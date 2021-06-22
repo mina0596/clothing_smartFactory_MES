@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_humanResources}">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3 th:text="${title}"></h3>
+	    </div>
+</th:block>
+
+<th:block layout:fragment="customJs">
+	<script>
+		$(function(){
+			$('#deleteBtn').click(function(){
+				var tdList = $('#list').children().find('tr');
+				tdList.html('<span class="check"><input type="checkbox" class="checked"></span>');
+				console.log(tdList);
+			});
+		})
+	</script>
+</th:block>
+
+<th:block layout:fragment="container">
+인사관리 
+	
+	
+	<div class="row mt">
+     <div class="col-md-12">
+          <h4><i class="fa fa-truck"></i>사원목록/조회</h4>
+          <hr>  
+			<div class="form-group" style="padding-left: 50px">
+				<div class="col-md-3">
+				 <select class="form-control">
+				   <option>사원명</option>
+				   <option>담당부서</option>
+				   <option>담당직책</option>
+				   <option>이메일</option>
+				   <option>전화번호</option>
+
+				  </select>
+				</div>
+				<div class="col-md-6">
+				  <input class="form-control" type="text" placeholder="검색어를 입력하세요">
+				</div>
+				<div class="col-md-2">
+				  <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
+				  <button type="button" class="btn btn-primary">검색</button>
+				</div>
+	       </div>
+	       
+	      <br>
+	      <br>
+	      <br>
+	      <br>
+	      <br>
+	      
+                
+	        <form class="form-horizontal style-form">
+              <table class="table table-striped table-advance table-hover" id="list">
+                <thead>
+                  <tr>
+                    <th><input type="checkbox" class="checked"></th>
+                    <th><i class="fa fa-bullhorn"></i>번호</th>
+                    <th class="hidden-phone"><i class="fa fa-bookmark"></i>사원코드</th>
+                    <th class="hidden-phone"><i class="fa fa-bookmark"></i>사원명</th>
+                    <th><i class="fa fa-bookmark"></i>담당부서</th>
+                    <th><i class=" fa fa-bookmark"></i>담당직책</th>
+                    <th><i class=" fa fa-bookmark"></i>이메일</th>
+                    <th><i class=" fa fa-bookmark"></i>전화번호</th>
+                    <th><i class=" fa fa-bookmark"></i>등록일자</th>
+                    <th><i class=" fa fa-pencil"></i>수정</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                  	<td><input type="checkbox" class="checked"></td>
+                    <td class="hidden-phone">1</td>
+                    <td class="hidden-phone">worker01</td>      
+                    <td class="hidden-phone">이한빛</td>
+                    <td>본사</td>
+                    <td>임원</td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>onelight@naver.com</td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>010-7170-7123</td>
+                    <td>2021.06.22 14:20</td>
+                    <td> 
+                      
+                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                      
+                    </td>
+                  </tr>
+                  
+               
+
+                 
+                 
+                </tbody>
+              </table>
+            
+		        <div class="form-group text-right">
+		          <div class="col-lg-offset-2 col-lg-10">
+		           <a th:href="@{/addHumanResources}" class="btn btn-success btn-xs"><i class="fa fa-check"></i>사원등록</a>
+		           <a id="deleteBtn" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i>삭제</a>
+		          </div>
+		        </div>
+       		</form>
+       		
+          </div>
+          <!-- /col-md-12 -->
+        </div>
+        <!-- /row -->
+        
+</th:block>
+
+</html>

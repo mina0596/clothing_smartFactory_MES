@@ -6,26 +6,33 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class QualityControlController {
 
+	//[한빛]불량품등록 -> 목록
+	@PostMapping("/addDefectiveProduct")
+	public String addDefectiveProduct() {
+		return "redirect:/defectiveProductList";
+	}
 	
-	//불량품 등록
-		@GetMapping("/addDefectiveProduct")
-		public String addDefectiveProduct(Model model) {
-			
-			model.addAttribute("title", "불량품 등록");
-			return"quality/#addDefectiveProduct";
-		}
+
+	//[한빛]불량품 등록
+	@GetMapping("/addDefectiveProduct")
+	public String addDefectiveProduct(Model model) {
 		
-	//불량품 조회
+		model.addAttribute("title", "불량품 등록");
+		return"quality/addDefectiveProduct";
+	}
+		
+	//[한빛]불량품 조회
 	@GetMapping("/defectiveProductList")
 	public String getDefectiveProductList(Model model) {
 		
 		model.addAttribute("title", "불량품 조회");
-		return"quality/#defectiveProductList";
+		return"quality/defectiveProductList";
 	}
 
 	//검사현황 실적 
@@ -35,6 +42,7 @@ public class QualityControlController {
 		model.addAttribute("title", "검사현황관리:실적");
 		return"quality/inspectionPerformance";
 	}
+	
 	//불량현황등록 메서드
 	@GetMapping("/addDefectInspectionResultStatus")
 	public String addDefectInspectionResultStatus(Model model) {
@@ -42,6 +50,7 @@ public class QualityControlController {
 		model.addAttribute("title", "검사현황관리:불량현황");
 		return"quality/addDefectInspectionResultStatus";
 	}
+	
 	//검사현황 성적서조회 및리스트
 	@GetMapping("/qualityInspectionReport")
 	public String qualityInspectionReport(Model model) {
@@ -49,6 +58,7 @@ public class QualityControlController {
 		model.addAttribute("title", "검사현황관리:성적서조회및 리스트");
 		return"quality/qualityInspectionReport";
 	}
+	
 	//검사현황 성적서등록
 	@GetMapping("/addQualityInspectionReport")
 	public String addQualityInspectionReport(Model model) {
@@ -56,6 +66,7 @@ public class QualityControlController {
 		model.addAttribute("title", "검사현황관리:성적서등록");
 		return"quality/addQualityInspectionReport";
 	}
+	
 	//검사현황 등록
 	@GetMapping("/addQualityInspectionStatus")
 	public String addInspectionStatus(Model model) {
@@ -82,7 +93,7 @@ public class QualityControlController {
 	public String addQualityInspection(Model model) {
 		
 		model.addAttribute("title", "품질검사:검사등록");
-		return"quality/!addQualityInspection";
+		return"quality/addQualityInspection";
 	}	
 	
 
@@ -91,20 +102,32 @@ public class QualityControlController {
 		return "quality/addStandardTable";
 	}
 	
+	//[민아]품질검사 기준표 목록
 	@GetMapping("/getStandardTableList")
 	public String getStandardTableList() {
 		return "quality/StandardTableList";
 	}
-	@GetMapping("/qualityControlRequestList")
+	
+
+	//[다미]품질검사요청목록
+	@GetMapping("/qualityInspectionRequestList")
 	public String qualityControlRequestList() {
-		return "quality/qualityControlRequestList";
+		return "quality/qualityInspectionRequestList";
+	}
+		
+	//[다미]품질검사요청 메서드
+	@PostMapping("/qualityInspectionRequest")
+	public String qualityInspectionRequest(@RequestParam(name = "qualityInspection", required = false)String qualityInspection) {
+		return "redirect:/qualityInspectionRequestList";
 	}
 	
-	@GetMapping("/qualityControlRequest")
+	//[다미]품질검사요청
+	@GetMapping("/qualityInspectionRequest")
 	public String qualityControlRequest() {
-		return "quality/qualityControlRequest";
+		return "quality/qualityInspectionRequest";
 	}
 	
+	//품질관리 메인화면
 	@GetMapping("/qualityControl")
 	public String getQulity() {
 		return "quality/qualityControl";
