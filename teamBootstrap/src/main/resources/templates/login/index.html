@@ -15,8 +15,8 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
 		<div class="img">
 			<div class="login-content">
 			<form th:action="@{/login}" >
-				<img th:src="@{login/img/avatar.svg}">
-				<h2 class="title">공장사원</h2>
+				<img class="img01" th:src="@{login/img/avatar.svg}">
+				<h2 class="title">관리자</h2>
            		<div class="input-div one">
            		   <div class="i">
            		   		<i class="fas fa-user"></i>
@@ -40,10 +40,11 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
             </form>
         </div>
 		</div>
-		<div class="login-content">
+		<div class="img">
+			<div class="login-content">
 			<form th:action="@{/login}" >
-				<img th:src="@{login/img/avatar.svg}">
-				<h2 class="title">본사사원</h2>
+				<img class="img01" th:src="@{login/img/avatar.svg}">
+				<h2 class="title">본사</h2>
            		<div class="input-div one">
            		   <div class="i">
            		   		<i class="fas fa-user"></i>
@@ -66,6 +67,36 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
             	<input type="submit" class="btn" value="Login">
             </form>
         </div>
+		</div>
+		<div class="img">
+			<div class="login-content">
+			<form th:action="@{/login}" >
+				<img class="img01" th:src="@{login/img/avatar.svg}">
+				<h2 class="title">공장</h2>
+           		<div class="input-div one">
+           		   <div class="i">
+           		   		<i class="fas fa-user"></i>
+           		   </div>
+           		   <div class="div">
+           		   		<h5>ID</h5>
+           		   		<input type="text" class="input">
+           		   </div>
+           		</div>
+           		<div class="input-div pass">
+           		   <div class="i"> 
+           		    	<i class="fas fa-lock"></i>
+           		   </div>
+           		   <div class="div">
+           		    	<h5>Password</h5>
+           		    	<input type="password" class="input">
+            	   </div>
+            	</div>
+            	<a href="#">Forgot Password?</a>
+            	<input type="submit" class="btn" value="Login">
+            </form>
+        </div>
+		</div>
+		
         
     </div>
     <script type="text/javascript" th:src="@{login/js/main.js}"></script>
