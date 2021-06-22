@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_contract}">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3 ></h3>
+	    </div>
+</th:block>
+
+
+<th:block layout:fragment="container">
+	
+	<div class="row mt">
+  <div class="col-lg-12">
+    <div class="form-panel">
+      <h4 class="mb"><i class="fa fa-edit"></i> 원부자재 발주정보</h4>
+      <hr>
+      <br>
+      
+      <form class="form-horizontal style-form" method="post">
+
+       
+        
+        <div class="form-group">
+       	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">원부자재발주코드</label>
+       	 	<div class="col-sm-4">
+	           	<input class="form-control" id="disabledInput" type="text" placeholder="suplier01" disabled="disabled" >
+	           
+         	  	</div>
+         	 	</div>
+        <div class="form-group">
+       	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">원부자재거래처명</label>
+       	 	<div class="col-sm-4">
+	           	<input class="form-control" id="disabledInput" type="text" placeholder="나는단추" disabled="disabled" >
+	           
+         	  	</div>
+         	 	</div>
+        
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">거래처담당자</label>
+          <div class="col-sm-10">
+            <input class="form-control" id="disabledInput" type="text" placeholder="홍길동"disabled="disabled"  >
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">거래처 연락처</label>
+          <div class="col-sm-10">
+          	<input class="form-control" id="disabledInput" type="tel"placeholder="070-2515-1555"disabled="disabled"  >
+          </div>
+        </div>
+        
+        
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">원부자재 재료명</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="동그라미 단추" disabled="disabled">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">원부자재 색상명</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="royalBlue" disabled="disabled">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">원부자재 패턴및 특징</label>
+          <div class="col-sm-10">
+           <input type="text" class="form-control" placeholder="물방울무늬" disabled="disabled">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">원부자재  발주수량</label>
+          <div class="col-sm-10">
+           <input type="text" class="form-control" placeholder="50" disabled="disabled" >
+          </div>
+        </div>
+        <div class="form-group">
+           	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">발주단위</label>
+           	  	<div class="col-sm-4">
+             	 <input type="text" class="form-control" placeholder="개" disabled="disabled" >
+           	  	</div>
+           	 	</div>
+      <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label">원부자재납기일</label>
+          <div class="col-md-4">
+           
+              <input type="text" class="form-control" readonly="readonly" size="16" placeholder="2021-01-29 13:30" disabled="disabled">
+              
+              </div>
+            </div>
+          <div class="form-group">
+          <label class="col-lg-2 col-sm-2 control-label">발주등록자</label>
+          <div class="col-lg-10">
+            <p class="form-control-static">한보람</p>
+          </div>
+        </div>
+       <div class="form-group">
+	     <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">발주승인상태</label>
+	     	<div class="col-sm-10">
+	      	<input type="text" class="form-control" placeholder="승인요청" disabled="disabled">
+    	 	</div>
+    	 </div>
+        
+       <div class="form-group text-right">
+                    <div class="col-lg-offset-2 col-lg-10">
+                      <button class="btn btn-theme" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">발주정보확인</font></font></button>
+                      
+                    </div>
+                    </div>
+       		</form>
+      
+    	</div>
+   	</div>
+   	</div>
+
+   
+           
+	 <script th:src="@{Dashio/lib/jquery-ui-1.9.2.custom.min.js}"></script>
+  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-fileupload/bootstrap-fileupload.js}"></script>
+  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
+  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-daterangepicker/date.js}"></script>
+  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-daterangepicker/daterangepicker.js}"></script>
+  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js}"></script>
+  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-daterangepicker/moment.min.js}"></script>
+  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-timepicker/js/bootstrap-timepicker.js}"></script>
+  <script th:src="@{Dashio/lib/advanced-form-components.js}"></script>
+  <script src="lib/jquery/jquery.min.js"></script>
+
+  <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+  <script class="include" type="text/javascript" src="lib/jquery.dcjqaccordion.2.7.js"></script>
+  <script src="lib/jquery.scrollTo.min.js"></script>
+  <script src="lib/jquery.nicescroll.js" type="text/javascript"></script>
+  <!--common script for all pages-->
+  <script src="lib/common-scripts.js"></script>
+  <!--script for this page-->
+
+	
+</th:block>
+
+</html>

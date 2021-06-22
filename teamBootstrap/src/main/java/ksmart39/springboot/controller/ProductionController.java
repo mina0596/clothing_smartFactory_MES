@@ -12,16 +12,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ProductionController {
 	//작업지시 목록
 	@GetMapping("/workOrderList")
-	public String workerOrderList(Model model,@RequestParam(name = "workOrderSearchKey",required = false)String workOrderSearchKey
-			,@RequestParam(name ="workOrderSearchValue",required = false )String workOrderSearchValue) {
+	public String workerOrderList() {
 		
-		model.addAttribute("title", "작업지시관리: 작업지시목록");
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("workOrderSearchKey", workOrderSearchKey);
-		paramMap.put("workOrderSearchValue", workOrderSearchValue);
+		/*
+		 * model.addAttribute("title", "작업지시관리: 작업지시목록"); Map<String, Object> paramMap =
+		 * new HashMap<String, Object>(); paramMap.put("workOrderSearchKey",
+		 * workOrderSearchKey); paramMap.put("workOrderSearchValue",
+		 * workOrderSearchValue);
+		 */
 		return "production/workOrderList";
 	}
 	//작업지시등록
+	
 	@GetMapping("/addWorkOrder")
 	public String addWorkerOrder(Model model) {
 		model.addAttribute("title", "작업지시관리: 작업지시등록");
