@@ -8,6 +8,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class RawMaterialsController {
 	
+	//[한빛]소요별 자재 정보 입력 후 자재 입고 목록으로 리다이렉트 , 파라미터는 임시 값
+	@PostMapping("/addExWarehousing")
+	public String addExWarehousing(@RequestParam(value = "raw_material_name", required = false )String raw_material_name) {
+		return "redirect:/exWarehousingList";
+	}
+	
 	//[한빛]출고현황
 	@GetMapping("/exWarehousingStatus")
 	public String exWarehousingStatus() {
