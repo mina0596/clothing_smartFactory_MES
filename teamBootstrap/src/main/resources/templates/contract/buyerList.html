@@ -1,55 +1,118 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
-layout:decorate="@{layout/default_humanResources}">
+layout:decorate="@{layout/default_contract}">
 
 <th:block layout:fragment="pageTitle">
 	   <div class="border-head"> 
-	    <h3>거래처관리</h3>
+	    <h3 th:text="${title}"></h3>
 	    </div>
 </th:block>
 
+<th:block layout:fragment="customJs">
+	<script>
+		$(function(){
+			$('#deleteBtn').click(function(){
+				var tdList = $('#list').children().find('tr');
+				tdList.html('<span class="check"><input type="checkbox" class="checked"></span>');
+				console.log(tdList);
+			});
+		})
+	</script>
+</th:block>
 
 <th:block layout:fragment="container">
-	 <div class="content-panel">
-              <h4><i class="fa fa-angle-right"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">수주거래처조회</font></font></h4><hr><table class="table table-striped table-advance table-hover">
+수주관리
+	
+	
+	<div class="row mt">
+     <div class="col-md-12">
+          <h4><i class="fa fa-truck"></i>수주거래처목록/조회</h4>
+          <hr>  
+			<div class="form-group" style="padding-left: 50px">
+				<div class="col-md-3">
+				 <select class="form-control">
+				   <option>거래처명</option>
+				   <option>전화번호</option>
+				   <option>대표자명</option>
+				   <option>담당자명</option>
+				   <option>사업자번호</option>
+				   <option>주소</option>
+
+				  </select>
+				</div>
+				<div class="col-md-6">
+				  <input class="form-control" type="text" placeholder="검색어를 입력하세요">
+				</div>
+				<div class="col-md-2">
+				  <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
+				  <button type="button" class="btn btn-primary">검색</button>
+				</div>
+	       </div>
+	       
+	      <br>
+	      <br>
+	      <br>
+	      <br>
+	      <br>
+	      
                 
-                
+	        <form class="form-horizontal style-form">
+              <table class="table table-striped table-advance table-hover" id="list">
                 <thead>
                   <tr>
-                    <th><i class="fa fa-bullhorn"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 거래처코드</font></font></th>
-                    <th><i class="fa fa-bookmark"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 거래처명</font></font></th>
-                    <th><i class="fa fa-bookmark"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 사업자번호</font></font></th>
-                    <th><i class="fa fa-bookmark"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 대표자</font></font></th>
-                    <th><i class="fa fa-bookmark"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 거래처담당자</font></font></th>
-                    <th><i class="fa fa-bookmark"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 거래처연락처</font></font></th>
-                    <th><i class="fa fa-bookmark"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">주소</font></font></th>
-                    <th><i class=" fa fa-edit"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 상태</font></font></th>
-                    <th></th>
+                  	<th><input type="checkbox" class="checked"></th>
+                    <th><i class="fa fa-bullhorn"></i>번호</th>
+                    <th class="hidden-phone"><i class="fa fa-bookmark"></i>거래처코드</th>
+                    <th><i class="fa fa-bookmark"></i>회사명</th>
+                    <th><i class=" fa fa-bookmark"></i>전화번호</th>
+                    <th><i class="fa fa-bookmark"></i>대표자</th>
+                    <th><i class=" fa fa-bookmark"></i>담당자</th>
+                    <th><i class=" fa fa-bookmark"></i>사업자번호</th>
+                    <th><i class=" fa fa-bookmark"></i>주소</th>
+                    <th><i class=" fa fa-pencil"></i>수정</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                  <td><span class="label label-warning label-mini"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CA001</font></font></span></td>                 
-                   <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">파크랜드</font></font></td>                                 
-                    <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">192-023234-1231</font></font></td>
-                    <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">조인성</font></font></td>
-                    <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이한빛</font></font></td>
-                    <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">010-1234-1234</font></font></td>
-                    <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">전주시 만성동로12345 3층</font></font></td>
-                    <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                  	<td><input type="checkbox" class="checked"></td>
+                    <td class="hidden-phone">1</td>
+                    <td class="hidden-phone">buyer01</td>
+                    <td>이한빛</td>
+                    <td>063-293-9192</td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>조인성</td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>이광수</td>
+                    <td>109-203123-23124</td>
+                    <td>전라북도 전주시 만성동로 129</td>
+                    <td> 
+                      
                       <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                      
                     </td>
                   </tr>
+                  
+               
+
                  
-         
+                 
                 </tbody>
               </table>
-            </div>
-
-
+            
+		        <div class="form-group text-right">
+		          <div class="col-lg-offset-2 col-lg-10">
+		           <a th:href="@{/addBuyer}" class="btn btn-success btn-xs"><i class="fa fa-check"></i>등록</a>
+		           <a id="deleteBtn" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i>삭제</a>
+		          </div>
+		        </div>
+       		</form>
+       		
+          </div>
+          <!-- /col-md-12 -->
+        </div>
+        <!-- /row -->
+        
 </th:block>
 
 </html>

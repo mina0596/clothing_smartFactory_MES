@@ -12,8 +12,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class QualityControlController {
 
+	//[한빛]불량품등록 -> 목록
+	@PostMapping("/addDefectiveProduct")
+	public String addDefectiveProduct() {
+		return "redirect:/defectiveProductList";
+	}
 	
-	//불량품 등록
+
+	//[한빛]불량품 등록
 	@GetMapping("/addDefectiveProduct")
 	public String addDefectiveProduct(Model model) {
 		
@@ -21,7 +27,7 @@ public class QualityControlController {
 		return"quality/addDefectiveProduct";
 	}
 		
-	//불량품 조회
+	//[한빛]불량품 조회
 	@GetMapping("/defectiveProductList")
 	public String getDefectiveProductList(Model model) {
 		

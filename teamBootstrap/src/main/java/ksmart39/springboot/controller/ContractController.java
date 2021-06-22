@@ -6,34 +6,62 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ContractController {
-	//수주주문 조회
+	
+	//[한빛]수주 주문서 조회
+	@GetMapping("/buyerOrderList")
+	public String buyerOrderList(Model model) {
+		model.addAttribute("title", "주문서 목록 및 조회");
+		return "contract/buyerOrderList";
+	}		
+	
+	//[한빛]수주 주문서 등록
+	@GetMapping("/addBuyerOrder")
+	public String addBuyerOrder(Model model) {
+		model.addAttribute("title", "주문서 등록");
+		return "contract/addBuyerOrder";
+	}	
+	
+	//[한빛]수주주문 조회
 	@GetMapping("/buyerContractList")
 	public String buyerContractList(Model model) {
 		model.addAttribute("title", "수주거래처조회");
 		return "contract/buyerContractList";
 	}
-	//수주주문 등록
-	@GetMapping("/addBuyerContract")
-	public String addBuyerContract(Model model) {
-		model.addAttribute("title", "수주거래처등록");
-		return "contract/addBuyerContract";
-	}
-	//수주거래처 조회
-	@GetMapping("/buyerList")
-	public String buyerList(Model model) {
-		model.addAttribute("title", "수주거래처조회");
-		return "contract/buyerList";
-	}
-	//수주거래처 등록
+	
+	//[한빛]수주거래처 등록
 	@GetMapping("/addBuyer")
 	public String addBuyer(Model model) {
 		model.addAttribute("title", "수주거래처등록");
 		return "contract/addBuyer";
 	}
+	
+	//[한빛]수주주문등록 ->목록으로 이동
+	@PostMapping("/addBuyer")
+	public String addBuyer() {
+		return "redirect:/buyerList";
+	}
+	
+	
+	//[한빛]수주주문 등록
+	@GetMapping("/addBuyerContract")
+	public String addBuyerContract(Model model) {
+		model.addAttribute("title", "수주거래처등록");
+		return "contract/addBuyerContract";
+	}
+	
+	//[한빛]수주거래처 조회
+	@GetMapping("/buyerList")
+	public String buyerList(Model model) {
+		model.addAttribute("title", "수주거래처조회");
+		return "contract/buyerList";
+	}
+	
+	
 	//원부자재 발주리스트
 	@GetMapping("/supplierContractList")
 	public String getRawmaterialsOrderList(Model model,@RequestParam(name = "supplierOrderSearchKey",required = false)String supplierOrderSearchKey
