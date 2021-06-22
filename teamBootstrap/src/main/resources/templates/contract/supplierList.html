@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_contract}">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	   
+	    </div>
+</th:block>
+
+
+<th:block layout:fragment="container">
+<div class="row mt">
+     <div class="col-md-12">
+       <div class="content">
+       
+          <h4><i class="fa fa-angle-right"></i>거래처 조회</h4>
+          <hr>
+                
+			<div class="form-group">
+				<div class="col-md-2">
+				 <select class="form-control">
+				   <option>거래처코드</option>
+				   <option>거래처명</option>
+				   <option>거래처담당자</option>
+				 </select>
+				</div>
+				<div class="col-md-6">
+				  <input class="form-control" type="text" placeholder="검색어를 입력하세요">
+				</div>
+				<div class="col-md-2">
+				  <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
+				  <button type="button" class="btn btn-primary">검색하여 가져오기</button>
+				</div>
+	       </div>
+	       
+	      <br>
+	      <br>
+	      <br>
+	      <br>
+	      <br>
+	      
+              <h4><i class="fa fa-angle-right"></i>거래처 목록</h4>    
+              <table class="table table-striped table-advance table-hover">
+                <thead>
+                  <tr>
+                    <th><i class="fa fa-bullhorn"></i>체크</th>
+                    <th class="hidden-phone"><i class="fa fa-bookmark"></i>원부자재 거래처코드</th>
+                    <th><i class="fa fa-bookmark"></i>원부자재 거래처명</th>
+                    <th><i class=" fa fa-bookmark"></i>원부자재 거래처담당자</th>
+                    <th><i class=" fa fa-bookmark"></i>원부자재 거래처연락처</th>
+                    <th><i class=" fa fa-bookmark"></i>원부자재 거래처주소 </th>
+                    <th><i class=" fa fa-bookmark"></i>원부자재 거래처등록일</th>
+                    <th><i class=" fa fa-bookmark"></i>원부자재거래처 수정</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                   <td class="hidden-phone">
+                      <input type="checkbox" class="checked">
+                    </td>
+                    <td class="hidden-phone">
+                    <a th:href="@{/!supplierInfo}">oc_001</a></td>
+                    <td class="hidden-phone">나는단추</td>
+                    <td>홍길동</td>
+                    <td>070-2515-1555</td>
+                    <td>
+                     	전주시
+                    </td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>2021-01-17 11:30</td>
+                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
+                  </tr>
+                  
+                  <tr>
+                   <td class="hidden-phone">
+                      <input type="checkbox" class="checked">
+                    </td>
+                    <td class="hidden-phone">
+                    <a >oc_002</a></td>
+                    <td class="hidden-phone">견고한지퍼나라</td>
+                    <td>공예윤</td>
+                    <td>070-2505-1545</td>
+                    <td>
+                     	익산시
+                    </td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>2021-01-18 11:30</td>
+                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
+                  </tr>
+                  
+                  <tr>
+                   <td class="hidden-phone">
+                      <input type="checkbox" class="checked">
+                    </td>
+                    <td class="hidden-phone">
+                    <a >oc_003</a></td>
+                    <td class="hidden-phone">부드러운실크컴퍼니</td>
+                    <td>서윤우</td>
+                    <td>070-2815-1555</td>
+                    <td>
+                     	김제시
+                    </td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>2021-01-19 11:30</td>
+                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
+                  </tr>
+                  
+                  <tr>
+                   <td class="hidden-phone">
+                      <input type="checkbox" class="checked">
+                    </td>
+                    <td class="hidden-phone">
+                    <a >oc_004</a></td>
+                    <td class="hidden-phone">정교한심지</td>
+                    <td>이로운</td>
+                    <td>070-658-9208</td>
+                    <td>
+                     	군산시
+                    </td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>2021-01-1811:30</td>
+                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
+                  </tr>
+           		 </tbody>
+              </table>
+            </div>
+            <!-- /content-panel -->
+          </div>
+          	 <div class="form-group">
+                    <div class="col-lg-offset-1 col-lg-11 text-right">
+                      <button class="btn btn-success btn-xs" th:href="@{/!addSupplier}"><i class="fa fa-check"></i>거래처등록</button>
+                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i>거래처삭제</button>
+                    </div>
+                    </div>
+          <!-- /col-md-12 -->
+        </div>
+	
+          
+          
+</th:block>
+
+</html>

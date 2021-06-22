@@ -20,10 +20,11 @@ body{
 .container{
     width: 100vw;
     height: 100vh;
-    display: grid;
+    display: inline-flex;
     grid-template-columns: repeat(2, 1fr);
     grid-gap :7rem;
     padding: 0 2rem;
+    justify-content: center;
 }
 
 .img{
@@ -37,14 +38,15 @@ body{
 	justify-content: flex-start;
 	align-items: center;
 	text-align: center;
+	align-self: center;
 }
 
 .img img{
-	width: 500px;
+	width: 250px;
 }
 
 form{
-	width: 360px;
+	width: 300px;
 }
 
 .login-content img{
@@ -182,15 +184,22 @@ a:hover{
 }
 
 
-@media screen and (max-width: 1050px){
+@media screen and (max-width: 1300px){
 	.container{
 		grid-gap: 5rem;
 	}
+	
 }
 
-@media screen and (max-width: 1000px){
+@media screen and (max-width: 1200px){
 	form{
 		width: 290px;
+		
+	}
+	.login-content{
+		justify-content: inherit;
+		align-self: center;
+		width: 250px;
 	}
 
 	.login-content h2{
@@ -199,24 +208,39 @@ a:hover{
 	}
 
 	.img img{
-		width: 400px;
+		width: 200px;
 	}
 }
 
-@media screen and (max-width: 900px){
-	.container{
-		grid-template-columns: 1fr;
+@media screen and (max-width: 1000px){
+ 	body{
+ 		overflow: scroll;
+ 	}
+ 	
+ 	.container{
+		flex-direction: column;	
+		align-items: center;
+		height: 600px;
 	}
 
-	.img{
+	.img01{
+		visibility: none;
 		display: none;
 	}
 
-	.wave{
+/* 	.wave{
 		display: none;
+	} */
+
+ 	.login-content{
+/* 		justify-content: inherit;
+		align-self: center; */
+		align-content: space-around;
+		display: flex;
+		height: 250px;
+		
+		
+
 	}
 
-	.login-content{
-		justify-content: center;
-	}
 }
