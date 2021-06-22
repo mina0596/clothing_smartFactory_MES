@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_qualityControl}">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3>품질관리</h3>
+	    </div>
+</th:block>
+
+
+<th:block layout:fragment="container">
+	 <div class="row mt">
+  <div class="col-lg-12">
+    <div class="form-panel">
+      <h4 class="mb"><i class="fa fa-edit"></i> 품질검사 기준표 등록</h4>
+      <hr>
+      <br>
+      
+      <form class="form-horizontal style-form" method="post">
+
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사명</label>
+          <div class="col-sm-6">
+            <input class="form-control" id="disabledInput" type="text" placeholder="과도한 다림질과 프레스로 인한 표면 변색 (DB에서 가져온 값)" disabled>
+            <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
+            <a th:href="@{/qualityInspectionList}" class="btn btn-default">검색하여 가져오기</a>
+          </div>
+        </div>
+        
+        <div class="form-group">
+   	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">검사 결과 단위</label>
+   	  	<div class="col-sm-2">
+     	 <select class="form-control">
+          <option>등급</option>
+          <option>수치</option>
+          <option>패스여부</option>
+          <option>기타</option>
+         </select>
+   	  	</div>
+   	 	</div>
+        
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">검사 대상</label>
+          <div class="col-sm-6">
+            <input class="form-control" id="disabledInput" type="text" placeholder="완제품" disabled>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">거래처명</label>
+          <div class="col-sm-10">
+            <input class="form-control" id="disabledInput" type="text" placeholder="파크랜드 전주점 (DB에서 가져온 값)" disabled>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">상품 품목별 의뢰 코드</label>
+          <div class="col-sm-10">
+          	<span class="label label-default" style="font-size: 100%;">req01_MS_pants</span> 
+          	<span class="label label-default" style="font-size: 100%;">req01_MS_jacket</span> 
+            <!-- <input class="form-control" id="disabledInput" type="text" placeholder="req01_MS_pants, (DB에서 가져온 값)" disabled> -->
+          </div>
+        </div>
+           	        
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">납품처 주소</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="전주시 덕진구 금암동 (DB에서 가져올 수 있고, 수정할 수도 있다.)">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">납품처 연락처</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="063-717-1008 (DB에서 가져올 수 있고, 수정할 수도 있다.)">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">출고일자</label>
+          <div class="col-md-4">
+            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
+              <input type="text" class="form-control" readonly="readonly" size="16">
+              <div class="input-group-btn">
+                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
+                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+     
+
+        <div class="form-group">
+          <label class="col-lg-2 col-sm-2 control-label" style="font-weight: 600;">담당 사원명</label>
+          <div class="col-lg-10">
+            <p class="form-control-static">한예슬</p>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="col-lg-2 col-sm-2 control-label" style="font-weight: 600;">담당자 사원 코드</label>
+          <div class="col-lg-10">
+            <p class="form-control-static">employee1234</p>
+          </div>
+        </div>
+ 		
+         <div class="form-group text-right">
+          <div class="col-lg-offset-2 col-lg-10">
+            <button class="btn btn-theme" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">등록</font></font></button>
+            <button class="btn btn-theme04" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소</font></font></button>
+          </div>
+        </div>
+         
+        
+      </form>
+      
+    </div>
+  </div>
+<!-- col-lg-12-->
+</div>
+
+</th:block>
+
+</html>

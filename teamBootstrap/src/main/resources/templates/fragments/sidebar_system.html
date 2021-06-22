@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+      <div th:fragment="sidebar_system" id="sidebar" class="nav-collapse ">
+        <!-- sidebar menu start-->
+        <ul class="sidebar-menu" id="nav-accordion">
+          <h5 class="centered">시스템관리</h5>
+
+
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-cogs"></i>
+              <span>사용자관리</span>
+              </a>
+            <ul class="sub">
+              <li><a th:href="@{/userManagement}">전체사용자조회</a></li>
+            </ul>
+          </li>
+          
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-book"></i>
+              <span>커뮤니티</span>
+              </a>
+            <ul class="sub">
+              <li><a th:href="@{/lobby}">로비</a></li>
+              <li><a th:href="@{/messenger}">메신저</a></li>
+            </ul>
+          </li>
+          
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-book"></i>
+              <span>Q&A</span>
+              </a>
+            <ul class="sub">
+              <li><a th:href="@{/qAndA}">자주하는 질문</a></li>
+            </ul>
+          </li>
+ 
+    
+        </ul>
+        <!-- sidebar menu end-->
+      </div>
+</html>

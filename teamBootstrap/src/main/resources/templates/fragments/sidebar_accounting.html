@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+      <div th:fragment="sidebar_accounting" id="sidebar" class="nav-collapse ">
+        <ul class="sidebar-menu" id="nav-accordion">
+        
+        <!-- 상단메뉴 -->
+        <h5 class="centered">회계관리</h5>
+         <li class="sub-menu">
+           <a href="javascript:;">
+             <i class="fa fa-won"></i>
+              
+        <!-- sidebar menu start-->
+        <span>결제관리</span>
+         </a>
+       	   <ul class="sub">
+       	   	<li><a th:href="@{/addInvoiceApproval}">결제 요청 등록</a></li>
+       	   	<li><a th:href="@{/invoiceApprovalList}">결제 현황 조회</a></li>
+       	   </ul>  
+          </li>
+       	   <li class="sub-menu">
+	         <a href="javascript:;">
+	           <i class="fa fa-book"></i>
+
+              
+              <span>계정과목 관리</span>
+              </a>
+            <ul class="sub">
+              <li><a th:href="@{/addAccountSubject}">계정과목 등록</a></li>
+              <li><a th:href="@{/accountSubjectList}">계정과목 조회</a></li>
+            </ul>
+          </li>
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-book"></i>
+              
+              <span>전표관리</span>
+              </a>
+            <ul class="sub">
+              <li><a th:href="@{#}">전표 등록</a></li>
+              <li><a th:href="@{#}">전표 현황 조회</a></li>
+            </ul>
+          </li>
+ 
+    
+        </ul>
+        <!-- sidebar menu end-->
+      </div>
+</html>

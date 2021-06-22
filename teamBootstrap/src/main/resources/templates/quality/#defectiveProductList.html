@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_qualityControl}">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3>인사관리</h3>
+	    </div>
+</th:block>
+
+
+<th:block layout:fragment="container">
+	 <div class="content-panel">
+              <h4><i class="fa fa-angle-right"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">불량품조회</font></font></h4><hr>
+                
+              <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">검색: </font></font><input type="text" aria-controls="hidden-table-info"></label>
+              
+              
+              <h4><i class="fa fa-angle-right"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">회원목록</font></font></h4><hr><table class="table table-striped table-advance table-hover">
+                
+               
+                <thead>
+                  <tr>
+                    <th><i class="fa fa-bullhorn"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 불량품코드</font></font></th>
+                    <th><i class="fa fa-bookmark"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">품질검사코드</font></font></th>
+                    <th><i class="fa fa-bookmark"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">대분류 검사명</font></font></th>
+                    <th><i class="fa fa-bookmark"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">중분류 검사명</font></font></th>
+                    <th><i class="fa fa-bookmark"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">소분류 검사명</font></font></th>
+                    <th><i class="fa fa-bookmark"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">소분류 상세 검사명</font></font></th>
+                    <th><i class="fa fa-bookmark"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">불량원인</font></font></th>
+                    <th><i class="fa fa-bookmark"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">처리방법</font></font></th>
+                    <th><i class="fa fa-bookmark"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">비고</font></font></th>
+                    <th><i class=" fa fa-edit"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 상태</font></font></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                 
+                  <tr>
+                    <td>
+                      <a href="basic_table.html#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">fp001</font></font></a>
+                    </td>
+                   <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">request01</font></font></td>                    
+               
+                    <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">대</font></font></td>
+                    <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">중</font></font></td>
+                    <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">소</font></font></td>
+                    <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">상세</font></font></td>
+                    <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">나사빠짐</font></font></td>
+                    <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">폐기</font></font></td>
+                    <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">어쩌라고</font></font></td>
+                    <td>
+                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                    </td>
+                  </tr>
+          
+              
+           
+                  
+                  
+               
+         
+                </tbody>
+              </table>
+            </div>
+
+
+</th:block>
+
+</html>

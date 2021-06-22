@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: headFragment"></head>
+
+<body>
+  <section id="container">
+		<header th:replace="/fragments/header::header"></header>
+
+    <aside>
+		<div th:replace="/fragments/sidebar_rawMaterials::sidebar_rawMaterials"></div>
+    </aside>
+    <!--main content start-->
+    <section id="main-content">
+      <section class="wrapper">
+       
+        <div class="row">
+          <div class="col-lg-9 main-chart">
+            <!--CUSTOM CHART START -->
+          <th:block layout:fragment="pageTitle"></th:block>
+				
+          <th:block layout:fragment="container"></th:block>
+          </div>
+          <!-- !!!!!!본문!!!!!!! -->
+          		
+        </div>
+        <!-- /row -->
+      </section>
+    </section>
+	   	<footer th:replace="/fragments/footer"></footer>
+
+  </section>
+ 
+</body>
+
+</html>

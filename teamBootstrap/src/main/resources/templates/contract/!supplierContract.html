@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_contract}">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3 th:text="${title}"></h3>
+	    </div>
+</th:block>
+
+
+<th:block layout:fragment="container">
+	<div class="form-panel">
+	 <h4 class="mb"><i class="fa fa-angle-right"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">원부자재 발주등록</font></font></h4>
+              <div class="form">
+                <form class="cmxform form-horizontal style-form" id="signupForm" method="get" action="">
+                  <div class="form-group ">
+                    <label for="firstname" class="control-label col-xs-3"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">원부자재 발주 코드</font></font></label>
+                    <div class="col-md-3">
+                      <input class=" form-control" id="" type="text">
+                      </div>
+                    <label for="firstname" class="control-label col-xs-3"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">발주담당자명</font></font></label>
+                    <div class="col-md-3">
+                      <input class=" form-control" id="" type="text">
+                      </div>
+                      </div>
+                 
+                  <div class="form-group ">
+                    <label class="col-xs-3 control-label">원부자재 거래처선택</label>
+                  <select class="form-panel col-xs-3 ">
+		                  <option>거래처명</option>
+		                  <option>나는단추</option>
+		                  <option>부드러운실크컴퍼니</option>
+		                  <option>견고한지퍼나라</option>
+		             </select>
+		                             
+                  <select class="form-panel col-xs-3" >
+		                  <option>거래처담당자</option>
+		                  <option>김길동</option>
+		                  <option>이완수</option>
+		                  <option>공예윤</option>
+		             </select>
+		            <select class="form-panel col-xs-2 ">
+		                  <option>거래처번호</option>
+		                  <option>010-1248-3458</option>
+		                  <option>010-2427</option>
+		                  </select>
+		             </div>
+		             
+                  <div class="form-group ">
+                    <label class="col-xs-3 control-label">원부자재 재료선택</label>
+                  
+                  <select class="form-panel col-xs-2 ">
+		                  <option>원자재/부자재구분</option>
+		                  <option>원자재</option>
+		                  <option>부자재</option>
+		             </select>
+                     <select class="form-panel col-xs-2 ">
+		                  <option>원부자재 재료명</option>
+		                  <option>원자재의 실크</option>
+                     	<option>원자재의 폴리에스테르</option>
+		                  <option>부자재의 단추</option>
+		                  <option>부자재의 지퍼</option>
+		             </select>
+		             <select class="form-panel col-xs-2 ">
+		                  <option>원부자재 색상명</option>
+		                  <option>실크 화이트</option>
+		                  <option>실크 블랙</option>
+		                  <option>실크 블루</option>
+		                  <option>폴리에스테르블루</option>
+		                  <option>폴리에스테르화이트</option>
+		                  <option>단추 레드</option>
+		                  <option>단추 블루</option>
+		                  <option>지퍼 황금색</option>
+		                  <option>지퍼 은색</option>
+		             </select>
+		               <select class="form-panel col-xs-2">
+		                  <option>원부자재특징 </option>
+		                  <option>실크체크 </option>
+		                  <option>폴리에스테르물결무늬 </option>
+		                  <option>단추 물방울무늬 </option>
+		                  
+		             </select>
+                   </div>
+                      <div class="form-group ">
+                    <label class="col-xs-3 control-label">발주수량</label>
+                  	<div class="col-xs-3">
+                      <input class=" form-control" id="" type="text">
+                      </div>
+		           <label class="col-xs-1 control-label">발주단위</label>                   
+                  	<select class="form-panel col-xs-3" >
+		                  <option>단위</option>
+		                  <option>kg</option>
+		                  <option>마</option>
+		                  <option>필</option>
+		             </select>
+		             </div>
+		            <div class="form-group ">
+                    <label class="col-xs-3 control-label">납기일</label>
+                    <div class="col-xs-3">
+                     <div class="input-group date form_datetime-component">
+                      <input type="text" class="form-control" size="16">
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
+                        </span>
+                        </div>
+                        </div>
+                  	<label class="col-xs-1 control-label">발주 승인요청</label> 
+		            <select class="form-panel col-xs-3" >
+		                  <option>승인여부</option>
+		                  <option>작성중</option>
+		                  <option>승인요청</option>
+		                  <option></option>
+		             </select>
+		             </div>
+		            
+                  <div class="form-group text-right">
+                    <div class="col-lg-offset-2 col-lg-10">
+                      <button class="btn btn-theme" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">발주등록</font></font></button>
+                      <button class="btn btn-theme04" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">발주취소</font></font></button>
+                    </div>
+                  </div>
+            
+                </form>
+              </div>
+              </div>
+           
+
+	
+</th:block>
+
+</html>

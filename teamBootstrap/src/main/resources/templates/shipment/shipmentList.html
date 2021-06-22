@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_shipment}">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3>출고조회</h3>
+	    </div>
+</th:block>
+
+<th:block layout:fragment="customJs">
+	<script>
+		$(function(){
+			$('#deleteBtn').click(function(){
+				var tdList = $('#list').children().find('tr');
+				$(tdList).each(function(){
+				console.log($(this).innerText() + '텍스트 가져오기 테스트');
+				});
+				tdList.html('<span class="check"><input type="checkbox" class="checked"></span>');
+				console.log(tdList);
+			});
+		})
+	</script>
+</th:block>
+
+<th:block layout:fragment="container">
+
+	<!-- <span class="check"><input type="checkbox" class="checked"></span> -->
+	
+	<div class="row mt">
+     <div class="col-md-12">
+          <h4><i class="fa fa-truck"></i> 출고 현황 조회</h4>
+          <hr>  
+			<div class="form-group" style="padding-left: 50px">
+				<div class="col-md-3">
+				 <select class="form-control">
+				   <option>출고 번호</option>
+				   <option>품명</option>
+				   <option>품목별 의뢰 코드</option>
+				   <option>거래처명</option>
+				   <option>출고예정일</option>
+				   <option>출고일</option>
+				   <option>출고 현황</option>
+				  </select>
+				</div>
+				<div class="col-md-6">
+				  <input class="form-control" type="text" placeholder="검색어를 입력하세요">
+				</div>
+				<div class="col-md-2">
+				  <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
+				  <button type="button" class="btn btn-primary">검색하여 가져오기</button>
+				</div>
+	       </div>
+	       
+	      <br>
+	      <br>
+	      <br>
+	      <br>
+	      <br>
+	      
+                
+	        <form class="form-horizontal style-form">
+              <table class="table table-striped table-advance table-hover" id="list">
+                <thead>
+                  <tr>
+                    <th><i class="fa fa-bullhorn"></i>출고 번호</th>
+                    <th class="hidden-phone"><i class="fa fa-bookmark"></i>품명</th>
+                    <th><i class="fa fa-bookmark"></i>품목별 의뢰 코드</th>
+                    <th><i class=" fa fa-bookmark"></i>거래처명</th>
+                    <th><i class=" fa fa-bookmark"></i>출고예정일</th>
+                    <th><i class=" fa fa-bookmark"></i>출고일</th>
+                    <th><i class=" fa fa-bookmark"></i>출고 현황</th>
+                    <th><i class=" fa fa-pencil"></i>수정</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="hidden-phone">shipment_01</td>
+                    <td class="hidden-phone">남성 정장 바지</td>
+                    <td>req02_MS_pants</td>
+                    <td>
+                      <!-- 거래처명을 누르면 거래처 정보를 보여주는 창으로 이동  -->
+                      <a th:href="@{/supplierList}">나이키 의류</a>
+                    </td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>2021-01-18 16:02</td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>2021-01-18 16:30</td>
+                    <td><span class="label label-info label-mini">출고완료</span></td>
+                    <td> 
+                      
+                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                      
+                    </td>
+                  </tr>
+                  
+                  <tr>
+                    <td class="hidden-phone">shipment_02</td>
+                    <td class="hidden-phone">남성 정장 조끼</td>
+                    <td>req02_MS_vest </td>
+                    <td>
+                      <!-- 거래처명을 누르면 거래처 정보를 보여주는 창으로 이동  -->
+                      <a th:href="@{/supplierList}">파크랜드</a>
+                    </td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>2021-01-18 16:02</td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>2021-01-18 16:30</td>
+                    <td><span class="label label-warning label-mini">출고준비중</span></td>
+                    <td> 
+                      
+                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                      
+                    </td>
+                  </tr>
+                  
+                  <tr>
+                    <td class="hidden-phone">shipment_03</td>
+                    <td class="hidden-phone">남성 정장 바지</td>
+                    <td>req02_MS_pants</td>
+                    <td>
+                      <!-- 거래처명을 누르면 거래처 정보를 보여주는 창으로 이동  -->
+                      <a th:href="@{/supplierList}">Dashio 정장</a>
+                    </td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>2021-01-18 16:02</td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>2021-01-18 16:30</td>
+                    <td><span class="label label-warning label-mini">출고준비중</span></td>
+                    <td> 
+                      
+                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                      
+                    </td>
+                  </tr>
+                  
+                  
+                  <tr>
+                    <td class="hidden-phone">shipment_04</td>
+                    <td class="hidden-phone">숙녀 정장 자켓</td>
+                    <td>req03_WS_jacket</td>
+                    <td>
+                      <!-- 거래처명을 누르면 거래처 정보를 보여주는 창으로 이동  -->
+                      <a th:href="@{/supplierList}">젠틀맨 정장</a>
+                    </td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>2021-01-18 16:02</td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>2021-01-18 16:30</td>
+                    <td><span class="label label-info label-mini">출고완료</span></td>
+                    <td> 
+                      
+                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                      
+                    </td>
+                  </tr>
+                 
+                 
+                 <tr>
+                    <td class="hidden-phone">shipment_05</td>
+                    <td class="hidden-phone">숙녀 정장 치마</td>
+                    <td>req03_WS_skirt</td>
+                    <td>
+                      <!-- 거래처명을 누르면 거래처 정보를 보여주는 창으로 이동  -->
+                      <a th:href="@{/supplierList}">맞춤정장스트</a>
+                    </td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>2021-01-18 16:02</td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>2021-01-18 16:30</td>
+                    <td><span class="label label-info label-mini">출고완료</span></td>
+                    <td> 
+                      
+                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                      
+                    </td>
+                  </tr>
+                 
+                 
+                </tbody>
+              </table>
+            
+		        <div class="form-group text-right">
+		          <div class="col-lg-offset-2 col-lg-10">
+		           <a th:href="@{/addShipment}" class="btn btn-success btn-xs"><i class="fa fa-check"></i>등록</a>
+		           <a id="deleteBtn" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i>삭제</a>
+		          </div>
+		        </div>
+       		</form>
+       		
+          </div>
+          <!-- /col-md-12 -->
+        </div>
+        <!-- /row -->
+        
+</th:block>
+
+</html>

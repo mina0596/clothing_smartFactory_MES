@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+      <div th:fragment="sidebar_qualityControl" id="sidebar" class="nav-collapse ">
+        <!-- sidebar menu start-->
+        <ul class="sidebar-menu" id="nav-accordion">
+          <h5 class="centered">품질관리</h5>
+
+
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-cogs"></i>
+              <span>검사목록</span>
+              </a>
+            <ul class="sub">
+              <li><a th:href="@{/addQualityInspection}">검사 등록</a></li>
+              <li><a th:href="@{/qualityInspectionList}">검사 목록/조회</a></li>
+            </ul>
+          </li>
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-book"></i>
+              <span>검사요청</span>
+              </a>
+             <ul class="sub">
+              <li><a th:href="@{/qualityControlRequest}">품질 검사 요청</a></li>
+              <li><a th:href="@{/qualityControlRequestList}">요청목록</a></li>
+            </ul>
+          </li>
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-book"></i>
+              <span>검사현황</span>
+              </a>
+            <ul class="sub">
+              <li><a th:href="@{/addQualityInspectionStatus}">검사현황</a></li>
+              <li><a th:href="@{/addQualityInspectionReport}">성적서등록</a></li>
+              <li><a th:href="@{/qualityInspectionReport}">성적서 조회/목록</a></li>
+              <li><a th:href="@{/addDefectInspectionResultStatus}">불량현황</a></li>
+              <li><a th:href="@{/inspectionPerformance}">실적</a></li>
+            </ul>
+          </li>
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-book"></i>
+              <span>불량품</span>
+              </a>
+            <ul class="sub">
+              <li><a th:href="@{/addDefectiveProduct}">불량품 등록</a></li>
+              <li><a th:href="@{/defectiveProductList}">불량품 조회/목록</a></li>
+            </ul>
+          </li>
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-book"></i>
+              <span>기준표</span>
+              </a>
+            <ul class="sub">
+              <li><a th:href="@{/addStandardTable}">기준표 등록</a></li>
+              <li><a th:href="@{/getStandardTableList}">기준표 조회/목록</a></li>
+            </ul>
+          </li>
+ 
+    
+        </ul>
+        <!-- sidebar menu end-->
+      </div>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_humanResources}">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3>인사관리</h3>
+	    </div>
+</th:block>
+
+
+<th:block layout:fragment="container">
+	 <div class="content-panel">
+              <h4><i class="fa fa-angle-right"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">회원조회</font></font></h4><hr><table class="table table-striped table-advance table-hover">
+                
+                
+                <thead>
+                  <tr>
+                    <th><i class="fa fa-bullhorn"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 사원코드</font></font></th>
+                    <th><i class="fa fa-bookmark"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 사원명</font></font></th>
+                    <th><i class="fa fa-bookmark"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 담당부서</font></font></th>
+                    <th><i class="fa fa-bookmark"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 담당직책</font></font></th>
+                    <th><i class="fa fa-bookmark"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 이메일</font></font></th>
+                    <th><i class="fa fa-bookmark"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 전화번호</font></font></th>
+                    <th><i class=" fa fa-edit"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 상태</font></font></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <a href="basic_table.html#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">w001</font></font></a>
+                    </td>
+                   <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이한빛</font></font></td>                    
+                    <td><span class="label label-info label-mini"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">본사</font></font></span></td>
+                    <td><span class="label label-warning label-mini"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">임원</font></font></span></td>
+                    
+                    <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">onelight@naver.com</font></font></td>
+                    <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">010-1234-1234</font></font></td>
+                    <td>
+                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <a href="basic_table.html#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">w001</font></font></a>
+                    </td>
+                   <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이한빛</font></font></td>                    
+                    <td><span class="label label-info label-mini"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">본사</font></font></span></td>
+                    <td><span class="label label-warning label-mini"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">임원</font></font></span></td>
+                    
+                    <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">onelight@naver.com</font></font></td>
+                    <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">010-1234-1234</font></font></td>
+                    <td>
+                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <a href="basic_table.html#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">w001</font></font></a>
+                    </td>
+                   <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이한빛</font></font></td>                    
+                    <td><span class="label label-info label-mini"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">본사</font></font></span></td>
+                    <td><span class="label label-warning label-mini"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">임원</font></font></span></td>
+                    
+                    <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">onelight@naver.com</font></font></td>
+                    <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">010-1234-1234</font></font></td>
+                    <td>
+                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <a href="basic_table.html#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">w001</font></font></a>
+                    </td>
+                   <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이한빛</font></font></td>                    
+                    <td><span class="label label-info label-mini"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">본사</font></font></span></td>
+                    <td><span class="label label-warning label-mini"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">임원</font></font></span></td>
+                    
+                    <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">onelight@naver.com</font></font></td>
+                    <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">010-1234-1234</font></font></td>
+                    <td>
+                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <a href="basic_table.html#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">w001</font></font></a>
+                    </td>
+                   <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이한빛</font></font></td>                    
+                    <td><span class="label label-info label-mini"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">본사</font></font></span></td>
+                    <td><span class="label label-warning label-mini"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">임원</font></font></span></td>
+                    
+                    <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">onelight@naver.com</font></font></td>
+                    <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">010-1234-1234</font></font></td>
+                    <td>
+                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <a href="basic_table.html#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">w001</font></font></a>
+                    </td>
+                   <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이한빛</font></font></td>                    
+                    <td><span class="label label-info label-mini"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">본사</font></font></span></td>
+                    <td><span class="label label-warning label-mini"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">임원</font></font></span></td>
+                    
+                    <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">onelight@naver.com</font></font></td>
+                    <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">010-1234-1234</font></font></td>
+                    <td>
+                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <a href="basic_table.html#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">w001</font></font></a>
+                    </td>
+                   <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이한빛</font></font></td>                    
+                    <td><span class="label label-info label-mini"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">본사</font></font></span></td>
+                    <td><span class="label label-warning label-mini"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">임원</font></font></span></td>
+                    
+                    <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">onelight@naver.com</font></font></td>
+                    <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">010-1234-1234</font></font></td>
+                    <td>
+                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <a href="basic_table.html#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">w001</font></font></a>
+                    </td>
+                   <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이한빛</font></font></td>                    
+                    <td><span class="label label-info label-mini"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">본사</font></font></span></td>
+                    <td><span class="label label-warning label-mini"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">임원</font></font></span></td>
+                    
+                    <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">onelight@naver.com</font></font></td>
+                    <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">010-1234-1234</font></font></td>
+                    <td>
+                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <a href="basic_table.html#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">w001</font></font></a>
+                    </td>
+                   <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이한빛</font></font></td>                    
+                    <td><span class="label label-info label-mini"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">본사</font></font></span></td>
+                    <td><span class="label label-warning label-mini"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">임원</font></font></span></td>
+                    
+                    <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">onelight@naver.com</font></font></td>
+                    <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">010-1234-1234</font></font></td>
+                    <td>
+                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <a href="basic_table.html#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">w001</font></font></a>
+                    </td>
+                   <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이한빛</font></font></td>                    
+                    <td><span class="label label-info label-mini"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">본사</font></font></span></td>
+                    <td><span class="label label-warning label-mini"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">임원</font></font></span></td>
+                    
+                    <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">onelight@naver.com</font></font></td>
+                    <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">010-1234-1234</font></font></td>
+                    <td>
+                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <a href="basic_table.html#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">w001</font></font></a>
+                    </td>
+                   <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이한빛</font></font></td>                    
+                    <td><span class="label label-info label-mini"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">본사</font></font></span></td>
+                    <td><span class="label label-warning label-mini"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">임원</font></font></span></td>
+                    
+                    <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">onelight@naver.com</font></font></td>
+                    <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">010-1234-1234</font></font></td>
+                    <td>
+                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <a href="basic_table.html#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">w001</font></font></a>
+                    </td>
+                   <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이한빛</font></font></td>                    
+                    <td><span class="label label-info label-mini"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">본사</font></font></span></td>
+                    <td><span class="label label-warning label-mini"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">임원</font></font></span></td>
+                    
+                    <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">onelight@naver.com</font></font></td>
+                    <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">010-1234-1234</font></font></td>
+                    <td>
+                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <a href="basic_table.html#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">w001</font></font></a>
+                    </td>
+                   <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이한빛</font></font></td>                    
+                    <td><span class="label label-info label-mini"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">본사</font></font></span></td>
+                    <td><span class="label label-warning label-mini"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">임원</font></font></span></td>
+                    
+                    <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">onelight@naver.com</font></font></td>
+                    <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">010-1234-1234</font></font></td>
+                    <td>
+                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <a href="basic_table.html#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">w001</font></font></a>
+                    </td>
+                   <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이한빛</font></font></td>                    
+                    <td><span class="label label-info label-mini"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">본사</font></font></span></td>
+                    <td><span class="label label-warning label-mini"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">임원</font></font></span></td>
+                    
+                    <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">onelight@naver.com</font></font></td>
+                    <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">010-1234-1234</font></font></td>
+                    <td>
+                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <a href="basic_table.html#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">w001</font></font></a>
+                    </td>
+                   <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이한빛</font></font></td>                    
+                    <td><span class="label label-info label-mini"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">본사</font></font></span></td>
+                    <td><span class="label label-warning label-mini"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">임원</font></font></span></td>
+                    
+                    <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">onelight@naver.com</font></font></td>
+                    <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">010-1234-1234</font></font></td>
+                    <td>
+                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <a href="basic_table.html#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">w001</font></font></a>
+                    </td>
+                   <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이한빛</font></font></td>                    
+                    <td><span class="label label-info label-mini"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">본사</font></font></span></td>
+                    <td><span class="label label-warning label-mini"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">임원</font></font></span></td>
+                    
+                    <td class="hidden-phone"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">onelight@naver.com</font></font></td>
+                    <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">010-1234-1234</font></font></td>
+                    <td>
+                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                    </td>
+                  </tr>
+                  
+                  
+                  
+               
+         
+                </tbody>
+              </table>
+            </div>
+
+
+</th:block>
+
+</html>

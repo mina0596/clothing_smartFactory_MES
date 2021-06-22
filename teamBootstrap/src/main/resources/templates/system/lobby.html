@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_system}">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3>시스템관리</h3>
+	    </div>
+</th:block>
+
+
+<th:block layout:fragment="container">
+	<section class="wrapper site-min-height">
+        <!-- page start-->
+        <div class="chat-room mt">
+          <aside class="mid-side">
+            <div class="chat-room-head">
+              <h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">로비 룸</font></font></h3>
+              <form action="#" class="pull-right position">
+                <input type="text" placeholder="검색" class="form-control search-btn ">
+              </form>
+            </div>
+            <div class="room-desk">
+              <h4 class="pull-left"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">오픈 룸</font></font></h4>
+              <a href="#" class="pull-right btn btn-theme02"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">+ 방 만들기</font></font></a>
+              <div class="room-box">
+                <h5 class="text-primary"><a href="chat_room.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">계기반</font></font></a></h5>
+                <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">여기에서 대시 보드에 대해 이야기합니다. </font><font style="vertical-align: inherit;">제공된 지원이 없습니다.</font></font></p>
+                <p><span class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">관리자 :</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Sam Soffes | </font></font><span class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">회원 :</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 98 | </font></font><span class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">마지막 활동 :</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 2 분 전</font></font></p>
+              </div>
+              <div class="room-box">
+                <h5 class="text-primary"><a href="chat_room.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">지원하다</font></font></a></h5>
+                <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Dashio 채팅을 지원합니다. </font><font style="vertical-align: inherit;">구매 티켓이 필요합니다.</font></font></p>
+                <p><span class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">관리자 :</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Sam Soffes | </font></font><span class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">회원 :</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 44 | </font></font><span class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">마지막 활동 :</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 15 분 전</font></font></p>
+              </div>
+              <div class="room-box">
+                <h5 class="text-primary"><a href="chat_room.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">MaxFront</font></font></a></h5>
+                <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">프런트 엔드에 대한 기술 지원. </font><font style="vertical-align: inherit;">사용자 정의가 없습니다.</font></font></p>
+                <p><span class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">관리자 :</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Sam Soffes | </font></font><span class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">회원 :</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 22 | </font></font><span class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">마지막 활동 :</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 15 분 전</font></font></p>
+              </div>
+            </div>
+            <div class="room-desk">
+              <h4 class="pull-left"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">사적인 방</font></font></h4>
+              <div class="room-box">
+                <h5 class="text-primary"><a href="chat_room.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">대시 통계</font></font></a></h5>
+                <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">사이트 통계에 관한 비공개 채팅.</font></font></p>
+                <p><span class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">관리자 :</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Sam Soffes | </font></font><span class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">회원 :</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 13 | </font></font><span class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">마지막 활동 :</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 15 분 전</font></font></p>
+              </div>
+              <div class="room-box">
+                <h5 class="text-primary"><a href="chat_room.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">골드 클라이언트</font></font></a></h5>
+                <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">골드 회원을위한 독점 지원. </font><font style="vertical-align: inherit;">멤버십 $ 98 / 년</font></font></p>
+                <p><span class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">관리자 :</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Sam Soffes | </font></font><span class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">회원 :</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 13 | </font></font><span class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">마지막 활동 :</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 15 분 전</font></font></p>
+              </div>
+            </div>
+          </aside>
+          <aside class="right-side">
+            <div class="user-head">
+              <a href="#" class="chat-tools btn-theme"><i class="fa fa-cog"></i> </a>
+              <a href="#" class="chat-tools btn-theme03"><i class="fa fa-key"></i> </a>
+            </div>
+            <div class="invite-row">
+              <h4 class="pull-left"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">팀 멤버</font></font></h4>
+              <a href="#" class="btn btn-theme04 pull-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">+ 초대</font></font></a>
+            </div>
+            <ul class="chat-available-user">
+              <li>
+                <a href="chat_room.html">
+                  <img class="img-circle" src="img/friends/fr-02.jpg" width="32"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                  폴 브라운
+                   </font></font><span class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1h : 02m</font></font></span>
+                  </a>
+              </li>
+              <li>
+                <a href="chat_room.html">
+                  <img class="img-circle" src="img/friends/fr-05.jpg" width="32"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                  데이비드 던컨
+                   </font></font><span class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1h : 08m</font></font></span>
+                  </a>
+              </li>
+              <li>
+                <a href="chat_room.html">
+                  <img class="img-circle" src="img/friends/fr-07.jpg" width="32"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                  로라 스미스
+                   </font></font><span class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1h : 10m</font></font></span>
+                  </a>
+              </li>
+              <li>
+                <a href="chat_room.html">
+                  <img class="img-circle" src="img/friends/fr-08.jpg" width="32"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                  줄리아 슐츠
+                   </font></font><span class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3h : 00m</font></font></span>
+                  </a>
+              </li>
+              <li>
+                <a href="chat_room.html">
+                  <img class="img-circle" src="img/friends/fr-01.jpg" width="32"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                  프랭크 아리아스
+                   </font></font><span class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4h : 22m</font></font></span>
+                  </a>
+              </li>
+            </ul>
+          </aside>
+        </div>
+        <!-- page end-->
+      </section>
+</th:block>
+
+</html>

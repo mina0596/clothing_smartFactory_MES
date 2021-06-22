@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_accounting}">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3>계정 과목 목록</h3>
+	   </div>
+</th:block>
+
+
+<th:block layout:fragment="container">
+	<div class="content-panel">
+              <h4><i class="fa fa-angle-right"></i>accountSubjectList</h4>
+              <section id="unseen">
+                <table style="table-layout: fixed;" class="table table-bordered table-striped table-condensed" >
+                  <thead>
+                    <tr>
+				        <th>계정과목코드</th>
+						<th>계정과목명</th>
+						<th>적요</th>
+						<th>등록일시</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+					<tr>
+						<td>acc_01</td>
+						<td>현금</td>
+						<td>원자재 구매</td>
+						<td>2021-05-12 15:15:00</td>
+					</tr>
+					<tr>
+						<td>acc_01</td>
+						<td>현금</td>
+						<td>원자재 구매</td>
+						<td>2021-05-12 15:15:00</td>
+					</tr>
+					<tr>
+						<td>acc_01</td>
+						<td>현금</td>
+						<td>원자재 구매</td>
+						<td>2021-05-12 15:15:00</td>
+					</tr>
+					<tr>
+						<td>acc_01</td>
+						<td>현금</td>
+						<td>원자재 구매</td>
+						<td>2021-05-12 15:15:00</td>
+					</tr>
+                    
+                  </tbody>
+                </table>
+              </section>
+            </div>
+	
+	
+</th:block>
+
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_system}">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3>시스템관리</h3>
+	    </div>
+</th:block>
+
+
+<th:block layout:fragment="container">
+	<section class="wrapper site-min-height">
+        <div class="row mt mb">
+          <div class="col-lg-12">
+            <h3><i class="fa fa-angle-right"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 자주하는 질문</font></font></h3>
+            <br>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+              <div class="dmbox">
+                <div class="service-icon">
+                  <a class="" href="faq.html#"><i class="dm-icon fa fa-question fa-3x"></i></a>
+                </div>
+                <h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1. 지식 기반</font></font></h4>
+                <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Lorem Ipsum은 인쇄 및 조판 업계의 더미 텍스트입니다. </font><font style="vertical-align: inherit;">Lorem Ipsum은 1500 년대 이후 업계의 표준 더미 텍스트였습니다.</font></font></p>
+              </div>
+            </div>
+            <!-- end dmbox -->
+            <div class="col-lg-4 col-md-4 col-sm-12">
+              <div class="dmbox">
+                <div class="service-icon">
+                  <a class="" href="faq.html#"><i class="dm-icon fa fa-envelope-o fa-3x"></i></a>
+                </div>
+                <h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2. 버그 신고</font></font></h4>
+                <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Lorem Ipsum은 인쇄 및 조판 업계의 더미 텍스트입니다. </font><font style="vertical-align: inherit;">Lorem Ipsum은 1500 년대 이후 업계의 표준 더미 텍스트였습니다.</font></font></p>
+              </div>
+            </div>
+            <!-- end dmbox -->
+            <div class="col-lg-4 col-md-4 col-sm-12">
+              <div class="dmbox">
+                <div class="service-icon">
+                  <a class="" href="faq.html#"><i class="dm-icon fa fa-random fa-3x"></i></a>
+                </div>
+                <h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3. 티켓 제출</font></font></h4>
+                <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Lorem Ipsum은 인쇄 및 조판 업계의 더미 텍스트입니다. </font><font style="vertical-align: inherit;">Lorem Ipsum은 1500 년대 이후 업계의 표준 더미 텍스트였습니다.</font></font></p>
+              </div>
+            </div>
+            <!-- end dmbox -->
+          </div>
+          <!--  /col-lg-12 -->
+        </div>
+        <!-- /row -->
+        <div class="row content-panel">
+          <h2 class="centered"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">가장 많이 묻는 질문</font></font></h2>
+          <div class="col-md-10 col-md-offset-1 mt mb">
+            <div class="accordion" id="accordion2">
+              <div class="accordion-group">
+                <div class="accordion-heading">
+                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="faq.html#collapseOne">
+                    <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이 템플릿을 구입하는 방법은 무엇입니까?
+                    </font></font></a>
+                </div>
+                <div id="collapseOne" class="accordion-body collapse in">
+                  <div class="accordion-inner">
+                    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Lorem Ipsum은 인쇄 및 조판 업계의 더미 텍스트입니다. </font><font style="vertical-align: inherit;">Lorem Ipsum은 알려지지 않은 프린터가 유형의 갤리를 가져 와서 유형 견본 책자를 만들기 위해 스크램블 한 1500 년대 이후로 업계의 표준 더미 텍스트였습니다. </font><font style="vertical-align: inherit;">그것은 5 세기뿐만 아니라 본질적으로 변하지 않은 전자 조판으로의 도약에도 살아 남았습니다.</font></font></p>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-group">
+                <div class="accordion-heading">
+                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="faq.html#collapseTwo">
+                    <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">내 서버를 어떻게 설치할 수 있습니까?
+                    </font></font></a>
+                </div>
+                <div id="collapseTwo" class="accordion-body collapse">
+                  <div class="accordion-inner">
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
+                      specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-group">
+                <div class="accordion-heading">
+                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="faq.html#collapseThree">
+                    <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">색 구성표를 변경하는 방법?
+                    </font></font></a>
+                </div>
+                <div id="collapseThree" class="accordion-body collapse">
+                  <div class="accordion-inner">
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
+                      specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-group">
+                <div class="accordion-heading">
+                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="faq.html#collapseFour">
+                    <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Revolution Slider를 통합하는 방법은 무엇입니까?
+                    </font></font></a>
+                </div>
+                <div id="collapseFour" class="accordion-body collapse">
+                  <div class="accordion-inner">
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
+                      specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-group">
+                <div class="accordion-heading">
+                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="faq.html#collapseFive">
+                    <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">지원을 받으려면 어떻게해야합니까?
+                    </font></font></a>
+                </div>
+                <div id="collapseFive" class="accordion-body collapse">
+                  <div class="accordion-inner">
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
+                      specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end accordion -->
+          </div>
+          <!-- col-md-10 -->
+        </div>
+        <!--  /row -->
+      </section>
+</th:block>
+
+</html>

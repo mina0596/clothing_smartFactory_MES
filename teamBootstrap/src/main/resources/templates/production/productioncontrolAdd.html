@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_production}">
+  <link rel="stylesheet" type="text/css" href="lib/bootstrap-datetimepicker/datertimepicker.css" />
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3>생산계획 등록</h3>
+	    </div>
+</th:block>
+
+
+<th:block layout:fragment="container">
+
+<div class="col-lg-12">
+            <div class="form-panel">
+              <h4 class="mb"><i class="fa fa-angle-right"></i> Form Elements</h4>
+              <form class="form-horizontal style-form" method="get">
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">성별별 양복명</label>
+                  <div class="col-sm-10">
+                      <select class="form-control">
+						<option>::선택::</option>
+						<option>신사양복</option>
+						<option>여성양복</option>
+		               </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">품목소분류</label>
+                  <div class="col-sm-10">
+                      <select class="form-control">
+						<option>::선택::</option>
+						<option>바지</option>
+						<option>자켓</option>
+						<option>치마</option>
+		               </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">원부자재 재료명 <br>색상명</label>
+                  <div class="col-sm-10">
+                      <select class="form-control">
+						<option>::선택::</option>
+						<option>빨간색</option>
+						<option>모래갈색</option>
+						<option>파란색</option>
+		               </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">담당자 사원 코드</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">수량</label>
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">단위</label>
+                  <div class="col-sm-10">
+                      <select class="form-control">
+						<option>::선택::</option>
+						<option>벌</option>
+		               </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-md-3"> 작업 시작 예정일</label>
+                  <div class="col-md-4">
+                    <div class="input-group date form_datetime-component">
+                      <input type="text" class="form-control" readonly="" size="16">
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
+                        </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-md-3"> 작업 마감 예정일</label>
+                  <div class="col-md-4">
+                    <div class="input-group date form_datetime-component">
+                      <input type="text" class="form-control" readonly="" size="16">
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
+                        </span>
+                    </div>
+                  </div>
+                </div>
+
+           
+                            
+              
+                
+                 <div class="form-group ">
+                    <label for="ccomment" class="control-label col-lg-2">비고</label>
+                    <div class="col-lg-10">
+                      <textarea class="form-control " id="ccomment" name="comment" required></textarea>
+                    </div>
+                  </div>
+                 <div class="form-group">
+                    <div class="col-lg-offset-2 col-lg-10">
+                      <button class="btn btn-theme" type="submit">Save</button>
+                      <button class="btn btn-theme04" type="button">Cancel</button>
+                    </div>
+                 </div>
+                 
+    			</form>            
+                </div>
+	
+            </div>
+
+	<!-- js placed at the end of the document so the pages load faster -->
+  <script th:src="@{Dashio/lib/jquery/jquery-3.6.0.min.js}"></script>
+  <script th:src="@{Dashio/lib/jquery/jquery.min.js}"></script>
+  <script th:src="@{Dashio/lib/bootstrap/js/bootstrap.min.js}"></script>
+  <script class="include" type="text/javascript" th:src="@{Dashio/lib/jquery.dcjqaccordion.2.7.js}"></script>
+  <script th:src="@{Dashio/lib/jquery.scrollTo.min.js}"></script>
+  <script th:src="@{Dashio/lib/jquery.nicescroll.js}" type="text/javascript"></script>
+  <!--common script for all pages-->
+  <script th:src="@{Dashio/lib/common-scripts.js}"></script>
+  <!--script for this page-->
+  <script th:src="@{Dashio/lib/jquery-ui-1.9.2.custom.min.js}"></script>
+  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-fileupload/bootstrap-fileupload.js}"></script>
+  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
+  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-daterangepicker/date.js}"></script>
+  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-daterangepicker/daterangepicker.js}"></script>
+  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js}"></script>
+  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-daterangepicker/moment.min.js}"></script>
+  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-timepicker/js/bootstrap-timepicker.js}"></script>
+  <script th:src="@{Dashio/lib/advanced-form-components.js}"></script>
+
+</th:block>
+
+
+
+</html>

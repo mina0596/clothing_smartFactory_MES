@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_contract}">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3 th:text="${title}"></h3>
+	    </div>
+</th:block>
+
+
+<th:block layout:fragment="container">
+	<div class="form-panel">
+              <form role="form" class="form-horizontal style-form" th:action="@{/addSupplier}">
+                <div class="form-group has-success">
+                  <label class="col-lg-3 control-label">거래처코드</label>
+                  <div class="col-lg-9">
+                    <input type="text" placeholder="" id="f-name" class="form-control">
+                   </div>
+                   </div>
+                <div class="form-group has-success">
+                  <label class="col-lg-3 control-label">거래처구분</label>
+                  <div class="col-lg-9">
+                     <select class="form-panel col-lg-11">
+		                  <option>원부자재거래처</option>
+		                  <option>수주거래처</option>
+		              </select>
+                   </div>
+                   </div>
+                <div class="form-group has-success">
+                  <label class="col-lg-3 control-label">거래처명</label>
+                  <div class="col-lg-9">
+                    <input type="text" placeholder="" id="f-name" class="form-control">
+                   </div>
+                   </div>
+                <div class="form-group has-success">
+                  <label class="col-lg-3 control-label">거래처연락처</label>
+                  <div class="col-lg-3">
+                    <input type="text" placeholder="" id="f-name" class="form-control">     
+                   </div>
+                    <div class="col-lg-3">
+                    <input type="text" placeholder="" id="f-name" class="form-control">     
+                   </div>
+                   <div class="col-lg-3">
+                    <input type="text" placeholder="" id="f-name" class="form-control">     
+                   </div>
+                   </div>
+                <div class="form-group has-success">
+                  <label class="col-lg-3 control-label">거래처직원담당자</label>
+                  <div class="col-lg-9">
+                    <input type="text" placeholder="" id="f-name" class="form-control">
+                   </div>
+                </div>
+                <div class="form-group has-success">
+                  <label class="col-lg-3 control-label">거래처대표자명</label>
+                  <div class="col-lg-9">
+                    <input type="text" placeholder="" id="f-name" class="form-control">
+                   </div>
+                </div>
+                <div class="form-group has-success">
+                  <label class="col-lg-3 control-label">거래처사업자번호</label>
+                  <div class="col-lg-9">
+                    <input type="text" placeholder="" id="f-name" class="form-control">
+                   </div>
+                </div>
+                <div class="form-group has-success">
+                  <label class="col-lg-3 control-label">거래처주소</label>
+                  <div class="col-lg-9">
+                    <input type="text" placeholder="" id="f-name" class="form-control">
+                   </div>
+                </div>
+                <div class="form-group text-right">
+                    <div class="col-lg-offset-2 col-lg-10">
+                      <button class="btn btn-theme" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">거래처등록</font></font></button>
+                      <button class="btn btn-theme04" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소</font></font></button>
+                    </div>
+                    </div>
+              </form>
+            </div>
+	
+	
+	</th:block>
+
+</html>

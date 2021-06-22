@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+      <div th:fragment="sidebar_rawMaterials" id="sidebar" class="nav-collapse ">
+        <!-- sidebar menu start-->
+        <ul class="sidebar-menu" id="nav-accordion">
+          <h5 class="centered">자재관리</h5>
+
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-desktop"></i>
+              <span>자재입고</span>
+              </a>
+            <ul class="sub">
+              <li><a th:href="@{/addInWarehousingMaterials}">입고등록</a></li>
+              <li><a th:href="@{/InWarehousingMaterialsList}">입고현황</a></li>
+            </ul>
+          </li>
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-cogs"></i>
+              <span>원부자재정보</span>
+              </a>
+            <ul class="sub">
+              <li><a th:href="@{/addRawMaterials}">원부자재 등록</a></li>
+              <li><a th:href="@{/rawMaterialsList}">원부자재 조회</a></li>
+            </ul>
+          </li>
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-book"></i>
+              <span>자재출고</span>
+              </a>
+            <ul class="sub">
+              <li><a th:href="@{#}">의뢰별 소요자재 등록</a></li>
+              <li><a th:href="@{#}">의뢰별 소요자재 조회</a></li>
+              <li><a th:href="@{#}">출고현황</a></li>
+            </ul>
+
+        </ul>
+        <!-- sidebar menu end-->
+      </div>
+</html>

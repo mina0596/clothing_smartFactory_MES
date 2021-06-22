@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+      <div th:fragment="sidebar_shipment" id="sidebar" class="nav-collapse ">
+        <!-- sidebar menu start-->
+        <ul class="sidebar-menu" id="nav-accordion">
+          <h5 class="centered">출하관리</h5>
+
+
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-tasks"></i>
+              <span>출하지시</span>
+              </a>
+            <ul class="sub">
+              <li><a th:href="@{/addShipmentOrder}">출하지시 등록</a></li>
+              <li><a th:href="@{/shipmentOrderList}">출하지시 조회/목록</a></li>
+            </ul>
+          </li>
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-book"></i>
+              <span>송장관리</span>
+              </a>
+            <ul class="sub">
+              <li><a th:href="@{/addShipmentInvoice}">송장 등록</a></li>
+              <li><a th:href="@{/shipmentInvoiceList}">송장 조회/목록</a></li>
+            </ul>
+          </li>
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-truck"></i>
+              
+              <span>출고관리</span>
+              </a>
+            <ul class="sub">
+              <li><a th:href="@{/courierList}">운송정보</a></li>
+              <li><a th:href="@{/addShipment}">출고 등록</a></li>
+              <li><a th:href="@{/shipmentList}">출고 조회</a></li>
+            </ul>
+          </li>
+ 
+    
+        </ul>
+        <!-- sidebar menu end-->
+      </div>
+</html>

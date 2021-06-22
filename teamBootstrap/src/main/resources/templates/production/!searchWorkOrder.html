@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <div th:fragment="searchWorkOrder">
+  	<form th:action="@{/!workOrderList}" method="get">
+  		<select name="workOrderSearchKey">
+  			<option>작업지시번호</option>
+  			<option>계약번호</option>
+  			<option>품목명</option>
+  		
+  			
+  			 			
+  		</select>
+  		<input type="text" name="workOrderSearchValue" placeholder="검색어를입력해주세요">
+  		<button type="submit">검색</button>
+  	</form>
+
+  </div>
+</html>

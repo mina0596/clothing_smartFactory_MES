@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_system}">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3>시스템관리</h3>
+	    </div>
+</th:block>
+
+
+<th:block layout:fragment="container">
+	<section class="wrapper">
+        <!-- page start-->
+        <div class="row mt">
+          <div class="col-sm-3">
+            <section class="panel">
+              <div class="panel-body">
+                <a href="mail_compose.html" class="btn btn-compose">
+                  <i class="fa fa-pencil"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">  메일 작성
+                  </font></font></a>
+                <ul class="nav nav-pills nav-stacked mail-nav">
+                  <li class="active"><a href="inbox.html"> <i class="fa fa-inbox"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 받은 편지함  </font></font><span class="label label-theme pull-right inbox-notification"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">삼</font></font></span></a></li>
+                  <li><a href="#"> <i class="fa fa-envelope-o"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 메일을 보내다</font></font></a></li>
+                  <li><a href="#"> <i class="fa fa-exclamation-circle"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 중대한</font></font></a></li>
+                  <li><a href="#"> <i class="fa fa-file-text-o"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 체커 </font></font><span class="label label-info pull-right inbox-notification"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8</font></font></span></a>
+                  </li>
+                  <li><a href="#"> <i class="fa fa-trash-o"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 폐물</font></font></a></li>
+                </ul>
+              </div>
+            </section>
+            <section class="panel">
+              <div class="panel-body">
+                <ul class="nav nav-pills nav-stacked labels-info ">
+                  <li>
+                    <h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">온라인 친구</font></font></h4>
+                  </li>
+                  <li>
+                    <a href="#">
+                        <img src="img/friends/fr-10.jpg" class="img-circle" width="20"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">로라
+                        </font></font><p><span class="label label-success"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">유효한</font></font></span></p>
+                      </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                        <img src="img/friends/fr-05.jpg" class="img-circle" width="20"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">데이비드
+                        </font></font><p><span class="label label-danger"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 바쁜</font></font></span></p>
+                      </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                        <img src="img/friends/fr-01.jpg" class="img-circle" width="20"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">표
+                        </font></font><p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">오프라인</font></font></p>
+                      </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                        <img src="img/friends/fr-03.jpg" class="img-circle" width="20"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">필립
+                        </font></font><p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">오프라인</font></font></p>
+                      </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                        <img src="img/friends/fr-02.jpg" class="img-circle" width="20"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Joshua
+                        </font></font><p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">오프라인</font></font></p>
+                      </a>
+                  </li>
+                </ul>
+                <a href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> + 더 추가</font></font></a>
+                <div class="inbox-body text-center inbox-action">
+                  <div class="btn-group">
+                    <a class="btn mini btn-default" href="javascript:;">
+                      <i class="fa fa-power-off"></i>
+                      </a>
+                  </div>
+                  <div class="btn-group">
+                    <a class="btn mini btn-default" href="javascript:;">
+                      <i class="fa fa-cog"></i>
+                      </a>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+          <div class="col-sm-9">
+            <section class="panel">
+              <header class="panel-heading wht-bg">
+                <h4 class="gen-case"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                    받은 편지함 (3)
+                    </font></font><form action="#" class="pull-right mail-src-position">
+                      <div class="input-append">
+                        <input type="text" class="form-control " placeholder="메일 검색">
+                      </div>
+                    </form>
+                  </h4>
+              </header>
+              <div class="panel-body minimal">
+                <div class="mail-option">
+                  <div class="chk-all">
+                    <div class="pull-left mail-checkbox">
+                      <input type="checkbox" class="">
+                    </div>
+                    <div class="btn-group">
+                      <a data-toggle="dropdown" href="#" class="btn mini all"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                        모두
+                        </font></font><i class="fa fa-angle-down "></i>
+                        </a>
+                      <ul class="dropdown-menu">
+                        <li><a href="#"> None</a></li>
+                        <li><a href="#"> Read</a></li>
+                        <li><a href="#"> Unread</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="btn-group">
+                    <a data-original-title="Refresh" data-placement="top" data-toggle="dropdown" href="#" class="btn mini tooltips">
+                      <i class=" fa fa-refresh"></i>
+                      </a>
+                  </div>
+                  <div class="btn-group hidden-phone">
+                    <a data-toggle="dropdown" href="#" class="btn mini blue"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                      더
+                      </font></font><i class="fa fa-angle-down "></i>
+                      </a>
+                    <ul class="dropdown-menu">
+                      <li><a href="#"><i class="fa fa-pencil"></i> Mark as Read</a></li>
+                      <li><a href="#"><i class="fa fa-ban"></i> Spam</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#"><i class="fa fa-trash-o"></i> Delete</a></li>
+                    </ul>
+                  </div>
+                  <div class="btn-group">
+                    <a data-toggle="dropdown" href="#" class="btn mini blue"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                      이동
+                      </font></font><i class="fa fa-angle-down "></i>
+                      </a>
+                    <ul class="dropdown-menu">
+                      <li><a href="#"><i class="fa fa-pencil"></i> Mark as Read</a></li>
+                      <li><a href="#"><i class="fa fa-ban"></i> Spam</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#"><i class="fa fa-trash-o"></i> Delete</a></li>
+                    </ul>
+                  </div>
+                  <ul class="unstyled inbox-pagination">
+                    <li><span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">99 중 1-50</font></font></span></li>
+                    <li>
+                      <a class="np-btn" href="#"><i class="fa fa-angle-left  pagination-left"></i></a>
+                    </li>
+                    <li>
+                      <a class="np-btn" href="#"><i class="fa fa-angle-right pagination-right"></i></a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="table-inbox-wrap ">
+                  <table class="table table-inbox table-hover">
+                    <tbody>
+                      <tr class="unread">
+                        <td class="inbox-small-cells">
+                          <input type="checkbox" class="mail-checkbox">
+                        </td>
+                        <td class="inbox-small-cells"><i class="fa fa-star"></i></td>
+                        <td class="view-message  dont-show"><a href="mail_view.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Google Inc.</font></font></a></td>
+                        <td class="view-message "><a href="mail_view.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">새 계정이 준비되었습니다.</font></font></a></td>
+                        <td class="view-message  inbox-small-cells"><i class="fa fa-paperclip"></i></td>
+                        <td class="view-message  text-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">오전 08:10</font></font></td>
+                      </tr>
+                      <tr class="unread">
+                        <td class="inbox-small-cells">
+                          <input type="checkbox" class="mail-checkbox">
+                        </td>
+                        <td class="inbox-small-cells"><i class="fa fa-star"></i></td>
+                        <td class="view-message dont-show"><a href="mail_view.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">마크 톰슨</font></font></a></td>
+                        <td class="view-message"><a href="mail_view.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">마지막 프로젝트 업데이트</font></font></a></td>
+                        <td class="view-message inbox-small-cells"></td>
+                        <td class="view-message text-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3 월 15 일</font></font></td>
+                      </tr>
+                      <tr class="unread">
+                        <td class="inbox-small-cells">
+                          <input type="checkbox" class="mail-checkbox">
+                        </td>
+                        <td class="inbox-small-cells"><i class="fa fa-star"></i></td>
+                        <td class="view-message dont-show"><a href="mail_view.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Wonder Corp.</font></font></a></td>
+                        <td class="view-message"><a href="mail_view.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">등록 해 주셔서 감사합니다</font></font></a></td>
+                        <td class="view-message inbox-small-cells"></td>
+                        <td class="view-message text-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3 월 15 일</font></font></td>
+                      </tr>
+                      <tr class="">
+                        <td class="inbox-small-cells">
+                          <input type="checkbox" class="mail-checkbox">
+                        </td>
+                        <td class="inbox-small-cells"><i class="fa fa-star"></i></td>
+                        <td class="view-message dont-show"><a href="mail_view.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">페이스 북</font></font></a></td>
+                        <td class="view-message"><a href="mail_view.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">새로운 우정 요청</font></font></a></td>
+                        <td class="view-message inbox-small-cells"></td>
+                        <td class="view-message text-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3 월 13 일</font></font></td>
+                      </tr>
+                      <tr class="">
+                        <td class="inbox-small-cells">
+                          <input type="checkbox" class="mail-checkbox">
+                        </td>
+                        <td class="inbox-small-cells"><i class="fa fa-star inbox-started"></i></td>
+                        <td class="view-message dont-show"><a href="mail_view.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">마크 웨버 </font></font><span class="label label-danger pull-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">긴급한</font></font></span></a></td>
+                        <td class="view-message"><a href="mail_view.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">서버가 다운되었습니다</font></font></a></td>
+                        <td class="view-message inbox-small-cells"></td>
+                        <td class="view-message text-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3 월 9 일</font></font></td>
+                      </tr>
+                      <tr class="">
+                        <td class="inbox-small-cells">
+                          <input type="checkbox" class="mail-checkbox">
+                        </td>
+                        <td class="inbox-small-cells"><i class="fa fa-star inbox-started"></i></td>
+                        <td class="view-message dont-show"><a href="mail_view.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">페이스 북</font></font></a></td>
+                        <td class="view-message"><a href="mail_view.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Patrick S.</font></font></a></td>
+                        <td class="view-message inbox-small-cells"><i class="fa fa-paperclip"></i></td>
+                        <td class="view-message text-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3 월 8 일</font></font></td>
+                      </tr>
+                      <tr class="">
+                        <td class="inbox-small-cells">
+                          <input type="checkbox" class="mail-checkbox">
+                        </td>
+                        <td class="inbox-small-cells"><i class="fa fa-star inbox-started"></i></td>
+                        <td class="view-message dont-show"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">페이팔 Inc.</font></font></td>
+                        <td class="view-message"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">새로운 결제가 접수되었습니다.</font></font></td>
+                        <td class="view-message inbox-small-cells"><i class="fa fa-paperclip"></i></td>
+                        <td class="view-message text-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3 월 04 일</font></font></td>
+                      </tr>
+                      <tr class="">
+                        <td class="inbox-small-cells">
+                          <input type="checkbox" class="mail-checkbox">
+                        </td>
+                        <td class="inbox-small-cells"><i class="fa fa-star"></i></td>
+                        <td class="view-message dont-show"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">안드레아 </font></font><span class="label label-success pull-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">여자 친구</font></font></span></td>
+                        <td class="view-message view-message"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">주말 계획</font></font></td>
+                        <td class="view-message inbox-small-cells"></td>
+                        <td class="view-message text-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3 월 04 일</font></font></td>
+                      </tr>
+                      <tr class="">
+                        <td class="inbox-small-cells">
+                          <input type="checkbox" class="mail-checkbox">
+                        </td>
+                        <td class="inbox-small-cells"><i class="fa fa-star"></i></td>
+                        <td class="view-message dont-show"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">데이비드 그린</font></font></td>
+                        <td class="view-message view-message"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">축구 티켓</font></font></td>
+                        <td class="view-message inbox-small-cells"></td>
+                        <td class="view-message text-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2 월 22 일</font></font></td>
+                      </tr>
+                      <tr class="">
+                        <td class="inbox-small-cells">
+                          <input type="checkbox" class="mail-checkbox">
+                        </td>
+                        <td class="inbox-small-cells"><i class="fa fa-star"></i></td>
+                        <td class="view-message dont-show"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">에블린 </font></font><span class="label label-info pull-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">가족</font></font></span></td>
+                        <td class="view-message view-message"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">깜짝 파티</font></font></td>
+                        <td class="view-message inbox-small-cells"></td>
+                        <td class="view-message text-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2 월 19 일</font></font></td>
+                      </tr>
+                      <tr class="">
+                        <td class="inbox-small-cells">
+                          <input type="checkbox" class="mail-checkbox">
+                        </td>
+                        <td class="inbox-small-cells"><i class="fa fa-star inbox-started"></i></td>
+                        <td class="view-message dont-show"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">마틴 무어</font></font></td>
+                        <td class="view-message"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">안녕 친구!</font></font></td>
+                        <td class="view-message inbox-small-cells"></td>
+                        <td class="view-message text-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2 월 17 일</font></font></td>
+                      </tr>
+                      <tr class="">
+                        <td class="inbox-small-cells">
+                          <input type="checkbox" class="mail-checkbox">
+                        </td>
+                        <td class="inbox-small-cells"><i class="fa fa-star inbox-started"></i></td>
+                        <td class="dont-show"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">페이스 북</font></font></td>
+                        <td class="view-message"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">폴은 당신의 벽에 게시</font></font></td>
+                        <td class="view-message inbox-small-cells"><i class="fa fa-paperclip"></i></td>
+                        <td class="view-message text-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2 월 14 일</font></font></td>
+                      </tr>
+                      <tr class="">
+                        <td class="inbox-small-cells">
+                          <input type="checkbox" class="mail-checkbox">
+                        </td>
+                        <td class="inbox-small-cells"><i class="fa fa-star"></i></td>
+                        <td class="view-message dont-show"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">스티브 스톨</font></font></td>
+                        <td class="view-message"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">업데이트 개발</font></font></td>
+                        <td class="view-message inbox-small-cells"><i class="fa fa-paperclip"></i></td>
+                        <td class="view-message text-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2 월 11 일</font></font></td>
+                      </tr>
+                      <tr class="">
+                        <td class="inbox-small-cells">
+                          <input type="checkbox" class="mail-checkbox">
+                        </td>
+                        <td class="inbox-small-cells"><i class="fa fa-star"></i></td>
+                        <td class="dont-show"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">로라 안톤</font></font></td>
+                        <td class="view-message view-message"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">새로운 구독</font></font></td>
+                        <td class="view-message inbox-small-cells"></td>
+                        <td class="view-message text-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1 월 14 일</font></font></td>
+                      </tr>
+                      <tr class="">
+                        <td class="inbox-small-cells">
+                          <input type="checkbox" class="mail-checkbox">
+                        </td>
+                        <td class="inbox-small-cells"><i class="fa fa-star"></i></td>
+                        <td class="view-message dont-show"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ryanair</font></font></td>
+                        <td class="view-message"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">귀하의 항공권</font></font></td>
+                        <td class="view-message inbox-small-cells"></td>
+                        <td class="view-message text-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1 월 07 일</font></font></td>
+                      </tr>
+                      <tr class="">
+                        <td class="inbox-small-cells">
+                          <input type="checkbox" class="mail-checkbox">
+                        </td>
+                        <td class="inbox-small-cells"><i class="fa fa-star"></i></td>
+                        <td class="view-message dont-show"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">트위터</font></font></td>
+                        <td class="view-message"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">비밀번호 초기화</font></font></td>
+                        <td class="view-message inbox-small-cells"></td>
+                        <td class="view-message text-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1 월 04 일</font></font></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+</th:block>
+
+</html>

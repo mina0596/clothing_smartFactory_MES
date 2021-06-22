@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_contract}">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3 th:text="${title}"></h3>
+	    </div>
+</th:block>
+
+
+<th:block layout:fragment="container">
+	<div class="content">
+			 <div th:include="contract/!searchSupplierContract :: searchSupplierContract">
+			 </div>
+              <table class="table table-striped table-advance table-hover">
+                <h4><i class="fa fa-angle-right"></i> 원부자재 발주목록  및 조회 </h4>
+              
+                <thead>
+                  <tr>
+                    <th><i class="fa fa-bullhorn"></i>원부자재발주코드</th>
+                   
+                    <th><i class="fa fa-bookmark"></i> 원부자재거래처명</th>
+                    <th><i class="fa fa-bookmark"></i> 원부자재 거래처 담당자</th>
+                    <th><i class="fa fa-bookmark"></i> 원부자재 거래처연락처</th>
+                    <th><i class="fa fa-bookmark"></i> 원부자재구분</th>
+                    <th><i class="fa fa-bookmark"></i> 원부자재 재료명</th>
+                    <th><i class="fa fa-bookmark"></i> 원부자재 색상명 </th>
+                    <th><i class="fa fa-bookmark"></i> 원부자재 특징</th>
+                    <th><i class="fa fa-bookmark"></i> 원부자재 발주수량</th>
+                    <th><i class="fa fa-bookmark"></i> 원부자재  발주단위</th>
+                    <th><i class="fa fa-bookmark"></i> 원부자재 발주등록일 </th>
+                    <th><i class="fa fa-bookmark"></i> 원부자재 발주변경일</th>
+                    <th><i class="fa fa-bookmark"></i> 원부자재 발주 승인상태</th>
+                    <th><i class="fa fa-bookmark"></i> 원부자재 거래처 수정삭제 </th>
+                   
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <a href="basic_table.html#">suplier01</a>
+                    </td>
+                    <td>
+                      <a href="basic_table.html#">나는단추</a>
+                    </td>
+                    <td>
+                      <a href="basic_table.html#">홍길동</a>
+                    </td>
+
+                    <td class="hidden-phone">070-2515-1555</td>
+                     <td>
+                      <a href="basic_table.html#">부자재</a>
+                    </td>
+                     <td>
+                      <a href="basic_table.html#">부자재의단추</a>
+                    </td>
+                     <td>
+                      <a href="basic_table.html#">단추색상레드</a>
+                    </td>
+                     <td>
+                      <a href="basic_table.html#">단추물결무늬</a>
+                    </td>
+                     <td>
+                      <a href="basic_table.html#">200</a>
+                    </td>
+                     <td>
+                      <a href="basic_table.html#">개</a>
+                    </td>
+                     <td>
+                      <a href="basic_table.html#">승인요청</a>
+                    </td>
+                    
+                   
+                     <td>
+                      <a href="basic_table.html#">2021-05-06 10:30:00</a>
+                    </td>
+                     <td>
+                      <a href="basic_table.html#">2021-05-07 11:00:00</a>
+                    </td>
+                     <td>
+                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                    </td>
+                   
+                    
+                  </tr>
+                  
+                  <tr>
+                    <td>
+                      <a href="basic_table.html#">suplier02</a>
+                    </td>
+                    <td>
+                      <a href="basic_table.html#">견고한지퍼나라</a>
+                    </td>
+                    <td>
+                      <a href="basic_table.html#">공예윤</a>
+                    </td>
+
+                    <td class="hidden-phone">070-2505-1545</td>
+                     <td>
+                      <a href="basic_table.html#">부자재</a>
+                    </td>
+                     <td>
+                      <a href="basic_table.html#">부자재의지퍼</a>
+                    </td>
+                     <td>
+                      <a href="basic_table.html#">지퍼의황금색</a>
+                    </td>
+                     <td>
+                      <a href="basic_table.html#">지퍼</a>
+                    </td>
+                     <td>
+                      <a href="basic_table.html#">50</a>
+                    </td>
+                     <td>
+                      <a href="basic_table.html#">개</a>
+                    </td>
+                     <td>
+                      <a href="basic_table.html#">승인완료</a>
+                    </td>
+                    
+                   
+                     <td>
+                      <a href="basic_table.html#">2021-05-06 10:30:00</a>
+                    </td>
+                     <td>
+                      <a href="basic_table.html#">2021-05-06 11:00:00</a>
+                    </td>
+                     <td>
+                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                    </td>
+                   
+                    
+                  </tr>
+                  
+                  <tr>
+                    <td>
+                      <a href="basic_table.html#">suplier03</a>
+                    </td>
+                    <td>
+                      <a href="basic_table.html#">부드러운실크컴퍼니</a>
+                    </td>
+                    <td>
+                      <a href="basic_table.html#">서윤우</a>
+                    </td>
+
+                    <td class="hidden-phone">070-2815-1555</td>
+                     <td>
+                      <a href="basic_table.html#">원자재</a>
+                    </td>
+                     <td>
+                      <a href="basic_table.html#">원자재의실크</a>
+                    </td>
+                     <td>
+                      <a href="basic_table.html#">실크 샌드 브라운</a>
+                    </td>
+                     <td>
+                      <a href="basic_table.html#">격자무늬</a>
+                    </td>
+                     <td>
+                      <a href="basic_table.html#">20</a>
+                    </td>
+                     <td>
+                      <a href="basic_table.html#">필</a>
+                    </td>
+                     <td>
+                      <a href="basic_table.html#">승인요청</a>
+                    </td>
+                    
+                   
+                     <td>
+                      <a href="basic_table.html#">2021-05-06 10:35:00</a>
+                    </td>
+                     <td>
+                      <a href="basic_table.html#">2021-05-07 11:00:00</a>
+                    </td>
+                     <td>
+                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                    </td>
+                   
+                    
+                  </tr>
+                  
+                  <tr>
+                    <td>
+                      <a href="basic_table.html#">suplier01</a>
+                    </td>
+                    <td>
+                      <a href="basic_table.html#">나는단추</a>
+                    </td>
+                    <td>
+                      <a href="basic_table.html#">홍길동</a>
+                    </td>
+
+                    <td class="hidden-phone">070-2515-1555</td>
+                     <td>
+                      <a href="basic_table.html#">부자재</a>
+                    </td>
+                     <td>
+                      <a href="basic_table.html#">부자재의단추</a>
+                    </td>
+                     <td>
+                      <a href="basic_table.html#">단추색상레드</a>
+                    </td>
+                     <td>
+                      <a href="basic_table.html#">단추물결무늬</a>
+                    </td>
+                     <td>
+                      <a href="basic_table.html#">200</a>
+                    </td>
+                     <td>
+                      <a href="basic_table.html#">개</a>
+                    </td>
+                     <td>
+                      <a href="basic_table.html#">승인요청</a>
+                    </td>
+                    
+                   
+                     <td>
+                      <a href="basic_table.html#">2021-05-06 10:30:00</a>
+                    </td>
+                     <td>
+                      <a href="basic_table.html#">2021-05-07 11:00:00</a>
+                    </td>
+                     <td>
+                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                    </td>
+                   
+                    
+                  </tr>
+                  
+                 
+                   
+                </tbody>
+              </table>
+            </div>
+            
+</th:block>
+
+</html>

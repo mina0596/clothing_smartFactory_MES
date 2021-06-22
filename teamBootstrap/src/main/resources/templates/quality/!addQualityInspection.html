@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_qualityControl}">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3 th:text="${title}"></h3>
+	    </div>
+</th:block>
+
+
+<th:block layout:fragment="container">
+<div class="form-panel">
+              <form role="form" class="form-horizontal style-form" th:action="@{/ㅁ}">
+                <div class="form-group has-success ">
+                  <label class="col-xs-3 control-label fa fa-book">품질검사코드</label>
+                  <div class="col-xs-3">
+                    <input type="text" placeholder="품질검사 코드" name="quailtyInspectionCode" class="form-control">
+                   </div>
+                   </div>
+                <div class="form-group has-success ">
+                   <label class="col-xs-3 control-label">품질검사대분류</label>
+                  <div class="col-xs-3">
+                   <select>
+	                    <option>::대분류검사명::</option>
+	                    <option>::원자재검사::</option>
+	                    <option>::공정중간검사::</option>
+	                    <option>::완제품검사::</option>
+                    </select>
+                    </div>
+                   <label class="col-xs-2 control-label">품질검사중분류</label>
+                  <div class="col-xs-4">
+                   <select>
+	                    <option>::중분류검사명::</option>
+	                    <option>::원자재_원단이화학검사(파괴검사)1::</option>
+	                    <option>::원자재_원단이화학검사(파괴검사)2::</option>
+	                    <option>::원자재_원단이화학검사(파괴검사)3::</option>
+	                    <option>::원자재_원단이화학검사(파괴검사)4::</option>
+	                    <option>::원자재_원단이화학검사(파괴검사)5::</option>
+	                    <option>::원자재_원단이화학검사(파괴검사)6::</option>
+	                    <option>::공정중간검사_재단물검사1::</option>
+	                    <option>::공정중간검사_재단물검사2::</option>
+	                    <option>::공정중간검사_재단물검사3::</option>
+	                    <option>::공정중간검사_봉제검사1::</option>
+	                    <option>::공정중간검사_봉제검사2::</option>
+	                    <option>::공정중간검사_봉제검사3::</option>
+	                    <option>::공정중간검사_봉제검사4::</option>
+	                    <option>::완제품검사_봉제검사1::</option>
+	                    <option>::완제품검사_봉제검사2::</option>
+	                    <option>::완제품검사_봉제검사3::</option>
+	                    <option>::완제품검사_봉제검사4::</option>
+	                    <option>::완제품검사_마무리1::</option>
+	                    <option>::완제품검사_마무리2::</option>
+	                    
+                    </select>
+                    </div>
+                  </div>
+                  <div class="form-group has-success ">
+                   <label class="col-xs-2 control-label">품질검사소분류</label>
+                  <div class="col-xs-4">
+                   <select>
+	                    <option>::품질검사소분류명::</option>
+	                    <option>::원단이화학검사(파괴검사)_물세탁1::</option>
+	                    <option>::원단이화학검사(파괴검사)_물세탁2::</option>
+	                    <option>::원단이화학검사(파괴검사)_드라이클리닝_염색성::</option>
+	                    <option>::원단이화학검사(파괴검사)_마찰변색도::</option>
+	                    <option>::원단이화학검사(파괴검사)_마찰견뢰도::</option>
+	                    <option>::원단이화학검사(파괴검사)_땀,일광복합견뢰도::</option>
+	                    <option>::재단물검사_너치1::</option>
+	                    <option>::재단물검사_너치2::</option>
+	                    <option>::재단물검사_너치3::</option>
+	                    <option>::공정봉제검사_부속치수1::</option>
+	                    <option>::공정봉제검사_부속치수2::</option>
+	                    <option>::공정봉제검사_심지치수::</option>
+	                    <option>::공정봉제검사_상의치수::</option>
+	                    <option>::공정봉제검사_하의치수::</option>
+	                    <option>::완제품봉제검사_상의치수1::</option>
+	                    <option>::완제품봉제검사_상의치수2::</option>
+	                    <option>::완제품봉제검사_하의치수1::</option>
+	                    <option>::완제품봉제검사_하의치수2::</option>
+	                    <option>::완제마무리_다림질::</option>
+	                    <option>::완제마무리_라벨::</option>
+                    </select>
+                    </div>
+                   <label class="col-xs-2 control-label">품질검사세분류</label>
+                  <div class="col-xs-4">
+                   <select>
+	                    <option>::세부검사명::</option>
+	                    <option>::물세탁1_변퇴색::</option>
+	                    <option>::물세탁2_직물외관변화::</option>
+	                    <option>::드라이클리닝염색성_자체이염::</option>
+	                    <option>::마찰변색도_건::</option>
+	                    <option>::마찰견뢰도_석유계::</option>
+	                    <option>::------::</option>
+	                    <option>::너치1_너치위치::</option>
+	                    <option>::너치2_너치깊이::</option>
+	                    <option>::너치3_너치빠짐::</option>
+	                    <option>::부속치수1_좌우라펠폭::</option>
+	                    <option>::부속치수2_고지선박음확인::</option>
+	                    <option>::--------::</option>
+	                    <option>::상의치수_좌우어깨끝점~소매밑단 길이비교::</option>
+	                    <option>::하의치수_바지트임길이</option>
+	                    <option>::상의치수1_자켓총길이</option>
+	                    <option>::상의치수2_자켓어깨너비</option>
+	                    <option>::-----------</option>
+	                    <option>::다림질_표면변색::</option>
+	                    <option>::라벨_라벨표기사항확인::</option>
+	                </select>
+                    </div>
+                  </div>
+                <div class="form-group text-right">
+                    <div class="col-lg-offset-2 col-lg-10">
+                      <button class="btn btn-theme" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">품질검사 등록</font></font></button>
+                      <button class="btn btn-theme04" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">품질검사등록취소</font></font></button>
+                    </div>
+                    </div>
+              </form>
+              </div>
+          
+                        <!-- js placed at the end of the document so the pages load faster -->
+
+  <!--script for this page-->
+  <script th:src="@{Dashio/lib/jquery-ui-1.9.2.custom.min.js}"></script>
+  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-fileupload/bootstrap-fileupload.js}"></script>
+  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
+  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-daterangepicker/date.js}"></script>
+  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-daterangepicker/daterangepicker.js}"></script>
+  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js}"></script>
+  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-daterangepicker/moment.min.js}"></script>
+  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-timepicker/js/bootstrap-timepicker.js}"></script>
+  <script th:src="@{Dashio/lib/advanced-form-components.js}"></script>
+  <script src="lib/jquery/jquery.min.js"></script>
+
+  <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+  <script class="include" type="text/javascript" src="lib/jquery.dcjqaccordion.2.7.js"></script>
+  <script src="lib/jquery.scrollTo.min.js"></script>
+  <script src="lib/jquery.nicescroll.js" type="text/javascript"></script>
+  <!--common script for all pages-->
+  <script src="lib/common-scripts.js"></script>
+  <!--script for this page-->
+	
+</th:block>
+
+</html>
