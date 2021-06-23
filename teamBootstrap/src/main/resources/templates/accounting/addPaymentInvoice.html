@@ -42,27 +42,27 @@
             <input class="form-control" id="disabledInput" type="text" placeholder="oc_001(DB에서 가져온 값)" disabled>
           </div>
         </div>
-        
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">거래처명</label>
           <div class="col-sm-10">
-          <div class="col-sm-10">
-            <input class="form-control" id="disabledInput" type="text" placeholder="oc_001(DB에서 가져온 값)" disabled>
-          </div>
+            <input class="form-control" id="disabledInput" type="text" placeholder="(DB에서 가져온 값)" disabled>
           </div>
         </div>
+        
            	        
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">계정과목코드</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="acc_01(DB에서 가져온 값)">
+            <input type="text" class="form-control" placeholder="acc_01(검색해서 가져오기)">
+            <!-- 버튼 누르면 검색할 수 있는 창으로 연결 검색 창 누르면 || 계정과목 코드 - 계정과목 명 ||<-- 이렇게 뜨는 걸로 -->            
+            <button type="button" class="btn btn-default">검색하여 가져오기</button>
           </div>
         </div>
         
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">계정과목명</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="현금(DB에서 가져온 값)">
+            <input type="text" class="form-control" placeholder="현금(DB에서 가져온 값)" disabled="disabled">
           </div>
         </div>
         <div class="form-group">
@@ -84,17 +84,15 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">입출금</label>
-          <div class="col-sm-10">
-            <div class="col-sm-4">
+                  <label class="col-sm-2 col-sm-2 control-label">입출금</label>
+                  <div class="col-sm-4">
                       <select class="form-control">
 						<option>::선택::</option>
-						<option>출금</option>
 						<option>입금</option>
+						<option>출금</option>
 		               </select>
                   </div>
-          </div>
-        </div>
+                </div>
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">담당자 사원코드</label>
           <div class="col-sm-10">

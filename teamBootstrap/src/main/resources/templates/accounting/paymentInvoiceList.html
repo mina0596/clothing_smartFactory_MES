@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_accounting}">
 
-</body>
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3>계정 과목 목록</h3>
+	   </div>
+	 <!--   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js"></script> -->
+	   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+</th:block>
+
+
+<th:block layout:fragment="container">
+	<div class="row mt">
+     <div class="col-md-12">
+       <div class="content">
+       
+       	리스트 만들어야합니다.
+
+             
+            </div>
+            </div>
+            </div>
+</th:block>
+
 </html>
