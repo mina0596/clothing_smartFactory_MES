@@ -43,7 +43,7 @@ public class QualityControlController {
 		return"quality/inspectionPerformance";
 	}
 	
-	//불량현황등록 메서드
+	//[한빛]불량현황등록 메서드
 	@GetMapping("/addDefectInspectionResultStatus")
 	public String addDefectInspectionResultStatus(Model model) {
 		
