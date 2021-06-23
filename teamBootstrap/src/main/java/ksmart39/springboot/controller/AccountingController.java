@@ -1,10 +1,10 @@
 package ksmart39.springboot.controller;
 
-import javax.annotation.PostConstruct;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,7 +15,19 @@ public class AccountingController {
 	
 	
 	private static final Logger log = LoggerFactory.getLogger(AccountingController.class);
-
+	
+	//[다미] 전표 목록
+	@GetMapping("/paymentInvoiceList")
+	public String paymentInvoiceList(Model model) {
+		return "accounting/paymentInvoiceList";
+	}
+	
+	//[다미] 전표 등록 화면
+	@GetMapping("/addPaymentInvoice")
+	public String addPaymentInvoice(Model model) {
+		return "accounting//addPaymentInvoice";
+	}
+	
 	//계정과목 등록 후 리스트로 리턴
 	@PostMapping("/addAccountSubject")
 	public String addAccountSubject(@RequestParam(value="account_category_name", required = false )String account_category_name
