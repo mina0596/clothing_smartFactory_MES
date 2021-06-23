@@ -13,28 +13,19 @@ layout:decorate="@{layout/default_rawMaterials}">
 <th:block layout:fragment="container">
 <div class="col-lg-12">
             <div class="form-panel">
-              <h4 class="mb"><i class="fa fa-angle-right"></i>출고등록</h4>
-              <form th:action="@{/addExWarehousing}" class="form-horizontal style-form" method="post" >
-       
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">원부자재 코드</label>
-          <div class="col-sm-6">
-            <input class="form-control" id="disabledInput" type="text" placeholder="명주실 (DB에서 가져온 값)" disabled>
-            <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
-            <!-- 검색창에서 검색하여 없는 품목은 등록도 할 수 있도록 설정하기 -->
-            <button type="button" class="btn btn-default">검색하여 가져오기</button>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">원부자재 발주코드</label>
-          <div class="col-sm-6">
-            <input class="form-control" id="disabledInput" type="text" placeholder="명주실 (DB에서 가져온 값)" disabled>
-            <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
-            <!-- 검색창에서 검색하여 없는 품목은 등록도 할 수 있도록 설정하기 -->
-            <button type="button" class="btn btn-default">검색하여 가져오기</button>
-          </div>
-        </div>
-                       
+              <h4 class="mb"><i class="fa fa-angle-right"></i> 소요별 자재 등록</h4>
+              <form th:action="@{/addMaterialsUse}" class="form-horizontal style-form" method="post" >
+        
+		        <div class="form-group">
+		          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품목별 의뢰코드</label>
+		          <div class="col-sm-6">
+		            <input class="form-control" id="disabledInput" type="text" placeholder="명주실 (DB에서 가져온 값)" disabled>
+		            <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
+		            <!-- 검색창에서 검색하여 없는 품목은 등록도 할 수 있도록 설정하기 -->
+		            <button type="button" class="btn btn-default">검색하여 가져오기</button>
+		          </div>
+		        </div>
+        
                <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품목 소분류명</label>
                   <div class="col-sm-6">
@@ -48,7 +39,53 @@ layout:decorate="@{layout/default_rawMaterials}">
 		             </select>
                   </div>
                 </div>
+               
+		        <div class="form-group">
+		          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">원부자재 코드</label>
+		          <div class="col-sm-6">
+		            <input class="form-control" id="disabledInput" type="text" placeholder="명주실 (DB에서 가져온 값)" disabled>
+		            <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
+		            <!-- 검색창에서 검색하여 없는 품목은 등록도 할 수 있도록 설정하기 -->
+		            <button type="button" class="btn btn-default">검색하여 가져오기</button>
+		          </div>
+		        </div>
+                       
+                
+         
+                
+				<div class="form-group">
+				<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">원부자재 구분</label>
+				<div class="radio" style="font-size: 15px">
+		          <label>
+		            <input type="radio" name="optionsRadios" style="display: inline;" id="optionsRadios1" value="option1" checked>원자재
+		          </label>      
+		                
+		          <label>
+		            <input type="radio" name="optionsRadios" style="display: inline;" id="optionsRadios2" value="option2">부자재
+		          </label> 
+		        </div>      
+				</div>
+                
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">재료구분 코드</label>
+          <div class="col-sm-6">
+            <input class="form-control" id="disabledInput" type="text" placeholder="명주실 (DB에서 가져온 값)" disabled>
+            <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
+            <!-- 검색창에서 검색하여 없는 품목은 등록도 할 수 있도록 설정하기 -->
+            <button type="button" class="btn btn-default">검색하여 가져오기</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">재료구분</label>
+          <div class="col-sm-6">
+            <input class="form-control" id="disabledInput" type="text" placeholder="명주실 (DB에서 가져온 값)" disabled>
+            <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
+            <!-- 검색창에서 검색하여 없는 품목은 등록도 할 수 있도록 설정하기 -->
+            <button type="button" class="btn btn-default">검색하여 가져오기</button>
+          </div>
+        </div>
 
+                
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">원부자재 재료명</label>
           <div class="col-sm-6">
@@ -68,61 +105,46 @@ layout:decorate="@{layout/default_rawMaterials}">
             <button type="button" class="btn btn-default">검색하여 가져오기</button>
           </div>
         </div>
-             
-              
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">특징 (패턴 및 모양)</label>
-          <div class="col-sm-6">
-            <input class="form-control"type="text" placeholder="흰색체크">
-            <span class="help-block">특징을 입력하지 않아도 됩니다.</span>
-          </div>
-        </div>  
-       
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">수량</label>
-          <div class="col-sm-6">
-            <input type="number" name="raw_material_transaction_amount" class="form-control">
-          </div>
-        </div>
                 
-		<div class="form-group">
-	   	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">단위</label>
-	   	  	<div class="col-sm-2">
-	     	 <select class="form-control">
-	          <option>kg</option>
-	          <option>g</option>
-	          <option>마(야드)</option>
-	          <option>개</option>
-	         </select>
-	   	  	</div>
-	  	 	</div>
-	  	 	
-	        <div class="form-group">
-	          <label class="col-lg-2 col-sm-2 control-label" style="font-weight: 600;">담당 사원명</label>
-	          <div class="col-lg-6">
-	            <p class="form-control-static">이한빛</p>
-	          </div>
-	        </div>
-	        
-	        <div class="form-group">
-	          <label class="col-lg-2 col-sm-2 control-label" style="font-weight: 600;">담당자 사원 코드</label>
-	          <div class="col-lg-6">
-	            <p class="form-control-static">W01</p>
-	          </div>
-	     	</div>
-	     	
-         <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">출고일시</label>
-          <div class="col-md-4">
-            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
-              <input type="text" class="form-control" readonly="readonly" size="16">
-              <div class="input-group-btn">
-                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
-                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
-              </div>
-            </div>
-          </div>
-    	</div>
+		        <div class="form-group">
+		          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">특징 (패턴 및 모양)</label>
+		          <div class="col-sm-6">
+		            <input class="form-control"type="text" placeholder="흰색체크">
+		            <span class="help-block">특징을 입력하지 않아도 됩니다.</span>
+		          </div>
+		        </div>       
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">수량</label>
+                  <div class="col-sm-6">
+                    <input type="number" name="raw_material_transaction_amount" class="form-control">
+                  </div>
+                </div>
+                
+				<div class="form-group">
+			   	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">단위</label>
+			   	  	<div class="col-sm-2">
+			     	 <select class="form-control">
+			          <option>kg</option>
+			          <option>g</option>
+			          <option>마(야드)</option>
+			          <option>개</option>
+			         </select>
+			   	  	</div>
+		   	 	</div>
+               <div class="form-group">
+		          <label class="col-lg-2 col-sm-2 control-label" style="font-weight: 600;">담당 사원명</label>
+		          <div class="col-lg-6">
+		            <p class="form-control-static">김다미</p>
+		          </div>
+		        </div>
+		        
+		        <div class="form-group">
+		          <label class="col-lg-2 col-sm-2 control-label" style="font-weight: 600;">담당자 사원 코드</label>
+		          <div class="col-lg-6">
+		            <p class="form-control-static">W01</p>
+		          </div>
+       		 </div>
+
          
          <div class="form-group text-right">
           <div class="col-lg-offset-2 col-lg-10">
