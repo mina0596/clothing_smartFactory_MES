@@ -10,7 +10,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ProductionController {
-	//작업지시 목록
+
+	
+	//[민아]완제품 등록
+	@GetMapping("/addCompletedProduct")
+	public String addCompletedProduct() {
+		return "production/addCompletedProduct";
+	}
+	
+	//[민아]완제품 목록
+	@GetMapping("/completedProductList")
+	public String getCompletedProductList() {
+		return "production/completedProductList";
+	}
+	
+	//[보람]작업지시정보
+	@GetMapping("/workOrderInfo")
+	public String workOrderInfo() {
+		return "production/workOrderInfo";
+	}
+	//[보람]작업지시 목록
 	@GetMapping("/workOrderList")
 	public String workerOrderList() {
 		
@@ -22,33 +41,33 @@ public class ProductionController {
 		 */
 		return "production/workOrderList";
 	}
-	//작업지시등록
 	
+	//[보람]작업지시등록
 	@GetMapping("/addWorkOrder")
 	public String addWorkerOrder(Model model) {
 		model.addAttribute("title", "작업지시관리: 작업지시등록");
 		return "production/addWorkOrder";
 	}
 
-	//생산공정 등록
+	//[민아]생산공정 등록
 	@GetMapping("/addProductionProcess")
 	public String addProductionProcess() {
 		return "production/addProductionProcess";
 	}
 	
-	//생산공정 목록
+	//[민아]생산공정 목록
 	@GetMapping("/productionProcessList")
 	public String getProductionProcessList() {
 		return "production/productionProcessList";
 	}
 	
-	//생산계획 목록
+	//[다미]생산계획 목록
 	@GetMapping("/productionPlanList")
 	public String productioncontrolList(){
 		return "production/productionPlanList";
 	}
 	
-	//생산계획 등록
+	//[다미]생산계획 등록
 	@GetMapping("/addProductionPlan")
 	public String productioncontrolAdd() {
 		return "production/addProductionPlan";

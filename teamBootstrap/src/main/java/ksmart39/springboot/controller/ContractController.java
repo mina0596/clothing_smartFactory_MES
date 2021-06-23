@@ -61,6 +61,7 @@ public class ContractController {
 		return "contract/buyerList";
 	}
 
+	
 	//to[보람] 원부자재라는 단어를 발주로 바꿔주세요 + 메서드명이랑 경로랑 이름 연관성있게 from [민아]
 	//[보람]원부자재 발주리스트 발주코드 클릭시 발주정보 경로 메서드
 	@GetMapping("/supplierContractInfo")

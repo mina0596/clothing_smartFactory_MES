@@ -43,7 +43,7 @@ public class QualityControlController {
 		return"quality/inspectionPerformance";
 	}
 	
-	//불량현황등록 메서드
+	//[한빛]불량현황등록 메서드
 	@GetMapping("/addDefectInspectionResultStatus")
 	public String addDefectInspectionResultStatus(Model model) {
 		
@@ -75,6 +75,11 @@ public class QualityControlController {
 		return"quality/addQualityInspectionStatus";
 	}
 
+	//[보람] 검사 리스트 검사번호클릭시 검사정보 경로
+			@GetMapping("qualityInspectionInfo")
+			public String qualityInspectionInfo() {
+				return "quality/qualityInspectionInfo";
+			}
 	//검사종류 리스트 메서드
 	@GetMapping("/qualityInspectionList")
 	public String getQualityInspectionList(Model model,@RequestParam(name = "qualityInspectionSearchkey",required = false)String qualityInspectionSearchkey
