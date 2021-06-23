@@ -24,6 +24,11 @@ public class ProductionController {
 		return "production/completedProductList";
 	}
 	
+	//[보람]작업지시정보
+	@GetMapping("/workOrderInfo")
+	public String workOrderInfo() {
+		return "production/workOrderInfo";
+	}
 	//[보람]작업지시 목록
 	@GetMapping("/workOrderList")
 	public String workerOrderList() {

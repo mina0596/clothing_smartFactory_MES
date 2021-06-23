@@ -22,7 +22,11 @@ public class ShipmentController {
 		
 		return"shipment/addShipmentInvoice";
 	}
-	
+	//[보람] 출하지시리스트 순번 클릭시 출하지시정보
+			@GetMapping("/shipmentOrderInfo")
+			public String shipmentOrderInfo() {
+				return"shipment/shipmentOrderInfo";
+			}
 	
 	//출하지시조회및리스트
 	@GetMapping("/shipmentOrderList")
