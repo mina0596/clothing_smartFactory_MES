@@ -18,6 +18,12 @@ public class CommunityController {
 		model.addAttribute("title","로비");
 		return "community/lobby";
 	}
+	//채팅룸
+	@GetMapping("/chatroom")
+	public String chatroom(Model model) {
+		model.addAttribute("title","로비");
+		return "community/chatroom";
+	}
 	
 	//메신저
 	@GetMapping("/messenger")
