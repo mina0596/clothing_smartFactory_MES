@@ -8,37 +8,35 @@ layout:decorate="@{layout/default_production}">
 	    <h3>생산 계획 목록</h3>
 	    </div>
 	<script type="text/javascript">
-		$(function(){
-			$('#deleteBtn').click(function(){			
-				var i = $('#list').find('th');
-				var j = i[0];
-				
-				//체크 버튼 토글
-				var result = $(this).attr('data-change');
-					if(result == 'N' || result == undefined){
-						j.innerHTML = '<input type="checkbox" id="checkAll">';
-						$('.checked').css('visibility','visible');
-						$(this).attr('data-change','Y');
-						
-						//#checkAll 버튼 클릭 시 전체 checked
-						$('#checkAll').click(function(){
-							if($('#checkAll').prop('checked')){
-								$('.checked').prop('checked',true);
-							}else{
-								$('.checked').prop('checked',false);
-							}
-						});
-
-					}else if(result == 'Y'){
-							j.innerHTML = '<i class="fa fa-bullhorn"></i>체크';
-							$('.checked').css('visibility','hidden');
-							$(this).attr('data-change','N');						
-				}
-				
+	$(function(){
+		$('#deleteBtn').click(function(){			
+			var firstTr = $('#list').find('th').parent();
+			var tr = $('#list').find('td').parent();
 			
+			//체크 버튼 토글
+			var result = $(this).attr('data-change');
+				if(result == 'N' || result == undefined){
+					firstTr.prepend('<th class="th"><input type="checkbox" id="checkAll"></th>');
+					tr.prepend('<td class="td"><input type="checkbox" class = "checked"></td>');
+					$(this).attr('data-change','Y');
 					
-			});
+					//#checkAll 버튼 클릭 시 전체 checked
+					$('#checkAll').click(function(){
+						if($('#checkAll').prop('checked')){
+							$('.checked').prop('checked',true);
+						}else{
+							$('.checked').prop('checked',false);
+						}
+					});
+
+				}else if(result == 'Y'){
+					$('#list').find('.th').remove();
+					$('#list').find('.td').remove();
+						$(this).attr('data-change','N');						
+			}
+								
 		});
+	});
 	</script>   
 </th:block>
 
@@ -81,7 +79,7 @@ layout:decorate="@{layout/default_production}">
               <table id="list" class="table table-striped table-advance table-hover">
                 <thead>
                   <tr>
-                    <th><i class="fa fa-bullhorn"></i>체크</th>
+                    <th><i class="fa fa-bullhorn"></i>번호</th>
                     <th class="hidden-phone"><i class="fa fa-bookmark"></i>생산계획 코드</th>
                     <th><i class="fa fa-bookmark"></i>양복명</th>
                     <th><i class=" fa fa-bookmark"></i>소분류</th>
@@ -94,7 +92,7 @@ layout:decorate="@{layout/default_production}">
                 <tbody>
                   <tr>
                    <td class="hidden-phone">
-                      <input type="checkbox" class="checked" style="visibility: hidden;">
+                      1
                     </td> 
                     <td class="hidden-phone">
                     <a th:href="@{#}">production_plan_01</a></td>
@@ -108,7 +106,7 @@ layout:decorate="@{layout/default_production}">
                   </tr>
                   <tr>
                    <td class="hidden-phone">
-                      <input type="checkbox" class="checked" style="visibility: hidden;">
+                      2
                     </td>
                     <td class="hidden-phone">
                     <a th:href="@{#}">production_plan_01</a></td>
@@ -122,7 +120,7 @@ layout:decorate="@{layout/default_production}">
                   </tr>
                   <tr>
                    <td class="hidden-phone">
-                      <input type="checkbox" class="checked" style="visibility: hidden;">
+                      3
                     </td>
                     <td class="hidden-phone">
                     <a th:href="@{#}">production_plan_01</a></td>
@@ -136,7 +134,7 @@ layout:decorate="@{layout/default_production}">
                   </tr>
                   <tr>
                    <td class="hidden-phone">
-                      <input type="checkbox" class="checked" style="visibility: hidden;">
+                     4
                     </td>
                     <td class="hidden-phone">
                     <a th:href="@{#}">production_plan_01</a></td>
@@ -150,7 +148,7 @@ layout:decorate="@{layout/default_production}">
                   </tr>
                   <tr>
                    <td class="hidden-phone">
-                      <input type="checkbox" class="checked" style="visibility:hidden;">
+                     5
                     </td>
                     <td class="hidden-phone">
                     <a th:href="@{#}">production_plan_01</a></td>
@@ -164,7 +162,7 @@ layout:decorate="@{layout/default_production}">
                   </tr>
                   <tr>
                    <td class="hidden-phone">
-                      <input type="checkbox" class="checked" style="visibility: hidden;">
+                     6
                     </td>
                     <td class="hidden-phone">
                     <a th:href="@{#}">production_plan_01</a></td>
@@ -178,7 +176,7 @@ layout:decorate="@{layout/default_production}">
                   </tr>
                   <tr>
                    <td class="hidden-phone">
-                      <input type="checkbox" class="checked" style="visibility: hidden;">
+                      7
                     </td>
                     <td class="hidden-phone">
                     <a th:href="@{#}">production_plan_01</a></td>

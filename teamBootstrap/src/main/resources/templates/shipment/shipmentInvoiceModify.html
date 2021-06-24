@@ -11,22 +11,29 @@
 
 
 <th:block layout:fragment="container">
-
+<div class="row mt">
+  <div class="col-lg-12">
     <div class="form-panel">
-      <h4 class="mb"><i class="fa fa-edit"></i> 송장등록</h4>
+      <h4 class="mb"><i class="fa fa-edit"></i> 송장수정화면</h4>
       <hr>
       <br>
       
       <form class="form-horizontal style-form" method="post">
       
+      <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label">송장번호</label>
+          <div class="col-md-5">
+            <input class="form-control" id="disabledInput" type="text" placeholder="817421456157" disabled>
+          </div>
+          </div>
      
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label">출하그룹코드</label>
           <div class="col-md-5">
             <div  class="input-group date form_datetime-adv">
-              <input type="text" class="form-control"  size="16">
+              <input type="text" class="form-control" placeholder="출하그룹코드" size="16" disabled="disabled">
               <div class="input-group-btn">
-                <button type="button" class=" btn btn-theme03 btn btn-default"><i class="fa"></i>검색하여 가져오기</button>
+                <button type="button" class="btn btn-default"><i class="fa"></i>검색하여 가져오기</button>
               </div>
             </div>
           </div>
@@ -36,13 +43,7 @@
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label">의뢰코드</label>
           <div class="col-md-5">
-            <input class="form-control" id="disabledInput" type="text" placeholder="" >
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label">계약번호</label>
-          <div class="col-md-5">
-            <input class="form-control" id="disabledInput" type="text" placeholder="" >
+            <input class="form-control" id="disabledInput" type="text" placeholder="" disabled>
           </div>
         </div>
         <div class="form-group">
@@ -92,18 +93,19 @@
           </div>
         </div>
  		
-       <div class="form-group text-right">
-                    <div class="col-lg-offset-2 col-lg-10">
-                      <button class="btn btn-theme" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">송장등록</font></font></button>
-                      <button class="btn btn-theme04" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">송장취소</font></font></button>
-                    </div>
-                    </div>
+        <div class="form-group text-right">
+	        <button type="button" class="btn btn-round btn-primary">송장수정</button>
+	        <button type="button" class="btn btn-round btn-warning">송장수정취소</button>
+        </div>
         
          
         
       </form>
       
     </div>
+  </div>
+<!-- col-lg-12-->
+</div>
 
 
 </th:block>

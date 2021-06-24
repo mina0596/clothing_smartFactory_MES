@@ -23,7 +23,7 @@ public class QualityControlController {
 	@GetMapping("/addDefectiveProduct")
 	public String addDefectiveProduct(Model model) {
 		
-		model.addAttribute("title", "불량품 등록");
+		model.addAttribute("title", "품질관리");
 		return"quality/addDefectiveProduct";
 	}
 		
@@ -31,7 +31,7 @@ public class QualityControlController {
 	@GetMapping("/defectiveProductList")
 	public String getDefectiveProductList(Model model) {
 		
-		model.addAttribute("title", "불량품 조회");
+		model.addAttribute("title", "품질관리");
 		return"quality/defectiveProductList";
 	}
 
@@ -113,7 +113,20 @@ public class QualityControlController {
 		return "quality/StandardTableList";
 	}
 	
-
+	
+	
+	//[다미&보람] 품질검사 측정값 목록
+	@GetMapping("/inspectionMeasurementValueList")
+	public String inspectionMeasurementValueList(Model model) {
+		return "quality/inspectionMeasurementValueList";
+	}
+	
+	//[다미&보람] 품질검사 측정값 등록
+	@GetMapping("/addInspectionMeasurementValue")
+	public String addInspectionMeasurementValue(Model model) {
+		return "quality/addInspectionMeasurementValue";
+	}
+	
 	//[다미]품질검사요청목록
 	@GetMapping("/qualityInspectionRequestList")
 	public String qualityControlRequestList() {
