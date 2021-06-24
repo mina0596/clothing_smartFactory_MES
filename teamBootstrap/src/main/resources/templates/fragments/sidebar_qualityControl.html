@@ -9,54 +9,65 @@
           <li class="sub-menu">
             <a href="javascript:;">
               <i class="fa fa-cogs"></i>
-              <span>검사목록</span>
+              <span>검사목록 ![보람]</span>
               </a>
             <ul class="sub">
-              <li><a th:href="@{/addQualityInspection}">검사 등록</a></li>
-              <li><a th:href="@{/qualityInspectionList}">검사 목록/조회</a></li>
+              <li><a th:href="@{/addQualityInspection}">검사 등록 ![보람]</a></li>
+              <li><a th:href="@{/qualityInspectionList}">검사 목록/조회 ![보람]</a></li>
             </ul>
           </li>
           <li class="sub-menu">
             <a href="javascript:;">
               <i class="fa fa-book"></i>
-              <span>검사요청</span>
+              <span>검사요청 ![다미]</span>
               </a>
              <ul class="sub">
-              <li><a th:href="@{/qualityInspectionRequest}">품질 검사 요청</a></li>
-              <li><a th:href="@{/qualityInspectionRequestList}">요청목록</a></li>
+              <li><a th:href="@{/qualityInspectionRequest}">품질 검사 요청 ![다미]</a></li>
+              <li><a th:href="@{/qualityInspectionRequestList}">요청목록 ![다미]</a></li>
+            </ul>
+          </li>
+          
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-book"></i>
+              <span>검사측정값 ![다미&보람]</span>
+              </a>
+            <ul class="sub">
+              <li><a th:href="@{/addInspectionMeasurementValue}">검사 측정값 등록 ![다미&보람]</a></li>
+              <li><a th:href="@{/inspectionMeasurementValueList}">검사 측정값 목록 ![다미&보람]</a></li>
+              <li><a th:href="@{/addQualityInspectionReport}">성적서등록 ![다미&보람]</a></li>
+              <li><a th:href="@{/qualityInspectionReport}">성적서 조회/목록 ![다미&보람]</a></li>
             </ul>
           </li>
           <li class="sub-menu">
             <a href="javascript:;">
               <i class="fa fa-book"></i>
-              <span>검사현황</span>
+              <span>검사현황 ![다미&보람]</span>
               </a>
             <ul class="sub">
-              <li><a th:href="@{/addQualityInspectionStatus}">검사현황</a></li>
-              <li><a th:href="@{/addQualityInspectionReport}">성적서등록</a></li>
-              <li><a th:href="@{/qualityInspectionReport}">성적서 조회/목록</a></li>
-              <li><a th:href="@{/addDefectInspectionResultStatus}">불량현황</a></li>
-              <li><a th:href="@{/inspectionPerformance}">실적</a></li>
+              <li><a th:href="@{/addQualityInspectionStatus}">검사현황 ![다미&보람]</a></li>
+              <li><a th:href="@{/addDefectInspectionResultStatus}">불량현황 ![다미&보람]</a></li>
+              <li><a th:href="@{/inspectionPerformance}">실적 ![다미&보람]</a></li>
             </ul>
           </li>
           <li class="sub-menu">
             <a href="javascript:;">
               <i class="fa fa-book"></i>
-              <span>불량품 #[한빛]</span>
+              <span>불량품 ![한빛]</span>
               </a>
             <ul class="sub">
-              <li><a th:href="@{/addDefectiveProduct}"> 불량품 등록 #[한빛]</a></li>
-              <li><a th:href="@{/defectiveProductList}">불량품 조회/목록 #[한빛]</a></li>
+              <li><a th:href="@{/addDefectiveProduct}"> 불량품 등록 ![한빛]</a></li>
+              <li><a th:href="@{/defectiveProductList}">불량품 조회/목록 ![한빛]</a></li>
             </ul>
           </li>
           <li class="sub-menu">
             <a href="javascript:;">
               <i class="fa fa-book"></i>
-              <span>기준표</span>
+              <span>기준표 #[민아]</span>
               </a>
             <ul class="sub">
-              <li><a th:href="@{/addStandardTable}">기준표 등록</a></li>
-              <li><a th:href="@{/getStandardTableList}">기준표 조회/목록</a></li>
+              <li><a th:href="@{/addStandardTable}">기준표 등록 #[민아]</a></li>
+              <li><a th:href="@{/getStandardTableList}">기준표 조회/목록 ![민아]</a></li>
             </ul>
           </li>
  
