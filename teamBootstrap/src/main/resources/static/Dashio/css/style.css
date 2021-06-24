@@ -3507,3 +3507,6 @@ ul.chat-available-user li a:hover {
 #copyrights a {
   color: #fff;
 }
+.hInput{
+	margin-left: 5px;
+}

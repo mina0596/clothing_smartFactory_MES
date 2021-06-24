@@ -10,515 +10,283 @@ layout:decorate="@{layout/default_qualityControl}">
 </th:block>
 
 
+
 <th:block layout:fragment="container">
-	 <div class="content" >
-            <div th:include=" quality/!searchQualityInspection :: searchQualityInspection"></div> 
+	<div class="row mt">
+     <div class="col-md-12">
+       <div class="content">
+       
+          <h4><i class="fa fa-angle-right"></i>품질검사조회</h4>
+          <hr>
+                
+			<div class="form-group">
+				<div class="col-md-2">
+				 <select class="form-control">
+				   <option>품질검사 대분류명</option>
+				   <option>품질검사 중분류명</option>
+				   <option>품질검사 소분류명</option>
+				   <option>품질검사 소분류상세검사명</option>
+				   
+				 </select>
+				</div>
+				<div class="col-md-6">
+				  <input class="form-control" type="text" placeholder="검색어를 입력하세요">
+				</div>
+				<div class="col-md-2">
+				  <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
+				  <button type="button" class="btn btn-primary">검색하여 가져오기</button>
+				</div>
+	       </div>
+	       
+	      <br>
+	      <br>
+	      <br>
+	      <br>
+	      <br>
+	      
+              <h4><i class="fa fa-angle-right"></i>품질검사목록</h4> 
+              <hr>   
               <table class="table table-striped table-advance table-hover">
-                <h4><i class="fa fa-angle-right"></i> 품질검사목록</h4>
-                <hr>
                 <thead>
                   <tr>
-                    <th>품질검사체크</th>
-                    <th>품질검사코드</th>
-                    <th>대분류검사코드</th>
-                    <th>대분류검사코드명</th>
-                    <th>중분류검사코드</th>                    
-                    <th>중분류검사코드명</th>                    
-                    <th>소분류검사코드</th>                    
-                    <th>소분류검사코드명</th>                    
-                    <th>세분류검사코드</th>                    
-                    <th>세분류검사코드명</th>                    
-                    <th>검사 등록일시</th>                    
-                    <th>검사 변경일시</th>
-                    <td>검사수정/삭제</td>                    
-             </tr>
+                   <th>체크</th>
+                    <th><i class="fa fa-bullhorn"></i>순번</th>
+                    <th><i class="fa fa-bookmark"></i>검사대분류명</th>
+                    <th><i class=" fa fa-bookmark"></i>검사중분류명</th>
+                    <th><i class=" fa fa-bookmark"></i>검사소분류명</th>
+                    <th><i class=" fa fa-bookmark"></i>검사 소분류상세명</th>
+                    <th><i class=" fa fa-bookmark"></i>등록날짜</th>
+                    <th><i class=" fa fa-bookmark"></i>수정버튼</th>
+                    <th></th>
+                  </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>
+                   <td class="hidden-phone">
                       <input type="checkbox" class="checked">
                     </td>
+                    
+                    
+                    <td class="hidden-phone"><a th:href="@{/qualityInspectionInfo}">1</a></td>
+                    <td class="hidden-phone">원자재검사</td>
+                    <td>원단이화학검사(파괴검사)</td>
+                    <td>물세탁</td>
                     <td>
-                      AA_ee_wash_1
+                     	변퇴색
                     </td>
-                    <td>
-                      AA
+                     <td>
+                     	2021-01-29 13:30
                     </td>
-                    <td>원자재검사</td>
-                    <td>ee</td>
-                    <td>원단 이화학검사(파괴검사) </td>
-                    <td>wash </td>
-                    <td>물세탁 </td>
-                    <td>1</td>
-                    <td>변퇴색</td>
-                    <td>2021-05-01 10:30 </td>
-                    <td>2021-05-01 11:30 </td>
-                   <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                    </td>
-                </tr>
+                   <td>  <button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
+                  </tr>
+                  
                   <tr>
-                    <td>
+                   <td class="hidden-phone">
                       <input type="checkbox" class="checked">
                     </td>
+                    <td class="hidden-phone">
+                   2</td>
+                    <td class="hidden-phone">원자재검사</td>
+                    <td>원단이화학검사(파괴검사)</td>
+                    <td>물세탁</td>
                     <td>
-                      AA_ee_wash_2
+                     	직물외관변화
                     </td>
-                    <td>
-                      AA
+                     <td>
+                     	2021-01-29 13:35
                     </td>
-                    <td>원자재검사</td>
-                    <td>ee</td>
-                    <td>원단 이화학검사(파괴검사) </td>
-                    <td>wash </td>
-                    <td>물세탁 </td>
-                    <td>2</td>
-                    <td>직물외관변화</td>
-                    <td>2021-05-01 10:30 </td>
-                    <td>2021-05-01 11:30 </td>
-                   <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                    </td>
-                </tr>
+                   <td>  <button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
+                  </tr>
                   <tr>
-                    <td>
+                   <td class="hidden-phone">
                       <input type="checkbox" class="checked">
                     </td>
+                    <td class="hidden-phone">
+                   3</td>
+                    <td class="hidden-phone">원자재검사</td>
+                    <td>원단이화학검사(파괴검사)</td>
+                    <td>드라이클리닝_염색성</td>
                     <td>
-                      AA_ee_dryCleaning_1
+                     	자체이염
+                     </td>
+                     <td>
+                     	2021-01-29 13:40
                     </td>
-                    <td>
-                      AA
-                    </td>
-                    <td>원자재검사</td>
-                    <td>ee</td>
-                    <td>이화학검사(파괴검사) </td>
-                    <td>dryCleaning </td>
-                    <td>드라이클리닝_염색성 </td>
-                    <td>1</td>
-                    <td>자체이염</td>
-                    <td>2021-05-01 10:30 </td>
-                    <td>2021-05-01 11:30 </td>
-                   <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                    </td>
-                </tr>
+                   <td>  <button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
+                  </tr>
+                  
+                  
                   <tr>
-                    <td>
+                   <td class="hidden-phone">
                       <input type="checkbox" class="checked">
                     </td>
+                    <td class="hidden-phone">
+                   4</td>
+                    <td class="hidden-phone">원자재검사</td>
+                    <td>원단이화학검사(파괴검사)</td>
+                    <td>마찰변색도</td>
                     <td>
-                      AA_ee_coloraChangeByFriction_1
+                     	
                     </td>
-                    <td>
-                      AA
+                     <td>
+                     	2021-01-29 13:40
                     </td>
-                    <td>원자재검사</td>
-                    <td>ee</td>
-                    <td>이화학검사(파괴검사) </td>
-                    <td>colorChangeByFriction </td>
-                    <td>마찰변색도 </td>
-                    <td>1</td>
-                    <td>건</td>
-                    <td>2021-05-01 10:30 </td>
-                    <td>2021-05-01 11:30 </td>
-                   <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                    </td>
-                </tr>
+                   <td>  <button class="btn btn-primary btn-xs" type="button"><i class="fa fa-pencil"></i>수정</button></td>
+                  </tr>
+                  
                   <tr>
-                    <td>
+                   <td class="hidden-phone">
                       <input type="checkbox" class="checked">
                     </td>
-                    <td>
-                      AA_ee_sweat
-                    </td>
-                    <td>
-                      AA
-                    </td>
-                    <td>원자재검사</td>
-                    <td>ee</td>
-                    <td>이화학검사(파괴검사) </td>
-                    <td>sweat </td>
-                    <td>땀,일광복합견뢰도	 </td>
-                    <td></td>
-                    <td></td>
-                    <td>2021-05-01 10:30 </td>
-                    <td>2021-05-01 11:30 </td>
-                   <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                    </td>
-                </tr>
-                  <tr>
-                    <td>
-                      <input type="checkbox" class="checked">
-                    </td>
-                    <td>
-                      AA_ee_frictionFastness_1	
-                    </td>
-                    <td>
-                      AA
-                    </td>
-                    <td>원자재검사</td>
-                    <td>ee</td>
-                    <td>이화학검사(파괴검사) </td>
-                    <td>frictionFastness </td>
+                    <td class="hidden-phone">
+                   5</td>
+                    <td class="hidden-phone">원자재검사</td>
+                    <td>원단이화학검사(파괴검사)</td>
                     <td>마찰견뢰도 </td>
-                    <td>1</td>
-                    <td>석유계</td>
-                    <td>2021-05-01 10:30 </td>
-                    <td>2021-05-01 11:30 </td>
-                   <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                    </td>
-                </tr>
-                  <tr>
                     <td>
+                     	석유계
+                    </td>
+                     <td>
+                     	2021-01-29 13:45
+                    </td>
+                   <td>  <button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
+                  </tr>
+                  <tr>
+                   <td class="hidden-phone">
                       <input type="checkbox" class="checked">
                     </td>
+                    <td class="hidden-phone">
+                   6</td>
+                    <td class="hidden-phone">공정중간검사</td>
+                    <td>재단물검사</td>
+                    <td>너치  </td>
                     <td>
-                      BB_ff_notch_1
+                     	너치위치
                     </td>
-                    <td>
-                      BB	
+                     <td>
+                     	2021-01-29 13:48
                     </td>
-                    <td>공정중간검사</td>
-                    <td>ff</td>
-                    <td>재단물검사	</td>
-                    <td>notch</td>
-                    <td>너치 </td>
-                    <td>1</td>
-                    <td>너치위치</td>
-                    <td>2021-05-01 10:30 </td>
-                    <td>2021-05-01 11:30 </td>
-                   <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                    </td>
-                </tr>
+                   <td>  <button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
+                  </tr>
                   <tr>
-                    <td>
+                   <td class="hidden-phone">
                       <input type="checkbox" class="checked">
                     </td>
+                    <td class="hidden-phone">
+                   7</td>
+                    <td class="hidden-phone">공정중간검사</td>
+                    <td>재단물검사</td>
+                    <td>너치  </td>
                     <td>
-                     BB_ff_notch_2
+                     	너치깊이
                     </td>
-                    <td>
-                      BB	
+                     <td>
+                     	2021-01-29 13:48
                     </td>
-                    <td>공정중간검사</td>
-                    <td>ff</td>
-                    <td>재단물검사	</td>
-                    <td>notch</td>
-                    <td>너치 </td>
-                    <td>2</td>
-                    <td>너치깊이</td>
-                    <td>2021-05-01 10:30 </td>
-                    <td>2021-05-01 11:30 </td>
-                   <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                    </td>
-                </tr>
+                   <td>  <button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
+                  </tr>
+                  
                   <tr>
-                    <td>
+                   <td class="hidden-phone">
                       <input type="checkbox" class="checked">
                     </td>
+                    <td class="hidden-phone">
+                   8</td>
+                    <td class="hidden-phone">공정중간검사</td>
+                    <td>재단물검사</td>
+                    <td>너치  </td>
                     <td>
-                     BB_ff_notch_3
+                     	너치빠짐
                     </td>
-                    <td>
-                      BB	
+                     <td>
+                     	2021-01-29 13:48
                     </td>
-                    <td>공정중간검사</td>
-                    <td>ff</td>
-                    <td>재단물검사	</td>
-                    <td>notch</td>
-                    <td>너치 </td>
-                    <td>3</td>
-                    <td>너치빠짐</td>
-                    <td>2021-05-01 10:30 </td>
-                    <td>2021-05-01 11:30 </td>
-                   <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                    </td>
-                </tr>
+                   <td>  <button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
+                  </tr>
                   <tr>
-                    <td>
+                   <td class="hidden-phone">
                       <input type="checkbox" class="checked">
                     </td>
-                    <td>
-                     BB_gg_collarLapel_1
-                    </td>
-                    <td>
-                      BB	
-                    </td>
-                    <td>공정중간검사</td>
-                    <td>gg</td>
+                    <td class="hidden-phone">
+                   9</td>
+                    <td class="hidden-phone">공정중간검사</td>
                     <td>봉제검사</td>
-                    <td>accessory_size</td>
                     <td>부속 치수 </td>
-                    <td>1</td>
-                    <td>좌우 라펠폭</td>
-                    <td>2021-05-01 10:30 </td>
-                    <td>2021-05-01 11:30 </td>
-                   <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                    </td>
-                </tr>
-                  <tr>
                     <td>
+                     	좌우 라펠폭
+                    </td>
+                     <td>
+                     	2021-01-29 13:49
+                    </td>
+                   <td>  <button class="btn btn-primary btn-xs" type="button" ></i>수정</button></td>
+                  </tr>
+                  <tr>
+                   <td class="hidden-phone">
                       <input type="checkbox" class="checked">
                     </td>
-                    <td>
-                     BB_gg_collarLapel_2	
-                    </td>
-                    <td>
-                      BB	
-                    </td>
-                    <td>공정중간검사</td>
-                    <td>gg</td>
+                    <td class="hidden-phone">
+                   10</td>
+                    <td class="hidden-phone">공정중간검사</td>
                     <td>봉제검사</td>
-                    <td>accessory_size</td>
                     <td>부속 치수 </td>
-                    <td>2</td>
-                    <td>고지선받음확인</td>
-                    <td>2021-05-01 10:30 </td>
-                    <td>2021-05-01 11:30 </td>
-                   <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                    </td>
-                </tr>
-                  <tr>
                     <td>
+                     	고지선받음확인
+                    </td>
+                     <td>
+                     	2021-01-29 13:49
+                    </td>
+                   <td>  <button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
+                  </tr>
+                  <tr>
+                   <td class="hidden-phone">
                       <input type="checkbox" class="checked">
                     </td>
-                    <td>
-                     BB_gg_collarLapel_3	
-                    </td>
-                    <td>
-                      BB	
-                    </td>
-                    <td>공정중간검사</td>
-                    <td>gg</td>
+                    <td class="hidden-phone">
+                   11</td>
+                    <td class="hidden-phone">공정중간검사</td>
                     <td>봉제검사</td>
-                    <td>interlining_size</td>
-                    <td>심지 치수 </td>
-                    <td>1</td>
-                    <td></td>
-                    <td>2021-05-01 10:30 </td>
-                    <td>2021-05-01 11:30 </td>
-                   <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                    </td>
-                </tr>
-                  <tr>
+                    <td>심지 치수  </td>
                     <td>
+                     	
+                    </td>
+                     <td>
+                     	2021-01-29 13:49
+                    </td>
+                   <td>  <button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
+                  </tr>
+                  
+                  <tr>
+                   <td class="hidden-phone">
                       <input type="checkbox" class="checked">
                     </td>
-                    <td>
-                     BB_gg_sleeve_1
-                    </td>
-                    <td>
-                      BB	
-                    </td>
-                    <td>공정중간검사</td>
-                    <td>gg</td>
+                    <td class="hidden-phone">
+                   12</td>
+                    <td class="hidden-phone">공정중간검사</td>
                     <td>봉제검사</td>
-                    <td>upper_size</td>
-                    <td>상의 치수 </td>
-                    <td>1</td>
-                    <td>좌우 어깨끝점~소매 밑단까지 길이비교</td>
-                    <td>2021-05-01 10:30 </td>
-                    <td>2021-05-01 11:30 </td>
-                   <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                    </td>
-                </tr>
-                  <tr>
+                    <td>상의 치수  </td>
                     <td>
-                      <input type="checkbox" class="checked">
+                     	좌우 어깨끝점~소매 밑단까지 길이비교
                     </td>
-                    <td>
-                     CC_hh_size_1
+                     <td>
+                     	2021-01-29 14:11
                     </td>
-                    <td>
-                      CC	
-                    </td>
-                    <td>완제품검사</td>
-                    <td>hh</td>
-                    <td>봉제검사</td>
-                    <td>bottom_size</td>
-                    <td>하의 치수</td>
-                    <td>1</td>
-                    <td>바지의 트임길이</td>
-                    <td>2021-05-01 10:30 </td>
-                    <td>2021-05-01 11:30 </td>
-                   <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                    </td>
-                </tr>
-                  <tr>
-                    <td>
-                      <input type="checkbox" class="checked">
-                    </td>
-                    <td>
-                     CC_hh_size_1
-                    </td>
-                    <td>
-                      CC	
-                    </td>
-                    <td>완제품검사</td>
-                    <td>hh</td>
-                    <td>봉제검사</td>
-                    <td>bottom_size</td>
-                    <td>하의 치수</td>
-                    <td>2</td>
-                    <td>바지의 소매통</td>
-                    <td>2021-05-01 10:30 </td>
-                    <td>2021-05-01 11:30 </td>
-                   <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                    </td>
-                </tr>
-                  <tr>
-                    <td>
-                      <input type="checkbox" class="checked">
-                    </td>
-                    <td>
-                     CC_hh_size_1
-                    </td>
-                    <td>
-                      CC	
-                    </td>
-                    <td>완제품검사</td>
-                    <td>hh</td>
-                    <td>봉제검사</td>
-                    <td>upper_size</td>
-                    <td>상의 치수</td>
-                    <td>3</td>
-                    <td>자켓의 총길이</td>
-                    <td>2021-05-01 10:30 </td>
-                    <td>2021-05-01 11:30 </td>
-                   <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                    </td>
-                </tr>
-                  <tr>
-                    <td>
-                      <input type="checkbox" class="checked">
-                    </td>
-                    <td>
-                     CC_hh_size_1
-                    </td>
-                    <td>
-                      CC	
-                    </td>
-                    <td>완제품검사</td>
-                    <td>hh</td>
-                    <td>봉제검사</td>
-                    <td>upper_size</td>
-                    <td>상의치수</td>
-                    <td>4</td>
-                    <td>자켓의어깨너비</td>
-                    <td>2021-05-01 10:30 </td>
-                    <td>2021-05-01 11:30 </td>
-                   <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                    </td>
-                </tr>
-                  <tr>
-                    <td>
-                      <input type="checkbox" class="checked">
-                    </td>
-                    <td>
-                     CC_hh_size_1
-                    </td>
-                    <td>
-                      CC	
-                    </td>
-                    <td>완제품검사</td>
-                    <td>hh</td>
-                    <td>마무리</td>
-                    <td>ironing</td>
-                    <td>다림질</td>
-                    <td>1</td>
-                    <td>표면변색</td>
-                    <td>2021-05-01 10:30 </td>
-                    <td>2021-05-01 11:30 </td>
-                   <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                    </td>
-                </tr>
-                  <tr>
-                    <td>
-                      <input type="checkbox" class="checked">
-                    </td>
-                    <td>
-                     CC_hh_size_1
-                    </td>
-                    <td>
-                      CC	
-                    </td>
-                    <td>완제품검사</td>
-                    <td>hh</td>
-                    <td>마무리</td>
-                    <td>label</td>
-                    <td>라벨</td>
-                    <td>1</td>
-                    <td>라벨표기사항확인</td>
-                    <td>2021-05-01 10:30 </td>
-                    <td>2021-05-01 11:30 </td>
-                   <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                    </td>
-                </tr>
-
-
-
-
+                   <td>  <button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
+                  </tr>
+                  
+                  
+                  
                  
-                  
-                  
-                  
-                </tbody>
+           		 </tbody>
               </table>
+            </div>
+             
+                    <div class=" col-xs-12 text-right">
+                   
+                      <button class="btn btn-success btn-xs" type="button" ><i class="fa fa-check"></i>검사등록</button>
+                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i>검사삭제</button>
+                    </div>
+                 
+            </div>
             </div>
 </th:block>
 

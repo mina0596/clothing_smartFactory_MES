@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_accounting}">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3>전표 목록</h3>
+	   </div>
+<script type="text/javascript">
+		$(function(){
+			$('#deleteBtn').click(function(){			
+				var firstTr = $('#list').find('th').parent();
+				var tr = $('#list').find('td').parent();
+				
+				//체크 버튼 토글
+				var result = $(this).attr('data-change');
+					if(result == 'N' || result == undefined){
+						firstTr.prepend('<th class="th"><input type="checkbox" id="checkAll"></th>');
+						tr.prepend('<td class="td"><input type="checkbox" class = "checked"></td>');
+						$(this).attr('data-change','Y');
+						
+						//#checkAll 버튼 클릭 시 전체 checked
+						$('#checkAll').click(function(){
+							if($('#checkAll').prop('checked')){
+								$('.checked').prop('checked',true);
+							}else{
+								$('.checked').prop('checked',false);
+							}
+						});
+
+					}else if(result == 'Y'){
+						$('#list').find('.th').remove();
+						$('#list').find('.td').remove();
+							$(this).attr('data-change','N');						
+				}
+									
+			});
+		});
+	</script>  
+
+</th:block>
+
+
+<th:block layout:fragment="container">
+<div class="row mt">
+     <div class="col-xs-12">
+          <h4><i class="fa fa-truck"></i>전표 목록</h4>
+          <hr>  
+			<div class="form-group" style="padding-left: 50px">
+				<div class="col-md-3">
+				 <select class="form-control">
+				   <option>수금전표발행번호</option>
+				   <option>계약번호</option>
+				   <option>거래처명</option>
+				   <option>계정과목명</option>
+				   <option>제목</option>
+				   <option>등록일시</option>
+				   <option>입출금</option>
+				  </select>
+				</div>
+				<div class="col-md-6">
+				  <input class="form-control" type="text" placeholder="검색어를 입력하세요">
+				</div>
+				<div class="col-md-2">
+				  <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
+				  <button type="button" class="btn btn-primary">검색하여 가져오기</button>
+				</div>
+	       </div>
+	       
+	      <br>
+	      <br>
+	      <br>
+	      <br>
+	      <br>
+	      
+                
+	        <form class="form-horizontal style-form">
+              <table class="table table-striped table-advance table-hover" id="list">
+                <thead>
+                  <tr class="first">
+                    <th><i class="fa fa-bullhorn"></i>수금전표발행번호</th>
+                    <th><i class="fa fa-bookmark"></i>계약번호</th>
+                    <th><i class=" fa fa-bookmark"></i>거래처명</th>
+                    <th><i class=" fa fa-bookmark"></i>계정과목명</th>
+                    <th><i class=" fa fa-clock-o"></i>제목</th>
+                    <th><i class=" fa fa-pencil"></i>금액</th>
+                    <th><i class=" fa fa-pencil"></i>입출금</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="hidden-phone"><a th:href=@{#}>210512_slip</a></td>
+                    <td class="hidden-phone">1234</td>
+                    <td>파크랜드</td>
+                    <td>현금</td>
+                    <td>원자재 구매</td>
+                    <td>250000</td>
+                    <td>출금</td>
+                    <td> 
+                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="hidden-phone"><a th:href=@{#}>210512_slip</a></td>
+                    <td class="hidden-phone">1234</td>
+                    <td>파크랜드</td>
+                    <td>현금</td>
+                    <td>원자재 구매</td>
+                    <td>250000</td>
+                    <td>출금</td>
+                    <td> 
+                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="hidden-phone"><a th:href=@{#}>210512_slip</a></td>
+                    <td class="hidden-phone">1234</td>
+                    <td>파크랜드</td>
+                    <td>현금</td>
+                    <td>원자재 구매</td>
+                    <td>250000</td>
+                    <td>출금</td>
+                    <td> 
+                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                    </td>
+                  </tr>
+                  
+                 
+                 
+                </tbody>
+              </table>
+            
+		        <div class="form-group text-right">
+		          <div class="col-lg-offset-2 col-lg-10">
+		           <a th:href="@{/addPaymentInvoice}" class="btn btn-success btn-xs"><i class="fa fa-check"></i>등록</a>
+		           <a id="deleteBtn" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i>삭제</a>
+		          </div>
+		        </div>
+       		</form>
+       		
+          </div>
+          <!-- /col-md-12 -->
+        </div>
+        <!-- /row -->
+</th:block>
+
+</html>

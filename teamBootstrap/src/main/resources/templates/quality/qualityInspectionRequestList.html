@@ -5,19 +5,19 @@ layout:decorate="@{layout/default_qualityControl}">
 
 <th:block layout:fragment="pageTitle">
 	   <div class="border-head"> 
-	    <h3>품질 검사 요청</h3>
+	    <h3>품질 관리</h3>
 	    </div>
-<script type="text/javascript">
+ <script type="text/javascript">
 		$(function(){
 			$('#deleteBtn').click(function(){			
-				var i = $('#list').find('th');
-				var j = i[0];
+				var firstTr = $('#list').find('th').parent();
+				var tr = $('#list').find('td').parent();
 				
 				//체크 버튼 토글
 				var result = $(this).attr('data-change');
 					if(result == 'N' || result == undefined){
-						j.innerHTML = '<input type="checkbox" id="checkAll">';
-						$('.checked').css('visibility','visible');
+						firstTr.prepend('<th class="th"><input type="checkbox" id="checkAll"></th>');
+						tr.prepend('<td class="td"><input type="checkbox" class = "checked"></td>');
 						$(this).attr('data-change','Y');
 						
 						//#checkAll 버튼 클릭 시 전체 checked
@@ -30,16 +30,14 @@ layout:decorate="@{layout/default_qualityControl}">
 						});
 
 					}else if(result == 'Y'){
-							j.innerHTML = '<i class="fa fa-bullhorn"></i>체크';
-							$('.checked').css('visibility','hidden');
+						$('#list').find('.th').remove();
+						$('#list').find('.td').remove();
 							$(this).attr('data-change','N');						
 				}
-				
-			
-					
+									
 			});
 		});
-	</script>  	    
+	</script>  
 </th:block>
 
 
@@ -85,7 +83,7 @@ layout:decorate="@{layout/default_qualityControl}">
               <table id="list" class="table table-striped table-advance table-hover">
                 <thead>
                   <tr>
-                    <th><i class="fa fa-bullhorn"></i>체크</th>
+                    <th><i class="fa fa-bullhorn"></i>번호</th>
                     <th class="hidden-phone"><i class="fa fa-bookmark"></i>품질검사 요청 코드</th>
                     <th><i class="fa fa-bookmark"></i>품질검사 코드</th>
                     <th><i class=" fa fa-bookmark"></i>소분류 검사명</th>
@@ -97,7 +95,7 @@ layout:decorate="@{layout/default_qualityControl}">
                 <tbody>
                   <tr>
                    <td class="hidden-phone">
-                      <input type="checkbox" class="checked" style="visibility: hidden;">
+                     1
                     </td>
                     <td class="hidden-phone">
                     <a th:href="@{#}">QC_REQUEST01</a></td>
@@ -110,7 +108,7 @@ layout:decorate="@{layout/default_qualityControl}">
                   </tr>
                   <tr>
                    <td class="hidden-phone">
-                      <input type="checkbox" class="checked" style="visibility: hidden;">
+                     2
                     </td>
                     <td class="hidden-phone">
                     <a th:href="@{#}">QC_REQUEST01</a></td>
@@ -123,7 +121,7 @@ layout:decorate="@{layout/default_qualityControl}">
                   </tr>
                   <tr>
                    <td class="hidden-phone">
-                      <input type="checkbox" class="checked" style="visibility: hidden;">
+                     3
                     </td>
                     <td class="hidden-phone">
                     <a th:href="@{#}">QC_REQUEST01</a></td>
@@ -136,7 +134,7 @@ layout:decorate="@{layout/default_qualityControl}">
                   </tr>
                   <tr>
                    <td class="hidden-phone">
-                      <input type="checkbox" class="checked" style="visibility: hidden;">
+                     4
                     </td>
                     <td class="hidden-phone">
                     <a th:href="@{#}">QC_REQUEST01</a></td>
@@ -149,7 +147,7 @@ layout:decorate="@{layout/default_qualityControl}">
                   </tr>
                   <tr>
                    <td class="hidden-phone">
-                      <input type="checkbox" class="checked" style="visibility: hidden;">
+                     5
                     </td>
                     <td class="hidden-phone">
                     <a th:href="@{#}">QC_REQUEST01</a></td>
@@ -162,7 +160,7 @@ layout:decorate="@{layout/default_qualityControl}">
                   </tr>
                   <tr>
                    <td class="hidden-phone">
-                      <input type="checkbox" class="checked" style="visibility: hidden;">
+                    6
                     </td>
                     <td class="hidden-phone">
                     <a th:href="@{#}">QC_REQUEST01</a></td>
@@ -175,7 +173,7 @@ layout:decorate="@{layout/default_qualityControl}">
                   </tr>
                   <tr>
                    <td class="hidden-phone">
-                      <input type="checkbox" class="checked" style="visibility: hidden;">
+                     7
                     </td>
                     <td class="hidden-phone">
                     <a th:href="@{#}">QC_REQUEST01</a></td>

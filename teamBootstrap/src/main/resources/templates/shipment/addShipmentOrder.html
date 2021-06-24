@@ -1,22 +1,124 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
-layout:decorate="@{layout/default_shipment}">
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+	  layout:decorate="@{layout/default_shipment}">
 
 <th:block layout:fragment="pageTitle">
 	   <div class="border-head"> 
-	    <h3 th:text="${title}"></h3>
+	    <h3>출하지시등록</h3>
 	    </div>
 </th:block>
 
 
 <th:block layout:fragment="container">
-	<div class="form-group">
-      출하지시등록
-	<br><br><br><br><br><br><br><br><br><br><br><br>
-	<br><br><br><br><br><br><br><br><br><br><br><br>
-	<br><br><br><br><br><br><br><br><br><br><br><br>
-	<br><br><br><br><br><br><br><br><br><br><br><br>
+
+    <div class="form-panel">
+      <h4 class="mb"><i class="fa fa-edit"></i> 출하지시등록</h4>
+      <hr>
+      <br>
+      
+      <form class="form-horizontal style-form" method="post">
+       <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label">품목별의뢰코드검색</label>
+          <div class="col-md-5">
+            <div  class="input-group date form_datetime-adv">
+              <input type="text" class="form-control"  size="16">
+              <div class="input-group-btn">
+                <button type="button" class=" btn btn-theme03 btn btn-default"><i class="fa"></i>검색하여 가져오기</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
+        
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label">의뢰코드</label>
+          <div class="col-md-5">
+            <input class="form-control" id="disabledInput" type="text" placeholder="" disabled>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label">계약번호</label>
+          <div class="col-md-5">
+            <input class="form-control" id="disabledInput" type="text" placeholder="" disabled>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label">거래처명</label>
+          <div class="col-md-5">
+            <input class="form-control" id="disabledInput" type="text" placeholder="파크랜드 전주점 (DB에서 가져온 값)" disabled>
+          </div>
+        </div>
+         <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label">제품명</label>
+       	 <div class="col-md-5">
+            <input type="text" class="form-control" placeholder="">
+          </div>
+        </div>
+         <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label">납품처 주소</label>
+          <div class="col-md-5">
+            <input type="text" class="form-control" placeholder="전주시 덕진구 금암동 (DB에서 가져올 수 있고, 수정할 수도 있다.)">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label">납품처 연락처</label>
+          <div class="col-md-5">
+            <input type="text" class="form-control" placeholder="063-717-1008 (DB에서 가져올 수 있고, 수정할 수도 있다.)">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label">계약상태</label>
+          <div class="col-md-5">
+            <input type="text" class="form-control" placeholder="">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label">출고일자</label>
+          <div class="col-md-5">
+            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
+              <input type="text" class="form-control" readonly="readonly" size="16">
+              <div class="input-group-btn">
+                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
+                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+     
+
+        <div class="form-group">
+          <label class="col-lg-2 col-sm-2 control-label">담당 사원명</label>
+          <div class="col-md-5">
+            <p class="form-control-static">추잔탁</p>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="col-lg-2 col-sm-2 control-label">담당자 사원 코드</label>
+          <div class="col-md-5">
+            <p class="form-control-static">employee0293</p>
+          </div>
+        </div>
+ 		
+        <div class="form-group text-right">
+            <div class="col-lg-offset-2 col-lg-10">
+              <button class="btn btn-theme" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">출하지시등록</font></font></button>
+              <button class="btn btn-theme04" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">출하지시취소</font></font></button>
+            </div>
+            </div>
+        
+         
+        
+      </form>
+      
+    </div>
+ 
+
 </th:block>
 
 </html>
