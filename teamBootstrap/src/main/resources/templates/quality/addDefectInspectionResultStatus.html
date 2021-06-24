@@ -5,17 +5,237 @@ layout:decorate="@{layout/default_qualityControl}">
 
 <th:block layout:fragment="pageTitle">
 	   <div class="border-head"> 
-	    <h3 th:text="${title}"></h3>
+	    <h3>품질 관리</h3>
+	    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	    </div>
+
 </th:block>
 
 
 <th:block layout:fragment="container">
-	품질검사 결과 불량현황   차트 js 로 합니다 
-	<br><br><br><br><br><br><br><br><br><br><br><br>
-	<br><br><br><br><br><br><br><br><br><br><br><br>
-	<br><br><br><br><br><br><br><br><br><br><br><br>
-	<br><br><br><br><br><br><br><br><br><br><br><br>
+	
+	<h4><i class="fa fa-angle-right"></i>불량 현황</h4>
+          
+          <div class="form-group">
+				<div class="col-md-3">
+				 <select class="form-control" >
+				   <option>품질검사 요청 코드</option>
+				   <option>계약번호</option>
+				   <option>품목별 의뢰 코드</option>
+				   <option>품질검사 코드</option>
+				   <option>대분류 검사명</option>
+				   <option>중분류 검사명</option>
+				   <option>소분류 검사명</option>
+				   <option>소분류 검사 검사명</option>
+				   <option>샘플링 여부</option>
+				   <option>등록일시</option>
+				 </select>
+				</div>
+				<div class="col-md-6">
+				  <input class="form-control" type="text" placeholder="검색어를 입력하세요">
+				</div>
+				<div class="col-md-2">
+				  <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
+				  <button type="button" class="btn btn-primary">검색하여 가져오기</button>
+				</div>
+	       </div>
+          <br><br>
+	
+	
+	<div class="content-panel"> 
+		<canvas id="myChart3"></canvas>
+	</div>
+
+              <h4><i class="fa fa-angle-right"></i> 불량현황</h4>
+              <section id="unseen">
+                <table class="table table-bordered table-striped table-condensed">
+                  <thead>
+                    <tr>
+                      <th>Code</th>
+                      <th>Company</th>
+                      <th class="numeric">Price</th>
+                      <th class="numeric">Change</th>
+                      <th class="numeric">Change %</th>
+                      <th class="numeric">Open</th>
+                      <th class="numeric">High</th>
+                      <th class="numeric">Low</th>
+                      <th class="numeric">Volume</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>AAC</td>
+                      <td>AUSTRALIAN AGRICULTURAL COMPANY LIMITED.</td>
+                      <td class="numeric">$1.38</td>
+                      <td class="numeric">-0.01</td>
+                      <td class="numeric">-0.36%</td>
+                      <td class="numeric">$1.39</td>
+                      <td class="numeric">$1.39</td>
+                      <td class="numeric">$1.38</td>
+                      <td class="numeric">9,395</td>
+                    </tr>
+                    <tr>
+                      <td>AAD</td>
+                      <td>ARDENT LEISURE GROUP</td>
+                      <td class="numeric">$1.15</td>
+                      <td class="numeric"> +0.02</td>
+                      <td class="numeric">1.32%</td>
+                      <td class="numeric">$1.14</td>
+                      <td class="numeric">$1.15</td>
+                      <td class="numeric">$1.13</td>
+                      <td class="numeric">56,431</td>
+                    </tr>
+                    <tr>
+                      <td>AAX</td>
+                      <td>AUSENCO LIMITED</td>
+                      <td class="numeric">$4.00</td>
+                      <td class="numeric">-0.04</td>
+                      <td class="numeric">-0.99%</td>
+                      <td class="numeric">$4.01</td>
+                      <td class="numeric">$4.05</td>
+                      <td class="numeric">$4.00</td>
+                      <td class="numeric">90,641</td>
+                    </tr>
+                    <tr>
+                      <td>ABC</td>
+                      <td>ADELAIDE BRIGHTON LIMITED</td>
+                      <td class="numeric">$3.00</td>
+                      <td class="numeric"> +0.06</td>
+                      <td class="numeric">2.04%</td>
+                      <td class="numeric">$2.98</td>
+                      <td class="numeric">$3.00</td>
+                      <td class="numeric">$2.96</td>
+                      <td class="numeric">862,518</td>
+                    </tr>
+                    <tr>
+                      <td>ABP</td>
+                      <td>ABACUS PROPERTY GROUP</td>
+                      <td class="numeric">$1.91</td>
+                      <td class="numeric">0.00</td>
+                      <td class="numeric">0.00%</td>
+                      <td class="numeric">$1.92</td>
+                      <td class="numeric">$1.93</td>
+                      <td class="numeric">$1.90</td>
+                      <td class="numeric">595,701</td>
+                    </tr>
+                    <tr>
+                      <td>ABY</td>
+                      <td>ADITYA BIRLA MINERALS LIMITED</td>
+                      <td class="numeric">$0.77</td>
+                      <td class="numeric"> +0.02</td>
+                      <td class="numeric">2.00%</td>
+                      <td class="numeric">$0.76</td>
+                      <td class="numeric">$0.77</td>
+                      <td class="numeric">$0.76</td>
+                      <td class="numeric">54,567</td>
+                    </tr>
+                    <tr>
+                      <td>ACR</td>
+                      <td>ACRUX LIMITED</td>
+                      <td class="numeric">$3.71</td>
+                      <td class="numeric"> +0.01</td>
+                      <td class="numeric">0.14%</td>
+                      <td class="numeric">$3.70</td>
+                      <td class="numeric">$3.72</td>
+                      <td class="numeric">$3.68</td>
+                      <td class="numeric">191,373</td>
+                    </tr>
+                    <tr>
+                      <td>ADU</td>
+                      <td>ADAMUS RESOURCES LIMITED</td>
+                      <td class="numeric">$0.72</td>
+                      <td class="numeric">0.00</td>
+                      <td class="numeric">0.00%</td>
+                      <td class="numeric">$0.73</td>
+                      <td class="numeric">$0.74</td>
+                      <td class="numeric">$0.72</td>
+                      <td class="numeric">8,602,291</td>
+                    </tr>
+                    <tr>
+                      <td>AGG</td>
+                      <td>ANGLOGOLD ASHANTI LIMITED</td>
+                      <td class="numeric">$7.81</td>
+                      <td class="numeric">-0.22</td>
+                      <td class="numeric">-2.74%</td>
+                      <td class="numeric">$7.82</td>
+                      <td class="numeric">$7.82</td>
+                      <td class="numeric">$7.81</td>
+                      <td class="numeric">148</td>
+                    </tr>
+                    <tr>
+                      <td>AGK</td>
+                      <td>AGL ENERGY LIMITED</td>
+                      <td class="numeric">$13.82</td>
+                      <td class="numeric"> +0.02</td>
+                      <td class="numeric">0.14%</td>
+                      <td class="numeric">$13.83</td>
+                      <td class="numeric">$13.83</td>
+                      <td class="numeric">$13.67</td>
+                      <td class="numeric">846,403</td>
+                    </tr>
+                    <tr>
+                      <td>AGO</td>
+                      <td>ATLAS IRON LIMITED</td>
+                      <td class="numeric">$3.17</td>
+                      <td class="numeric">-0.02</td>
+                      <td class="numeric">-0.47%</td>
+                      <td class="numeric">$3.11</td>
+                      <td class="numeric">$3.22</td>
+                      <td class="numeric">$3.10</td>
+                      <td class="numeric">5,416,303</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+            
+	
+<script type="text/javascript">
+var ctx = document.getElementById('myChart3').getContext('2d');
+var data = {
+		  type: 'radar',
+		  data: {
+			  labels: [
+				    'Eating',
+				    'Drinking',
+				    'Sleeping',
+				    'Designing',
+				    'Coding',
+				    'Cycling',
+				    'Running'
+				  ],
+				  datasets: [{
+				    label: 'My First Dataset',
+				    data: [65, 59, 90, 81, 56, 55, 40],
+				    fill: true,
+				    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+				    borderColor: 'rgb(255, 99, 132)',
+				    pointBackgroundColor: 'rgb(255, 99, 132)',
+				    pointBorderColor: '#fff',
+				    pointHoverBackgroundColor: '#fff',
+				    pointHoverBorderColor: 'rgb(255, 99, 132)'
+				  }, {
+				    label: 'My Second Dataset',
+				    data: [28, 48, 40, 19, 96, 27, 100],
+				    fill: true,
+				    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+				    borderColor: 'rgb(54, 162, 235)',
+				    pointBackgroundColor: 'rgb(54, 162, 235)',
+				    pointBorderColor: '#fff',
+				    pointHoverBackgroundColor: '#fff',
+				    pointHoverBorderColor: 'rgb(54, 162, 235)'
+				 }]
+		  },
+		  options: {
+		    elements: {
+		      line: {
+		        borderWidth: 3
+		      }
+		    }
+		  },
+		};
+var chart = new Chart(ctx, data);
+
+</script>	
 </th:block>
 
 </html>
