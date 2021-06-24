@@ -7,7 +7,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class ShipmentController {
-	
+	//[보람]송장 수정화면
+	@GetMapping("/shipmentInvoiceModify")
+	public String shipmentInvoiceModify(){
+		return"shipment/shipmentInvoiceModify";
+	}
 	//송장관리의 송장 목록및 조회
 	@GetMapping("/shipmentInvoiceList")
 	public String getShipmentInvoiceList(Model model) {
