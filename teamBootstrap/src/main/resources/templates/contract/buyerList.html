@@ -22,7 +22,7 @@ layout:decorate="@{layout/default_contract}">
 </th:block>
 
 <th:block layout:fragment="container">
-수주관리
+
 	
 	
 	<div class="row mt">
@@ -38,6 +38,7 @@ layout:decorate="@{layout/default_contract}">
 				   <option>담당자명</option>
 				   <option>사업자번호</option>
 				   <option>주소</option>
+				   <option>등록일자</option>
 
 				  </select>
 				</div>
@@ -70,6 +71,7 @@ layout:decorate="@{layout/default_contract}">
                     <th><i class=" fa fa-bookmark"></i>담당자</th>
                     <th><i class=" fa fa-bookmark"></i>사업자번호</th>
                     <th><i class=" fa fa-bookmark"></i>주소</th>
+                    <th><i class=" fa fa-bookmark"></i>등록일자</th>
                     <th><i class=" fa fa-pencil"></i>수정</th>
                   </tr>
                 </thead>
@@ -86,12 +88,14 @@ layout:decorate="@{layout/default_contract}">
                     <td>이광수</td>
                     <td>109-203123-23124</td>
                     <td>전라북도 전주시 만성동로 129</td>
-                    <td> 
-                      
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      
-                    </td>
-                  </tr>
+                    <td>2021.06.21 12:25</td>
+                  	<td>  
+                  		<button type="submit" th:href="@{/modifyHumanResources}" class="btn btn-primary btn-xs">
+                  			<i class="fa fa-pencil"></i>
+                  				수정
+                  		</button>
+                  	</td>
+                    </tr>
                   
                
 

@@ -11,199 +11,83 @@ layout:decorate="@{layout/default_contract}">
 
 
 <th:block layout:fragment="container">
-	수주관리 
-	<div class="form-panel">
-	 <h4 class="mb"><i class="fa fa-angle-right"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">주문서등록</font></font></h4>
-              <div class="form">
-                <form class="cmxform form-horizontal style-form" id="signupForm" method="post" th:action="@{addBuyerOrder}">
-                  
-                  <div class="form-group ">
-                    <label for="firstname" class="control-label col-lg-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">회사명</font></font></label>
-                    <div class="col-lg-10">
-                      <input class=" form-control" id="clientAccountName" name="clientAccountName" type="text">
-                    </div>
-                  </div>
-                  
-                  
-              <h4><i class="fa fa-angle-right"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">자켓사이즈</font></font></h4>
-              <hr>
-              <table class="table">
-                <tbody>
-                <tr>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">총기장<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">어깨너비<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">가슴둘레<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                </tr>
-                <tr>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">허리둘레<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">소매기장<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">소매동<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                </tr>
-                <tr>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">소매부리<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">목너비<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">오른팔길이<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                </tr>
-                <tr>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">왼팔길이<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">뒷목길이<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">암홀<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                </tr>
-                 
-                </tbody>
-              </table>
-              
-              <h4><i class="fa fa-angle-right"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">조끼사이즈</font></font></h4>
-              <hr>
-              <table class="table">
-                <tbody>
-                <tr>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">총기장<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">어깨너비<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">가슴둘레<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                </tr>
-                <tr>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">허리둘레<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">소매기장<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">소매동<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                </tr>
-                <tr>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">소매부리<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">목너비<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">오른팔길이<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                </tr>
-                <tr>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">왼팔길이<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">뒷목길이<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">암홀<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                </tr>
-                 
-                </tbody>
-              </table>
-              
-              
-              <h4><i class="fa fa-angle-right"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">바지사이즈</font></font></h4>
-              <hr>
-              <table class="table">
-                <tbody>
-                <tr>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">허리둘레<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">엉덩이둘레<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">기장<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                </tr>
-                <tr>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">밑단길이<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">밑위길이<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">허벅지둘레<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                </tr>
-                 
-                </tbody>
-              </table>
-              
-              <h4><i class="fa fa-angle-right"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">치마사이즈</font></font></h4>
-              <hr>
-              <table class="table">
-                <tbody>
-                <tr>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">허리둘레<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">엉덩이둘레<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">기장<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                </tr>
-                <tr>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">밑단길이<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">밑위길이<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">허벅지둘레<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                </tr>
-                 
-                </tbody>
-              </table>
-              
-              
-              <h4><i class="fa fa-angle-right"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">자켓부속사이즈</font></font></h4>
-              <hr>
-              <table class="table">
-                <tbody>
-                <tr>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">라벨폭<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">칼라포이트길이<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">노치폭가로<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                </tr>
-                <tr>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">노치폭세로<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">고지선길이<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">뒤칼라밴드폭<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                </tr>
-                <tr>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">주머니뚜껑길이<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">주머니뚜껑폭<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">주머니입술길이<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                </tr>
-                <tr>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">주머니입구 폭<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">트임길이<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">트임폭<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                </tr>
-                <tr>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">몸판접착심지<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">소맷부리폴리단추<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">어깨각패드<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                </tr>
-                <tr>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">앞중심 테이프<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">아래칼라테이프<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                    <th style="padding-right: 15px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">암홀테이프<input type="text" class="hInput" ><input type="text" placeholder="cm" value="cm" readonly="readonly" style="margin-left: 5px; width: 30px;"></font></font></th>
-                </tr>
-                 
-                </tbody>
-              </table>
-                                 
+	
+			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+              <div class="custom-box">
+                <div class="icn-main-container">
+                  <span class="icn-container">상의</span>
+                </div>
+                <div class="servicetitle">
+                  <h4>          
+                  	<label>
+            			<input type="radio" name="optionsRadios" style="display: inline;" id="optionsRadios1" value="option1" checked>자켓
+          			</label>                      
+          			<label>
+            			<input type="radio" name="optionsRadios" style="display: inline;" id="optionsRadios2" value="option2">조끼
+          			</label> 
+          		</h4>
+                  <hr>
+                </div>
+                <ul class="pricing">
+                  <li><input type="text" class="form-control"  placeholder="총기장" style="width: 100px; display: inline; margin-left: 10px;">
+                  		<input type="text" class="form-control"  placeholder="어깨너비" style="width: 100px; display: inline; margin-left: 10px;">
+                  </li>
+                  <li><input type="text" class="form-control"  placeholder="가슴둘레" style="width: 100px; display: inline; margin-left: 10px;">
+                  		<input type="text" class="form-control"  placeholder="허리둘레" style="width: 100px; display: inline; margin-left: 10px;">
+                  </li>
+                  <li><input type="text" class="form-control"  placeholder="소매기장" style="width: 100px; display: inline; margin-left: 10px;">
+                  		<input type="text" class="form-control"  placeholder="소매동" style="width: 100px; display: inline; margin-left: 10px;">
+                  </li>
+                  <li><input type="text" class="form-control"  placeholder="소매부리" style="width: 100px; display: inline; margin-left: 10px;">
+                  		<input type="text" class="form-control"  placeholder="목너비" style="width: 100px; display: inline; margin-left: 10px;">
+                  </li>
+                  <li><input type="text" class="form-control"  placeholder="오른팔길이" style="width: 100px; display: inline; margin-left: 10px;">
+                  		<input type="text" class="form-control"  placeholder="왼팔길이" style="width: 100px; display: inline; margin-left: 10px;">
+                  </li>
+                  <li><input type="text" class="form-control"  placeholder="뒷목길이" style="width: 100px; display: inline; margin-left: 10px;">
+                  		<input type="text" class="form-control"  placeholder="암홀" style="width: 100px; display: inline; margin-left: 10px;">
+                  </li>
+                </ul>
+                <a class="btn btn-theme" href="#">Order Now</a>
+              </div>
+              <!-- end custombox -->
+            </div>
             
-              
-          
-
-                <br>
-                  <div class="form-group ">
-                    <label for="lastname" class="control-label col-lg-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">전화번호</font></font></label>
-                    <div class="col-lg-10">
-                      <input class=" form-control" id="clientAccountPhone" name="clientAccountPhone" type="text">
-                    </div>
-                  </div>
-                  
-                  <div class="form-group ">
-                    <label for="email" class="control-label col-lg-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">대표자</font></font></label>
-                    <div class="col-lg-10">
-                      <input class="form-control " id="clientAccountCeo" name="clientAccountCeo" type="text">
-                    </div>
-                  </div>
-                  
-                  <div class="form-group ">
-                    <label for="email" class="control-label col-lg-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">납품처주소</font></font></label>
-                    <div class="col-lg-10">
-                      <input class="form-control " id="clientAccountManager" name="clientAccountManager" type="text">
-                    </div>
-                  </div>
-                  
-                  <div class="form-group ">
-                    <label for="email" class="control-label col-lg-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">납품처연락처</font></font></label>
-                    <div class="col-lg-10">
-                      <input class="form-control " id="clientAccountPhone" name="clientAccountPhone" type="text">
-                    </div>
-                  </div>
-                  
-
-                
-                  <div class="form-group ">
-                    <label for="email" class="control-label col-lg-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">특이사항</font></font></label>
-                    <div class="col-lg-10">
-                      <input class="form-control " id="clientAccountAddr" name="clientAccountAddr" type="text">
-                    </div>
-                  </div>
-                  
-                  
-		    
-		     </form>
-		   </div>
-		</div>
+            
+			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+              <div class="custom-box">
+                <div class="icn-main-container">
+                  <span class="icn-container">하의</span>
+                </div>
+                <div class="servicetitle">
+                  <h4>          
+                  	<label>
+            			<input type="radio" name="optionsRadios" style="display: inline;" id="optionsRadios1" value="option1" checked>바지
+          			</label>                      
+          			<label>
+            			<input type="radio" name="optionsRadios" style="display: inline;" id="optionsRadios2" value="option2">치마
+          			</label> 
+          		</h4>
+                  <hr>
+                </div>
+                <ul class="pricing">
+                  <li><input type = "text" placeholder="허리둘레"></li>
+                  <li><input type = "text" placeholder="엉덩이둘레"></li>
+                  <li><input type = "text" placeholder="기장"></li>
+                  <li><input type = "text" placeholder="밑단길이"></li>
+                  <li><input type = "text" placeholder="밑위길이"></li>
+                  <li><input type = "text" placeholder="허벅지둘레"></li>
+                  <li><input type = "text" placeholder=""></li>
+                  <li><input type = "text" placeholder=""></li>
+                  <li><input type = "text" placeholder=""></li>
+                  <li><input type = "text" placeholder=""></li>
+                  <li><input type = "text" placeholder=""></li>
+                  <li><input type = "text" placeholder=""></li>
+                </ul>
+                <a class="btn btn-theme" href="#">Order Now</a>
+              </div>
+              <!-- end custombox -->
+            </div>
 
 
 </th:block>
