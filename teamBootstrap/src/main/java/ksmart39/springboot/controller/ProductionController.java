@@ -11,6 +11,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ProductionController {
 
+	//[민아+한빛]생산현황조회
+	@GetMapping("/productionStateList")
+	public String getProductionState() {
+		return "production/productionStateList";
+	}
+	
+	//[민아+한빛]생산실적 조회/목록
+	@GetMapping("/productionPerformance")
+	public String getproductionPerformance() {
+		return "production/productionPerformance";
+	}
+	
 	
 	//[민아]완제품 등록
 	@GetMapping("/addCompletedProduct")
