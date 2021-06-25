@@ -21,23 +21,13 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout">
 						var par = $(this).parent();
 						var materialName = par.parent().find('.materialName').text();
 						console.log(materialName);
-						return submitFlag;
+						opener.document.getElementById('parents').value = materialName;
+						opener.document.getElementById('parents').readOnly = true;
 					}
 				if(submitFlag) window.close();
 				});
 				
-				var request = $.ajax({
-					url: "/addRawMaterials",
-					method: "GET",
-					data: {materialName : materialName},
-					dataType: "json"
-				});
-				request.done(function( data ){
-					console.log(data);
-				});
-				request.fail(function( jqXHR, textStatus ){
-					alert( "Request failed: " + textStatus );
-				});
+				
 			});
 		})
 	</script>
@@ -109,8 +99,8 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout">
        </table>
        <div class="form-group text-right">
          <div class="col-lg-offset-2 col-lg-10">
-          <button class="btn btn-success btn-xs" type="submit" id="selectBtn"><i class="fa fa-check"></i>선택</button>
-          <button class="btn btn-danger btn-xs" type="submit" id="cancelBtn"><i class="fa fa-trash-o"></i>취소</button>
+          <button class="btn btn-success btn-xs" type="button" id="selectBtn"><i class="fa fa-check"></i>선택</button>
+          <button class="btn btn-danger btn-xs" type="button" id="cancelBtn"><i class="fa fa-trash-o"></i>취소</button>
          </div>
        </div>
 	</form>
