@@ -7,6 +7,26 @@ layout:decorate="@{layout/default_contract}">
 	   <div class="border-head"> 
 	   
 	    </div>
+	    
+<th:block layout:fragment="customJs">
+<script>
+$(function(){
+	var supplierName= $('#supplierName').text();
+	var supplierEmployee= $('#supplierEmployee').text();
+	var supplierNumber =$('#supplierNumber').text();
+	var supplierOner = $('#supplierOner').text();
+	var supplier1 =$('#supplier1').text();
+	var suppelirAddr =$('#suppelirAddr').text();
+	#('#updateBtn').click(function(){
+		location.href='supplierModify?supplierName='+supplierName+'&supplierEmployee='supplierEmployee+'&supplierNumber='supplierNumber+'&supplierOner='supplierOner+'&supplier1='supplier1+'&suppelirAddr='suppelirAddr;
+		console.log(suppelirAddr);	
+		location.href='addInWarehousing?materialName='+materialName+'&materialColor='materialColor;
+	});
+	
+})
+ 
+
+</script>
 </th:block>
 
 
@@ -64,17 +84,17 @@ layout:decorate="@{layout/default_contract}">
                       <input type="checkbox" class="checked">
                     </td>
                     <td class="hidden-phone">1</td>
-                    <td class="hidden-phone">나는단추</td>
-                    <td>홍길동</td>
-                    <td>070-2515-1555</td>
-                    <td>김철수</td>
-                    <td>111-1011-111</td>
-                    <td>
+                    <td class="hidden-phone" id="supplierName">나는단추</td>
+                    <td id="supplierEmployee">홍길동</td>
+                    <td id="supplierNumber">070-2515-1555</td>
+                    <td id="supplierOner">김철수</td>
+                    <td id="supplier1">111-1011-111</td>
+                    <td id="suppelirAddr">
                      	전주시
                     </td>
                     <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
                     <td>2021-01-17 11:30</td>
-                  	<td>  <button class="btn btn-primary btn-xs" type="button" onclick="location.href='/supplierModify'"><i class="fa fa-pencil"></i>수정</button></td>
+                  	<td>  <button class="btn btn-primary btn-xs" type="button" id="modifyBtn"><i class="fa fa-pencil"></i>수정</button></td>
                   </tr>
                   
                   <tr>
