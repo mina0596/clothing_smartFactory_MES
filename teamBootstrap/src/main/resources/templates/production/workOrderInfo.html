@@ -1,16 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
-layout:decorate="@{layout/default_production}">
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout">
 
-<th:block layout:fragment="pageTitle">
-	   <div class="border-head"> 
-	    <h3>생산관리</h3>
-	    </div>
-</th:block>
-
-
-<th:block layout:fragment="container">
 
 
     <div class="form-panel">
@@ -20,16 +11,18 @@ layout:decorate="@{layout/default_production}">
       
       <form class="form-horizontal style-form" method="post">
 
-       
+       <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">작업지시번호</label>
+         <div class="col-md-5">
+            <span>DB에서 가지고오는 작업지시번호</span>
+          </div>
+        </div>
         
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label"style="font-weight: 600;"> 계약번호</label>
           <div class="col-md-5">
             <div  class="input-group ">
-              <input type="search" class="form-control"  size="16">
-              <div class="input-group-btn">
-                <button type="button" class=" btn btn-theme03 btn btn-default"><i class="fa"></i>검색하여 가져오기</button>
-              </div>
+             <span>DB에서 가지고오는 계약번호</span>
             </div>
           </div>
         </div>
@@ -38,95 +31,70 @@ layout:decorate="@{layout/default_production}">
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">거래처명</label>
          <div class="col-md-5">
-            <input class="form-control" id="disabledInput" type="text"  >
+            <span>DB에서 가지고오는거래처명</span>
           </div>
         </div>
-        
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">의뢰코드</label>
-          <div class="col-md-5">
-          	<input class="form-control" id="disabledInput" type="tel"  >
+         <div class="col-md-5">
+            <span>DB에서 가지고오는 의뢰코드명</span>
           </div>
         </div>
-           	        
-         <div class="form-group">
-       	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품목별의뢰번호</label>
-       		<div class="col-md-5">
-           	<input class="form-control" id="disabledInput" type="text" placeholder="원부자재 코드명 " >
-	           
-         	  	</div>
-         	 	</div>
-        
         <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">원부자재명</label>
+         <div class="col-md-5">
+            <span>DB에서 가지고오는 원부자재명</span>
+          </div>
+        </div>
+       <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">양복명</label>
           <div class="col-md-5">
-            <input type="text" class="form-control" placeholder="" >
+            <span>DB에서 가지고오는 양복명</span>
           </div>
         </div>
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품목명</label>
           <div class="col-md-5">
-            <input type="text" class="form-control" >
+            <span>DB에서 가지고오는품목명</span>
           </div>
         </div>
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">디자인첨부</label>
               <div class="fileupload fileupload-new col-xs-3" data-provides="fileupload">
-                  <input type="file" name="designDrawingAttachment" />
-                  <span class="fileupload-preview" style="margin-left:5px;"></span>
+              <span>DB에서 가지고오는 파일명</span>
+                     <span class="fileupload-preview" style="margin-left:5px;"></span>
         		</div>
         </div>
         
       <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label"  style="font-weight: 600;">납기일</label>
-          <div class="col-md-4">
-            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
-              <input type="text" class="form-control" readonly="readonly" size="16">
-              <div class="input-group-btn">
-                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
-                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
-              </div>
-            </div>
+          <div class="col-md-5">
+            <span>DB에서 가지고오는거납기일</span>
           </div>
         </div>
       <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label"  style="font-weight: 600;">생산시작예정일</label>
-          <div class="col-md-4">
-            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
-              <input type="text" class="form-control" readonly="readonly" size="16">
-              <div class="input-group-btn">
-                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
-                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
-              </div>
-            </div>
+          <div class="col-md-5">
+            <span>DB에서 가지고오는생산시작일</span>
           </div>
         </div>
       <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label"  style="font-weight: 600;">생산마감예정일</label>
-          <div class="col-md-4">
-            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
-              <input type="text" class="form-control" readonly="readonly" size="16">
-              <div class="input-group-btn">
-                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
-                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
-              </div>
-            </div>
+          <div class="col-md-5">
+            <span>DB에서 가지고오는생산마감예정일</span>
           </div>
         </div>
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">생산지시수량</label>
-          <div class="col-md-4">
-            <input type="text" class="form-control" >
+          <div class="col-md-5">
+            <span>DB에서 가지고오는생산수량</span>
           </div>
         </div>
         <div class="form-group">
            	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">생산단위</label>
-           	  	<div class="col-sm-4">
-             	 <select class="form-control">
-                  <option>단위</option>
-                  <option> 벌</option>
-                 </select>
-           	  	</div>
+           	  	<div class="col-md-5">
+	            <span>단위</span>
+	          </div>
            	 	</div>
     	<div class="form-group">
           <label class="col-lg-2 col-sm-2 control-label" style="font-weight: 600;">작업지시자</label>
@@ -136,9 +104,8 @@ layout:decorate="@{layout/default_production}">
         </div>
        <div class="form-group text-right">
                     <div class="col-lg-offset-2 col-lg-10">
-                      <button class="btn btn-theme" type="button" onclick="location.href='/workOrderList'"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">작업지시등록</font></font></button>
-                      <button class="btn btn-theme04" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">작업지시취소</font></font></button>
-                    </div>
+                      <button class="btn btn-theme" type="button" onclick="self.close();"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">작업지시정보확인</font></font></button>
+        			 </div>
                     </div>
        		</form>
       
@@ -170,6 +137,6 @@ layout:decorate="@{layout/default_production}">
   <script src="lib/common-scripts.js"></script>
   <!--script for this page-->
 
-</th:block>
+
 
 </html>

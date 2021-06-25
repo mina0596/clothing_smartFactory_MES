@@ -8,6 +8,9 @@ layout:decorate="@{layout/default_production}">
 	   <div class="border-head"> 
 	    <h3>작업지시목록및조회</h3>
 	    </div>
+	     <script language="javascript">
+  function showPopup() { window.open("workOrderInfo", "작업지시정보", "width=500, height=600, left=100, top=50"); }
+  </script>
 </th:block>
 
 
@@ -68,7 +71,7 @@ layout:decorate="@{layout/default_production}">
                       <input type="checkbox" class="checked">
                     </td>
                      <td class="hidden-phone">1</td>
-                    <td class="hidden-phone"><a th:href="@{/workOrderInfo}">
+                    <td class="hidden-phone"><a onclick="showPopup();">
                     operation_order_01</a></td>
                     <td class="hidden-phone">1234</td>
                     <td class="hidden-phone">파크랜드</td>
