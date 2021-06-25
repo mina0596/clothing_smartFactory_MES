@@ -5,7 +5,7 @@ layout:decorate="@{layout/default_contract}">
 
 <th:block layout:fragment="pageTitle">
 	   <div class="border-head"> 
-	    <h3 th:text="${title}"></h3>
+	    <h3 >수/발주관리</h3>
 	    </div>
 </th:block>
 
@@ -15,7 +15,7 @@ layout:decorate="@{layout/default_contract}">
 	<div class="row mt">
   <div class="col-lg-12">
     <div class="form-panel">
-      <h4 class="mb"><i class="fa fa-edit"></i> 원부자재 거래처수정</h4>
+      <h4 class="mb"><i class="fa fa-edit"></i>발주 거래처수정</h4>
       <hr>
       <br>
       
@@ -23,66 +23,53 @@ layout:decorate="@{layout/default_contract}">
 
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">거래처 코드</label>
-          <div class="col-sm-10">
-            <input class="form-control" id="client_code" type="text" placeholder="oc_001" disabled>
+          <div class="col-sm-5">
+            <input class="form-control" id="client_code" type="text" placeholder="DB발주거래처코드" readonly="readonly">
             <!-- 거래처 코드를 자동증가로 할것인지 아닌지 생각해보기 -->            
           </div>
         </div>
-        
-        <div class="form-group">
-       	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">거래처구분</label>
-       	  	<!--거래처 등록 페이지는 페이지로해서 통합등록을하면 어떨까? -->
-       	  	<div class="col-sm-4">
-           	 <select class="form-control" name="client_category">
-                <option>거래처 구분</option>
-                <option>수주거래처</option>
-                <option>원부자재거래처</option>
-               </select>
-         	  	</div>
-         	 	</div>
-        
-        <div class="form-group">
+       <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">거래처명</label>
-          <div class="col-sm-10">
-            <input class="form-control" id="disabledInput" type="text" placeholder="나는 단추" >
+          <div class="col-sm-5">
+            <input class="form-control" id="disabledInput" type="text" placeholder="" >
           </div>
         </div>
         
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">거래처 연락처</label>
-          <div class="col-sm-10">
-          	<input class="form-control" id="disabledInput" type="tel" placeholder="070-2515-1555" >
+          <div class="col-sm-5">
+          	<input class="form-control" id="disabledInput" type="tel" placeholder="" >
           </div>
         </div>
            	        
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">거래처직원 담당자</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="홍길동" >
+          <div class="col-sm-5">
+            <input type="text" class="form-control" placeholder="" >
           </div>
         </div>
         
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">거래처 대표자명</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="김철수">
+          <div class="col-sm-5">
+            <input type="text" class="form-control" placeholder="">
           </div>
         </div>
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">거래처사업자번호</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="111-1111-1111-11">
+          <div class="col-sm-5">
+            <input type="text" class="form-control" placeholder="">
           </div>
         </div>
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">거래처주소</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="전주시">
+          <div class="col-sm-5">
+            <input type="text" class="form-control" placeholder="">
           </div>
         </div>
      	<div class="form-group text-right">
                     <div class="col-lg-offset-2 col-lg-10">
-                      <button class="btn btn-theme" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">거래처수정</font></font></button>
+                     <a th:href="@{/supplierList}"><button class="btn btn-theme" type="button" ><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">거래처수정</font></font></button></a>
                       <button class="btn btn-theme04" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">거래처수정취소</font></font></button>
                     </div>
                     </div>

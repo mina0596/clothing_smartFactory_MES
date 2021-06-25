@@ -14,80 +14,58 @@ layout:decorate="@{layout/default_contract}">
 	
 	
     <div class="form-panel">
-      <h4 class="mb"><i class="fa fa-edit"></i> 원부자재 거래처등록</h4>
+      <h4 class="mb"><i class="fa fa-edit"></i> 발주 거래처등록</h4>
       <hr>
       <br>
       
-      <form class="form-horizontal style-form" method="post">
-
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">거래처 코드</label>
-          <div class="col-sm-10">
-            <input class="form-control" id="client_code" type="text" placeholder="client_code" >
-            <!-- 거래처 코드를 자동증가로 할것인지 아닌지 생각해보기 -->            
-          </div>
-        </div>
-        
-        <div class="form-group">
-       	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">거래처구분</label>
-       	  	<!--거래처 등록 페이지는 페이지로해서 통합등록을하면 어떨까? -->
-       	  	<div class="col-sm-4">
-           	 <select class="form-control" name="client_category">
-                <option>거래처 구분</option>
-                <option>수주거래처</option>
-                <option>원부자재거래처</option>
-               </select>
-         	  	</div>
-         	 	</div>
-        
-        <div class="form-group">
+      <form class="form-horizontal style-form" method="post" th:action="@{/addSupplier}">
+		 <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">거래처명</label>
-          <div class="col-sm-10">
+          <div class="col-sm-5">
             <input class="form-control" id="disabledInput" type="text"  >
           </div>
         </div>
-        
-        <div class="form-group">
+	    <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">거래처 연락처</label>
-          <div class="col-sm-10">
+          <div class="col-sm-5">
           	<input class="form-control" id="disabledInput" type="tel"  >
           </div>
         </div>
            	        
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">거래처직원 담당자</label>
-          <div class="col-sm-10">
+         <div class="col-sm-5">
             <input type="text" class="form-control" >
           </div>
         </div>
         
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">거래처 대표자명</label>
-          <div class="col-sm-10">
+          <div class="col-sm-5">
             <input type="text" class="form-control" placeholder="">
           </div>
         </div>
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">거래처사업자번호</label>
-          <div class="col-sm-10">
+          <div class="col-sm-5">
             <input type="text" class="form-control" placeholder="">
           </div>
         </div>
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">거래처주소</label>
-          <div class="col-sm-10">
+          <div class="col-sm-5">
             <input type="text" class="form-control" placeholder="">
           </div>
         </div>
-     	<div class="form-group text-right">
+        <!-- DB연결하고나서 Post방식으로 값넘겨서 할예정 그래서버튼 submit할예정임돠 -->
+     			<div class="form-group text-right">
                     <div class="col-lg-offset-2 col-lg-10">
-                      <button class="btn btn-theme" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">거래처등록</font></font></button>
+                      <a th:href="@{/supplierList}"><button class="btn btn-theme" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">거래처등록</font></font></button></a>
                       <button class="btn btn-theme04" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소</font></font></button>
                     </div>
                     </div>
        		</form>
-      
-    	</div>
+     </div>
     
 	
 	</th:block>

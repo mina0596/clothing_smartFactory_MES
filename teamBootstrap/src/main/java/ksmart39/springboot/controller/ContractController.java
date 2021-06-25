@@ -69,7 +69,12 @@ public class ContractController {
 		
 		return "contract/supplierContractInfo";
 	}
+	//[보람]원부자재 발주 수정메서드
+	@GetMapping("/supplierContractModify")
+	public String supplierContractModify() {
 		
+		return "contract/supplierContractModify";
+	}
 	//[보람]원부자재 발주리스트
 	@GetMapping("/supplierContractList")
 	public String getRawmaterialsOrderList(Model model,@RequestParam(name = "supplierOrderSearchKey",required = false)String supplierOrderSearchKey
@@ -79,6 +84,7 @@ public class ContractController {
 		return"contract/supplierContractList";
 	}
 
+	
 
 	//[보람]원부자재 발주등록메서드
 	@GetMapping("/addSupplierContract")
@@ -102,16 +108,22 @@ public class ContractController {
 		return"contract/supplierList";
 	}
 	
-	//[보람]원부자재 거래처 수정 경로 메서드
+	//[보람]원부자재 거래처 수정 경로 메서드 DB연결되면제대로할예정
 	@GetMapping("/supplierModify")
 	public String supplierModify() {
 		return"contract/supplierModify";
 	}
 	
+	//[보람]원부자재 거래처 등록후 redirect
+	@PostMapping("/addSuppler")
+	public String addsuplier() {
+		
+		return"redirect:/supplierList";
+	}
 	//[보람]원자재거래처 등록 경로 메서드
 	@GetMapping("/addSupplier")
 	public String supplierAccount(Model model) {
-		model.addAttribute("title", "원자재거래처등록");
+		model.addAttribute("title", "수/발주관리");
 		return"contract/addSupplier";
 	
 	}
