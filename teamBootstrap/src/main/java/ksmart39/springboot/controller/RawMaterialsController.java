@@ -41,6 +41,13 @@ public class RawMaterialsController {
 		return "rawMaterials/searchMaterialName";
 	}
 	
+	//[민아]모달 실험
+	@GetMapping("/modalTest")
+	public String testModaltest(Model model) {
+		
+		return "rawMaterials/modalTest";
+	}
+	
 	//[민아]원부자재 등록화면
 	@GetMapping("/addRawMaterials")
 	public String addRawMeterials(Model model) {
