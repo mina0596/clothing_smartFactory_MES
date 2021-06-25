@@ -9,10 +9,21 @@ layout:decorate="@{layout/default_rawMaterials}">
 	    </div>
 </th:block>
 
+<th:block layout:fragment="customJs">
+	<script>
+		$(function(){
+			$('#searchBtn').click(function(){
+		    console.log('찍히고잇니?');
+		    window.open('searchMaterialName','popup','width=500,height=500'); 
+		    })
+		}) 
+	
+	
+	</script>
+</th:block>
 
 <th:block layout:fragment="container">
-	<div class="row mt">
-  <div class="col-lg-12">
+
     <div class="form-panel">
       <h4 class="mb"><i class="fa fa-edit"></i> 원부자재 등록</h4>
       <hr>
@@ -24,15 +35,26 @@ layout:decorate="@{layout/default_rawMaterials}">
 		<div class="form-group">
 		<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">원부자재 구분</label>
 		<div class="radio" style="font-size: 15px">
-          <label>
-            <input type="radio" name="optionsRadios" style="display: inline;" id="optionsRadios1" value="option1" checked>원자재
+          <label style="padding-right: 20px">
+            <input type="radio" name="optionsRadios"  id="optionsRadios1" value="원자재" checked>원자재
           </label>      
-                
           <label>
-            <input type="radio" name="optionsRadios" style="display: inline;" id="optionsRadios2" value="option2">부자재
+            <input type="radio" name="optionsRadios" id="optionsRadios2" value="부자재">부자재
           </label> 
         </div>      
 		</div>
+        
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">원부자재 재료 구분</label>
+          <div class="col-md-5">
+            <div  class="input-group date form_datetime-adv">
+              <input type="text" class="form-control" name="materialName" id="parents"  size="16">
+              <div class="input-group-btn">
+                <button type="button" class=" btn btn-theme03 btn btn-default" id="searchBtn"><i class="fa"></i>검색하여 가져오기</button>
+              </div>
+            </div>
+          </div>
+        </div>
         
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">원부자재 재료명</label>
@@ -87,9 +109,6 @@ layout:decorate="@{layout/default_rawMaterials}">
       </form>
       
     </div>
-  </div>
-<!-- col-lg-12-->
-</div>
 
 </th:block>
 
