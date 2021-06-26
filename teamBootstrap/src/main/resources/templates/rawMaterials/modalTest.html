@@ -28,6 +28,7 @@ layout:decorate="@{layout/default_rawMaterials}">
 						var par = $(this).parent();
 						var supplierName = par.parent().find('.supplierName').text();
 						console.log(supplierName + '<<supplierName');
+						$('#bySupplierValue').attr('value', supplierName);
 					}				
 					
 				});
@@ -50,33 +51,7 @@ layout:decorate="@{layout/default_rawMaterials}">
 	
 	
 	</script>
-	<script type="text/javascript">
-			$(function(){
-				
-				
-				
-				
-					
-				$('[data-popup-open]').on('click', function(e)  {
-			        var targeted_popup_class = jQuery(this).attr('data-popup-open');
-			        $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
 
-			        e.preventDefault();
-			    });
-
-			    //----- CLOSE
-			    $('[data-popup-close]').on('click', function(e)  {
-			        var targeted_popup_class = jQuery(this).attr('data-popup-close');
-			        $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
-
-			        e.preventDefault();
-			    });
-				
-			});
-			
-			
-
-	        </script>
 </th:block>
 
 <th:block layout:fragment="container">
@@ -90,6 +65,7 @@ layout:decorate="@{layout/default_rawMaterials}">
       
       
 		<!-- 모달테스트할꺼임 -->
+		<!-- 부모화면에서의 검색부분 -->
 		 <div class="form-group"><!-- 발주처별 -->
 			<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">발주처별 검색</label>
 			<div class="col-md-5">
@@ -99,7 +75,9 @@ layout:decorate="@{layout/default_rawMaterials}">
 				</div>
 			</div>
         </div>
+        <!-- 부부모화면에서의 검색부분 끝 -->
         
+        <!-- 모달화면에서의 검색부분 -->
         <div class="modal fade modal-xl"  id="bySupplierModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog" style="width:auto;display:table" role="document">
 		    <div class="modal-content">
@@ -108,11 +86,9 @@ layout:decorate="@{layout/default_rawMaterials}">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		          <span aria-hidden="true">&times;</span>
 		        </button>
-		      </div>
+		      </div>     
 		      <div class="modal-body">
-		   
 		   <div class="form-group">
-          
           <div class="col-xs-4">
           <select class="form-control">
 		   <option>::원부자재 선택::</option>
@@ -128,9 +104,8 @@ layout:decorate="@{layout/default_rawMaterials}">
             </div>
           </div>
 		</div>
-    </div>
 
-	<!-- 내가가져온거  -->
+	<!-- 모달에서 테이블부분  -->
        <table class="table table-striped table-advance table-hover" id="list">
          <thead>
            <tr>
@@ -165,12 +140,13 @@ layout:decorate="@{layout/default_rawMaterials}">
 				<td>123456</td>
 				<td class="supplierName">나는실크</td>
 			</tr>
-         </tbody>
-       </table>
-		 </div>
+        </tbody>
+      </table>
+	 </div>
+    </div>
 		    <div class="modal-footer">
-		      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-		      <button type="button" class="btn btn-primary" id="selectBtn">Save changes</button>
+		      <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+		      <button type="button" class="btn btn-primary" id="selectBtn" data-dismiss="modal">값가져오기</button>
 	        </div>
 		    </div>
 		  </div>
