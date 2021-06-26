@@ -7,6 +7,21 @@ layout:decorate="@{layout/default_contract}">
 	   <div class="border-head"> 
 	    <h3>수/발주관리</h3>
 	    </div>
+	<th:block layout:fragment="customJs">
+	<script>
+
+	$(function(){
+		$('#cancleBtn').click(function(){
+			window.history.back();
+		});
+		//월요일에 합치고나서 ContractController 경로 메서드하고나서 하기
+		$('#searchSupplier').click(function(){
+			window.open('searchSupplierName','popup','width=400,height=500');
+		})
+	});
+	
+	</script>
+	</th:block>	  
 </th:block>
 
 
@@ -24,9 +39,9 @@ layout:decorate="@{layout/default_contract}">
           <label class="col-sm-2 col-sm-2 control-label"> 거래처명</label>
           <div class="col-md-5">
             <div  class="input-group ">
-              <input type="search" class="form-control"  size="16">
+              <input type="search" class="form-control" id="supplierName" size="16">
               <div class="input-group-btn">
-                <button type="button" class=" btn btn-theme03 btn btn-default"><i class="fa"></i>검색하여 가져오기</button>
+                <button type="button" class=" btn btn-theme03 btn btn-default" id="searchSupplier" ><i class="fa"></i>검색하여 가져오기</button>
               </div>
             </div>
           </div>
@@ -37,14 +52,14 @@ layout:decorate="@{layout/default_contract}">
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">거래처담당자</label>
          <div class="col-md-5">
-            <input class="form-control" id="disabledInput" type="text"  >
+            <input class="form-control" id="supplierEmployee" type="text"  >
           </div>
         </div>
         
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">거래처 연락처</label>
           <div class="col-md-5">
-          	<input class="form-control" id="disabledInput" type="tel"  >
+          	<input class="form-control" id="supplierPhone" type="tel"  >
           </div>
         </div>
            	        
@@ -111,7 +126,7 @@ layout:decorate="@{layout/default_contract}">
        <div class="form-group text-right">
                     <div class="col-lg-offset-2 col-lg-10">
                      <a th:href="@{/supplierContractList}"> <button class="btn btn-theme" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">발주요청등록</font></font></button></a>
-                      <button class="btn btn-theme04" type="button" ><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">발주요청취소</font></font></button>
+                      <button class="btn btn-theme04" type="button" id="cancleBtn"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">발주요청취소</font></font></button>
                     </div>
                     </div>
        		</form>

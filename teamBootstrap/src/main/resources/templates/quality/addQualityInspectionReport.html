@@ -7,6 +7,16 @@ layout:decorate="@{layout/default_qualityControl}">
 	   <div class="border-head"> 
 	    <h3 >품질관리</h3>
 	    </div>
+	<th:block layout:fragment="customJs">
+		    <script>
+	$(function(){
+		$('#cancleBtn').click(function(){
+			window.history.back();
+		});
+	});
+	
+	</script>
+	</th:block>	 
 </th:block>
 
 
@@ -122,8 +132,8 @@ layout:decorate="@{layout/default_qualityControl}">
  		
        <div class="form-group text-right">
                     <div class="col-lg-offset-2 col-lg-10">
-                      <button class="btn btn-theme" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">성적서등록</font></font></button>
-                      <button class="btn btn-theme04" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">성적서취소</font></font></button>
+                      <button class="btn btn-theme" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">성적서등록</font></font></button>
+                      <button class="btn btn-theme04" type="button" id="cancleBtn"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">성적서취소</font></font></button>
                     </div>
                     </div>
         

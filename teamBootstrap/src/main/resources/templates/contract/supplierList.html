@@ -17,12 +17,17 @@ $(function(){
 	var supplierOner = $('#supplierOner').text();
 	var supplier1 =$('#supplier1').text();
 	var suppelirAddr =$('#suppelirAddr').text();
-	#('#updateBtn').click(function(){
-		location.href='supplierModify?supplierName='+supplierName+'&supplierEmployee='supplierEmployee+'&supplierNumber='supplierNumber+'&supplierOner='supplierOner+'&supplier1='supplier1+'&suppelirAddr='suppelirAddr;
-		console.log(suppelirAddr);	
-		location.href='addInWarehousing?materialName='+materialName+'&materialColor='materialColor;
-	});
 	
+	$('#modifyBtn').click(function(){
+		
+		location.href='supplierModify?supplierName='+supplierName;
+		//전달된 파라미터로 화면에 창을 어떻게 뜨울까?
+		//opener 메서드를사용해봐서 해볼까?
+			
+		});
+	
+
+
 })
  
 
