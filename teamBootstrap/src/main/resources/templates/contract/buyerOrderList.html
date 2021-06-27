@@ -5,32 +5,49 @@ layout:decorate="@{layout/default_contract}">
 
 <th:block layout:fragment="pageTitle">
 	   <div class="border-head"> 
-	    
+	    <h3 th:text="${title}"></h3>
 	    </div>
 </th:block>
 
+<th:block layout:fragment="customJs">
+	<script>
+		$(function(){
+			$('#deleteBtn').click(function(){
+				var tdList = $('#list').children().find('tr');
+				tdList.html('<span class="check"><input type="checkbox" class="checked"></span>');
+				console.log(tdList);
+			});
+		})
+	</script>
+</th:block>
 
 <th:block layout:fragment="container">
+
+	
+	
 	<div class="row mt">
      <div class="col-md-12">
-       <div class="content">
-       
-          <h4><i class="fa fa-angle-right"></i>발주조회</h4>
-          <hr>
-                
-			<div class="form-group">
-				<div class="col-md-2">
+          <h4><i class="fa fa-truck"></i>수주주문서목록/조회</h4>
+          <hr>  
+			<div class="form-group" style="padding-left: 50px">
+				<div class="col-md-3">
 				 <select class="form-control">
-				   <option>발주코드</option>
-				   <option>발주품목</option>
-				 </select>
+				   <option>계약번호</option>
+				   <option>거래처명</option>
+				   <option>수주의뢰코드</option>
+				   <option>담당자명</option>
+				   <option>결제조건</option>
+				   <option>수주일자</option>
+				   <option>등록일자</option>
+
+				  </select>
 				</div>
 				<div class="col-md-6">
 				  <input class="form-control" type="text" placeholder="검색어를 입력하세요">
 				</div>
 				<div class="col-md-2">
 				  <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
-				  <button type="button" class="btn btn-primary">검색하여 가져오기</button>
+				  <button type="button" class="btn btn-primary">검색</button>
 				</div>
 	       </div>
 	       
@@ -40,140 +57,66 @@ layout:decorate="@{layout/default_contract}">
 	      <br>
 	      <br>
 	      
-              <h4><i class="fa fa-angle-right"></i>발주목록</h4>    
-              <table class="table table-striped table-advance table-hover">
+                
+	        <form class="form-horizontal style-form">
+              <table class="table table-striped table-advance table-hover" id="list">
                 <thead>
                   <tr>
-                    <th><i class="fa fa-bullhorn"></i>체크</th>
-                    <th class="hidden-phone"><i class="fa fa-bookmark"></i>원부자재 발주코드</th>
-                    <th><i class="fa fa-bookmark"></i>원부자재 거래처명</th>
-                    <th><i class=" fa fa-bookmark"></i>원부자재 품목명 </th>
-                    <th><i class=" fa fa-bookmark"></i>원부자재수량</th>
-                    <th><i class=" fa fa-bookmark"></i>원부자재 납기일</th>
-                    <th><i class=" fa fa-bookmark"></i>원부자재승인상태</th>
-                    <th><i class=" fa fa-bookmark"></i>발주등록날짜</th>
-                    <th><i class=" fa fa-bookmark"></i>승인확인</th> <!-- 승인담당자만 볼수있게해야됨  -->
-                    <th><i class=" fa fa-bookmark"></i>발주 수정버튼</th>
-                    <th></th>
+                  	<th><input type="checkbox" class="checked"></th>
+                    <th><i class="fa fa-bullhorn"></i>번호</th>
+                    <th class="hidden-phone"><i class="fa fa-bookmark"></i>품목별 의뢰코드</th>
+                    <th><i class="fa fa-bookmark"></i>성별별 양복명</th>
+                    <th><i class=" fa fa-bookmark"></i>수량</th>
+                    <th><i class="fa fa-bookmark"></i>단위</th>
+                    <th><i class=" fa fa-bookmark"></i>측정사이즈</th>
+                    <th><i class=" fa fa-bookmark"></i>첨부파일</th>
+                    <th><i class=" fa fa-bookmark"></i>납기일자</th>
+                    <th><i class=" fa fa-bookmark"></i>의뢰승인여부</th>
+                    <th><i class=" fa fa-bookmark"></i>등록일자</th>
+                    <th><i class=" fa fa-pencil"></i>수정</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                   <td class="hidden-phone">
-                      <input type="checkbox" class="checked">
-                    </td>
-                    <td class="hidden-phone">
-                    <a th:href="@{/!supplierContractInfo}">suplier01</a></td>
-                    <td class="hidden-phone">나는단추</td>
-                    <td>단추</td>
-                    <td>50개</td>
-                    <td>
-                     	2021-02-10 
-                    </td>
-                    <!--승인상태는 승인담당자만 셀렉트할수있게해워야됨  -->
-                    <td><select>
-                    	<option>승인요청</option>
-                    	<option>비승인</option>
-                    	<option>승인</option>
-                    </select></td>
-                    <td>
-                     	2021-01-29 13:30
-                    </td>
-                    <td>
-                    <button class="btn btn-success btn-xs"><i class="fa fa-check"></i>승인확인</button></td>
-                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
+                  	<td><input type="checkbox" class="checked"></td>
+                    <td class="hidden-phone">1</td>
+                    <td class="hidden-phone">req01_MS_pants</td>
+                    <td>신사양복</td>
+                    <td>5</td>
+                    <td>벌</td>
+                    <td>상세측정표</td>
+                    <td>첨부파일</td>
+                    <td>2021.01.12</td>
+                    <td>승인완료</td>
+                    <td>2021.01.12 1:30</td>
+                  	<td>  
+                  		<button type="submit" th:href="@{/modifyBuyerOrder}" class="btn btn-primary btn-xs">
+                  			<i class="fa fa-pencil"></i>
+                  				수정
+                  		</button>
+                  	</td>
+                    </tr>
                   
-                  <tr>
-                   <td class="hidden-phone">
-                      <input type="checkbox" class="checked">
-                    </td>
-                    <td class="hidden-phone">
-                    <a >suplier02</a></td>
-                    <td class="hidden-phone">부드러운실크컴퍼니</td>
-                    <td>실크</td>
-                    <td>10필</td>
-                    <td>
-                     	2021-02-15 
-                    </td>
-                    <!--승인상태는 승인담당자만 셀렉트할수있게해워야됨  -->
-                    <td><select>
-                    	<option>승인요청</option>
-                    	<option>비승인</option>
-                    	<option>승인</option>
-                    </select></td>
-                    <td>
-                     	2021-01-30 11:30
-                    </td>
-                    <td>
-                    <button class="btn btn-success btn-xs"><i class="fa fa-check"></i>승인확인</button></td>
-                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  
-                  <tr>
-                   <td class="hidden-phone">
-                      <input type="checkbox" class="checked">
-                    </td>
-                    <td class="hidden-phone">
-                    <a >suplier03</a></td>
-                    <td class="hidden-phone">견고한지퍼나라</td>
-                    <td>지퍼</td>
-                    <td>100개</td>
-                    <td>
-                     	2021-02-18 
-                    </td>
-                    <!--승인상태는 승인담당자만 셀렉트할수있게해워야됨  -->
-                    <td><select>
-                    	<option>승인요청</option>
-                    	<option>비승인</option>
-                    	<option>승인</option>
-                    </select></td>
-                    <td>
-                     	2021-01-29 12:30
-                    </td>
-                    <td>
-                    <button class="btn btn-success btn-xs"><i class="fa fa-check"></i>승인확인</button></td>
-                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  <tr>
-                   <td class="hidden-phone">
-                      <input type="checkbox" class="checked">
-                    </td>
-                    <td class="hidden-phone">
-                    <a>suplier04</a></td>
-                    <td class="hidden-phone">정교한심지</td>
-                    <td>접착심지</td>
-                    <td>150개</td>
-                    <td>
-                     	2021-02-15 
-                    </td>
-                    <!--승인상태는 승인담당자만 셀렉트할수있게해워야됨  -->
-                    <td><select>
-                    	<option>승인요청</option>
-                    	<option>비승인</option>
-                    	<option>승인</option>
-                    </select></td>
-                    <td>
-                     	2021-01-30 15:30
-                    </td>
-                    <td>
-                    <button class="btn btn-success btn-xs"><i class="fa fa-check"></i>승인확인</button></td>
-                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  
+               
+
                  
-           		 </tbody>
+                 
+                </tbody>
               </table>
-            </div>
-            </div>
-             <div class="form-group">
-                    <div class=" col-xs-12 text-right">
-                      <button class="btn btn-success btn-xs" th:href="@{/!addSupplier}"><i class="fa fa-check"></i>발주등록</button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i>발주삭제</button>
-                    </div>
-                    </div>
-            </div>
             
+		        <div class="form-group text-right">
+		          <div class="col-lg-offset-2 col-lg-10">
+		           <a th:href="@{/addBuyer}" class="btn btn-success btn-xs"><i class="fa fa-check"></i>등록</a>
+		           <a id="deleteBtn" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i>삭제</a>
+		          </div>
+		        </div>
+       		</form>
+       		
+          </div>
+          <!-- /col-md-12 -->
+        </div>
+        <!-- /row -->
+        
 </th:block>
 
 </html>

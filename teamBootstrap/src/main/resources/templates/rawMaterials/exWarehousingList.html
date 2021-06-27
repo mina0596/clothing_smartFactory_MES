@@ -5,138 +5,473 @@ layout:decorate="@{layout/default_rawMaterials}">
 
 <th:block layout:fragment="pageTitle">
 	   <div class="border-head"> 
-	    <h3>자재관리</h3>
-	    </div>
-</th:block>
+	    <h3>자재 관리</h3>
+	   </div>
 
-<th:block layout:fragment="customJs">
-	<script>
+ <script type="text/javascript">
 		$(function(){
-			$('#deleteBtn').click(function(){
-				var tdList = $('#list').children().find('tr');
-				tdList.html('<span class="check"><input type="checkbox" class="checked"></span>');
-				console.log(tdList);
-			});
-		})
-	</script>
+			//#checkAll 버튼 클릭 시 전체 checked
+				$('#checkAll').click(function(){
+					if($('#checkAll').prop('checked')){
+						$('.checked').prop('checked',true);
+							}else{
+								$('.checked').prop('checked',false);
+							}
+						});									
+					});
+
+	</script>  
 </th:block>
 
 <th:block layout:fragment="container">
-	
-	<div class="row mt">
      <div class="col-md-12">
-          <h4><i class="fa fa-truck"></i>자재 출고 현황 목록/조회</h4>
-          <hr>  
-			<div class="form-group" style="padding-left: 50px">
-				<div class="col-md-3">
-				 <select class="form-control">
-				   <option>원부자재 코드</option>
-				   <option>재료명</option>
-				   <option>색상명</option>
-				   <option>수량</option>
-				   <option>단위</option>
-				   <option>출고날짜</option>
-				   <option>등록일시</option>
-				  </select>
-				</div>
-				<div class="col-md-6">
-				  <input class="form-control" type="text" placeholder="검색어를 입력하세요">
-				</div>
-				<div class="col-md-2">
-				  <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
-				  <button type="button" class="btn btn-primary">검색하여 가져오기</button>
-				</div>
-	       </div>
-	       
-	      <br>
-	      <br>
-	      <br>
-	      <br>
-	      <br>
-	      
-                
-	        <form class="form-horizontal style-form">
-              <table class="table table-striped table-advance table-hover" id="list">
+       <div class="content">
+       
+
+		<h4><i class="fa fa-angle-right"></i>자재 입고 조회</h4>
+         	 <hr>
+		<form class="form-inline" role="form">
+        
+         <table class="table table-striped table-advance table-hover">
+         	<thead>
+         		<tr>
+         			<th>발주처별</th>
+         			<th>재료별</th>
+         			<th>입고일별</th>
+         			<th><!-- 공백 --></th>
+         			<th>원부자재구분</th>
+         		</tr>
+         	</thead>
+         	<tbody>
+         		<tr>
+         			<td style="padding-right: 20px;">
+	         			 <div class="form-group"><!-- 발주처별 -->
+		               		<button id="bySupplier" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
+		                	<input type="text" class="form-control" id="bySupplierValue" placeholder="직접 입력 또는 검색">
+		                </div>
+         			</td>
+         			<td style="padding-right: 20px;">
+         				<div class="form-group"><!-- 재료별 -->
+		               		<button id="byMaterialName" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
+		                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="직접 입력 또는 검색">
+	              		</div>
+         			</td>
+         			<td>
+         				<div class="form-group">
+		                	<input type=date class="form-control" id="exampleInputPassword2" placeholder="입고일별">&nbsp&nbsp&nbsp ~ 
+	               		</div>
+         			</td>
+         			<td style="padding-right: 20px;">
+         				<div class="form-group">
+		                	<input type=date class="form-control" id="exampleInputPassword2" placeholder="입고일별">
+	               		</div>
+         			</td>
+         			<td style="padding-right: 20px;">
+         				<div class="form-group">
+		                	<select class="form-control" style="width: 125px;">
+		                		<option>All</option>
+		                		<option>원자재</option>
+		                		<option>부자재</option>
+		                	</select>
+	               		</div>
+         			</td>
+         			<td>
+         				  <button type="submit" class="btn btn-theme">검색</button>
+         			</td>        			
+         		</tr>
+         	</tbody>
+         </table>  
+        </form>  
+         
+         <!-- 모달 시작 -->
+         <div class="modal fade modal-xl"  id="bySupplierModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" style="width:auto;display:table" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h4 class="modal-title" id="exampleModalLabel">발주처 검색</h4>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      
+		      <!-- 모달본문 -->
+		   <div class="modal-body">
+		   
+		   <table  class="table table-striped table-advance table-hover">
+         	<tbody>       		
+       			<thead>
+        			<tr>
+	         			<!-- <th style="padding-bottom: 12px;"><label class="control-label">발주처 코드</label></th> -->
+	         			<th colspan="2" style="padding-right: 20px;">
+		         			 <div class="form-inline" style="margin-bottom: 0px;"><!-- 발주처별 -->
+		         			 	<label class="control-label">발주처 코드</label>&nbsp
+			                	<input type="text" class="form-control" id="bySupplierValue" placeholder="검색어를 입력하세요.">
+			                </div>
+	         			</th>
+	         			<!-- <th style="padding-bottom: 12px;"><label class="control-label">발주처 명</label></th> -->
+	         			<th colspan="3" style="padding-right: 20px;">
+	         				<div class="form-inline" style="margin-bottom: 0px;"><!-- 재료별 -->
+		         				<label class="control-label">발주처 명</label>&nbsp
+			                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
+	         				 &nbsp&nbsp&nbsp <button type="submit" class="btn btn-theme">검색</button>
+		              		</div>
+	         			</th>  
+        			</tr>     			
+       			</thead>
+       			<tbody style="text-align: center;">
+       				<tr>
+       					<td>no.</td>
+       					<td>발주처코드</td>
+       					<td>발주처명</td>
+       				</tr>
+     				<tr>
+     					<td>1</td>
+       					<td>123456</td>
+       					<td>나는 단추</td>
+     				</tr>
+     				<tr>
+     					<td>2</td>
+       					<td>123456</td>
+       					<td>나는 단추</td>
+     				</tr>
+     				<tr>
+     					<td>3</td>
+       					<td>123456</td>
+       					<td>나는 단추</td>
+     				</tr>
+       			</tbody>        		
+         	</tbody>
+         </table> 
+         
+		 </div>
+		    <div class="modal-footer">
+			      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			      <button type="button" class="btn btn-primary">Save changes</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<!-- bySupplierModal 끝 -->
+		
+		<!-- byMaterialName 모달 시작 -->
+         <div class="modal fade modal-xl"  id="byMaterialNameModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" style="width:auto;display:table" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h4 class="modal-title" id="exampleModalLabel">발주처 검색</h4>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      
+		      <!-- 모달본문 -->
+		   <div class="modal-body">
+		   
+		   <table  class="table table-striped table-advance table-hover">
+         	<tbody>       		
+       			<thead>
+        			<tr>
+	         			<th colspan="2" style="padding-right: 20px;">
+		         			 <div class="form-inline" style="margin-bottom: 0px;"><!-- 발주처별 -->
+		         			 	<label class="control-label">재료코드</label>&nbsp
+			                	<input type="text" class="form-control" id="bySupplierValue" placeholder="검색어를 입력하세요.">
+			                </div>
+	         			</th>
+	         			<th colspan="1" style="padding-right: 20px;">
+	         				<div class="form-inline" style="margin-bottom: 0px;"><!-- 재료별 -->
+		         				<label class="control-label">재료구분</label>&nbsp
+			                	<select class="form-control" style="width: 125px;">
+			                		<option>All</option>
+			                		<option>실</option>
+			                		<option>원단</option>
+		                	</select>
+		              		</div>
+	         			</th>  
+	         			<th colspan="1" style="padding-right: 20px;">
+	         				<div class="form-inline" style="margin-bottom: 0px;"><!-- 재료별 -->
+		         				<label class="control-label">재료명</label>&nbsp
+			                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
+		              		</div>
+	         			</th>  
+	         			<th colspan="2" style="padding-right: 20px;">
+	         				<div class="form-inline" style="margin-bottom: 0px;"><!-- 색상별 -->
+		         				<label class="control-label">색상명</label>&nbsp
+			                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
+	         				 &nbsp&nbsp&nbsp <button type="submit" class="btn btn-theme">검색</button>
+		              		</div>
+	         			</th>  
+        			</tr>     			
+       			</thead>
+       			<tbody style="text-align: center;">
+       				<tr>
+       					<td>no.</td>
+       					<td>재료코드</td>
+       					<td>재료구분</td>
+       					<td>재료명</td>
+       					<td>색상</td>
+       				</tr>
+     				<tr>
+     					<td>1</td>
+       					<td>123456</td>
+       					<td>원단</td>
+       					<td>실크</td>
+       					<td>곤색</td>
+     				</tr>
+     				<tr>
+     					<td>1</td>
+       					<td>123456</td>
+       					<td>원단</td>
+       					<td>실크</td>
+       					<td>곤색</td>
+     				</tr>
+     				<tr>
+     					<td>1</td>
+       					<td>123456</td>
+       					<td>원단</td>
+       					<td>실크</td>
+       					<td>곤색</td>
+     				</tr>
+     				
+       			</tbody>        		
+         	</tbody>
+         </table> 
+         
+		 </div>
+		    <div class="modal-footer">
+			      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			      <button type="button" class="btn btn-primary">Save changes</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+        <!-- byMaterialNameModal 끝 -->
+ 
+		<div>
+             <div>
+              <h4><i class="fa fa-angle-right"></i>자재 입고 목록</h4> 
+             </div>
+              <table id="list" class="table table-striped table-advance table-hover">
                 <thead>
                   <tr>
-                    <th><input type="checkbox" class="checked"></th>
-                    <th><i class="fa fa-bullhorn"></i>번호</th>
+                  	<th><input type="checkbox" id="checkAll"></th>
+                 	 <th><i class="fa fa-bullhorn"></i>번호</th>
                     <th class="hidden-phone"><i class="fa fa-bookmark"></i>원부자재 코드</th>
-                    <th><i class="fa fa-bookmark"></i>원부자재 발주코드</th>
+                    <th><i class="fa fa-bookmark"></i>원부자재 발주 코드</th>
                     <th><i class=" fa fa-bookmark"></i>재료명</th>
-                    <th><i class=" fa fa-bookmark"></i>색상명</th>
-                    <th><i class=" fa fa-bookmark"></i>특징</th>
                     <th><i class=" fa fa-bookmark"></i>수량</th>
                     <th><i class=" fa fa-bookmark"></i>단위</th>
-                    <th><i class=" fa fa-bookmark"></i>출고일자</th>
-                    <th><i class=" fa fa-bookmark"></i>출고현황</th>
-                    <th><i class=" fa fa-bookmark"></i>등록일자</th>
-                    <th><i class=" fa fa-pencil"></i>수정</th>
+                    <th><i class=" fa fa-bookmark"></i>입고일시</th>
                   </tr>
                 </thead>
+ 
                 <tbody>
+                <!--db에서 데이터 넣어야하는 부분 -->
                   <tr>
-                    <th><input type="checkbox" class="checked"></th>
-                    <td class="hidden-phone">1</td>
-                    <td class="hidden-phone">rw001</td>
-                    <td class="hidden-phone">rwex001</td>
-                    <td class="hidden-phone">원단실</td>
-                    <td>개나리색</td>
-                    <td>해당없음</td>
-                    <td>200</td>
-                    <td>개</td>
-                    <td>2021-01-18 16:30</td>             
-                    <td><span class="label label-info label-mini">출고완료</span></td>
-                    <td>2021-01-18 16:30</td>                
+                  	<td><input type="checkbox" class="checked"></td>
+                  	<td>1</td>
+                    <td class="hidden-phone">
+                    <a th:href="@{#}" data-popup-open="inWarehousingInfo" >silk01_sandyBrown</a></td>
+                    <td class="hidden-phone">order_Thread01_red</td>
+                    <td>명주실</td>
+                    <td>2</td>
+                    <td>박스</td>
+                    <td>2021-05-12 15:15:00</td>
                   	<td>  
-                  		<button type="submit" th:href="@{/modifyHumanResources}" class="btn btn-primary btn-xs">
+                  		<button type="submit" th:href="@{/inWarehousingMaterialsModify}" class="btn btn-primary btn-xs">
                   			<i class="fa fa-pencil"></i>
                   				수정
                   		</button>
                   	</td>
-                   </tr>
+                  </tr>
                   <tr>
-                    <th><input type="checkbox" class="checked"></th>
-                    
-                    <td class="hidden-phone">1</td>
-                    <td class="hidden-phone">rw001</td>
-                    <td class="hidden-phone">rwex001</td>
-                    <td class="hidden-phone">원단실</td>
-                    <td>개나리색</td>
-                    <td>해당없음</td>
-                    <td>200</td>
-                    <td>개</td>
-                    <td>2021-01-18 16:30</td>
-                    <td><span class="label label-warning label-mini">출고준비중</span></td>
-                    <td>2021-01-18 16:30</td> 
+                  	<td><input type="checkbox" class="checked"></td>
+                  	<td>2</td>
+                    <td class="hidden-phone">
+                    <a th:href="@{#}">silk01_sandyBrown</a></td>
+                    <td class="hidden-phone">order_Thread01_red</td>
+                    <td>명주실</td>
+                    <td>박스</td>
+                    <td>2</td>
+                    <td>2021-05-12 15:15:00</td>
                   	<td>  
-                  		<button type="submit" th:href="@{/modifyHumanResources}" class="btn btn-primary btn-xs">
+                  		<button type="submit" th:href="@{/inWarehousingMaterialsModify}" class="btn btn-primary btn-xs">
                   			<i class="fa fa-pencil"></i>
                   				수정
                   		</button>
                   	</td>
-                   </tr>
-                  
-              
-                 
-                 
-               
-                 
-                 
-                </tbody>
+                  </tr>
+                  <tr>
+                  	<td><input type="checkbox" class="checked"></td>
+                  	<td>3</td>
+                    <td class="hidden-phone">
+                    <a th:href="@{#}">silk01_sandyBrown</a></td>
+                    <td class="hidden-phone">order_Thread01_red</td>
+                    <td>명주실</td>
+                    <td>박스</td>
+                    <td>2</td>
+                    <td>2021-05-12 15:15:00</td>
+                  	<td>  
+                  		<button type="submit" th:href="@{/inWarehousingMaterialsModify}" class="btn btn-primary btn-xs">
+                  			<i class="fa fa-pencil"></i>
+                  				수정
+                  		</button>
+                  	</td>
+                  </tr>
+                  <tr>
+                  	<td><input type="checkbox" class="checked"></td>
+                  	<td>4</td>
+                    <td class="hidden-phone">
+                    <a th:href="@{#}">silk01_sandyBrown</a></td>
+                    <td class="hidden-phone">order_Thread01_red</td>
+                    <td>명주실</td>
+                    <td>박스</td>
+                    <td>2</td>
+                    <td>2021-05-12 15:15:00</td>
+                  	<td>  
+                  		<button type="submit" th:href="@{/inWarehousingMaterialsModify}" class="btn btn-primary btn-xs">
+                  			<i class="fa fa-pencil"></i>
+                  				수정
+                  		</button>
+                  	</td>
+                  </tr>
+                  <tr>
+                  	<td><input type="checkbox" class="checked"></td>
+                  	<td>5</td>
+                    <td class="hidden-phone">
+                    <a th:href="@{#}">silk01_sandyBrown</a></td>
+                    <td class="hidden-phone">order_Thread01_red</td>
+                    <td>명주실</td>
+                    <td>박스</td>
+                    <td>2</td>
+                    <td>2021-05-12 15:15:00</td>
+                  	<td>  
+                  		<button type="submit" th:href="@{/inWarehousingMaterialsModify}" class="btn btn-primary btn-xs">
+                  			<i class="fa fa-pencil"></i>
+                  				수정
+                  		</button>
+                  	</td>
+                  </tr>
+           		 </tbody>
               </table>
-            
-		        <div class="form-group text-right">
+           	 </div>
+            </div>
+            <div class="form-group text-right">
 		          <div class="col-lg-offset-2 col-lg-10">
-		           <a th:href="@{/addWareHousing}" class="btn btn-success btn-xs"><i class="fa fa-check"></i>등록</a>
+		           <a th:href="@{/addInWarehousing}" class="btn btn-success btn-xs"><i class="fa fa-check"></i>입고 등록</a>
 		           <a id="deleteBtn" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i>삭제</a>
 		          </div>
-		        </div>
-       		</form>
-       		
-          </div>
-        </div>
-        
+		        </div> 
+            </div>
+          
+          
+          <!-- 입고 상세 내역 팝업창 -->
+          <div class="popup" data-popup="inWarehousingInfo">
+		    <div class="popup-inner" style="width:auto; display:table;">
+				<div class="popup-contents">
+		   		  <a class="popup-close" data-popup-close="inWarehousingInfo" href="#"><h3><i class="fa fa-times-circle"></i></h3></a> 
+					<div class="image" style="margin:auto; width: 200px; height: 200px; background-color: aqua;">
+					</div>
+		      </div>
+		      <div class="fancybox-skin" style="padding: 15px; width: auto; height: auto;">
+
+		              <div>
+			              	<table class="table">
+				                <tbody>
+				                	<tr>
+				                		<td>자재코드</td>
+				                		<td>123456</td>
+				                		<td colspan="2">자재명</td>
+				                		<td colspan="2">어쩌구원단</td>
+				                	</tr>
+				                	<tr>
+				                		<td>규격명</td>
+				                		<td>box</td>
+				                		<td>대분류</td>
+				                		<td>원자재</td>
+				                		<td>발주처</td>
+				                		<td>나는원단</td>
+				                	</tr>
+				                	<tr>
+				                		<td>발주단위</td>
+				                		<td>개</td>
+				                		<td>중분류</td>
+				                		<td>원단</td>
+				                		<td>배송요일</td>
+				                		<td>월 수 목</td>
+				                	</tr>
+				                	<tr>
+				                		<td>최소수량</td>
+				                		<td>1</td>
+				                		<td>소분류</td>
+				                		<td>실크</td>
+				                		<td>재고운영</td>
+				                		<td>TC</td>
+				                	</tr>
+				                	<tr>
+				                		<td>최대수량</td>
+				                		<td>99</td>
+				                		<td>입고예정(D+1)</td>
+				                		<td>0</td>
+				                		<td>입고예정(D+2)</td>
+				                		<td>0</td>
+				                		<td>입고예정(D+3)</td>
+				                		<td>1</td>
+				                	</tr>
+				                </tbody>
+			              </table>
+		              </div>
+		              
+		            </div>
+					</div>
+		    </div>
+
+          
+          
+          
+    	  <!-- 검색창 모달 -->
+          <script type="text/javascript">
+			$(function(){
+				
+				$("button").on('click', function(e){
+					
+					var checkId = $(this).attr('id');
+					if(checkId != null && checkId != undefined){
+						if(checkId == 'bySupplier'){
+							e.preventDefault();
+							$('#bySupplierModal').modal("show");
+							
+						}else if(checkId == 'byMaterialName'){
+							e.preventDefault();
+							$('#byMaterialNameModal').modal("show");
+						}
+					}
+				});
+				
+				
+					
+				$('[data-popup-open]').on('click', function(e)  {
+			        var targeted_popup_class = jQuery(this).attr('data-popup-open');
+			        $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+
+			        e.preventDefault();
+			    });
+
+			    //----- CLOSE
+			    $('[data-popup-close]').on('click', function(e)  {
+			        var targeted_popup_class = jQuery(this).attr('data-popup-close');
+			        $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+
+			        e.preventDefault();
+			    });
+				
+			});
+			
+			
+
+	        </script>
+	          
+            
 </th:block>
+
 
 </html>
