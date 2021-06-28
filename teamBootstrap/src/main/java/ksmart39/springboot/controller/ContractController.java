@@ -53,6 +53,11 @@ public class ContractController {
 		model.addAttribute("title", "수주관리");
 		return "contract/addBuyerContract";
 	}
+
+	@GetMapping("/modifyBuyer")
+	public String modifyBuyer() {
+		return"contract/modifyBuyer";
+	}
 	
 	//[한빛]수주거래처 조회
 	@GetMapping("/buyerList")

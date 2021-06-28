@@ -21,9 +21,15 @@ public class HumanResourcesController {
 		return"humanResources/addHumanResources";	
 	}
 
+	//[한빛]사원수정
+	@GetMapping("/modifyHumanResources")
+	public String modifyHumanResources() {
+		return "humanResources/modifyHumanResources";
+	}
+	
 	//[한빛]사원목록
 	@GetMapping("/humanResourcesList")
-	public String humanResourcesLookup(Model model) {
+	public String humanResourcesList(Model model) {
 		model.addAttribute("title", "인사관리");
 		return "humanResources/humanResourcesList";
 	}
