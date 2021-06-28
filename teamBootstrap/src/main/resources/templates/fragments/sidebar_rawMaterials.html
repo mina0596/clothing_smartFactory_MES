@@ -2,23 +2,27 @@
 <html xmlns:th="http://www.thymeleaf.org">
       <div th:fragment="sidebar_rawMaterials" id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
+
         <ul class="sidebar-menu" id="nav-accordion">
           <h5 class="centered">자재관리</h5>
 
           
           <li class="sub-menu">
             <a href="javascript:;">
-              <i class="fa fa-cogs"></i>
+              <i class="fa fa-th"></i>
               <span>원부자재 정보 ![민아]</span>
               </a>
             <ul class="sub">
               <li><a th:href="@{/addRawMaterials}">원부자재 등록 ![민아]</a></li>
               <li><a th:href="@{/rawMaterialsList}">원부자재 조회 ![민아]</a></li>
+              <li><a th:href="@{/inventoryStatus}">원부자재 현재고 현황 ![민아]</a></li>
+              <li><a th:href="@{/warehousingList}">입/출고 종합 조회 ![민아]</a></li>
+              
             </ul>
           </li>
           <li class="sub-menu">
             <a href="javascript:;">
-              <i class="fa fa-desktop"></i>
+              <i class="fa fa-sign-in"></i>
               <span>자재입고 ![다미]</span>
               </a>
             <ul class="sub">
@@ -28,7 +32,7 @@
           </li>
           <li class="sub-menu">
             <a href="javascript:;">
-              <i class="fa fa-book"></i>
+              <i class="fa fa-sign-out"></i>
               <span>자재출고  ![한빛]</span>
               </a>
             <ul class="sub">
