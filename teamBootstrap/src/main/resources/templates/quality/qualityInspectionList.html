@@ -30,6 +30,7 @@ layout:decorate="@{layout/default_qualityControl}">
 			//테이블의 값을 찾음
 			var qualityinspectionInfo ;
 			qualityinspectionInfo = window.open('/qualityInspectionInfo',"height=450, width:300");
+			opener.document.getElementById('#highClassificationInfo').innerText=highClassification;
 			$('#highClassificationInfo',qualityinspectionInfo.document).push('highClassification');	 
 			// 팝업창에 테이블의 값을 전달해야한다 좀더생각해보자......
 		});
@@ -128,14 +129,11 @@ layout:decorate="@{layout/default_qualityControl}">
                    <td class="hidden-phone">
                       <input type="checkbox" class="checked">
                     </td>
-                    <td class="hidden-phone">
-                   2</td>
-                    <td class="hidden-phone">원자재검사</td>
-                    <td>원단이화학검사(파괴검사)</td>
-                    <td>물세탁</td>
-                    <td>
-                     	직물외관변화
-                    </td>
+                    <td class="hidden-phone"><a id="infoBtn">2</a></td>
+                   <td class="hidden-phone" id="highClassificatonName">원자재검사</td>
+                    <td id="mediumClassification">원단이화학검사(파괴검사)</td>
+                    <td id="lowClassification">물세탁</td>
+                    <td id="subClassification">	직물외관변화  </td>
                      <td>
                      	2021-01-29 13:35
                     </td>
@@ -145,14 +143,11 @@ layout:decorate="@{layout/default_qualityControl}">
                    <td class="hidden-phone">
                       <input type="checkbox" class="checked">
                     </td>
-                    <td class="hidden-phone">
-                   3</td>
-                    <td class="hidden-phone">원자재검사</td>
-                    <td>원단이화학검사(파괴검사)</td>
-                    <td>드라이클리닝_염색성</td>
-                    <td>
-                     	자체이염
-                     </td>
+                   <td class="hidden-phone"><a id="infoBtn">3</a></td>
+                   <td class="hidden-phone" id="highClassificatonName">원자재검사</td>
+                    <td id="mediumClassification">원단이화학검사(파괴검사)</td>
+                    <td id="lowClassification">드라이클리닝_염색성</td>
+                    <td id="subClassification">자체이염  </td>
                      <td>
                      	2021-01-29 13:40
                     </td>
@@ -164,14 +159,11 @@ layout:decorate="@{layout/default_qualityControl}">
                    <td class="hidden-phone">
                       <input type="checkbox" class="checked">
                     </td>
-                    <td class="hidden-phone">
-                   4</td>
-                    <td class="hidden-phone">원자재검사</td>
-                    <td>원단이화학검사(파괴검사)</td>
-                    <td>마찰변색도</td>
-                    <td>
-                     	
-                    </td>
+                   <td class="hidden-phone"><a id="infoBtn">4</a></td>
+                   <td class="hidden-phone" id="highClassificatonName">원자재검사</td>
+                    <td id="mediumClassification">원단이화학검사(파괴검사)</td>
+                    <td id="lowClassification">마찰변색도</td>
+                    <td id="subClassification">    </td>
                      <td>
                      	2021-01-29 13:40
                     </td>
