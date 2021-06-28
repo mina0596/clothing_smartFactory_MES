@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head" style="text-align: center; padding-top: 30px; padding-bottom: 10px;"> 
+	    <h2>자재관리</h2>
+	    </div>
+</th:block>
+<head th:replace="fragments/head :: headFragment"></head>
+<th:block layout:fragment="customJs">
+	<script>
+		$(function(){
+			$('#selectBtn').click(function(){
+				var submitFlag = false;
+				var tableAttr = $('#list').children();
+				var tdList = tableAttr.find('.checked');
+				tdList.each(function(){
+					if($(this).is(':checked')){
+						submitFlag = true;
+						var par = $(this).parent();
+						var materialName = par.parent().find('.materialName').text();
+						console.log(materialName);
+						opener.document.getElementById('parents').value = materialName;
+						opener.document.getElementById('parents').readOnly = true;
+					}
+				if(submitFlag) window.close();
+				});
+				
+				
+			});
+		})
+	</script>
+</th:block>
+
+<th:block layout:fragment="container">
+    <div class="form-panel">
+      <h4 class="mb"><i class="fa fa-globe"></i> 원부자재 재료 구분 검색</h4>
+      <hr>
+      <br>
+      
+	<div th:fragment="searchFragment">
+      <form th:action="@{rawMaterials/addRawMaterials}" class="form-horizontal style-form" name="myform"></form>
+        <div class="form-group">
+          
+          <div class="col-xs-4">
+          <select class="form-control">
+		   <option>::원부자재 선택::</option>
+		   <option>원부재</option>
+		   <option>부자재</option>
+		  </select>
+		  </div>
+		  
+          <div class="input-group col-xs-6">
+            <input type="text" class="form-control" size="5">
+            <div class="input-group-btn">
+              <button type="submit" class=" btn btn-theme03 btn btn-default"><i class="fa"></i>검색</button>
+            </div>
+          </div>
+		</div>
+    </div>
+
+	<form class="form-horizontal style-form">
+       <table class="table table-striped table-advance table-hover" id="list">
+         <thead>
+           <tr>
+             <th><input type="checkbox" class="checked"></th>
+             <th><i class="fa fa-bullhorn"></i>번호</th>
+             <th class="hidden-phone"><i class="fa fa-bookmark"></i>원부자재 재료 구분</th>
+             <th><i class="fa fa-bookmark"></i>원부자재 재료명</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr>
+             <td><input type="checkbox" class="checked"></td>
+             <td>1</td>
+             <td>원자재</td>
+             <td class="materialName">원단</td>
+            </tr>
+           <tr>
+            <td><input type="checkbox" class="checked"></td>
+            <td>2</td>
+            <td>부자재</td>
+            <td class="materialName">단추</td>
+           </tr>
+           <tr>
+            <td><input type="checkbox" class="checked"></td>
+            <td>3</td>
+            <td>부자재</td>
+            <td class="materialName">실</td>
+           </tr>
+           <tr>
+            <td><input type="checkbox" class="checked"></td>
+            <td>4</td>
+            <td>부자재</td>
+            <td class="materialName">지퍼</td>
+           </tr>
+         </tbody>
+       </table>
+       <div class="form-group text-right">
+         <div class="col-lg-offset-2 col-lg-10">
+          <button class="btn btn-success btn-xs" type="button" id="selectBtn"><i class="fa fa-check"></i>선택</button>
+          <button class="btn btn-danger btn-xs" type="button" id="cancelBtn"><i class="fa fa-trash-o"></i>취소</button>
+         </div>
+       </div>
+	</form>
+</th:block>
+
+</html>

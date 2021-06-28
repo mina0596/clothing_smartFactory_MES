@@ -7,6 +7,16 @@
 	   <div class="border-head"> 
 	    <h3>출하지시등록</h3>
 	    </div>
+<th:block layout:fragment="customJs">
+		    <script>
+	$(function(){
+		$('#cancleBtn').click(function(){
+			window.history.back();
+		});
+	});
+	
+	</script>
+	</th:block>	 
 </th:block>
 
 
@@ -108,7 +118,7 @@
         <div class="form-group text-right">
             <div class="col-lg-offset-2 col-lg-10">
               <button class="btn btn-theme" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">출하지시등록</font></font></button>
-              <button class="btn btn-theme04" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">출하지시취소</font></font></button>
+              <button class="btn btn-theme04" type="button" id="cancleBtn"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">출하지시취소</font></font></button>
             </div>
             </div>
         

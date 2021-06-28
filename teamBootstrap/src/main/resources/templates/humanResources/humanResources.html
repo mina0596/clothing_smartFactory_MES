@@ -18,6 +18,17 @@ layout:decorate="@{layout/default_humanResources}">
 				console.log(tdList);
 			});
 		})
+		$(function(){
+	//#checkAll 버튼 클릭 시 전체 checked
+		$('#checkAll').click(function(){
+			if($('#checkAll').prop('checked')){
+				$('.checked').prop('checked',true);
+					}else{
+						$('.checked').prop('checked',false);
+					}
+				});									
+			});
+
 	</script>
 </th:block>
 
@@ -60,8 +71,8 @@ layout:decorate="@{layout/default_humanResources}">
               <table class="table table-striped table-advance table-hover" id="list">
                 <thead>
                   <tr>
-                    <th><input type="checkbox" class="checked"></th>
-                    <th><i class="fa fa-bullhorn"></i>번호</th>
+                  	<th><input type="checkbox" id="checkAll"></th>
+                    <th><i class="fa fa-bullhorn"></i>no.</th>
                     <th class="hidden-phone"><i class="fa fa-bookmark"></i>사원코드</th>
                     <th class="hidden-phone"><i class="fa fa-bookmark"></i>사원명</th>
                     <th><i class="fa fa-bookmark"></i>담당부서</th>
@@ -85,12 +96,7 @@ layout:decorate="@{layout/default_humanResources}">
                     <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
                     <td>010-7170-7123</td>
                     <td>2021.06.22 14:20</td>
-                  	<td>  
-                  		<button type="submit" th:href="@{/modifyHumanResources}" class="btn btn-primary btn-xs">
-                  			<i class="fa fa-pencil"></i>
-                  				수정
-                  		</button>
-                  	</td>
+                    <td>  <button class="btn btn-primary btn-xs" type="button" onclick="location.href='/modifyHumanResources'"><i class="fa fa-pencil"></i>수정</button></td>
                   </tr>
                   
                

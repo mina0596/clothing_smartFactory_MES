@@ -5,7 +5,7 @@ layout:decorate="@{layout/default_rawMaterials}">
 
 <th:block layout:fragment="pageTitle">
 	   <div class="border-head"> 
-	    <h3>자재 입고 등록</h3>
+	    <h3>자재 관리</h3>
 	    </div>
 </th:block>
 
@@ -14,70 +14,66 @@ layout:decorate="@{layout/default_rawMaterials}">
 <th:block layout:fragment="container">
             <div class="form-panel">
               <h4 class="mb"><i class="fa fa-edit"></i> 자재 입고 등록</h4>
-              <form th:action="@{/addInWarehousingMaterials}" class="form-horizontal style-form" method="post">
+              <form th:action="@{/addInWarehousing}" class="form-horizontal style-form" method="post">
                
                <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label" >원부자재 쟤료명</label>
-                  <div class="col-sm-4">
-                      <select name="raw_material_name" class="form-control">
-						<option>::선택::</option>
-						<option>명주실</option>
-						<option>실크</option>
-						<option>폴리에스터</option>
-		               </select>
-                  </div>
-                </div>
-               <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label" >원부자재 쟤료 색상명</label>
-                  <div class="col-sm-4">
-                      <select name="raw_material_color_name" class="form-control">
-						<option>::선택::</option>
-						<option value="red">빨간색</option>
-						<option value="sandBrown">모래갈색</option>
-						<option value="Blue">파란색</option>
-		               </select>
-                  </div>
-                </div>
-               <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label" >특징</label>
-                  <div class="col-sm-4">
-                      <select name="raw_material_feature" class="form-control">
-						<option value="">::선택::</option>
-						<option value="">해당없음</option>
-						<option value="흰색체크">흰색체크</option>
-						<option value="동그라미">동그라미</option>
-		               </select>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">수량</label>
-                  <div class="col-sm-4">
-                    <input type="number" name="raw_material_transaction_amount" class="form-control">
-                  </div>
-                </div>
-                 <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label" >단위</label>
-                  <div class="col-sm-4">
-                      <select name="raw_material_unit" class="form-control">
-						<option value="">::선택::</option>
-						<option value="마">마</option>
-						<option value="개">개</option>
-		               </select>
-                  </div>
-                </div>
-               <div class="form-group">
-		          <label class="col-lg-2 col-sm-2 control-label">담당 사원명</label>
-		          <div class="col-lg-10">
-		            <p class="form-control-static">김다미</p>
+		          <label class="col-sm-2 col-sm-2 control-label">발주 코드 검색</label>
+		          <div class="col-md-4">
+		            <div  class="input-group ">
+		              <input type="search" class="form-control"  size="16">
+		              <div class="input-group-btn">
+		                <button type="button" id="search" class=" btn btn-theme03 btn btn-default"><i class="fa"></i>검색하여 가져오기</button>
+		              </div>
+		            </div>
 		          </div>
 		        </div>
 		        
 		        <div class="form-group">
-		          <label class="col-lg-2 col-sm-2 control-label">담당자 사원 코드</label>
-		          <div class="col-lg-10">
-		            <p class="form-control-static">W01</p>
-		          </div>
-       		 </div>
+                  <label class="col-sm-2 col-sm-2 control-label">원부자재 코드</label>
+                  <div class="col-sm-4">
+                    <input type="number" name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
+                  </div>
+                </div>
+		        <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">재료명</label>
+                  <div class="col-sm-4">
+                    <input type="number" name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
+                  </div>
+                </div>
+		        <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">색상</label>
+                  <div class="col-sm-4">
+                    <input type="number" name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
+                  </div>
+                </div>
+		        <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">특징</label>
+                  <div class="col-sm-4">
+                    <input type="number" name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
+                  </div>
+                </div>
+		        <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">발주 담당자 코드</label>
+                  <div class="col-sm-4">
+                    <input type="number" name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
+                  </div>
+                </div>
+		        <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">발주 담당자명</label>
+                  <div class="col-sm-4">
+                    <input type="number" name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
+                  </div>
+                </div>
+                
+                
+		        <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">갯수</label>
+                  <div class="col-sm-4"><!-- 값 들어오고 disabled 풀어주기 -->
+                    <input type="number" name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
+                  </div>
+                </div>
+		        	        
+               
                <div class="form-group">
 		          <label class="col-sm-2 col-sm-2 control-label">입고일시</label>
 		          <div class="col-md-4">
@@ -99,7 +95,139 @@ layout:decorate="@{layout/default_rawMaterials}">
     			</form>            
                 </div>
 
- 
-            </th:block>
+			<!-- ========================================= -->
+ 			<!--- 검색창 모달 시작 ---->
+     		<div class="modal fade modal-xl"  id="bySupplierModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" style="width:auto;display:table" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h4 class="modal-title" id="exampleModalLabel">발주 목록 검색</h4>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      
+		      <!-- 모달본문 -->
+		   <div class="modal-body">
+		   
+		   <table  class="table table-striped table-advance table-hover">
+         	<tbody>       		
+       			<thead>
+        			<tr>
+	         			<th colspan="3" style="padding-right: 20px;">
+		         			 <div class="form-inline" style="margin-bottom: 0px;">
+		         			 	<label class="control-label">발주 코드</label>&nbsp
+			                	<input type="text" class="form-control" id="bySupplierValue" placeholder="검색어를 입력하세요.">
+			                </div>
+	         			</th>
+	         			<th colspan="1" style="padding-right: 20px;">
+	         				<div class="form-inline" style="margin-bottom: 0px;">
+		         				<label class="control-label">거래처명</label>&nbsp
+			                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
+		              		</div>
+	         			</th>  
+	         			<th style="padding-right: 20px;">
+	         				<div class="form-inline" style="margin-bottom: 0px;">
+		         				<label class="control-label">품목명</label>&nbsp
+			                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
+		              		</div>
+	         			</th>  
+	         			<th colspan="5" style="padding-right: 20px;">
+	         				<div class="form-inline" style="margin-bottom: 0px;">
+		         				<label class="control-label">발주 날짜</label>&nbsp
+			                	<input type="date" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">&nbsp ~
+			                	<input type="date" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
+	         				 &nbsp&nbsp&nbsp <button type="submit" class="btn btn-theme">검색</button>
+		              		</div>
+	         			</th>  
+        			</tr>     			
+       			</thead>
+       			<tbody style="text-align: center;">
+       				<tr>
+       					<td><i class="fa fa-check"></i></td>
+       					<td>no.</td>
+       					<td>발주코드</td>
+       					<td>거래처명</td>
+       					<td>품목명</td>
+       					<td>색상명</td>
+       					<td>수량</td>
+       					<td>입고예정일</td>
+       					<td>발주일자</td>
+       				</tr>
+     				<tr>
+     					<td><input type="radio" name="bySupplierModal"></td>
+     					<td>1</td>
+       					<td>123456</td>
+       					<td class="bySupplierModal">나는 단추</td>
+       					<td class="bySupplierModal">단추</td>
+       					<td class="bySupplierModal">뻘건색</td>
+       					<td class="bySupplierModal">100</td>
+       					<td class="bySupplierModal">2021-02-22</td>
+       					<td class="bySupplierModal">2021-02-10</td>
+     				</tr>
+     				<tr>
+     					<td><input type="radio" name="bySupplierModal"></td>
+     					<td>1</td>
+       					<td>123456</td>
+       					<td class="bySupplierModal">나는 단추</td>
+       					<td class="bySupplierModal">단추</td>
+       					<td class="bySupplierModal">뻘건색</td>
+       					<td class="bySupplierModal">100</td>
+       					<td class="bySupplierModal">2021-02-22</td>
+       					<td class="bySupplierModal">2021-02-10</td>
+     				</tr>
+     				<tr>
+     					<td><input type="radio" name="bySupplierModal"></td>
+     					<td>1</td>
+       					<td>123456</td>
+       					<td class="bySupplierModal">나는 단추</td>
+       					<td class="bySupplierModal">단추</td>
+       					<td class="bySupplierModal">뻘건색</td>
+       					<td class="bySupplierModal">100</td>
+       					<td class="bySupplierModal">2021-02-22</td>
+       					<td class="bySupplierModal">2021-02-10</td>
+     				</tr>
+     				<tr>
+     					<td><input type="radio" name="bySupplierModal"></td>
+     					<td>1</td>
+       					<td>123456</td>
+       					<td class="bySupplierModal">나는 단추</td>
+       					<td class="bySupplierModal">단추</td>
+       					<td class="bySupplierModal">뻘건색</td>
+       					<td class="bySupplierModal">100</td>
+       					<td class="bySupplierModal">2021-02-22</td>
+       					<td class="bySupplierModal">2021-02-10</td>
+     				</tr>
+     				
+       			</tbody>        		
+         	</tbody>
+         </table> 
+         
+		 </div>
+		    <div class="modal-footer">
+			      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			      <button type="button" id="saveSupplier" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+     
+      <script type="text/javascript">
+			$(function(){
+				
+				$('#search').click(function(){
+					$('#bySupplierModal').modal("show");
+					
+					$('#saveSupplier').click(function(){
+						var check = $('input[name=bySupplierModal]:checked');
+						var checkVal = check.parents('tr').find('.bySupplierModal').text();
+						console.log(checkVal);
+						$('#bySupplierValue').attr('value', checkVal);
+					});
+				});	
+			});
+				
+     </script>
+     </th:block>
 
 </html>

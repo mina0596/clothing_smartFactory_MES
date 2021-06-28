@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout">
+
+<head th:replace="fragments/head :: headFragment"></head>
+<th:block layout:fragment="customJs">
+    <!-- 모달화면에서의 검색부분 -->
+        <div class="modal fade modal-xl"  id="bySupplierModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" style="width:auto;display:table" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h4 class="modal-title" id="exampleModalLabel"><i class="fa fa-globe"></i> 원부자재 재료 구분 검색</h4>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>     
+		      <div class="modal-body">
+		   <div class="form-group">
+          <div class="col-md-6">
+          <select class="form-control">
+		   <option>::구분선택::</option>
+		   <option>원부재</option>
+		   <option>부자재</option>
+		  </select>
+		  </div>
+		  
+          <div class="input-group col-md-6">
+            <input type="text" class="form-control" size="5">
+            <div class="input-group-btn">
+              <button type="button" class=" btn btn-theme03 btn btn-default"><i class="fa"></i>검색</button>
+            </div>
+          </div>
+		</div>
+
+	<!-- 모달에서 테이블부분  -->
+       <table class="table table-striped table-advance table-hover" id="list">
+         <thead>
+           <tr>
+             <th><i class="fa fa-check-circle-o"></i> 선택</th>
+             <th><i class="fa fa-bullhorn"></i> 번호</th>
+             <th class="hidden-phone"><i class="fa fa-bookmark"></i> 원부자재 재료 구분</th>
+             <th><i class="fa fa-bookmark"></i> 원부자재 재료명</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr>
+             <td><input type="radio" class="radioClass"></td>
+             <td>1</td>
+             <td>원자재</td>
+             <td class="materialName">원단</td>
+            </tr>
+           <tr>
+            <td><input type="radio" class="radioClass"></td>
+            <td>2</td>
+            <td>부자재</td>
+            <td class="materialName">단추</td>
+           </tr>
+           <tr>
+            <td><input type="radio" class="radioClass"></td>
+            <td>3</td>
+            <td>부자재</td>
+            <td class="materialName">실</td>
+           </tr>
+           <tr>
+            <td><input type="radio" class="radioClass"></td>
+            <td>4</td>
+            <td>부자재</td>
+            <td class="materialName">지퍼</td>
+           </tr>
+         </tbody>
+       </table>
+	 </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+      <button type="button" class="btn btn-primary" id="sendMaterialNameBtn" data-dismiss="modal">값가져오기</button>
+       </div>
+    </div>
+   
+  </div>
+
+		<!-- 모달테스트 끝  -->
+
+</th:block>
+</html>
