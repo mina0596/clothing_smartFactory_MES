@@ -7,39 +7,18 @@ layout:decorate="@{layout/default_qualityControl}">
 	   <div class="border-head"> 
 	    <h3>품질관리</h3>
 	    </div>
-	    <script type="text/javascript">
-		$(function(){
-			$('#deleteBtn').click(function(){			
-				var i = $('#list').find('th');
-				var j = i[0];
-				
-				//체크 버튼 토글
-				var result = $(this).attr('data-change');
-					if(result == 'N' || result == undefined){
-						j.innerHTML = '<input type="checkbox" id="checkAll">';
-						$('.checked').css('visibility','visible');
-						$(this).attr('data-change','Y');
-						
-						//#checkAll 버튼 클릭 시 전체 checked
-						$('#checkAll').click(function(){
-							if($('#checkAll').prop('checked')){
-								$('.checked').prop('checked',true);
-							}else{
-								$('.checked').prop('checked',false);
-							}
-						});
+	  <th:block layout:fragment="customJs">
+<script>
+$(function(){
+	$('#modifyBtn').click(function(){
+		
+	})
+});
 
-					}else if(result == 'Y'){
-							j.innerHTML = '<i class="fa fa-bullhorn"></i>체크';
-							$('.checked').css('visibility','hidden');
-							$(this).attr('data-change','N');						
-				}
-				
-			
-					
-			});
-		});
-	</script>
+</script>
+</th:block>	    
+	    
+	
 </th:block>
 
 
@@ -112,7 +91,7 @@ layout:decorate="@{layout/default_qualityControl}">
                     <td class="hidden-phone">합격</td>
                     <td class="hidden-phone">2021-03-14 13:30</td>
                     	<td>  
-                  		<button type="submit"  class="btn btn-primary btn-xs">
+                  		<button type="button"  class="btn btn-primary btn-xs" id="modifyBtn">
                   			<i class="fa fa-pencil"></i>
                   				수정
                   		</button>

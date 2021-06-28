@@ -7,6 +7,52 @@ layout:decorate="@{layout/default_qualityControl}">
 	   <div class="border-head"> 
 	    <h3 th:text="${title}"></h3>
 	    </div>
+<th:block layout:fragment="customJs">
+	<script>
+	$(function(){
+		$('#infoBtn').click(function(){
+		
+			 var str ="";
+			var tdArr = new Array();
+			var infoBtn= $(this);
+			var tr= infoBtn.parent().parent();
+			var td = tr.children();
+			//console.log("클릭한 행의 모든데이터"+tr.text());	
+				td.each(function(i){
+				tdArr.push(td.eq(i).text());
+			});
+			//console.log("배열에 담긴값"+tdArr);
+			var highClassification = td.eq(2).text();
+			var mediumClassification =td.eq(3).text();
+			var lowClassification =td.eq(4).text();
+			var subClassification= td.eq(5).text();
+			var regDate=td.eq(6).text(); 
+			//테이블의 값을 찾음
+			var qualityinspectionInfo ;
+			qualityinspectionInfo = window.open('/qualityInspectionInfo',"height=450, width:300");
+			$('#highClassificationInfo',qualityinspectionInfo.document).push('highClassification');	 
+			// 팝업창에 테이블의 값을 전달해야한다 좀더생각해보자......
+		});
+		$('#modifyBtn').click(function(){
+			
+		});
+		$('#delBtn').click(function(){
+			if(confirm("삭제 하시겠습니까?")){
+				$('input[name=check]:checked').each(function(){
+					var tr_value =$(this).val();
+					var tr= $
+				})
+			}
+			
+		});
+			
+		
+
+	});
+
+	</script>
+	</th:block>
+   	    
 </th:block>
 
 
@@ -46,7 +92,7 @@ layout:decorate="@{layout/default_qualityControl}">
 	      
               <h4><i class="fa fa-angle-right"></i>품질검사목록</h4> 
               <hr>   
-              <table class="table table-striped table-advance table-hover">
+              <table id="inspectionList" class="table table-striped table-advance table-hover">
                 <thead>
                   <tr>
                    <th>체크</th>
@@ -61,20 +107,18 @@ layout:decorate="@{layout/default_qualityControl}">
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr >
                    <td class="hidden-phone">
-                      <input type="checkbox" class="checked">
+                      <input type="checkbox" class="checked" name="check">
                     </td>
-                    
-                    
-                    <td class="hidden-phone"><a th:href="@{/qualityInspectionInfo}">1</a></td>
-                    <td class="hidden-phone">원자재검사</td>
-                    <td>원단이화학검사(파괴검사)</td>
-                    <td>물세탁</td>
-                    <td>
+                    <td class="hidden-phone"><a id="infoBtn">1</a></td>
+                    <td class="hidden-phone" id="highClassificatonName">원자재검사</td>
+                    <td id="mediumClassification">원단이화학검사(파괴검사)</td>
+                    <td id="lowClassification">물세탁</td>
+                    <td id="subClassification">
                      	변퇴색
                     </td>
-                     <td>
+                     <td id="regDate">
                      	2021-01-29 13:30
                     </td>
                    <td>  <button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
@@ -95,7 +139,7 @@ layout:decorate="@{layout/default_qualityControl}">
                      <td>
                      	2021-01-29 13:35
                     </td>
-                   <td>  <button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
+                   <td>  <button class="btn btn-primary btn-xs" type="button" id="modifyBtn" ><i class="fa fa-pencil"></i>수정</button></td>
                   </tr>
                   <tr>
                    <td class="hidden-phone">
@@ -283,7 +327,7 @@ layout:decorate="@{layout/default_qualityControl}">
                     <div class=" col-xs-12 text-right">
                    
                       <button class="btn btn-success btn-xs" type="button" ><i class="fa fa-check"></i>검사등록</button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i>검사삭제</button>
+                      <button class="btn btn-danger btn-xs" type="button" id="delBtn"><i class="fa fa-trash-o "></i>검사삭제</button>
                     </div>
                  
             </div>

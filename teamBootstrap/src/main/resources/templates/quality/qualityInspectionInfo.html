@@ -20,36 +20,31 @@ layout:decorate="@{layout/default_qualityControl}">
       <hr>
       <br>
       
-      <form class="form-horizontal style-form" method="post">
+      <form id="inspectionInfoForm" class="form-horizontal style-form" method="post">
 
-       <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사 코드</label>
-          <div class="col-sm-10">
-            <span>AA_ee_wash_1</span>
-            </div>
-            </div>
+       
        <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사 대분류명</label>
           <div class="col-sm-10">
-            <span>원자재검사</span>
-            </div>
+           <p id="highClassificationInfo" ></p>
+          </div>
             </div>
        <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사 중분류명</label>
           <div class="col-sm-10">
-            <span>원단 이화학검사(파괴검사)</span>
+            <span></span>
             </div>
             </div>
        <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사 소분류명</label>
           <div class="col-sm-10">
-            <span>물세탁</span>
+            <span></span>
             </div>
             </div>
        <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사 소분류상세명</label>
           <div class="col-sm-10">
-            <span>변퇴색</span>
+            <span></span>
             </div>
             </div>
         
@@ -59,12 +54,7 @@ layout:decorate="@{layout/default_qualityControl}">
             <span>2021-01-29 13:30</span>
             </div>
             </div>
-       <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사 변경날짜</label>
-          <div class="col-sm-10">
-            <span>2021-01-30 13:30</span>
-            </div>
-            </div>
+    
         
        
         
@@ -105,4 +95,12 @@ layout:decorate="@{layout/default_qualityControl}">
 	
 </th:block>
 
+<th:block layout:fragment="customJs">
+	<script>
+	$(function(){
+		
+	});
+	
+	</script>
+	</th:block>
 </html>
