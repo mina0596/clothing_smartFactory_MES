@@ -9,76 +9,94 @@ layout:decorate="@{layout/default_production}">
 	    </div>
 	<script type="text/javascript">
 	$(function(){
-		$('#deleteBtn').click(function(){			
-			var firstTr = $('#list').find('th').parent();
-			var tr = $('#list').find('td').parent();
-			
-			//체크 버튼 토글
-			var result = $(this).attr('data-change');
-				if(result == 'N' || result == undefined){
-					firstTr.prepend('<th class="th"><input type="checkbox" id="checkAll"></th>');
-					tr.prepend('<td class="td"><input type="checkbox" class = "checked"></td>');
-					$(this).attr('data-change','Y');
-					
-					//#checkAll 버튼 클릭 시 전체 checked
-					$('#checkAll').click(function(){
-						if($('#checkAll').prop('checked')){
-							$('.checked').prop('checked',true);
+		//#checkAll 버튼 클릭 시 전체 checked
+			$('#checkAll').click(function(){
+				if($('#checkAll').prop('checked')){
+					$('.checked').prop('checked',true);
 						}else{
 							$('.checked').prop('checked',false);
 						}
-					});
-
-				}else if(result == 'Y'){
-					$('#list').find('.th').remove();
-					$('#list').find('.td').remove();
-						$(this).attr('data-change','N');						
-			}
-								
-		});
-	});
+					});									
+				});
 	</script>   
 </th:block>
 
 <th:block layout:fragment="container">
-	<div class="row mt">
-     <div class="col-xs-12 main-chart">
+	<div class="col-md-12">
        <div class="content">
        
           <h4><i class="fa fa-angle-right"></i>생산 계획 조회</h4>
-          <hr>
-                
-			<div class="form-group">
-				<div class="col-md-2">
-				 <select class="form-control">
-				   <option>생산계획 코드</option>
-				   <option>양복명</option>
-				   <option>담당자 사원 코드</option>
-				   <option>수량</option>
-				   <option>작업 시작 예정일</option>
-				   <option>작업 마감 예정일</option>
-				   <option>등록일시</option>
-				 </select>
-				</div>
-				<div class="col-md-6">
-				  <input class="form-control" type="text" placeholder="검색어를 입력하세요">
-				</div>
-				<div class="col-md-2">
-				  <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
-				  <button type="button" class="btn btn-primary">검색하여 가져오기</button>
-				</div>
-	       </div>
-	       
-	      <br>
-	      <br>
-	      <br>
-	      <br>
-	      <br>
-	      
-              <h4><i class="fa fa-angle-right"></i>생산 계획 목록</h4>    
+          		<hr>
+            <form class="form-inline" role="form">
+        
+         <table class="table table-striped table-advance table-hover">
+         	<thead>
+         		<tr>
+         			<th>양복명</th>
+         			<th>소분류</th>
+         			<th>등록일시</th>
+         			<th><!-- 공백 --></th>
+         			<th>정렬</th>
+         		</tr>
+         	</thead>
+         	<tbody>
+         		<tr>
+         		
+         			<td style="padding-right: 20px;">
+         				<div class="form-group">
+		                	<select class="form-control" style="width: 125px;">
+		                		<option>All</option>
+		                		<option>남성양복</option>
+		                		<option>여성양복</option>
+		                	</select>
+	               		</div>
+         			</td>
+         			<td style="padding-right: 20px;">
+         				<div class="form-group">
+		                	<select class="form-control" style="width: 125px;">
+		                		<option>All</option>
+		                		<option>바지</option>
+		                		<option>자켓</option>
+		                		<option>치마</option>
+		                	</select>
+	               		</div>
+         			</td>       			
+         			
+         			<td>
+         				<div class="form-group">
+		                	<input type="date" class="form-control" id="exampleInputPassword2" placeholder="등록일시">&nbsp;&nbsp;&nbsp; ~ 
+	               		</div>
+         			</td>
+         			<td style="padding-right: 20px;">
+         				<div class="form-group">
+		                	<input type="date" class="form-control" id="exampleInputPassword2" placeholder="등록일시">
+	               		</div>
+         			</td>
+         			<td style="padding-right: 20px;">
+         				<div class="form-group">
+		                	<select class="form-control" style="width: 125px;">
+		                		<option>최신순</option>
+		                		<option>오래된순</option>
+		                	</select>
+	               		</div>
+         			</td>     
+         			
+         			<td>
+         				  <button type="submit" class="btn btn-theme">검색</button>
+         			</td>        			
+         		</tr>
+         	</tbody>
+         </table>  
+        </form>
+        
+        <div>
+        	  <div>            
+              <h4><i class="fa fa-angle-right"></i>생산 계획 목록</h4>   
+              </div> 
               <table id="list" class="table table-striped table-advance table-hover">
                 <thead>
                   <tr>
+                  	<th><input type="checkbox" id="checkAll"></th>
                     <th><i class="fa fa-bullhorn"></i>번호</th>
                     <th class="hidden-phone"><i class="fa fa-bookmark"></i>생산계획 코드</th>
                     <th><i class="fa fa-bookmark"></i>양복명</th>
@@ -89,8 +107,11 @@ layout:decorate="@{layout/default_production}">
                     <th><i class=" fa fa-bookmark"></i>등록일시</th>
                   </tr>
                 </thead>
+                
+                
                 <tbody>
                   <tr>
+                  <td><input type="checkbox" class="checked"></td>
                    <td class="hidden-phone">
                       1
                     </td> 
@@ -105,6 +126,7 @@ layout:decorate="@{layout/default_production}">
                   	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
                   </tr>
                   <tr>
+                  <td><input type="checkbox" class="checked"></td>
                    <td class="hidden-phone">
                       2
                     </td>
@@ -119,6 +141,7 @@ layout:decorate="@{layout/default_production}">
                   	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
                   </tr>
                   <tr>
+                  <td><input type="checkbox" class="checked"></td>
                    <td class="hidden-phone">
                       3
                     </td>
@@ -133,6 +156,7 @@ layout:decorate="@{layout/default_production}">
                   	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
                   </tr>
                   <tr>
+                  <td><input type="checkbox" class="checked"></td>
                    <td class="hidden-phone">
                      4
                     </td>
@@ -147,6 +171,7 @@ layout:decorate="@{layout/default_production}">
                   	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
                   </tr>
                   <tr>
+                  <td><input type="checkbox" class="checked"></td>
                    <td class="hidden-phone">
                      5
                     </td>
@@ -161,6 +186,7 @@ layout:decorate="@{layout/default_production}">
                   	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
                   </tr>
                   <tr>
+                  <td><input type="checkbox" class="checked"></td>
                    <td class="hidden-phone">
                      6
                     </td>
@@ -175,6 +201,7 @@ layout:decorate="@{layout/default_production}">
                   	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
                   </tr>
                   <tr>
+                  <td><input type="checkbox" class="checked"></td>
                    <td class="hidden-phone">
                       7
                     </td>
@@ -188,17 +215,16 @@ layout:decorate="@{layout/default_production}">
                     <td>2020-05-22 16:00:00</td>
                   	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
                   </tr>
-                  
-           		 </tbody>
+              	</tbody>
               </table>
+           	 </div>
             </div>
-            </div>
-             <div class="form-group">
-                    <div class=" col-xs-12 text-right">
-                      <button class="btn btn-success btn-xs" th:href="@{/addProductioncontrol}"><i class="fa fa-check"></i>등록</button>
-                      <button class="btn btn-danger btn-xs" id="deleteBtn"><i class="fa fa-trash-o "></i>삭제</button>
+            <div class="form-group text-right">
+                    <div class="col-lg-offset-2 col-lg-10">
+                      <a th:href="@{/addProductionPlan}" class="btn btn-success btn-xs"><i class="fa fa-check"></i>등록</a>
+                      <a class="btn btn-danger btn-xs" id="deleteBtn"><i class="fa fa-trash-o "></i>삭제</a>
                     </div>
-                    </div>
+                </div>
             </div>
             
 </th:block>

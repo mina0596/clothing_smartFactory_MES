@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
-layout:decorate="@{layout/default_qualityControl}">
+layout:decorate="@{layout/default_rawMaterials}">
 
 <th:block layout:fragment="pageTitle">
 	   <div class="border-head"> 
-	    <h3>품질관리</h3>
+	    <h3>자재관리</h3>
 	    </div>
 </th:block>
 
@@ -27,6 +27,7 @@ layout:decorate="@{layout/default_qualityControl}">
 			
 			
 			//원부자재 재료 구분명 가져오는 modal
+			//버튼을 하나로 묶고 따로 따로 가져올 수 있게 분류하기			
 			$('#searchBtn1').click(function(){
 				$('#byMaterialCategory').modal("show");
 			});
@@ -115,19 +116,20 @@ layout:decorate="@{layout/default_qualityControl}">
 </th:block>
 
 <th:block layout:fragment="container">
-	<div class="form-panel form-horizontal">
-	   <h4 class="mb"><i class="fa fa-edit"></i> 품질검사 기준표 등록</h4>
-	   <hr>
-	   <br>
-	                
-		<div class="form-group">
+
+    <div class="form-panel form-horizontal">
+      <h4 class="mb"><i class="fa fa-edit"></i> 원부자재 정보 수정</h4>
+      <hr>
+      <br>
+ 
+ 		<div class="form-group">
 		<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">원부자재 구분</label>
 		<div class="radio" style="font-size: 15px">
           <label style="padding-right: 20px">
-            <input type="radio" name="optionsRadios"  id="optionsRadios1" value="원자재" checked>원자재
+            <input type="radio" name="optionsRadios"  id="optionsRadios1" value="원자재" th:checked="${rawMaterialCate == '원자재'}">원자재
           </label>      
           <label>
-            <input type="radio" name="optionsRadios" id="optionsRadios2" value="부자재">부자재
+            <input type="radio" name="optionsRadios" id="optionsRadios2" value="부자재" th:checked="${rawMaterialCate == '부자재'}">부자재
           </label>
         </div>  
 		</div>
@@ -136,7 +138,7 @@ layout:decorate="@{layout/default_qualityControl}">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">원부자재 재료 구분</label>
           <div class="col-md-5">
             <div  class="input-group date form_datetime-adv">
-              <input type="text" class="form-control" id="materialCateName" size="16">
+              <input type="text" class="form-control" id="materialCateName" size="16" th:value="${materialCate}">
               <div class="input-group-btn">
                 <button type="button" class=" btn btn-theme03 btn btn-default" id="searchBtn1"><i class="fa"></i>검색하여 가져오기</button>
               </div>
@@ -148,7 +150,7 @@ layout:decorate="@{layout/default_qualityControl}">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">원부자재 재료명</label>
           <div class="col-md-5">
             <div  class="input-group date form_datetime-adv">
-              <input type="text" class="form-control" id="materialName" size="16">
+              <input type="text" class="form-control" id="materialName" size="16" th:value="${materialName}">
               <div class="input-group-btn">
                 <button type="button" class=" btn btn-theme03 btn btn-default" id="searchBtn2"><i class="fa"></i>검색하여 가져오기</button>
               </div>
@@ -161,7 +163,7 @@ layout:decorate="@{layout/default_qualityControl}">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">원부자재 재료 색상명</label>
           <div class="col-md-5">
             <div  class="input-group date form_datetime-adv">
-              <input type="text" class="form-control" id="colorName" size="16">
+              <input type="text" class="form-control" id="colorName" size="16" th:value="${colorName}">
               <div class="input-group-btn">
                 <button type="button" class=" btn btn-theme03 btn btn-default" id="searchBtn3"><i class="fa"></i>검색하여 가져오기</button>
               </div>
@@ -175,19 +177,20 @@ layout:decorate="@{layout/default_qualityControl}">
    	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">단위</label>
    	  	<div class="col-sm-2">
      	 <select class="form-control">
-          <option>kg</option>
-          <option>g</option>
-          <option>마(야드)</option>
-          <option>개</option>
+          <option th:selected="${unit == 'kg'}">kg</option>
+          <option th:selected="${unit == 'g'}">g</option>
+          <option th:selected="${unit == '마'}">마(야드)</option>
+          <option th:selected="${unit == '개'}">개</option>
          </select>
    	  	</div>
+   	  	
    	 	</div>
 		
         
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">특징 (패턴 및 모양)</label>
           <div class="col-sm-6">
-            <input class="form-control"type="text" placeholder="흰색체크">
+            <input class="form-control"type="text" placeholder="흰색체크"  th:value="${feature}">
             <span class="help-block">특징을 입력하지 않아도 됩니다.</span>
           </div>
         </div>       
@@ -195,7 +198,7 @@ layout:decorate="@{layout/default_qualityControl}">
          <div class="form-group text-right">
           <div class="col-lg-offset-2 col-lg-10">
             <button class="btn btn-theme" type="button" onclick="location.href='rawMaterialsList'"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">등록</font></font></button>
-            <button class="btn btn-theme04" type="button" ><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소</font></font></button>
+            <button class="btn btn-theme04" type="button" onclick="location.href='rawMaterialsList'"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소</font></font></button>
           </div>
         </div>
          
@@ -466,7 +469,7 @@ layout:decorate="@{layout/default_qualityControl}">
   </div>
 
 		<!-- 모달테스트 끝  -->
-       
+
 </th:block>
 
 </html>
