@@ -162,7 +162,10 @@ public class RawMaterialsController {
 	
 	//[다미]자재 입고 등록
 	@GetMapping("/addInWarehousing")
-	public String addInWarehousingMaterials() {
+	public String addInWarehousingMaterials(@RequestParam(name = "materialName", required = false) String materialName
+										  , Model model) {
+		model.addAttribute("materialName", materialName);
+		log.info("materialName 받아온값 {}", materialName);
 		return "rawMaterials/addInWarehousing";
 	}
 	
