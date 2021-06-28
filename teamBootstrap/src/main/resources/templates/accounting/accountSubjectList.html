@@ -9,45 +9,26 @@ layout:decorate="@{layout/default_accounting}">
 	   </div>
 	 <script type="text/javascript">
 		$(function(){
-			$('#deleteBtn').click(function(){			
-				var firstTr = $('#list').find('th').parent();
-				var tr = $('#list').find('td').parent();
-				
-				//체크 버튼 토글
-				var result = $(this).attr('data-change');
-					if(result == 'N' || result == undefined){
-						firstTr.prepend('<th class="th"><input type="checkbox" id="checkAll"></th>');
-						tr.prepend('<td class="td"><input type="checkbox" class = "checked"></td>');
-						$(this).attr('data-change','Y');
-						
-						//#checkAll 버튼 클릭 시 전체 checked
-						$('#checkAll').click(function(){
-							if($('#checkAll').prop('checked')){
-								$('.checked').prop('checked',true);
+			//#checkAll 버튼 클릭 시 전체 checked
+				$('#checkAll').click(function(){
+					if($('#checkAll').prop('checked')){
+						$('.checked').prop('checked',true);
 							}else{
 								$('.checked').prop('checked',false);
 							}
-						});
+						});									
+					});
 
-					}else if(result == 'Y'){
-						$('#list').find('.th').remove();
-						$('#list').find('.td').remove();
-							$(this).attr('data-change','N');						
-				}
-									
-			});
-		});
 	</script>  
 </th:block>
 
 
 <th:block layout:fragment="container">
-	<div class="row mt">
      <div class="col-md-12">
        <div class="content">
        
           <h4><i class="fa fa-angle-right"></i>계정과목 조회</h4>
-          <hr>
+         		 <hr>
                 
 			<div class="form-group">
 				<div class="col-md-2">
@@ -77,6 +58,7 @@ layout:decorate="@{layout/default_accounting}">
               <table id="list" class="table table-striped table-advance table-hover">
                 <thead>
                   <tr>
+                  	<th><input type="checkbox" id="checkAll"></th>
                     <th><i class="fa fa-bullhorn"></i>번호</th>
                     <th class="hidden-phone"><i class="fa fa-bookmark"></i>계정과목 코드</th>
                     <th><i class="fa fa-bookmark"></i>계정과목명</th>
@@ -87,7 +69,8 @@ layout:decorate="@{layout/default_accounting}">
                 </thead>
                 <tbody>
                   <tr th:if="${#lists.size(accountingCategoryList) > 0}" th:each="l,i : ${accountingCategoryList}">
-                   <td th:text="${i.index+1}"></td>
+                  	<td><input type="checkbox" class="checked"></td>
+                 	<td th:text="${i.index+1}"></td>
                     <td class="hidden-phone"><a th:href="@{#}">[[${l.categoryCode}]]</a></td>
                     <td th:text="${l.categoryName}" class="hidden-phone"></td>
                     <td th:text="${l.categoryContent}"></td>
