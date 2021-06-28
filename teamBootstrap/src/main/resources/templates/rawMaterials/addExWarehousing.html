@@ -16,13 +16,15 @@ layout:decorate="@{layout/default_rawMaterials}">
               <h4 class="mb"><i class="fa fa-angle-right"></i>출고등록</h4>
               <form th:action="@{/addExWarehousing}" class="form-horizontal style-form" method="post" >
        
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">원부자재 코드</label>
-          <div class="col-sm-6">
-            <input class="form-control" id="disabledInput" type="text" placeholder="명주실 (DB에서 가져온 값)" disabled>
-            <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
-            <!-- 검색창에서 검색하여 없는 품목은 등록도 할 수 있도록 설정하기 -->
-            <button type="button" class="btn btn-default">검색하여 가져오기</button>
+       <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label">원부자재 코드</label>
+          <div class="col-md-5">
+            <div  class="input-group col-xs-20">
+              <input type="text" class="form-control"  size="16">
+              <div class="input-group-btn">
+                <button type="submit" class=" btn btn-theme03 btn btn-default"><i class="fa"></i>검색해서 가져오기</button>
+              </div>
+            </div>
           </div>
         </div>
         <div class="form-group">

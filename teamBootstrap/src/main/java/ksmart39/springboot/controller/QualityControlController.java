@@ -27,6 +27,13 @@ public class QualityControlController {
 		return"quality/addDefectiveProduct";
 	}
 		
+	//[한빛]불량품 수정
+	@GetMapping("/modifyDefectiveProduct")
+	public String modifyDefectiveProduct(Model model) {
+		model.addAttribute("title", "불량품수정");
+		return"quality/modifyDefectiveProduct";
+	}
+	
 	//[한빛]불량품 조회
 	@GetMapping("/defectiveProductList")
 	public String getDefectiveProductList(Model model) {
