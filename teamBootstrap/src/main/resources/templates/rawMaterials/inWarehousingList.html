@@ -120,10 +120,10 @@ layout:decorate="@{layout/default_rawMaterials}">
                     <td>박스</td>
                     <td>2021-05-12 15:15:00</td>
                   	<td>  
-                  		<button type="submit" th:href="@{/inWarehousingMaterialsModify}" class="btn btn-primary btn-xs">
+                  		<a th:href="@{/inWarehousingModify}" class="btn btn-primary btn-xs">
                   			<i class="fa fa-pencil"></i>
                   				수정
-                  		</button>
+                  		</a>
                   	</td>
                   </tr>
                   
@@ -134,7 +134,7 @@ layout:decorate="@{layout/default_rawMaterials}">
             <div class="form-group text-right">
 		          <div class="col-lg-offset-2 col-lg-10">
 		           <a th:href="@{/addInWarehousing}" class="btn btn-success btn-xs"><i class="fa fa-check"></i>입고 등록</a>
-		           <a id="deleteBtn" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i>삭제</a>
+		           <a id="deleteBtn" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>삭제</a>
 		          </div>
 		        </div> 
             </div>
