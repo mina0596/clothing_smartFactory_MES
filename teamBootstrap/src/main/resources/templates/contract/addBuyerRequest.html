@@ -95,10 +95,11 @@ layout:decorate="@{layout/default_contract}">
 <th:block layout:fragment="container">
 
 	<!-- 수주등록내용 -->
-    <div class="form-panel form-horizontal">
-      <h4 class="mb"><i class="fa fa-edit"></i>수주등록</h4>
-      <hr>
-      <br>
+	<div class="form-panel">
+	 <h4 class="mb"><i class="fa fa-angle-right"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">수주등록</font></font></h4>
+              <div class="form">
+                <form class="cmxform form-horizontal style-form" id="signupForm" method="post" th:action="@{addBuyer}">
+              
       
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">거래처명</label>
@@ -146,17 +147,17 @@ layout:decorate="@{layout/default_contract}">
             </div>
           </div>
         </div>
- 		
-         <div class="form-group text-right">
-          <div class="col-lg-offset-2 col-lg-10">
-            <button class="btn btn-theme" type="button" onclick="location.href='buyerRequestList'"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">등록</font></font></button>
-            <button class="btn btn-theme04" type="button" onClick="history.back();"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소</font></font></button>
-          </div>
         </div>
-         
-        
-
-    </div>
+ 		
+		         <div class="form-group text-right">
+		         <div class="col-lg-offset-2 col-lg-10">
+		           <button class="btn btn-theme" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">등록</font></font></button>
+            	   <button class="btn btn-theme04" type="button" onClick="history.back();"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소</font></font></button>
+		         </div>
+		       </div>
+		     </form>
+		   </div>
+		</div>
     
   		
     <!-- 모달화면에서의 품목관련 검색부분 -->
