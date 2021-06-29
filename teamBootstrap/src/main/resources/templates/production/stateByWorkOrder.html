@@ -3,12 +3,6 @@
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
 layout:decorate="@{layout/default_production}">
 
-<th:block layout:fragment="pageTitle">
-	   <div class="border-head"> 
-	    <h3>생산관리</h3>
-	    </div>
-</th:block>
-
 
 <th:block layout:fragment="container">
 	<div class="row mt">
@@ -21,6 +15,7 @@ layout:decorate="@{layout/default_production}">
          
          	<tbody>
          		<tr>
+         			<td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
          			<td>
          				<div class="form-group">
 		                	<select class="form-control" style="width: 150px;" id="searchCate">
@@ -82,6 +77,7 @@ layout:decorate="@{layout/default_production}">
                     <th><i class="fa fa-clock-o"></i> 납기일<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
                     <th><i class="fa fa-calendar"> </i>작업시작일자<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
                     <th><i class="fa fa-bookmark"></i> 작업상태<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><i class="fa fa-clock-o"></i> 가동시간<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
                     <th><i class="fa fa-calendar"></i> 작업완료일자<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
                   </tr>
                 </thead>
@@ -90,11 +86,12 @@ layout:decorate="@{layout/default_production}">
 	                <td><input type="checkbox" class="check"></td>
 	            	<td>1</td>
                     <td>work_order_01</td>
-                    <td>req03_WS_pants</td>
+                    <td><a th:href="@{/stateByProduct}">req03_WS_pants</a></td>
                     <td>파크랜드</td>
                     <td>2021-06-29</td>
                     <td>2021-06-06</td>
                     <td><span class="badge" style="padding-top: 5px;">완료</span></td>
+                    <td>1시간50분</td>
                     <td>2021-06-16</td>
                   </tr>
                   
@@ -102,11 +99,12 @@ layout:decorate="@{layout/default_production}">
                   	<td><input type="checkbox" class="check"></td>
 	            	<td>2</td>
                     <td>work_order_02</td>
-                    <td>req10_WS_jacket</td>
+                    <td><a th:href="@{/stateByProduct}">req10_WS_jacket</a></td>
                     <td>이랜드</td>
                     <td>2021-06-09</td>
                     <td>2021-05-26</td>
                     <td><span class="badge bg-important" style="padding-top: 5px;">진행중</span></td>
+                    <td>6시간00분</td>
                     <td>2021-06-01</td>
                   </tr>
                   
@@ -114,11 +112,12 @@ layout:decorate="@{layout/default_production}">
                   	<td><input type="checkbox" class="check"></td>
 	            	<td>3</td>
                     <td>work_order_03</td>
-                    <td>req10_WS_skirt</td>
+                    <td><a th:href="@{/stateByProduct}">req10_WS_skirt</a></td>
                     <td>이랜드</td>
                     <td>2021-06-09</td>
                     <td>2021-05-26</td>
                     <td><span class="badge" style="padding-top: 5px;">완료</span></td>
+                    <td>3시간30분</td>
                     <td>2021-06-02</td>
                   </tr>
                   
@@ -127,11 +126,12 @@ layout:decorate="@{layout/default_production}">
                   	<td><input type="checkbox" class="check"></td>
 	            	<td>4</td>
                     <td>work_order_04</td>
-                    <td>req10_WS_pants</td>
+                    <td><a th:href="@{/stateByProduct}">req10_WS_pants</a></td>
                     <td>이랜드</td>
                     <td>2021-06-09</td>
                     <td>2021-05-26</td>
                     <td><span class="badge bg-important" style="padding-top: 5px;">진행중</span></td>
+                    <td>1시간13분</td>
                     <td>2021-06-01</td>
                  </tr>
                   

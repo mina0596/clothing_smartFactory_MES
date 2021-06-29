@@ -3,13 +3,6 @@
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
 layout:decorate="@{layout/default_production}">
 
-<th:block layout:fragment="pageTitle">
-	   <div class="border-head"> 
-	    <h3>생산관리</h3>
-	    </div>
-</th:block>
-
-
 <th:block layout:fragment="container">
 	<div class="row mt">
      <div class="col-md-12">
@@ -21,39 +14,44 @@ layout:decorate="@{layout/default_production}">
          
          	<tbody>
          		<tr>
+         			<td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
          			<td>
          				<div class="form-group">
 		                	<select class="form-control" style="width: 150px;" id="searchCate">
 		                		<option>::선택::</option>
-		                		<option>작업지시코드</option>
-		                		<option>품목의뢰코드</option>
-		                		<option>거래처명</option>
+		                		<option>생산계획코드</option>
+		                		<option>양복명</option>
+		                		<option>품목명</option>
+		                		<option>생산수량</option>
+		                		<option>잔량</option>
 		                	</select>
 	               		</div>
+
 	         			 <div class="form-group">
 		                	<input type="text" class="form-control" placeholder="직접 입력 또는 검색">
 		                	키워드 <i class="btn fa fa-search" style="padding: 0px;" id="SupplierValue"></i>
 		               		 
 		                </div>
+		                
          			</td>
          			<td>
          				<div class="form-group">
 		                	<select class="form-control" style="width: 150px;">
-		                		<option>::기간검색선택::</option>
-		                		<option>납기일</option>
+		                		<option>::기간 검색 선택::</option>
 		                		<option>작업시작일자</option>
+		                		<option>작업마감일자</option>
 		                		<option>작업완료일자</option>
 		                	</select>
 	               		</div>
          				<div class="form-group">
-		                	<input type=date class="form-control" id="exampleInputPassword2" placeholder="입고일별">&nbsp&nbsp ~ &nbsp&nbsp
+		                	<input type=date class="form-control" id="exampleInputPassword2">&nbsp&nbsp ~ &nbsp&nbsp
 	               		</div>
          				<div class="form-group">
-		                	<input type=date class="form-control" id="exampleInputPassword2" placeholder="입고일별">
+		                	<input type=date class="form-control" id="exampleInputPassword2">
 	               		</div>
          			</td>
          			<td>
-         				  <button type="submit" class="btn btn-theme">검색</button>
+         				  <button type="button" class="btn btn-theme">검색</button>
          			</td>        			
          		</tr>
          	</tbody>
@@ -67,76 +65,83 @@ layout:decorate="@{layout/default_production}">
 	      <br>
 	      <br>
 	      
-            <h4><i class="fa fa-angle-right"></i> 작업지시별 현황 목록</h4>         
+            <h4><i class="fa fa-angle-right"></i> 생산계획별 현황 목록</h4>         
 	        <form class="form-horizontal style-form">
               <table class="table table-striped table-advance table-hover" id="list">
                 <thead>
                   <tr>
-                 	<th><i class="fa fa-check-circle-o"></i> 선택</th>
              		<th><i class="fa fa-bullhorn"></i> 번호</th>
-             		<!-- 지시코드를 누르면 상세정보로 생산 시작 예정일, 마감 예정일, 보여주기 -->
-                    <th><i class="fa fa-barcode"></i> 작업지시코드</th>
-                    <!-- 계약정보로 이동하게 하거나, 상세정보로 불러와서 보이게하기 -->
-                    <th><i class="fa fa-barcode"></i> 품목별의뢰코드</th>
-                    <th><i class="fa fa-bookmark"></i> 거래처명</th>
-                    <th><i class="fa fa-clock-o"></i> 납기일<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
-                    <th><i class="fa fa-calendar"> </i>작업시작일자<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
-                    <th><i class="fa fa-bookmark"></i> 작업상태<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
-                    <th><i class="fa fa-calendar"></i> 작업완료일자<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><i class="fa fa-barcode"></i> 생산계획코드</th>
+                    <th><i class="fa fa-bookmark"></i> 양복명</th>
+                    <th><i class="fa fa-bookmark"></i> 품목명</th>
+                    <th><i class="fa fa-bookmark"></i> 계획수량<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><i class="fa fa-bookmark"></i> 생산량<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><i class="fa fa-bookmark"></i> 잔량<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><i class="fa fa-calendar"></i> 작업시작일자<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><i class="fa fa-bookmark"></i> 진행상황<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><i class="fa fa-calendar"></i> 작업마감일자<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><i class="fa fa-calendar"></i> 계획기간<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><i class="fa fa-bookmark"></i> 담당자</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-	                <td><input type="checkbox" class="check"></td>
-	            	<td>1</td>
-                    <td>work_order_01</td>
-                    <td>req03_WS_pants</td>
-                    <td>파크랜드</td>
-                    <td>2021-06-29</td>
-                    <td>2021-06-06</td>
-                    <td><span class="badge" style="padding-top: 5px;">완료</span></td>
-                    <td>2021-06-16</td>
+	                <td>1</td>
+                    <td>production_plan_01</td>
+                    <td>숙녀양복</td>
+                    <td>바지</td>
+                    <td>100벌</td>
+                    <td>60벌</td>
+                    <td>40벌</td>
+                    <td>2021-02-01</td>
+                    <td><span class="badge bg-important" style="padding-top: 5px;">진행중</span></td>
+                    <td>2021-03-01</td>
+                    <td>1개월</td>
+                    <td>박민아</td>
                   </tr>
                   
                   <tr>
-                  	<td><input type="checkbox" class="check"></td>
 	            	<td>2</td>
-                    <td>work_order_02</td>
-                    <td>req10_WS_jacket</td>
-                    <td>이랜드</td>
-                    <td>2021-06-09</td>
-                    <td>2021-05-26</td>
-                    <td><span class="badge bg-important" style="padding-top: 5px;">진행중</span></td>
-                    <td>2021-06-01</td>
-                  </tr>
-                  
+                    <td>production_plan_02</td>
+                    <td>숙녀양복</td>
+                    <td>치마</td>
+                    <td>20벌</td>
+                    <td>26벌</td>
+                    <td></td>
+                    <td>2021-02-01</td>
+                    <td><span class="badge" style="padding-top: 5px;">달성</span></td>
+                    <td>2021-02-08</td>
+                    <td>일주일</td>
+                    <td>김다미</td>
+                  </tr>   
                   <tr>
-                  	<td><input type="checkbox" class="check"></td>
-	            	<td>3</td>
-                    <td>work_order_03</td>
-                    <td>req10_WS_skirt</td>
-                    <td>이랜드</td>
-                    <td>2021-06-09</td>
-                    <td>2021-05-26</td>
-                    <td><span class="badge" style="padding-top: 5px;">완료</span></td>
-                    <td>2021-06-02</td>
-                  </tr>
-                  
-                  
-                 <tr>
-                  	<td><input type="checkbox" class="check"></td>
-	            	<td>4</td>
-                    <td>work_order_04</td>
-                    <td>req10_WS_pants</td>
-                    <td>이랜드</td>
-                    <td>2021-06-09</td>
-                    <td>2021-05-26</td>
+                  	<td>3</td>
+                    <td>production_plan_03</td>
+                    <td>숙녀양복</td>
+                    <td>자켓</td>
+                    <td>5벌</td>
+                    <td>2벌</td>
+                    <td>3벌</td>
+                    <td>2021-02-01</td>
                     <td><span class="badge bg-important" style="padding-top: 5px;">진행중</span></td>
-                    <td>2021-06-01</td>
+                    <td>2021-02-01</td>
+                    <td>하루</td>
+                    <td>이한빛</td>
+                  </tr>
+                 <tr>
+	            	<td>4</td>
+                    <td>production_plan_04</td>
+                    <td>신사양복</td>
+                    <td>자켓</td>
+                    <td>200벌</td>
+                    <td>206벌</td>
+                    <td></td>
+                    <td>2021-02-01</td>
+                    <td><span class="badge" style="padding-top: 5px;">달성</span></td>
+                    <td>2021-04-01</td>
+                    <td>2개월</td>
+                    <td>한보람</td>
                  </tr>
-                  
-                  
-                 
                 </tbody>
               </table>
             
