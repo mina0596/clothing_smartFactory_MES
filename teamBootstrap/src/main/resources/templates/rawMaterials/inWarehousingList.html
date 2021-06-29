@@ -139,59 +139,58 @@ layout:decorate="@{layout/default_rawMaterials}">
 		        </div> 
             </div>
           
-          
+          <!-- =============================================================== -->
           <!-- 입고 상세 내역 팝업창 -->
           <div class="popup" data-popup="inWarehousingInfo">
 		    <div class="popup-inner" style="width:auto; display:table;">
 				<div class="popup-contents">
 		   		  <a class="popup-close" data-popup-close="inWarehousingInfo" href="#"><h3><i class="fa fa-times-circle"></i></h3></a> 
-					<div class="image" style="margin:auto; width: 200px; height: 200px; background-color: aqua;">
+					<div class="inWarehousingInfoPopUp-image" style="background-color: blue;">
 					</div>
 		      </div>
-		      <div class="fancybox-skin" style="padding: 15px; width: auto; height: auto;">
-
+		      <div class="inWarehousingInfoPopUp-skin">
+		              <h4>품목 상세 정보</h4>
 		              <div>
-			              	<table class="table">
+			              	<table class="table table-bordered">
+
 				                <tbody>
 				                	<tr>
-				                		<td>자재코드</td>
+				                		<td class="inWarehousingInfoPopUp">자재코드</td>
 				                		<td>123456</td>
-				                		<td colspan="2">자재명</td>
-				                		<td colspan="2">어쩌구원단</td>
+				                		<td class="inWarehousingInfoPopUp">자재명</td>
+				                		<td colspan="3">어쩌구원단</td>
 				                	</tr>
 				                	<tr>
-				                		<td>규격명</td>
+				                		<td class="inWarehousingInfoPopUp">규격명</td>
 				                		<td>box</td>
-				                		<td>대분류</td>
+				                		<td class="inWarehousingInfoPopUp">대분류</td>
 				                		<td>원자재</td>
-				                		<td>발주처</td>
+				                		<td class="inWarehousingInfoPopUp">발주처</td>
 				                		<td>나는원단</td>
 				                	</tr>
 				                	<tr>
-				                		<td>발주단위</td>
+				                		<td class="inWarehousingInfoPopUp">발주단위</td>
 				                		<td>개</td>
-				                		<td>중분류</td>
+				                		<td class="inWarehousingInfoPopUp">중분류</td>
 				                		<td>원단</td>
-				                		<td>배송요일</td>
+				                		<td class="inWarehousingInfoPopUp">배송요일</td>
 				                		<td>월 수 목</td>
 				                	</tr>
 				                	<tr>
-				                		<td>최소수량</td>
+				                		<td class="inWarehousingInfoPopUp">최소수량</td>
 				                		<td>1</td>
-				                		<td>소분류</td>
+				                		<td class="inWarehousingInfoPopUp">소분류</td>
 				                		<td>실크</td>
-				                		<td>재고운영</td>
+				                		<td class="inWarehousingInfoPopUp">재고운영</td>
 				                		<td>TC</td>
 				                	</tr>
 				                	<tr>
-				                		<td>최대수량</td>
+				                		<td class="inWarehousingInfoPopUp">최대수량</td>
 				                		<td>99</td>
-				                		<td>입고예정(D+1)</td>
+				                		<td class="inWarehousingInfoPopUp">입고예정(D+1)</td>
 				                		<td>0</td>
-				                		<td>입고예정(D+2)</td>
+				                		<td class="inWarehousingInfoPopUp">입고예정(D+2)</td>
 				                		<td>0</td>
-				                		<td>입고예정(D+3)</td>
-				                		<td>1</td>
 				                	</tr>
 				                </tbody>
 			              </table>
@@ -200,10 +199,13 @@ layout:decorate="@{layout/default_rawMaterials}">
 		            </div>
 					</div>
 		    </div>
-
-          <!-- ========================================================== -->
-         <!-- bySupplierModal 모달 시작 -->
-         <div class="modal fade modal-xl"  id="bySupplierModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<!-- 입고 상세 내역 팝업창 끝 -->	
+		<!-- ========================================================== -->
+			
+			
+		<!-- ========================================================== -->
+		<!-- bySupplierModal 모달 시작 -->
+	     <div class="modal fade modal-xl"  id="bySupplierModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog" style="width:auto;display:table" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
