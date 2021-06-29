@@ -27,16 +27,16 @@ public class ProductionController {
 		this.productionService = productionService;
 	}
 	
-	//[민아+한빛]생산현황조회
-	@GetMapping("/productionStateList")
-	public String getProductionState() {
-		return "production/productionStateList";
+	//[민아+한빛]작업지시별 생산 현황 조회
+	@GetMapping("/stateByWorkOrder")
+	public String getStateByWorkOrder() {
+		return "production/stateByWorkOrder";
 	}
 	
-	//[민아+한빛]생산실적 조회/목록
-	@GetMapping("/productionPerformance")
-	public String getproductionPerformance() {
-		return "production/productionPerformance";
+	//[민아+한빛]생산계획별 생산 현황 조회
+	@GetMapping("/stateByProductionPlan")
+	public String getstateByProductionPlan() {
+		return "production/stateByProductionPlan";
 	}
 	
 	

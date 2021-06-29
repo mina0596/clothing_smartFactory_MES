@@ -98,7 +98,7 @@ layout:decorate="@{layout/default_contract}">
 	<div class="form-panel">
 	 <h4 class="mb"><i class="fa fa-angle-right"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">수주등록</font></font></h4>
               <div class="form">
-                <form class="cmxform form-horizontal style-form" id="signupForm" method="post" th:action="@{addBuyer}">
+                <form class="cmxform form-horizontal style-form" id="signupForm" method="post" th:action="@{addBuyerRequest}">
               
       
         <div class="form-group">
@@ -138,6 +138,19 @@ layout:decorate="@{layout/default_contract}">
             
        <div class="form-group">
         <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">납기일</label>
+        <div class="col-md-4">
+          <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
+            <input type="text" class="form-control" readonly="readonly" size="16">
+            <div class="input-group-btn">
+              <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
+              <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
+            </div>
+          </div>
+        </div>
+        </div>
+        
+       <div class="form-group">
+        <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">수주일자</label>
         <div class="col-md-4">
           <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
             <input type="text" class="form-control" readonly="readonly" size="16">
@@ -257,8 +270,8 @@ layout:decorate="@{layout/default_contract}">
 	 </div>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
       <button type="button" class="btn btn-primary" id="sendMaterialNameBtn" data-dismiss="modal">선택</button>
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
        </div>
     </div>
   </div>

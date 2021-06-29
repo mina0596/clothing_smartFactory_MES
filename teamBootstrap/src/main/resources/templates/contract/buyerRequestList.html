@@ -93,12 +93,12 @@ layout:decorate="@{layout/default_contract}">
                  	<th><i class="fa fa-bullhorn"></i>번호</th>
                     <th class="hidden-phone"><i class="fa fa-bookmark"></i>의뢰코드</th>
                     <th><i class="fa fa-bookmark"></i>거래처명</th>
-                    <th><i class="fa fa-bookmark"></i>양복명</th>
-                    <th><i class=" fa fa-bookmark"></i>품목명</th>
+                    <th><i class="fa fa-bookmark"></i>품목</th>
                     <th><i class=" fa fa-bookmark"></i>납품주소</th>
                     <th><i class=" fa fa-bookmark"></i>납품연락처</th>
                     <th><i class=" fa fa-bookmark"></i>납기일</th>
                     <th><i class=" fa fa-bookmark"></i>승인상태</th>
+                    <th><i class=" fa fa-bookmark"></i>수주일자</th>
                     <th><i class=" fa fa-bookmark"></i>등록일자</th>
                     <th><i class=" fa fa-bookmark"></i>수정</th>
                   </tr>
@@ -111,12 +111,12 @@ layout:decorate="@{layout/default_contract}">
                   	<td>1</td>
                     <td>rep01</td>
                     <td>파크랜드</td>
-                    <td>신사양복</td>
-                    <td>자켓</td>
+                    <td><a th:href="@{#}" data-popup-open="requestInfo" >품목 상세</a></td>
                     <td>전주시 덕진구 서신동 123</td>
                     <td>063-299-1234</td>
                     <td>2021-05-12</td>
                    <td> <button  type="button" class="btn btn-info btn-xs" id="addBtn" ><i class="fa fa-check"></i>승인완료</button></td>
+                    <td>2021-05-12</td>
                     <td>2021-05-12 15:15:00</td>
                     <td>  <button class="btn btn-primary btn-xs" type="button" onclick="location.href='/modifyBuyerRequest'"><i class="fa fa-pencil"></i>수정</button></td>
 
@@ -128,7 +128,7 @@ layout:decorate="@{layout/default_contract}">
             </div>
             <div class="form-group text-right">
 		          <div class="col-lg-offset-2 col-lg-10">
-		          <a th:href="@{/}" class="btn btn-theme02"><i class="fa fa-check"></i> 승인목록</a>	
+		          <a th:href="@{/addBuyerContract}" class="btn btn-theme02"><i class="fa fa-check"></i> 계약등록</a>	
 		          <br>
 		          <br>
 		          <br>
@@ -139,7 +139,37 @@ layout:decorate="@{layout/default_contract}">
 		        </div> 
             </div>
           
-          
+          <!-- 입고 상세 내역 팝업창 -->
+          <div class="popup" data-popup="requestInfo">
+		    <div class="popup-inner" style="width:auto; display:table;">
+				<div class="popup-contents">
+		   		  <a class="popup-close" data-popup-close="requestInfo" href="#"><h3><i class="fa fa-times-circle"></i></h3></a> 
+					<div class="image" style="margin:auto; width: 100px; height: 100px; background-color: aqua;">
+					</div>
+		      </div>
+		      <div class="fancybox-skin" style="padding: 15px; width: auto; height: auto;">
+
+		              <div>
+			              	<table class="table">
+				                <tbody>
+
+				                	<tr>
+				                		<td style="font-weight: 600;">양복명</td>
+				                		<td style="font-weight: 600;">품목명</td>
+				                	</tr>
+				                	<tr>
+				                		<td>신사양복</td>
+				                		<td>조끼</td>
+				                	</tr>
+
+
+				                </tbody>
+			              </table>
+		              </div>
+		              
+		            </div>
+					</div>
+		    </div>          
 
 
           <!-- ========================================================== -->

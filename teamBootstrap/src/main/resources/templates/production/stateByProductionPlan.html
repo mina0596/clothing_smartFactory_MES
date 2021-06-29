@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_production}">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3>생산관리</h3>
+	    </div>
+</th:block>
+
+
+<th:block layout:fragment="container">
+	<div class="row mt">
+     <div class="col-md-12">
+          <h4><i class="fa fa-angle-right"></i> 생산계획별 현황 조회</h4>
+          <hr>  
+          
+          <form class="form-inline" role="form">
+         <table class="table table-striped table-advance table-hover">
+         
+         	<tbody>
+         		<tr>
+         			<td>
+         				<div class="form-group">
+		                	<select class="form-control" style="width: 150px;" id="searchCate">
+		                		<option>::선택::</option>
+		                		<option>작업지시코드</option>
+		                		<option>품목의뢰코드</option>
+		                		<option>거래처명</option>
+		                	</select>
+	               		</div>
+	         			 <div class="form-group">
+		                	<input type="text" class="form-control" placeholder="직접 입력 또는 검색">
+		                	키워드 <i class="btn fa fa-search" style="padding: 0px;" id="SupplierValue"></i>
+		               		 
+		                </div>
+         			</td>
+         			<td>
+         				<div class="form-group">
+		                	<select class="form-control" style="width: 150px;">
+		                		<option>::기간검색선택::</option>
+		                		<option>납기일</option>
+		                		<option>작업시작일자</option>
+		                		<option>작업완료일자</option>
+		                	</select>
+	               		</div>
+         				<div class="form-group">
+		                	<input type=date class="form-control" id="exampleInputPassword2" placeholder="입고일별">&nbsp&nbsp ~ &nbsp&nbsp
+	               		</div>
+         				<div class="form-group">
+		                	<input type=date class="form-control" id="exampleInputPassword2" placeholder="입고일별">
+	               		</div>
+         			</td>
+         			<td>
+         				  <button type="submit" class="btn btn-theme">검색</button>
+         			</td>        			
+         		</tr>
+         	</tbody>
+         </table>  
+        </form>
+			
+	       
+	       
+	               		
+	   
+	      <br>
+	      <br>
+	      
+            <h4><i class="fa fa-angle-right"></i> 작업지시별 현황 목록</h4>         
+	        <form class="form-horizontal style-form">
+              <table class="table table-striped table-advance table-hover" id="list">
+                <thead>
+                  <tr>
+                 	<th><i class="fa fa-check-circle-o"></i> 선택</th>
+             		<th><i class="fa fa-bullhorn"></i> 번호</th>
+             		<!-- 지시코드를 누르면 상세정보로 생산 시작 예정일, 마감 예정일, 보여주기 -->
+                    <th><i class="fa fa-barcode"></i> 작업지시코드</th>
+                    <!-- 계약정보로 이동하게 하거나, 상세정보로 불러와서 보이게하기 -->
+                    <th><i class="fa fa-barcode"></i> 품목별의뢰코드</th>
+                    <th><i class="fa fa-bookmark"></i> 거래처명</th>
+                    <th><i class="fa fa-clock-o"></i> 납기일<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><i class="fa fa-calendar"> </i>작업시작일자<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><i class="fa fa-bookmark"></i> 작업상태<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><i class="fa fa-calendar"></i> 작업완료일자<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+	                <td><input type="checkbox" class="check"></td>
+	            	<td>1</td>
+                    <td>work_order_01</td>
+                    <td>req03_WS_pants</td>
+                    <td>파크랜드</td>
+                    <td>2021-06-29</td>
+                    <td>2021-06-06</td>
+                    <td><span class="badge" style="padding-top: 5px;">완료</span></td>
+                    <td>2021-06-16</td>
+                  </tr>
+                  
+                  <tr>
+                  	<td><input type="checkbox" class="check"></td>
+	            	<td>2</td>
+                    <td>work_order_02</td>
+                    <td>req10_WS_jacket</td>
+                    <td>이랜드</td>
+                    <td>2021-06-09</td>
+                    <td>2021-05-26</td>
+                    <td><span class="badge bg-important" style="padding-top: 5px;">진행중</span></td>
+                    <td>2021-06-01</td>
+                  </tr>
+                  
+                  <tr>
+                  	<td><input type="checkbox" class="check"></td>
+	            	<td>3</td>
+                    <td>work_order_03</td>
+                    <td>req10_WS_skirt</td>
+                    <td>이랜드</td>
+                    <td>2021-06-09</td>
+                    <td>2021-05-26</td>
+                    <td><span class="badge" style="padding-top: 5px;">완료</span></td>
+                    <td>2021-06-02</td>
+                  </tr>
+                  
+                  
+                 <tr>
+                  	<td><input type="checkbox" class="check"></td>
+	            	<td>4</td>
+                    <td>work_order_04</td>
+                    <td>req10_WS_pants</td>
+                    <td>이랜드</td>
+                    <td>2021-06-09</td>
+                    <td>2021-05-26</td>
+                    <td><span class="badge bg-important" style="padding-top: 5px;">진행중</span></td>
+                    <td>2021-06-01</td>
+                 </tr>
+                  
+                  
+                 
+                </tbody>
+              </table>
+            
+       		</form>
+       		
+          </div>
+          <!-- /col-md-12 -->
+        </div>
+        <!-- /row -->
+</th:block>
+
+</html>
