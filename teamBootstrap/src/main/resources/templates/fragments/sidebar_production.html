@@ -6,16 +6,7 @@
           <h5 class="centered">생산관리</h5>
 
 
-          <li class="sub-menu">
-            <a href="javascript:;">
-              <i class="fa fa-cogs"></i>
-              <span>생산공정관리 ![민아]</span>
-              </a>
-            <ul class="sub">
-              <li><a th:href="@{/addProductionProcess}">생산공정 등록 ![민아]</a></li>
-              <li><a th:href="@{/productionProcessList}">생산공정 조회/목록 ![민아]</a></li>
-            </ul>
-          </li>
+          
           <li class="sub-menu">
             <a href="javascript:;">
               <i class="fa fa-book"></i>
@@ -24,9 +15,9 @@
             <ul class="sub">
               <li><a th:href="@{/addProductionPlan}">생산계획 등록 ![다미]</a></li>
               <li><a th:href="@{/productionPlanList}">생산계획 조회/목록 ![다미]</a></li>
-              <li><a th:href="@{/productionPlanList}">일별 생산계획 조회 ![다미]</a></li>
-              <li><a th:href="@{/productionPlanList}">주간별 생산계획 조회 ![다미]</a></li>
-              <li><a th:href="@{/productionPlanList}">월별 생산계획 조회 ![다미]</a></li>
+              <li><a th:href="@{/productionDailyPlanList}">일별 생산계획 조회 ![다미]</a></li>
+              <li><a th:href="@{/productionWeeklyPlanList}">주간별 생산계획 조회 ![다미]</a></li>
+              <li><a th:href="@{/productionMonthlyPlanList}">월별 생산계획 조회 ![다미]</a></li>
             </ul>
           </li>
           <li class="sub-menu">
@@ -64,6 +55,4 @@
         </ul>
         <!-- sidebar menu end-->
       </div>
-      
-
 </html>
