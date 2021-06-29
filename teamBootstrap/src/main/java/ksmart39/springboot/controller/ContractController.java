@@ -41,14 +41,19 @@ public class ContractController {
 		return "contract/addBuyerContract";
 	}
 	//------------------------------------------수주의뢰---------------------------------------------------------
-	//[한빛]수주조회
+	//[한빛] 수주의뢰 수정
+	@GetMapping("/modifyBuyerRequest")
+	public String modifyBuyerRequest() {
+		return"contract/modifyBuyerRequest";
+	}
+	//[한빛]수주의뢰 조회
 	@GetMapping("/buyerRequestList")
 	public String buyerRequestList(Model model) {
 		model.addAttribute("title", "수주관리");
 		return "contract/buyerRequestList";
 	}
 	
-	//[한빛]수주등록
+	//[한빛]수주의뢰 등록
 	@GetMapping("/addBuyerRequest")
 	public String addBuyerRequest(Model model) {
 		model.addAttribute("title", "수주관리");
