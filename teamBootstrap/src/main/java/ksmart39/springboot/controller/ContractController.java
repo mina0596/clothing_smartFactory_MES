@@ -12,6 +12,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ContractController {
 	//----------------------------------------수주주문서-----------------------------------------------------
+	
+	//[한빛]수주계약 등록 -> 조회
+	@PostMapping("/addBuyerOrder")
+	public String addBuyerOrder() {
+		return "redirect:/buyerOrderList";
+	}
+	
 	//[한빛]수주 주문서 조회
 	@GetMapping("/buyerOrderList")
 	public String buyerOrderList(Model model) {
@@ -26,6 +33,17 @@ public class ContractController {
 		return "contract/addBuyerOrder";
 	}	
 	//---------------------------------------수주계약---------------------------------------------------------
+	//[한빛] 수주계약 수정
+	@GetMapping("/modifyBuyerContract")
+	public String modifyBuyerContract() {
+		return"contract/modifyBuyerContract";
+	}
+	//[한빛]수주계약 등록 -> 조회
+	@PostMapping("/addBuyerContract")
+	public String addBuyerContract() {
+		return "redirect:/buyerContractList";
+	}
+	
 	//[한빛]수주계약 조회
 	@GetMapping("/buyerContractList")
 	public String buyerContractList(Model model) {
@@ -52,7 +70,12 @@ public class ContractController {
 		model.addAttribute("title", "수주관리");
 		return "contract/buyerRequestList";
 	}
-	
+	//[한빛]수주주문등록 ->목록으로 이동
+	@PostMapping("/addBuyerRequest")
+	public String addBuyerRequest() {
+		return "redirect:/buyerRequestList";
+	}
+		
 	//[한빛]수주의뢰 등록
 	@GetMapping("/addBuyerRequest")
 	public String addBuyerRequest(Model model) {
