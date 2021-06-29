@@ -59,14 +59,10 @@ layout:decorate="@{layout/default_contract}">
          			</td>
          			<td>
          				<div class="form-group">
-		                	<input type=date class="form-control" id="exampleInputPassword2" placeholder="입고일별">&nbsp&nbsp&nbsp ~ 
+		                	<input type=date class="form-control" id="exampleInputPassword2" placeholder="입고일별">&nbsp&nbsp&nbsp  
 	               		</div>
          			</td>
-         			<td style="padding-right: 20px;">
-         				<div class="form-group">
-		                	<input type=date class="form-control" id="exampleInputPassword2" placeholder="입고일별">
-	               		</div>
-         			</td>
+
          			<td style="padding-right: 20px;">
          				<div class="form-group">
 		                	<select class="form-control" style="width: 125px;">
@@ -84,8 +80,7 @@ layout:decorate="@{layout/default_contract}">
          </table>  
         </form>  
          
-         
-         
+
  
 		<div>
              <div>
@@ -187,8 +182,8 @@ layout:decorate="@{layout/default_contract}">
        				<tr>
        					<td><i class="fa fa-check"></i></td>
        					<td>no.</td>
-       					<td>발주처코드</td>
-       					<td>발주처명</td>
+       					<td>수주처코드</td>
+       					<td>수주처명</td>
        				</tr>
      				<tr>
      					<td><input type="radio" name="bySupplierModal"></td>
@@ -220,7 +215,7 @@ layout:decorate="@{layout/default_contract}">
 		    </div>
 		  </div>
 		</div>
-		<!-- bySupplierModal 끝 -->
+		<!-- byBuyerModal 끝 -->
 		
 		<!-- byMaterialName 모달 시작 -->
          <div class="modal fade modal-xl"  id="byMaterialNameModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -240,31 +235,36 @@ layout:decorate="@{layout/default_contract}">
          	<tbody>       		
        			<thead>
         			<tr>
-	         			<th colspan="2" style="padding-right: 20px;">
-		         			 <div class="form-inline" style="margin-bottom: 0px;"><!-- 발주처별 -->
-		         			 	<label class="control-label">재료코드</label>&nbsp
-			                	<input type="text" class="form-control" id="bySupplierValue" placeholder="검색어를 입력하세요.">
-			                </div>
-	         			</th>
+
 	         			<th colspan="1" style="padding-right: 20px;">
 	         				<div class="form-inline" style="margin-bottom: 0px;"><!-- 재료별 -->
-		         				<label class="control-label">재료구분</label>&nbsp
+		         				<label class="control-label">성별에 따른 양복명</label>&nbsp
 			                	<select class="form-control" style="width: 125px;">
-			                		<option>All</option>
-			                		<option>실</option>
-			                		<option>원단</option>
+			                		<option>::선택::</option>
+			                		<option>남성양복</option>
+			                		<option>여성양복</option>
 		                	</select>
 		              		</div>
 	         			</th>  
+	         			
 	         			<th colspan="1" style="padding-right: 20px;">
 	         				<div class="form-inline" style="margin-bottom: 0px;"><!-- 재료별 -->
-		         				<label class="control-label">재료명</label>&nbsp
-			                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
+		         				<label class="control-label">품목 소분류명</label>&nbsp
+			                	<select class="form-control" style="width: 125px;">
+			                		<option>::선택::</option>
+			                		<option>자켓</option>
+			                		<option>셔츠</option>
+			                		<option>블라우스</option>
+			                		<option>조끼</option>
+			                		<option>바지</option>
+			                		<option>치마</option>
+		                		</select>
 		              		</div>
 	         			</th>  
+
 	         			<th colspan="2" style="padding-right: 20px;">
 	         				<div class="form-inline" style="margin-bottom: 0px;"><!-- 색상별 -->
-		         				<label class="control-label">색상명</label>&nbsp
+		         				<label class="control-label">검색</label>&nbsp
 			                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
 	         				 &nbsp&nbsp&nbsp <button type="submit" class="btn btn-theme">검색</button>
 		              		</div>
@@ -274,35 +274,23 @@ layout:decorate="@{layout/default_contract}">
        			<tbody style="text-align: center;">
        				<tr>
        					<td><i class="fa fa-check"></i></td>
-       					<td>no.</td>
-       					<td>재료코드</td>
-       					<td>재료구분</td>
-       					<td>재료명</td>
-       					<td>색상</td>
+       					<td>성별에 따른 양복명</td>
+       					<td>품목 소분류명</td>
        				</tr>
      				<tr>
      					<td><input type="radio" name="materialName"></td>
-     					<td>1</td>
-       					<td>123456</td>
-       					<td>원단</td>
-       					<td class="materialName">실크</td>
-       					<td>곤색</td>
+       					<td>남성양복</td>
+       					<td>자켓</td>
      				</tr>
      				<tr>
      					<td><input type="radio" name="materialName"></td>
-     					<td>1</td>
-       					<td>123456</td>
-       					<td>원단</td>
-       					<td class="materialName">폴리</td>
-       					<td>곤색</td>
+       					<td>남성양복</td>
+       					<td>셔츠</td>
      				</tr>
      				<tr>
      					<td><input type="radio" name="materialName"></td>
-     					<td>1</td>
-       					<td>123456</td>
-       					<td>원단</td>
-       					<td class="materialName">test</td>
-       					<td>곤색</td>
+       					<td>남성양복</td>
+       					<td>조끼</td>
      				</tr>
      				
        			</tbody>        		
@@ -311,8 +299,8 @@ layout:decorate="@{layout/default_contract}">
          
 		 </div>
 		    <div class="modal-footer">
-			      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			      <button type="button" id="saveMaterialName" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+			      <button type="button" id="saveMaterialName" class="btn btn-primary" data-dismiss="modal">선택</button>
+			      <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
 		      </div>
 		    </div>
 		  </div>
