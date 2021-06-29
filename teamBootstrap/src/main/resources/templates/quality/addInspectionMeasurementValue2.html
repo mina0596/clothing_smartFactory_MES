@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_qualityControl}">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3>품질 관리</h3>
+	    </div>
+</th:block>
+
+
+<th:block layout:fragment="container">
+    <div class="form-panel">
+      <h4 class="mb"><i class="fa fa-edit"></i>품질 검사 측정값 등록</h4>
+      <hr>
+      <br>
+      
+      <form th:action="@{/qualityInspectionRequest}" class="form-horizontal style-form" method="post">
+
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label">품질검사 요청 코드</label>
+          <div class="col-sm-6">
+            <input class="form-control" id="disabledInput" type="text" placeholder="1234 (DB에서 가져온 값)" disabled>
+            <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
+            <button type="button" class="btn btn-default">검색하여 가져오기</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label">계약번호</label>
+          <div class="col-sm-6">
+            <input class="form-control" id="disabledInput" type="text" placeholder="1234 (품질검사요청코드에서 알아서 들어옴)" disabled>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label">품목별 의뢰 코드</label>
+          <div class="col-sm-6">
+            <input class="form-control" id="disabledInput" type="text" placeholder="1234 (품질검사요청코드에서 알아서 들어옴)" disabled>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label">품질검사명</label>
+          <div class="col-sm-6">
+            <input class="form-control" id="disabledInput" type="text" placeholder="1234 (품질검사요청코드에서 알아서 들어옴)" disabled>
+          </div>
+        </div>
+         <div class="form-group">
+		   <label class="col-sm-2 col-sm-2 control-label">측정회차</label>
+			   <div class="col-sm-4">
+		      	 <select class="form-control">
+						<option>::선택::</option>
+						<option>1회차</option>
+						<option>2회차</option>
+						<option>3회차</option>
+		          </select>
+	            </div>
+          </div>
+           <div class="form-group">
+            <label class="col-sm-2 col-sm-2 control-label">측정값</label>
+            <div class="col-sm-2"> 
+              <input type="text" class="form-control">
+            </div>
+          </div>
+           <div class="form-group">
+            <label class="col-sm-2 col-sm-2 control-label">측정단위</label>
+            <div class="col-sm-2"> 
+              <input type="text" class="form-control" placeholder="cm/mm">
+            </div>
+          </div>
+                
+       
+        <div class="form-group">
+          <label class="col-lg-2 col-sm-2 control-label">담당 사원명</label>
+          <div class="col-lg-10">
+            <p class="form-control-static">김다미</p>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="col-lg-2 col-sm-2 control-label">담당자 사원 코드</label>
+          <div class="col-lg-10">
+            <p class="form-control-static">W01</p>
+          </div>
+        </div>
+ 		
+         <div class="form-group text-right">
+          <div class="col-lg-offset-2 col-lg-10">
+            <button class="btn btn-theme" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">등록</font></font></button>
+            <button class="btn btn-theme04" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소</font></font></button>
+          </div>
+        </div>
+      </form>
+      
+    </div>
+<!-- col-lg-12-->
+
+
+</th:block>
+
+</html>

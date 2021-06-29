@@ -16,82 +16,141 @@ layout:decorate="@{layout/default_qualityControl}">
       <hr>
       <br>
       
-      <form th:action="@{/qualityInspectionRequest}" class="form-horizontal style-form" method="post">
-
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label">품질검사 요청 코드</label>
-          <div class="col-sm-6">
-            <input class="form-control" id="disabledInput" type="text" placeholder="1234 (DB에서 가져온 값)" disabled>
-            <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
-            <button type="button" class="btn btn-default">검색하여 가져오기</button>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label">계약번호</label>
-          <div class="col-sm-6">
-            <input class="form-control" id="disabledInput" type="text" placeholder="1234 (품질검사요청코드에서 알아서 들어옴)" disabled>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label">품목별 의뢰 코드</label>
-          <div class="col-sm-6">
-            <input class="form-control" id="disabledInput" type="text" placeholder="1234 (품질검사요청코드에서 알아서 들어옴)" disabled>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label">품질검사명</label>
-          <div class="col-sm-6">
-            <input class="form-control" id="disabledInput" type="text" placeholder="1234 (품질검사요청코드에서 알아서 들어옴)" disabled>
-          </div>
-        </div>
-         <div class="form-group">
-		   <label class="col-sm-2 col-sm-2 control-label">측정회차</label>
-			   <div class="col-sm-4">
-		      	 <select class="form-control">
-						<option>::선택::</option>
-						<option>1회차</option>
-						<option>2회차</option>
-						<option>3회차</option>
-		          </select>
-	            </div>
-          </div>
-           <div class="form-group">
-            <label class="col-sm-2 col-sm-2 control-label">측정값</label>
-            <div class="col-sm-2"> 
-              <input type="text" class="form-control">
+              <div class="panel-heading">
+                <ul class="nav nav-tabs nav-justified">
+                  <li class="">
+                    <a data-toggle="tab" href="#overview" aria-expanded="false">Overview</a>
+                  </li>
+                  <li class="active">
+                    <a data-toggle="tab" href="#contact" class="contact-map" aria-expanded="true">Contact</a>
+                  </li>
+                  <li class="">
+                    <a data-toggle="tab" href="#edit" aria-expanded="false">Edit Profile</a>
+                  </li>
+                </ul>
+              </div>
+              <!-- /panel-heading -->
+              <div class="panel-body">
+                <div class="tab-content">
+                  <div id="overview" class="tab-pane">
+                    <div class="row">
+                      <div class="col-md-6">
+                    		여기에 뭐넣지
+                      </div>
+                      <!-- /col-md-6 -->
+                      <div class="col-md-6 detailed">
+							여긴 뭐넣지
+                      </div>
+                      <!-- /col-md-6 -->
+                    </div>
+                    <!-- /OVERVIEW -->
+                  </div>
+                  <!-- /tab-pane -->
+                  <div id="contact" class="tab-pane active">
+                    <div class="row">
+                      <div class="col-md-6">
+                        
+                      </div>
+                      <!-- /col-md-6 -->
+                    </div>
+                    <!-- /row -->
+                  </div>
+                  <!-- /tab-pane -->
+                  <div id="edit" class="tab-pane">
+                    <div class="row">
+                      <div class="col-lg-8 col-lg-offset-2 detailed">
+                        <h4 class="mb">Personal Information</h4>
+                        <form role="form" class="form-horizontal">
+                          <div class="form-group">
+                            <label class="col-lg-2 control-label"> Avatar</label>
+                            <div class="col-lg-6">
+                              <input type="file" id="exampleInputFile" class="file-pos">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-lg-2 control-label">Company</label>
+                            <div class="col-lg-6">
+                              <input type="text" placeholder=" " id="c-name" class="form-control">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-lg-2 control-label">Lives In</label>
+                            <div class="col-lg-6">
+                              <input type="text" placeholder=" " id="lives-in" class="form-control">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-lg-2 control-label">Country</label>
+                            <div class="col-lg-6">
+                              <input type="text" placeholder=" " id="country" class="form-control">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-lg-2 control-label">Description</label>
+                            <div class="col-lg-10">
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="col-lg-8 col-lg-offset-2 detailed mt">
+                        <h4 class="mb">Contact Information</h4>
+                        <form role="form" class="form-horizontal">
+                          <div class="form-group">
+                            <label class="col-lg-2 control-label">Address 1</label>
+                            <div class="col-lg-6">
+                              <input type="text" placeholder=" " id="addr1" class="form-control">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-lg-2 control-label">Address 2</label>
+                            <div class="col-lg-6">
+                              <input type="text" placeholder=" " id="addr2" class="form-control">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-lg-2 control-label">Phone</label>
+                            <div class="col-lg-6">
+                              <input type="text" placeholder=" " id="phone" class="form-control">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-lg-2 control-label">Cell</label>
+                            <div class="col-lg-6">
+                              <input type="text" placeholder=" " id="cell" class="form-control">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-lg-2 control-label">Email</label>
+                            <div class="col-lg-6">
+                              <input type="text" placeholder=" " id="email" class="form-control">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-lg-2 control-label">Skype</label>
+                            <div class="col-lg-6">
+                              <input type="text" placeholder=" " id="skype" class="form-control">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                              <button class="btn btn-theme" type="submit">Save</button>
+                              <button class="btn btn-theme04" type="button">Cancel</button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                      <!-- /col-lg-8 -->
+                    </div>
+                    <!-- /row -->
+                  </div>
+                  <!-- /tab-pane -->
+                </div>
+                <!-- /tab-content -->
+              </div>
+              <!-- /panel-body -->
             </div>
-          </div>
-           <div class="form-group">
-            <label class="col-sm-2 col-sm-2 control-label">측정단위</label>
-            <div class="col-sm-2"> 
-              <input type="text" class="form-control" placeholder="cm/mm">
-            </div>
-          </div>
-                
-       
-        <div class="form-group">
-          <label class="col-lg-2 col-sm-2 control-label">담당 사원명</label>
-          <div class="col-lg-10">
-            <p class="form-control-static">김다미</p>
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label class="col-lg-2 col-sm-2 control-label">담당자 사원 코드</label>
-          <div class="col-lg-10">
-            <p class="form-control-static">W01</p>
-          </div>
-        </div>
- 		
-         <div class="form-group text-right">
-          <div class="col-lg-offset-2 col-lg-10">
-            <button class="btn btn-theme" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">등록</font></font></button>
-            <button class="btn btn-theme04" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소</font></font></button>
-          </div>
-        </div>
-      </form>
       
-    </div>
+
 <!-- col-lg-12-->
 
 
