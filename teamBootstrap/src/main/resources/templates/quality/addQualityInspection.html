@@ -13,6 +13,16 @@ layout:decorate="@{layout/default_qualityControl}">
 		$('#cancleBtn').click(function(){
 			window.history.back();
 		});
+		$('#seldiv').hide();
+		$('#highSelbox').change(function(){
+		if($('#highSelbox').val()=='inspection04'){
+			$('#seldiv').show();
+		}else{
+			$('#seldiv').hide();
+		}
+			
+		});//대분류 배열에 따라 중분류 배열값이 가지고오는 chage 메서드써야하는데 거기에다가  hide도 따라와야한다.
+		
 	});
 	
 	</script>
@@ -35,18 +45,26 @@ layout:decorate="@{layout/default_qualityControl}">
         
         <div class="form-group">
        	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사 대분류명</label>
-       	  	<div class="col-sm-10">
-             	 <select class="form-control">
-                  <option>::품질검사대분류명::</option>
-                  <option>::원자재검사::</option>
-                  <option>::공정중간검사::</option>
-                  <option>::완제품검사::</option>
+       	  	<div class="col-sm-5">
+             	 <select class="form-control" name="highClasscificationInspection" id="highSelbox" onchange="selectHighClasscification">
+                  <option value="">::품질검사대분류명::</option>
+                  <option value="inspection01">::원자재검사::</option>
+                  <option value="inspection02">::공정중간검사::</option>
+                  <option value="inspection03">::완제품검사::</option>
+                  <option value="inspection04">::직접입력::</option>
                  </select>
            	  	</div>
-           	  	</div>
+           	  </div>
+       <div class="form-group" id="seldiv">
+   	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;" >대분류명직접입력</label>
+   	  	<div class="col-sm-5">
+      	<input class="form-control" id="selboxDirect" type="text"  >
+          </div>
+          </div>
+           	  
         <div class="form-group">
        	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사 중분류명</label>
-       	  	<div class="col-sm-10">
+       	  	<div class="col-sm-5">
              	 <select class="form-control">
                   <option>::중분류검사명::</option>
 	                    <option>::원자재_원단이화학검사(파괴검사)1::</option>
@@ -73,59 +91,17 @@ layout:decorate="@{layout/default_qualityControl}">
            	  	</div>
         <div class="form-group">
        	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사 소분류명</label>
-       	  	<div class="col-sm-10">
-             	 <select class="form-control">
-                  <option>::품질검사소분류명::</option>
-	                    <option>::원단이화학검사(파괴검사)_물세탁1::</option>
-	                    <option>::원단이화학검사(파괴검사)_물세탁2::</option>
-	                    <option>::원단이화학검사(파괴검사)_드라이클리닝_염색성::</option>
-	                    <option>::원단이화학검사(파괴검사)_마찰변색도::</option>
-	                    <option>::원단이화학검사(파괴검사)_마찰견뢰도::</option>
-	                    <option>::원단이화학검사(파괴검사)_땀,일광복합견뢰도::</option>
-	                    <option>::재단물검사_너치1::</option>
-	                    <option>::재단물검사_너치2::</option>
-	                    <option>::재단물검사_너치3::</option>
-	                    <option>::공정봉제검사_부속치수1::</option>
-	                    <option>::공정봉제검사_부속치수2::</option>
-	                    <option>::공정봉제검사_심지치수::</option>
-	                    <option>::공정봉제검사_상의치수::</option>
-	                    <option>::공정봉제검사_하의치수::</option>
-	                    <option>::완제품봉제검사_상의치수1::</option>
-	                    <option>::완제품봉제검사_상의치수2::</option>
-	                    <option>::완제품봉제검사_하의치수1::</option>
-	                    <option>::완제품봉제검사_하의치수2::</option>
-	                    <option>::완제마무리_다림질::</option>
-	                    <option>::완제마무리_라벨::</option>
-                 </select>
-           	  	</div>
+       	  	<div class="col-sm-5">
+          	<input class="form-control" id="" type="text"  >
+          </div>
+           	  
            	  	</div>
         
         <div class="form-group">
        	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사 소분류상세명</label>
-       	  	<div class="col-sm-10">
-             	 <select class="form-control">
-                  <option>::소분류상세검사명::</option>
-	                    <option>::물세탁1_변퇴색::</option>
-	                    <option>::물세탁2_직물외관변화::</option>
-	                    <option>::드라이클리닝염색성_자체이염::</option>
-	                    <option>::마찰변색도_건::</option>
-	                    <option>::마찰견뢰도_석유계::</option>
-	                    <option>::------::</option>
-	                    <option>::너치1_너치위치::</option>
-	                    <option>::너치2_너치깊이::</option>
-	                    <option>::너치3_너치빠짐::</option>
-	                    <option>::부속치수1_좌우라펠폭::</option>
-	                    <option>::부속치수2_고지선박음확인::</option>
-	                    <option>::--------::</option>
-	                    <option>::상의치수_좌우어깨끝점~소매밑단 길이비교::</option>
-	                    <option>::하의치수_바지트임길이</option>
-	                    <option>::상의치수1_자켓총길이</option>
-	                    <option>::상의치수2_자켓어깨너비</option>
-	                    <option>::-----------</option>
-	                    <option>::다림질_표면변색::</option>
-	                    <option>::라벨_라벨표기사항확인::</option>
-                 </select>
-           	  	</div>
+       	  <div class="col-sm-5">
+          	<input class="form-control" id="" type="text"  >
+          </div>
            	  	</div>
         
       
