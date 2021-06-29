@@ -8,40 +8,39 @@ layout:decorate="@{layout/default_shipment}">
 	   <div class="border-head"> 
 	    <h3>출하관리</h3>
 	   </div>
+	      <th:block layout:fragment="customJs">
+<script>
+$(function(){
+	//#checkAll 버튼 클릭 시 전체 checked
+		$('#checkAll').click(function(){
+			if($('#checkAll').prop('checked')){
+				$('.check').prop('checked',true);
+					}else{
+						$('.check').prop('checked',false);
+					}
+				});
 
-<script type="text/javascript">
-		$(function(){
-			$('#deleteBtn').click(function(){			
-				var i = $('#list').find('th');
-				var j = i[0];
-				
-				//체크 버튼 토글
-				var result = $(this).attr('data-change');
-					if(result == 'N' || result == undefined){
-						j.innerHTML = '<input type="checkbox" id="checkAll">';
-						$('.checked').css('visibility','visible');
-						$(this).attr('data-change','Y');
-						
-						//#checkAll 버튼 클릭 시 전체 checked
-						$('#checkAll').click(function(){
-							if($('#checkAll').prop('checked')){
-								$('.checked').prop('checked',true);
-							}else{
-								$('.checked').prop('checked',false);
-							}
-						});
-
-					}else if(result == 'Y'){
-							j.innerHTML = '<i class="fa fa-bullhorn"></i>체크';
-							$('.checked').css('visibility','hidden');
-							$(this).attr('data-change','N');						
+		//삭제하기
+		var tableAttr = $('#shipmentOrderList').children();
+		var tdList = tableAttr.find('.check');
+		
+		$('#shipmentInvoicelist').click(function(){
+			tdList = tableAttr.find('.check');
+			var parent = tdList.parent();
+			parent.each(function(){
+				console.log($(this).parent());	
+				var removeRow = $(this).parent();			
+				if($(this).find('.check').is(':checked')){		
+					removeRow.remove();
 				}
-				
-			
-					
 			});
+
 		});
-	</script>   
+			});
+
+
+</script>
+	</th:block>
 
 </th:block>
 
@@ -77,11 +76,11 @@ layout:decorate="@{layout/default_shipment}">
 	      <br>
 	      
               <h4><i class="fa fa-angle-right"></i>송장목록</h4>    
-              <table id="list" class="table table-striped table-advance table-hover">
+              <table id="shipmentInvoicelist" class="table table-striped table-advance table-hover" >
                 <thead>
                   <tr>
                     <th>
-                    	<i class="fa fa-bullhorn" style="width: inherit;"></i>체크
+                    	<input type="checkbox" class="check" id="checkAll">
                     </th>
                     <th class="hidden-phone"><i class="fa fa-bookmark"></i>순번</th>
                     <th class="hidden-phone"><i class="fa fa-bookmark"></i>송장번호</th>
@@ -99,8 +98,8 @@ layout:decorate="@{layout/default_shipment}">
                 <tbody>
                 <!--db에서 데이터 넣어야하는 부분 -->
                   <tr>
-                   <td class="hidden-phone">
-                      <input type="checkbox" class="checked" style="visibility: hidden;">
+                  <td class="hidden-phone">
+                      <input type="checkbox" class="check">
                     </td>
                     <td class="hidden-phone">1</td>
                     <td class="hidden-phone">
@@ -111,7 +110,7 @@ layout:decorate="@{layout/default_shipment}">
                     <td>CJ대한통운</td>
                     <td>2021-05-12 15:15:00</td>
                   	<td>  
-                  		<button type="submit"  class="btn btn-primary btn-xs">
+                  		<button type="button"  class="btn btn-primary btn-xs" onclick="location.href='/modifyShipmentInvoice'">
                   			<i class="fa fa-pencil"></i>
                   				수정
                   		</button>
@@ -119,7 +118,7 @@ layout:decorate="@{layout/default_shipment}">
                   </tr>
                   <tr>
                    <td class="hidden-phone">
-                      <input type="checkbox" class="checked" style="visibility: hidden;">
+                      <input type="checkbox" class="check">
                     </td>
                     <td class="hidden-phone">2</td>
                     <td class="hidden-phone">
@@ -130,7 +129,7 @@ layout:decorate="@{layout/default_shipment}">
                     <td>CJ대한통운</td>
                     <td>2021-05-13 15:15:00</td>
                   	<td>  
-                  		<button class="btn btn-primary btn-xs" type="button" th:href="@{/shipmentInvoiceModify}">
+                  		<button class="btn btn-primary btn-xs" type="button" onclick="location.href='/modifyShipmentInvoice'">
                   			<i class="fa fa-pencil"></i>
                   				수정
                   		</button>
@@ -138,7 +137,7 @@ layout:decorate="@{layout/default_shipment}">
                   </tr>
                   <tr>
                    <td class="hidden-phone">
-                      <input type="checkbox" class="checked" style="visibility: hidden;">
+                      <input type="checkbox" class="check">
                     </td>
                     <td class="hidden-phone">3</td>
                     <td class="hidden-phone">
@@ -149,7 +148,7 @@ layout:decorate="@{layout/default_shipment}">
                     <td>CJ대한통운</td>
                     <td>2021-05-13 15:15:00</td>
                   	<td>  
-                  		<button type="submit"  class="btn btn-primary btn-xs">
+                  		<button type="button"  class="btn btn-primary btn-xs" onclick="location.href='/modifyShipmentInvoice'">
                   			<i class="fa fa-pencil"></i>
                   				수정
                   		</button>
@@ -157,7 +156,7 @@ layout:decorate="@{layout/default_shipment}">
                   </tr>
                   <tr>
                    <td class="hidden-phone">
-                      <input type="checkbox" class="checked" style="visibility: hidden;">
+                      <input type="checkbox" class="check">
                     </td>
                     <td class="hidden-phone">4</td>
                     <td class="hidden-phone">
@@ -168,7 +167,7 @@ layout:decorate="@{layout/default_shipment}">
                     <td>CJ대한통운</td>
                     <td>2021-05-13 15:15:00</td>
                   	<td>  
-                  		<button type="submit"  class="btn btn-primary btn-xs">
+                  		<button type="button"  class="btn btn-primary btn-xs" onclick="location.href='/modifyShipmentInvoice'">
                   			<i class="fa fa-pencil"></i>
                   				수정
                   		</button>
@@ -179,19 +178,18 @@ layout:decorate="@{layout/default_shipment}">
            		 </tbody>
               </table>
             </div>
-            </div>
-            <div class="form-group text-right">
-		          <div class="col-lg-offset-2 col-lg-10">
-		           <a th:href="@{/addShipmentInvoice}" class="btn btn-success btn-xs"><i class="fa fa-check"></i>송장 등록</a>
-		           <a id="deleteBtn" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i>삭제</a>
-		          </div>
-		        </div>
-             
-            </div>
+             <div class="form-group">
+                    <div class="col-lg-offset-1 col-lg-11 text-right">
+                      <button class="btn btn-success btn-xs" type="button" onclick="location.href='/addShipmentInvoice'"><i class="fa fa-check"></i>송장번호등록</button>
+                      <button class="btn btn-danger btn-xs" type="button" id="deleteBtn"><i class="fa fa-trash-o "></i>작업지시삭제</button>
+                    </div>
+                    </div>
+             </div>
+             </div>
         
             
 </th:block>
 
 
-</html>
+
 </html>
