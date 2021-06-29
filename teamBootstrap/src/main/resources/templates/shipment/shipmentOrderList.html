@@ -59,15 +59,15 @@ $(function(){
          		<tr>
          			<th>출하지시번호</th>
          			<th>품목별</th>
-         			<th>계약상태별</th>
-         			<th>뭐가들어가지?</th>
+         			<th>거래처별</th>
+         			<th>납기일</th>
          			
          		</tr>
          	</thead>
          	<tbody>
          		<tr>
          			<td style="padding-right: 20px;">
-	         			 <div class="form-group"><!-- 양복명 -->
+	         			 <div class="form-group"><!-- 출하지시번호 -->
 		               		<button id="bySupplier" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
 		                	<input type="text" class="form-control" id="bySupplierValue" placeholder="직접 입력 또는 검색">
 		                </div>
@@ -78,12 +78,13 @@ $(function(){
 		                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="직접 입력 또는 검색">
 	              		</div>
          			</td>
-         			<td>
-         				<div class="form-group">
-		                	<input type=date class="form-control" id="exampleInputPassword2" placeholder="입고일별">&nbsp&nbsp&nbsp ~ 
-	               		</div>
-         			</td>
          			<td style="padding-right: 20px;">
+         				<div class="form-group"><!-- 거래처별 -->
+		               		<button id="byMaterialName" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
+		                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="직접 입력 또는 검색">
+	              		</div>
+         			</td>
+         			<td style="padding-right: 20px;"><!-- 납기일 -->
          				<div class="form-group">
 		                	<input type=date class="form-control" id="exampleInputPassword2" placeholder="입고일별">
 	               		</div>
@@ -197,8 +198,8 @@ $(function(){
                   </div>
                   <div class="form-group">
                     <div class="col-lg-offset-1 col-lg-11 text-right">
-                      <button class="btn btn-success btn-xs" type="button" onclick="location.href='/addShipmentOrder'"><i class="fa fa-check"></i>작업지시등록</button>
-                      <button class="btn btn-danger btn-xs" type="button" id="deleteBtn"><i class="fa fa-trash-o "></i>작업지시삭제</button>
+                      <button class="btn btn-success btn-xs" type="button" onclick="location.href='/addShipmentOrder'"><i class="fa fa-check">출하지시등록</i></button>
+                      <button class="btn btn-danger btn-xs" type="button" id="deleteBtn"><i class="fa fa-trash-o "></i>출하지시삭제</button>
                     </div>
                     </div>
                   </div>

@@ -143,9 +143,9 @@ public class RawMaterialsController {
 	}
 	
 	//[다미]자재입고 수정
-	@GetMapping("/inWarehousingModify")
-	public String inWarehousingModify(@RequestParam(value = "raw_material_name", required = false)String raw_material_name) {
-		return "rawMaterials/inWarehousingModify";
+	@GetMapping("/modifyInWarehousing")
+	public String modifyInWarehousing(@RequestParam(value = "raw_material_name", required = false)String raw_material_name) {
+		return "rawMaterials/modifyInWarehousing";
 	}
 		//TO[다미] MATERIALS 빼주세용 METHOD명에, 내가 파일이름이랑 다른것들은 바꿧어요 FROM[민아]
 	//[다미]자재입고 리스트

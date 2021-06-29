@@ -314,7 +314,6 @@ ul.top-menu > li > .logout {
     height:17px;
     width:17px;
     display:inline-block;
-    background: url("../img/nav-expand.png") no-repeat top;
     border-radius:3px;
     -moz-border-radius:3px;
     -webkit-border-radius:3px;
@@ -323,7 +322,6 @@ ul.top-menu > li > .logout {
     top:15px;
 }
 .active .dcjq-icon {
-    background: url("../img/nav-expand.png") no-repeat bottom;
     border-radius:3px;
     -moz-border-radius:3px;
     -webkit-border-radius:3px;
@@ -4188,3 +4186,27 @@ table.fc-border-separate {
 .fc-agenda .ui-resizable-resizing { /* TODO: better selector */
   _overflow: hidden;
   }
+  
+  
+/* 팝업 css */
+.popup-inner{
+	padding-top: 50px;
+}
+
+.inWarehousingInfoPopUp-image{
+	 margin:auto; 
+	 width: 300px; 
+	 height: 200px;
+}
+
+
+.inWarehousingInfoPopUp-skin{
+	 padding-top: 20px; 
+	 width: auto; 
+	 height: auto;
+}
+
+.inWarehousingInfoPopUp{
+	background-color: #eaeaea;
+	text-align: center;
+}

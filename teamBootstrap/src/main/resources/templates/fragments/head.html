@@ -26,10 +26,13 @@
 	<link th:href="@{Dashio/img/favicon.png}" rel="icon">
 	<link th:href="@{Dashio/img/apple-touch-icon.png}" rel="apple-touch-icon">
 	
-	<!-- Bootstrap fullcalendar CSS JS -->
-	<script th:src="@{Dashio/lib/fullcalendar/fullcalendar.min.js}"></script>
-	<script th:src="@{Dashio/lib/calendar-conf-events.js}"></script>
-	<link th:href="@{Dashio/lib/bootstrap/css/bootstrap-fullcalendar.css}" rel="stylesheet">
+	<!-- fullcalendar CSS JS -->
+	<link th:href="@{Dashio/fullcalendar/main.css}" rel="stylesheet">
+	<link th:href="@{Dashio/fullcalendar/main.min.css}" rel="stylesheet">
+	<script th:src="@{Dashio/fullcalendar/main.min.js}"></script>
+	<link th:href="@{Dashio/fullcalendar/demo-to-codepen.css}" rel="stylesheet">
+	<script th:src="@{Dashio/fullcalendar/demo-to-codepen.js}"></script>
+	
 	
 	<!-- Bootstrap core CSS -->
 	<link th:href="@{Dashio/lib/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
@@ -45,22 +48,7 @@
 	<script th:src="@{Dashio/lib/chart-master/Chart.js}"></script>  
 	
 	                      
-		<script type="text/javascript">
-		    $(document).ready(function() {
-		      var unique_id = $.gritter.add({
-		        // (string | mandatory) the heading of the notification
-		        image: 'img/ui-sam.jpg',
-		        // (bool | optional) if you want it to fade out on its own or just sit there
-		        sticky: false,
-		        // (int | optional) the time you want it to be alive for before fading out
-		        time: 8000,
-		        // (string | optional) the class name you want to apply to that specific message
-		        class_name: 'my-sticky-class'
-		      });
 		
-		      return false;
-		    });
-  		</script>
   		
 		<script type="application/javascript">
 		$(document).ready(function() {

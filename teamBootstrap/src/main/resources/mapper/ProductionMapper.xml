@@ -1,3 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ksmart39.springboot.dao.ProductionMapper"></mapper>
+<mapper namespace="ksmart39.springboot.dao.ProductionMapper">
+
+
+<select id="getProductionMonthlyPlanList" resultType="ProductionPlan">
+		SELECT 
+			production_plan_code
+			,gender_categorized_name
+			,detailed_categorized_name
+			,charge_employee_code
+			,charge_employee_name
+			,production_plan_quantity
+			,production_plan_qantity_unit
+			,expected_production_start_date
+			,expected_production_end_date
+			,production_plan_period
+			,production_plan_note
+			,production_plan_reg_date
+			,production_plan_update_date
+		FROM 
+			production_plan;
+</select>
+
+
+
+
+
+
+</mapper>

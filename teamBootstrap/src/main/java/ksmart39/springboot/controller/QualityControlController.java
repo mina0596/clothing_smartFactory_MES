@@ -66,12 +66,13 @@ public class QualityControlController {
 		return"quality/qualityInspectionReport";
 	}
 	
-	//검사현황 성적서등록
-	@GetMapping("/addQualityInspectionReport")
+	
+	//[다미+보람]검사현황최종결과등록
+	@GetMapping("/addFinalnspectionMeasurementValue")
 	public String addQualityInspectionReport(Model model) {
 		
-		model.addAttribute("title", "검사현황관리:성적서등록");
-		return"quality/addQualityInspectionReport";
+		model.addAttribute("title", "품질관리");
+		return"quality/addFinalnspectionMeasurementValue";
 	}
 	
 	//검사현황 등록
@@ -81,12 +82,26 @@ public class QualityControlController {
 		model.addAttribute("title", "검사현황관리:검사현황등록");
 		return"quality/addQualityInspectionStatus";
 	}
+	
+	
 
 	//[보람] 검사 리스트 검사번호클릭시 검사정보 경로
 			@GetMapping("qualityInspectionInfo")
 			public String qualityInspectionInfo() {
 				return "quality/qualityInspectionInfo";
 			}
+			
+	//[보람 ]검사 수정 완료
+	@PostMapping("/modifyQualityInspection")
+	public String  modifyQualityInspection() {
+		
+		return"redirect:/qualityInspectionList";
+	}
+	//[보람] 검사 수정 경로
+	@GetMapping("/modifyQualityInspection")
+	public String getModifyQualityInspection() {
+		return "quality/modifyQualityInspection";
+	}
 	//검사종류 리스트 메서드
 	@GetMapping("/qualityInspectionList")
 	public String getQualityInspectionList(Model model,@RequestParam(name = "qualityInspectionSearchkey",required = false)String qualityInspectionSearchkey

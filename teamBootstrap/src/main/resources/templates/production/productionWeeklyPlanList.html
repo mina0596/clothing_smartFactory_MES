@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_production}">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3>생산 관리</h3>
+	    </div>
+
+ <script>
+
+ $.ajax({ 
+     type : "POST", //보내는 타입을 Post방식으로 할지,  GET방식으로 할지 결정
+     url : "/productionMonthlyPlanList", 
+     contentType : "application/x-www-form-urlencoded; charset=utf-8",  // 기본값?
+     success : function(res) {
+        console.log(res);
+        console.log(res[0]);
+        var calendarEl = document.getElementById('calendar');
+
+	    var calendar = new FullCalendar.Calendar(calendarEl, {
+	      initialView: 'dayGridWeek',
+	      initialDate: '2021-06-07',
+	      headerToolbar: {
+	        left: 'prev,next today',
+	        center: 'title',
+	        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+	      },
+	      events: [
+	        {
+	          title: 'All Day Event',
+	          start: '2021-06-01'
+	        },
+	        {
+	          title: 'Long Event',
+	          start: '2021-06-07',
+	          end: '2021-06-10'
+	        },
+	        {
+	          groupId: '999',
+	          title: 'Repeating Event',
+	          start: '2021-06-09T16:00:00'
+	        },
+	        {
+	          groupId: '999',
+	          title: 'Repeating Event',
+	          start: '2021-06-16T16:00:00'
+	        },
+	        {
+	          title: 'Conference',
+	          start: '2021-06-11',
+	          end: '2021-06-13'
+	        },
+	        {
+	          title: 'Meeting',
+	          start: '2021-06-12T10:30:00',
+	          end: '2021-06-12T12:30:00'
+	        },
+	        {
+	          title: 'Lunch',
+	          start: '2021-06-12T12:00:00'
+	        },
+	        {
+	          title: 'Meeting',
+	          start: '2021-06-12T14:30:00'
+	        },
+	        {
+	          title: 'Birthday Party',
+	          start: '2021-06-13T07:00:00'
+	        },
+	        {
+	          title: 'Click for Google',
+	          url: 'http://google.com/',
+	          start: '2021-06-28'
+	        }
+	      ]
+	    });
+
+	    calendar.render();
+     },
+     error : function(request, status, error) {
+         alert("에러가 발생했습니다. 관리자에게 문의하시기 바랍니다", request, status, error);
+     }
+ });
+
+
+
+
+    </script>
+</th:block>
+
+<th:block layout:fragment="container">
+<div class="col-md-8">
+ <div class="content">
+    <h4><i class="fa fa-angle-right"></i>월별 생산 계획 조회</h4>
+   		<hr>
+   		<div>
+   		<!-- 굳이 필요 없을 거 같기도 하고... -->
+   		<div class="form-group text-right">
+         <div class="btn-group">
+		        <a th:href="@{/productionWeeklyPlanList}" class="btn btn-default">월별 조회</a>
+		        <a th:href="@{/productionPlanList}" class="btn btn-default">전체목록 조회</a>
+		        <a th:href="@{/productionDailyPlanList}" class="btn btn-default">일별 조회</a>
+	        </div>
+         </div>
+   		 <table class="table table-striped table-advance table-hover">
+         	<tbody>
+         		<tr>       		
+         			<td>
+         				<div class=form-inline>
+		                	<label>양복명</label>
+		                	<select class="form-control" style="width: 200px;">
+		                		<option>All</option>
+		                		<option>남성양복</option>
+		                		<option>여성양복</option>
+		                	</select>
+	               		</div>
+         			</td>
+         			<td style="padding-right: 20px;">
+         				<div class="form-inline">
+         					<label>소분류</label>
+		                	<select class="form-control" style="width: 200px;">
+		                		<option>All</option>
+		                		<option>바지</option>
+		                		<option>자켓</option>
+		                		<option>치마</option>
+		                	</select>
+	               		</div>
+         			</td>       			
+         			  
+         			
+         			<td>
+         				  <button type="submit" class="btn btn-theme">검색</button>
+         			</td>        			
+         		</tr>
+         		
+         	</tbody>
+         </table> 
+         </div> 
+         <br>
+         <br>
+        <div class="border-head">
+		  	<div class="form-panel">
+			    <div id='calendar'></div>
+			</div>
+        </div>
+	  </div>
+	</div>
+            
+</th:block>
+
+</html>

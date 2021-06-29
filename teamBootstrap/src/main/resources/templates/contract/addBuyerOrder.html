@@ -7,6 +7,43 @@ layout:decorate="@{layout/default_contract}">
 	   <div class="border-head"> 
 	    <h3 th:text="${title}"></h3>
 	    </div>
+	    
+	    	    	<th:block layout:fragment="customJs">
+		    <script>
+	$(function(){
+		$('#cancleBtn').click(function(){
+			window.history.back();
+		});
+		$('#seldiv').hide();
+		$('#highSelbox').change(function(){
+		if($('#highSelbox').val()=='suit01'){
+			$('#seldiv').show();
+		}else{
+			$('#seldiv').hide();
+		}
+			
+		});//대분류 배열에 따라 중분류 배열값이 가지고오는 chage 메서드써야하는데 거기에다가  hide도 따라와야한다.
+		
+	});
+	
+	$(function(){
+		$('#cancleBtn').click(function(){
+			window.history.back();
+		});
+		$('#selws').hide();
+		$('#highSelbox').change(function(){
+		if($('#highSelbox').val()=='suit02'){
+			$('#selws').show();
+		}else{
+			$('#selws').hide();
+		}
+			
+		});//대분류 배열에 따라 중분류 배열값이 가지고오는 chage 메서드써야하는데 거기에다가  hide도 따라와야한다.
+		
+	});
+	
+	</script>
+	</th:block>	 
 </th:block>
 
 
@@ -15,202 +52,248 @@ layout:decorate="@{layout/default_contract}">
 	<div class="form-panel">
 	 <h4 class="mb"><i class="fa fa-angle-right"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">수주계약등록</font></font></h4>
               <div class="form">
-                <form class="cmxform form-horizontal style-form" id="signupForm" method="get" action="">
-            
-			       <div class="form-group">
-			         <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">수주의뢰코드</label>
-			         <div class="col-sm-6">
-			           <input class="form-control" id="disabledInput" type="text" placeholder="명주실 (DB에서 가져온 값)" disabled>
-			           <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
-			           <!-- 검색창에서 검색하여 없는 품목은 등록도 할 수 있도록 설정하기 -->
-			           <button type="button" class="btn btn-default">검색하여 가져오기</button>
-			         </div>
-			       </div>
-			       
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">성별별 양복명</label>
-   	  	<div class="col-sm-6">
-     	 <select class="form-control">
-          <option>::선택::</option>
-          <option>신사양복</option>
-          <option>여성양복</option>
-         </select>
-   	  	</div>
-		</div>
- 			     	          
- 
- 			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
- 		<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">사이즈측정</label>
- 			
-              <div class="custom-box">
-                <div class="icn-main-container">
-                  <span class="icn-container">상의</span>
-                </div>
-                <div class="servicetitle">
-                  <h4>          
-                  	<label>
-            			<input type="radio" name="optionsRadios" style="display: inline;" id="optionsRadios1" value="option1" checked>자켓
-          			</label>                      
-          			<label>
-            			<input type="radio" name="optionsRadios" style="display: inline;" id="optionsRadios2" value="option2">조끼
-          			</label> 
-          		</h4>
-                  <hr>
-                </div>
-                <ul class="pricing">
-                  <li><input type="text" class="form-control"  placeholder="총기장" style="width: 100px; display: inline; margin-left: 10px;">
-                  		<input type="text" class="form-control"  placeholder="어깨너비" style="width: 100px; display: inline; margin-left: 10px;">
-                  </li>
-                  <li><input type="text" class="form-control"  placeholder="가슴둘레" style="width: 100px; display: inline; margin-left: 10px;">
-                  		<input type="text" class="form-control"  placeholder="허리둘레" style="width: 100px; display: inline; margin-left: 10px;">
-                  </li>
-                  <li><input type="text" class="form-control"  placeholder="소매기장" style="width: 100px; display: inline; margin-left: 10px;">
-                  		<input type="text" class="form-control"  placeholder="소매동" style="width: 100px; display: inline; margin-left: 10px;">
-                  </li>
-                  <li><input type="text" class="form-control"  placeholder="소매부리" style="width: 100px; display: inline; margin-left: 10px;">
-                  		<input type="text" class="form-control"  placeholder="목너비" style="width: 100px; display: inline; margin-left: 10px;">
-                  </li>
-                  <li><input type="text" class="form-control"  placeholder="오른팔길이" style="width: 100px; display: inline; margin-left: 10px;">
-                  		<input type="text" class="form-control"  placeholder="왼팔길이" style="width: 100px; display: inline; margin-left: 10px;">
-                  </li>
-                  <li><input type="text" class="form-control"  placeholder="뒷목길이" style="width: 100px; display: inline; margin-left: 10px;">
-                  		<input type="text" class="form-control"  placeholder="암홀" style="width: 100px; display: inline; margin-left: 10px;">
-                  </li>
-                  <li><input type="text" class="form-control"  placeholder="" style="width: 100px; display: inline; margin-left: 10px;">
-                  		<input type="text" class="form-control"  placeholder="" style="width: 100px; display: inline; margin-left: 10px;">
-                  </li>
-                  <li><input type="text" class="form-control"  placeholder="" style="width: 100px; display: inline; margin-left: 10px;">
-                  		<input type="text" class="form-control"  placeholder="" style="width: 100px; display: inline; margin-left: 10px;">
-                  </li>
-                  <li><input type="text" class="form-control"  placeholder="" style="width: 100px; display: inline; margin-left: 10px;">
-                  		<input type="text" class="form-control"  placeholder="" style="width: 100px; display: inline; margin-left: 10px;">
-                  </li>
-
-                </ul>
-                <a class="btn btn-theme" href="#">Order Now</a>
-              </div>
-              <!-- end custombox -->
-            </div>
-
-			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-              <div class="custom-box">
-                <div class="icn-main-container">
-                  <span class="icn-container">하의</span>
-                </div>
-                <div class="servicetitle">
-                  <h4>          
-                  	<label>
-            			<input type="radio" name="optionsRadios" style="display: inline;" id="optionsRadios1" value="option1" checked>바지
-          			</label>                      
-          			<label>
-            			<input type="radio" name="optionsRadios" style="display: inline;" id="optionsRadios2" value="option2">치마
-          			</label> 
-          		</h4>
-                  <hr>
-                </div>
-                <ul class="pricing">
-                  <li><input type="text" class="form-control"  placeholder="허리둘레" style="width: 100px; display: inline; margin-left: 10px;">
-                  		<input type="text" class="form-control"  placeholder="엉덩이둘레" style="width: 100px; display: inline; margin-left: 10px;">
-                  </li>
-                  <li><input type="text" class="form-control"  placeholder="기장" style="width: 100px; display: inline; margin-left: 10px;">
-                  		<input type="text" class="form-control"  placeholder="밑단길이" style="width: 100px; display: inline; margin-left: 10px;">
-                  </li>
-                  <li><input type="text" class="form-control"  placeholder="밑위길이" style="width: 100px; display: inline; margin-left: 10px;">
-                  		<input type="text" class="form-control"  placeholder="허벅지둘레" style="width: 100px; display: inline; margin-left: 10px;">
-                  </li>
-                  <li><input type="text" class="form-control"  placeholder="" style="width: 100px; display: inline; margin-left: 10px;">
-                  		<input type="text" class="form-control"  placeholder="" style="width: 100px; display: inline; margin-left: 10px;">
-                  </li>
-                  <li><input type="text" class="form-control"  placeholder="" style="width: 100px; display: inline; margin-left: 10px;">
-                  		<input type="text" class="form-control"  placeholder="" style="width: 100px; display: inline; margin-left: 10px;">
-                  </li>
-                  <li><input type="text" class="form-control"  placeholder="" style="width: 100px; display: inline; margin-left: 10px;">
-                  		<input type="text" class="form-control"  placeholder="" style="width: 100px; display: inline; margin-left: 10px;">
-                  </li>
-                  <li><input type="text" class="form-control"  placeholder="" style="width: 100px; display: inline; margin-left: 10px;">
-                  		<input type="text" class="form-control"  placeholder="" style="width: 100px; display: inline; margin-left: 10px;">
-                  </li>
-                  <li><input type="text" class="form-control"  placeholder="" style="width: 100px; display: inline; margin-left: 10px;">
-                  		<input type="text" class="form-control"  placeholder="" style="width: 100px; display: inline; margin-left: 10px;">
-                  </li>
-                  <li><input type="text" class="form-control"  placeholder="" style="width: 100px; display: inline; margin-left: 10px;">
-                  		<input type="text" class="form-control"  placeholder="" style="width: 100px; display: inline; margin-left: 10px;">
-                  </li>
-                 </ul>
-                <a class="btn btn-theme" href="#">Order Now</a>
-              </div>
-              <!-- end custombox -->
-            </div>
-            
-			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-              <div class="custom-box">
-                <div class="icn-main-container">
-                  <span class="icn-container">부속</span>
-                </div>
-                <div class="servicetitle">
-                  <h4>          
-                  	<label>
-            			<input type="radio" name="optionsRadios" style="display: inline;" id="optionsRadios1" value="option1" checked>자켓부속
-          			</label>                      
-
-          		</h4>
-                  <hr>
-                </div>
-                <ul class="pricing">
-                  <li><input type="text" class="form-control"  placeholder="라벨폭" style="width: 100px; display: inline; margin-left: 10px;">
-                  		<input type="text" class="form-control"  placeholder="칼라포이트길이" style="width: 100px; display: inline; margin-left: 10px;">
-                  </li>
-                  <li><input type="text" class="form-control"  placeholder="노치폭가로" style="width: 100px; display: inline; margin-left: 10px;">
-                  		<input type="text" class="form-control"  placeholder="노치폭세로" style="width: 100px; display: inline; margin-left: 10px;">
-                  </li>
-                  <li><input type="text" class="form-control"  placeholder="고지선길이" style="width: 100px; display: inline; margin-left: 10px;">
-                  		<input type="text" class="form-control"  placeholder="뒤칼라밴드폭" style="width: 100px; display: inline; margin-left: 10px;">
-                  </li>
-                  <li><input type="text" class="form-control"  placeholder="주머니뚜껑길이" style="width: 100px; display: inline; margin-left: 10px;">
-                  		<input type="text" class="form-control"  placeholder="주머니뚜껑폭" style="width: 100px; display: inline; margin-left: 10px;">
-                  </li>
-                  <li><input type="text" class="form-control"  placeholder="주머니 입술길이" style="width: 100px; display: inline; margin-left: 10px;">
-                  		<input type="text" class="form-control"  placeholder="주머니입구 폭" style="width: 100px; display: inline; margin-left: 10px;">
-                  </li>
-                  <li><input type="text" class="form-control"  placeholder="트임길이" style="width: 100px; display: inline; margin-left: 10px;">
-                  		<input type="text" class="form-control"  placeholder="트임폭" style="width: 100px; display: inline; margin-left: 10px;">
-                  </li>
-                  <li><input type="text" class="form-control"  placeholder="몸판접착심지" style="width: 100px; display: inline; margin-left: 10px;">
-                  		<input type="text" class="form-control"  placeholder="소맷부리폴리단추" style="width: 100px; display: inline; margin-left: 10px;">
-                  </li>
-                  <li><input type="text" class="form-control"  placeholder="어깨각패드" style="width: 100px; display: inline; margin-left: 10px;">
-                  		<input type="text" class="form-control"  placeholder="앞중심 테이프" style="width: 100px; display: inline; margin-left: 10px;">
-                  </li>
-                  <li><input type="text" class="form-control"  placeholder="아래칼라테이프" style="width: 100px; display: inline; margin-left: 10px;">
-                  		<input type="text" class="form-control"  placeholder="암홀테이프" style="width: 100px; display: inline; margin-left: 10px;">
-                  </li>
-                  
-              </ul>
-                <a class="btn btn-theme" href="#">Order Now</a>
-              </div>
-              <!-- end custombox -->
-            </div>
-			       <div class="form-group">
-			         <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">수량</label>
-			         <div class="col-sm-6">
-			           <input type="number" name="raw_material_transaction_amount" class="form-control">
-			         </div>
-			       </div>
-   
-                  <div class="form-group ">
-                    <label for="email" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">단위</font></font></label>
-                    <div class="col-lg-6">
-                      <input class="form-control " id="clientAccountAddr" name="clientAccountAddr" type="text">
-                    </div>
-                  </div>
-                  
-            
+                <form class="cmxform form-horizontal style-form" id="signupForm" method="post" th:action="@{addBuyerOrder}">
                   <div class="form-group ">
                     <label for="firstname" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">거래처명</font></font></label>
                     <div class="col-lg-6">
                       <input class=" form-control" id="clientAccountName" name="clientAccountName" type="text">
                     </div>
                   </div>
+
+        <div class="form-group">
+       	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">성별에 따른 양복명</label>
+       	  	<div class="col-sm-6">
+             	 <select class="form-control" name="highClasscificationInspection" id="highSelbox" onchange="selectHighClasscification">
+                  <option value="">::선택::</option>
+                  <option value="suit01">::남성양복::</option>
+                  <option value="suit02">::여성양복::</option>
+                 </select>
+           	  	</div>
+           	  </div>
+           	  
+       <div class="form-group" id="seldiv">
+   	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;" >사이즈</label>
+   	  	<div class="col-sm-9">
+   	  	
+			<div>
+              <h4><i class="fa fa-angle-right"></i> 자켓</h4>
+              <hr>
+              <table class="table">
+ 
+                <tbody>
+                  <tr>
+                    <td><input type="number" placeholder="총기장"></td>
+                    <td><input type="number" placeholder="어깨너비"></td>
+                    <td><input type="number" placeholder="가슴둘레"></td>
+                    <td><input type="number" placeholder="허리둘레"></td>
+                    <td><input type="number" placeholder="소매기장"></td>
+                    <td><input type="number" placeholder="소매동"></td>
+                  </tr>
+                  <tr>
+                    <td><input type="number" placeholder="소매부리"></td>
+                    <td><input type="number" placeholder="목너비"></td>
+                    <td><input type="number" placeholder="오른팔길이"></td>
+                    <td><input type="number" placeholder="왼팔길이"></td>
+                    <td><input type="number" placeholder="뒷목길이"></td>
+                    <td><input type="number" placeholder="암홀"></td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>          
+			<div>
+              <h4><i class="fa fa-angle-right"></i> 셔츠</h4>
+              <hr>
+              <table class="table">
+ 
+                <tbody>
+                  <tr>
+                    <td><input type="number" placeholder="총기장"></td>
+                    <td><input type="number" placeholder="어깨너비"></td>
+                    <td><input type="number" placeholder="가슴둘레"></td>
+                    <td><input type="number" placeholder="허리둘레"></td>
+                    <td><input type="number" placeholder="소매기장"></td>
+                    <td><input type="number" placeholder="소매동"></td>
+                  </tr>
+                  <tr>
+                    <td><input type="number" placeholder="소매부리"></td>
+                    <td><input type="number" placeholder="목너비"></td>
+                    <td><input type="number" placeholder="오른팔길이"></td>
+                    <td><input type="number" placeholder="왼팔길이"></td>
+                    <td><input type="number" placeholder="뒷목길이"></td>
+                    <td><input type="number" placeholder="암홀"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>          
+			<div>
+              <h4><i class="fa fa-angle-right"></i> 조끼</h4>
+              <hr>
+              <table class="table">
+ 
+                <tbody>
+                  <tr>
+                    <td><input type="number" placeholder="총기장"></td>
+                    <td><input type="number" placeholder="어깨너비"></td>
+                    <td><input type="number" placeholder="가슴둘레"></td>
+                    <td><input type="number" placeholder="허리둘레"></td>
+                    <td><input type="number" placeholder="소매기장"></td>
+                    <td><input type="number" placeholder="소매동"></td>
+                  </tr>
+                  <tr>
+                    <td><input type="number" placeholder="소매부리"></td>
+                    <td><input type="number" placeholder="목너비"></td>
+                    <td><input type="number" placeholder="오른팔길이"></td>
+                    <td><input type="number" placeholder="왼팔길이"></td>
+                    <td><input type="number" placeholder="뒷목길이"></td>
+                    <td><input type="number" placeholder="암홀"></td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>   
+           <div>
+              <h4><i class="fa fa-angle-right"></i> 바지</h4>
+              <hr>
+              <table class="table">
+ 
+                <tbody>
+                  <tr>
+                    <td><input type="number" placeholder="허리둘레"></td>
+                    <td><input type="number" placeholder="엉덩이둘레"></td>
+                    <td><input type="number" placeholder="기장"></td>
+                    <td><input type="number" placeholder="밑단길이"></td>
+                    <td><input type="number" placeholder="밑위길이"></td>
+                    <td><input type="number" placeholder="허벅지둘레"></td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>         
+            </div>
+          </div>
+          			       
+       <div class="form-group" id="selws">
+   	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;" >사이즈</label>
+   	  	<div class="col-sm-10">
+   	  	
+			<div>
+              <h4><i class="fa fa-angle-right"></i> 자켓</h4>
+              <hr>
+              <table class="table">
+ 
+                <tbody>
+                  <tr>
+                    <td><input type="number" placeholder="총기장"></td>
+                    <td><input type="number" placeholder="어깨너비"></td>
+                    <td><input type="number" placeholder="가슴둘레"></td>
+                    <td><input type="number" placeholder="허리둘레"></td>
+                    <td><input type="number" placeholder="소매기장"></td>
+                    <td><input type="number" placeholder="소매동"></td>
+                  </tr>
+                  <tr>
+                    <td><input type="number" placeholder="소매부리"></td>
+                    <td><input type="number" placeholder="목너비"></td>
+                    <td><input type="number" placeholder="오른팔길이"></td>
+                    <td><input type="number" placeholder="왼팔길이"></td>
+                    <td><input type="number" placeholder="뒷목길이"></td>
+                    <td><input type="number" placeholder="암홀"></td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>          
+			<div>
+              <h4><i class="fa fa-angle-right"></i> 셔츠</h4>
+              <hr>
+              <table class="table">
+ 
+                <tbody>
+                  <tr>
+                    <td><input type="number" placeholder="총기장"></td>
+                    <td><input type="number" placeholder="어깨너비"></td>
+                    <td><input type="number" placeholder="가슴둘레"></td>
+                    <td><input type="number" placeholder="허리둘레"></td>
+                    <td><input type="number" placeholder="소매기장"></td>
+                    <td><input type="number" placeholder="소매동"></td>
+                  </tr>
+                  <tr>
+                    <td><input type="number" placeholder="소매부리"></td>
+                    <td><input type="number" placeholder="목너비"></td>
+                    <td><input type="number" placeholder="오른팔길이"></td>
+                    <td><input type="number" placeholder="왼팔길이"></td>
+                    <td><input type="number" placeholder="뒷목길이"></td>
+                    <td><input type="number" placeholder="암홀"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>          
+			<div>
+              <h4><i class="fa fa-angle-right"></i> 조끼</h4>
+              <hr>
+              <table class="table">
+ 
+                <tbody>
+                  <tr>
+                    <td><input type="number" placeholder="총기장"></td>
+                    <td><input type="number" placeholder="어깨너비"></td>
+                    <td><input type="number" placeholder="가슴둘레"></td>
+                    <td><input type="number" placeholder="허리둘레"></td>
+                    <td><input type="number" placeholder="소매기장"></td>
+                    <td><input type="number" placeholder="소매동"></td>
+                  </tr>
+                  <tr>
+                    <td><input type="number" placeholder="소매부리"></td>
+                    <td><input type="number" placeholder="목너비"></td>
+                    <td><input type="number" placeholder="오른팔길이"></td>
+                    <td><input type="number" placeholder="왼팔길이"></td>
+                    <td><input type="number" placeholder="뒷목길이"></td>
+                    <td><input type="number" placeholder="암홀"></td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>   
+           <div>
+              <h4><i class="fa fa-angle-right"></i> 바지</h4>
+              <hr>
+              <table class="table">
+ 
+                <tbody>
+                  <tr>
+                    <td><input type="number" placeholder="허리둘레"></td>
+                    <td><input type="number" placeholder="엉덩이둘레"></td>
+                    <td><input type="number" placeholder="기장"></td>
+                    <td><input type="number" placeholder="밑단길이"></td>
+                    <td><input type="number" placeholder="밑위길이"></td>
+                    <td><input type="number" placeholder="허벅지둘레"></td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>         
+            </div>
+          </div>
+          			       
+
+
+   
+               <div class="form-group ">
+                 <label for="email" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">수량</font></font></label>
+                 <div class="col-lg-6">
+                   <input class="form-control " id="clientAccountAddr" name="clientAccountAddr" type="text">
+                 </div>
+               </div>
+               
+               <div class="form-group ">
+                 <label for="email" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">단위</font></font></label>
+                 <div class="col-lg-6">
+                   <input class="form-control " id="clientAccountAddr" name="clientAccountAddr" type="text">
+                 </div>
+               </div>
+                  
+            
+
              
             
                   <div class="form-group ">
@@ -228,7 +311,7 @@ layout:decorate="@{layout/default_contract}">
                   </div>
                   
                 <div class="form-group">
-		          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">납기일</label>
+		          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">납기요청일</label>
 		          <div class="col-md-4">
 		            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
 		              <input type="text" class="form-control" readonly="readonly" size="16">
@@ -271,7 +354,18 @@ layout:decorate="@{layout/default_contract}">
 			          </div>
 			     	</div>        
                    
-
+                <div class="form-group">
+		          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">수주주문일자</label>
+		          <div class="col-md-4">
+		            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
+		              <input type="text" class="form-control" readonly="readonly" size="16">
+		              <div class="input-group-btn">
+		                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
+		                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
+		              </div>
+		            </div>
+		          </div>
+		        </div>
                   
                   <div class="form-group text-right">
 		         <div class="col-lg-offset-2 col-lg-10">
