@@ -14,17 +14,6 @@ public class QualityInspection {
 	private String qualityInspectionUpdateDate;
 	
 	
-	@Override
-	public String toString() {
-		return "QualityInspection [qualityInspectionCode=" + qualityInspectionCode + ", highClassificationCode="
-				+ highClassificationCode + ", highClassificationName=" + highClassificationName
-				+ ", mediumClassificationCode=" + mediumClassificationCode + ", mediumClassificationName="
-				+ mediumClassificationName + ", lowClassificationCode=" + lowClassificationCode
-				+ ", lowClassificationName=" + lowClassificationName + ", subClassificationCode="
-				+ subClassificationCode + ", subClassificationName=" + subClassificationName
-				+ ", qualityInspectionRegDate=" + qualityInspectionRegDate + ", qualityInspectionUpdateDate="
-				+ qualityInspectionUpdateDate + "]";
-	}
 	public String getQualityInspectionCode() {
 		return qualityInspectionCode;
 	}
@@ -90,6 +79,17 @@ public class QualityInspection {
 	}
 	public void setQualityInspectionUpdateDate(String qualityInspectionUpdateDate) {
 		this.qualityInspectionUpdateDate = qualityInspectionUpdateDate;
+	}
+	@Override
+	public String toString() {
+		return "QualityInspection [qualityInspectionCode=" + qualityInspectionCode + ", highClassificationCode="
+				+ highClassificationCode + ", highClassificationName=" + highClassificationName
+				+ ", mediumClassificationCode=" + mediumClassificationCode + ", mediumClassificationName="
+				+ mediumClassificationName + ", lowClassificationCode=" + lowClassificationCode
+				+ ", lowClassificationName=" + lowClassificationName + ", subClassificationCode="
+				+ subClassificationCode + ", subClassificationName=" + subClassificationName
+				+ ", qualityInspectionRegDate=" + qualityInspectionRegDate + ", qualityInspectionUpdateDate="
+				+ qualityInspectionUpdateDate + "]";
 	}
 
 }

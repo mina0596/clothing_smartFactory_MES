@@ -35,6 +35,10 @@ layout:decorate="@{layout/default_qualityControl}">
 				});
 
 			});
+			function highClassificationName()
+			
+			
+			
 				});
 
 
@@ -68,25 +72,21 @@ layout:decorate="@{layout/default_qualityControl}">
          		<tr>
          			<td style="padding-right: 20px;">
          				<div class="form-group">
-		                	<select class="form-control" style="width: 125px;">
+		                	<select class="form-control" style="width: 125px;" name="highClassificationName" id="highClassificationName" onchange="getSelectBox(this)">
 		                		<option value="">대분류 검사명</option>
-		                		<option value="ramInspection">원자재</option>
-		                		<option value="productionInspection">공정검사</option>
-		                		<option value="finalInspection">완제품검사</option>
-		                		<option value="otherInspection">기타검사 </option>
+		                		<th:block th:each="qualityInspection : ${qualityInspectionList}">
+		                		<option th:value="${qualityInspection.highClassificationCode}" th:text="${qualityInspection.highClassificationName}"></option>
+		                		</th:block>
 		                		
 		                	</select>
 	               		</div>
          			</td>
          			<td style="padding-right: 20px;">
          				<div class="form-group">
-		                	<select class="form-control" style="width: 125px;">
+		                	<select class="form-control" style="width: 125px;" name="mediumClassificationName" id="mediumClassificationName" onchange="getSelectBox(this)" >
 		                		<option value="">중분류검사명</option>
-		                		<option value="lowInspection01">원단이화확검사</option>
-		                		<option value="lowInspection02">공정중간검사</option>
-		                		<option value="lowInspection03">마무리검사</option>
-		                		<option value="otherInsepcetion">기타검사 </option>
 		                		
+		                	
 		                	</select>
 	               		</div>
          			</td>
@@ -128,242 +128,25 @@ layout:decorate="@{layout/default_qualityControl}">
                   </tr>
                 </thead>
                 <tbody>
-                  <tr >
+                  <tr th:if="${#lists.size(qualityInspectionList) > 0}" th:each="l,i: ${qualityInspectionList}" >
                    <td class="hidden-phone">
                       <input type="checkbox" class="check" name="check">
                     </td>
-                    <td class="hidden-phone"><a id="infoBtn">1</a></td>
-                    <td class="hidden-phone">AA_ee_wash_1</td>
-                    <td class="hidden-phone" id="highClassificatonName">원자재검사</td>
-                    <td id="mediumClassification">원단이화학검사(파괴검사)</td>
-                    <td id="lowClassification">물세탁</td>
-                    <td id="subClassification">
+                    <td th:text="${i.index+1}"><a id="infoBtn"></a></td>
+                    <td th:text="${l.qualityInspectionCode}"></td>
+                    <td th:text =${l.highClassificationName} id="highClassificatonName"></td>
+                    <td th:text =${l.mediumClassificationName} id="mediumClassification"></td>
+                    <td th:text="${l.lowClassificationName}" id="lowClassification"></td>
+                    <td th:text="${l.subClassificationName}" id="subClassification">
                      	변퇴색
                     </td>
-                     <td id="regDate">
-                     	2021-01-29 13:30
+                     <td th:text="${l.qualityInspectionRegDate}" id="regDate">
+                     	
                     </td>
                    <td>  <button class="btn btn-warning btn-xs" type="button" onclick="location.href='/addStandardTable'"><i class="fa fa-pencil"></i>기준표등록</button></td>
                    <td>  <button class="btn btn-success btn-xs" type="button" onclick="location.href='/qualityInspectionRequest'" ><i class="fa fa-pencil"></i>검사요청</button></td>
                    <td>  <button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
                   </tr>
-                  
-                  <tr>
-                   <td class="hidden-phone">
-                      <input type="checkbox" class="check">
-                    </td>
-                    <td class="hidden-phone"><a >2</a></td>
-                    <td class="hidden-phone">AA_ee_wash_2</td>
-                   <td class="hidden-phone" id="highClassificatonName">원자재검사</td>
-                    <td id="mediumClassification">원단이화학검사(파괴검사)</td>
-                    <td id="lowClassification">물세탁</td>
-                    <td id="subClassification">	직물외관변화  </td>
-                     <td>
-                     	2021-01-29 13:35
-                    </td>
-                     <td>  <button class="btn btn-warning btn-xs" type="button" onclick="location.href='/addStandardTable'"><i class="fa fa-pencil"></i>기준표등록</button></td>
-                   <td>  <button class="btn btn-success btn-xs" type="button" onclick="location.href='/qualityInspectionRequest'"><i class="fa fa-pencil"></i>검사요청</button></td>
-                   <td>  <button class="btn btn-primary btn-xs" type="button" id="modifyBtn" ><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  <tr>
-                   <td class="hidden-phone">
-                      <input type="checkbox" class="check">
-                    </td>
-                   <td class="hidden-phone"><a id="infoBtn">3</a></td>
-                    <td class="hidden-phone">AA_ee_dryCleaning_1</td>
-                   <td  id="highClassificatonName">원자재검사</td>
-                    <td id="mediumClassification">원단이화학검사(파괴검사)</td>
-                    <td id="lowClassification">드라이클리닝_염색성</td>
-                    <td id="subClassification">자체이염  </td>
-                     <td>
-                     	2021-01-29 13:40
-                    </td>
-                     <td>  <button class="btn btn-warning btn-xs" type="button" onclick="location.href='/addStandardTable'"><i class="fa fa-pencil"></i>기준표등록</button></td>
-                   <td>  <button class="btn btn-success btn-xs" type="button" onclick="location.href='/qualityInspectionRequest'"><i class="fa fa-pencil"></i>검사요청</button></td>
-                   <td>  <button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  
-                  
-                  <tr>
-                   <td class="hidden-phone">
-                      <input type="checkbox" class="check">
-                    </td>
-                   <td class="hidden-phone"><a id="infoBtn">4</a></td>
-                    <td class="hidden-phone">AA_ee_coloraChangeByFriction_1</td>
-                   <td class="hidden-phone" id="highClassificatonName">원자재검사</td>
-                    <td id="mediumClassification">원단이화학검사(파괴검사)</td>
-                    <td id="lowClassification">마찰변색도</td>
-                    <td id="subClassification">    </td>
-                     <td>
-                     	2021-01-29 13:40
-                    </td>
-                     <td>  <button class="btn btn-warning btn-xs" type="button" onclick="location.href='/addStandardTable'"><i class="fa fa-pencil"></i>기준표등록</button></td>
-                   <td>  <button class="btn btn-success btn-xs" type="button"onclick="location.href='/qualityInspectionRequest'" ><i class="fa fa-pencil"></i>검사요청</button></td>
-                   <td>  <button class="btn btn-primary btn-xs" type="button"><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  
-                  <tr>
-                   <td class="hidden-phone">
-                      <input type="checkbox" class="check">
-                    </td>
-                    <td class="hidden-phone">
-                   5</td>
-                    <td class="hidden-phone">BB_ff_notch_1</td>
-                    <td class="hidden-phone">원자재검사</td>
-                    <td>원단이화학검사(파괴검사)</td>
-                    <td>마찰견뢰도 </td>
-                    <td>
-                     	석유계
-                    </td>
-                     <td>
-                     	2021-01-29 13:45
-                    </td>
-                     <td>  <button class="btn btn-warning btn-xs" type="button" onclick="location.href='/addStandardTable'"><i class="fa fa-pencil"></i>기준표등록</button></td>
-                   <td>  <button class="btn btn-success btn-xs" type="button" onclick="location.href='/qualityInspectionRequest'" ><i class="fa fa-pencil"></i>검사요청</button></td>
-                   <td>  <button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  <tr>
-                   <td class="hidden-phone">
-                      <input type="checkbox" class="check">
-                    </td>
-                    <td class="hidden-phone">
-                   6</td>
-                    <td class="hidden-phone">BB_ff_notch_1</td>
-                    <td class="hidden-phone">공정중간검사</td>
-                    <td>재단물검사</td>
-                    <td>너치  </td>
-                    <td>
-                     	너치위치
-                    </td>
-                     <td>
-                     	2021-01-29 13:48
-                    </td>
-                     <td>  <button class="btn btn-warning btn-xs" type="button" onclick="location.href='/addStandardTable'"><i class="fa fa-pencil"></i>기준표등록</button></td>
-                   <td>  <button class="btn btn-success btn-xs" type="button" onclick="location.href='/qualityInspectionRequest'" ><i class="fa fa-pencil"></i>검사요청</button></td>
-                   <td>  <button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  <tr>
-                   <td class="hidden-phone">
-                      <input type="checkbox" class="check">
-                    </td>
-                    <td class="hidden-phone">
-                   7</td>
-                    <td class="hidden-phone">BB_ff_notch_2</td>
-                    <td class="hidden-phone">공정중간검사</td>
-                    <td>재단물검사</td>
-                    <td>너치  </td>
-                    <td>
-                     	너치깊이
-                    </td>
-                     <td>
-                     	2021-01-29 13:48
-                    </td>
-                     <td>  <button class="btn btn-warning btn-xs" type="button" onclick="location.href='/addStandardTable'"><i class="fa fa-pencil"></i>기준표등록</button></td>
-                   <td>  <button class="btn btn-success btn-xs" type="button" onclick="location.href='/qualityInspectionRequest'" ><i class="fa fa-pencil"></i>검사요청</button></td>
-                   <td>  <button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  
-                  <tr>
-                   <td class="hidden-phone">
-                      <input type="checkbox" class="check">
-                    </td>
-                    <td class="hidden-phone">
-                   8</td>
-                    <td class="hidden-phone">BB_ff_notch_3</td>
-                    <td class="hidden-phone">공정중간검사</td>
-                    <td>재단물검사</td>
-                    <td>너치  </td>
-                    <td>
-                     	너치빠짐
-                    </td>
-                     <td>
-                     	2021-01-29 13:48
-                    </td>
-                     <td>  <button class="btn btn-warning btn-xs" type="button" onclick="location.href='/addStandardTable'"><i class="fa fa-pencil"></i>기준표등록</button></td>
-                   <td>  <button class="btn btn-success btn-xs" type="button" onclick="location.href='/qualityInspectionRequest'" ><i class="fa fa-pencil"></i>검사요청</button></td>
-                   <td>  <button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  <tr>
-                   <td class="hidden-phone">
-                      <input type="checkbox" class="check">
-                    </td>
-                    <td class="hidden-phone">
-                   9</td>
-                    <td class="hidden-phone">BB_gg_collarLapel_1</td>
-                    <td class="hidden-phone">공정중간검사</td>
-                    <td>봉제검사</td>
-                    <td>부속 치수 </td>
-                    <td>
-                     	좌우 라펠폭
-                    </td>
-                     <td>
-                     	2021-01-29 13:49
-                    </td>
-                     <td>  <button class="btn btn-warning btn-xs" type="button" onclick="location.href='/addStandardTable'"><i class="fa fa-pencil"></i>기준표등록</button></td>
-                   <td>  <button class="btn btn-success btn-xs" type="button" onclick="location.href='/qualityInspectionRequest'" ><i class="fa fa-pencil"></i>검사요청</button></td>
-                   <td>  <button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  <tr>
-                   <td class="hidden-phone">
-                      <input type="checkbox" class="check">
-                    </td>
-                    <td class="hidden-phone">
-                   10</td>
-                    <td class="hidden-phone">BB_gg_collarLapel_2</td>
-                    <td class="hidden-phone">공정중간검사</td>
-                    <td>봉제검사</td>
-                    <td>부속 치수 </td>
-                    <td>
-                     	고지선받음확인
-                    </td>
-                     <td>
-                     	2021-01-29 13:49
-                    </td>
-                     <td>  <button class="btn btn-warning btn-xs" type="button" onclick="location.href='/addStandardTable'"><i class="fa fa-pencil"></i>기준표등록</button></td>
-                   <td>  <button class="btn btn-success btn-xs" type="button" onclick="location.href='/qualityInspectionRequest'" ><i class="fa fa-pencil"></i>검사요청</button></td>
-                   <td>  <button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  <tr>
-                   <td class="hidden-phone">
-                      <input type="checkbox" class="check">
-                    </td>
-                    <td class="hidden-phone">
-                   11</td>
-                    <td class="hidden-phone">BB_gg_collarLapel_3</td>
-                    <td class="hidden-phone">공정중간검사</td>
-                    <td>봉제검사</td>
-                    <td>심지 치수  </td>
-                    <td>
-                     	
-                    </td>
-                     <td>
-                     	2021-01-29 13:49
-                    </td> <td>  <button class="btn btn-warning btn-xs" type="button" onclick="location.href='/addStandardTable'"><i class="fa fa-pencil"></i>기준표등록</button></td>
-                   <td>  <button class="btn btn-success btn-xs" type="button" onclick="location.href='/qualityInspectionRequest'" ><i class="fa fa-pencil"></i>검사요청</button></td>
-                   <td>  <button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  
-                  <tr>
-                   <td class="hidden-phone">
-                      <input type="checkbox" class="check">
-                    </td>
-                    <td class="hidden-phone">
-                   12</td>
-                    <td class="hidden-phone">BB_gg_sleeve_1</td>
-                    <td class="hidden-phone">공정중간검사</td>
-                    <td>봉제검사</td>
-                    <td>상의 치수  </td>
-                    <td>
-                     	좌우 어깨끝점~소매 밑단까지 길이비교
-                    </td>
-                     <td>
-                     	2021-01-29 14:11
-                    </td>
-                     <td>  <button class="btn btn-warning btn-xs" type="button" onclick="location.href='/addStandardTable'"><i class="fa fa-pencil"></i>기준표등록</button></td>
-                   <td>  <button class="btn btn-success btn-xs" type="button" onclick="location.href='/qualityInspectionRequest'" ><i class="fa fa-pencil"></i>검사요청</button></td>
-                   <td>  <button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  
                   
                   
                  
