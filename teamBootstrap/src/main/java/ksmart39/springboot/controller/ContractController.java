@@ -19,6 +19,19 @@ public class ContractController {
 		return "redirect:/buyerOrderList";
 	}
 	
+	//[한빛]수주 주문서 수정
+	@GetMapping("/buyerOrderInfo")
+	public String buyerOrderInfo(Model model) {
+		model.addAttribute("title", "수주관리");
+		return "contract/buyerOrderInfo";
+	}	
+	//[한빛]수주 주문서 수정
+	@GetMapping("/modifyBuyerOrder")
+	public String modifyBuyerOrder(Model model) {
+		model.addAttribute("title", "수주관리");
+		return "contract/buyerOrderList";
+	}	
+	
 	//[한빛]수주 주문서 조회
 	@GetMapping("/buyerOrderList")
 	public String buyerOrderList(Model model) {
