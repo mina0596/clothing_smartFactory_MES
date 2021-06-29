@@ -24,6 +24,12 @@ public class ProductionController {
 	}
 	
 	
+	//[민아]완제품 수정
+	@GetMapping("/modifyCompletedProduct")
+	public String modifyCompletedProduct() {
+		return "production/modifyCompletedProduct";
+	}
+	
 	//[민아]완제품 등록
 	@GetMapping("/addCompletedProduct")
 	public String addCompletedProduct() {

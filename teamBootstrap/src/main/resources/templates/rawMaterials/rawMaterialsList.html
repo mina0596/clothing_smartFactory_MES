@@ -53,9 +53,6 @@ layout:decorate="@{layout/default_rawMaterials}">
 				var unit = tdElement.find('#unit').text();
 				
 				location.href='modifyRawMaterials?rawMaterialCate=' + rawMaterialCate + '&materialCate=' + materialCate + '&materialName=' + materialName + '&colorName=' + colorName + '&feature=' + feature + '&unit=' + unit;
-				
-
-				
 			});
 		})
 	</script>
@@ -85,7 +82,7 @@ layout:decorate="@{layout/default_rawMaterials}">
                		<input type=date class="form-control col-xs-3" id="exampleInputPassword2" placeholder="입고일별">
 				</div>
 				<div class="col-md-2">         
-				  <button type="button" class="btn btn-primary">검색</button>
+				  <button type="button" class="btn btn-theme">검색</button>
 				</div>
 	       </div>
 	       
@@ -105,16 +102,16 @@ layout:decorate="@{layout/default_rawMaterials}">
                   <tr>
                  	<th><i class="fa fa-check-circle-o"></i> 선택</th>
              		<th><i class="fa fa-bullhorn"></i> 번호</th>
-                    <th><i class="fa fa-barcode"></i>원부자재 코드</th>
-                    <th><i class="fa fa-bookmark"></i>원부자재 구분</th>
-                    <th><i class="fa fa-bookmark"></i>구분명</th>
-                    <th><i class="fa fa-bookmark"></i>재료명</th>
-                    <th><i class=" fa fa-bookmark"></i>색상명</th>
-                    <th><i class=" fa fa-bookmark"></i>특징</th>
-                    <th><i class=" fa fa-bookmark"></i>단위</th>
-                    <th><i class=" fa fa-clock-o"></i>등록일</th>
-                    <th><i class=" fa fa-sign-in"></i>입고등록</th>
-                    <th><i class=" fa fa-pencil"></i>수정</th>
+                    <th><i class="fa fa-barcode"></i> 원부자재 코드</th>
+                    <th><i class="fa fa-bookmark"></i> 원부자재 구분</th>
+                    <th><i class="fa fa-bookmark"></i> 구분명</th>
+                    <th><i class="fa fa-bookmark"></i> 재료명</th>
+                    <th><i class=" fa fa-bookmark"></i> 색상명</th>
+                    <th><i class=" fa fa-bookmark"></i> 특징</th>
+                    <th><i class=" fa fa-bookmark"></i> 단위</th>
+                    <th><i class=" fa fa-clock-o"></i> 등록일</th>
+                    <th><i class=" fa fa-exchange"></i> 입출고 등록</th>
+                    <th><i class=" fa fa-pencil"></i> 수정</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -131,7 +128,8 @@ layout:decorate="@{layout/default_rawMaterials}">
                     <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
                     <td>2021-01-18 16:02</td>
                     <td> 
-                      <button type="button" class="btn btn-warning btn-xs" onclick="location.href='addInWarehousing'"><i class="fa fa-sign-in"></i></button>
+                      <button type="button" class="btn btn-success btn-xs" onclick="location.href='addInWarehousing'" style="padding-right: 5px;"><i class="fa fa-plus-square"></i></button>
+                      <button type="button" class="btn btn-danger btn-xs" onclick="location.href='addExWarehousing'"><i class="fa fa-minus-square"></i></button>
                     </td>
                     <td> 
                       <button type="button" class="btn btn-primary btn-xs" id="modifyBtn" ><i class="fa fa-pencil"></i></button>
@@ -151,7 +149,8 @@ layout:decorate="@{layout/default_rawMaterials}">
                     <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
                     <td>2021-01-18 16:02</td>
                     <td> 
-                      <button type="button" class="btn btn-warning btn-xs" onclick="location.href='addInWarehousing'"><i class="fa fa-sign-in"></i></button>
+                      <button type="button" class="btn btn-success btn-xs" onclick="location.href='addInWarehousing'" style="padding-right: 5px;"><i class="fa fa-plus-square"></i></button>
+                      <button type="button" class="btn btn-danger btn-xs" onclick="location.href='addExWarehousing'"><i class="fa fa-minus-square"></i></button>
                     </td>
                     <td> 
                       <button type="button" class="btn btn-primary btn-xs" id="modifyBtn" ><i class="fa fa-pencil"></i></button>
@@ -171,7 +170,8 @@ layout:decorate="@{layout/default_rawMaterials}">
                     <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
                     <td>2021-01-18 16:02</td>
                     <td> 
-                      <button type="button" class="btn btn-warning btn-xs" onclick="location.href='addInWarehousing'"><i class="fa fa-sign-in"></i></button>
+                      <button type="button" class="btn btn-success btn-xs" onclick="location.href='addInWarehousing'" style="padding-right: 5px;"><i class="fa fa-plus-square"></i></button>
+                      <button type="button" class="btn btn-danger btn-xs" onclick="location.href='addExWarehousing'"><i class="fa fa-minus-square"></i></button>
                     </td>
                     <td> 
                       <button type="button" class="btn btn-primary btn-xs" id="modifyBtn"><i class="fa fa-pencil"></i></button>
@@ -192,7 +192,8 @@ layout:decorate="@{layout/default_rawMaterials}">
                     <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
                     <td>2021-01-18 16:02</td>
                     <td> 
-                      <button type="button" class="btn btn-warning btn-xs" onclick="location.href='addInWarehousing'"><i class="fa fa-sign-in"></i></button>
+                      <button type="button" class="btn btn-success btn-xs" onclick="location.href='addInWarehousing'" style="padding-right: 5px;"><i class="fa fa-plus-square"></i></button>
+                      <button type="button" class="btn btn-danger btn-xs" onclick="location.href='addExWarehousing'"><i class="fa fa-minus-square"></i></button>
                     </td>
                     <td> 
                       <button type="button" class="btn btn-primary btn-xs" id="modifyBtn"><i class="fa fa-pencil"></i></button>

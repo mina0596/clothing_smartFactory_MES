@@ -144,25 +144,28 @@ public class RawMaterialsController {
 	
 	//[다미]자재입고 수정
 	@GetMapping("/inWarehousingModify")
-	public String inWarehousingMaterialsModify(@RequestParam(value = "raw_material_name", required = false)String raw_material_name) {
-		return "redirect:/inWarehousingList";
+	public String inWarehousingModify(@RequestParam(value = "raw_material_name", required = false)String raw_material_name) {
+		return "rawMaterials/inWarehousingModify";
 	}
 		//TO[다미] MATERIALS 빼주세용 METHOD명에, 내가 파일이름이랑 다른것들은 바꿧어요 FROM[민아]
 	//[다미]자재입고 리스트
 	@GetMapping("/inWarehousingList")
-	public String InWarehousingMaterialsList() {
+	public String InWarehousingList() {
 		return "rawMaterials/inWarehousingList";
 	}
 	
 	//[다미]자재 입고 등록 후 자재 입고 목록으로 리다이렉트 , 파라미터는 임시 값
 	@PostMapping("/addInWarehousing")
-	public String addInWarehousingMaterials(@RequestParam(value = "raw_material_name", required = false )String raw_material_name) {
+	public String addInWarehousing(@RequestParam(value = "raw_material_name", required = false )String raw_material_name) {
 		return "redirect:/inWarehousingList";
 	}
 	
 	//[다미]자재 입고 등록
 	@GetMapping("/addInWarehousing")
-	public String addInWarehousingMaterials() {
+	public String addInWarehousing(@RequestParam(name = "materialName", required = false) String materialName
+										  , Model model) {
+		model.addAttribute("materialName", materialName);
+		log.info("materialName 받아온값 {}", materialName);
 		return "rawMaterials/addInWarehousing";
 	}
 	

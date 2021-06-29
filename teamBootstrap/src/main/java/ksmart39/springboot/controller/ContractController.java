@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ContractController {
-	
+	//----------------------------------------수주주문서-----------------------------------------------------
 	//[한빛]수주 주문서 조회
 	@GetMapping("/buyerOrderList")
 	public String buyerOrderList(Model model) {
@@ -25,35 +25,49 @@ public class ContractController {
 		model.addAttribute("title", "수주관리");
 		return "contract/addBuyerOrder";
 	}	
-	
-	//[한빛]수주주문 조회
+	//---------------------------------------수주계약---------------------------------------------------------
+	//[한빛]수주계약 조회
 	@GetMapping("/buyerContractList")
 	public String buyerContractList(Model model) {
 		model.addAttribute("title", "수주관리");
 		return "contract/buyerContractList";
 	}
 	
-	//[한빛]수주거래처 등록
-	@GetMapping("/addBuyer")
-	public String addBuyer(Model model) {
+	
+	//[한빛]수주계약 등록
+	@GetMapping("/addBuyerContract")
+	public String addBuyerContract(Model model) {
 		model.addAttribute("title", "수주관리");
-		return "contract/addBuyer";
+		return "contract/addBuyerContract";
+	}
+	//------------------------------------------수주의뢰---------------------------------------------------------
+	//[한빛] 수주의뢰 수정
+	@GetMapping("/modifyBuyerRequest")
+	public String modifyBuyerRequest() {
+		return"contract/modifyBuyerRequest";
+	}
+	//[한빛]수주의뢰 조회
+	@GetMapping("/buyerRequestList")
+	public String buyerRequestList(Model model) {
+		model.addAttribute("title", "수주관리");
+		return "contract/buyerRequestList";
 	}
 	
+	//[한빛]수주의뢰 등록
+	@GetMapping("/addBuyerRequest")
+	public String addBuyerRequest(Model model) {
+		model.addAttribute("title", "수주관리");
+		return "contract/addBuyerRequest";
+	}
+	
+	//---------------------------------------------수주거래처------------------------------------------------------
 	//[한빛]수주주문등록 ->목록으로 이동
 	@PostMapping("/addBuyer")
 	public String addBuyer() {
 		return "redirect:/buyerList";
 	}
 	
-	
-	//[한빛]수주주문 등록
-	@GetMapping("/addBuyerContract")
-	public String addBuyerContract(Model model) {
-		model.addAttribute("title", "수주관리");
-		return "contract/addBuyerContract";
-	}
-
+	//[한빛] 수주거래처 수정
 	@GetMapping("/modifyBuyer")
 	public String modifyBuyer() {
 		return"contract/modifyBuyer";
@@ -66,7 +80,13 @@ public class ContractController {
 		return "contract/buyerList";
 	}
 
-	
+	//[한빛]수주거래처 등록
+	@GetMapping("/addBuyer")
+	public String addBuyer(Model model) {
+		model.addAttribute("title", "수주관리");
+		return "contract/addBuyer";
+	}
+	//------------------------------------------------------발주----------------------------------------------------------
 	//to[보람] 원부자재라는 단어를 발주로 바꿔주세요 + 메서드명이랑 경로랑 이름 연관성있게 from [민아]
 	//[보람]원부자재 발주리스트 발주코드 클릭시 발주정보 경로 메서드
 	@GetMapping("/supplierContractInfo")
@@ -133,6 +153,7 @@ public class ContractController {
 	
 	}
 
+	//수/발주 메인화면
 	@GetMapping("/contract")
 	public String getContractmangement() {
 		

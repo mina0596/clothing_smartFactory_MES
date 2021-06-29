@@ -14,10 +14,47 @@ layout:decorate="@{layout/default_contract}">
 		$('#cancleBtn').click(function(){
 			window.history.back();
 		});
-		//월요일에 합치고나서 ContractController 경로 메서드하고나서 하기
+		
+		var tableAttr= $('#seachrSupplierList').children();
+		var tdList = tableAttr.find('.bySupplierModal');
+		var radioCheck = tableAttr.find('.bySupplierModal').is(':checked');
+		var checkId = $(this).attr('id');
+		//거래처명 검색 모달 
 		$('#searchSupplier').click(function(){
-			window.open('searchSupplierName','popup','width=400,height=500');
-		})
+			$('#bySupplierModal').modal("show");
+		});
+		$('#saveSupplier').click(function(){
+			var check = $('input[name=bySupplierModal]:checked');
+			tdList =tableAttr.find('.bySupplierModal');
+			tdList.each(function(){
+				if($(this).is(':checked')){
+					var parent = $(this).parent();
+					var searchSupplierName = par.parent().find('.searchSupplierName').text();
+					console.log(supplierName+"<거래처명");
+					var searchSupplierEmployee = par.parent().find('.searchSupplierEmployee').text();
+					var supplierTel = par.parent().find('.searchSupplierTel').text();
+					$('#supplierContractName').attr('value',searchSupplierName);
+					$('#supplierEmployee').attr('value',supplierEmployee);
+					$('#supplierPhone').attr('value',supplierTel);
+				}
+			});
+			
+		});
+		$('[data-popup-open]').on('click', function(e)  {
+		       var targeted_popup_class = jQuery(this).attr('data-popup-open');
+		       $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+
+		       e.preventDefault();
+		   });
+
+		    //----- CLOSE
+		    $('[data-popup-close]').on('click', function(e)  {
+		       var targeted_popup_class = jQuery(this).attr('data-popup-close');
+		       $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+
+		       e.preventDefault();
+		    });
+	
 	});
 	
 	</script>
@@ -39,7 +76,7 @@ layout:decorate="@{layout/default_contract}">
           <label class="col-sm-2 col-sm-2 control-label"> 거래처명</label>
           <div class="col-md-5">
             <div  class="input-group ">
-              <input type="search" class="form-control" id="supplierName" size="16">
+              <input type="search" class="form-control" id="supplierContractName" size="16">
               <div class="input-group-btn">
                 <button type="button" class=" btn btn-theme03 btn btn-default" id="searchSupplier" ><i class="fa"></i>검색하여 가져오기</button>
               </div>
@@ -132,6 +169,81 @@ layout:decorate="@{layout/default_contract}">
        		</form>
       
     	</div>
+    <!-- 거래처명 검색 모달 시작-->
+     <div class="modal fade modal-xl"  id="bySupplierModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" style="width:auto;display:table" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h4 class="modal-title" id="exampleModalLabel">발주처 검색</h4>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      
+		      <!-- 모달본문 -->
+		   <div class="modal-body">
+		   
+		   <table  class="table table-striped table-advance table-hover" id="seachrSupplierList">
+         	<tbody>       		
+       			<thead>
+        			<tr>
+	         			<!-- <th style="padding-bottom: 12px;"><label class="control-label">발주처 명</label></th> -->
+	         			<th colspan="3" style="padding-right: 20px;">
+	         				<div class="form-inline" style="margin-bottom: 0px;">
+		         				<label class="control-label">발주처 명</label>
+			                	<input type="text" class="form-control" id="searchSupplierName" placeholder="검색어를 입력하세요.">
+	         				 <button type="submit" class="btn btn-theme">검색</button>
+		              		</div>
+	         			</th>  
+        			</tr>     			
+       			</thead>
+       			<tbody style="text-align: center;">
+       				<tr>
+       					<td><i class="fa fa-check"></i></td>
+       					<td>no.</td>
+       					<td>발주거래처명</td>
+       					<td>발주거래처담당자</td>
+       					<td>발주거래처연락처 </td>
+       				</tr>
+     				<tr>
+     					<td><input type="radio" name="bySupplierModal"></td>
+     					<td>1</td>
+       					<td class="searchSupplierName" >나는 단추</td>
+       					<td class="searchSupplierEmployee">홍길동</td>
+       					<td class="searchSupplierTel">070-2515-1555</td>
+     				</tr>
+     				<tr>
+     					<td><input type="radio" name="bySupplierModal"></td>
+     					<td>2</td>
+       					<td class="searchSupplierName">견고한지퍼나라</td>
+       					<td class="searchSupplierEmployee" >공예윤</td>
+       					<td class="searchSupplierTel">070-2505-1545</td>
+     				</tr>
+     				<tr>
+     					<td><input type="radio" name="bySupplierModal"></td>
+     					<td>3</td>
+       					<td class="searchSupplierName">부드러운실크컴퍼니</td>
+       					<td class="searchSupplierEmployee" >서윤우</td>
+       					<td class="searchSupplierTel" >070-2815-1555</td>
+     				</tr>
+     				<tr>
+     					<td><input type="radio" name="bySupplierModal"></td>
+     					<td>4</td>
+       					<td class="searchSupplierName">정교한심지</td>
+       					<td class="searchSupplierEmployee" >이로운</td>
+       					<td class="searchSupplierTel" >070-658-9208</td>
+     				</tr>
+       			</tbody>        		
+         	</tbody>
+         </table> 
+      </div> 
+      <div class="modal-footer">
+			      <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+			      <button type="button" id="saveSupplier" class="btn btn-primary" data-dismiss="modal">확인</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
     
            
 	 <script th:src="@{Dashio/lib/jquery-ui-1.9.2.custom.min.js}"></script>
