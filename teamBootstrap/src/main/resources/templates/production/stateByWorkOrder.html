@@ -54,7 +54,89 @@ layout:decorate="@{layout/default_production}">
          	</tbody>
          </table>  
         </form>
-			
+			<br>
+	      <br>
+	      
+            <h4><i class="fa fa-angle-right"></i> 작업지시별 현황 검색 결과</h4> 
+            작업지시코드 'work_order_01' 로 검색한 결과 입니다.        
+	        <form class="form-horizontal style-form">
+              <table class="table table-striped table-advance table-hover" id="list">
+                <thead>
+                  <tr>
+                 	<th><i class="fa fa-check-circle-o"></i> 선택</th>
+             		<th><i class="fa fa-bullhorn"></i> 번호</th>
+             		<!-- 지시코드를 누르면 상세정보로 생산 시작 예정일, 마감 예정일, 보여주기 -->
+                    <th><i class="fa fa-barcode"></i> 작업지시코드</th>
+                    <!-- 계약정보로 이동하게 하거나, 상세정보로 불러와서 보이게하기 -->
+                    <th><i class="fa fa-barcode"></i> 품목별의뢰코드</th>
+                    <th><i class="fa fa-bookmark"></i> 거래처명</th>
+                    <th><i class="fa fa-clock-o"></i> 납기일<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><i class="fa fa-calendar"> </i>작업시작일자<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><i class="fa fa-bookmark"></i> 작업상태<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><i class="fa fa-clock-o"></i> 가동시간<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><i class="fa fa-calendar"></i> 작업완료일자<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+	                <td><input type="checkbox" class="check"></td>
+	            	<td>1</td>
+                    <td>work_order_01</td>
+                    <td><a th:href="@{/stateByProduct}">req03_WS_pants</a></td>
+                    <td>파크랜드</td>
+                    <td>2021-06-29</td>
+                    <td>2021-06-06</td>
+                    <td><span class="badge" style="padding-top: 5px;">완료</span></td>
+                    <td>1시간50분</td>
+                    <td>2021-06-16</td>
+                  </tr>
+                  
+                  <tr>
+                  	<td><input type="checkbox" class="check"></td>
+	            	<td>2</td>
+                    <td>work_order_02</td>
+                    <td><a th:href="@{/stateByProduct}">req10_WS_jacket</a></td>
+                    <td>이랜드</td>
+                    <td>2021-06-09</td>
+                    <td>2021-05-26</td>
+                    <td><span class="badge bg-important" style="padding-top: 5px;">진행중</span></td>
+                    <td>6시간00분</td>
+                    <td>2021-06-01</td>
+                  </tr>
+                  
+                  <tr>
+                  	<td><input type="checkbox" class="check"></td>
+	            	<td>3</td>
+                    <td>work_order_03</td>
+                    <td><a th:href="@{/stateByProduct}">req10_WS_skirt</a></td>
+                    <td>이랜드</td>
+                    <td>2021-06-09</td>
+                    <td>2021-05-26</td>
+                    <td><span class="badge" style="padding-top: 5px;">완료</span></td>
+                    <td>3시간30분</td>
+                    <td>2021-06-02</td>
+                  </tr>
+                  
+                  
+                 <tr>
+                  	<td><input type="checkbox" class="check"></td>
+	            	<td>4</td>
+                    <td>work_order_04</td>
+                    <td><a th:href="@{/stateByProduct}">req10_WS_pants</a></td>
+                    <td>이랜드</td>
+                    <td>2021-06-09</td>
+                    <td>2021-05-26</td>
+                    <td><span class="badge bg-important" style="padding-top: 5px;">진행중</span></td>
+                    <td>1시간13분</td>
+                    <td>2021-06-01</td>
+                 </tr>
+                  
+                  
+                 
+                </tbody>
+              </table>
+            
+       		</form>
 	       
 	       
 	               		
