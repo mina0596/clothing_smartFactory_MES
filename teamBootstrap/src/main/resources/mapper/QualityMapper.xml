@@ -1,3 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ksmart39.springboot.dao.QualityControlMapper"></mapper>
+<mapper namespace="ksmart39.springboot.dao.QualityControlMapper">
+<resultMap type="QualityInspection" id="">
+
+</resultMap>
+
+<!--[보람]품질검사리스트조회메서드  -->
+<select id="getQualityInspectionList" resultType="QualityInspection">
+SELECT 
+	quality_inspection_code				AS	 qualityInspectionCode
+	, high_classification_code			AS	 highClassificationCode
+	, high_classification_name1			AS	 highClassificationName
+	, medium_classification_code		AS	 mediumClassificationCode
+	, medium_classification_name1		AS	 mediumClassificationName
+	, low_classification_code			AS	 lowClassificationCode
+	, low_classification_name1			AS	 lowClassificationName
+	, sub_classification_code			AS	 subClassificationCode
+	, sub_classification_name1			AS	subClassificationName
+	, quality_inspection_reg_date		AS qualityInspectionRegDate
+	, quality_inspection_update_date    AS qualityInspectionUpdateDate
+	FROM 
+	quality_inspection_list;
+
+</select>
+<!--[보람]품질검사 코드조회메서드  -->
+<select id="getQualityInspectionByCode" parameterType="String">
+	SELECT 
+		quality_inspection_code
+		, high_classification_code
+		, high_classification_name1
+		, medium_classification_code
+		, medium_classification_name1
+		, low_classification_code
+		, low_classification_name1
+		, sub_classification_code
+		, sub_classification_name1
+		, quality_inspection_reg_date
+		, quality_inspection_update_date
+	FROM quality_inspection_list
+		WHERE quality_inspection_code=#{qualityInspectionCode};
+		
+
+</select>
+
+
+
+
+
+</mapper>
