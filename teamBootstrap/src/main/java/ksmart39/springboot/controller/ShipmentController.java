@@ -1,5 +1,7 @@
 package ksmart39.springboot.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,10 +9,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class ShipmentController {
+	private static final Logger log = LoggerFactory.getLogger(ShipmentController.class);
+	
+	//[보람] 송장 수정화면 완료
+	@PostMapping("/modifyShipmentInvoice")
+	public String modifyShipmentInvoice() {
+		return"redirect:/shipmentInvoiceList";
+	}
 	//[보람]송장 수정화면
-	@GetMapping("/shipmentInvoiceModify")
+	@GetMapping("/modifyShipmentInvoice")
 	public String shipmentInvoiceModify(){
-		return"shipment/shipmentInvoiceModify";
+		return"shipment/modifyShipmentInvoice";
 	}
 	//송장관리의 송장 목록및 조회
 	@GetMapping("/shipmentInvoiceList")
@@ -26,6 +35,22 @@ public class ShipmentController {
 		
 		return"shipment/addShipmentInvoice";
 	}
+	
+	//[보람 ]출하지시  수정화면 수정후
+	@PostMapping("/modifyShipmentOrder")
+	public String modifyShipmentOrder1() {
+		
+		//DAO 만들고나서 메서드 명 변경할거임
+		return "redirect:/shipmentOrderList";
+	}
+	//[보람] 출하지시 리스트 수정화면 경로 메서드
+	@GetMapping("/modifyShipmentOrder")
+	public String modifyShipmentOrder() {
+		
+		
+		return "shipment/modifyShipmentOrder";
+	}
+	
 	//[보람] 출하지시리스트 순번 클릭시 출하지시정보
 			@GetMapping("/shipmentOrderInfo")
 			public String shipmentOrderInfo() {
