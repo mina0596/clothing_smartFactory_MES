@@ -27,6 +27,7 @@ layout:decorate="@{layout/default_production}">
        
           <h4><i class="fa fa-angle-right"></i>생산 계획 조회</h4>
           		<hr>
+	       
             <form class="form-inline" role="form">
         
          <table class="table table-striped table-advance table-hover">
@@ -34,6 +35,7 @@ layout:decorate="@{layout/default_production}">
          		<tr>
          			<th>양복명</th>
          			<th>소분류</th>
+         			<th>수량</th>
          			<th>등록일시</th>
          			<th><!-- 공백 --></th>
          			<th>정렬</th>
@@ -61,7 +63,11 @@ layout:decorate="@{layout/default_production}">
 		                	</select>
 	               		</div>
          			</td>       			
-         			
+         			<td style="padding-right: 20px;">
+         				<div class="form-group" >
+		                	<input type="text" class="form-control" style="width: 110px;" placeholder="수량입력">
+	               		</div>
+         			</td>       			        			
          			<td>
          				<div class="form-group">
 		                	<input type="date" class="form-control" id="exampleInputPassword2" placeholder="등록일시">&nbsp;&nbsp;&nbsp; ~ 
@@ -85,10 +91,17 @@ layout:decorate="@{layout/default_production}">
          				  <button type="submit" class="btn btn-theme">검색</button>
          			</td>        			
          		</tr>
+         		
          	</tbody>
          </table>  
         </form>
-        
+         <div class="form-group text-right">
+         <div class="btn-group">
+		        <a th:href="@{/productionMonthlyPlanList}" class="btn btn-default">월별 조회</a>
+		        <a th:href="@{/productionWeeklyPlanList}" class="btn btn-default">주간별 조회</a>
+		        <a th:href="@{/productionDailyPlanList}" class="btn btn-default">일별 조회</a>
+	        </div>
+         </div>
         <div>
         	  <div>            
               <h4><i class="fa fa-angle-right"></i>생산 계획 목록</h4>   
@@ -123,7 +136,7 @@ layout:decorate="@{layout/default_production}">
                     <td>20</td>
                     <td>벌</td>
                     <td>2020-05-22 16:00:00</td>
-                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
+                  	<td><a th:href="@{/modifyProductionPlan}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</a></td>
                   </tr>
                   <tr>
                   <td><input type="checkbox" class="checked"></td>

@@ -10,11 +10,33 @@ layout:decorate="@{layout/default_qualityControl}">
 <th:block layout:fragment="customJs">
 	<script>
 	$(function(){
-		
-			
-		
+		//#checkAll 버튼 클릭 시 전체 checked
+			$('#checkAll').click(function(){
+				if($('#checkAll').prop('checked')){
+					$('.check').prop('checked',true);
+						}else{
+							$('.check').prop('checked',false);
+						}
+					});
 
-	});
+			//삭제하기
+			var tableAttr = $('#inspectionList').children();
+			var tdList = tableAttr.find('.check');
+			
+			$('#delBtn').click(function(){
+				tdList = tableAttr.find('.check');
+				var parent = tdList.parent();
+				parent.each(function(){
+					console.log($(this).parent());	
+					var removeRow = $(this).parent();			
+					if($(this).find('.check').is(':checked')){		
+						removeRow.remove();
+					}
+				});
+
+			});
+				});
+
 
 	</script>
 	</th:block>
@@ -89,7 +111,9 @@ layout:decorate="@{layout/default_qualityControl}">
               <table id="inspectionList" class="table table-striped table-advance table-hover">
                 <thead>
                   <tr>
-                   <th>체크</th>
+                   <th>
+                    	<input type="checkbox" class="check" id="checkAll">
+                    </th>
                     <th><i class="fa fa-bullhorn"></i>순번</th>
                     <th><i class="fa fa-bullhorn"></i>검사코드</th>
                     <th><i class="fa fa-bookmark"></i>검사대분류명</th>
@@ -106,7 +130,7 @@ layout:decorate="@{layout/default_qualityControl}">
                 <tbody>
                   <tr >
                    <td class="hidden-phone">
-                      <input type="checkbox" class="checked" name="check">
+                      <input type="checkbox" class="check" name="check">
                     </td>
                     <td class="hidden-phone"><a id="infoBtn">1</a></td>
                     <td class="hidden-phone">AA_ee_wash_1</td>
@@ -120,13 +144,13 @@ layout:decorate="@{layout/default_qualityControl}">
                      	2021-01-29 13:30
                     </td>
                    <td>  <button class="btn btn-warning btn-xs" type="button" onclick="location.href='/addStandardTable'"><i class="fa fa-pencil"></i>기준표등록</button></td>
-                   <td>  <button class="btn btn-success btn-xs" type="button" onclick="location.herf='/qualityInspectionRequest'" ><i class="fa fa-pencil"></i>검사요청</button></td>
+                   <td>  <button class="btn btn-success btn-xs" type="button" onclick="location.href='/qualityInspectionRequest'" ><i class="fa fa-pencil"></i>검사요청</button></td>
                    <td>  <button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
                   </tr>
                   
                   <tr>
                    <td class="hidden-phone">
-                      <input type="checkbox" class="checked">
+                      <input type="checkbox" class="check">
                     </td>
                     <td class="hidden-phone"><a >2</a></td>
                     <td class="hidden-phone">AA_ee_wash_2</td>
@@ -138,12 +162,12 @@ layout:decorate="@{layout/default_qualityControl}">
                      	2021-01-29 13:35
                     </td>
                      <td>  <button class="btn btn-warning btn-xs" type="button" onclick="location.href='/addStandardTable'"><i class="fa fa-pencil"></i>기준표등록</button></td>
-                   <td>  <button class="btn btn-success btn-xs" type="button" onclick="location.herf='/qualityInspectionRequest'" ><i class="fa fa-pencil"></i>검사요청</button></td>
+                   <td>  <button class="btn btn-success btn-xs" type="button" onclick="location.href='/qualityInspectionRequest'"><i class="fa fa-pencil"></i>검사요청</button></td>
                    <td>  <button class="btn btn-primary btn-xs" type="button" id="modifyBtn" ><i class="fa fa-pencil"></i>수정</button></td>
                   </tr>
                   <tr>
                    <td class="hidden-phone">
-                      <input type="checkbox" class="checked">
+                      <input type="checkbox" class="check">
                     </td>
                    <td class="hidden-phone"><a id="infoBtn">3</a></td>
                     <td class="hidden-phone">AA_ee_dryCleaning_1</td>
@@ -155,14 +179,14 @@ layout:decorate="@{layout/default_qualityControl}">
                      	2021-01-29 13:40
                     </td>
                      <td>  <button class="btn btn-warning btn-xs" type="button" onclick="location.href='/addStandardTable'"><i class="fa fa-pencil"></i>기준표등록</button></td>
-                   <td>  <button class="btn btn-success btn-xs" type="button" onclick="location.herf='/qualityInspectionRequest'" ><i class="fa fa-pencil"></i>검사요청</button></td>
+                   <td>  <button class="btn btn-success btn-xs" type="button" onclick="location.href='/qualityInspectionRequest'"><i class="fa fa-pencil"></i>검사요청</button></td>
                    <td>  <button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
                   </tr>
                   
                   
                   <tr>
                    <td class="hidden-phone">
-                      <input type="checkbox" class="checked">
+                      <input type="checkbox" class="check">
                     </td>
                    <td class="hidden-phone"><a id="infoBtn">4</a></td>
                     <td class="hidden-phone">AA_ee_coloraChangeByFriction_1</td>
@@ -174,13 +198,13 @@ layout:decorate="@{layout/default_qualityControl}">
                      	2021-01-29 13:40
                     </td>
                      <td>  <button class="btn btn-warning btn-xs" type="button" onclick="location.href='/addStandardTable'"><i class="fa fa-pencil"></i>기준표등록</button></td>
-                   <td>  <button class="btn btn-success btn-xs" type="button" onclick="location.herf='/qualityInspectionRequest'" ><i class="fa fa-pencil"></i>검사요청</button></td>
+                   <td>  <button class="btn btn-success btn-xs" type="button"onclick="location.href='/qualityInspectionRequest'" ><i class="fa fa-pencil"></i>검사요청</button></td>
                    <td>  <button class="btn btn-primary btn-xs" type="button"><i class="fa fa-pencil"></i>수정</button></td>
                   </tr>
                   
                   <tr>
                    <td class="hidden-phone">
-                      <input type="checkbox" class="checked">
+                      <input type="checkbox" class="check">
                     </td>
                     <td class="hidden-phone">
                    5</td>
@@ -195,12 +219,12 @@ layout:decorate="@{layout/default_qualityControl}">
                      	2021-01-29 13:45
                     </td>
                      <td>  <button class="btn btn-warning btn-xs" type="button" onclick="location.href='/addStandardTable'"><i class="fa fa-pencil"></i>기준표등록</button></td>
-                   <td>  <button class="btn btn-success btn-xs" type="button" onclick="location.herf='/qualityInspectionRequest'" ><i class="fa fa-pencil"></i>검사요청</button></td>
+                   <td>  <button class="btn btn-success btn-xs" type="button" onclick="location.href='/qualityInspectionRequest'" ><i class="fa fa-pencil"></i>검사요청</button></td>
                    <td>  <button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
                   </tr>
                   <tr>
                    <td class="hidden-phone">
-                      <input type="checkbox" class="checked">
+                      <input type="checkbox" class="check">
                     </td>
                     <td class="hidden-phone">
                    6</td>
@@ -215,12 +239,12 @@ layout:decorate="@{layout/default_qualityControl}">
                      	2021-01-29 13:48
                     </td>
                      <td>  <button class="btn btn-warning btn-xs" type="button" onclick="location.href='/addStandardTable'"><i class="fa fa-pencil"></i>기준표등록</button></td>
-                   <td>  <button class="btn btn-success btn-xs" type="button" onclick="location.herf='/qualityInspectionRequest'" ><i class="fa fa-pencil"></i>검사요청</button></td>
+                   <td>  <button class="btn btn-success btn-xs" type="button" onclick="location.href='/qualityInspectionRequest'" ><i class="fa fa-pencil"></i>검사요청</button></td>
                    <td>  <button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
                   </tr>
                   <tr>
                    <td class="hidden-phone">
-                      <input type="checkbox" class="checked">
+                      <input type="checkbox" class="check">
                     </td>
                     <td class="hidden-phone">
                    7</td>
@@ -235,13 +259,13 @@ layout:decorate="@{layout/default_qualityControl}">
                      	2021-01-29 13:48
                     </td>
                      <td>  <button class="btn btn-warning btn-xs" type="button" onclick="location.href='/addStandardTable'"><i class="fa fa-pencil"></i>기준표등록</button></td>
-                   <td>  <button class="btn btn-success btn-xs" type="button" onclick="location.herf='/qualityInspectionRequest'" ><i class="fa fa-pencil"></i>검사요청</button></td>
+                   <td>  <button class="btn btn-success btn-xs" type="button" onclick="location.href='/qualityInspectionRequest'" ><i class="fa fa-pencil"></i>검사요청</button></td>
                    <td>  <button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
                   </tr>
                   
                   <tr>
                    <td class="hidden-phone">
-                      <input type="checkbox" class="checked">
+                      <input type="checkbox" class="check">
                     </td>
                     <td class="hidden-phone">
                    8</td>
@@ -256,12 +280,12 @@ layout:decorate="@{layout/default_qualityControl}">
                      	2021-01-29 13:48
                     </td>
                      <td>  <button class="btn btn-warning btn-xs" type="button" onclick="location.href='/addStandardTable'"><i class="fa fa-pencil"></i>기준표등록</button></td>
-                   <td>  <button class="btn btn-success btn-xs" type="button" onclick="location.herf='/qualityInspectionRequest'" ><i class="fa fa-pencil"></i>검사요청</button></td>
+                   <td>  <button class="btn btn-success btn-xs" type="button" onclick="location.href='/qualityInspectionRequest'" ><i class="fa fa-pencil"></i>검사요청</button></td>
                    <td>  <button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
                   </tr>
                   <tr>
                    <td class="hidden-phone">
-                      <input type="checkbox" class="checked">
+                      <input type="checkbox" class="check">
                     </td>
                     <td class="hidden-phone">
                    9</td>
@@ -276,12 +300,12 @@ layout:decorate="@{layout/default_qualityControl}">
                      	2021-01-29 13:49
                     </td>
                      <td>  <button class="btn btn-warning btn-xs" type="button" onclick="location.href='/addStandardTable'"><i class="fa fa-pencil"></i>기준표등록</button></td>
-                   <td>  <button class="btn btn-success btn-xs" type="button" onclick="location.herf='/qualityInspectionRequest'" ><i class="fa fa-pencil"></i>검사요청</button></td>
-                   <td>  <button class="btn btn-primary btn-xs" type="button" ></i>수정</button></td>
+                   <td>  <button class="btn btn-success btn-xs" type="button" onclick="location.href='/qualityInspectionRequest'" ><i class="fa fa-pencil"></i>검사요청</button></td>
+                   <td>  <button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
                   </tr>
                   <tr>
                    <td class="hidden-phone">
-                      <input type="checkbox" class="checked">
+                      <input type="checkbox" class="check">
                     </td>
                     <td class="hidden-phone">
                    10</td>
@@ -296,12 +320,12 @@ layout:decorate="@{layout/default_qualityControl}">
                      	2021-01-29 13:49
                     </td>
                      <td>  <button class="btn btn-warning btn-xs" type="button" onclick="location.href='/addStandardTable'"><i class="fa fa-pencil"></i>기준표등록</button></td>
-                   <td>  <button class="btn btn-success btn-xs" type="button" onclick="location.herf='/qualityInspectionRequest'" ><i class="fa fa-pencil"></i>검사요청</button></td>
+                   <td>  <button class="btn btn-success btn-xs" type="button" onclick="location.href='/qualityInspectionRequest'" ><i class="fa fa-pencil"></i>검사요청</button></td>
                    <td>  <button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
                   </tr>
                   <tr>
                    <td class="hidden-phone">
-                      <input type="checkbox" class="checked">
+                      <input type="checkbox" class="check">
                     </td>
                     <td class="hidden-phone">
                    11</td>
@@ -315,13 +339,13 @@ layout:decorate="@{layout/default_qualityControl}">
                      <td>
                      	2021-01-29 13:49
                     </td> <td>  <button class="btn btn-warning btn-xs" type="button" onclick="location.href='/addStandardTable'"><i class="fa fa-pencil"></i>기준표등록</button></td>
-                   <td>  <button class="btn btn-success btn-xs" type="button" onclick="location.herf='/qualityInspectionRequest'" ><i class="fa fa-pencil"></i>검사요청</button></td>
+                   <td>  <button class="btn btn-success btn-xs" type="button" onclick="location.href='/qualityInspectionRequest'" ><i class="fa fa-pencil"></i>검사요청</button></td>
                    <td>  <button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
                   </tr>
                   
                   <tr>
                    <td class="hidden-phone">
-                      <input type="checkbox" class="checked">
+                      <input type="checkbox" class="check">
                     </td>
                     <td class="hidden-phone">
                    12</td>
@@ -336,7 +360,7 @@ layout:decorate="@{layout/default_qualityControl}">
                      	2021-01-29 14:11
                     </td>
                      <td>  <button class="btn btn-warning btn-xs" type="button" onclick="location.href='/addStandardTable'"><i class="fa fa-pencil"></i>기준표등록</button></td>
-                   <td>  <button class="btn btn-success btn-xs" type="button" onclick="location.herf='/qualityInspectionRequest'" ><i class="fa fa-pencil"></i>검사요청</button></td>
+                   <td>  <button class="btn btn-success btn-xs" type="button" onclick="location.href='/qualityInspectionRequest'" ><i class="fa fa-pencil"></i>검사요청</button></td>
                    <td>  <button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
                   </tr>
                   
@@ -349,7 +373,7 @@ layout:decorate="@{layout/default_qualityControl}">
              
                     <div class=" col-xs-12 text-right">
                    
-                      <button class="btn btn-success btn-xs" type="button" ><i class="fa fa-check"></i>검사등록</button>
+                      <button class="btn btn-success btn-xs" type="button"  onclick="location.href='/addQualityInspection'"><i class="fa fa-check"></i>검사등록</button>
                       <button class="btn btn-danger btn-xs" type="button" id="delBtn"><i class="fa fa-trash-o "></i>검사삭제</button>
                     </div>
                  

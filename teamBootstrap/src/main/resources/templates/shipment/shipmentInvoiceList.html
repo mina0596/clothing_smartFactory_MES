@@ -21,10 +21,10 @@ $(function(){
 				});
 
 		//삭제하기
-		var tableAttr = $('#shipmentOrderList').children();
+		var tableAttr = $('#shipmentInvoicelist').children();
 		var tdList = tableAttr.find('.check');
 		
-		$('#shipmentInvoicelist').click(function(){
+		$('#deleteBtn').click(function(){
 			tdList = tableAttr.find('.check');
 			var parent = tdList.parent();
 			parent.each(function(){
@@ -52,30 +52,58 @@ $(function(){
           <h4><i class="fa fa-angle-right"></i>송장조회</h4>
           <hr>
                 
-			<div class="form-group">
-				<div class="col-md-2">
-				 <select class="form-control">
-				   <option>송장번호</option>
-				   <option>납품처주소</option>
-				   
-				 </select>
-				</div>
-				<div class="col-md-6">
-				  <input class="form-control" type="text" placeholder="검색어를 입력하세요">
-				</div>
-				<div class="col-md-2">
-				  <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
-				  <button type="button" class="btn btn-primary">검색하여 가져오기</button>
-				</div>
-	       </div>
-	       
-	      <br>
-	      <br>
-	      <br>
-	      <br>
-	      <br>
+			 <form class="form-inline" role="form">
+        
+         <table class="table table-striped table-advance table-hover">
+         	<thead>
+         		<tr>
+         			<th>송장번호</th>
+         			<th>거래처별</th>
+         			<th>출고일</th>
+         			<th>납기일</th>
+         			
+         		</tr>
+         	</thead>
+         	<tbody>
+         		<tr>
+         			<td style="padding-right: 20px;">
+	         			 <div class="form-group"><!-- 출하지시번호 -->
+		               		<button id="bySupplier" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
+		                	<input type="text" class="form-control" id="bySupplierValue" placeholder="직접 입력 또는 검색">
+		                </div>
+         			</td>
+         			<td style="padding-right: 20px;">
+         				<div class="form-group"><!-- 품목별 -->
+		               		<button id="byMaterialName" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
+		                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="직접 입력 또는 검색">
+	              		</div>
+         			</td>
+         			<td style="padding-right: 20px;">
+         				<div class="form-group"><!-- 거래처별 -->
+		               		<button id="byMaterialName" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
+		                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="직접 입력 또는 검색">
+	              		</div>
+         			</td><td style="padding-right: 20px;"><!-- 납기일 -->
+         				<div class="form-group">
+		                	<input type=date class="form-control" id="exampleInputPassword2" placeholder="입고일별">
+	               		</div>
+         			</td>
+         			<td style="padding-right: 20px;"><!-- 납기일 -->
+         				<div class="form-group">
+		                	<input type=date class="form-control" id="exampleInputPassword2" placeholder="입고일별">
+	               		</div>
+         			</td>
+         			
+         			<td>
+         				  <button type="submit" class="btn btn-theme">검색</button>
+         			</td>        			
+         		</tr>
+         	</tbody>
+         </table>  
+        </form> 
 	      
-              <h4><i class="fa fa-angle-right"></i>송장목록</h4>    
+              <h4><i class="fa fa-angle-right"></i>송장목록</h4>  
+              <hr>  
               <table id="shipmentInvoicelist" class="table table-striped table-advance table-hover" >
                 <thead>
                   <tr>
@@ -180,8 +208,8 @@ $(function(){
             </div>
              <div class="form-group">
                     <div class="col-lg-offset-1 col-lg-11 text-right">
-                      <button class="btn btn-success btn-xs" type="button" onclick="location.href='/addShipmentInvoice'"><i class="fa fa-check"></i>송장번호등록</button>
-                      <button class="btn btn-danger btn-xs" type="button" id="deleteBtn"><i class="fa fa-trash-o "></i>작업지시삭제</button>
+                      <button class="btn btn-success btn-xs" type="button" onclick="location.href='/addShipmentInvoice'"><i class="fa fa-check"></i>송장등록</button>
+                      <button class="btn btn-danger btn-xs" type="button" id="deleteBtn"><i class="fa fa-trash-o "></i>송장삭제</button>
                     </div>
                     </div>
              </div>
