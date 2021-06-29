@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_production}">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3>생산 관리</h3>
+	    </div>
+
+ <script>
+
+ $.ajax({ 
+     type : "POST", //보내는 타입을 Post방식으로 할지,  GET방식으로 할지 결정
+     url : "/productionMonthlyPlanList", 
+     contentType : "application/x-www-form-urlencoded; charset=utf-8",  // 기본값?
+     success : function(res) {
+        console.log(res);
+        console.log(res[0]);
+        var calendarEl = document.getElementById('calendar');
+
+	    var calendar = new FullCalendar.Calendar(calendarEl, {
+	      initialView: 'dayGridMonth',
+	      initialDate: '2021-06-07',
+	      headerToolbar: {
+	        left: 'prev,next today',
+	        center: 'title',
+	        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+	      },
+	      events: [
+	        {
+	          title: 'All Day Event',
+	          start: '2021-06-01'
+	        },
+	        {
+	          title: 'Long Event',
+	          start: '2021-06-07',
+	          end: '2021-06-10'
+	        },
+	        {
+	          groupId: '999',
+	          title: 'Repeating Event',
+	          start: '2021-06-09T16:00:00'
+	        },
+	        {
+	          groupId: '999',
+	          title: 'Repeating Event',
+	          start: '2021-06-16T16:00:00'
+	        },
+	        {
+	          title: 'Conference',
+	          start: '2021-06-11',
+	          end: '2021-06-13'
+	        },
+	        {
+	          title: 'Meeting',
+	          start: '2021-06-12T10:30:00',
+	          end: '2021-06-12T12:30:00'
+	        },
+	        {
+	          title: 'Lunch',
+	          start: '2021-06-12T12:00:00'
+	        },
+	        {
+	          title: 'Meeting',
+	          start: '2021-06-12T14:30:00'
+	        },
+	        {
+	          title: 'Birthday Party',
+	          start: '2021-06-13T07:00:00'
+	        },
+	        {
+	          title: 'Click for Google',
+	          url: 'http://google.com/',
+	          start: '2021-06-28'
+	        }
+	      ]
+	    });
+
+	    calendar.render();
+     },
+     error : function(request, status, error) {
+         alert("에러가 발생했습니다. 관리자에게 문의하시기 바랍니다", request, status, error);
+     }
+ });
+
+
+
+
+    </script>
+</th:block>
+
+<th:block layout:fragment="container">
+<div class="col-md-8">
+ <div class="content">
+  <div class="form-panel">
+    <h4><i class="fa fa-angle-right"></i>월별 생산 계획 조회</h4>
+   		<hr>
+    <div id='calendar'></div>
+	</div>
+  </div>
+	</div>
+            
+</th:block>
+
+</html>

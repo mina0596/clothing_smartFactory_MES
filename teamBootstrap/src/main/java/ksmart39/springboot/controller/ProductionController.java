@@ -1,16 +1,32 @@
 package ksmart39.springboot.controller;
 
-import java.util.HashMap;
-import java.util.Map;
 
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import ksmart39.springboot.domain.ProductionPlan;
+import ksmart39.springboot.service.ProductionService;
 
 @Controller
 public class ProductionController {
 
+	
+	private static final Logger log = LoggerFactory.getLogger(ProductionController.class);
+	
+	private final ProductionService productionService;
+	
+	public ProductionController(ProductionService productionService) {
+		this.productionService = productionService;
+	}
+	
 	//[민아+한빛]생산현황조회
 	@GetMapping("/productionStateList")
 	public String getProductionState() {
@@ -78,6 +94,36 @@ public class ProductionController {
 	public String getProductionProcessList() {
 		return "production/productionProcessList";
 	}
+	
+	//[다미]생산계획 일별 목록
+	@GetMapping("/productionDailyPlanList")
+	public String productionDailyPlanList() {
+		return "production/productionDailyPlanList";
+	}
+	
+	//[다미]생산계획 주간별 목록
+	@GetMapping("/productionWeeklyPlanList")
+	public String productionWeeklyPlanList() {
+		return "production/productionWeeklyPlanList";
+	}
+	
+	//[다미]생산계획 월별 목록
+	@GetMapping("/productionMonthlyPlanList")
+	public String getProductionMonthlyPlanList(Model model) {
+//		List<ProductionPlan> monthlyResult = productionService.getProductionMonthlyPlanList();
+//		log.info("=================================================");
+//		log.info("생산 계획 받아온 값 : {}", monthlyResult);
+//		log.info("=================================================");
+		return "production/productionMonthlyPlanList";
+	}
+	
+	//[다미]생산계획 월별 목록test
+	@ResponseBody
+	@RequestMapping(value="/productionMonthlyPlanList", method = RequestMethod.POST)
+	public List<ProductionPlan> getProductionMonthlyPlanList(){
+		return productionService.getProductionMonthlyPlanList();
+	}
+
 	
 	//[다미]생산계획 목록
 	@GetMapping("/productionPlanList")

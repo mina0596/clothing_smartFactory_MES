@@ -36,7 +36,22 @@ layout:decorate="@{layout/default_rawMaterials}">
 						removeRow.remove();
 					}
 				});
-
+			});
+			
+			//수정하기
+			var modifyBtn = tableAttr.children().find('#modifyBtn');
+			modifyBtn.click(function(){
+				console.log('찍히니?');
+				var tdElement = $(this).parent().parent();
+				var rawMaterialCate = tdElement.find('#rawMaterialCate').text();
+				console.log(rawMaterialCate);
+				var materialCate = tdElement.find('#materialCate').text();
+				var materialName = tdElement.find('#materialName').text();
+				var colorName = tdElement.find('#colorName').text();
+				var feature = tdElement.find('#feature').text();
+				var unit = tdElement.find('#unit').text();
+				
+				location.href='modifyRawMaterials?rawMaterialCate=' + rawMaterialCate + '&materialCate=' + materialCate + '&materialName=' + materialName + '&colorName=' + colorName + '&feature=' + feature + '&unit=' + unit;
 			});
 			
 			//여기부터 테이블에 대한 스크립트 가지고온거
@@ -166,7 +181,7 @@ layout:decorate="@{layout/default_rawMaterials}">
 	                <td><input type="checkbox" class="check"></td>
 	            	<td>1</td>
                     <td class="hidden-phone">2021-01-18 16:02</td>
-                    <td class="center hidden-phone">입고</td>
+                    <td class="center hidden-phone" id="inventoryCate">입고</td>
                     <td class="center hidden-phone">thread01_red</td>
                     <td id="materialName">명주실</td>
                     <td id="colorName">빨간색</td>
@@ -187,7 +202,7 @@ layout:decorate="@{layout/default_rawMaterials}">
                   	<td><input type="checkbox" class="check"></td>
 	            	<td>2</td>
 	            	<td>2021-01-18 16:02</td>
-                    <td>입고</td>
+                    <td id="inventoryCate">입고</td>
                     <td class="hidden-phone">silk01_sandyBrown</td>
                     <td id="materialName">실크</td>
                     <td id="colorName">모래갈색</td>
@@ -208,7 +223,7 @@ layout:decorate="@{layout/default_rawMaterials}">
                   	<td><input type="checkbox" class="check"></td>
 	            	<td>3</td>
 	            	<td>2021-01-18 16:02</td>
-                    <td>출고</td>
+                    <td id="inventoryCate">출고</td>
                     <td class="hidden-phone">button01_royalBlue</td>
                     <td id="materialName">둥근단추</td>
                     <td id="colorName">파란색</td>
@@ -230,7 +245,7 @@ layout:decorate="@{layout/default_rawMaterials}">
                   	<td><input type="checkbox" class="check"></td>
 	            	<td>4</td>
 	            	<td>2021-01-18 16:02</td>
-	            	<td>입고</td>
+	            	<td id="inventoryCate">입고</td>
                     <td class="hidden-phone">thread02_chromeYellow</td>
                     <td id="materialName">명주실</td>
                     <td id="colorName">개나리색</td>
