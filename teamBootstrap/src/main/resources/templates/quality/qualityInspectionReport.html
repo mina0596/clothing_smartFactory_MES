@@ -10,7 +10,7 @@ layout:decorate="@{layout/default_qualityControl}">
 	  <th:block layout:fragment="customJs">
 <script>
 $(function(){
-	$('#modifyBtn').click(function(){
+	$('#finalInspectionResutl').click(function(){
 		
 	})
 });
@@ -62,17 +62,13 @@ $(function(){
               <table id="list" class="table table-striped table-advance table-hover">
                 <thead>
                   <tr>
-                    <th>
-                    	<i class="fa fa-bullhorn" style="width: inherit;"></i>체크
-                    </th>
+                    
                     <th class="hidden-phone"><i class="fa fa-bookmark"></i>순번</th>
-                    <th class="hidden-phone"><i class="fa fa-bookmark"></i>성적서결과번호</th>
-                    <th><i class="fa fa-bookmark"></i>품질검사요청코드</th>
+                    <th class="hidden-phone"><i class="fa fa-bookmark"></i>양복명</th>
                     <th><i class=" fa fa-bookmark"></i>계약번호</th>
                     <th><i class=" fa fa-bookmark"></i>성적서결과</th>
                     <th><i class=" fa fa-bookmark"></i>성적서등록일시</th>
-                    <th><i class=" fa fa-bookmark"></i>수정</th>
-                  </tr>
+				 </tr>
                 </thead>
                
                
@@ -80,88 +76,39 @@ $(function(){
                 <tbody>
                 <!--db에서 데이터 넣어야하는 부분 -->
                   <tr>
-                   <td class="hidden-phone">
-                      <input type="checkbox" class="checked" style="visibility: hidden;">
-                    </td>
-                    <td class="hidden-phone">1</td>
-                    <td class="hidden-phone">AA_ee_wash_result</td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">QC_REQUEST01</a></td>
+                  	<td class="finalInspectionResutl">1</td>
+                    <td class="hidden-phone">신사양복</td>
                     <td class="hidden-phone">1234</td>
                     <td class="hidden-phone">합격</td>
                     <td class="hidden-phone">2021-03-14 13:30</td>
-                    	<td>  
-                  		<button type="button"  class="btn btn-primary btn-xs" id="modifyBtn">
-                  			<i class="fa fa-pencil"></i>
-                  				수정
-                  		</button>
-                  	</td>
                   </tr>
-                  <tr>
-                   <td class="hidden-phone">
-                      <input type="checkbox" class="checked" style="visibility: hidden;">
-                    </td>
-                    <td class="hidden-phone">2</td>
-                    <td class="hidden-phone">AA_ee_wash_result</td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">QC_REQUEST02</a></td>
-                    <td class="hidden-phone">1235</td>
-                    <td class="hidden-phone">불합격</td>
-                    <td class="hidden-phone">2021-03-14 13:30</td>
-                    	<td>  
-                  		<button type="submit"  class="btn btn-primary btn-xs">
-                  			<i class="fa fa-pencil"></i>
-                  				수정
-                  		</button>
-                  	</td>
-                  </tr>
-                  <tr>
-                   <td class="hidden-phone">
-                      <input type="checkbox" class="checked" style="visibility: hidden;">
-                    </td>
-                    <td class="hidden-phone">3</td>
-                    <td class="hidden-phone">AA_ee_wash_result</td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">QC_REQUEST03</a></td>
-                    <td class="hidden-phone">1236</td>
+                 <tr>
+                  	<td class="finalInspectionResutl">2</td>
+                    <td class="hidden-phone">여성양복</td>
+                    <td class="hidden-phone">1542</td>
                     <td class="hidden-phone">합격</td>
                     <td class="hidden-phone">2021-03-14 13:30</td>
-                    	<td>  
-                  		<button type="submit"  class="btn btn-primary btn-xs">
-                  			<i class="fa fa-pencil"></i>
-                  				수정
-                  		</button>
-                  	</td>
                   </tr>
-                  <tr>
-                   <td class="hidden-phone">
-                      <input type="checkbox" class="checked" style="visibility: hidden;">
-                    </td>
-                    <td class="hidden-phone">4</td>
-                    <td class="hidden-phone">AA_ee_wash_result</td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">QC_REQUEST04</a></td>
-                    <td class="hidden-phone">1236</td>
+                 <tr>
+                  	<td class="finalInspectionResutl" >3</td>
+                    <td class="hidden-phone">신사양복</td>
+                    <td class="hidden-phone">1234</td>
                     <td class="hidden-phone">합격</td>
                     <td class="hidden-phone">2021-03-14 13:30</td>
-                    	<td>  
-                  		<button type="submit"  class="btn btn-primary btn-xs">
-                  			<i class="fa fa-pencil"></i>
-                  				수정
-                  		</button>
-                  	</td>
+                  </tr>
+                  <tr>
+                  	<td class="finalInspectionResutl">4</td>
+                    <td class="hidden-phone">여성양복</td>
+                    <td class="hidden-phone">1234</td>
+                    <td class="hidden-phone">합격</td>
+                    <td class="hidden-phone">2021-03-14 13:30</td>
                   </tr>
                   </tbody>
                   </table>
                   </div>
                   </div>
-                  <div class="form-group text-right">
-		          <div class="col-lg-offset-2 col-lg-10">
-		           <a th:href="@{/addShipmentInvoice}" class="btn btn-success btn-xs"><i class="fa fa-check"></i>송장 등록</a>
-		           <a id="deleteBtn" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i>삭제</a>
-		          </div>
-		        </div>
                   </div>
+                 
 </th:block>
 
 </html>

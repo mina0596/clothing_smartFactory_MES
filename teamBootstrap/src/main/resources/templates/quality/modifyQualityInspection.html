@@ -13,10 +13,19 @@ layout:decorate="@{layout/default_qualityControl}">
 		$('#cancleBtn').click(function(){
 			window.history.back();
 		});
-	
-		var highClassificationName= new Array();
-		var highCalssificationObject = new Object();
+		var middleInspections = false;
+		function update_selected(){
+			$('#middleSelbox').val(0);
+			$('#middleSelbox').find("option[value!=0]").detach();
+			$('#middleSelbox').append(middleInspections.filter('.middleInspection'+$(this).val()));
+		}
 		
+		$(function(){
+			middleInspections =$('#middleSelbox').find('option[value!=0]');
+			middleInspections.detach();
+			$('#highSelbox').change(update_selected);
+			$('#highSelbox').trigger('change');
+		});
 		
 		
 		
@@ -63,12 +72,12 @@ layout:decorate="@{layout/default_qualityControl}">
         <div class="form-group">
        	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사 대분류명</label>
        	  	<div class="col-sm-5">
-             	 <select class="form-control" name="highClassificationName" id="highSelbox" onchange="setSelectBox(this)">
+             	 <select class="form-control" name="highClasscificationInspection" id="highSelbox">
                   <option value="">::품질검사대분류명::</option>
-                  <th:block  th:each="">
-                  
-                  </th:block>
-                  
+                  <option value="inspection01">::원자재검사::</option>
+                  <option value="inspection02">::공정중간검사::</option>
+                  <option value="inspection03">::완제품검사::</option>
+                  <option value="inspection04">::대분류직접입력::</option>
                  </select>
            	  	</div>
            	  </div>
@@ -82,7 +91,7 @@ layout:decorate="@{layout/default_qualityControl}">
         <div class="form-group">
        	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사 중분류명</label>
        	  	<div class="col-sm-5">
-             	 <select class="form-control" name="mediumClassificationName" id="middleSelbox">
+             	 <select class="form-control" id="middleSelbox">
                			<option value="0">::중분류검사명::</option>
 	                    <option class="middleInspection1" value="ramInspection01">::원자재_원단이화학검사(파괴검사)1::</option>
 	                    <option class="middleInspection1" value="ramInspection02">::원자재_원단이화학검사(파괴검사)2::</option>
