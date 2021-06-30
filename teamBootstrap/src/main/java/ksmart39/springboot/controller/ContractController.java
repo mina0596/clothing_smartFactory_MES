@@ -154,12 +154,32 @@ public class ContractController {
 	}
 
 	
-
-	//[보람]원부자재 발주등록메서드
+	//[보람]원부자재 발주 계약 등록 
 	@GetMapping("/addSupplierContract")
+	public String addSupplierContract() {
+		return"contract/addSupplierContract";
+	}
+	
+	//[보람]발주 수정 완료 경로
+	@PostMapping("/modifySupplierRequest")
+	public String modifySupplierRequestComplete() {
+		return"redirect:/supplierRequestList";
+	}
+	//[보람] 발주 수정 경로 
+	@GetMapping("/modifySupplierRequest")
+	public String modifySupplierRequest() {
+		return "contract/modifySupplierRequest";
+	}
+	//[보람]원부자재 발주등록 완ㄹ
+	@PostMapping("/addSupplierRequest")
+	public String addSupplierRequestComplete() {
+		return "redirect"/supplierRequestList";
+	}
+	//[보람]원부자재 발주등록메서드
+	@GetMapping("/addSupplierRequest")
 	public String rawMaterialsOrder(Model model) {
-		model.addAttribute("title","원부자재발주등록");
-		return "contract/addSupplierContract";
+		
+		return "contract/addSupplierRequest";
 	}
 	
 	//[보람]원부자재 거래처 리스트에서 코드 클릭시 거래처정보 경로 메서드
