@@ -19,13 +19,13 @@ layout:decorate="@{layout/default_qualityControl}">
               <div class="panel-heading">
                 <ul class="nav nav-tabs nav-justified">
                   <li class="">
-                    <a data-toggle="tab" href="#overview" aria-expanded="false">Overview</a>
+                    <a data-toggle="tab" href="#overview" aria-expanded="true">등급별</a>
                   </li>
                   <li class="active">
-                    <a data-toggle="tab" href="#contact" class="contact-map" aria-expanded="true">Contact</a>
+                    <a data-toggle="tab" href="#contact" class="contact-map" aria-expanded="false">수치별</a>
                   </li>
                   <li class="">
-                    <a data-toggle="tab" href="#edit" aria-expanded="false">Edit Profile</a>
+                    <a data-toggle="tab" href="#edit" aria-expanded="false">Y/N</a>
                   </li>
                 </ul>
               </div>
@@ -33,13 +33,20 @@ layout:decorate="@{layout/default_qualityControl}">
               <div class="panel-body">
                 <div class="tab-content">
                   <div id="overview" class="tab-pane">
-                    <div class="row">
-                      <div class="col-md-6">
-                    		여기에 뭐넣지
-                      </div>
-                      <!-- /col-md-6 -->
+                    <div class="row">                 
                       <div class="col-md-6 detailed">
-							여긴 뭐넣지
+							소품류 품질검사 측정값 등록
+							 <div class="form-group">
+					          <label class="col-sm-2 col-sm-2 control-label">품질검사요청 코드</label>
+					          <div class="col-md-4">
+					            <div  class="input-group ">
+					              <input type="search" id="contractNum" class="form-control"  size="16">
+					              <div class="input-group-btn">
+					                <button type="button" id="searchContractNum" class=" btn btn-theme03 btn btn-default"><i class="fa"></i>검색하여 가져오기</button>
+					              </div>
+					            </div>
+					          </div>
+					        </div>
                       </div>
                       <!-- /col-md-6 -->
                     </div>
