@@ -14,12 +14,12 @@ layout:decorate="@{layout/default_contract}">
 		$('#cancleBtn').click(function(){
 			window.history.back();
 		});
-		$('#seldiv').hide();
+		$('#seldms').hide();
 		$('#highSelbox').change(function(){
 		if($('#highSelbox').val()=='suit01'){
-			$('#seldiv').show();
+			$('#seldms').show();
 		}else{
-			$('#seldiv').hide();
+			$('#seldms').hide();
 		}
 			
 		});//대분류 배열에 따라 중분류 배열값이 가지고오는 chage 메서드써야하는데 거기에다가  hide도 따라와야한다.
@@ -71,17 +71,30 @@ layout:decorate="@{layout/default_contract}">
            	  	</div>
            	  </div>
            	  
-       <div class="form-group" id="seldiv">
+       <div class="form-group" id="seldms">
    	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;" >사이즈</label>
    	  	<div class="col-sm-10">
    	  	
 			<div>
-              <h4><i class="fa fa-angle-right"></i> 자켓</h4>
-              <hr>
+				<h4><i class="fa fa-angle-right"></i>            
+				<input type="checkbox" name="chk_info" value="자켓">자켓
+				<input type="checkbox" name="chk_info" value="셔츠" checked="checked">셔츠
+				<input type="checkbox" name="chk_info" value="조끼">조끼
+                </h4>             
+				<hr>
               <table class="table">
- 
+ 				<thead>
+					<tr>
+						<th>총기장</th>
+						<th>어깨너비</th>
+						<th>가슴둘레</th>
+						<th>허리둘레</th>
+						<th>소매기장</th>
+						<th>소매동</th>
+					</tr>
+ 				</thead>
                 <tbody>
-                  <tr>
+ 				 <tr>
                     <td><input type="number" placeholder="총기장"></td>
                     <td><input type="number" placeholder="어깨너비"></td>
                     <td><input type="number" placeholder="가슴둘레"></td>
@@ -89,6 +102,18 @@ layout:decorate="@{layout/default_contract}">
                     <td><input type="number" placeholder="소매기장"></td>
                     <td><input type="number" placeholder="소매동"></td>
                   </tr>
+                </tbody>
+ 				<thead>
+					<tr>
+						<th>소매부리</th>
+						<th>목너비</th>
+						<th>오른팔길이</th>
+						<th>왼팔길이</th>
+						<th>뒷목길이</th>
+						<th>암홀</th>
+					</tr>
+ 				</thead>
+                <tbody>
                   <tr>
                     <td><input type="number" placeholder="소매부리"></td>
                     <td><input type="number" placeholder="목너비"></td>
@@ -97,68 +122,29 @@ layout:decorate="@{layout/default_contract}">
                     <td><input type="number" placeholder="뒷목길이"></td>
                     <td><input type="number" placeholder="암홀"></td>
                   </tr>
-
                 </tbody>
               </table>
             </div>          
-			<div>
-              <h4><i class="fa fa-angle-right"></i> 셔츠</h4>
-              <hr>
-              <table class="table">
- 
-                <tbody>
-                  <tr>
-                    <td><input type="number" placeholder="총기장"></td>
-                    <td><input type="number" placeholder="어깨너비"></td>
-                    <td><input type="number" placeholder="가슴둘레"></td>
-                    <td><input type="number" placeholder="허리둘레"></td>
-                    <td><input type="number" placeholder="소매기장"></td>
-                    <td><input type="number" placeholder="소매동"></td>
-                  </tr>
-                  <tr>
-                    <td><input type="number" placeholder="소매부리"></td>
-                    <td><input type="number" placeholder="목너비"></td>
-                    <td><input type="number" placeholder="오른팔길이"></td>
-                    <td><input type="number" placeholder="왼팔길이"></td>
-                    <td><input type="number" placeholder="뒷목길이"></td>
-                    <td><input type="number" placeholder="암홀"></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>          
-			<div>
-              <h4><i class="fa fa-angle-right"></i> 조끼</h4>
-              <hr>
-              <table class="table">
- 
-                <tbody>
-                  <tr>
-                    <td><input type="number" placeholder="총기장"></td>
-                    <td><input type="number" placeholder="어깨너비"></td>
-                    <td><input type="number" placeholder="가슴둘레"></td>
-                    <td><input type="number" placeholder="허리둘레"></td>
-                    <td><input type="number" placeholder="소매기장"></td>
-                    <td><input type="number" placeholder="소매동"></td>
-                  </tr>
-                  <tr>
-                    <td><input type="number" placeholder="소매부리"></td>
-                    <td><input type="number" placeholder="목너비"></td>
-                    <td><input type="number" placeholder="오른팔길이"></td>
-                    <td><input type="number" placeholder="왼팔길이"></td>
-                    <td><input type="number" placeholder="뒷목길이"></td>
-                    <td><input type="number" placeholder="암홀"></td>
-                  </tr>
 
-                </tbody>
-              </table>
-            </div>   
            <div>
-              <h4><i class="fa fa-angle-right"></i> 바지</h4>
+              <h4><i class="fa fa-angle-right"></i>            
+				<input type="checkbox" name="chk_info" value="자켓">바지
+                </h4> 
               <hr>
               <table class="table">
  
+                <thead>
+					<tr>
+						<th>허리둘레</th>
+						<th>엉덩이둘레</th>
+						<th>기장</th>
+						<th>밑단길이</th>
+						<th>밑위길이</th>
+						<th>허벅지둘레</th>
+					</tr>
+ 				</thead>
                 <tbody>
-                  <tr>
+ 				 <tr>
                     <td><input type="number" placeholder="허리둘레"></td>
                     <td><input type="number" placeholder="엉덩이둘레"></td>
                     <td><input type="number" placeholder="기장"></td>
@@ -166,7 +152,6 @@ layout:decorate="@{layout/default_contract}">
                     <td><input type="number" placeholder="밑위길이"></td>
                     <td><input type="number" placeholder="허벅지둘레"></td>
                   </tr>
-
                 </tbody>
               </table>
             </div>         
@@ -178,8 +163,11 @@ layout:decorate="@{layout/default_contract}">
    	  	<div class="col-sm-10">
    	  	
 			<div>
-              <h4><i class="fa fa-angle-right"></i> 자켓</h4>
-              <hr>
+				<h4><i class="fa fa-angle-right"></i>            
+				<input type="checkbox" name="chk_info" value="자켓">자켓
+				<input type="checkbox" name="chk_info" value="블라우스" checked="checked">블라우스
+				<input type="checkbox" name="chk_info" value="조끼">조끼
+                </h4>                 <hr>
               <table class="table">
  
                 <tbody>
@@ -203,38 +191,25 @@ layout:decorate="@{layout/default_contract}">
                 </tbody>
               </table>
             </div>          
-			<div>
-              <h4><i class="fa fa-angle-right"></i> 블라우스</h4>
-              <hr>
-              <table class="table">
- 
-                <tbody>
-                  <tr>
-                    <td><input type="number" placeholder="총기장"></td>
-                    <td><input type="number" placeholder="어깨너비"></td>
-                    <td><input type="number" placeholder="가슴둘레"></td>
-                    <td><input type="number" placeholder="허리둘레"></td>
-                    <td><input type="number" placeholder="소매기장"></td>
-                    <td><input type="number" placeholder="소매동"></td>
-                  </tr>
-                  <tr>
-                    <td><input type="number" placeholder="소매부리"></td>
-                    <td><input type="number" placeholder="목너비"></td>
-                    <td><input type="number" placeholder="오른팔길이"></td>
-                    <td><input type="number" placeholder="왼팔길이"></td>
-                    <td><input type="number" placeholder="뒷목길이"></td>
-                    <td><input type="number" placeholder="암홀"></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>          
            <div>
-              <h4><i class="fa fa-angle-right"></i> 치마</h4>
+              <h4><i class="fa fa-angle-right"></i>            
+				<input type="checkbox" name="chk_info" value="치마">치마
+                </h4> 
               <hr>
               <table class="table">
  
+                <thead>
+					<tr>
+						<th>허리둘레</th>
+						<th>엉덩이둘레</th>
+						<th>기장</th>
+						<th>밑단길이</th>
+						<th>밑위길이</th>
+						<th>허벅지둘레</th>
+					</tr>
+ 				</thead>
                 <tbody>
-                  <tr>
+ 				 <tr>
                     <td><input type="number" placeholder="허리둘레"></td>
                     <td><input type="number" placeholder="엉덩이둘레"></td>
                     <td><input type="number" placeholder="기장"></td>
@@ -242,7 +217,6 @@ layout:decorate="@{layout/default_contract}">
                     <td><input type="number" placeholder="밑위길이"></td>
                     <td><input type="number" placeholder="허벅지둘레"></td>
                   </tr>
-
                 </tbody>
               </table>
             </div>         
