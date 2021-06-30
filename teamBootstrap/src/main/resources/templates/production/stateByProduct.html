@@ -41,12 +41,12 @@ layout:decorate="@{layout/default_production}">
 		                		<option>납기일</option>
 		                	</select>
 	               		</div>
-         				<div class="form-group">
-		                	<input type=date class="form-control" id="exampleInputPassword2">&nbsp&nbsp ~ &nbsp&nbsp
-	               		</div>
-         				<div class="form-group">
-		                	<input type=date class="form-control" id="exampleInputPassword2">
-	               		</div>
+         				<div class="input-group input-large" data-date="01/01/2014" data-date-format="mm/dd/yyyy">
+	                      <span class="input-group-addon">From</span>
+	                      <input type="text" class="form-control dpd1" name="from">
+	                      <span class="input-group-addon">To</span>
+	                      <input type="text" class="form-control dpd2" name="to">
+	                    </div>
          			</td>
          			<td>
          				  <button type="button" class="btn btn-theme">검색</button>
