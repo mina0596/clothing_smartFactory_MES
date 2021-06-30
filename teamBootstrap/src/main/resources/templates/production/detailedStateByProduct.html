@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_production}">
+
+<th:block layout:fragment="container">
+	<div class="row mt">
+     <div class="col-md-12">
+          <h4><i class="fa fa-angle-right"></i> 의뢰품목별 상세 생산공정 현황 조회</h4>
+          <hr>  
+          
+          <form class="form-inline" role="form">
+         <table class="table table-striped table-advance table-hover">
+	         <thead>
+         		<tr>
+         			<th> </th>
+         			<th> </th>
+         			<th><i class="fa fa-barcode"></i> 의뢰 품목코드</th>
+         			<th><i class="fa fa-calendar"></i> 기간별</th>
+         			<th></th>
+         		</tr>
+         	</thead>
+         	<tbody>
+         		<tr>
+         			<td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+         			<td>
+         			
+               		</td>
+	               	<td>
+	         			 <div class="form-group">
+		                	<input type="text" class="form-control" placeholder="직접 입력 또는 검색">
+		                	코드찾기 <i class="btn fa fa-search" style="padding: 0px;" id="SupplierValue"></i>
+		                </div>
+         			</td>
+         			<td>
+         				<div class="form-group">
+		                	<select class="form-control" style="width: 150px;">
+		                		<option>::기간 검색 선택::</option>
+		                		<option>제조시작일시</option>
+		                		<option>제조완료일시</option>
+		                		<option>납기일</option>
+		                	</select>
+	               		</div>
+         				<div class="form-group">
+		                	<input type=date class="form-control" id="exampleInputPassword2">&nbsp&nbsp ~ &nbsp&nbsp
+	               		</div>
+         				<div class="form-group">
+		                	<input type=date class="form-control" id="exampleInputPassword2">
+	               		</div>
+         			</td>
+         			<td>
+         				  <button type="button" class="btn btn-theme">검색</button>
+         			</td>        			
+         		</tr>
+         	</tbody>
+         </table>  
+        </form>
+			<br>
+	       
+	       <h4><i class="fa fa-angle-right"></i> 의뢰품목별 상세 생산공정 현황 검색 조회 결과</h4>
+	       의뢰품목코드 'req03_WS_pants' 로 검색한 결과 입니다.
+          <hr> 
+       		<form class="form-horizontal style-form">
+              <table class="table table-striped table-advance table-hover" id="list">
+                <thead>
+                  <tr>
+             		<th><i class="fa fa-bullhorn"></i> 번호</th>
+                    <th><i class="fa fa-barcode"></i> 의뢰 품목코드</th>
+                    <th><i class="fa fa-bookmark"></i> 대분류 항목명</th>
+                    <th><i class="fa fa-bookmark"></i> 중분로 항목명</th>
+                    <th><i class="fa fa-bookmark"></i> 공정순번</th>
+                    <th><i class="fa fa-bookmark"></i> 공정 상태</th>
+                    <th><i class="fa fa-calendar"></i> 시작일시<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><i class="fa fa-calendar"></i> 완료일시<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+	                <td>1</td>
+                    <td>req03_WS_pants</td>
+                    <td>재단 공정</td>
+                    <td>재단 전 공정</td>
+                    <td>1</td>
+                    <td><span class="badge bg" style="padding-top: 5px;">완료</span></td>
+                    <td>2021-06-21 16:31</td>
+                    <td>2021-06-21 17:01</td>
+                  </tr>
+                  
+                  <tr>
+	            	<td>2</td>
+                    <td>req03_WS_pants</td>
+                    <td>재단 공정</td>
+                    <td>재단 본공정</td>
+                    <td>2</td>
+                    <td><span class="badge bg" style="padding-top: 5px;">완료</span></td>
+                    <td>2021-06-21 17:30</td>
+                    <td>2021-06-21 18:01</td>
+                  </tr>   
+                  <tr>
+                  	<td>3</td>
+                    <td>req03_WS_pants</td>
+                    <td>재단 공정</td>
+                    <td>재단 후 공정</td>
+                    <td>3</td>
+                    <td><span class="badge bg-warning" style="padding-top: 5px;">진행중</span></td>
+                    <td>2021-06-21 19:00</td>
+                    <td></td>
+                  </tr>  
+                </tbody>
+              </table>
+            
+       		</form>
+	               		
+	   
+	      <br>
+	      <br>
+	      
+            <h4><i class="fa fa-angle-right"></i> 의뢰품목별 생산공정 현황 목록</h4>
+            <hr>         
+	        <form class="form-horizontal style-form">
+              <table class="table table-striped table-advance table-hover" id="list">
+                <thead>
+                  <tr>
+                 	<th><input type="checkbox" id="checkAll"></th>
+             		<th><i class="fa fa-bullhorn"></i> 번호</th>
+                    <th><i class="fa fa-barcode"></i> 의뢰품목코드</th>
+                    <th><i class="fa fa-calendar"></i> 제조시작일시<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><i class="fa fa-bookmark"></i> 진행중인 공정</th>
+                    <th><i class="fa fa-bookmark"></i> 공정순번</th>
+                    <th><i class="fa fa-calendar"></i> 제조완료일시<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><i class="fa fa-calendar"></i> 납기일<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                  	<td><input type="checkbox" class="checked"></td>
+	                <td>1</td>
+                    <td>req03_WS_pants</td>
+                    <td>2021-02-01</td>
+                    <td><span class="badge bg" style="padding-top: 5px;">봉제 본봉공정</span></td>
+                    <td>4</td>
+                    <td></td>
+                    <td>2021-03-01</td>
+                  </tr>
+                  
+                  <tr>
+                  	<td><input type="checkbox" class="checked"></td>
+	            	<td>2</td>
+                    <td>req11_WS_jacket</td>
+                    <td>2021-03-21</td>
+                    <td><span class="badge bg" style="padding-top: 5px;">완성가공</span></td>
+                    <td>6</td>
+                    <td>2021-03-27</td>
+                    <td>2021-03-01</td>
+                  </tr>   
+                  <tr>
+                  	<td><input type="checkbox" class="checked"></td>
+                  	<td>3</td>
+                    <td>req13_WS_jacket</td>
+                    <td>2021-03-21</td>
+                    <td><span class="badge bg" style="padding-top: 5px;">봉제 특수 공정</span></td>
+                    <td>6</td>
+                    <td>2021-03-27</td>
+                    <td>2021-03-01</td>
+                  </tr>
+                 <tr>
+                 	<td><input type="checkbox" class="checked"></td>
+	            	<td>4</td>
+                    <td>req19_WS_skirt</td>
+                    <td>2021-03-21</td>
+                    <td><span class="badge bg" style="padding-top: 5px;">재단 후공정</span></td>
+                    <td>6</td>
+                    <td></td>
+                    <td>2021-03-01</td>
+                 </tr>
+                </tbody>
+              </table>
+            
+       		</form>
+       		
+       		
+          </div>
+          <!-- /col-md-12 -->
+        </div>
+        <!-- /row -->
+</th:block>
+
+</html>
