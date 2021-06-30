@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="subPass">
+                 <div class="form-inline">
+	                <div class="col-xs-3 input-group">	
+						<input type="number" class="form-control" placeholder="숫자입력">
+						<div class="input-group-btn">
+							<button id="addRows" class=" btn btn-theme03 btn btn-default">측정값 행 추가</button>
+						</div>
+					</div>
+                </div>
+				<br>
+                 <table class="table table-bordered table-striped table-condensed">
+                  <thead>
+                    <tr ><!-- 세부에 체크가 되어있으면 세부에 값이 들어간다...? -->
+                      <th><input type="checkbox" id="checkAll"></th>
+                      <th>*품질검사 요청코드</th>
+                      <th>검사명</th>
+                      <th colspan="2">
+                      	<input type="checkbox" class="checkedFistNum">
+                      	*1회차
+                      </th>
+                      <th colspan="2">
+                      	<input type="checkbox" class="checkedSecondNum">
+                      	2회차
+                      </th>
+                      <th colspan="2">
+                      	<input type="checkbox" class="checkedThirdNum">
+                      	3회차
+                      </th>
+                      <th>
+                      	시작일시
+                      </th>
+                      <th>
+                      	완료일시
+                      </th>
+                      <th>
+                      	등록
+                      </th>
+                    
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>	
+                      <td><input type="checkbox" class="checked"></td>
+                      <td>
+		                <div class="input-group">	
+							<input type="text" class="form-control" placeholder="숫자입력">
+							<div class="input-group-btn">
+								<button id="addRows" class="btn btn-default">검색</button>
+							</div>						
+		                </div>
+					  </td>
+					  <td>검사명</td>
+                      <td>
+                      	 <input type="radio" name="test">합격
+					  </td>
+					  <td>
+                      	 <input type="radio" name="test">불합격
+					  </td>
+                      <td>
+                      	<input type="radio" name="test2" disabled="disabled">합격
+					  </td>
+					  <td>					  	
+                      	 <input type="radio" name="test2" disabled="disabled">불합격
+					  </td>
+                      <td>
+                      	<input type="radio" name="test3" disabled="disabled">합격
+					  </td>
+					  <td>					  	
+                      	 <input type="radio" name="test3" disabled="disabled">불합격
+					  </td>
+                      
+                      <td>
+                      	<input type="text" class="form-control" placeholder="공란일시 등록시간">
+                      </td>
+                      <td>
+                      	<input type="text" class="form-control" placeholder="공란일시 등록시간">
+                      </td>
+                      <td>
+	               		<button type="button">등록</button>
+					  </td>
+                    </tr>
+
+                  </tbody>
+                </table>   
+                <!-- 등급별로 등록 -->
+</th:block>
+
+</html>
