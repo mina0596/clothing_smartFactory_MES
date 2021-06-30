@@ -12,49 +12,31 @@ layout:decorate="@{layout/default_contract}">
 
 	$(function(){
 		$('#cancleBtn').click(function(){
-			window.history.back();
+			location.href='/supplierContractList';
 		});
 		
 		var tableAttr= $('#seachrSupplierList').children();
-		var tdList = tableAttr.find('.bySupplierModal');
-		var radioCheck = tableAttr.find('.bySupplierModal').is(':checked');
+		var tdList = tableAttr.find('.bySupplierRequestModal');
+		var radioCheck = tableAttr.find('.bySupplierRequestModal').is(':checked');
 		var checkId = $(this).attr('id');
 		//거래처명 검색 모달 
-		$('#searchSupplier').click(function(){
-			$('#bySupplierModal').modal("show");
+		$('#searchSupplierRequest').click(function(){
+			$('#bySupplierRequestModal').modal("show");
 		});
-		$('#saveSupplier').click(function(){
-			var check = $('input[name=bySupplierModal]:checked');
-			tdList =tableAttr.find('.bySupplierModal');
+		$('#saveSupplierRequest').click(function(){
+			var check = $('input[name=bySupplierRequestModal]:checked');
+			tdList =tableAttr.find('.bySupplierRequestModal');
 			tdList.each(function(){
 				if($(this).is(':checked')){
 					var parent = $(this).parent();
-					var searchSupplierName = par.parent().find('.searchSupplierName').text();
-					console.log(supplierName+"<거래처명");
-					var searchSupplierEmployee = par.parent().find('.searchSupplierEmployee').text();
-					var supplierTel = par.parent().find('.searchSupplierTel').text();
-					$('#supplierContractName').attr('value',searchSupplierName);
-					$('#supplierEmployee').attr('value',supplierEmployee);
-					$('#supplierPhone').attr('value',supplierTel);
-				}
-			});
-		$('#searchRamMeterial').click(function(){
-			var check = $('input[name=bySupplierModal]:checked');
-			tdList =tableAttr.find('.bySupplierModal');
-			tdList.each(function(){
-				if($(this).is(':checked')){
-					var parent = $(this).parent();
-					var searchSupplierName = par.parent().find('.searchSupplierName').text();
 					
-					var searchSupplierEmployee = par.parent().find('.searchSupplierEmployee').text();
-					var supplierTl = par.parent().find('.searchSupplierTel').text();
-					$('#supplierContractName').attr('value',searchSupplierName);
-					$('#supplierEmployee').attr('value',supplierEmployee);
-					$('#supplierPhone').attr('value',supplierTel);
+					
 				}
 			});
-			
 		});
+		
+			
+		
 		$('[data-popup-open]').on('click', function(e)  {
 		       var targeted_popup_class = jQuery(this).attr('data-popup-open');
 		       $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
@@ -81,115 +63,110 @@ layout:decorate="@{layout/default_contract}">
 	
 	
     <div class="form-panel">
-      <h4 class="mb"><i class="fa fa-edit"></i> 발주등록</h4>
+      <h4 class="mb"><i class="fa fa-edit"></i> 발주계약등록</h4>
       <hr>
       <br>
-      
       <form class="form-horizontal style-form" method="post" >
-
        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">발주거래처명</label>
-          <div class="col-md-5">
-            <div  class="input-group ">
-              <input type="search" class="form-control" id="supplierContractName" size="16">
-              <div class="input-group-btn">
-                <button type="button" class=" btn btn-theme03 btn btn-default" id="searchSupplier" ><i class="fa"></i>검색하여 가져오기</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-       
-        
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">발주거래처담당자</label>
-         <div class="col-md-5">
-            <input class="form-control" id="supplierEmployee" type="text"  >
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">발주거래처 연락처</label>
-          <div class="col-md-5">
-          	<input class="form-control" id="supplierPhone" type="tel"  >
-          </div>
-        </div>
-           	        
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label"style="font-weight: 600;">발주원부자재명</label>
+          <label class="col-sm-2 col-sm-2 control-label"style="font-weight: 600;">발주코드</label>
           <div class="col-md-5">
             <div  class="input-group ">
               <input type="search" class="form-control"  size="16">
               <div class="input-group-btn">
-                <button type="button" class=" btn btn-theme03 btn btn-default" id="searchRamMeterial"><i class="fa"></i>검색하여 가져오기</button>
+                <button type="button" class=" btn btn-theme03 btn btn-default" id="searchSupplierRequest"><i class="fa"></i>검색하여 가져오기</button>
               </div>
             </div>
           </div>
         </div>
-        
-        
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">발주원부자재 색상</label>
+		<div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">거래처명</label>
           <div class="col-md-5">
-            <input type="text" class="form-control" placeholder="검색한 색상명" disabled="disabled">
+          	<input class="form-control"  type="text" placeholder="검색하여가지고오는값" disabled="disabled">
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">발주원부자재 패턴및 특징</label>
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">재료명</label>
           <div class="col-md-5">
-           <input type="text" class="form-control" placeholder="검색한 패턴및 특징" disabled="disabled">
+           <input type="text" class="form-control" placeholder="검색하여가지고오는값" disabled="disabled" >
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">발주원부자재수량</label>
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">수량</label>
+          <div class="col-md-5">
+           <input type="text" class="form-control"placeholder="검색하여가지고오는값" disabled="disabled" >
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">단위</label>
+          <div class="col-md-5">
+           <input type="text" class="form-control" placeholder="검색하여가지고오는값" disabled="disabled" >
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">발주날짜</label>
+          <div class="col-md-5">
+           <input type="text" class="form-control" placeholder="검색하여가지고오는값" disabled="disabled" >
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">결제조건</label>
           <div class="col-md-5">
            <input type="text" class="form-control" placeholder="" >
           </div>
         </div>
         <div class="form-group">
-           	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">발주단위</label>
-           	  	<div class="col-sm-4">
-             	 <select class="form-control">
-                  <option>단위</option>
-                  <option> 개</option>
-                  <option> kg</option>
-                  <option> 필</option>
-                 </select>
-           	  	</div>
-           	 	</div>
-      <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label"style="font-weight: 600;">발주원부자재납기일</label>
-          <div class="col-md-4">
-            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
-              <input type="text" class="form-control" readonly="readonly" size="16">
-              <div class="input-group-btn">
-                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
-                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
-              </div>
-            </div>
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">총계약금액</label>
+          <div class="col-md-5">
+           <input type="text" class="form-control" placeholder="" >
           </div>
         </div>
+ 
+      	<div class="form-group">
+		          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">계약시작일</label>
+		          <div class="col-md-4">
+		            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
+		              <input type="text" class="form-control" readonly="readonly" size="16">
+		              <div class="input-group-btn">
+		                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
+		                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
+		              </div>
+		            </div>
+		          </div>
+		        </div>
+         <div class="form-group">
+		          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">계약종료일</label>
+		          <div class="col-md-4">
+		            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
+		              <input type="text" class="form-control" readonly="readonly" size="16">
+		              <div class="input-group-btn">
+		                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
+		                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
+		              </div>
+		            </div>
+		          </div>
+		        </div>
+                  
         	<div class="form-group">
-          <label class="col-lg-2 col-sm-2 control-label"style="font-weight: 600;">발주등록자</label>
+          <label class="col-lg-2 col-sm-2 control-label"style="font-weight: 600;">계약담당자</label>
           <div class="col-md-5">
-            <p class="form-control-static">한보람</p>
+            <p class="form-control-static">추선민</p>
           </div>
         </div>
        <div class="form-group text-right">
                     <div class="col-lg-offset-2 col-lg-10">
-                     <a th:href="@{/supplierContractList}"> <button class="btn btn-theme" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">발주요청등록</font></font></button></a>
-                      <button class="btn btn-theme04" type="button" id="cancleBtn"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">발주요청취소</font></font></button>
+                     <a th:href="@{/supplierContractList}"> <button class="btn btn-theme" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">계약등록</font></font></button></a>
+                      <button class="btn btn-theme04" type="button" id="cancleBtn"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">계약취소</font></font></button>
                     </div>
                     </div>
        		</form>
       
     	</div>
-    <!-- 거래처명 검색 모달 시작-->
-     <div class="modal fade modal-xl"  id="bySupplierModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- 발주 검색 모달 시작-->
+     <div class="modal fade modal-xl"  id="bySupplierRequestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog" style="width:auto;display:table" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <h4 class="modal-title" id="exampleModalLabel">발주처 검색</h4>
+		        <h4 class="modal-title" id="exampleModalLabel">발주 검색</h4>
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		          <span aria-hidden="true">&times;</span>
 		        </button>
@@ -203,11 +180,18 @@ layout:decorate="@{layout/default_contract}">
        			<thead>
         			<tr>
 	         			<!-- <th style="padding-bottom: 12px;"><label class="control-label">발주처 명</label></th> -->
-	         			<th colspan="3" style="padding-right: 20px;">
-	         				<div class="form-inline" style="margin-bottom: 0px;">
-		         				<label class="control-label">발주처 명</label>
-			                	<input type="text" class="form-control" id="searchSupplierName" placeholder="검색어를 입력하세요.">
-	         				 <button type="submit" class="btn btn-theme">검색</button>
+	         			
+	         			<th colspan="12" style="padding-right: 20px;">
+	         			<div class="form-group col-xs-2"><!-- 발주처별 -->
+		               		 <select class="form-control">
+				   				<option>발주거래처명</option>
+				   				<option>발주품목명</option>
+				   				<option>발주번호</option>
+				   			 </select>
+		                </div>
+	         				<div class="form-inline col-md-5">
+		         			  <input type="text" class="form-control " id="searchSupplierName" placeholder="검색어를 입력하세요.">
+	         				 <button type="submit" class="btn btn-theme" >검색</button>
 		              		</div>
 	         			</th>  
         			</tr>     			
@@ -216,141 +200,59 @@ layout:decorate="@{layout/default_contract}">
        				<tr>
        					<td><i class="fa fa-check"></i></td>
        					<td>no.</td>
+       					<td>발주코드</td>
        					<td>발주거래처명</td>
+       					<td>발주재료명</td>
+       					<td>발주수량</td>
+       					<td>발주단위</td>
+       					<td>발주재료색상</td>
        					<td>발주거래처담당자</td>
        					<td>발주거래처연락처 </td>
+       					<td>발주날짜 </td>
+       					<td>발주납기일</td>
        				</tr>
      				<tr>
-     					<td><input type="radio" name="bySupplierModal"></td>
+     					<td><input type="radio" name="bySupplierRequestModal"></td>
      					<td>1</td>
-       					<td class="searchSupplierName" >나는 단추</td>
-       					<td class="searchSupplierEmployee">홍길동</td>
-       					<td class="searchSupplierTel">070-2515-1555</td>
+     					<td>suppLier01</td>
+       					<td>나는 단추</td>
+       					<td>동그란단추</td>
+       					<td>50</td>
+       					<td>개</td>
+       					<td>Blue</td>
+       					<td>김철수</td>
+       					<td>070-2515-1555</td>
+       					<td>2021-05-13</td>
+       					<td>2021-05-20</td>
      				</tr>
      				<tr>
-     					<td><input type="radio" name="bySupplierModal"></td>
+     					<td><input type="radio" name="bySupplierRequestModal"></td>
      					<td>2</td>
-       					<td class="searchSupplierName">견고한지퍼나라</td>
-       					<td class="searchSupplierEmployee" >공예윤</td>
-       					<td class="searchSupplierTel">070-2505-1545</td>
+     					<td>suppLier02</td>
+       					<td>부드러운실크컴퍼니</td>
+       					<td>실크</td>
+       					<td>1</td>
+       					<td>필</td>
+       					<td>White</td>
+       					<td>서윤우</td>
+       					<td>070-2815-1555</td>
+       					<td>2021-05-14</td>
+       					<td>2021-05-21</td>
      				</tr>
      				<tr>
-     					<td><input type="radio" name="bySupplierModal"></td>
+     					<td><input type="radio" name="bySupplierRequestModal"></td>
      					<td>3</td>
-       					<td class="searchSupplierName">부드러운실크컴퍼니</td>
-       					<td class="searchSupplierEmployee" >서윤우</td>
-       					<td class="searchSupplierTel" >070-2815-1555</td>
+     					<td>suppLier03</td>
+       					<td>견고한지퍼나라</td>
+       					<td>지퍼</td>
+       					<td>200</td>
+       					<td>개</td>
+       					<td>White</td>
+       					<td>서윤우</td>
+       					<td>070-2815-1555</td>
+       					<td>2021-05-14</td>
+       					<td>2021-05-21</td>
      				</tr>
-     				<tr>
-     					<td><input type="radio" name="bySupplierModal"></td>
-     					<td>4</td>
-       					<td class="searchSupplierName">정교한심지</td>
-       					<td class="searchSupplierEmployee" >이로운</td>
-       					<td class="searchSupplierTel" >070-658-9208</td>
-     				</tr>
-       			</tbody>        		
-         	</tbody>
-         </table> 
-      </div> 
-      <div class="modal-footer">
-			      <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-			      <button type="button" id="saveSupplier" class="btn btn-primary" data-dismiss="modal">확인</button>
-		      </div>
-		    </div>
-		  </div>
-		</div>
-     <div class="modal fade modal-xl"  id="bySupplierModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog" style="width:auto;display:table" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h4 class="modal-title" id="exampleModalLabel">원부자재검색</h4>
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">&times;</span>
-		        </button>
-		      </div>
-		      
-		      <!-- 모달본문 -->
-		   <div class="modal-body">
-		   
-		   <table  class="table table-striped table-advance table-hover" >
-         	<tbody>       		
-       			<thead>
-        			<tr>
-	         			<!-- <th style="padding-bottom: 12px;"><label class="control-label">발주처 명</label></th> -->
-	         			<th colspan="3" style="padding-right: 20px;">
-	         				<div class="form-inline" style="margin-bottom: 0px;">
-		         				<label class="control-label">원부자재검색</label>
-			                	<input type="text" class="form-control" id="searchSupplierName" placeholder="검색어를 입력하세요.">
-	         				 <button type="submit" class="btn btn-theme">검색</button>
-		              		</div>
-	         			</th>  
-        			</tr>     			
-       			</thead>
-       			<tbody style="text-align: center;">
-       				<tr>
-       					<td><i class="fa fa-check"></i></td>
-       					<td>no.</td>
-       					<td>원부자재구분</td>
-       					<td>원부자재재료구분</td>
-       					<td>원부자재재료명</td>
-       					<td>원부자재 색상</td>
-       					<td>원부자재 패턴및특징</td>
-       				</tr>
-     				<tr>
-     					<td><input type="radio" name="bySupplierModal"></td>
-     					<td>1</td>
-     					<td>원자재</td>
-     					<td>원단</td>
-     					<td>실크</td>
-     					<td>sandyBrown</td>
-     					<td>흰색체크무늬</td>
-       					
-     				</tr>
-     				<tr>
-     					<td><input type="radio" name="bySupplierModal"></td>
-     					<td>2</td>
-     					<td>원자재</td>
-     					<td>원단</td>
-     					<td>면</td>
-     					<td>Blue</td>
-     					<td>격자무늬</td>
-       				</tr>
-     				<tr>
-     					<td><input type="radio" name="bySupplierModal"></td>
-     					<td>3</td>
-     					<td>원자재</td>
-     					<td>원단</td>
-     					<td>폴리에스테르</td>
-     					<td>Black</td>
-     					<td>무늬없음</td>
-       				</tr>
-     				<tr>
-     					<td><input type="radio" name="bySupplierModal"></td>
-     					<td>4</td>
-     					<td>부자재</td>
-     					<td>단추</td>
-     					<td>커프스</td>
-     					<td>Black</td>
-     					<td>소용돌이무늬</td>
-       				</tr>
-     				<tr>
-     					<td><input type="radio" name="bySupplierModal"></td>
-     					<td>5</td>
-     					<td>부자재</td>
-     					<td>단추</td>
-     					<td>동그란단추</td>
-     					<td>White</td>
-     					<td>물결무늬</td>
-       				</tr>
-     				<tr>
-     					<td><input type="radio" name="bySupplierModal"></td>
-     					<td>6</td>
-     					<td>부자재</td>
-     					<td>지퍼</td>
-     					<td>메탈릭지퍼</td>
-     					<td>Gold</td>
-     					<td></td>
-       				</tr>
      				
        			</tbody>        		
          	</tbody>
@@ -364,7 +266,6 @@ layout:decorate="@{layout/default_contract}">
 		  </div>
 		</div>
     
-           
 	 <script th:src="@{Dashio/lib/jquery-ui-1.9.2.custom.min.js}"></script>
   <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-fileupload/bootstrap-fileupload.js}"></script>
   <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
