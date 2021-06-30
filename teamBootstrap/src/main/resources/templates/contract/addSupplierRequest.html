@@ -12,7 +12,7 @@ layout:decorate="@{layout/default_contract}">
 
 	$(function(){
 		$('#cancleBtn').click(function(){
-			window.history.back();
+			location.href="/supplierRequestList";
 		});
 		
 		var tableAttr= $('#seachrSupplierList').children();
@@ -22,6 +22,9 @@ layout:decorate="@{layout/default_contract}">
 		//거래처명 검색 모달 
 		$('#searchSupplier').click(function(){
 			$('#bySupplierModal').modal("show");
+		});
+		$('#searchRamMeterial').click(function(){
+			$('#byRamMetrialModal').modal("show");
 		});
 		$('#saveSupplier').click(function(){
 			var check = $('input[name=bySupplierModal]:checked');
@@ -38,19 +41,14 @@ layout:decorate="@{layout/default_contract}">
 					$('#supplierPhone').attr('value',supplierTel);
 				}
 			});
-		$('#searchRamMeterial').click(function(){
-			var check = $('input[name=bySupplierModal]:checked');
-			tdList =tableAttr.find('.bySupplierModal');
+		});
+		$('#saveRamMeterial').click(function(){
+			var check = $('input[name=byRamMetrialModal]:checked');
+			tdList =tableAttr.find('.byRamMetrialModal');
 			tdList.each(function(){
 				if($(this).is(':checked')){
 					var parent = $(this).parent();
-					var searchSupplierName = par.parent().find('.searchSupplierName').text();
 					
-					var searchSupplierEmployee = par.parent().find('.searchSupplierEmployee').text();
-					var supplierTl = par.parent().find('.searchSupplierTel').text();
-					$('#supplierContractName').attr('value',searchSupplierName);
-					$('#supplierEmployee').attr('value',supplierEmployee);
-					$('#supplierPhone').attr('value',supplierTel);
 				}
 			});
 			
@@ -177,14 +175,14 @@ layout:decorate="@{layout/default_contract}">
         </div>
        <div class="form-group text-right">
                     <div class="col-lg-offset-2 col-lg-10">
-                     <a th:href="@{/supplierContractList}"> <button class="btn btn-theme" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">발주요청등록</font></font></button></a>
+                     <a th:href="@{/supplierRequestList}"> <button class="btn btn-theme" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">발주요청등록</font></font></button></a>
                       <button class="btn btn-theme04" type="button" id="cancleBtn"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">발주요청취소</font></font></button>
                     </div>
                     </div>
        		</form>
       
     	</div>
-    <!-- 거래처명 검색 모달 시작-->
+    <!-- 거래처명 검색 모달 시작=============================================================================-->
      <div class="modal fade modal-xl"  id="bySupplierModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog" style="width:auto;display:table" role="document">
 		    <div class="modal-content">
@@ -259,7 +257,9 @@ layout:decorate="@{layout/default_contract}">
 		    </div>
 		  </div>
 		</div>
-     <div class="modal fade modal-xl"  id="bySupplierModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<!--원부자재 재료  검색 모달창 시작==============================================-->
+		<!-- 원부자재 재료명 -->
+     <div class="modal fade modal-xl"  id="byRamMetrialModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog" style="width:auto;display:table" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
@@ -297,7 +297,7 @@ layout:decorate="@{layout/default_contract}">
        					<td>원부자재 패턴및특징</td>
        				</tr>
      				<tr>
-     					<td><input type="radio" name="bySupplierModal"></td>
+     					<td><input type="radio" name="byRamMetrialModal"></td>
      					<td>1</td>
      					<td>원자재</td>
      					<td>원단</td>
@@ -307,7 +307,7 @@ layout:decorate="@{layout/default_contract}">
        					
      				</tr>
      				<tr>
-     					<td><input type="radio" name="bySupplierModal"></td>
+     					<td><input type="radio" name="byRamMetrialModal"></td>
      					<td>2</td>
      					<td>원자재</td>
      					<td>원단</td>
@@ -316,7 +316,7 @@ layout:decorate="@{layout/default_contract}">
      					<td>격자무늬</td>
        				</tr>
      				<tr>
-     					<td><input type="radio" name="bySupplierModal"></td>
+     					<td><input type="radio" name="byRamMetrialModal"></td>
      					<td>3</td>
      					<td>원자재</td>
      					<td>원단</td>
@@ -325,7 +325,7 @@ layout:decorate="@{layout/default_contract}">
      					<td>무늬없음</td>
        				</tr>
      				<tr>
-     					<td><input type="radio" name="bySupplierModal"></td>
+     					<td><input type="radio" name="byRamMetrialModal"></td>
      					<td>4</td>
      					<td>부자재</td>
      					<td>단추</td>
@@ -334,7 +334,7 @@ layout:decorate="@{layout/default_contract}">
      					<td>소용돌이무늬</td>
        				</tr>
      				<tr>
-     					<td><input type="radio" name="bySupplierModal"></td>
+     					<td><input type="radio" name="byRamMetrialModal"></td>
      					<td>5</td>
      					<td>부자재</td>
      					<td>단추</td>
@@ -343,7 +343,7 @@ layout:decorate="@{layout/default_contract}">
      					<td>물결무늬</td>
        				</tr>
      				<tr>
-     					<td><input type="radio" name="bySupplierModal"></td>
+     					<td><input type="radio" name="byRamMetrialModal"></td>
      					<td>6</td>
      					<td>부자재</td>
      					<td>지퍼</td>
@@ -358,7 +358,7 @@ layout:decorate="@{layout/default_contract}">
       </div> 
       <div class="modal-footer">
 			      <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-			      <button type="button" id="saveSupplier" class="btn btn-primary" data-dismiss="modal">확인</button>
+			      <button type="button" id="saveRamMeterial" class="btn btn-primary" data-dismiss="modal">확인</button>
 		      </div>
 		    </div>
 		  </div>

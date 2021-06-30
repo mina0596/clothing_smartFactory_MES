@@ -135,16 +135,21 @@ public class ContractController {
 	//[보람]원부자재 발주리스트 발주코드 클릭시 발주정보 경로 메서드
 	@GetMapping("/supplierContractInfo")
 	public String getSupplierContractInfo() {
-		
-		return "contract/supplierContractInfo";
+	
+	return "contract/supplierContractInfo";
 	}
-	//[보람]원부자재 발주 수정메서드
-	@GetMapping("/supplierContractModify")
+	//[보람]원부자재 발주 계약 수정 완료
+	@PostMapping("/modifySupplierContract")
+	public String modifySupplierContractCompelte() {
+		return"redirect:/supplierContractList";
+	}
+	//[보람]원부자재 발주 계약수정메서드
+	@GetMapping("/modifySupplierContract")
 	public String supplierContractModify() {
 		
-		return "contract/supplierContractModify";
+		return "contract/modifySupplierContract";
 	}
-	//[보람]원부자재 발주리스트
+	//[보람]원부자재 발주계약리스트
 	@GetMapping("/supplierContractList")
 	public String getRawmaterialsOrderList(Model model,@RequestParam(name = "supplierOrderSearchKey",required = false)String supplierOrderSearchKey
 			,@RequestParam(name ="supplierOrderSearchValue",required = false )String supplierOrderSearchValue) {
@@ -154,12 +159,23 @@ public class ContractController {
 	}
 
 	
+	//[보람]원부자재 발주 계약 완료 
+	@PostMapping("/addSupplierContract")
+	public String addSupplierContractCompelte() {
+		return"redirect/supplierContractList";
+	}
+	
 	//[보람]원부자재 발주 계약 등록 
 	@GetMapping("/addSupplierContract")
 	public String addSupplierContract() {
 		return"contract/addSupplierContract";
 	}
 	
+	//[보람] 발주 리스트 경로
+	@GetMapping("/supplierRequestList")
+	public String supplierRequestList() {
+		return "contract/supplierRequestList";
+	}
 	//[보람]발주 수정 완료 경로
 	@PostMapping("/modifySupplierRequest")
 	public String modifySupplierRequestComplete() {
@@ -170,11 +186,12 @@ public class ContractController {
 	public String modifySupplierRequest() {
 		return "contract/modifySupplierRequest";
 	}
-	//[보람]원부자재 발주등록 완ㄹ
+	//[보람]원부자재 발주등록 완료
 	@PostMapping("/addSupplierRequest")
 	public String addSupplierRequestComplete() {
-		return "redirect"/supplierRequestList";
+		return "redirect:/supplierRequestList";
 	}
+	
 	//[보람]원부자재 발주등록메서드
 	@GetMapping("/addSupplierRequest")
 	public String rawMaterialsOrder(Model model) {
