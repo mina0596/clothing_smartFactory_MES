@@ -27,6 +27,24 @@ public class ProductionController {
 		this.productionService = productionService;
 	}
 	
+	//[민아+한빛]의뢰품목별 상세 생산 공정 현황 등록
+	@GetMapping("/productProgressList")
+	public String getproductProgressList() {
+		return "production/productProgressList";
+	}
+	
+	//[민아+한빛]의뢰품목별 상세 생산 공정 현황 조회
+	@GetMapping("/detailedStateByProduct")
+	public String getDetailedStateByProduct() {
+		return "production/detailedStateByProduct";
+	}
+	
+	//[민아+한빛]의뢰품목별 생산 현황 조회
+	@GetMapping("/stateByProduct")
+	public String getStateByProduct() {
+		return "production/stateByProduct";
+	}
+	
 	//[민아+한빛]작업지시별 생산 현황 조회
 	@GetMapping("/stateByWorkOrder")
 	public String getStateByWorkOrder() {
@@ -35,7 +53,7 @@ public class ProductionController {
 	
 	//[민아+한빛]생산계획별 생산 현황 조회
 	@GetMapping("/stateByProductionPlan")
-	public String getstateByProductionPlan() {
+	public String getStateByProductionPlan() {
 		return "production/stateByProductionPlan";
 	}
 	

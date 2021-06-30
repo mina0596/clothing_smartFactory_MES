@@ -19,6 +19,27 @@ public class ContractController {
 		return "redirect:/buyerOrderList";
 	}
 	
+	//[한빛]수주 주문서 승인완료 목록
+	@GetMapping("/buyerOrderApproval")
+	public String buyerOrderApproval(Model model) {
+		model.addAttribute("title", "수주관리");
+		return "contract/buyerOrderApproval";
+	}	
+	
+	//[한빛]수주 주문서 상세로!
+	@GetMapping("/buyerOrderInfo")
+	public String buyerOrderInfo(Model model) {
+		model.addAttribute("title", "수주관리");
+		return "contract/buyerOrderInfo";
+	}	
+	
+	//[한빛]수주 주문서 수정
+	@GetMapping("/modifyBuyerOrder")
+	public String modifyBuyerOrder(Model model) {
+		model.addAttribute("title", "수주관리");
+		return "contract/buyerOrderList";
+	}	
+	
 	//[한빛]수주 주문서 조회
 	@GetMapping("/buyerOrderList")
 	public String buyerOrderList(Model model) {
@@ -114,16 +135,21 @@ public class ContractController {
 	//[보람]원부자재 발주리스트 발주코드 클릭시 발주정보 경로 메서드
 	@GetMapping("/supplierContractInfo")
 	public String getSupplierContractInfo() {
-		
-		return "contract/supplierContractInfo";
+	
+	return "contract/supplierContractInfo";
 	}
-	//[보람]원부자재 발주 수정메서드
-	@GetMapping("/supplierContractModify")
+	//[보람]원부자재 발주 계약 수정 완료
+	@PostMapping("/modifySupplierContract")
+	public String modifySupplierContractCompelte() {
+		return"redirect:/supplierContractList";
+	}
+	//[보람]원부자재 발주 계약수정메서드
+	@GetMapping("/modifySupplierContract")
 	public String supplierContractModify() {
 		
-		return "contract/supplierContractModify";
+		return "contract/modifySupplierContract";
 	}
-	//[보람]원부자재 발주리스트
+	//[보람]원부자재 발주계약리스트
 	@GetMapping("/supplierContractList")
 	public String getRawmaterialsOrderList(Model model,@RequestParam(name = "supplierOrderSearchKey",required = false)String supplierOrderSearchKey
 			,@RequestParam(name ="supplierOrderSearchValue",required = false )String supplierOrderSearchValue) {
@@ -133,12 +159,44 @@ public class ContractController {
 	}
 
 	
-
-	//[보람]원부자재 발주등록메서드
+	//[보람]원부자재 발주 계약 완료 
+	@PostMapping("/addSupplierContract")
+	public String addSupplierContractCompelte() {
+		return"redirect/supplierContractList";
+	}
+	
+	//[보람]원부자재 발주 계약 등록 
 	@GetMapping("/addSupplierContract")
+	public String addSupplierContract() {
+		return"contract/addSupplierContract";
+	}
+	
+	//[보람] 발주 리스트 경로
+	@GetMapping("/supplierRequestList")
+	public String supplierRequestList() {
+		return "contract/supplierRequestList";
+	}
+	//[보람]발주 수정 완료 경로
+	@PostMapping("/modifySupplierRequest")
+	public String modifySupplierRequestComplete() {
+		return"redirect:/supplierRequestList";
+	}
+	//[보람] 발주 수정 경로 
+	@GetMapping("/modifySupplierRequest")
+	public String modifySupplierRequest() {
+		return "contract/modifySupplierRequest";
+	}
+	//[보람]원부자재 발주등록 완료
+	@PostMapping("/addSupplierRequest")
+	public String addSupplierRequestComplete() {
+		return "redirect:/supplierRequestList";
+	}
+	
+	//[보람]원부자재 발주등록메서드
+	@GetMapping("/addSupplierRequest")
 	public String rawMaterialsOrder(Model model) {
-		model.addAttribute("title","원부자재발주등록");
-		return "contract/addSupplierContract";
+		
+		return "contract/addSupplierRequest";
 	}
 	
 	//[보람]원부자재 거래처 리스트에서 코드 클릭시 거래처정보 경로 메서드

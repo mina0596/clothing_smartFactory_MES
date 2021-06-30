@@ -1,16 +1,32 @@
 package ksmart39.springboot.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import ksmart39.springboot.domain.QualityInspection;
+import ksmart39.springboot.service.QualityControlService;
 
 @Controller
 public class QualityControlController {
+	private static final Logger log = LoggerFactory.getLogger(QualityControlController.class);
+	@Autowired
+	private QualityControlService qualityControlService;
 
 	//[한빛]불량품등록 -> 목록
 	@PostMapping("/addDefectiveProduct")
@@ -102,16 +118,19 @@ public class QualityControlController {
 	public String getModifyQualityInspection() {
 		return "quality/modifyQualityInspection";
 	}
+	
+	
 	//검사종류 리스트 메서드
 	@GetMapping("/qualityInspectionList")
-	public String getQualityInspectionList(Model model,@RequestParam(name = "qualityInspectionSearchkey",required = false)String qualityInspectionSearchkey
-			,@RequestParam(name ="qualityInspectionSearchValue",required = false )String qualityInspectionSearchValue) {
+	public String getQualityInspectionList(Model model) {
+		List<QualityInspection> qualityInspectionList =qualityControlService.getQualityInspectionList();
+		
+		log.info("========================================");
+		log.info("qualityInspectionList:",qualityInspectionList);
+		log.info("========================================");
+		model.addAttribute("qualityInspectionList", qualityInspectionList);
 	
 		
-		model.addAttribute("title", "품질검사:검사목록 및 조회목록");
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("qualityInspectionSearchkey", qualityInspectionSearchkey);
-		paramMap.put("qualityInspectionSearchValue", qualityInspectionSearchValue);
 		return"quality/qualityInspectionList";
 	}
 	
