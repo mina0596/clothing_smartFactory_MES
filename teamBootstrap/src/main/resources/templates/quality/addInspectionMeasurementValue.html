@@ -17,13 +17,13 @@ layout:decorate="@{layout/default_qualityControl}">
               <div class="panel-heading">
                 <ul class="nav nav-tabs nav-justified">
                   <li class="active">
-                    <a data-toggle="tab" href="#overview" aria-expanded="true">등급별로 등록</a>
-                  </li>
-                  <li class="">
-                    <a data-toggle="tab" href="#contact" class="contact-map" aria-expanded="false">Contact</a>
+                    <a data-toggle="tab" href="#overview">원부자재 측정값 등록</a>
                   </li>
                   <li>
-                    <a data-toggle="tab" href="#edit">Edit Profile</a>
+                    <a data-toggle="tab" href="#contact">수치별로 등록</a>
+                  </li>
+                  <li>
+                    <a data-toggle="tab" href="#edit">합격/불합격별로 등록</a>
                   </li>
                 </ul>
               </div>
@@ -32,17 +32,29 @@ layout:decorate="@{layout/default_qualityControl}">
                 <div class="tab-content">
                   <div id="overview" class="tab-pane active">
                
-                <div>	
-					<input type="number" placeholder="숫자입력">
-					<button id="addRows">측정값 행 추가</button>
-				</div>
-
-                 <table class="table">
+                <div class="form-inline">
+              		<div class="col-sm-3 input-group">	
+						<input type="text" class="form-control" placeholder="품질검사 요청코드 검색">
+						<div class="input-group-btn">
+							<button class="btn btn-warning">검색</button>
+						</div>
+					</div>
+	                <div class="col-sm-3 input-group">	
+						<input type="number" class="form-control" placeholder="숫자입력">
+						<div class="input-group-btn">
+							<button id="addRows" class=" btn btn-theme03 btn btn-default">측정값 행 추가</button>
+						</div>
+					</div>
+	                
+                </div>
+				<br>
+                 <table class="table table-bordered table-striped table-condensed">
                   <thead>
-                    <tr><!-- 세부에 체크가 되어있으면 세부에 값이 들어간다...? -->
+                    <tr ><!-- 세부에 체크가 되어있으면 세부에 값이 들어간다...? -->
                       <th><input type="checkbox" id="checkAll"></th>
                       <th>*품질검사 요청코드</th>
-                      <th>*세부/소분류</th>
+                      <th>검사명</th>
+                      <th>원부자재명</th>
                       <th>
                       	<input type="checkbox" class="checkedFistNum">
                       	*1회차
@@ -52,8 +64,8 @@ layout:decorate="@{layout/default_qualityControl}">
                       	2회차
                       </th>
                       <th>
-                      	3회차
                       	<input type="checkbox" class="checkedThirdNum">
+                      	3회차
                       </th>
                       <th>
                       	시작일시
@@ -68,33 +80,47 @@ layout:decorate="@{layout/default_qualityControl}">
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>	
+                    <tr id="tableTr">	
                       <td><input type="checkbox" class="checked"></td>
                       <td>
-	               		<input type="text">
-	               		<button type="button">검색</button>
+		                <div class="input-group">	
+							<input type="text" class="form-control" placeholder="숫자입력">
+							<div class="input-group-btn">
+								<button id="addRows" class="btn btn-default">검색</button>
+							</div>						
+		                </div>
+					  </td>
+					  <td>검사명</td>
+					  <td>원부자재이름</td>
+                      <td>
+                      	 <div class="input-group">
+					      <span class="input-group-addon">
+					        <input type="checkbox" aria-label="...">
+					      </span>
+					      <input type="text" class="form-control" aria-label="...">
+					    </div>
 					  </td>
                       <td>
-						<input type="radio" name="subOrlow"> 세분류
-						<input type="radio" name="subOrlow"> 소분류
+                      	<div class="input-group">
+					      <span class="input-group-addon">
+					        <input type="checkbox" aria-label="...">
+					      </span>
+					      <input type="text" class="form-control" disabled="disabled" aria-label="...">
+					    </div>
 					  </td>
                       <td>
-                      	<input type="checkbox" class="checkedFistNumAll">
-	               		<input type="text" >
+                      	<div class="input-group">
+					      <span class="input-group-addon">
+					        <input type="checkbox" aria-label="...">
+					      </span>
+					      <input type="text" class="form-control" disabled="disabled" aria-label="...">
+					    </div>
 					  </td>
                       <td>
-                      	<input type="checkbox" class="checkedSecondNumAll">
-	               		<input type="text" disabled="disabled">
-					  </td>
-                      <td>
-                      	<input type="checkbox" class="checkedThirdNumAll">
-	               		<input type="text" disabled="disabled">
-					  </td>
-                      <td>
-                      	<input type="text" placeholder="공란일시 등록시간">
+                      	<input type="text" class="form-control" placeholder="공란일시 등록시간">
                       </td>
                       <td>
-                      	<input type="text" placeholder="공란일시 등록시간">
+                      	<input type="text" class="form-control" placeholder="공란일시 등록시간">
                       </td>
                       <td>
 	               		<button type="button">등록</button>
@@ -113,11 +139,12 @@ layout:decorate="@{layout/default_qualityControl}">
                   </div>
                   
                   
-                  <!-- /tab-pane -->
+                  <!-- 세번째 -->
                   <div id="edit" class="tab-pane">
-                     어쩌구
-                    <!-- /row -->
+                  	<th:block th:replace="/quality/addInspectionMeasurementValueMenu/addInspectionMeasurementValueSubPass::subPass"></th:block>
                   </div>
+                  
+                  
                   <!-- /tab-pane -->
                 </div>
                 <!-- /tab-content -->
@@ -126,7 +153,35 @@ layout:decorate="@{layout/default_qualityControl}">
             </div>
             <!-- /col-lg-12 -->
           </div>
-
+<script>
+	$(function(){		
+// 		function noEvent() { // 새로 고침 방지
+// 		    if (event.keyCode == 116) {
+// 		        alert("새로고침을 할 수 없습니다.");
+// 		        event.keyCode = 2;
+// 		        return false;
+// 		    } else if (event.ctrlKey
+// 		            && (event.keyCode == 78 || event.keyCode == 82)) {
+// 		        return false;
+// 		    }
+// 		}
+// 		document.onkeydown = noEvent;
+		
+		$('#addRows').click(function(){
+			var tr = $('#tableTr');
+			var tbody = tr.parent();
+			var innerHtml = '<tr>';
+			innerHtml += '<td><input type="checkbox" class="checked"></td><td><div class="input-group"><input type="text" class="form-control" placeholder="숫자입력"><div class="input-group-btn"><button id="addRows" class="btn btn-default">검색</button></div></div></td><td>검사명</td><td>원부자재이름</td><td><div class="input-group"><span class="input-group-addon"><input type="checkbox" aria-label="..."></span><input type="text" class="form-control" aria-label="..."></div></td><td><div class="input-group"><span class="input-group-addon"><input type="checkbox" aria-label="..."></span><input type="text" class="form-control" disabled="disabled" aria-label="..."></div></td><td><div class="input-group"><span class="input-group-addon"><input type="checkbox" aria-label="..."></span><input type="text" class="form-control" disabled="disabled" aria-label="..."></div></td><td><input type="text" class="form-control" placeholder="공란일시 등록시간"></td><td><input type="text" class="form-control" placeholder="공란일시 등록시간"></td><td><button type="button">등록</button></td>';
+			innerHtml += '</tr>';
+			tbody.append(innerHtml);
+			
+		});
+		
+	});
+	
+	
+	
+</script>
 </th:block>
 
 </html>

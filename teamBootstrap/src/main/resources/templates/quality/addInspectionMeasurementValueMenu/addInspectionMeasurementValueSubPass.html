@@ -1,38 +1,91 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<th:block th:fragment="subSize">
-    
-					<div class="row">
-                      <div class="col-md-6">
-                        <div id="map" style="position: relative; overflow: hidden;"><div style="height: 100%; width: 100%; position: absolute; top: 0px; left: 0px; background-color: rgb(229, 227, 223);"><div class="gm-err-container"><div class="gm-err-content"><div class="gm-err-icon"><img src="https://maps.gstatic.com/mapfiles/api-3/images/icon_error.png" draggable="false" style="user-select: none;"></div><div class="gm-err-title">죄송합니다. 문제가 발생했습니다.</div><div class="gm-err-message">Google 지도가 제대로 로드되지 않았습니다. 자바스크립트 콘솔에서 자세한 기술 정보를 확인하세요.</div></div></div></div></div>
-                      </div>
-                      <!-- /col-md-6 -->
-                      <div class="col-md-6 detailed">
-                        <h4>Location</h4>
-                        <div class="col-md-8 col-md-offset-2 mt">
-                          <p>
-                            Postal Address<br> PO BOX 12988, Sutter Ave<br> Brownsville, New York.
-                          </p>
-                          <br>
-                          <p>
-                            Headquarters<br> 844 Sutter Ave,<br> 9003, New York.
-                          </p>
-                        </div>
-                        <h4>Contacts</h4>
-                        <div class="col-md-8 col-md-offset-2 mt">
-                          <p>
-                            Phone: +33 4898-4303<br> Cell: 48 4389-4393<br>
-                          </p>
-                          <br>
-                          <p>
-                            Email: hello@dashiotheme.com<br> Skype: UseDashio<br> Website: http://Alvarez.is
-                          </p>
-                        </div>
-                      </div>
-                      <!-- /col-md-6 -->
-                    </div>
+<th:block th:fragment="subPass">
+                 <div class="form-inline">
+	                <div class="col-xs-3 input-group">	
+						<input type="number" class="form-control" placeholder="숫자입력">
+						<div class="input-group-btn">
+							<button id="addRows" class=" btn btn-theme03 btn btn-default">측정값 행 추가</button>
+						</div>
+					</div>
+                </div>
+				<br>
+                 <table class="table table-bordered table-striped table-condensed">
+                  <thead>
+                    <tr ><!-- 세부에 체크가 되어있으면 세부에 값이 들어간다...? -->
+                      <th><input type="checkbox" id="checkAll"></th>
+                      <th>*품질검사 요청코드</th>
+                      <th>검사명</th>
+                      <th colspan="2">
+                      	<input type="checkbox" class="checkedFistNum">
+                      	*1회차
+                      </th>
+                      <th colspan="2">
+                      	<input type="checkbox" class="checkedSecondNum">
+                      	2회차
+                      </th>
+                      <th colspan="2">
+                      	<input type="checkbox" class="checkedThirdNum">
+                      	3회차
+                      </th>
+                      <th>
+                      	시작일시
+                      </th>
+                      <th>
+                      	완료일시
+                      </th>
+                      <th>
+                      	등록
+                      </th>
+                    
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>	
+                      <td><input type="checkbox" class="checked"></td>
+                      <td>
+		                <div class="input-group">	
+							<input type="text" class="form-control" placeholder="숫자입력">
+							<div class="input-group-btn">
+								<button id="addRows" class="btn btn-default">검색</button>
+							</div>						
+		                </div>
+					  </td>
+					  <td>검사명</td>
+                      <td>
+                      	 <input type="radio" name="test">합격
+					  </td>
+					  <td>
+                      	 <input type="radio" name="test">불합격
+					  </td>
+                      <td>
+                      	<input type="radio" name="test2" disabled="disabled">합격
+					  </td>
+					  <td>					  	
+                      	 <input type="radio" name="test2" disabled="disabled">불합격
+					  </td>
+                      <td>
+                      	<input type="radio" name="test3" disabled="disabled">합격
+					  </td>
+					  <td>					  	
+                      	 <input type="radio" name="test3" disabled="disabled">불합격
+					  </td>
+                      
+                      <td>
+                      	<input type="text" class="form-control" placeholder="공란일시 등록시간">
+                      </td>
+                      <td>
+                      	<input type="text" class="form-control" placeholder="공란일시 등록시간">
+                      </td>
+                      <td>
+	               		<button type="button">등록</button>
+					  </td>
+                    </tr>
 
+                  </tbody>
+                </table>   
+                <!-- 등급별로 등록 -->
 </th:block>
 
 </html>
