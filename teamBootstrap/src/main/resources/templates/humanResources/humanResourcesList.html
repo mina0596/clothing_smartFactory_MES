@@ -85,20 +85,19 @@ layout:decorate="@{layout/default_humanResources}">
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                  	<td><input type="checkbox" id="checkAll"></td>
-                    <td class="hidden-phone">1</td>
-                    <td class="hidden-phone">worker01</td>      
-                    <td class="hidden-phone">이한빛</td>
-                    <td>본사</td>
-                    <td>임원</td>
-                    <td>onelight@naver.com</td>
-                    <td>010-7170-7123</td>
-                    <td>2021.06.22 14:20</td>
+                  <tr th:each=" h,n : ${humanResources}">
+                  	<td><input type="checkbox"  class="checked"></td>
+                    <td th:text = ${n.index+1}></td>
+                    <td  th:text="${h.employeeCode}"></td>      
+                    <td th:text="${h.employeeName}"></td>
+                    <td th:text="${h.employeeDepartment}"></td>
+                    <td th:text="${h.employeePosition}"></td>
+                    <td th:text="${h.employeeEmail}"></td>
+                    <td th:text="${h.employeeTel}"></td>
+                    <td th:text="${h.employeeInfoRegDate}"></td>
                     <td>  <button class="btn btn-primary btn-xs" type="button" onclick="location.href='/modifyHumanResources'"><i class="fa fa-pencil"></i>수정</button></td>
                   </tr>
                   
-   
                 </tbody>
               </table>
             
