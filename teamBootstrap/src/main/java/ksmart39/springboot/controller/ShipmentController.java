@@ -80,18 +80,23 @@ public class ShipmentController {
 	public String getShipment(){
 		return "shipment/shipment";
 	}
-	//운송회사 정보
+	//[민아]운송회사 정보
 	@GetMapping("/courierList")
 	public String getCourierList() {
 		return "shipment/courierList";
 	}
-	//출고등록
+	//[민아]출고등록
 	@GetMapping("/addShipment")
 	public String addShippedProductInfo() {
 		return "shipment/addShipment";
 	}
+	//[민아]출고수정
+	@GetMapping("/modifyShipment")
+	public String modifyShipment() {
+		return "shipment/modifyShipment";
+	}
 	
-	//출고리스트
+	//[민아]출고리스트
 	@GetMapping("/shipmentList")
 	public String getShipmentList() {
 		return "shipment/shipmentList";
