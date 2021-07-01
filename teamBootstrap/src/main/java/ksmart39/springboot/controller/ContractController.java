@@ -181,6 +181,25 @@ public class ContractController {
 
 
 	//=========================================================
+	//[민아]계약후 예정 수금/출금 등록
+	@GetMapping("/addInvoicePayment")
+	public String addInvoicePayment() {
+		return "contract/addInvoicePayment";
+	}
+	
+	//[민아]수금/출금 청구 등록
+	@GetMapping("/addInvoiceClaim")
+	public String addInvoiceClaim() {
+		return "contract/addInvoiceClaim";
+	}
+	
+	//[민아]수금/출금 청구 목록
+	@GetMapping("/invoiceClaimList")
+	public String getInvoiceClaimList() {
+		return "contract/invoiceClaimList";
+	}
+
+	
 	// 결제 등록
 	@GetMapping("/addInvoiceApproval")
 	public String addInvoiceApproval() {
