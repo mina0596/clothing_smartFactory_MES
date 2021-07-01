@@ -14,12 +14,44 @@ layout:decorate="@{layout/default_system}">
 			window.history.back();
 		});
 	
-		
-		
-		
-
 		$('#seldiv').hide();
-		$('#seldiv2').hide()
+		$('#seldiv2').hide();
+		var ramInspection=['원단이화학검사'];
+		var midInpspection2=['재단물검사','봉제검사'];
+		var finalInpspection=['봉제검사','마무리'];
+		var directInspection=['직접입력'];
+		$('#highSelbox').change(function(){
+			if($('#highSelbox').val()=='원자재검사'){
+				$('.middleInspection').remove();
+				$.each(ramInspection,function(i,item){
+					$('#middleSelbox').append('<option class="middleInspection">'+item+'</option>');
+				});
+			}else if ($('#highSelbox').val()=='공정중간검사'){
+				$('.middleInspection').remove();
+				$.each(midInpspection2,function(i,item){
+					$('#middleSelbox').append('<option class="middleInspection">'+item+'</option>');
+				});
+			}else if($('#highSelbox').val()=='완제품검사'){
+				$('.middleInspection').remove();
+				$.each(finalInpspection,function(i,item){
+					$('#middleSelbox').append('<option class="middleInspection">'+item+'</option>');
+				});
+			}else if($('#highSelbox').val()=='직접입력'){
+				$('.middleInspection').remove();
+					$('#seldiv').show();
+					$.each(directInspection,function(i,item){
+					$('#middleSelbox').append('<option class="middleInspection">'+item+'</option>');
+					$('#seldiv2').show();
+					});
+				}else{
+					$('#seldiv').hide();
+					$('#seldiv2').hide();
+			}
+			
+		});
+		
+		
+/* 
 		$('#highSelbox').change(function(){
 		if($('#highSelbox').val()=='inspection04'){
 			$('#seldiv').show();
@@ -36,7 +68,7 @@ layout:decorate="@{layout/default_system}">
 		}
 			
 		});
-		
+		 */
 		
 	});
 	
@@ -62,10 +94,11 @@ layout:decorate="@{layout/default_system}">
        	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사 대분류명</label>
        	  	<div class="col-sm-5">
              	 <select class="form-control" name="highClassificationName" id="highSelbox" >
-                  <option value="">::품질검사대분류명::</option>
-                  <option value="">::품질검사대분류명::</option>
-                  <option value="">::품질검사대분류명::</option>
-                  <option value="">::품질검사대분류명::</option>
+                  <option value="">::대분류검사명::</option>
+                  <option value="원자재검사">::원자재검사::</option>
+                  <option value="공정중간검사">::공정중간검사::</option>
+                  <option value="완제품검사">::완제품검사::</option>
+                  <option value="직접입력">::직접입력::</option>
                
                   
                 
@@ -85,27 +118,8 @@ layout:decorate="@{layout/default_system}">
        	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사 중분류명</label>
        	  	<div class="col-sm-5">
              	 <select class="form-control" name="mediumClassificationName" id="middleSelbox">
-               			<option value="0">::중분류검사명::</option>
-	                    <option class="middleInspection1" value="ramInspection01">::원자재_원단이화학검사(파괴검사)1::</option>
-	                    <option class="middleInspection1" value="ramInspection02">::원자재_원단이화학검사(파괴검사)2::</option>
-	                    <option class="middleInspection1" value="ramInspection03">::원자재_원단이화학검사(파괴검사)3::</option>
-	                    <option class="middleInspection1" value="ramInspection04">::원자재_원단이화학검사(파괴검사)4::</option>
-	                    <option class="middleInspection1" value="ramInspection05">::원자재_원단이화학검사(파괴검사)5::</option>
-	                    <option class="middleInspection1" value="ramInspection06">::원자재_원단이화학검사(파괴검사)6::</option>
-	                    <option class="middleInspection1" value="midInpspection01">::공정중간검사_재단물검사1::</option>
-	                    <option class="middleInspection2" value="midInpspection02">::공정중간검사_재단물검사2::</option>
-	                    <option class="middleInspection2" value="midInpspection03">::공정중간검사_재단물검사3::</option>
-	                    <option class="middleInspection2" value="midInpspection04">::공정중간검사_봉제검사1::</option>
-	                    <option class="middleInspection2" value="midInpspection05">::공정중간검사_봉제검사2::</option>
-	                    <option class="middleInspection2" value="midInpspection06">::공정중간검사_봉제검사3::</option>
-	                    <option class="middleInspection2" value="midInpspection07">::공정중간검사_봉제검사4::</option>
-	                    <option class="middleInspection3" value="finalInpspection01">::완제품검사_봉제검사1::</option>
-	                    <option class="middleInspection3" value="finalInpspection02">::완제품검사_봉제검사2::</option>
-	                    <option class="middleInspection3" value="finalInpspection03">::완제품검사_봉제검사3::</option>
-	                    <option class="middleInspection3" value="finalInpspection04">::완제품검사_봉제검사4::</option>
-	                    <option class="middleInspection3" value="finalInpspection05">::완제품검사_마무리1::</option>
-	                    <option class="middleInspection3" value="finalInpspection06">::완제품검사_마무리2::</option>
-	                    <option class="middleInspection4" value="middleInspectionDriect">::중분류직접입력::</option>
+               			<option class="middleInspection"  value="">::중분류검사명::</option>
+	                     
                  </select>
            	  	</div>
            	  	</div>
