@@ -27,6 +27,7 @@ public class ProductionController {
 		this.productionService = productionService;
 	}
 	
+	//================================================================
 	//[민아+한빛]의뢰품목별 상세 생산 공정 현황 등록
 	@GetMapping("/productProgressList")
 	public String getproductProgressList() {
@@ -57,7 +58,7 @@ public class ProductionController {
 		return "production/stateByProductionPlan";
 	}
 	
-	
+	//===================================================================
 	//[민아]완제품 수정
 	@GetMapping("/modifyCompletedProduct")
 	public String modifyCompletedProduct() {
@@ -76,6 +77,7 @@ public class ProductionController {
 		return "production/completedProductList";
 	}
 	
+	//=====================================================================
 	//[보람]작업지시정보
 	@GetMapping("/workOrderInfo")
 	public String workOrderInfo() {
@@ -101,6 +103,8 @@ public class ProductionController {
 		return "production/addWorkOrder";
 	}
 
+	
+	//================================================================
 	//[민아]생산공정 등록
 	@GetMapping("/addProductionProcess")
 	public String addProductionProcess() {
@@ -113,6 +117,8 @@ public class ProductionController {
 		return "production/productionProcessList";
 	}
 	
+	
+	//==================================================================
 	//[다미]생산계획 일별 목록
 	@GetMapping("/productionDailyPlanList")
 	public String productionDailyPlanList() {
@@ -155,6 +161,8 @@ public class ProductionController {
 		return "production/addProductionPlan";
 	}
 	
+	
+	//====================================================================
 	//생산관리 메인화면
 	@GetMapping("/production")
 	public String getProdcutioncontrol () {

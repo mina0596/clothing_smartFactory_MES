@@ -1,3 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ksmart39.springboot.dao.SystemMapper"></mapper>
+<mapper namespace="ksmart39.springboot.dao.SystemMapper">
+
+
+		<resultMap type="HumanResources"  id="getHumanResourcesInfo">
+		<result  property="employeeCode" 				column="employee_code"/>
+		<result  property="levelNum" 				column="level_num"/>
+		<result  property="employeeId" 				column="employee_id"/>
+		<result  property="employeePw" 			column="employee_pw"/>
+		<result  property="employeeName" 			column="employee_name"/>
+		<result  property="employeeTel" 				column="employee_tel"/>
+		<result  property="employeeAddress" 				column="employee_address"/>
+		<result  property="employeeEmail" 				column="employee_email"/>
+		<result  property="employeeDepartment" 				column="employee_department"/>
+		<result  property="employeePosition" 		column="employee_position"/>
+		<result  property="employeeInfoRegDate" 		column="employee_info_reg_date"/>
+		<result  property="employeeInfoUpdateDate" 		column="employee_info_update_date"/>
+		<association property="humanResourcesLevel"  javaType="HumanResourcesLevel">
+			<id property="levelNum"  column="level_num"/>	 <!-- join 공통 -->
+			<result property="levelName" column="level_name"/>
+		</association>
+	</resultMap>
+	<select id="getHumanResources" resultMap="getHumanResourcesInfo"  resultType="HumanResources" fetchSize="1000">
+		SELECT
+			e.employee_code
+			,e.level_num
+			,e.employee_id
+			,e.employee_pw
+			,e.employee_name
+			,e.employee_tel
+			,e.employee_address
+			,e.employee_email
+			,e.employee_department
+			,e.employee_position
+			,e.employee_info_reg_date
+			,e.employee_info_update_date
+			,l.level_name
+		FROM
+			employee_info as e
+			INNER JOIN
+			erp_access_level as l
+			on
+			e.level_num = l.level_num;
+	</select>
+
+
+	<resultMap type="AccountingCategory" id="AccountingCategoryMap">
+		<result property="categoryCode" 		column="account_category_code"/>
+		<result property="categoryName" 		column="account_category_name"/>
+		<result property="categoryContent" 		column="account_category_content"/>
+		<result property="categoryRegDate" 		column="account_category_reg_date"/>
+		<result property="categoryUpdateDate" 	column="account_category_update_date"/>
+	</resultMap>
+	
+	<select id="getAccountingSubjectList" resultMap="AccountingCategoryMap">
+		SELECT
+			account_category_code
+			,account_category_content
+			,account_category_name
+			,account_category_reg_date
+			,account_category_update_date
+		FROM
+			account_category_list;
+	</select>
+	
+	
+	<resultMap type="QualityInspection" id="qualityInspectiontMap">
+<result  property="qualityInspectionCode" 				column="quality_inspection_code"/>
+<result  property="highClassificationCode" 				column="high_classification_code"/>
+<result  property="highClassificationName" 				column="high_classification_name1"/>
+<result  property="mediumClassificationCode" 			column="medium_classification_code"/>
+<result  property="mediumClassificationName" 			column="medium_classification_name1"/>
+<result  property="lowClassificationCode" 				column="low_classification_code"/>
+<result  property="lowClassificationName" 				column="low_classification_name1"/>
+<result  property="subClassificationCode" 				column="sub_classification_code"/>
+<result  property="subClassificationName" 				column="sub_classification_name1"/>
+<result  property="quality_inspection_reg_date" 		column="qualityInspectionRegDate"/>
+<result  property="quality_inspection_update_date" 		column="qualityInspectionUpdateDate"/>
+</resultMap>
+
+<!--[보람]품질검사리스트조회메서드  -->
+<select id="getQualityInspectionList"  resultType="QualityInspection">
+SELECT 
+	quality_inspection_code				AS	 qualityInspectionCode
+	, high_classification_code			AS	 highClassificationCode
+	, high_classification_name1			AS	 highClassificationName
+	, medium_classification_code		AS	 mediumClassificationCode
+	, medium_classification_name1		AS	 mediumClassificationName
+	, low_classification_code			AS	 lowClassificationCode
+	, low_classification_name1			AS	 lowClassificationName
+	, sub_classification_code			AS	 subClassificationCode
+	, sub_classification_name1			AS	subClassificationName
+	, quality_inspection_reg_date		AS qualityInspectionRegDate
+	, quality_inspection_update_date    AS qualityInspectionUpdateDate
+	FROM 
+	quality_inspection_list;
+
+</select>
+	
+	
+</mapper>

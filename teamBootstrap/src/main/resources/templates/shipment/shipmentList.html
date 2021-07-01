@@ -3,23 +3,62 @@
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
 layout:decorate="@{layout/default_shipment}">
 
-<th:block layout:fragment="pageTitle">
-	   <div class="border-head"> 
-	    <h3>출고조회</h3>
-	    </div>
-</th:block>
 
 <th:block layout:fragment="customJs">
 	<script>
 		$(function(){
-			$('#deleteBtn').click(function(){
-				var tdList = $('#list').children().find('tr');
-				$(tdList).each(function(){
-				console.log($(this).innerText() + '텍스트 가져오기 테스트');
-				});
-				tdList.html('<span class="check"><input type="checkbox" class="checked"></span>');
-				console.log(tdList);
+			$('#searchBtn1').click(function(){
+				$('#byMaterialCategory').modal("show");
 			});
+			
+			$('#sendMaterialCateNameBtn').click(function(){
+				tdList = tableAttr.find('.radioClass');
+				tdList.each(function(){
+					if($(this).is(':checked')){
+						var par = $(this).parent();
+						var materialCateName = par.parent().find('.materialCate').text();
+						console.log(materialCateName + '<<materialCateName');
+						$('#materialCateName').attr('value', materialCateName);
+						$('#materialCateName').attr('readOnly', true);
+						
+					}				
+					
+				});
+			});
+				$('[data-popup-open]').on('click', function(e)  {
+				       var targeted_popup_class = jQuery(this).attr('data-popup-open');
+				       $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+
+				       e.preventDefault();
+				   });
+
+				    //----- CLOSE
+				    $('[data-popup-close]').on('click', function(e)  {
+				       var targeted_popup_class = jQuery(this).attr('data-popup-close');
+				       $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+
+				       e.preventDefault();
+				    });
+		
+			
+			//삭제하기
+			var tableAttr = $('#list').children();
+			var tdList = tableAttr.find('.check');
+			
+			$('#deleteBtn').click(function(){
+				tdList = tableAttr.find('.check');
+				var parent = tdList.parent();
+				
+				parent.each(function(){
+					console.log($(this).parent());	
+					var removeRow = $(this).parent();			
+					if($(this).find('.check').is(':checked')){		
+						removeRow.remove();
+					}
+				});
+			});
+			
+		
 		})
 	</script>
 </th:block>
@@ -32,41 +71,65 @@ layout:decorate="@{layout/default_shipment}">
      <div class="col-md-12">
           <h4><i class="fa fa-truck"></i> 출고 현황 조회</h4>
           <hr>  
-			<div class="form-group" style="padding-left: 50px">
-				<div class="col-md-3">
-				 <select class="form-control">
-				   <option>출고 번호</option>
-				   <option>품명</option>
-				   <option>품목별 의뢰 코드</option>
-				   <option>거래처명</option>
-				   <option>출고예정일</option>
-				   <option>출고일</option>
-				   <option>출고 현황</option>
-				  </select>
-				</div>
-				<div class="col-md-6">
-				  <input class="form-control" type="text" placeholder="검색어를 입력하세요">
-				</div>
-				<div class="col-md-2">
-				  <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
-				  <button type="button" class="btn btn-primary">검색하여 가져오기</button>
-				</div>
-	       </div>
+			<form class="form-inline" role="form">
+         <table class="table table-striped table-advance table-hover">
+         	<tbody>
+         		<tr>
+         			<td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+         			
+	               	<td>
+	         			 <div class="form-group">
+	         			 	<select class="form-control" style="width: 180px;">
+		                		<option>::검색어 조건 선택::</option>
+		                		<option>계약번호</option>
+		                		<option>거래처명</option>
+		                		<option>출고번호</option>
+		                		<option>품목별의뢰코드</option>
+		                		<option>출고 현황</option>
+		                	</select>
+		                	<input type="text" class="form-control" placeholder="직접 입력 또는 검색"  id="SupplierValue">
+		                	코드찾기 <i class="btn fa fa-search" style="padding: 0px;" id="searchRequest"></i>
+		                </div>
+         			</td>
+         			<td>
+         				<div class="form-group">
+		                	<select class="form-control" style="width: 150px;">
+		                		<option>::기간 검색 선택::</option>
+		                		<option>출고예정일</option>
+		                		<option>출고일</option>
+		                		<option>납기일</option>
+		                	</select>
+	               		</div>
+         				<div class="input-group input-large" data-date="01/01/2014" data-date-format="mm/dd/yyyy">
+	                      <span class="input-group-addon">From</span>
+	                      <input type="text" class="form-control dpd1" name="from">
+	                      <span class="input-group-addon">To</span>
+	                      <input type="text" class="form-control dpd2" name="to">
+	                    </div>
+         			</td>
+         			<td>
+         				  <button type="button" class="btn btn-theme">검색</button>
+         			</td>        			
+         		</tr>
+         	</tbody>
+         </table>  
+        </form>
 	       
+	  
 	      <br>
-	      <br>
-	      <br>
-	      <br>
-	      <br>
-	      
+	      <h4><i class="fa fa-truck"></i> 출고 현황 목록</h4>
+			          <hr>
                 
 	        <form class="form-horizontal style-form">
               <table class="table table-striped table-advance table-hover" id="list">
                 <thead>
                   <tr>
+                  	<th><i class="fa fa-check-circle-o"></i> 선택</th>
+		            <th><i class="fa fa-bullhorn"></i> 번호</th>
                     <th><i class="fa fa-bullhorn"></i>출고 번호</th>
-                    <th class="hidden-phone"><i class="fa fa-bookmark"></i>품명</th>
+                    <th><i class="fa fa-bookmark"></i>계약번호</th>
                     <th><i class="fa fa-bookmark"></i>품목별 의뢰 코드</th>
+                    <th class="hidden-phone"><i class="fa fa-bookmark"></i>품명</th>
                     <th><i class=" fa fa-bookmark"></i>거래처명</th>
                     <th><i class=" fa fa-bookmark"></i>출고예정일</th>
                     <th><i class=" fa fa-bookmark"></i>출고일</th>
@@ -76,9 +139,12 @@ layout:decorate="@{layout/default_shipment}">
                 </thead>
                 <tbody>
                   <tr>
+                  	<td><input type="checkbox" class="check"></td>
+		            <td>1</td>
                     <td class="hidden-phone">shipment_01</td>
-                    <td class="hidden-phone">남성 정장 바지</td>
+                    <td>1234</td>
                     <td>req02_MS_pants</td>
+                    <td class="hidden-phone">남성 정장 바지</td>
                     <td>
                       <!-- 거래처명을 누르면 거래처 정보를 보여주는 창으로 이동  -->
                       <a th:href="@{/supplierList}">나이키 의류</a>
@@ -90,15 +156,18 @@ layout:decorate="@{layout/default_shipment}">
                     <td><span class="label label-info label-mini">출고완료</span></td>
                     <td> 
                       
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                      <button type="button" class="btn btn-primary btn-xs" id="modifyBtn" onclick="location.href='modifyShipment'"><i class="fa fa-pencil"></i></button>
                       
                     </td>
                   </tr>
                   
                   <tr>
+					<td><input type="checkbox" class="check"></td>
+		            <td>2</td>
                     <td class="hidden-phone">shipment_02</td>
-                    <td class="hidden-phone">남성 정장 조끼</td>
+                    <td>5468 </td>
                     <td>req02_MS_vest </td>
+                    <td class="hidden-phone">남성 정장 조끼</td>
                     <td>
                       <!-- 거래처명을 누르면 거래처 정보를 보여주는 창으로 이동  -->
                       <a th:href="@{/supplierList}">파크랜드</a>
@@ -110,15 +179,18 @@ layout:decorate="@{layout/default_shipment}">
                     <td><span class="label label-warning label-mini">출고준비중</span></td>
                     <td> 
                       
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                      <button type="button" class="btn btn-primary btn-xs" id="modifyBtn" onclick="location.href='modifyShipment'"><i class="fa fa-pencil"></i></button>
                       
                     </td>
                   </tr>
                   
                   <tr>
+                  	<td><input type="checkbox" class="check"></td>
+		            <td>3</td>
                     <td class="hidden-phone">shipment_03</td>
-                    <td class="hidden-phone">남성 정장 바지</td>
+                    <td>5489</td>
                     <td>req02_MS_pants</td>
+                    <td class="hidden-phone">남성 정장 바지</td>
                     <td>
                       <!-- 거래처명을 누르면 거래처 정보를 보여주는 창으로 이동  -->
                       <a th:href="@{/supplierList}">Dashio 정장</a>
@@ -130,16 +202,19 @@ layout:decorate="@{layout/default_shipment}">
                     <td><span class="label label-warning label-mini">출고준비중</span></td>
                     <td> 
                       
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                      <button type="button" class="btn btn-primary btn-xs" id="modifyBtn" onclick="location.href='modifyShipment'"><i class="fa fa-pencil"></i></button>
                       
                     </td>
                   </tr>
                   
                   
                   <tr>
+                  	<td><input type="checkbox" class="check"></td>
+		            <td>4</td>
                     <td class="hidden-phone">shipment_04</td>
-                    <td class="hidden-phone">숙녀 정장 자켓</td>
+                    <td>2548</td>
                     <td>req03_WS_jacket</td>
+                    <td class="hidden-phone">숙녀 정장 자켓</td>
                     <td>
                       <!-- 거래처명을 누르면 거래처 정보를 보여주는 창으로 이동  -->
                       <a th:href="@{/supplierList}">젠틀맨 정장</a>
@@ -151,16 +226,19 @@ layout:decorate="@{layout/default_shipment}">
                     <td><span class="label label-info label-mini">출고완료</span></td>
                     <td> 
                       
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                      <button type="button" class="btn btn-primary btn-xs" id="modifyBtn" onclick="location.href='modifyShipment'"><i class="fa fa-pencil"></i></button>
                       
                     </td>
                   </tr>
                  
                  
                  <tr>
+                 	<td><input type="checkbox" class="check"></td>
+		            <td>5</td>
                     <td class="hidden-phone">shipment_05</td>
-                    <td class="hidden-phone">숙녀 정장 치마</td>
+                    <td>9687</td>
                     <td>req03_WS_skirt</td>
+                    <td class="hidden-phone">숙녀 정장 치마</td>
                     <td>
                       <!-- 거래처명을 누르면 거래처 정보를 보여주는 창으로 이동  -->
                       <a th:href="@{/supplierList}">맞춤정장스트</a>
@@ -172,7 +250,7 @@ layout:decorate="@{layout/default_shipment}">
                     <td><span class="label label-info label-mini">출고완료</span></td>
                     <td> 
                       
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                      <button type="button" class="btn btn-primary btn-xs" id="modifyBtn" onclick="location.href='modifyShipment'"><i class="fa fa-pencil"></i></button>
                       
                     </td>
                   </tr>
@@ -193,6 +271,83 @@ layout:decorate="@{layout/default_shipment}">
           <!-- /col-md-12 -->
         </div>
         <!-- /row -->
+        
+            <!-- 모달화면에서의 검색부분 -->
+        <div class="modal fade modal-xl"  id="byMaterialCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" style="width:auto;display:table" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h4 class="modal-title" id="exampleModalLabel"><i class="fa fa-globe"></i> 원부자재 재료 구분 검색</h4>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>     
+		      <div class="modal-body">
+		   <div class="form-group">
+          <div class="col-md-6">
+          <select class="form-control">
+		   <option>::구분선택::</option>
+		   <option>원부재</option>
+		   <option>부자재</option>
+		  </select>
+		  </div>
+		  
+          <div class="input-group col-md-6">
+            <input type="text" class="form-control" size="5">
+            <div class="input-group-btn">
+              <button type="button" class=" btn btn-theme03 btn btn-default"><i class="fa"></i>검색</button>
+            </div>
+          </div>
+		</div>
+
+	<!-- 모달에서 테이블부분  -->
+       <table class="table table-striped table-advance table-hover" id="list">
+         <thead>
+           <tr>
+             <th><i class="fa fa-check-circle-o"></i> 선택</th>
+             <th><i class="fa fa-bullhorn"></i> 번호</th>
+             <th class="hidden-phone"><i class="fa fa-bookmark"></i> 원부자재 구분</th>
+             <th><i class="fa fa-bookmark"></i> 원부자재 재료 구분명</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr>
+             <td><input type="radio" name="radioClass" class="radioClass"></td>
+             <td>1</td>
+             <td>원자재</td>
+             <td class="materialCate">원단</td>
+            </tr>
+           <tr>
+            <td><input type="radio" name="radioClass" class="radioClass"></td>
+            <td>2</td>
+            <td>부자재</td>
+            <td class="materialCate">단추</td>
+           </tr>
+           <tr>
+            <td><input type="radio" name="radioClass" class="radioClass"></td>
+            <td>3</td>
+            <td>부자재</td>
+            <td class="materialCate">실</td>
+           </tr>
+           <tr>
+            <td><input type="radio" name="radioClass" class="radioClass"></td>
+            <td>4</td>
+            <td>부자재</td>
+            <td class="materialCate">지퍼</td>
+           </tr>
+         </tbody>
+       </table>
+	 </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+      <button type="button" class="btn btn-primary" id="sendMaterialCateNameBtn" data-dismiss="modal">값가져오기</button>
+       </div>
+    </div>
+   
+  </div>
+
+		<!-- 모달테스트 끝  -->
         
 </th:block>
 

@@ -114,7 +114,55 @@ layout:decorate="@{layout/default_qualityControl}">
 	   <h4 class="mb"><i class="fa fa-edit"></i> 품질검사 기준표 등록</h4>
 	   <hr>
 	   <br>
-	   
+	   <div class="form-group">
+               	<div class="col-md-3" style="padding-left: 50px;">
+	          		<label class="col-sm-2 control-label" style="font-weight: 600;">품질검사코드</label>
+               	</div>
+		          <div class="col-md-5">
+		            <div  class="input-group">
+		              <input type="text" class="form-control" id="materialCateName" size="16">
+		              <div class="input-group-btn">
+		                <button type="button" class=" btn btn-theme03 btn btn-default" id="searchBtn1"><i class="fa"></i>검색하여 가져오기</button>
+		              </div>
+		            </div>
+		          </div>
+		        </div>
+		        
+                <div class="form-group">
+               	<div class="col-md-3" style="padding-left: 50px;">
+	          		<label class="col-sm-2 control-label" style="font-weight: 600;">대분류 검사명</label>
+               	</div>
+		          <div class="col-md-5">
+		              <input type="text" class="form-control" id="materialCateName" disabled="disabled" size="16">
+		          </div>
+		        </div>
+		        
+                <div class="form-group">
+               	<div class="col-md-3" style="padding-left: 50px;">
+	          		<label class="col-sm-2 control-label" style="font-weight: 600;">중분류 검사명</label>
+               	</div>
+		          <div class="col-md-5">
+		              <input type="text" class="form-control" id="materialCateName" disabled="disabled" size="16">
+		          </div>
+		        </div>
+		        
+                <div class="form-group">
+               	<div class="col-md-3" style="padding-left: 50px;">
+	          		<label class="col-sm-2 control-label" style="font-weight: 600;">소분류 검사명</label>
+               	</div>
+		          <div class="col-md-5">
+		              <input type="text" class="form-control" id="materialCateName" disabled="disabled" size="16">
+		          </div>
+		        </div>
+		        
+                <div class="form-group">
+               	<div class="col-md-3" style="padding-left: 50px;">
+	          		<label class="col-sm-2 control-label" style="font-weight: 600;">소분류 세부 검사명</label>
+               	</div>
+		          <div class="col-md-5">
+		              <input type="text" class="form-control" id="materialCateName" disabled="disabled" size="16">
+		          </div>
+		        </div>
 	   <div class="panel-heading">
          <ul class="nav nav-tabs nav-justified">
            <li class="active">
@@ -134,6 +182,56 @@ layout:decorate="@{layout/default_qualityControl}">
           <div class="tab-content">
           <!-- 등급별화면 시작 -->
             <div id="overview" class="tab-pane active">
+              <div class="row">    
+                           
+                
+	           
+	           <div class="form-group">
+		        <div class="col-md-3" style="padding-left: 50px;">
+	                 <label class="control-label col-lg-2" style="font-weight: 600;"> 등급 기준</label>
+	            </div>
+	            <div class="col-md-2">
+                    <input type="text" class="form-control" placeholder="4등급 이상">
+               </div>  
+              </div>
+              
+                 
+	           <div class="form-group">
+		        <div class="col-md-3" style="padding-left: 50px;">
+	                 <label class="control-label col-lg-2" style="font-weight: 600;"> 합격을 위한 최소등급값</label>
+	            </div>
+	            <div class="col-md-2">
+                    <input type="number" class="form-control" placeholder="등급 숫자를 입력하세요">
+               </div> 
+	            <div class="col-md-2" style="padding-left: 0px;">
+                    <label class="col-sm-2 control-label" style="font-weight: 600; padding-left: 0px;">급</label>
+               </div> 
+              </div> 
+              
+              
+	           <div class="form-group">
+               	<div class="col-md-3" style="padding-left: 50px;">
+	          		<label class="col-sm-2 control-label" style="font-weight: 600;"> 시험방법</label>
+               	</div>
+		          <div class="col-md-5">
+		            <div  class="input-group">
+		              <input type="text" class="form-control" id="materialCateName" size="16" placeholder="KS K ISO 105-C10">
+		              <div class="input-group-btn">
+		                <button type="button" class=" btn btn-theme03 btn btn-default" id="searchBtn2"><i class="fa"></i> 웹에서 검색하여 가져오기</button>
+		              </div>
+		            </div>
+		          </div>
+		        </div>
+              
+                
+	               
+	              </div>
+	              <!-- /OVERVIEW -->
+	            </div>
+	            <!-- 등급별화면 끝 -->
+	            
+	            <!-- 수치별화면 시작 -->
+	            <div id="overview" class="tab-pane">
               <div class="row">    
                            
                 <div class="form-group">
@@ -230,18 +328,6 @@ layout:decorate="@{layout/default_qualityControl}">
 	              </div>
 	              <!-- /OVERVIEW -->
 	            </div>
-	            <!-- 등급별화면 끝 -->
-	            
-	            <!-- 수치별화면 시작 -->
-	            <div id="contact" class="tab-pane">
-	              <div class="row">
-	                <div class="col-md-6">
-                  
-                </div>
-                <!-- /col-md-6 -->
-              </div>
-              <!-- /row -->
-            </div>
             <!-- 수치별 화면 끝 -->
             
             
