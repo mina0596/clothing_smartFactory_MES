@@ -255,12 +255,16 @@ layout:decorate="@{layout/default_rawMaterials}">
                   <tr>
                   	<th><input type="checkbox" id="checkAll"></th>
                  	 <th><i class="fa fa-bullhorn"></i>번호</th>
-                    <th class="hidden-phone"><i class="fa fa-bookmark"></i>원부자재 구분</th>
-                    <th><i class="fa fa-bookmark"></i>원부자재명</th>
-                    <th><i class=" fa fa-bookmark"></i>색상</th>
+                    <th class="hidden-phone"><i class="fa fa-bookmark"></i>원부자재 발주코드</th>
+                    <th><i class="fa fa-bookmark"></i>원부자재코드</th>
+                    <th><i class=" fa fa-bookmark"></i>재료명</th>
+                    <th><i class=" fa fa-bookmark"></i>색상명</th>
+                    <th><i class=" fa fa-bookmark"></i>특이사항</th>
                     <th><i class=" fa fa-bookmark"></i>수량</th>
                     <th><i class=" fa fa-bookmark"></i>단위</th>
+                    <th><i class=" fa fa-bookmark"></i>출고일자</th>
                     <th><i class=" fa fa-bookmark"></i>등록일자</th>
+                    <th><i class=" fa fa-bookmark"></i>수정</th>
                   </tr>
                 </thead>
  
@@ -275,85 +279,20 @@ layout:decorate="@{layout/default_rawMaterials}">
                     <td>명주실</td>
                     <td>2</td>
                     <td>박스</td>
+                    <td>박스</td>
+                    <td>박스</td>
+                    <td>박스</td>
                     <td>2021-05-12 15:15:00</td>
                     <td>  <button class="btn btn-primary btn-xs" type="button" onclick="location.href='/modifyExWarehousing'"><i class="fa fa-pencil"></i>수정</button></td>
 
                   </tr>
-                  <tr>
-                  	<td><input type="checkbox" class="checked"></td>
-                  	<td>2</td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">silk01_sandyBrown</a></td>
-                    <td class="hidden-phone">order_Thread01_red</td>
-                    <td>명주실</td>
-                    <td>박스</td>
-                    <td>2</td>
-                    <td>2021-05-12 15:15:00</td>
-                  	<td>  
-                  		<button type="submit" th:href="@{/inWarehousingMaterialsModify}" class="btn btn-primary btn-xs">
-                  			<i class="fa fa-pencil"></i>
-                  				수정
-                  		</button>
-                  	</td>
-                  </tr>
-                  <tr>
-                  	<td><input type="checkbox" class="checked"></td>
-                  	<td>3</td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">silk01_sandyBrown</a></td>
-                    <td class="hidden-phone">order_Thread01_red</td>
-                    <td>명주실</td>
-                    <td>박스</td>
-                    <td>2</td>
-                    <td>2021-05-12 15:15:00</td>
-                  	<td>  
-                  		<button type="submit" th:href="@{/inWarehousingMaterialsModify}" class="btn btn-primary btn-xs">
-                  			<i class="fa fa-pencil"></i>
-                  				수정
-                  		</button>
-                  	</td>
-                  </tr>
-                  <tr>
-                  	<td><input type="checkbox" class="checked"></td>
-                  	<td>4</td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">silk01_sandyBrown</a></td>
-                    <td class="hidden-phone">order_Thread01_red</td>
-                    <td>명주실</td>
-                    <td>박스</td>
-                    <td>2</td>
-                    <td>2021-05-12 15:15:00</td>
-                  	<td>  
-                  		<button type="submit" th:href="@{/inWarehousingMaterialsModify}" class="btn btn-primary btn-xs">
-                  			<i class="fa fa-pencil"></i>
-                  				수정
-                  		</button>
-                  	</td>
-                  </tr>
-                  <tr>
-                  	<td><input type="checkbox" class="checked"></td>
-                  	<td>5</td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">silk01_sandyBrown</a></td>
-                    <td class="hidden-phone">order_Thread01_red</td>
-                    <td>명주실</td>
-                    <td>박스</td>
-                    <td>2</td>
-                    <td>2021-05-12 15:15:00</td>
-                  	<td>  
-                  		<button type="submit" th:href="@{/inWarehousingMaterialsModify}" class="btn btn-primary btn-xs">
-                  			<i class="fa fa-pencil"></i>
-                  				수정
-                  		</button>
-                  	</td>
-                  </tr>
-           		 </tbody>
+            		 </tbody>
               </table>
            	 </div>
             </div>
             <div class="form-group text-right">
 		          <div class="col-lg-offset-2 col-lg-10">
-		           <a th:href="@{/addInWarehousing}" class="btn btn-success btn-xs"><i class="fa fa-check"></i>입고 등록</a>
+		           <a th:href="@{/addInWarehousing}" class="btn btn-success btn-xs"><i class="fa fa-plus"></i>출고등록</a>
 		           <a id="deleteBtn" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i>삭제</a>
 		          </div>
 		        </div> 

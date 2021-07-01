@@ -74,8 +74,6 @@ layout:decorate="@{layout/default_contract}">
 								if($(this).is(':checked')){
 									if($(this).val() == '바지'){
 										pantsSizeList.show();
-									}else if($(this).val() == '치마'){
-										skirtSizeList.show();
 									}else{
 										pantsSizeList.hide();
 										skirtSizeList.hide();
@@ -124,9 +122,7 @@ layout:decorate="@{layout/default_contract}">
 						$(this).change(function(){
 							console.log($(this).val());
 								if($(this).is(':checked')){
-									if($(this).val() == '바지'){
-										pantsSizeList.show();
-									}else if($(this).val() == '치마'){
+									if($(this).val() == '치마'){
 										skirtSizeList.show();
 									}else{
 										pantsSizeList.hide();
@@ -336,14 +332,12 @@ layout:decorate="@{layout/default_contract}">
   				<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;" > 신사양복 하의</label>
   				<div class="col-sm-10" style="font-size: 13px; padding-right: 20px;">
 					<input type="checkbox" name="selectedItem" value="바지"> 바지
-					<input type="checkbox" name="selectedItem" value="치마"> 치마
 				</div>
             </div>          
           	<!-- 숙녀양복의 상의선택사항 -->
        	  	<div class="form-group" id="womenBottomItemList">
   				<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;" > 숙녀양복 하의</label>
   				<div class="col-sm-10" style="font-size: 13px; padding-right: 20px;">
-					<input type="checkbox" name="selectedItem" value="바지"> 바지
 					<input type="checkbox" name="selectedItem" value="치마"> 치마
 				</div>
             </div>          

@@ -14,8 +14,13 @@ layout:decorate="@{layout/default_rawMaterials}">
     
 <div class="col-lg-12 mt">
             <div class="row content-panel">
-             	 <h4 class="mb"><i class="fa fa-bars"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">자재출고등록</font></font></h4>
-             
+              <div class="panel-heading">
+                <ul class="nav nav-tabs nav-justified">
+                  <li class="active">
+                    <a data-toggle="tab" href="#overview">원부자재 측정값 등록</a>
+                  </li>
+                </ul>
+              </div>
               <!-- /panel-heading -->
               <div class="panel-body">
                 <div class="tab-content">
@@ -23,7 +28,7 @@ layout:decorate="@{layout/default_rawMaterials}">
                
                 <div class="form-inline">
               		<div class="col-sm-3 input-group">	
-						<input type="text" class="form-control" placeholder="원부자재코드 검색">
+						<input type="text" class="form-control" placeholder="품질검사 요청코드 검색">
 						<div class="input-group-btn">
 							<button id="requestCode" class="btn btn-warning">검색</button>
 						</div>
@@ -40,13 +45,19 @@ layout:decorate="@{layout/default_rawMaterials}">
                   <thead>
                     <tr ><!-- 세부에 체크가 되어있으면 세부에 값이 들어간다...? -->
                       <th><input type="checkbox" id="checkAll"></th>
-                      <th>*원부자재코드</th>
+                      <th>*품목별 의뢰코드</th>
+                      <th>품목 소분류명</th>
+                      <th>원부자재 구분</th>
+                      <th>재료 구분</th>
                       <th>재료명</th>
                       <th>색상명</th>
-   					  <th>특이사항</th> <!-- 패턴 및 모양 -->
-   					  <th>수량</th>
+   					  <th>패턴 및 모양</th>
+   					  <th>필요수량</th>
    					  <th>단위</th>
-                      <th>출고일시</th>
+                      <th>완료일시</th>
+                      <th>첨부파일</th>
+                      <th>등록</th>
+                      <th>삭제</th>
                     </tr>
                   </thead>
                   <tbody id="tbody">
@@ -54,34 +65,23 @@ layout:decorate="@{layout/default_rawMaterials}">
                       <td><input type="checkbox" class="checked"></td>
                       <td>
 		                <div class="input-group">	
-							<input type="text" class="form-control" placeholder="원부자재코드">
+							<input type="text" class="form-control" placeholder="품질검사요청코드 검색">
 							<div class="input-group-btn">
 								<button id="addRows" class="btn btn-default">검색</button>
 							</div>						
 		                </div>
 					  </td>
+					  <td>검사명</td>
+					  <td>원부자재이름</td>
                       <td>
-		                <div class="input-group">	
-							<input type="text" class="form-control" placeholder="재료명">
-							<div class="input-group-btn">
-								<button id="addRows" class="btn btn-default">검색</button>
-							</div>						
-		                </div>
+					      <select class="form-control">
+					      	<option>1회차</option>
+					      	<option>2회차</option>
+					      	<option>3회차</option>
+					      </select>
 					  </td>
                       <td>
-		                <div class="input-group">	
-							<input type="text" class="form-control" placeholder="색상명">
-							<div class="input-group-btn">
-								<button id="addRows" class="btn btn-default">검색</button>
-							</div>						
-		                </div>
-					  </td>
-
-            		<td>
-                      	<input type="text" class="form-control" placeholder="특이사항">
-                      </td>
-                      <td>
-                      	<input type="number" class="form-control" placeholder="수량">                      	
+                      	<input type="number" class="form-control" placeholder="측정값">                      	
 					  </td>
                       <td>
                       	<select class="form-control">
@@ -91,7 +91,16 @@ layout:decorate="@{layout/default_rawMaterials}">
 					      </select>         	
 					  </td>
                       <td>
-                      	<input type="number" class="form-control" placeholder="등록일자">                      	
+                      	<input type="text" class="form-control" placeholder="공란일시 등록시간">
+                      </td>
+                      <td>
+                      	<input type="text" class="form-control" placeholder="공란일시 등록시간">
+                      </td>
+                      <td>
+	               		<button type="button">등록</button>
+					  </td>
+                      <td>
+	               		<button type="button" class="removeButton">삭제</button>
 					  </td>
                     </tr>
 
@@ -109,7 +118,17 @@ layout:decorate="@{layout/default_rawMaterials}">
                </div>
 
 
-    
+                <!-- 두번째 -->
+                  <div id="contact" class="tab-pane">
+                  	<th:block th:replace="/quality/addInspectionMeasurementValueMenu/addInspectionMeasurementValueSubSize::subSize"></th:block>
+                  </div>
+                  
+                  
+                  <!-- 세번째 -->
+                  <div id="edit" class="tab-pane">
+                  	<th:block th:replace="/quality/addInspectionMeasurementValueMenu/addInspectionMeasurementValueSubPass::subPass"></th:block>
+                  </div>
+                  
                   
                   <!-- /tab-pane -->
                 </div>
