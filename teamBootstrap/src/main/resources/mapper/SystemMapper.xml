@@ -1,25 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ksmart39.springboot.dao.SystemMapper">
-	<resultMap type="AccountingCategory" id="AccountingCategoryMap">
-		<result property="categoryCode" 		column="account_category_code"/>
-		<result property="categoryName" 		column="account_category_name"/>
-		<result property="categoryContent" 		column="account_category_content"/>
-		<result property="categoryRegDate" 		column="account_category_reg_date"/>
-		<result property="categoryUpdateDate" 	column="account_category_update_date"/>
-	</resultMap>
-	
-	<select id="getAccountingSubjectList" resultMap="AccountingCategoryMap">
-		SELECT
-			account_category_code
-			,account_category_content
-			,account_category_name
-			,account_category_reg_date
-			,account_category_update_date
-		FROM
-			account_category_list;
-	</select>
-	
+
+
 		<resultMap type="HumanResources"  id="getHumanResourcesInfo">
 		<result  property="employeeCode" 				column="employee_code"/>
 		<result  property="levelNum" 				column="level_num"/>
@@ -60,6 +43,27 @@
 			on
 			e.level_num = l.level_num;
 	</select>
+
+
+	<resultMap type="AccountingCategory" id="AccountingCategoryMap">
+		<result property="categoryCode" 		column="account_category_code"/>
+		<result property="categoryName" 		column="account_category_name"/>
+		<result property="categoryContent" 		column="account_category_content"/>
+		<result property="categoryRegDate" 		column="account_category_reg_date"/>
+		<result property="categoryUpdateDate" 	column="account_category_update_date"/>
+	</resultMap>
+	
+	<select id="getAccountingSubjectList" resultMap="AccountingCategoryMap">
+		SELECT
+			account_category_code
+			,account_category_content
+			,account_category_name
+			,account_category_reg_date
+			,account_category_update_date
+		FROM
+			account_category_list;
+	</select>
+	
 	
 	<resultMap type="QualityInspection" id="qualityInspectiontMap">
 <result  property="qualityInspectionCode" 				column="quality_inspection_code"/>

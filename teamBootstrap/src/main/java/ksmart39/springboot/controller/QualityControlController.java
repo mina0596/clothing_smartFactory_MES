@@ -28,6 +28,8 @@ public class QualityControlController {
 	@Autowired
 	private QualityControlService qualityControlService;
 
+	
+	//================================================================
 	//[한빛]불량품등록 -> 목록
 	@PostMapping("/addDefectiveProduct")
 	public String addDefectiveProduct() {
@@ -58,6 +60,8 @@ public class QualityControlController {
 		return"quality/defectiveProductList";
 	}
 
+	
+	//================================================================
 	//검사현황 실적 
 	@GetMapping("/inspectionPerformance")
 	public String inspectionPerformance(Model model) {
@@ -93,18 +97,20 @@ public class QualityControlController {
 	
 
 	
+	//=============================================================================
 
 	@GetMapping("/addStandardTable")
 	public String addStandardTable() {
 		return "quality/addStandardTable";
 	}
-	
 	//[민아]품질검사 기준표 목록
 	@GetMapping("/getStandardTableList")
 	public String getStandardTableList() {
 		return "quality/StandardTableList";
 	}
 	
+	
+	//=============================================================================
 	//[다미] 실시간 검사 현황
 	@GetMapping("/qualityInspectionStatusNow")
 	public String qualityInspectionStatusNow() {
@@ -152,6 +158,9 @@ public class QualityControlController {
 		return "quality/addInspectionMeasurementValue";
 	}
 	
+	
+	
+	//====================================================================
 	//[다미]품질검사요청목록
 	@GetMapping("/qualityInspectionRequestList")
 	public String qualityControlRequestList() {
@@ -170,6 +179,9 @@ public class QualityControlController {
 		return "quality/qualityInspectionRequest";
 	}
 	
+	
+	
+	//=========================================================================
 	//품질관리 메인화면
 	@GetMapping("/qualityControl")
 	public String getQulity() {

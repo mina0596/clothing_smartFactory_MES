@@ -30,6 +30,8 @@ public class SystemController {
 
 	private static final Logger log = LoggerFactory.getLogger(SystemController.class);
 
+	
+	//==============================================================
 	//시스템 첫화면
 	@GetMapping("/system")
 	public String system(Model model) {
@@ -37,6 +39,38 @@ public class SystemController {
 		return "system/system";
 	}
 	
+	//===============================================================
+	
+	//[한빛]사원등록-> 사원목록
+	@PostMapping("/addHumanResources")
+	public String addHumanResources() {
+		return "redirect:/humanResourcesList";
+	}
+	
+	//[한빛]사원등록
+	@GetMapping("/addHumanResources")
+	public String humanResourcesEnroll(Model model) {
+		 model.addAttribute("title", "인사관리");
+		return"system/addHumanResources";	
+	}
+
+	//[한빛]사원수정
+	@GetMapping("/modifyHumanResources")
+	public String modifyHumanResources() {
+		return "system/modifyHumanResources";
+	}
+	
+	//[한빛]사원목록
+	@GetMapping("/humanResourcesList")
+	public String humanResourcesList(Model model) {
+		List<HumanResources> humanResources = systemService.getHumanResources();
+		model.addAttribute("title", "인사관리");
+		model.addAttribute("humanResources", humanResources);
+		return "system/humanResourcesList";
+	}
+	
+	
+	//==============================================================
 	//[한빛]수주주문등록 ->목록으로 이동
 	@PostMapping("/addClient")
 	public String addClient() {
@@ -62,6 +96,8 @@ public class SystemController {
 		model.addAttribute("title", "수주관리");
 		return "system/addClient";
 	}
+	
+	
  //==================================================================
 	//[다미]계정과목 등록 후 리스트로 리턴
 	@PostMapping("/addAccountSubject")
@@ -168,36 +204,8 @@ public class SystemController {
 		//여기에 list DB에서 받아서 뿌려줄꺼임
 		return "system/searchMaterialName";
 	}
-	//===============================
-	
-	//[한빛]사원등록-> 사원목록
-	@PostMapping("/addHumanResources")
-	public String addHumanResources() {
-		return "redirect:/humanResourcesList";
-	}
-	
-	//[한빛]사원등록
-	@GetMapping("/addHumanResources")
-	public String humanResourcesEnroll(Model model) {
-		 model.addAttribute("title", "인사관리");
-		return"system/addHumanResources";	
-	}
 
-	//[한빛]사원수정
-	@GetMapping("/modifyHumanResources")
-	public String modifyHumanResources() {
-		return "system/modifyHumanResources";
-	}
-	
-	//[한빛]사원목록
-	@GetMapping("/humanResourcesList")
-	public String humanResourcesList(Model model) {
-		List<HumanResources> humanResources = systemService.getHumanResources();
-		model.addAttribute("title", "인사관리");
-		model.addAttribute("humanResources", humanResources);
-		return "system/humanResourcesList";
-	}
-	//===========================================
+	//===============================================================
 	
 	
 

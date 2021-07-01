@@ -16,19 +16,22 @@ public class SystemService {
 	private SystemMapper systemMapper;
 
 	
-	public List<AccountingCategory> getAccountingSubjectList(){		
-		return systemMapper.getAccountingSubjectList();
-		
-	}
 	
-	//======================================
-	//회원전체조회(levelName포함)
+	//============================================================
+	//[한빛]회원전체조회(levelName포함)
 	public List<HumanResources> getHumanResources(){
 		List<HumanResources> humanResources = systemMapper.getHumanResources();
 		return humanResources;
 	}
 	
-	//========================================
+	//============================================================
+	//[다미] 회계과목 조회
+	public List<AccountingCategory> getAccountingSubjectList(){		
+		return systemMapper.getAccountingSubjectList();
+		
+	}
+	
+	//=============================================================
 	
 	//[보람 ]품질검사 리스트 조회메서드
 	public List<QualityInspection> getQualityInspectionList(){

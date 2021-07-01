@@ -19,10 +19,9 @@ public class RawMaterialsController {
 	
 	private static final Logger log = LoggerFactory.getLogger(RawMaterialsController.class);
 	
-	@Autowired
-	private RawMaterialsService rawMaterialsService;
 	
 	
+	//=================================================================
 	//[민아]원부자재 현재고 현황
 	@GetMapping("/inventoryStatus")
 	public String getInventoryStatus() {
@@ -38,6 +37,7 @@ public class RawMaterialsController {
 	}
 	
 
+	//===================================================================
 	
 	//[한빛]출고현황
 	@GetMapping("/exWarehousingList")
@@ -69,7 +69,7 @@ public class RawMaterialsController {
 	}
 	
 
-	
+	//===================================================================
 	//[다미]자재입고 수정
 	@GetMapping("/modifyInWarehousing")
 	public String modifyInWarehousing(@RequestParam(value = "raw_material_name", required = false)String raw_material_name) {
@@ -97,6 +97,8 @@ public class RawMaterialsController {
 		return "rawMaterials/addInWarehousing";
 	}
 	
+	
+	//=============================================================================
 	//자재관리 메인화면
 	@GetMapping("/rawMaterials")
 	public String meterials() {
