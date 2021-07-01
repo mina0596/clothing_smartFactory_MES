@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="modal_addInspectionMeasurementValue">
+ <!-- 모달시작 -->
+          <div class="modal fade modal-xl"  id="requestCodeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" style="width:auto;display:table" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h4 class="modal-title" id="exampleModalLabel">품질검사요청코드 목록</h4>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      
+		   
+		   <div class="modal-body">
+		   
+		   <table  class="table table-striped table-advance table-hover">
+         	<tbody>       		
+       			<thead>
+        			<tr>
+	         			<th colspan="3"	>
+		         			 <div class="form-inline">
+		         			 	<label class="control-label">계약번호</label>
+			                	<input type="text" class="form-control" id="bySupplierValue" placeholder="검색어를 입력하세요.">
+			                </div>
+	         			</th>
+	         			<th>
+	         				<div class="form-inline">
+		         				<label class="control-label">품목별 의뢰 코드</label>
+			                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
+		              		</div>
+	         			</th>
+	         			<th colspan="3">
+	         				<div class="form-inline">
+		         				<label class="control-label">요청날짜</label>
+			                	<input type="date" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">&nbsp ~
+			                	<input type="date" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
+		              		</div>
+	         			</th>  
+	         			</tr>  
+	         			<tr>
+	         			<th colspan="3">
+	         				<div class="form-inline">
+		         				<label class="control-label">품질검사 명</label>
+			                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
+		              		</div>
+	         			</th>  
+	         			<th>
+	         				<div class="form-inline">
+		         				<label class="control-label">원부자재명</label>
+			                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
+		              		</div>
+	         			</th>  
+	         			<th colspan="2">
+	         				<div class="form-inline">
+		         				<label class="control-label">거래처명</label>
+			                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
+	         				 <button type="submit" class="btn btn-theme" style="width: 40%; margin-left: 20px;">검색</button>
+		              		</div>
+	         			</th>
+	         			
+        			</tr>     			
+       			</thead>
+       			<tbody style="text-align: center;">
+       				<tr>
+       					<td><input type="checkbox"></td>
+       					<td>no.</td>
+       					<td>계약번호</td>
+       					<td>품목별 의뢰 코드</td>
+       					<td>품질검사명</td>
+       					<td>원부자재명</td>
+       					<td>요청날짜</td>
+       				</tr>
+     				<tr>
+						<td><input type="checkbox"></td>
+						<td>1</td>
+						<td>1234</td>
+						<td>req01_MS_pants</td>
+						<td>이화학검사</td>
+						<td>실크</td>
+						<td>2021-07-01</td>
+     				</tr>
+     				<tr>
+						<td><input type="checkbox"></td>
+						<td>1</td>
+						<td>1234</td>
+						<td>req01_MS_pants</td>
+						<td>이화학검사</td>
+						<td>실크</td>
+						<td>2021-07-01</td>
+     				</tr>
+     				<tr>
+						<td><input type="checkbox"></td>
+						<td>1</td>
+						<td>1234</td>
+						<td>req01_MS_pants</td>
+						<td>이화학검사</td>
+						<td>실크</td>
+						<td>2021-07-01</td>
+     				</tr>
+     			</tbody>        		
+         	</tbody>
+         </table> 
+         
+		 </div>
+		    <div class="modal-footer">
+			      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			      <button type="button" id="saveSupplier" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		</th:block>
+</html>
