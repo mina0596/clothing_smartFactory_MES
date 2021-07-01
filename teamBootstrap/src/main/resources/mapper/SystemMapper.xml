@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ksmart39.springboot.dao.SystemMapper">
 
-
+<!-- =========================================================== -->
 		<resultMap type="HumanResources"  id="getHumanResourcesInfo">
 		<result  property="employeeCode" 				column="employee_code"/>
 		<result  property="levelNum" 				column="level_num"/>
@@ -44,7 +44,67 @@
 			e.level_num = l.level_num;
 	</select>
 
+	<insert id="addHumanResources" parameterType="HumanResources">
+		INSERT INTO employee_info
+		(employee_code
+		 ,level_num
+		 ,employee_id
+		 ,employee_pw
+		 ,employee_name
+		 ,employee_tel
+		 ,employee_address
+		 ,employee_email
+		 ,employee_department
+		 ,employee_position
+		 ,employee_info_reg_date
+		 ,employee_info_update_date
+		)VALUES(
+		  #{employeeCode}
+		 ,#{levelNum}
+		 ,#{employeeId}
+		 ,#{employeePw}
+		 ,#{employeeName}
+		 ,#{employeeTel}
+		 ,#{employeeAddress}
+		 ,#{employeeEmail}
+		 ,#{employeeDepartment}
+		 ,#{employeePosition}
+		 ,CURDATE()
+		 ,CURDATE());
+	</insert>
+	
+	
+<!-- =========================================================== -->
+		<resultMap type="Client"  id="getClientInfo">
+		<result  property="clientCode" 				column="client_code"/>
+		<result  property="clientCategory" 				column="client_category"/>
+		<result  property="clientName" 				column="client_name"/>
+		<result  property="clientTel" 			column="client_tel"/>
+		<result  property="clientEmployee" 			column="client_employee"/>
+		<result  property="clientCeo" 				column="client_ceo"/>
+		<result  property="clientBusinessNum" 				column="client_business_num"/>
+		<result  property="clientAddress" 				column="client_address"/>
+		<result  property="clientInfoRegDate" 				column="client_info_reg_date"/>
+		<result  property="clientInfoUpdateDate" 		column="client_info_update_date"/>
+	</resultMap>
+	<select id="getClient" resultMap="getClientInfo"  resultType="Client" fetchSize="1000">
+		SELECT
+			c.client_code
+			,c.client_category
+			,c.client_name
+			,c.client_tel
+			,c.client_employee
+			,c.client_ceo
+			,c.client_business_num
+			,c.client_address
+			,c.client_info_reg_date
+			,c.client_info_update_date
+		FROM
+			client_info as c
+			
+	</select>
 
+<!-- =========================================================== -->
 	<resultMap type="AccountingCategory" id="AccountingCategoryMap">
 		<result property="categoryCode" 		column="account_category_code"/>
 		<result property="categoryName" 		column="account_category_name"/>
@@ -79,7 +139,7 @@
 <result  property="quality_inspection_update_date" 		column="qualityInspectionUpdateDate"/>
 </resultMap>
 
-<!--[보람]품질검사리스트조회메서드  -->
+<!-- =========================================================== -->
 <select id="getQualityInspectionList"  resultType="QualityInspection">
 SELECT 
 	quality_inspection_code				AS	 qualityInspectionCode
