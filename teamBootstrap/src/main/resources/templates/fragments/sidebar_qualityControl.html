@@ -54,10 +54,16 @@
               <i class="fa fa-book"></i>
               <span>검사현황 ![다미&보람]</span>
               </a>
-            <ul class="sub">
-              <li><a th:href="@{/addQualityInspectionStatus}">검사현황 ![다미&보람]</a></li>
+            <ul class="sub" style="display: block;">
+              <li><a th:href="@{/qualityInspectionStatusNow}">실시간 검사현황 ![다미&보람]</a></li>
+             <li><a th:href="@{/qualityInspectionStatusContract}">계약별 검사현황 ![다미&보람]</a></li>
+             <li><a th:href="@{/addDefectInspectionResultStatus}">불량현황 ![다미&보람]</a></li>
+            <li><a th:href="@{/stateBuyerContractQualityInspection}">수주계약별검사현황 ![다미&보람]</a></li>
               <li><a th:href="@{/addDefectInspectionResultStatus}">불량현황 ![다미&보람]</a></li>
               <li><a th:href="@{/inspectionPerformance}">실적 ![다미&보람]</a></li>
+			<li><a th:href="@{/searchByPeriodContractQualityInspection}">수주계약검사현황기간별조회 #[다미&보람]</a></li>
+			<li><a th:href="@{/stateByProductQualityInspection}">의뢰품목별검사현황 #[다미&보람]</a></li>
+			<li><a th:href="@{/searchByPeriodByProductQualityInspection}">의뢰품목별검사현황기간별조회 #[다미&보람]</a></li>
             </ul>
           </li>
           <li class="sub-menu">

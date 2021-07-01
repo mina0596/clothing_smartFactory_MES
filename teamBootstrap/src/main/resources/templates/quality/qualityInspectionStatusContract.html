@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_qualityControl}">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3 th:text="${title}"></h3>
+	    </div>
+	<th:block layout:fragment="customJs">
+
+	</th:block>	 
+	    
+</th:block>
+
+
+
+<th:block layout:fragment="container">
+	* 거래처명 or 수주계약 필수 기입 사항!
+	<div>
+		<hr>
+		거래처
+		<input type="text" placeholder="거래처명 검색">
+		<button>검색</button>
+		
+		수주계약
+		<input type="text" placeholder="수주계약 검색">
+		<button>검색</button>
+		
+		검사일
+		<input type="date">~ <input type="date">
+		
+		<br><br>
+		품목
+		<input type="text" placeholder="양복명">
+		<input type="text" placeholder="품목명">
+		
+		검사항목코드
+		<input type="text">
+		
+		검사항목명
+		<input type="text">
+		
+		<button>조회</button>
+		
+		<hr>
+		<h5>[계약번호:1245] 검사 현황</h5>
+		<table border="1"> 
+		<caption>테스트</caption> 
+		<tr> 
+			<th rowspan="2">no.</th> 
+			<th rowspan="2"><input type="checkbox"></th> 
+			<th rowspan="2">공정</th> 
+			<th rowspan="2">공정소분</th> 
+			<th rowspan="2">공정세분</th> 
+			<th rowspan="2">품목코드</th> 
+			<th rowspan="2">품목명</th> 
+			<th rowspan="2">요청시간</th> 
+			<th rowspan="2">검사단위</th> 
+			<th colspan="3" scope="colgroup" id="first">기준</th> 
+			<th colspan="3" scope="colgroup" id="second">측정값</th> 
+			<th colspan="2" scope="colgroup" id="second">처리정보</th> 
+			<th rowspan="2">최종합격여부</th> 
+			<th rowspan="2">기타</th> 
+		</tr> 
+		<tr> 
+			<th scope="col" id="hong">기준값</th> 
+			<th scope="col" id="jeon">최소값</th> 
+			<th scope="col" id="kim">최대값</th> 
+			<th scope="col" id="song">1회차</th> 
+			<th scope="col" id="song">2회차</th> 
+			<th scope="col" id="song">3회차</th> 
+			<th scope="col" id="song">시작시간</th> 
+			<th scope="col" id="song">완료시간</th> 
+		</tr>
+		<tr> 
+			<th scope="row" id="mandatory">1</th> 
+			<td><input type="checkbox"></td> 
+			<td>수입검사</td> 
+			<td>물세탁</td> 
+			<td>변퇴색</td> 
+			<td>req01_MS_pants</td>
+			<td>바지</td>
+			<td>2021-04-22 12:12:22</td>
+			<td>등급</td>
+			<td>4</td>
+			<td>5</td>
+			<td>4</td>
+			<td>5</td>
+			<td>3</td>
+			<td>4</td>
+			<td>2021-04-22 12:12:22</td>
+			<td>2021-04-22 12:12:22</td>
+			<td>합격</td>
+			<td>없음</td>
+		</tr> 
+		
+		</table>
+
+	</div>
+	
+</th:block>
+
+</html>
