@@ -28,6 +28,8 @@ public class QualityControlController {
 	@Autowired
 	private QualityControlService qualityControlService;
 
+	
+	//================================================================
 	//[한빛]불량품등록 -> 목록
 	@PostMapping("/addDefectiveProduct")
 	public String addDefectiveProduct() {
@@ -58,6 +60,8 @@ public class QualityControlController {
 		return"quality/defectiveProductList";
 	}
 
+	
+	//================================================================
 	//검사현황 실적 
 	@GetMapping("/inspectionPerformance")
 	public String inspectionPerformance(Model model) {
@@ -91,62 +95,22 @@ public class QualityControlController {
 		return"quality/addFinalnspectionMeasurementValue";
 	}
 	
-	
-	
 
-	//[보람] 검사 리스트 검사번호클릭시 검사정보 경로
-			@GetMapping("qualityInspectionInfo")
-			public String qualityInspectionInfo() {
-				return "quality/qualityInspectionInfo";
-			}
-			
-	//[보람 ]검사 수정 완료
-	@PostMapping("/modifyQualityInspection")
-	public String  modifyQualityInspection() {
-		
-		return"redirect:/qualityInspectionList";
-	}
-	//[보람] 검사 수정 경로
-	@GetMapping("/modifyQualityInspection")
-	public String getModifyQualityInspection() {
-		return "quality/modifyQualityInspection";
-	}
 	
-	
-	//검사종류 리스트 메서드
-	@GetMapping("/qualityInspectionList")
-	public String getQualityInspectionList(Model model) {
-		List<QualityInspection> qualityInspectionList =qualityControlService.getQualityInspectionList();
-		
-		log.info("========================================");
-		log.info("qualityInspectionList:",qualityInspectionList);
-		log.info("========================================");
-		model.addAttribute("qualityInspectionList", qualityInspectionList);
-	
-		
-		return"quality/qualityInspectionList";
-	}
-	
-	//검사종류 등록 메서드
-	@GetMapping("/addQualityInspection")
-	public String addQualityInspection(Model model) {
-		
-		model.addAttribute("title", "품질검사:검사등록");
-		return"quality/addQualityInspection";
-	}	
-	
+	//=============================================================================
 
 	@GetMapping("/addStandardTable")
 	public String addStandardTable() {
 		return "quality/addStandardTable";
 	}
-	
 	//[민아]품질검사 기준표 목록
 	@GetMapping("/getStandardTableList")
 	public String getStandardTableList() {
 		return "quality/StandardTableList";
 	}
 	
+	
+	//=============================================================================
 	//[다미] 실시간 검사 현황
 	@GetMapping("/qualityInspectionStatusNow")
 	public String qualityInspectionStatusNow() {
@@ -194,6 +158,9 @@ public class QualityControlController {
 		return "quality/addInspectionMeasurementValue";
 	}
 	
+	
+	
+	//====================================================================
 	//[다미]품질검사요청목록
 	@GetMapping("/qualityInspectionRequestList")
 	public String qualityControlRequestList() {
@@ -212,6 +179,9 @@ public class QualityControlController {
 		return "quality/qualityInspectionRequest";
 	}
 	
+	
+	
+	//=========================================================================
 	//품질관리 메인화면
 	@GetMapping("/qualityControl")
 	public String getQulity() {

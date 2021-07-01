@@ -98,7 +98,7 @@ public class HumanResources {
 	@Override
 	public String toString() {
 		return "HumanResources [employeeCode=" + employeeCode + ", levelNum=" + levelNum + ", employeeId=" + employeeId
-				+ ", employeePw=" + employeePw + ", employeeName=" + employeeName + ", employeeTel=" + employeeTel
+				 + ", employeePw=" + employeePw + ", employeeName=" + employeeName + ", employeeTel=" + employeeTel
 				+ ", employeeAddress=" + employeeAddress + ", employeeEmail=" + employeeEmail + ", employeeDepartment="
 				+ employeeDepartment + ", employeePosition=" + employeePosition + ", employeeInfoRegDate="
 				+ employeeInfoRegDate + ", employeeInfoUpdateDate=" + employeeInfoUpdateDate + ", humanResourcesLevel="

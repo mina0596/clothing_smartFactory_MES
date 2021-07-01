@@ -19,10 +19,9 @@ public class RawMaterialsController {
 	
 	private static final Logger log = LoggerFactory.getLogger(RawMaterialsController.class);
 	
-	@Autowired
-	private RawMaterialsService rawMaterialsService;
 	
 	
+	//=================================================================
 	//[민아]원부자재 현재고 현황
 	@GetMapping("/inventoryStatus")
 	public String getInventoryStatus() {
@@ -37,75 +36,8 @@ public class RawMaterialsController {
 		return "rawMaterials/warehousingList";
 	}
 	
-	//[민아]원부자재정보 수정 후
-	@PostMapping("/modifyRawMaterials")
-	public String modifyRawMaterials() {
-		return "redirect:/rawMaterialsList";
-	}
-	
-	//[민아]원부자재정보 수정
-	@GetMapping("/modifyRawMaterials")
-	public String modifyRawMaterialsInfo(@RequestParam(name = "rawMaterialCate", required = false) String rawMaterialCate
-										,@RequestParam(name = "materialCate", required = false) String materialCate
-										,@RequestParam(name = "materialName", required = false) String materialName
-										,@RequestParam(name = "colorName", required = false) String colorName
-										,@RequestParam(name = "feature", required = false) String feature
-										,@RequestParam(name = "unit", required = false) String unit
-										, Model model) {
-		//dao랑 연결하자!
-		
-		log.info("========================================");
-		log.info("화면에서 입력받은 값(수정) rawMaterialCate: {}", rawMaterialCate);
-		log.info("화면에서 입력받은 값(수정) materialCate: {}", materialCate);
-		log.info("화면에서 입력받은 값(수정) materialName: {}", materialName);
-		log.info("화면에서 입력받은 값(수정) colorName: {}", colorName);
-		log.info("화면에서 입력받은 값(수정) feature: {}", feature);
-		log.info("화면에서 입력받은 값(수정) unit: {}", unit);
-		log.info("========================================");
-		
-		model.addAttribute("rawMaterialCate", rawMaterialCate);
-		model.addAttribute("materialCate", materialCate);
-		model.addAttribute("materialName", materialName);
-		model.addAttribute("colorName", colorName);
-		model.addAttribute("feature", feature);
-		model.addAttribute("unit", unit);
-		
-		return "rawMaterials/modifyRawMaterials";
-	}
-	
-	
-	//[민아]원부자재 재료 구분 검색후 처리
-	@PostMapping("/searchRawMaterialName")
-	@ResponseBody
-	public String sendMaterialName(@RequestParam(name = "materialName", required = false) String materialName
-								  , Model model) {
-		
-		log.info("MaterialNameCheck 	materialName :::::: {}", materialName);
-		model.addAttribute("materialName", materialName);
-		return "redirect:/addRawMaterials";
-	}
-	
-	
-	//[민아]원부자재 재료 구분 검색
-	@GetMapping("/searchMaterialName")
-	public String getSearchValue() {
-		//여기에 list DB에서 받아서 뿌려줄꺼임
-		return "rawMaterials/searchMaterialName";
-	}
-	
-	//[민아]모달 실험
-	@GetMapping("/modalBody")
-	public String testModaltest(Model model) {
-		
-		return "rawMaterials/modalBody";
-	}
-	
-	//[민아]원부자재 등록화면
-	@GetMapping("/addRawMaterials")
-	public String addRawMeterials(Model model) {
-		
-		return "rawMaterials/addRawMaterials";
-	}
+
+	//===================================================================
 	
 	//[한빛]출고현황
 	@GetMapping("/exWarehousingList")
@@ -136,12 +68,8 @@ public class RawMaterialsController {
 		return "rawMaterials/addMaterialsUse";
 	}
 	
-	//[민아]원부자재 목록
-	@GetMapping("/rawMaterialsList")
-	public String getRawMeterialsList() {
-		return "rawMaterials/rawMaterialsList";
-	}
-	
+
+	//===================================================================
 	//[다미]자재입고 수정
 	@GetMapping("/modifyInWarehousing")
 	public String modifyInWarehousing(@RequestParam(value = "raw_material_name", required = false)String raw_material_name) {
@@ -169,6 +97,8 @@ public class RawMaterialsController {
 		return "rawMaterials/addInWarehousing";
 	}
 	
+	
+	//=============================================================================
 	//자재관리 메인화면
 	@GetMapping("/rawMaterials")
 	public String meterials() {

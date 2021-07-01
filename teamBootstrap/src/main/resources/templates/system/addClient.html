@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
-layout:decorate="@{layout/default_contract}">
+layout:decorate="@{layout/default_system}">
 
 <th:block layout:fragment="pageTitle">
 	   <div class="border-head"> 
@@ -15,7 +15,7 @@ layout:decorate="@{layout/default_contract}">
 	<div class="form-panel">
 	 <h4 class="mb"><i class="fa fa-angle-right"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">수주거래처등록</font></font></h4>
               <div class="form">
-                <form class="cmxform form-horizontal style-form" id="signupForm" method="post" th:action="@{addBuyer}">
+                <form class="cmxform form-horizontal style-form" id="signupForm" method="post" th:action="@{addClient}">
                   
                   <div class="form-group ">
                     <label for="firstname" class="control-label col-lg-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">회사명</font></font></label>
