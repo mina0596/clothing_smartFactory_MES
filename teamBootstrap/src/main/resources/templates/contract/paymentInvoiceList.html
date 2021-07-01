@@ -6,39 +6,20 @@ layout:decorate="@{layout/default_contract}">
 <th:block layout:fragment="pageTitle">
 	   <div class="border-head"> 
 	    <h3>전표 목록</h3>
-	   </div>
+	   </div> 
 <script type="text/javascript">
 		$(function(){
-			$('#deleteBtn').click(function(){			
-				var firstTr = $('#list').find('th').parent();
-				var tr = $('#list').find('td').parent();
-				
-				//체크 버튼 토글
-				var result = $(this).attr('data-change');
-					if(result == 'N' || result == undefined){
-						firstTr.prepend('<th class="th"><input type="checkbox" id="checkAll"></th>');
-						tr.prepend('<td class="td"><input type="checkbox" class = "checked"></td>');
-						$(this).attr('data-change','Y');
-						
-						//#checkAll 버튼 클릭 시 전체 checked
-						$('#checkAll').click(function(){
-							if($('#checkAll').prop('checked')){
-								$('.checked').prop('checked',true);
+			//#checkAll 버튼 클릭 시 전체 checked
+				$('#checkAll').click(function(){
+					if($('#checkAll').prop('checked')){
+						$('.checked').prop('checked',true);
 							}else{
 								$('.checked').prop('checked',false);
 							}
-						});
+						});									
+					});
 
-					}else if(result == 'Y'){
-						$('#list').find('.th').remove();
-						$('#list').find('.td').remove();
-							$(this).attr('data-change','N');						
-				}
-									
-			});
-		});
-	</script>  
-
+	</script> 
 </th:block>
 
 
@@ -47,38 +28,67 @@ layout:decorate="@{layout/default_contract}">
      <div class="col-xs-12">
           <h4><i class="fa fa-truck"></i>전표 목록</h4>
           <hr>  
-			<div class="form-group" style="padding-left: 50px">
-				<div class="col-md-3">
-				 <select class="form-control">
-				   <option>수금전표발행번호</option>
-				   <option>계약번호</option>
-				   <option>거래처명</option>
-				   <option>계정과목명</option>
-				   <option>제목</option>
-				   <option>등록일시</option>
-				   <option>입출금</option>
-				  </select>
-				</div>
-				<div class="col-md-6">
-				  <input class="form-control" type="text" placeholder="검색어를 입력하세요">
-				</div>
-				<div class="col-md-2">
-				  <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
-				  <button type="button" class="btn btn-primary">검색하여 가져오기</button>
-				</div>
-	       </div>
-	       
-	      <br>
-	      <br>
-	      <br>
-	      <br>
-	      <br>
-	      
-                
+          
+          <form class="form-inline" role="form">
+        
+        <!-- 검색 폼 -->
+         <table class="table table-striped table-advance table-hover">
+         	<thead>
+         		<tr>
+         			<th>계약번호</th>
+         			<th>계정과목명</th>
+         			<th>등록일시</th>
+         			<th><!-- 공백 --></th>
+         			<th>입출금 구분</th>
+         		</tr>
+         	</thead>
+         	<tbody>
+         		<tr>
+         			<td style="padding-right: 20px;">
+	         			 <div class="form-group">
+		               		<button id="byContractNum" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
+		                	<input type="text" class="form-control" id="bySupplierValue" placeholder="직접 입력 또는 검색">
+		                </div>
+         			</td>
+         			<td style="padding-right: 20px;">
+         				<div class="form-group">
+		               		<button id="byAccountSubject" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
+		                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="직접 입력 또는 검색">
+	              		</div>
+         			</td>
+         			<td>
+         				<div class="form-group">
+		                	<input type="date" class="form-control" id="exampleInputPassword2" placeholder="입고일별">&nbsp;&nbsp;&nbsp; ~ 
+	               		</div>
+         			</td>
+         			<td style="padding-right: 20px;">
+         				<div class="form-group">
+		                	<input type="date" class="form-control" id="exampleInputPassword2" placeholder="입고일별">
+	               		</div>
+         			</td>
+         			<td style="padding-right: 20px;">
+         				<div class="form-group">
+		                	<select class="form-control" style="width: 125px;">
+		                		<option>All</option>
+		                		<option>입금</option>
+		                		<option>출금</option>
+		                	</select>
+	               		</div>
+         			</td>
+         			<td>
+         				  <button type="submit" class="btn btn-theme">검색</button>
+         			</td>        			
+         		</tr>
+         	</tbody>
+         </table>  
+        </form>
+
+            <!-- 본문 -->    
 	        <form class="form-horizontal style-form">
               <table class="table table-striped table-advance table-hover" id="list">
                 <thead>
                   <tr class="first">
+                 	<th><input type="checkbox" id="checkAll"></th>
                     <th><i class="fa fa-bullhorn"></i>수금전표발행번호</th>
                     <th><i class="fa fa-bookmark"></i>계약번호</th>
                     <th><i class=" fa fa-bookmark"></i>거래처명</th>
@@ -86,10 +96,12 @@ layout:decorate="@{layout/default_contract}">
                     <th><i class=" fa fa-clock-o"></i>제목</th>
                     <th><i class=" fa fa-pencil"></i>금액</th>
                     <th><i class=" fa fa-pencil"></i>입출금</th>
+                    <th><i class=" fa fa-pencil"></i>수정</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
+                  	<td><input type="checkbox" class="checked"></td>
                     <td class="hidden-phone"><a th:href=@{#}>210512_slip</a></td>
                     <td class="hidden-phone">1234</td>
                     <td>파크랜드</td>
@@ -102,6 +114,7 @@ layout:decorate="@{layout/default_contract}">
                     </td>
                   </tr>
                   <tr>
+                  	<td><input type="checkbox" class="checked"></td>
                     <td class="hidden-phone"><a th:href=@{#}>210512_slip</a></td>
                     <td class="hidden-phone">1234</td>
                     <td>파크랜드</td>
@@ -114,6 +127,7 @@ layout:decorate="@{layout/default_contract}">
                     </td>
                   </tr>
                   <tr>
+                  	<td><input type="checkbox" class="checked"></td>
                     <td class="hidden-phone"><a th:href=@{#}>210512_slip</a></td>
                     <td class="hidden-phone">1234</td>
                     <td>파크랜드</td>
@@ -125,9 +139,7 @@ layout:decorate="@{layout/default_contract}">
                       <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
                     </td>
                   </tr>
-                  
-                 
-                 
+             
                 </tbody>
               </table>
             
@@ -138,11 +150,164 @@ layout:decorate="@{layout/default_contract}">
 		          </div>
 		        </div>
        		</form>
-       		
           </div>
-          <!-- /col-md-12 -->
         </div>
-        <!-- /row -->
-</th:block>
+        
+		<!-- byContractNum 모달 시작 -->
+         <div class="modal fade modal-xl"  id="byContractNumModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" style="width:auto;display:table" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h4 class="modal-title" id="exampleModalLabel">거래처 검색</h4>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      
+		      <!-- 모달본문 -->
+		   <div class="modal-body">
+		   
+		   <table  class="table table-striped table-advance table-hover">
+         	<tbody>       		
+       			<thead>
+        			<tr>
+	         			<th colspan="2" style="padding-right: 20px;">
+		         			 <div class="form-inline" style="margin-bottom: 0px;">
+		         			 	<label class="control-label">거래처코드</label>
+			                	<input type="text" class="form-control" id="bySupplierValue" placeholder="검색어를 입력하세요.">
+			                </div>
+	         			</th>
+	         			<th colspan="3" style="padding-right: 20px;">
+	         				<div class="form-inline" style="margin-bottom: 0px;">
+		         				<label class="control-label">거래처 명</label>
+			                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
+	         				  <button type="submit" class="btn btn-theme">검색</button>
+		              		</div>
+	         			</th>  
+        			</tr>     			
+       			</thead>
+       			<tbody style="text-align: center;">
+       				<tr>
+       					<td><i class="fa fa-check"></i></td>
+       					<td>no.</td>
+       					<td>수주처코드</td>
+       					<td>수주처명</td>
+       				</tr>
+     				<tr>
+     					<td><input type="radio" name="bySupplierModal"></td>
+     					<td>1</td>
+       					<td>123456</td>
+       					<td class="bySupplierModal">나는 단추</td>
+     				</tr>
+     				<tr>
+     					<td><input type="radio" name="bySupplierModal"></td>
+     					<td>2</td>
+       					<td>123456</td>
+       					<td class="bySupplierModal">나는 단추2</td>
+     				</tr>
+     				<tr>
+     					<td><input type="radio" name="bySupplierModal"></td>
+     					<td>3</td>
+       					<td>123456</td>
+       					<td class="bySupplierModal">나는 단추3</td>
+     				</tr>
+       			</tbody>        		
+         	</tbody>
+         </table> 
+         
+		 </div>
+		    <div class="modal-footer">
+			      <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+			      <button type="button" id="saveContractNum" class="btn btn-primary" data-dismiss="modal">검색</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+<!-- byContractNum 끝 -->        
 
+<!-- byContractNum 모달 시작 -->
+         <div class="modal fade modal-xl"  id="byAccountSubjectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" style="width:auto;display:table" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h4 class="modal-title" id="exampleModalLabel">거래처 검색</h4>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      
+		      <!-- 모달본문 -->
+		   <div class="modal-body">
+		   
+		   <table  class="table table-striped table-advance table-hover">
+         	<tbody>       		
+       			<thead>
+        			<tr>
+	         			<!-- <th style="padding-bottom: 12px;"><label class="control-label">발주처 코드</label></th> -->
+	         			<th colspan="2" style="padding-right: 20px;">
+		         			 <div class="form-inline" style="margin-bottom: 0px;"><!-- 발주처별 -->
+		         			 	<label class="control-label">거래처코드</label>&nbsp
+			                	<input type="text" class="form-control" id="bySupplierValue" placeholder="검색어를 입력하세요.">
+			                </div>
+	         			</th>
+	         			<!-- <th style="padding-bottom: 12px;"><label class="control-label">발주처 명</label></th> -->
+	         			<th colspan="3" style="padding-right: 20px;">
+	         				<div class="form-inline" style="margin-bottom: 0px;"><!-- 재료별 -->
+		         				<label class="control-label">거래처 명</label>&nbsp
+			                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
+	         				 &nbsp&nbsp&nbsp <button type="submit" class="btn btn-theme">검색</button>
+		              		</div>
+	         			</th>  
+        			</tr>     			
+       			</thead>
+       			<tbody style="text-align: center;">
+       				<tr>
+       					<td><i class="fa fa-check"></i></td>
+       					<td>no.</td>
+       					<td>수주처코드</td>
+       					<td>수주처명</td>
+       				</tr>
+     				<tr>
+     					<td><input type="radio" name="bySupplierModal"></td>
+     					<td>1</td>
+       					<td>123456</td>
+       					<td class="bySupplierModal">나는 단추</td>
+     				</tr>
+     				<tr>
+     					<td><input type="radio" name="bySupplierModal"></td>
+     					<td>2</td>
+       					<td>123456</td>
+       					<td class="bySupplierModal">나는 단추2</td>
+     				</tr>
+     				<tr>
+     					<td><input type="radio" name="bySupplierModal"></td>
+     					<td>3</td>
+       					<td>123456</td>
+       					<td class="bySupplierModal">나는 단추3</td>
+     				</tr>
+       			</tbody>        		
+         	</tbody>
+         </table> 
+         
+		 </div>
+		    <div class="modal-footer">
+			      <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+			      <button type="button" id="saveAccountSubject" class="btn btn-primary" data-dismiss="modal">검색</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+<!-- byContractNum 끝 -->        
+        
+
+<script type="text/javascript">
+	$('#byContractNum').click(function(){
+		$('#byContractNumModal').modal("show");
+	});
+	
+	$('#byAccountSubject').click(function(){
+		$('#byAccountSubjectModal').modal("show");
+	});
+</script>
+</th:block>
 </html>

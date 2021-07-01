@@ -12,9 +12,9 @@
 						</div>
 					</div>
 	                <div class="col-sm-3 input-group">	
-						<input type="number" id="trCount" min="1" value="1" class="form-control" placeholder="숫자입력">
+						<input type="number" id="trCountSubSize" min="1" value="1" class="form-control" placeholder="숫자입력">
 						<div class="input-group-btn">
-							<button id="addRows" class=" btn btn-theme03 btn btn-default">측정값 행 추가</button>
+							<button id="addRowsSubSize" class=" btn btn-theme03 btn btn-default">측정값 행 추가</button>
 						</div>
 					</div>	                
                 </div>
@@ -22,7 +22,7 @@
                  <table class="table table-bordered table-striped table-condensed">
                   <thead>
                     <tr ><!-- 세부에 체크가 되어있으면 세부에 값이 들어간다...? -->
-                      <th><input type="checkbox" id="checkAll"></th>
+                      <th><input type="checkbox" id="checkAllSubSize"></th>
                       <th>*품질검사 요청코드</th>
                       <th>검사명</th>
                       <th>*측정홧수</th>
@@ -34,9 +34,9 @@
                       <th>삭제</th>
                     </tr>
                   </thead>
-                  <tbody id="tbody">
+                  <tbody id="tbodySubSize">
                     <tr id="tableTr">	
-                      <td><input type="checkbox" class="checked"></td>
+                      <td><input type="checkbox" class="checkedSubSize"></td>
                       <td>
 		                <div class="input-group">	
 							<input type="text" class="form-control" placeholder="품질검사요청코드 검색">
@@ -83,10 +83,12 @@
               <div class="form-group text-right">
                     <div class="col-lg-offset-2 col-lg-10">
                       <a href="#" class="btn btn-success btn-xs"><i class="fa fa-check"></i>등록</a>
-                      <a class="btn btn-danger btn-xs" id="deleteBtn"><i class="fa fa-trash-o "></i>삭제</a>
+                      <a class="btn btn-danger btn-xs" id="deleteBtnSubSize"><i class="fa fa-trash-o "></i>삭제</a>
                     </div>
                 </div>
-
+ <th:block layout:fragment="customJs">
+	<script type="text/javascript" th:src="@{quality/addInspectionMeasurementValueSubSize.js}"></script>
+</th:block>
 </th:block>
 
 </html>
