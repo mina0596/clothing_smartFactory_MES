@@ -74,12 +74,14 @@ layout:decorate="@{layout/default_system}">
                   <tr>
                   	<th><input type="checkbox" id="checkAll"></th>
                     <th><i class="fa fa-bullhorn"></i>no.</th>
-                    <th class="hidden-phone"><i class="fa fa-bookmark"></i>사원코드</th>
-                    <th class="hidden-phone"><i class="fa fa-bookmark"></i>사원명</th>
+                    <th><i class="fa fa-info"></i>사원코드</th>
+                    <th><i class="fa fa-user"></i>사원명</th>
+                    <th><i class="fa fa-bookmark"></i>아이디</th>
+                    <th><i class="fa fa-lock"></i>비밀번호</th>
                     <th><i class="fa fa-bookmark"></i>담당부서</th>
                     <th><i class=" fa fa-bookmark"></i>담당직책</th>
-                    <th><i class=" fa fa-bookmark"></i>이메일</th>
-                    <th><i class=" fa fa-bookmark"></i>전화번호</th>
+                    <th><i class=" fa fa-envelope-o"></i>이메일</th>
+                    <th><i class=" fa fa-mobile"></i>전화번호</th>
                     <th><i class=" fa fa-bookmark"></i>등록일자</th>
                     <th><i class=" fa fa-pencil"></i>수정</th>
                   </tr>
@@ -90,6 +92,8 @@ layout:decorate="@{layout/default_system}">
                     <td th:text = ${n.index+1}></td>
                     <td  th:text="${h.employeeCode}"></td>      
                     <td th:text="${h.employeeName}"></td>
+                    <td  th:text="${h.employeeId}"></td>      
+                    <td  th:text="${h.employeePw}"></td>      
                     <td th:text="${h.employeeDepartment}"></td>
                     <td th:text="${h.employeePosition}"></td>
                     <td th:text="${h.employeeEmail}"></td>

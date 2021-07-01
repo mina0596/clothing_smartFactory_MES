@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ksmart39.springboot.dao.SystemMapper;
 import ksmart39.springboot.domain.AccountingCategory;
+import ksmart39.springboot.domain.Client;
 import ksmart39.springboot.domain.HumanResources;
 import ksmart39.springboot.domain.QualityInspection;
 
@@ -24,6 +25,16 @@ public class SystemService {
 		return humanResources;
 	}
 	
+	public int addHumanResources (HumanResources humanResources) {
+		int result = systemMapper.addHumanResources(humanResources);
+		return result;
+	}
+	//============================================================
+	//[한빛] 거래처 전체 조회
+	public List<Client> getClient(){
+		List<Client> client = systemMapper.getClient();
+		return client;
+	}
 	//============================================================
 	//[다미] 회계과목 조회
 	public List<AccountingCategory> getAccountingSubjectList(){		

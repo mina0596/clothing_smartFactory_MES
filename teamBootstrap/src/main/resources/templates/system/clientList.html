@@ -31,7 +31,7 @@ layout:decorate="@{layout/default_system}">
 	
 	<div class="row mt">
      <div class="col-md-12">
-		<h4><i class="fa fa-angle-right"></i>수주거래처조회</h4>
+		<h4><i class="fa fa-angle-right"></i>거래처조회</h4>
           <hr>  
 			<div class="form-group" style="padding-left: 50px">
 				<div class="col-md-3">
@@ -63,14 +63,15 @@ layout:decorate="@{layout/default_system}">
 	      
                 
 	        <form class="form-horizontal style-form">
-	        	<h4><i class="fa fa-angle-right"></i>수주거래처목록</h4>
+	        	<h4><i class="fa fa-angle-right"></i>거래처목록</h4>
 	        
               <table class="table table-striped table-advance table-hover" id="list">
                 <thead>
                   <tr>
                   	<th><input type="checkbox" id="checkAll"></th>
-                    <th><i class="fa fa-bullhorn"></i>번호</th>
-                    <th class="hidden-phone"><i class="fa fa-bookmark"></i>거래처코드</th>
+                    <th><i class="fa fa-bullhorn"></i>no.</th>
+                    <th><i class="fa fa-bookmark"></i>수발주구분</th>
+                    <th><i class="fa fa-bookmark"></i>거래처코드</th>
                     <th><i class="fa fa-bookmark"></i>회사명</th>
                     <th><i class=" fa fa-bookmark"></i>전화번호</th>
                     <th><i class="fa fa-bookmark"></i>대표자</th>
@@ -82,19 +83,18 @@ layout:decorate="@{layout/default_system}">
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr th:each=" c,n : ${client}">
                   	<td><input type="checkbox" id="checkAll"></td>
-                    <td class="hidden-phone">1</td>
-                    <td class="hidden-phone">buyer01</td>
-                    <td>이한빛</td>
-                    <td>063-293-9192</td>
-                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
-                    <td>조인성</td>
-                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
-                    <td>이광수</td>
-                    <td>109-203123-23124</td>
-                    <td>전라북도 전주시 만성동로 129</td>
-                    <td>2021.06.21 12:25</td>
+                    <td th:text = ${n.index+1}></td>
+                    <td th:text="${c.clientCategory}" class="badge bg-primary"></td>
+                    <td th:text="${c.clientCode}"></td>
+                    <td th:text="${c.clientName}"></td>
+                    <td th:text="${c.clientTel}"></td>
+                    <td th:text="${c.clientCeo}"></td>
+                    <td th:text="${c.clientEmployee}"></td>
+                    <td th:text="${c.clientBusinessNum}"></td>
+                    <td th:text="${c.clientAddress}"></td>
+                    <td th:text="${c.clientInfoRegDate}"></td>
                   	<td>  <button class="btn btn-primary btn-xs" type="button" onclick="location.href='/modifyClient'"><i class="fa fa-pencil"></i>수정</button></td>
 
                     </tr>

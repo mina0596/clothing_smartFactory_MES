@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ksmart39.springboot.domain.AccountingCategory;
+import ksmart39.springboot.domain.Client;
 import ksmart39.springboot.domain.HumanResources;
 import ksmart39.springboot.domain.QualityInspection;
 import ksmart39.springboot.service.SystemService;
@@ -43,13 +44,18 @@ public class SystemController {
 	
 	//[한빛]사원등록-> 사원목록
 	@PostMapping("/addHumanResources")
-	public String addHumanResources() {
+	public String addHumanResources(HumanResources humanResources) {
+		log.info("========================================");
+		log.info("화면에서 입력받은 값(회원가입) humanResources: {}", humanResources);
+		log.info("========================================");
+
+		systemService.addHumanResources(humanResources);
 		return "redirect:/humanResourcesList";
 	}
 	
 	//[한빛]사원등록
 	@GetMapping("/addHumanResources")
-	public String humanResourcesEnroll(Model model) {
+	public String addHumanResources(Model model) {
 		 model.addAttribute("title", "인사관리");
 		return"system/addHumanResources";	
 	}
@@ -71,29 +77,31 @@ public class SystemController {
 	
 	
 	//==============================================================
-	//[한빛]수주주문등록 ->목록으로 이동
+	//[한빛]주문등록 ->목록으로 이동
 	@PostMapping("/addClient")
 	public String addClient() {
 		return "redirect:/clientList";
 	}
 	
-	//[한빛] 수주거래처 수정
+	//[한빛]거래처 수정
 	@GetMapping("/modifyClient")
 	public String modifyClient() {
 		return"system/modifyClient";
 	}
 	
-	//[한빛]수주거래처 조회
+	//[한빛]거래처 조회
 	@GetMapping("/clientList")
 	public String clientList(Model model) {
-		model.addAttribute("title", "수주관리");
+		List<Client> client = systemService.getClient();
+		model.addAttribute("title", "거래처관리");
+		model.addAttribute("client", client);
 		return "system/clientList";
 	}
 
 	//[한빛]수주거래처 등록
 	@GetMapping("/addClient")
 	public String addClient(Model model) {
-		model.addAttribute("title", "수주관리");
+		model.addAttribute("title", "거래처관리");
 		return "system/addClient";
 	}
 	
