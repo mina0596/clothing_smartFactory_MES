@@ -13,6 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ContractController {
 	//----------------------------------------수주주문서-----------------------------------------------------
 	
+	//[민아]수주계약 등록 -> 조회
+	@GetMapping("/addBuyerOrder_Minah")
+	public String addBuyerOrder_Minah() {
+		return "contract/addbuyerOrder_Minah";
+	}
+	
 	//[한빛]수주계약 등록 -> 조회
 	@PostMapping("/addBuyerOrder")
 	public String addBuyerOrder() {
