@@ -2,13 +2,21 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <th:block th:fragment="subSize">
-	                <div class="form-inline">
+
+               
+                <div class="form-inline">
+              		<div class="col-sm-3 input-group">	
+						<input type="text" class="form-control" placeholder="품질검사 요청코드 검색">
+						<div class="input-group-btn">
+							<button id="requestCode" class="btn btn-warning">검색</button>
+						</div>
+					</div>
 	                <div class="col-sm-3 input-group">	
-						<input type="number" class="form-control" placeholder="숫자입력">
+						<input type="number" id="trCount" min="1" value="1" class="form-control" placeholder="숫자입력">
 						<div class="input-group-btn">
 							<button id="addRows" class=" btn btn-theme03 btn btn-default">측정값 행 추가</button>
 						</div>
-					</div>
+					</div>	                
                 </div>
 				<br>
                  <table class="table table-bordered table-striped table-condensed">
@@ -17,36 +25,21 @@
                       <th><input type="checkbox" id="checkAll"></th>
                       <th>*품질검사 요청코드</th>
                       <th>검사명</th>
-                      <th>
-                      	<input type="checkbox" class="checkedFistNum">
-                      	*1회차
-                      </th>
-                      <th>
-                      	<input type="checkbox" class="checkedSecondNum">
-                      	2회차
-                      </th>
-                      <th>
-                      	<input type="checkbox" class="checkedThirdNum">
-                      	3회차
-                      </th>
-                      <th>
-                      	시작일시
-                      </th>
-                      <th>
-                      	완료일시
-                      </th>
-                      <th>
-                      	등록
-                      </th>
-                    
+                      <th>*측정홧수</th>
+                      <th>측정값 </th>
+   					  <th>단위</th>
+   					  <th>시작일시</th>
+                      <th>완료일시</th>
+                      <th>등록</th>
+                      <th>삭제</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>	
+                  <tbody id="tbody">
+                    <tr id="tableTr">	
                       <td><input type="checkbox" class="checked"></td>
                       <td>
 		                <div class="input-group">	
-							<input type="text" class="form-control" placeholder="숫자입력">
+							<input type="text" class="form-control" placeholder="품질검사요청코드 검색">
 							<div class="input-group-btn">
 								<button id="addRows" class="btn btn-default">검색</button>
 							</div>						
@@ -54,28 +47,21 @@
 					  </td>
 					  <td>검사명</td>
                       <td>
-                      	 <div class="input-group">
-					      <span class="input-group-addon">
-					        <input type="checkbox" aria-label="...">
-					      </span>
-					      <input type="text" class="form-control" aria-label="...">
-					    </div>
+					      <select class="form-control">
+					      	<option>1회차</option>
+					      	<option>2회차</option>
+					      	<option>3회차</option>
+					      </select>
 					  </td>
                       <td>
-                      	<div class="input-group">
-					      <span class="input-group-addon">
-					        <input type="checkbox" aria-label="...">
-					      </span>
-					      <input type="text" class="form-control" disabled="disabled" aria-label="...">
-					    </div>
+                      	<input type="number" class="form-control" placeholder="측정값">                      	
 					  </td>
                       <td>
-                      	<div class="input-group">
-					      <span class="input-group-addon">
-					        <input type="checkbox" aria-label="...">
-					      </span>
-					      <input type="text" class="form-control" disabled="disabled" aria-label="...">
-					    </div>
+                      	<select class="form-control">
+					      	<option>mm</option>
+					      	<option>cm</option>
+					      	<option>직접입력</option>
+					      </select>         	
 					  </td>
                       <td>
                       	<input type="text" class="form-control" placeholder="공란일시 등록시간">
@@ -86,11 +72,21 @@
                       <td>
 	               		<button type="button">등록</button>
 					  </td>
+                      <td>
+	               		<button type="button" class="removeButtonSubSize">삭제</button>
+					  </td>
                     </tr>
 
                   </tbody>
-                </table>   
-                <!-- 등급별로 등록 -->
+                </table>  
+                 
+              <div class="form-group text-right">
+                    <div class="col-lg-offset-2 col-lg-10">
+                      <a href="#" class="btn btn-success btn-xs"><i class="fa fa-check"></i>등록</a>
+                      <a class="btn btn-danger btn-xs" id="deleteBtn"><i class="fa fa-trash-o "></i>삭제</a>
+                    </div>
+                </div>
+
 </th:block>
 
 </html>
