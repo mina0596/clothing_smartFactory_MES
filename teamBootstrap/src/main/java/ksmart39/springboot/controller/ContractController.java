@@ -239,6 +239,30 @@ public class ContractController {
 		return"contract/addSupplier";
 	
 	}
+	//=====================================
+	// 결제 등록
+	@GetMapping("/addInvoiceApproval")
+	public String addInvoiceApproval() {
+		return "contract/addInvoiceApproval";
+	}
+
+	// 결제 승인 현황 목록
+	@GetMapping("/invoiceApprovalList")
+	public String getInvoiceApprovalList() {
+		return "contract/invoiceApprovalList";
+	}
+	// [다미] 전표 목록
+	@GetMapping("/paymentInvoiceList")
+	public String paymentInvoiceList(Model model) {
+		return "contract/paymentInvoiceList";
+	}
+
+	// [다미] 전표 등록 화면
+	@GetMapping("/addPaymentInvoice")
+	public String addPaymentInvoice(Model model) {
+		return "contract//addPaymentInvoice";
+	}
+	
 
 	//수/발주 메인화면
 	@GetMapping("/contract")
