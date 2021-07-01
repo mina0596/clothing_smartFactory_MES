@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_qualityControl}">
+<th:block layout:fragment="pageTitle">
+
+  
+  
+<th:block layout:fragment="customJs">
+
+<script type="text/javascript">
+jQuery(document).ready(function() {
+
+
+
+    var barChart1 = [9, 8, 6, 8, 7, 6, 4];
+    var barChart2 = [5, 3, 4, 6, 2, 7, 8];
+    var barChart3 = [3, 2, 1, 4, 2, 1, 2];
+    var lineChart = [12, 7, 4, 10, 8, 5];
+    
+    jQuery("#chart").jqplot([barChart1, barChart2,barChart3, lineChart], {
+          title : "월별 합격율"
+        , stackSeries : true      // 그래프를 하나로 합친다.
+        , series : [
+            {      // barChart1 배열을 막대 그래프로 지정한다.
+                  renderer : jQuery.jqplot.BarRenderer
+                , rendererOptions : {
+                      barWidth : 35                    // 막대그래프의 넓이를 지정
+                    , barPadding : -15                // 막대그래프의 여백을 지정
+                    , highlightMouseOver : false    // 막대그래프의 클릭여부를 지정 (기본값 : true)
+                }
+            }
+            , {    // barChart2 배열을 막대 그래프로 지정한다.
+                  renderer : jQuery.jqplot.BarRenderer
+                , rendererOptions : {
+                      barWidth : 35                    // 막대그래프의 넓이를 지정
+                    , barPadding : -15                // 막대그래프의 여백을 지정
+                    , highlightMouseOver : false    // 막대그래프의 클릭여부를 지정 (기본값 : true)
+                }
+            }
+            , {    // barChart3 배열을 막대 그래프로 지정한다.
+                  renderer : jQuery.jqplot.BarRenderer
+                , rendererOptions : {
+                      barWidth : 35                    // 막대그래프의 넓이를 지정
+                    , barPadding : -15                // 막대그래프의 여백을 지정
+                    , highlightMouseOver : false    // 막대그래프의 클릭여부를 지정 (기본값 : true)
+                }
+            }
+            , {    // lineChart 배열을 꺽은선 그래프로 지정한다.
+                  disableStack : true      // 데이터의 합또한 합쳐지는 것을 방지하기위해 꺽은선 그래프는 disableStack을 true로 선언
+                  // jQuery.jqplot.LineRenderer(꺽은선 그래프)의 플러그인은 기본적으로 지정하지 않아도 된다.
+                , renderer : jQuery.jqplot.LineRenderer
+            }
+        ]
+        , axes: {
+            xaxis : {
+                  renderer : jQuery.jqplot.CategoryAxisRenderer
+                , ticks : ['1월', '2월', '3월', '4월', '5월', '6월']
+            }
+        }
+    });
+});
+
+	
+	</script>
+	</th:block>	
+	</th:block>
+<th:block layout:fragment="container">
+	 <div class="row content-panel">
+              <div class="panel-heading">
+                <ul class="nav nav-tabs nav-justified">
+                  <li class="active">
+                    <a data-toggle="tab" href="#overview">합격율월별조회</a>
+                  </li>
+                  <li>
+                    <a data-toggle="tab" href="#contact">합격율주간조회</a>
+                  </li>
+                  <li>
+                    <a data-toggle="tab" href="#edit">합격율 분기별조회 </a>
+                  </li>
+                </ul>
+              </div>
+              <!-- /panel-heading -->
+              <div class="panel-body">
+                <div class="tab-content">
+                  
+                  
+                  <div id="overview" class="tab-pane active">
+               		<div class="panel-body">
+                  
+                  	<div id="chart" style="width:780px;height:304px;"></div>
+                
+	                 </div>
+	                </div>
+  
+                <!-- 두번째 -->
+                  <div id="contact" class="tab-pane">
+                  	
+                  
+                  
+                  </div>
+            	
+                  <!-- 세번째 -->
+                  <div id="edit" class="tab-pane">
+                 
+          
+       	   
+      			</div>
+               </div>
+      		</div>
+      	</div>
+      			
+    
+
+          
+
+		
+		     
+</th:block>
+
+</html>
