@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
-layout:decorate="@{layout/default_humanResources}">
+layout:decorate="@{layout/default_system}">
 
 <th:block layout:fragment="pageTitle">
 	   <div class="border-head"> 
@@ -13,20 +13,12 @@ layout:decorate="@{layout/default_humanResources}">
 <th:block layout:fragment="container">
 	
 	<div class="form-panel">
-	 <h4 class="mb"><i class="fa fa-angle-right"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">사원수정</font></font></h4>
+	 <h4 class="mb"><i class="fa fa-angle-right"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 사원등록</font></font></h4>
               <div class="form">
                 <form class="cmxform form-horizontal style-form" id="signupForm" method="post"  th:action="@{/addHumanResources}">
-                
-			        <div class="form-group">
-			          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">사원코드</label>
-			          <div class="col-md-6">
-			            <input type="text" class="form-control" placeholder="검색한 색상명" disabled="disabled">
-			          </div>
-			        </div>
-			                
                   <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">권한</label>
-                  <div class="col-sm-6">
+                  <div class="col-sm-2">
                       <select class="form-control">
 						<option>::선택::</option>
 						<option value=1>관리자</option>					
@@ -35,7 +27,6 @@ layout:decorate="@{layout/default_humanResources}">
 		               </select>
                   </div>
                 </div>
-                
                  
                   <div class="form-group ">
                     <label for="firstname" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">사원명</font></font></label>
@@ -88,7 +79,7 @@ layout:decorate="@{layout/default_humanResources}">
               
                   <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">부서</label>
-                  <div class="col-sm-6">
+                  <div class="col-sm-2">
                       <select class="form-control">
 						<option>::선택::</option>
 						<option>본사</option>
@@ -99,7 +90,7 @@ layout:decorate="@{layout/default_humanResources}">
                 
                   <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">직책</label>
-                  <div class="col-sm-6">
+                  <div class="col-sm-2">
                       <select class="form-control">
 						<option>::선택::</option>
 						<option>사원</option>
@@ -115,7 +106,7 @@ layout:decorate="@{layout/default_humanResources}">
                 
          <div class="form-group text-right">
           <div class="col-lg-offset-2 col-lg-10">
-            <button class="btn btn-theme" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">수정</font></font></button>
+            <button class="btn btn-theme" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">등록</font></font></button>
             <button class="btn btn-theme04" type="button" onClick="history.back();"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소</font></font></button>
           </div>
         </div>

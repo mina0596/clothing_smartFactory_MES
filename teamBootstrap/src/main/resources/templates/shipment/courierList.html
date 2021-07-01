@@ -3,17 +3,20 @@
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
 layout:decorate="@{layout/default_shipment}">
 
-<th:block layout:fragment="pageTitle">
-	   <div class="border-head"> 
-	    <h3>출고 관리</h3>
-	    </div>
+<th:block layout:fragment="customJs">
+	<script type="text/javascript">
+		$(function(){
+			$('#registerBtn').click(function(){
+				alert('등록화면은 구현안할거에요...');	
+			});
+		})
+	</script>
 </th:block>
-
 
 <th:block layout:fragment="container">
 	 <div class="row mt">
      <div class="col-md-12">
-          <h4><i class="fa fa-truck"></i> 운송회사 정보</h4>
+          <h4><i class="fa fa-truck"></i> 운송회사 검색</h4>
           <hr>  
 			<div class="form-group" style="padding-left: 50px">
 				<div class="col-md-3">
@@ -28,18 +31,17 @@ layout:decorate="@{layout/default_shipment}">
 				</div>
 				<div class="col-md-2">
 				  <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
-				  <button type="button" class="btn btn-primary">검색하여 가져오기</button>
+				  <button type="button" class="btn btn-theme">검색하여 가져오기</button>
 				</div>
 	       </div>
 	       
 	      <br>
 	      <br>
 	      <br>
-	      <br>
-	      <br>
-	      
                 
-	        <form class="form-horizontal style-form">
+        <form class="form-horizontal style-form">
+	      <h4><i class="fa fa-truck"></i> 운송회사 목록</h4>
+			          <hr>
               <table class="table table-striped table-advance table-hover" id="list">
                 <thead>
                   <tr>
@@ -49,7 +51,6 @@ layout:decorate="@{layout/default_shipment}">
                     <th><i class=" fa fa-bookmark"></i>운송회사 직원 이메일</th>
                     <th><i class=" fa fa-bookmark"></i>운송회사 주소</th>
                     <th><i class=" fa fa-bookmark"></i>등록일</th>
-                    <th><i class=" fa fa-pencil"></i>수정</th>
                   </tr>
                 </thead>
              
@@ -65,9 +66,6 @@ layout:decorate="@{layout/default_shipment}">
                     <td>전북 전주시 덕진구 금암동</td>
                     <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
                     <td>2021-01-18 16:02</td>
-                    <td> 
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                    </td>
                   </tr>
                   
                   <tr>
@@ -81,9 +79,6 @@ layout:decorate="@{layout/default_shipment}">
                     <td>전북 전주시 덕진구 금암동</td>
                     <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
                     <td>2021-01-18 16:02</td>
-                    <td> 
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                    </td>
                   </tr>
                   
                   <tr>
@@ -97,9 +92,6 @@ layout:decorate="@{layout/default_shipment}">
                     <td>전북 전주시 덕진구 금암동</td>
                     <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
                     <td>2021-01-18 16:02</td>
-                    <td> 
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                    </td>
                   </tr>
                   
                   <tr>
@@ -113,9 +105,6 @@ layout:decorate="@{layout/default_shipment}">
                     <td>전북 전주시 덕진구 금암동</td>
                     <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
                     <td>2021-01-18 16:02</td>
-                    <td> 
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                    </td>
                   </tr>
                   
                   <tr>
@@ -129,9 +118,6 @@ layout:decorate="@{layout/default_shipment}">
                     <td>전북 전주시 덕진구 금암동</td>
                     <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
                     <td>2021-01-18 16:02</td>
-                    <td> 
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                    </td>
                   </tr>
                   
                   <tr>
@@ -145,9 +131,6 @@ layout:decorate="@{layout/default_shipment}">
                     <td>전북 전주시 덕진구 금암동</td>
                     <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
                     <td>2021-01-18 16:02</td>
-                    <td> 
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                    </td>
                   </tr>
                   
                   
@@ -155,12 +138,6 @@ layout:decorate="@{layout/default_shipment}">
                 </tbody>
               </table>
             
-		        <div class="form-group text-right">
-		          <div class="col-lg-offset-2 col-lg-10">
-		           <a th:href="@{/addShipment}" class="btn btn-success btn-xs"><i class="fa fa-check"></i>등록</a>
-		           <a id="deleteBtn" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i>삭제</a>
-		          </div>
-		        </div>
        		</form>
        		
           </div>
