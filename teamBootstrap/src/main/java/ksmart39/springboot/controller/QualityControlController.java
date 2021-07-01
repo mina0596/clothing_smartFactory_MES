@@ -91,13 +91,6 @@ public class QualityControlController {
 		return"quality/addFinalnspectionMeasurementValue";
 	}
 	
-	//검사현황 등록
-	@GetMapping("/addQualityInspectionStatus")
-	public String addInspectionStatus(Model model) {
-		
-		model.addAttribute("title", "검사현황관리:검사현황등록");
-		return"quality/addQualityInspectionStatus";
-	}
 	
 	
 
@@ -154,7 +147,40 @@ public class QualityControlController {
 		return "quality/StandardTableList";
 	}
 	
+	//[다미] 실시간 검사 현황
+	@GetMapping("/qualityInspectionStatusNow")
+	public String qualityInspectionStatusNow() {
+		return "quality/qualityInspectionStatusNow";
+	}
 	
+	//[다미&보람]수주계약별 검색 품질검사 현황
+	@GetMapping("/qualityInspectionStatusContract")
+	public String qualityInspectionStatusContract() {
+		return "quality/qualityInspectionStatusContract";
+	}
+		
+	//[다미&보람]수주계약별 검사현황
+		@GetMapping("/stateBuyerContractQualityInspection")
+		public String stateBuyerContractQualityInspection() {
+			return"quality/stateBuyerContractQualityInspection";
+		}
+
+	//[다미&보람]수주계약별 기간별조회
+		@GetMapping("/searchByPeriodContractQualityInspection")
+		public String searchByPeriodContractQualityInspection() {
+			return"quality/searchByPeriodContractQualityInspection";
+		}
+
+	//[다미&보람]의뢰품목별검사현황
+		@GetMapping("/stateByProductQualityInspection")
+		public String stateByProductQualityInspection() {
+			return"quality/stateByProductQualityInspection";
+		}
+	//[다미&보람]의뢰품목별 기간별조회
+		@GetMapping("/searchByPeriodByProductQualityInspection")
+		public String searchByPeriodByProductQualityInspection() {
+			return"quality/searchByPeriodByProductQualityInspection";
+		}
 	
 	//[다미&보람] 품질검사 측정값 목록
 	@GetMapping("/inspectionMeasurementValueList")
