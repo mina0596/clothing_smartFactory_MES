@@ -25,23 +25,23 @@
 		});
 		
 		// 전체 체크
-		$(document).on('click', '#checkAll', function(){
-			if($('#checkAll').prop('checked')){
-				$('.checked').prop('checked',true);
+		$(document).on('click', '#checkAllSubSize', function(){
+			if($('#checkAllSubSize').prop('checked')){
+				$('.checkedSubSize').prop('checked',true);
 			}else{
-				$('.checked').prop('checked',false);
+				$('.checkedSubSize').prop('checked',false);
 			}
 		});
 		
 		// 체크된 행 삭제
-		$(document).on('click', '#deleteBtn', function(){
+		$(document).on('click', '#deleteBtnSubSize', function(){
 			if (confirm("정말 삭제하시겠습니까?")) {
                 // 확인 버튼 클릭 시 동작
-				var checkObj = $('input[class="checked"]:checked');
+				var checkObj = $('input[class="checkedSubSize"]:checked');
 				// 체크된 항목 수
 				var checkCount = checkObj.length;
 				// 전체 행의 수
-				var bodyCount = $('#tbody tr').length;
+				var bodyCount = $('#tbodySubSize tr').length;
 				
 				if(checkCount < 1){
 					alert('체크된 항목이 없습니다.');
@@ -58,7 +58,7 @@
 					$('#checkAll').prop('checked',false);
 				});
 				
-				var lastTrRemoveBtnObj = $('#tbody tr:last td').find('.removeButton');
+				var lastTrRemoveBtnObj = $('#tbodySubSize tr:last td').find('.removeButtonSubSize');
 				
 // 				lastTrRemoveBtnObj.attr('class', 'addButton');
 // 				lastTrRemoveBtnObj.text('추가');
@@ -72,9 +72,9 @@
 		
 		
 		//행 추가
-		$('#addRows').click(function(){
-			var count = $('#trCount').val();
-			var tbody = $('#tbody');
+		$('#addRowsSubSize').click(function(){
+			var count = $('#trCountSubSize').val();
+			var tbody = $('#tbodySubSize');
 			
 			if(count != null && count != undefined && count > 0){
 // 				$('#tbody tr:last td:last button').attr('class', 'removeButton');
@@ -83,21 +83,21 @@
 				for(var i = 0; i < count; i++){
 					var lastIndex = $(tbody).find('tr:last').length;
 					var innerHtml = '<tr>';
-					innerHtml += '<td><input type="checkbox" class="checked"></td>';
-					innerHtml += '<td><div class="input-group"><input type="text" class="form-control" placeholder="숫자입력"><div class="input-group-btn"><button id="addRows" class="btn btn-default">검색</button></div></div></td>';
-					innerHtml += '<td>검사명</td>';
-					innerHtml += '<td>원부자재이름</td>';
-					innerHtml += '<td><select class="form-control"><option>1회차</option><option>2회차</option><option>3회차</option></select></td>';
-					innerHtml += '<td><input type="number" class="form-control" placeholder="측정값"></td>';
-					innerHtml += '<td><select class="form-control"><option>mm</option><option>cm</option><option>직접입력</option></select></td>';
-					innerHtml += '<td><input type="text" class="form-control" placeholder="공란일시 등록시간"></td>';
-					innerHtml += '<td><input type="text" class="form-control" placeholder="공란일시 등록시간"></td>';
-					innerHtml += '<td><button type="button">등록</button></td>';
+					innerHtml += '<td><input type="checkbox" class="checkedSubSize"></td>';
 					
 					if(i == (count - 1)){
-						innerHtml += '<td><button type="button" class="removeButton">삭제</button></td>';
+						innerHtml += '<td><div class="input-group"><input type="text" class="form-control" placeholder="품질검사요청코드 검색"><div class="input-group-btn"><button id="addRows" class="btn btn-default">검색</button></div></div></td>';
+						innerHtml += '<td>검사명</td>';
+						innerHtml += '<td><select class="form-control"><option>1회차</option><option>2회차</option><option>3회차</option></select></td>';
+						innerHtml += '<td><input type="number" class="form-control" placeholder="측정값"></td>';
+						innerHtml += '<td><select class="form-control"><option>mm</option><option>cm</option><option>직접입력</option></select></td>';
+						innerHtml += '<td><input type="text" class="form-control" placeholder="공란일시 등록시간"></td>';
+						innerHtml += '<td><input type="text" class="form-control" placeholder="공란일시 등록시간"></td>';
+						innerHtml += '<td><button type="button">등록</button></td>';
+						innerHtml += '<td><button type="button" class="removeButtonSubSize">삭제</button></td>';
+						
 					}else{
-						innerHtml += '<td><button type="button" class="removeButton">삭제</button></td>';	
+						innerHtml += '<td><button type="button" class="removeButtonSubSize">삭제</button></td>';	
 					}
 					
 					innerHtml += '</tr>';
@@ -107,19 +107,19 @@
 				}
 			}else{
 				alert('확인');
-				$('#trCount').focus();
+				$('#trCountSubSize').focus();
 				return false;
 			}
-			$('#trCount').val(1);
+			$('#trCountSubSize').val(1);
 			
 		});
 		
 		
 		
 		//행 삭제
-		$(document).on('click', '.removeButton', function(){
-			var bodyCount = $('#tbody tr').length;
-			var removeBtn = $('.removeButton').parent().parent();
+		$(document).on('click', '.removeButtonSubSize', function(){
+			var bodyCount = $('#tbodySubSize tr').length;
+			var removeBtn = $('.removeButtonSubSize').parent().parent();
 			
 			if(bodyCount > removeBtn.length ) {
 				alert('모든 행을 지울 수 없습니다.');
