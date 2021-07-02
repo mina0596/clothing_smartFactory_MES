@@ -45,57 +45,130 @@ layout:decorate="@{layout/default_qualityControl}">
 		
 		<hr>
 		<h5>[계약번호:1245] 검사 현황</h5>
-		<table border="1"> 
-		<caption>테스트</caption> 
-		<tr> 
-			<th rowspan="2">no.</th> 
-			<th rowspan="2"><input type="checkbox"></th> 
-			<th rowspan="2">공정</th> 
-			<th rowspan="2">공정소분</th> 
-			<th rowspan="2">공정세분</th> 
-			<th rowspan="2">품목코드</th> 
-			<th rowspan="2">품목명</th> 
-			<th rowspan="2">요청시간</th> 
-			<th rowspan="2">검사단위</th> 
-			<th colspan="3" scope="colgroup" id="first">기준</th> 
-			<th colspan="3" scope="colgroup" id="second">측정값</th> 
-			<th colspan="2" scope="colgroup" id="second">처리정보</th> 
-			<th rowspan="2">최종합격여부</th> 
-			<th rowspan="2">기타</th> 
-		</tr> 
-		<tr> 
-			<th scope="col" id="hong">기준값</th> 
-			<th scope="col" id="jeon">최소값</th> 
-			<th scope="col" id="kim">최대값</th> 
-			<th scope="col" id="song">1회차</th> 
-			<th scope="col" id="song">2회차</th> 
-			<th scope="col" id="song">3회차</th> 
-			<th scope="col" id="song">시작시간</th> 
-			<th scope="col" id="song">완료시간</th> 
-		</tr>
-		<tr> 
-			<th scope="row" id="mandatory">1</th> 
-			<td><input type="checkbox"></td> 
-			<td>수입검사</td> 
-			<td>물세탁</td> 
-			<td>변퇴색</td> 
-			<td>req01_MS_pants</td>
-			<td>바지</td>
-			<td>2021-04-22 12:12:22</td>
-			<td>등급</td>
-			<td>4</td>
-			<td>5</td>
-			<td>4</td>
-			<td>5</td>
-			<td>3</td>
-			<td>4</td>
-			<td>2021-04-22 12:12:22</td>
-			<td>2021-04-22 12:12:22</td>
-			<td>합격</td>
-			<td>없음</td>
-		</tr> 
+<!-- 		<table border="1">  -->
+<!-- 		<caption>테스트</caption>  -->
+<!-- 		<tr>  -->
+<!-- 			<th rowspan="2">no.</th>  -->
+<!-- 			<th rowspan="2"><input type="checkbox"></th>  -->
+<!-- 			<th rowspan="2">공정</th>  -->
+<!-- 			<th rowspan="2">공정소분</th>  -->
+<!-- 			<th rowspan="2">공정세분</th>  -->
+<!-- 			<th rowspan="2">품목코드</th>  -->
+<!-- 			<th rowspan="2">품목명</th>  -->
+<!-- 			<th rowspan="2">요청시간</th>  -->
+<!-- 			<th rowspan="2">검사단위</th>  -->
+<!-- 			<th colspan="3" scope="colgroup" id="first">기준</th>  -->
+<!-- 			<th colspan="3" scope="colgroup" id="second">측정값</th>  -->
+<!-- 			<th colspan="2" scope="colgroup" id="second">처리정보</th>  -->
+<!-- 			<th rowspan="2">최종합격여부</th>  -->
+<!-- 			<th rowspan="2">기타</th>  -->
+<!-- 		</tr>  -->
+<!-- 		<tr>  -->
+<!-- 			<th scope="col" id="hong">기준값</th>  -->
+<!-- 			<th scope="col" id="jeon">최소값</th>  -->
+<!-- 			<th scope="col" id="kim">최대값</th>  -->
+<!-- 			<th scope="col" id="song">1회차</th>  -->
+<!-- 			<th scope="col" id="song">2회차</th>  -->
+<!-- 			<th scope="col" id="song">3회차</th>  -->
+<!-- 			<th scope="col" id="song">시작시간</th>  -->
+<!-- 			<th scope="col" id="song">완료시간</th>  -->
+<!-- 		</tr> -->
+<!-- 		<tr>  -->
+<!-- 			<th scope="row" id="mandatory">1</th>  -->
+<!-- 			<td><input type="checkbox"></td>  -->
+<!-- 			<td>수입검사</td>  -->
+<!-- 			<td>물세탁</td>  -->
+<!-- 			<td>변퇴색</td>  -->
+<!-- 			<td>req01_MS_pants</td> -->
+<!-- 			<td>바지</td> -->
+<!-- 			<td>2021-04-22 12:12:22</td> -->
+<!-- 			<td>등급</td> -->
+<!-- 			<td>4</td> -->
+<!-- 			<td>5</td> -->
+<!-- 			<td>4</td> -->
+<!-- 			<td>5</td> -->
+<!-- 			<td>3</td> -->
+<!-- 			<td>4</td> -->
+<!-- 			<td>2021-04-22 12:12:22</td> -->
+<!-- 			<td>2021-04-22 12:12:22</td> -->
+<!-- 			<td>합격</td> -->
+<!-- 			<td>없음</td> -->
+<!-- 		</tr>  -->
 		
-		</table>
+<!-- 		</table> -->
+
+		<table class="table table-striped table-advance table-hover" id="list">
+                <thead>
+                  <tr>
+                 	<th rowspan="2"><input type="checkbox"></i> 선택</th>
+             		<th rowspan="2"><i class="fa fa-bullhorn"></i> no.</th>
+                    <th rowspan="2"><i class="fa fa-barcode"></i> 공정</th>
+                    <th rowspan="2"><i class="fa fa-barcode"></i> 공정소분</th>
+                    <th rowspan="2"><i class="fa fa-barcode"></i> 공정세분</th>
+                    <th rowspan="2"><i class="fa fa-barcode"></i> 품목코드</th>
+                    <th rowspan="2"><i class="fa fa-barcode"></i> 품목명</th>
+                    <th rowspan="2"><i class="fa fa-barcode"></i> 요청시간</th>
+                    <th rowspan="2"><i class="fa fa-barcode"></i> 검사단위</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+	                <td><input type="checkbox" class="check"></td>
+	            	<td>1</td>
+                    <td>work_order_01</td>
+                    <td><a href="/stateByProduct">req03_WS_pants</a></td>
+                    <td>파크랜드</td>
+                    <td>2021-06-29</td>
+                    <td>2021-06-06</td>
+                    <td><span class="badge" style="padding-top: 5px;">완료</span></td>
+                    <td>1시간50분</td>
+                    <td>2021-06-16</td>
+                  </tr>
+                  
+                  <tr>
+                  	<td><input type="checkbox" class="check"></td>
+	            	<td>2</td>
+                    <td>work_order_02</td>
+                    <td><a href="/stateByProduct">req10_WS_jacket</a></td>
+                    <td>이랜드</td>
+                    <td>2021-06-09</td>
+                    <td>2021-05-26</td>
+                    <td><span class="badge bg-important" style="padding-top: 5px;">진행중</span></td>
+                    <td>6시간00분</td>
+                    <td>2021-06-01</td>
+                  </tr>
+                  
+                  <tr>
+                  	<td><input type="checkbox" class="check"></td>
+	            	<td>3</td>
+                    <td>work_order_03</td>
+                    <td><a href="/stateByProduct">req10_WS_skirt</a></td>
+                    <td>이랜드</td>
+                    <td>2021-06-09</td>
+                    <td>2021-05-26</td>
+                    <td><span class="badge" style="padding-top: 5px;">완료</span></td>
+                    <td>3시간30분</td>
+                    <td>2021-06-02</td>
+                  </tr>
+                  
+                  
+                 <tr>
+                  	<td><input type="checkbox" class="check"></td>
+	            	<td>4</td>
+                    <td>work_order_04</td>
+                    <td><a href="/stateByProduct">req10_WS_pants</a></td>
+                    <td>이랜드</td>
+                    <td>2021-06-09</td>
+                    <td>2021-05-26</td>
+                    <td><span class="badge bg-important" style="padding-top: 5px;">진행중</span></td>
+                    <td>1시간13분</td>
+                    <td>2021-06-01</td>
+                 </tr>
+                  
+                  
+                 
+                </tbody>
+              </table>
 
 	</div>
 	

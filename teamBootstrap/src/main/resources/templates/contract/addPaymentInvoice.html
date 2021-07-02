@@ -7,6 +7,7 @@
 	   <div class="border-head"> 
 	    <h3>전표 관리</h3>
 	    </div>
+	    
 </th:block>
 
 
@@ -18,14 +19,18 @@
       <hr>
       <br>
       
+      
       <form class="form-horizontal style-form" method="post">
 
-        <div class="form-group">
+		<div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">수금전표발행번호</label>
-          <div class="col-sm-4">
-            <input class="form-control" id="disabledInput" type="text" placeholder="210512_slip (DB에서 가져온 값)" disabled>
-            <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
-            <button type="button" class="btn btn-default">검색하여 가져오기</button>
+          <div class="col-md-4">
+            <div class="input-group date form_datetime-adv">
+              <input type="text" class="form-control" id="materialCateName" size="16">
+              <div class="input-group-btn">
+                <button type="button" class="btn btn-theme03 btn btn-default" id="searchBtn1"><i class="fa"></i>검색하여 가져오기</button>
+              </div>
+            </div>
           </div>
         </div>
         
@@ -52,10 +57,13 @@
            	        
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">계정과목코드</label>
-          <div class="col-sm-4">
-            <input type="text" class="form-control" placeholder="acc_01(검색해서 가져오기)">
-            <!-- 버튼 누르면 검색할 수 있는 창으로 연결 검색 창 누르면 || 계정과목 코드 - 계정과목 명 ||<-- 이렇게 뜨는 걸로 -->            
-            <button type="button" class="btn btn-default">검색하여 가져오기</button>
+          <div class="col-md-4">
+            <div class="input-group date form_datetime-adv">
+              <input type="text" class="form-control" id="materialCateName" size="16">
+              <div class="input-group-btn">
+                <button type="button" class="btn btn-theme03 btn btn-default" id="searchBtn1"><i class="fa"></i>검색하여 가져오기</button>
+              </div>
+            </div>
           </div>
         </div>
         
@@ -109,8 +117,8 @@
  		
          <div class="form-group text-right">
           <div class="col-lg-offset-2 col-lg-10">
-            <button class="btn btn-theme" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">등록</font></font></button>
-            <button class="btn btn-theme04" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소</font></font></button>
+            <a th:href="@{/addPaymentInvoice}" class="btn btn-theme" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">등록</font></font></a>
+            <a class="btn btn-theme04" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소</font></font></a>
           </div>
         </div>
          

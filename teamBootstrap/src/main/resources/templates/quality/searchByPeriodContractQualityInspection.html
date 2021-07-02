@@ -12,11 +12,16 @@ layout:decorate="@{layout/default_qualityControl}">
 jQuery(document).ready(function() {
 
 
-
-    var barChart1 = [9, 8, 6, 8, 7, 6, 4];
-    var barChart2 = [5, 3, 4, 6, 2, 7, 8];
-    var barChart3 = [3, 2, 1, 4, 2, 1, 2];
+	//월간검사
+    var barChart1 = [9, 8, 6, 8, 7, 6, 4];//검사건수
+    var barChart2 = [5, 3, 4, 6, 2, 7, 8];//합격건수
+    var barChart3 = [3, 2, 1, 4, 2, 1, 2];//불량건수
     var lineChart = [12, 7, 4, 10, 8, 5];
+    //주간검사
+    var barChart4 = [50, 40, 60,70];
+    var barChart5 = [45, 39, 58, 67];
+    var barChart6 = [5,1,2,3];
+    var lineChart2 =[9,9,9,9];
     
     jQuery("#chart").jqplot([barChart1, barChart2,barChart3, lineChart], {
           title : "월별 합격율"
@@ -59,6 +64,48 @@ jQuery(document).ready(function() {
             }
         }
     });
+    
+    jQuery("#chart2").jqplot([barChart4, barChart5, barChart6, lineChart2], {
+          title : "주간별합격율"
+        , stackSeries : true      // 그래프를 하나로 합친다.
+        , series : [
+            {      // barChart1 배열을 막대 그래프로 지정한다.
+                  renderer : jQuery.jqplot.BarRenderer
+                , rendererOptions : {
+                      barWidth : 30                    // 막대그래프의 넓이를 지정
+                    , barPadding : -15                // 막대그래프의 여백을 지정
+                    , highlightMouseOver : false    // 막대그래프의 클릭여부를 지정 (기본값 : true)
+                }
+            }
+            , {    // barChart2 배열을 막대 그래프로 지정한다.
+                  renderer : jQuery.jqplot.BarRenderer
+                , rendererOptions : {
+                      barWidth : 30                    // 막대그래프의 넓이를 지정
+                    , barPadding : -15                // 막대그래프의 여백을 지정
+                    , highlightMouseOver : false    // 막대그래프의 클릭여부를 지정 (기본값 : true)
+                }
+            }
+            , {    // barChart3 배열을 막대 그래프로 지정한다.
+                  renderer : jQuery.jqplot.BarRenderer
+                , rendererOptions : {
+                      barWidth : 30                    // 막대그래프의 넓이를 지정
+                    , barPadding : -15                // 막대그래프의 여백을 지정
+                    , highlightMouseOver : false    // 막대그래프의 클릭여부를 지정 (기본값 : true)
+                }
+            }
+            , {    // lineChart 배열을 꺽은선 그래프로 지정한다.
+                  disableStack : true      // 데이터의 합또한 합쳐지는 것을 방지하기위해 꺽은선 그래프는 disableStack을 true로 선언
+                  // jQuery.jqplot.LineRenderer(꺽은선 그래프)의 플러그인은 기본적으로 지정하지 않아도 된다.
+                , renderer : jQuery.jqplot.LineRenderer
+            }
+        ]
+        , axes: {
+            xaxis : {
+                  renderer : jQuery.jqplot.CategoryAxisRenderer
+                , ticks : ['1주', '2주', '3주', '4주']
+            }
+        }
+    });
 });
 
 	
@@ -96,7 +143,7 @@ jQuery(document).ready(function() {
                 <!-- 두번째 -->
                   <div id="contact" class="tab-pane">
                   	
-                  
+                   	<div id="chart2" style="width:780px;height:400px;"></div>
                   
                   </div>
             	
