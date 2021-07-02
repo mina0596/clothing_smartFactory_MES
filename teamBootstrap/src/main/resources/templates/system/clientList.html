@@ -11,15 +11,23 @@ layout:decorate="@{layout/default_system}">
 
 <th:block layout:fragment="customJs">
 	<script>
-	//#checkAll 버튼 클릭 시 전체 checked
-		$('#checkAll').click(function(){
-			if($('#checkAll').prop('checked')){
-				$('.checked').prop('checked',true);
-					}else{
-						$('.checked').prop('checked',false);
-					}
-				});									
-			});
+	$(function(){
+		$('#deleteBtn').click(function(){
+			var tdList = $('#list').children().find('tr');
+			tdList.html('<span class="check"><input type="checkbox" class="checked"></span>');
+			console.log(tdList);
+		});
+	})
+	$(function(){
+//#checkAll 버튼 클릭 시 전체 checked
+	$('#checkAll').click(function(){
+		if($('#checkAll').prop('checked')){
+			$('.checked').prop('checked',true);
+				}else{
+					$('.checked').prop('checked',false);
+				}
+			});									
+		});
 
 </script>
 
@@ -31,34 +39,52 @@ layout:decorate="@{layout/default_system}">
 	
 	<div class="row mt">
      <div class="col-md-12">
-		<h4><i class="fa fa-angle-right"></i>거래처조회</h4>
-          <hr>  
-			<div class="form-group" style="padding-left: 50px">
-				<div class="col-md-3">
-				 <select class="form-control">
-				   <option>거래처명</option>
-				   <option>전화번호</option>
-				   <option>대표자명</option>
-				   <option>담당자명</option>
-				   <option>사업자번호</option>
-				   <option>주소</option>
-				   <option>등록일자</option>
-
-				  </select>
-				</div>
-				<div class="col-md-6">
-				  <input class="form-control" type="text" placeholder="검색어를 입력하세요">
-				</div>
-				<div class="col-md-2">
-				  <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
-				  <button type="button" class="btn btn-primary">검색</button>
-				</div>
-	       </div>
-	       
-	      <br>
-	      <br>
-	      <br>
-	      <br>
+		<h4><i class="fa fa-angle-right"></i>출고현황 조회</h4>
+         	 <hr>
+		<form class="form-inline" role="form">
+        
+         <table class="table table-striped table-advance table-hover">
+         	<thead>
+         		<tr>
+         			<th>수발주구분</th>
+         			<th>재료별</th>
+         		</tr>
+         	</thead>
+         	<tbody>
+         		<tr>
+         		    <td style="padding-right: 20px;">
+         				<div class="form-group">
+		                	<select class="form-control" style="width: 125px;">
+		                		<option>::선택::</option>
+		                		<option>All</option>
+		                		<option>수주</option>
+		                		<option>발주</option>
+		                	</select>
+	               		</div>
+         			</td>
+         			<td style="padding-right: 20px;">
+						<div class="form-group">
+		                	<select class="form-control" style="width: 125px;">
+		                		<option>::선택::</option>
+		                		<option>거래처명</option>
+		                		<option>원자재</option>
+		                		<option>부자재</option>
+		                	</select>
+	               		</div>
+         				<div class="col-md-6">
+				  			<input class="form-control" type="text" placeholder="검색어를 입력하세요">
+						</div>
+         			</td>
+         			<td style="padding-right: 20px;">
+         			</td>
+         			<td>
+         				  <button type="submit" class="btn btn-theme">검색</button>
+         			</td>        			
+         		</tr>
+         	</tbody>
+         </table>  
+        </form>  
+    	
 	      <br>
 	      
                 
@@ -84,7 +110,7 @@ layout:decorate="@{layout/default_system}">
                 </thead>
                 <tbody>
                   <tr th:each=" c,n : ${client}">
-                  	<td><input type="checkbox" id="checkAll"></td>
+                  	<td><input type="checkbox"  class="checked"></td>
                     <td th:text = ${n.index+1}></td>
                     <td th:text="${c.clientCategory}" class="badge bg-primary"></td>
                     <td th:text="${c.clientCode}"></td>
