@@ -118,6 +118,7 @@ layout:decorate="@{layout/default_qualityControl}">
                     <td>품질검사 결과코드</td>
                     <td>2021-05-12 15:15:00</td>
                     <td>  <button class="btn btn-primary btn-xs" type="button" onclick="location.href='/modifyDefectiveProduct'"><i class="fa fa-pencil"></i>수정</button></td>
+
                   </tr>
                   
            		 </tbody>
@@ -126,8 +127,8 @@ layout:decorate="@{layout/default_qualityControl}">
             </div>
             <div class="form-group text-right">
 		          <div class="col-lg-offset-2 col-lg-10">
-		           <a th:href="@{/addDefectiveProduct}" class="btn btn-success btn"><i class="fa fa-plus"></i> 불량품등록</a>
-		           <a id="deleteBtn" class="btn btn-danger"><i class="fa fa-trash-o"></i>삭제</a>
+		           <a th:href="@{/addDefectiveProduct}" class="btn btn-success btn-xs"><i class="fa fa-check"></i> 불량품등록</a>
+		           <a id="deleteBtn" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>삭제</a>
 		          </div>
 		        </div> 
             </div>
@@ -138,7 +139,8 @@ layout:decorate="@{layout/default_qualityControl}">
 		    <div class="popup-inner" style="width:auto; display:table;">
 				<div class="popup-contents">
 		   		  <a class="popup-close" data-popup-close="defectiveInfo" href="#"><h3><i class="fa fa-times-circle"></i></h3></a> 
-
+					<div class="inWarehousingInfoPopUp-image" style="background-color: blue;">
+					</div>
 		      </div>
 		      <div class="inWarehousingInfoPopUp-skin">
 		              <h4>불량품 상세 정보</h4>
