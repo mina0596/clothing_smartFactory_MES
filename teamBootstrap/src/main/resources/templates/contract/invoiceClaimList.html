@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_contract}">
+
+<th:block layout:fragment="container">
+	<div>
+
+          <h4><i class="fa fa-angle-right"></i> 수금/출금 청구 현황 조회</h4>
+          <hr>  
+          
+          <form class="form-horizontal style-form" role="form">
+         <table class="table content-panel">
+	         <tbody>
+         		<tr>
+         			<td>
+         				<div class=".col-md-3 ">
+		                	<select class="form-control" id="searchCate" >
+		                		<option>::수금/출금::</option>
+		                		<option>수금</option>
+		                		<option>출금</option>
+		                	</select>
+	               		</div>
+         			</td>
+         			<td>
+         				<div class=".col-md-3">
+		                	<select class="form-control .col-md-3" >
+		                		<option>::결제여부::</option>
+		                		<option>요청</option>
+		                		<option>승인</option>
+		                	</select>
+	               		</div>
+         			</td>
+         			<td><div class=".col-md-4"></div></td>
+         			<td><div class=".col-md-4"></div></td>
+         			
+         			<td>
+         				<div class="form-inline">
+         				
+	         				<div class=".col-md-4 input-group">
+			                	<select class="form-control" id="searchCate">
+			                		<option>::검색조건 선택::</option>
+			                		<option>청구코드</option>
+			                		<option>계약번호</option>
+			                		<option>완제품검사</option>
+			                	</select>
+		               		</div>
+	         				
+		         			<div class=".col-md-4 .col-md-offset-3 input-group">
+			                	<div class="input-group-btn">
+								<button class="btn btn-default"><i class="btn fa fa-search" style="padding: 0px;" id="SupplierValue"></i></button>
+								</div>
+			                	<input type="text" class="form-control" placeholder="직접 입력 또는 검색">
+			                </div>
+			                
+	               		</div>
+         			</td>
+       			</tr>
+       			<tr>
+         			<td>
+         				<div class=".col-md-4 input-group">
+		                	<select class="form-control" style="width: 150px;">
+		                		<option>::기간 선택::</option>
+		                		<option>수/출금 예정일자</option>
+		                		<option>제작시작일자</option>
+		                		<option>제작종료일자</option>
+		                		<option>청구일</option>
+		                	</select>
+	               		</div>
+               		</td>
+               		<td>
+         				<div class="form-inline">
+         				<div class="input-group input-large" data-date="01/01/2014" data-date-format="mm/dd/yyyy">
+	                      <span class="input-group-addon">From</span>
+	                      <input type="text" class="form-control dpd1" name="from">
+	                      <span class="input-group-addon">To</span>
+	                      <input type="text" class="form-control dpd2" name="to">
+	                    </div>
+	                    </div>
+         			</td>
+					<td></td>
+         			<td>
+         				  <button type="submit" class="btn btn-theme">검색</button>
+         			</td>        			
+         		</tr>
+         	</tbody>
+         </table>  
+        </form>
+			<br>
+	       
+	       <h4><i class="fa fa-angle-right"></i> 수금/출금 청구 현황 검색 조회 결과</h4>
+	       계약번호 '63587' 로 검색한 결과 입니다.
+          <hr> 
+       		<form class="form-horizontal style-form">
+              <table class="table table-striped table-advance table-hover" id="list">
+                <thead>
+                  <tr>
+                 	<th><input type="checkbox" id="checkAll"></th>
+             		<th><i class="fa fa-bullhorn"></i> 번호</th>
+                    <th><i class="fa fa-barcode"></i> 청구코드</th>
+                    <th><i class="fa fa-barcode"></i> 계약번호</th>
+                    <th><i class="fa fa-bookmark"></i> 수/출금 구분</th>
+                    <th><i class="fa fa-bookmark"></i> 청구액</th>
+                    <th><i class="fa fa-bookmark"></i> 내용</th>
+                    <!-- 누르면 메일보낼수있게  -->
+                    <th><i class="fa fa-barcode"></i> 청구 사원 코드</th>
+                    <th><i class="fa fa-calendar"></i> 수/출금 예정일자<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><i class="fa fa-bookmark"></i> 제작시작일자<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><i class="fa fa-calendar"></i> 제작종료일자<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><i class="fa fa-calendar"></i> 청구일<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><i class="fa fa-bookmark"></i> 승인여부</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                  	<td><input type="checkbox" class="checked"></td>
+	                <td>1</td>
+                    <td>dw01</td>
+                    <td>156748</td>
+                    <td>수금</td>
+                    <td>567900원</td>
+                    <td>계약금</td>
+                    <td>W01</td>
+                    <td>2021-02-01</td>
+                    <td>2021-02-01</td>
+                    <td>2021-02-01</td>
+                    <td>2021-02-01</td>
+                    <td><span class="badge bg-warning" style="padding-top: 5px;">결제요청</span></td>
+                  </tr>
+                  
+                  <tr>
+                  	<td><input type="checkbox" class="checked"></td>
+	                <td>1</td>
+                    <td>dw01</td>
+                    <td>156748</td>
+                    <td>수금</td>
+                    <td>567900원</td>
+                    <td>계약금</td>
+                    <td>W01</td>
+                    <td>2021-02-01</td>
+                    <td>2021-02-01</td>
+                    <td>2021-02-01</td>
+                    <td>2021-02-01</td>
+                    <td><span class="badge bg" style="padding-top: 5px;">결제승인</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            
+       		</form>
+	               		
+	   
+	      <br>
+	      <br>
+	      
+            <h4><i class="fa fa-angle-right"></i> 의뢰품목별 생산공정 현황 목록</h4>
+            <hr>         
+	        <form class="form-horizontal style-form">
+              <table class="table table-striped table-advance table-hover" id="list">
+                <thead>
+                  <tr>
+                 	<th><input type="checkbox" id="checkAll"></th>
+             		<th><i class="fa fa-bullhorn"></i> 번호</th>
+                    <th><i class="fa fa-barcode"></i> 의뢰품목코드</th>
+                    <th><i class="fa fa-calendar"></i> 제조시작일시<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><i class="fa fa-bookmark"></i> 진행중인 공정</th>
+                    <th><i class="fa fa-bookmark"></i> 공정순번</th>
+                    <th><i class="fa fa-calendar"></i> 제조완료일시<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><i class="fa fa-calendar"></i> 납기일<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                  	<td><input type="checkbox" class="checked"></td>
+	                <td>1</td>
+                    <td>req03_WS_pants</td>
+                    <td>2021-02-01</td>
+                    <td><span class="badge bg-warning" style="padding-top: 5px;">결제요청</span></td>
+                    <td>4</td>
+                    <td></td>
+                    <td>2021-03-01</td>
+                  </tr>
+                  <tr>
+                  	<td><input type="checkbox" class="checked"></td>
+	                <td>1</td>
+                    <td>req03_WS_pants</td>
+                    <td>2021-02-01</td>
+                    <td><span class="badge bg" style="padding-top: 5px;">결제승인</span></td>
+                    <td>4</td>
+                    <td></td>
+                    <td>2021-03-01</td>
+                  </tr>
+                  
+                  <tr>
+                  	<td><input type="checkbox" class="checked"></td>
+	            	<td>2</td>
+                    <td>req11_WS_jacket</td>
+                    <td>2021-03-21</td>
+                    <td><span class="badge bg" style="padding-top: 5px;">완성가공</span></td>
+                    <td>6</td>
+                    <td>2021-03-27</td>
+                    <td>2021-03-01</td>
+                  </tr>   
+                  <tr>
+                  	<td><input type="checkbox" class="checked"></td>
+                  	<td>3</td>
+                    <td>req13_WS_jacket</td>
+                    <td>2021-03-21</td>
+                    <td><span class="badge bg" style="padding-top: 5px;">봉제 특수 공정</span></td>
+                    <td>6</td>
+                    <td>2021-03-27</td>
+                    <td>2021-03-01</td>
+                  </tr>
+                 <tr>
+                 	<td><input type="checkbox" class="checked"></td>
+	            	<td>4</td>
+                    <td>req19_WS_skirt</td>
+                    <td>2021-03-21</td>
+                    <td><span class="badge bg" style="padding-top: 5px;">재단 후공정</span></td>
+                    <td>6</td>
+                    <td></td>
+                    <td>2021-03-01</td>
+                 </tr>
+                </tbody>
+              </table>
+            
+       		</form>
+
+        </div>
+        <!-- /row -->
+</th:block>
+
+</html>
