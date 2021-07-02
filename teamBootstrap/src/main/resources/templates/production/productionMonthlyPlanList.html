@@ -15,8 +15,6 @@ layout:decorate="@{layout/default_production}">
      url : "/productionMonthlyPlanList", 
      contentType : "application/x-www-form-urlencoded; charset=utf-8",  // 기본값?
      success : function(res) {
-        console.table(res);
-        console.log(res[0]);
         var calendarEl = document.getElementById('calendar');
 
 	    var calendar = new FullCalendar.Calendar(calendarEl, {
