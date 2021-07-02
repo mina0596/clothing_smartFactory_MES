@@ -4,227 +4,48 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
 layout:decorate="@{layout/default_qualityControl}">
 
 <th:block layout:fragment="pageTitle">
-	   <div class="border-head"> 
-	   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-	    <h3>품질검사</h3>
-	    </div>
+
 </th:block>
 
 
 <th:block layout:fragment="container">
 	
        
-          <h4><i class="fa fa-angle-right"></i>실적</h4>
+          <h4><i class="fa fa-angle-right"></i>실적
+           <button id="printS" class="btn btn-defalt btn-xs" onClick="content_print()"><i class="fa fa-print"></i></button>
+          </h4>
+         
           
-          <div class="form-group">
-				<div class="col-md-3">
-				 <select class="form-control" >
-				   <option>품질검사 요청 코드</option>
-				   <option>계약번호</option>
-				   <option>품목별 의뢰 코드</option>
-				   <option>품질검사 코드</option>
-				   <option>대분류 검사명</option>
-				   <option>중분류 검사명</option>
-				   <option>소분류 검사명</option>
-				   <option>소분류 검사 검사명</option>
-				   <option>샘플링 여부</option>
-				   <option>등록일시</option>
-				 </select>
-				</div>
-				<div class="col-md-6">
-				  <input class="form-control" type="text" placeholder="검색어를 입력하세요">
-				</div>
-				<div class="col-md-2">
-				  <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
-				  <button type="button" class="btn btn-primary">검색하여 가져오기</button>
-				</div>
-	       </div>
-          <br><br>
-			<div class="content-panel">
-				<canvas id="myChart4"></canvas>
-			</div>
-            
-			<div>
-              <h4><i class="fa fa-angle-right"></i>현황</h4>    
-			</div>
-             
-              <section id="unseen">
-                <table class="table table-bordered table-striped table-condensed">
-                  <thead>
-                    <tr>
-                      <th>Code</th>
-                      <th>Company</th>
-                      <th class="numeric">Price</th>
-                      <th class="numeric">Change</th>
-                      <th class="numeric">Change %</th>
-                      <th class="numeric">Open</th>
-                      <th class="numeric">High</th>
-                      <th class="numeric">Low</th>
-                      <th class="numeric">Volume</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>AAC</td>
-                      <td>AUSTRALIAN AGRICULTURAL COMPANY LIMITED.</td>
-                      <td class="numeric">$1.38</td>
-                      <td class="numeric">-0.01</td>
-                      <td class="numeric">-0.36%</td>
-                      <td class="numeric">$1.39</td>
-                      <td class="numeric">$1.39</td>
-                      <td class="numeric">$1.38</td>
-                      <td class="numeric">9,395</td>
-                    </tr>
-                    <tr>
-                      <td>AAD</td>
-                      <td>ARDENT LEISURE GROUP</td>
-                      <td class="numeric">$1.15</td>
-                      <td class="numeric"> +0.02</td>
-                      <td class="numeric">1.32%</td>
-                      <td class="numeric">$1.14</td>
-                      <td class="numeric">$1.15</td>
-                      <td class="numeric">$1.13</td>
-                      <td class="numeric">56,431</td>
-                    </tr>
-                    <tr>
-                      <td>AAX</td>
-                      <td>AUSENCO LIMITED</td>
-                      <td class="numeric">$4.00</td>
-                      <td class="numeric">-0.04</td>
-                      <td class="numeric">-0.99%</td>
-                      <td class="numeric">$4.01</td>
-                      <td class="numeric">$4.05</td>
-                      <td class="numeric">$4.00</td>
-                      <td class="numeric">90,641</td>
-                    </tr>
-                    <tr>
-                      <td>ABC</td>
-                      <td>ADELAIDE BRIGHTON LIMITED</td>
-                      <td class="numeric">$3.00</td>
-                      <td class="numeric"> +0.06</td>
-                      <td class="numeric">2.04%</td>
-                      <td class="numeric">$2.98</td>
-                      <td class="numeric">$3.00</td>
-                      <td class="numeric">$2.96</td>
-                      <td class="numeric">862,518</td>
-                    </tr>
-                    <tr>
-                      <td>ABP</td>
-                      <td>ABACUS PROPERTY GROUP</td>
-                      <td class="numeric">$1.91</td>
-                      <td class="numeric">0.00</td>
-                      <td class="numeric">0.00%</td>
-                      <td class="numeric">$1.92</td>
-                      <td class="numeric">$1.93</td>
-                      <td class="numeric">$1.90</td>
-                      <td class="numeric">595,701</td>
-                    </tr>
-                    <tr>
-                      <td>ABY</td>
-                      <td>ADITYA BIRLA MINERALS LIMITED</td>
-                      <td class="numeric">$0.77</td>
-                      <td class="numeric"> +0.02</td>
-                      <td class="numeric">2.00%</td>
-                      <td class="numeric">$0.76</td>
-                      <td class="numeric">$0.77</td>
-                      <td class="numeric">$0.76</td>
-                      <td class="numeric">54,567</td>
-                    </tr>
-                    <tr>
-                      <td>ACR</td>
-                      <td>ACRUX LIMITED</td>
-                      <td class="numeric">$3.71</td>
-                      <td class="numeric"> +0.01</td>
-                      <td class="numeric">0.14%</td>
-                      <td class="numeric">$3.70</td>
-                      <td class="numeric">$3.72</td>
-                      <td class="numeric">$3.68</td>
-                      <td class="numeric">191,373</td>
-                    </tr>
-                    <tr>
-                      <td>ADU</td>
-                      <td>ADAMUS RESOURCES LIMITED</td>
-                      <td class="numeric">$0.72</td>
-                      <td class="numeric">0.00</td>
-                      <td class="numeric">0.00%</td>
-                      <td class="numeric">$0.73</td>
-                      <td class="numeric">$0.74</td>
-                      <td class="numeric">$0.72</td>
-                      <td class="numeric">8,602,291</td>
-                    </tr>
-                    <tr>
-                      <td>AGG</td>
-                      <td>ANGLOGOLD ASHANTI LIMITED</td>
-                      <td class="numeric">$7.81</td>
-                      <td class="numeric">-0.22</td>
-                      <td class="numeric">-2.74%</td>
-                      <td class="numeric">$7.82</td>
-                      <td class="numeric">$7.82</td>
-                      <td class="numeric">$7.81</td>
-                      <td class="numeric">148</td>
-                    </tr>
-                    <tr>
-                      <td>AGK</td>
-                      <td>AGL ENERGY LIMITED</td>
-                      <td class="numeric">$13.82</td>
-                      <td class="numeric"> +0.02</td>
-                      <td class="numeric">0.14%</td>
-                      <td class="numeric">$13.83</td>
-                      <td class="numeric">$13.83</td>
-                      <td class="numeric">$13.67</td>
-                      <td class="numeric">846,403</td>
-                    </tr>
-                    <tr>
-                      <td>AGO</td>
-                      <td>ATLAS IRON LIMITED</td>
-                      <td class="numeric">$3.17</td>
-                      <td class="numeric">-0.02</td>
-                      <td class="numeric">-0.47%</td>
-                      <td class="numeric">$3.11</td>
-                      <td class="numeric">$3.22</td>
-                      <td class="numeric">$3.10</td>
-                      <td class="numeric">5,416,303</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </section>
- 
-             
+         <div  id="print" class="col-lg-8">
+          <div class="row content-panel">
+            <div class="col-lg-10 col-lg-offset-1">
+              <div class="invoice-body">
+                <div class="pull-center">
+                  <h2>품질검사 실적 보고서(2000년 00월)</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+         </div>
+         
           
-
-<script>
-
-
-
-var ctx = document.getElementById('myChart4').getContext('2d');
-var data  = {
-		  type: 'doughnut',
-		  data: {
-			  labels: [
-				    'Red',
-				    'Blue',
-				    'Yellow'
-				  ],
-				  datasets: [{
-				    label: 'My First Dataset',
-				    data: [300, 50, 100],
-				    backgroundColor: [
-				      'rgb(255, 99, 132)',
-				      'rgb(54, 162, 235)',
-				      'rgb(255, 205, 86)'
-				    ],
-				    hoverOffset: 4
-			}]
-		  },
-		};
-
-var chart = new Chart(ctx, data);
-
-
-
-
-
+</th:block>
+<th:bloc layout:fragment="customJs">
+<script type="text/javascript">
+	function content_print(){    
+	    var initBody = document.body.innerHTML;
+	    window.onbeforeprint = function(){
+	 
+	        document.body.innerHTML = document.getElementById('print').innerHTML;
+	    }
+	  
+	    window.onafterprint = function(){
+	
+	        document.body.innerHTML = initBody;
+	    }
+	
+	    window.print();     
+	}     
 </script>
 </th:block>
-
 </html>

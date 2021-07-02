@@ -322,6 +322,7 @@ ul.top-menu > li > .logout {
     height: 100%;
     position: fixed;
     background: #2f323a;
+   	overflow: auto;
 }
 
 #sidebar h5 {
