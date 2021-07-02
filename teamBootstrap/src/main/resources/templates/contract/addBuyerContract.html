@@ -18,45 +18,142 @@ layout:decorate="@{layout/default_contract}">
                 <form class="cmxform form-horizontal style-form" id="signupForm" method="post" th:action="@{addBuyerContract}">
                  
                   <div class="form-group ">
-                    <label for="firstname" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">계약번호</font></font></label>
-                    <div class="col-lg-6">
-                      <input class=" form-control" id="workeclientAccountCoderCode" name="clientAccountCode" type="text">
+                    <label for="firstname" class="control-label col-lg-2" style="font-weight: 600;">계약번호</label>
+                    <div class="col-md-2">
+                      <input class=" form-control" id="workeclientAccountCoderCode" name="clientAccountCode" type="text" disabled="disabled" placeholder="12876">
                     </div>
                   </div>
                  
                   
-                  <div class="form-group ">
-                    <label for="firstname" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">거래처명</font></font></label>
-                    <div class="col-lg-6">
-                      <input class=" form-control" id="clientAccountName" name="clientAccountName" type="text">
-                    </div>
-                  </div>
+                  <div class="form-group">
+		    		<label class="col-sm-2 control-label" style="font-weight: 600;">거래처명</label>
+			         <div class="col-md-5">
+			           <div  class="input-group">
+			             <input type="text" class="form-control" id="clientAccountName" name="clientAccountName" size="16" placeholder="5648" disabled="disabled">
+			             <div class="input-group-btn">
+			               <button type="button" class=" btn btn-theme03 btn btn-default" id="searchBtn1"><i class="fa"></i> 검색하여 가져오기</button>
+			             </div>
+			           </div>
+			         </div>
+			       </div>
                   
+                  
+     
 			       <div class="form-group">
 			         <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">수주의뢰코드</label>
-			         <div class="col-sm-6">
-			           <input class="form-control" id="disabledInput" type="text" placeholder="명주실 (DB에서 가져온 값)" disabled>
-			           <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
-			           <!-- 검색창에서 검색하여 없는 품목은 등록도 할 수 있도록 설정하기 -->
-			           <button type="button" class="btn btn-default">검색하여 가져오기</button>
+			         <div class="col-sm-4">
+			           <input class="form-control" id="disabledInput" type="text" placeholder="req01, req02, req04" disabled>
 			         </div>
+			       </div>
+			       
+			       <div class="form-group">
+			         <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">계약 품목 수량</label>
+			         <div class="col-md-2">
+                      <input class="form-control " id="clientAccountAddr" name="clientAccountAddr" type="number" placeholder="숫자만 입력하세요" disabled="disabled">
+                    </div>
+                    <div class="col-md-2" style="padding-left: 0px;">
+			            <label class="col-sm-2 control-label" style="font-weight: 600; padding-left: 0px;">벌</label>
+			        </div>
 			       </div>
 			       			     	      
                   
                   <div class="form-group ">
-                    <label for="email" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">결제조건</font></font></label>
-                    <div class="col-lg-6">
-                      <input class="form-control " id="clientAccountAddr" name="clientAccountAddr" type="text">
+                    <label for="email" class="control-label col-lg-2" style="font-weight: 600;">결제조건</label>
+                    <div class="col-md-2">
+                      <input class="form-control " id="clientAccountAddr" name="clientAccountAddr" type="text" placeholder="12개월 할부">
                     </div>
+                  </div>
+                  
+     
+                  <div class="form-group ">
+                    <label for="email" class="control-label col-lg-2" style="font-weight: 600;">총계약금</label>
+                    <div class="col-md-2">
+                      <input class="form-control " id="clientAccountAddr" name="clientAccountAddr" type="number" placeholder="숫자만 입력하세요">
+                    </div>
+                    <div class="col-md-2" style="padding-left: 0px;">
+			            <label class="col-sm-2 control-label" style="font-weight: 600; padding-left: 0px;">원</label>
+			        </div>
                   </div>
                   
                   <div class="form-group ">
-                    <label for="email" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">총계약금</font></font></label>
-                    <div class="col-lg-6">
-                      <input class="form-control " id="clientAccountAddr" name="clientAccountAddr" type="text">
+                    <label for="email" class="control-label col-lg-2" style="font-weight: 600;">계약금</label>
+                    <div class="col-md-1" style="padding-left: 0px;">
+			            <label class="col-sm-2 control-label" style="font-weight: 300; padding-right: 0px;">총계약금의 </label>
+			        </div>
+                    <div class="col-xs-1" style="padding-left: 0px;">
+                      <input class="form-control " id="clientAccountAddr" name="clientAccountAddr" type="number" placeholder="10">
                     </div>
+                    <div class="col-md-1" style="padding-left: 0px;">
+			            <label class="col-sm-2 control-label" style="font-weight: 600; padding-left: 0px;">%</label>
+			        </div>
+			        <div class="col-md-2" style="padding-left: 0px;">
+                      <input class="form-control " id="clientAccountAddr" name="clientAccountAddr" type="number" placeholder="54680">
+                    </div>
+                    <div class="col-md-1" style="padding-left: 0px;">
+			            <label class="col-sm-2 control-label" style="font-weight: 600; padding-left: 0px;">원</label>
+			        </div>
                   </div>
                   
+                  <div class="form-group ">
+                    <label for="email" class="control-label col-lg-2" style="font-weight: 600;">1차 검수 후</label>
+                    <div class="col-md-1" style="padding-left: 0px;">
+			            <label class="col-sm-2 control-label" style="font-weight: 300; padding-right: 0px;">총계약금의 </label>
+			        </div>
+                    <div class="col-xs-1" style="padding-left: 0px;">
+                      <input class="form-control " id="clientAccountAddr" name="clientAccountAddr" type="number" placeholder="10">
+                    </div>
+                    <div class="col-md-1" style="padding-left: 0px;">
+			            <label class="col-sm-2 control-label" style="font-weight: 600; padding-left: 0px;">%</label>
+			        </div>
+                    <div class="col-md-2" style="padding-left: 0px;">
+                      <input class="form-control " id="clientAccountAddr" name="clientAccountAddr" type="number" placeholder="54680">
+                    </div>
+                    <div class="col-md-1" style="padding-left: 0px;">
+			            <label class="col-sm-2 control-label" style="font-weight: 600; padding-left: 0px;">원</label>
+			        </div>
+                  </div>
+                  
+                  
+                  <div class="form-group ">
+                    <label for="email" class="control-label col-lg-2" style="font-weight: 600;">2차 검수 후</label>
+                    <div class="col-md-1" style="padding-left: 0px;">
+			            <label class="col-sm-2 control-label" style="font-weight: 300; padding-right: 0px;">총계약금의 </label>
+			        </div>
+                    <div class="col-xs-1" style="padding-left: 0px;">
+                      <input class="form-control " id="clientAccountAddr" name="clientAccountAddr" type="number" placeholder="10">
+                    </div>
+                    <div class="col-md-1" style="padding-left: 0px;">
+			            <label class="col-sm-2 control-label" style="font-weight: 600; padding-left: 0px;">%</label>
+			        </div>
+                    <div class="col-md-2" style="padding-left: 0px;">
+                      <input class="form-control " id="clientAccountAddr" name="clientAccountAddr" type="number" placeholder="54680">
+                    </div>
+                    <div class="col-md-1" style="padding-left: 0px;">
+			            <label class="col-sm-2 control-label" style="font-weight: 600; padding-left: 0px;">원</label>
+			        </div>
+                  </div>
+                  
+                  
+                  <div class="form-group ">
+                    <label for="email" class="control-label col-lg-2" style="font-weight: 600;">3차 검수 후</label>
+                    <div class="col-md-1" style="padding-left: 0px;">
+			            <label class="col-sm-2 control-label" style="font-weight: 300; padding-right: 0px;">총계약금의 </label>
+			        </div>
+                    <div class="col-xs-1" style="padding-left: 0px;">
+                      <input class="form-control " id="clientAccountAddr" name="clientAccountAddr" type="number" placeholder="10">
+                    </div>
+                    <div class="col-md-1" style="padding-left: 0px;">
+			            <label class="col-sm-2 control-label" style="font-weight: 600; padding-left: 0px;">%</label>
+			        </div>
+                    <div class="col-md-2" style="padding-left: 0px;">
+                      <input class="form-control " id="clientAccountAddr" name="clientAccountAddr" type="number" placeholder="54680">
+                    </div>
+                    <div class="col-md-1" style="padding-left: 0px;">
+			            <label class="col-sm-2 control-label" style="font-weight: 600; padding-left: 0px;">원</label>
+			        </div>
+                  </div>
+                  
+		        
 		        
                 <div class="form-group">
 		          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">계약시작일</label>
@@ -100,16 +197,20 @@ layout:decorate="@{layout/default_contract}">
                   
 		         <div class="form-group text-right">
 		         <div class="col-lg-offset-2 col-lg-10">
-		           <button class="btn btn-theme" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">등록</font></font></button>
-            	   <button class="btn btn-theme04" type="button" onClick="history.back();"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소</font></font></button>
+		           <button class="btn btn-theme" type="submit">등록</button>
+            	   <button class="btn btn-theme04" type="button" onClick="history.back();">취소</button>
 		         </div>
 		       </div>
 		     </form>
 		   </div>
 		</div>
 
-
-
+<script type="text/javascript" th:src="@{Dashio/lib/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script> 
+<script type="text/javascript" th:src="@{Dashio/lib/bootstrap-daterangepicker/date.js}"></script>
+<script type="text/javascript" th:src="@{Dashio/lib/bootstrap-daterangepicker/daterangepicker.js}"></script> 
+<script type="text/javascript" th:src="@{Dashio/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js}"></script> 
+<script type="text/javascript" th:src="@{Dashio/lib/bootstrap-daterangepicker/moment.min.js}"></script>
+<script th:src="@{Dashio/lib/advanced-form-components.js}"></script>
 </th:block>
 
 </html>
