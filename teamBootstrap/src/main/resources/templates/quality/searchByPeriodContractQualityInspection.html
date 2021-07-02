@@ -9,103 +9,73 @@ layout:decorate="@{layout/default_qualityControl}">
 <th:block layout:fragment="customJs">
 
 <script type="text/javascript">
+
 jQuery(document).ready(function() {
 
 
 	//월간검사
-    var barChart1 = [9, 8, 6, 8, 7, 6, 4];//검사건수
-    var barChart2 = [5, 3, 4, 6, 2, 7, 8];//합격건수
-    var barChart3 = [3, 2, 1, 4, 2, 1, 2];//불량건수
-    var lineChart = [12, 7, 4, 10, 8, 5];
+   
+    var barChart1 = [50, 70, 50, 120, 150, 180, 60, 40, 70, 140, 130, 50];//검사건수
+    var barChart2 = [48, 60, 30, 110, 130, 175, 40, 35, 38, 139, 128, 48];//합격건수
+    var barChart3 = [2,10,20,10,20,10,20,5,12,1,2,2];//불량건수
+    var lineChart = [96, 86, 60, 91, 86, 93, 67, 87,82,99,98,96];
     //주간검사
-    var barChart4 = [50, 40, 60,70];
-    var barChart5 = [45, 39, 58, 67];
-    var barChart6 = [5,1,2,3];
-    var lineChart2 =[9,9,9,9];
     
-    jQuery("#chart").jqplot([barChart1, barChart2,barChart3, lineChart], {
-          title : "월별 합격율"
-        , stackSeries : true      // 그래프를 하나로 합친다.
-        , series : [
-            {      // barChart1 배열을 막대 그래프로 지정한다.
-                  renderer : jQuery.jqplot.BarRenderer
-                , rendererOptions : {
-                      barWidth : 35                    // 막대그래프의 넓이를 지정
-                    , barPadding : -15                // 막대그래프의 여백을 지정
-                    , highlightMouseOver : false    // 막대그래프의 클릭여부를 지정 (기본값 : true)
-                }
+     $.jqplot.config.enablePlugins = true;
+  
+      jQuery("#chart").jqplot([barChart1, barChart2,barChart3, lineChart], {
+    	  animate: true, 
+    	  animateReplot: true,
+    	  cursor: {
+
+              show: true,
+              zoom: true,
+              looseZoom: true,
+              showTooltip: true
+			},
+         
+         title:{text:'계약 월별 검사 합격율 ',fontSize:20},  // 챠트  title 및 폰트 사이즈 설정
+
+	  series : [
+        	 
+            {    // barChart1 배열을 막대 그래프로 지정한다
+            	label:'검사건수',
+                renderer : jQuery.jqplot.BarRenderer
             }
-            , {    // barChart2 배열을 막대 그래프로 지정한다.
-                  renderer : jQuery.jqplot.BarRenderer
-                , rendererOptions : {
-                      barWidth : 35                    // 막대그래프의 넓이를 지정
-                    , barPadding : -15                // 막대그래프의 여백을 지정
-                    , highlightMouseOver : false    // 막대그래프의 클릭여부를 지정 (기본값 : true)
-                }
+            , {  label:'합격건수',
+            	// barChart2 배열을 막대 그래프로 지정한다.
+                renderer : jQuery.jqplot.BarRenderer
             }
-            , {    // barChart3 배열을 막대 그래프로 지정한다.
-                  renderer : jQuery.jqplot.BarRenderer
-                , rendererOptions : {
-                      barWidth : 35                    // 막대그래프의 넓이를 지정
-                    , barPadding : -15                // 막대그래프의 여백을 지정
-                    , highlightMouseOver : false    // 막대그래프의 클릭여부를 지정 (기본값 : true)
-                }
-            }
-            , {    // lineChart 배열을 꺽은선 그래프로 지정한다.
-                  disableStack : true      // 데이터의 합또한 합쳐지는 것을 방지하기위해 꺽은선 그래프는 disableStack을 true로 선언
-                  // jQuery.jqplot.LineRenderer(꺽은선 그래프)의 플러그인은 기본적으로 지정하지 않아도 된다.
-                , renderer : jQuery.jqplot.LineRenderer
-            }
-        ]
+            , {   label:'불합격건수', // barChart3 배열을 막대 그래프로 지정한다.
+                renderer : jQuery.jqplot.BarRenderer
+            },
+            	{label:'합격율'}
+               ]
         , axes: {
             xaxis : {
                   renderer : jQuery.jqplot.CategoryAxisRenderer
-                , ticks : ['1월', '2월', '3월', '4월', '5월', '6월']
+                , ticks : ['1월', '2월', '3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
+            },yaxis: {//y축
+	            	min: 0
+	    		}
+            ,y2axis: {
+                tickOptions: {
+                    formatString: "%'d"
+                },
+                rendererOptions: {
+                    // align the ticks on the y2 axis with the y axis.
+                    alignTicks: true,
+                    forceTickAt0: true
+                }
             }
-        }
+		        }
     });
+ 
+      
+
+
     
-    jQuery("#chart2").jqplot([barChart4, barChart5, barChart6, lineChart2], {
-          title : "주간별합격율"
-        , stackSeries : true      // 그래프를 하나로 합친다.
-        , series : [
-            {      // barChart1 배열을 막대 그래프로 지정한다.
-                  renderer : jQuery.jqplot.BarRenderer
-                , rendererOptions : {
-                      barWidth : 30                    // 막대그래프의 넓이를 지정
-                    , barPadding : -15                // 막대그래프의 여백을 지정
-                    , highlightMouseOver : false    // 막대그래프의 클릭여부를 지정 (기본값 : true)
-                }
-            }
-            , {    // barChart2 배열을 막대 그래프로 지정한다.
-                  renderer : jQuery.jqplot.BarRenderer
-                , rendererOptions : {
-                      barWidth : 30                    // 막대그래프의 넓이를 지정
-                    , barPadding : -15                // 막대그래프의 여백을 지정
-                    , highlightMouseOver : false    // 막대그래프의 클릭여부를 지정 (기본값 : true)
-                }
-            }
-            , {    // barChart3 배열을 막대 그래프로 지정한다.
-                  renderer : jQuery.jqplot.BarRenderer
-                , rendererOptions : {
-                      barWidth : 30                    // 막대그래프의 넓이를 지정
-                    , barPadding : -15                // 막대그래프의 여백을 지정
-                    , highlightMouseOver : false    // 막대그래프의 클릭여부를 지정 (기본값 : true)
-                }
-            }
-            , {    // lineChart 배열을 꺽은선 그래프로 지정한다.
-                  disableStack : true      // 데이터의 합또한 합쳐지는 것을 방지하기위해 꺽은선 그래프는 disableStack을 true로 선언
-                  // jQuery.jqplot.LineRenderer(꺽은선 그래프)의 플러그인은 기본적으로 지정하지 않아도 된다.
-                , renderer : jQuery.jqplot.LineRenderer
-            }
-        ]
-        , axes: {
-            xaxis : {
-                  renderer : jQuery.jqplot.CategoryAxisRenderer
-                , ticks : ['1주', '2주', '3주', '4주']
-            }
-        }
-    });
+
 });
 
 	
@@ -135,7 +105,131 @@ jQuery(document).ready(function() {
                   <div id="overview" class="tab-pane active">
                		<div class="panel-body">
                   
-                  	<div id="chart" style="width:780px;height:304px;"></div>
+                  	<div id="chart" style="width:1300px;height:304px;"></div>
+                  	<h4><i class="fa fa-angle-right"></i>2020년 월별 계약건수에따른 검사 합격과불합격 목록</h4>    
+             	 <table class="table table-striped table-advance table-hover"  >
+               	 <thead>
+                  <tr>
+                   <th class="hidden-phone"><i class="fa fa-bookmark"></i>월별</th>
+                    <th class="hidden-phone"><i class="fa fa-bookmark"></i>계약건수</th>
+                    <th><i class=" fa fa-bookmark"></i>검사건수</th>
+                    <th><i class=" fa fa-bookmark"></i>검사합격건수</th>
+                    <th><i class=" fa fa-bookmark"></i>검사불합격건수</th>
+                    <th><i class=" fa fa-bookmark"></i>등록일</th>
+                 </tr>
+                </thead>
+                <tbody >
+                  <tr>
+                 
+                    <td class="hidden-phone">1월</td>
+                    <td class="hidden-phone"> 50 </td>
+                    <td class="hidden-phone"> 50 </td>
+                    <td >48</td>
+                    <td >2</td>
+                    <td >2020-01-30</td>
+                   </tr>
+                  <tr>
+                  
+                    <td class="hidden-phone">2월</td>
+                    <td class="hidden-phone"> 70 </td>
+                    <td class="hidden-phone"> 70 </td>
+                    <td>60</td>
+                    <td>10</td>
+                     <td >2020-02-28</td>
+                   </tr>
+                  <tr>
+                    
+                    <td class="hidden-phone">3월</td>
+                    <td class="hidden-phone"> 50 </td>
+                    <td class="hidden-phone"> 50 </td>
+                    <td>30</td>
+                    <td>20</td>
+                     <td >2020-03-31</td>
+                   </tr>
+                  <tr>
+                    
+                    <td class="hidden-phone">4월</td>
+                    <td class="hidden-phone"> 120 </td>
+                    <td class="hidden-phone"> 120 </td>
+                    <td>110</td>
+                   	<td >10</td>
+                   	 <td >2020-04-30</td>
+                   </tr>
+                  <tr>
+                   
+                    <td class="hidden-phone">5월</td>
+                    <td class="hidden-phone"> 150 </td>
+                    <td class="hidden-phone"> 150 </td>
+                    <td >130</td>
+                    <td >20</td>
+                     <td >2020-05-31</td>
+                   </tr>
+                  <tr>
+                    
+                    <td class="hidden-phone">6월</td>
+                    <td class="hidden-phone"> 185 </td>
+                    <td class="hidden-phone"> 185 </td>
+                    <td >175</td>
+                    <td >10</td>
+                     <td >2020-06-30</td>
+                   </tr>
+                  <tr>
+                    
+                    <td class="hidden-phone">7월</td>
+                    <td class="hidden-phone">60 </td>
+                    <td class="hidden-phone">60 </td>
+                    <td >40</td>
+                    <td >20</td>
+                     <td >2020-07-30</td>
+                   </tr>
+                  <tr>
+                    
+                    <td class="hidden-phone">8월</td>
+                    <td class="hidden-phone">40 </td>
+                    <td class="hidden-phone">40 </td>
+                    <td >35</td>
+                    <td >5</td>
+                     <td >2020-08-30</td>
+                   </tr>
+                  <tr>
+                    
+                    <td class="hidden-phone">9월</td>
+                    <td class="hidden-phone">70 </td>
+                    <td class="hidden-phone">70 </td>
+                    <td >58</td>
+                    <td >12</td>
+                     <td >2020-09-30</td>
+                   </tr>
+                  <tr>
+                    
+                    <td class="hidden-phone">10월</td>
+                    <td class="hidden-phone"> 140 </td>
+                    <td class="hidden-phone"> 140 </td>
+                    <td >139</td>
+                    <td >1</td>
+                     <td >2020-10-30</td>
+                   </tr>
+                  <tr>
+                
+                    <td class="hidden-phone">11월</td>
+                    <td class="hidden-phone"> 130 </td>
+                    <td class="hidden-phone"> 130 </td>
+                    <td >128</td>
+                    <td >2</td>
+                     <td >2020-11-30</td>
+                   </tr>
+                  <tr>
+                    
+                    <td class="hidden-phone">12월</td>
+                    <td class="hidden-phone"> 50 </td>
+                    <td class="hidden-phone"> 50 </td>
+                    <td >48</td>
+                    <td >2</td>
+                     <td >2020-12-30</td>
+                   </tr>
+                  
+                 </tbody>
+              </table>
                 
 	                 </div>
 	                </div>
