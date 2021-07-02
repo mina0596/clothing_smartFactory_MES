@@ -27,6 +27,17 @@ public class ProductionController {
 		this.productionService = productionService;
 	}
 	
+	//[민아+한빛]의뢰품목별 상세 생산 공정 현황 등록
+	@GetMapping("/productionOrderList")
+	public String productionOrderList() {
+		return "production/productionOrderList";
+	}
+	
+	//[민아+한빛]의뢰품목별 상세 생산 공정 현황 등록
+	@GetMapping("/test")
+	public String test() {
+		return "production/test";
+	}
 	//================================================================
 	//[민아+한빛]의뢰품목별 상세 생산 공정 현황 등록
 	@GetMapping("/productProgressList")
