@@ -193,10 +193,10 @@ public class ContractController {
 		return "contract/addInvoiceClaim";
 	}
 	
-	//[민아]수금/출금 청구 목록
-	@GetMapping("/invoiceClaimList")
-	public String getInvoiceClaimList() {
-		return "contract/invoiceClaimList";
+	//[민아] 예정 수금/출금 목록
+	@GetMapping("/expectedPaymentList")
+	public String getExpectedPaymentList() {
+		return "contract/expectedPaymentList";
 	}
 
 	
