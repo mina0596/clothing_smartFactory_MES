@@ -16,25 +16,35 @@ layout:decorate="@{layout/default_system}">
 	
 		$('#seldiv').hide();
 		$('#seldiv2').hide();
+		$('#detailInspection').hide();
 		var ramInspection=['원단이화학검사'];
 		var midInpspection2=['재단물검사','봉제검사'];
 		var finalInpspection=['봉제검사','마무리'];
 		var directInspection=['직접입력'];
 		$('#highSelbox').change(function(){
+			$('#seldiv').hide();
+			$('#seldiv2').hide();
 			if($('#highSelbox').val()=='원자재검사'){
 				$('.middleInspection').remove();
+				
 				$.each(ramInspection,function(i,item){
 					$('#middleSelbox').append('<option class="middleInspection">'+item+'</option>');
+					$('#seldiv').hide();
+					$('#seldiv2').hide();
 				});
 			}else if ($('#highSelbox').val()=='공정중간검사'){
 				$('.middleInspection').remove();
 				$.each(midInpspection2,function(i,item){
 					$('#middleSelbox').append('<option class="middleInspection">'+item+'</option>');
+					$('#seldiv').hide();
+					$('#seldiv2').hide();
 				});
 			}else if($('#highSelbox').val()=='완제품검사'){
 				$('.middleInspection').remove();
 				$.each(finalInpspection,function(i,item){
 					$('#middleSelbox').append('<option class="middleInspection">'+item+'</option>');
+					$('#seldiv').hide();
+					$('#seldiv2').hide();
 				});
 			}else if($('#highSelbox').val()=='직접입력'){
 				$('.middleInspection').remove();
@@ -43,10 +53,9 @@ layout:decorate="@{layout/default_system}">
 					$('#middleSelbox').append('<option class="middleInspection">'+item+'</option>');
 					$('#seldiv2').show();
 					});
-				}else{
-					$('#seldiv').hide();
-					$('#seldiv2').hide();
-			}
+				}
+			});
+			
 			
 		});
 		
@@ -139,6 +148,18 @@ layout:decorate="@{layout/default_system}">
            	  	</div>
         
         <div class="form-group">
+       	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사 상세분류입력</label>
+       	  <div class="col-sm-5">
+          	<span>예
+          	<input type="radio" id="checkY"  >
+          	</span>
+          	<span>아니오
+          	<input type="radio" id="checkN"  >
+          	</span>
+          	
+          </div>
+           	  	</div>
+        <div class="form-group" id="">
        	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사 소분류상세명</label>
        	  <div class="col-sm-5">
           	<input class="form-control" id="" type="text"  >
@@ -146,7 +167,7 @@ layout:decorate="@{layout/default_system}">
            	  	</div>
         
       
-        <div class="form-group text-right">
+        <div class="form-group text-right" >
                     <div class="col-lg-offset-2 col-lg-10">
                       <button class="btn btn-theme" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">품질검사등록</font></font></button>
                       <button class="btn btn-theme04" type="button" id="cancleBtn"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">품질검사등록취소</font></font></button>
