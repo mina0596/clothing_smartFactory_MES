@@ -122,7 +122,7 @@ layout:decorate="@{layout/default_qualityControl}">
 			            <input type="radio" name="optionsRadios" id="optionsRadios2" value="수치별"> 수치별
 			          </label>
 			          <label>
-			            <input type="radio" name="optionsRadios" id="optionsRadios3" value="Y/N별"> Y/N별
+			            <input type="radio" name="optionsRadios" id="optionsRadios3" value="Y/N별"> 합격/불합격별
 			          </label>
 			        </div>  
 				</div>
@@ -204,27 +204,29 @@ layout:decorate="@{layout/default_qualityControl}">
                 <div id="byNumInput" class="accordion-body collapse">
                   <div class="accordion-inner">
                     <p>
-                    	
+
                     	<div class="form-group">
 			               	<div class="col-md-3" style="padding-left: 50px;">
 				          		<label class="col-sm-2 control-label" style="font-weight: 600;"> 측정 품목명</label>
 			               	</div>
-				            <div class="col-md-3">
+			               	<div class="col-md-3">
+				            <div  class="input-group">
 				              <input type="text" class="form-control" id="materialCateName" size="16" placeholder="자켓">
-		                    </div> 
-			                <div class="col-md-1" style="padding-left: 0px;">
-		                   		<i class="btn fa fa-search" style="padding-left: 0px;"></i>
-		                    </div> 
+				              <div class="input-group-btn">
+				                <button type="button" class=" btn btn-default" id="searchBtn2"><i class="fa fa-search"></i></button>
+				              </div>
+				            </div>
+				          </div>
 				        </div>
                     	
-                    	
+
                     	<div class="form-group">
 					        <div class="col-md-3" style="padding-left: 50px;">
 				                 <label class="control-label col-lg-2" style="font-weight: 600;"> 측정부위</label>
 				            </div>
 				            <div class="col-md-2">
 			                    <input type="text" class="form-control" placeholder="어깨너비">
-			               </div>  
+			                </div>  
 		                </div>
 		                
                     	<div class="form-group">
@@ -279,7 +281,7 @@ layout:decorate="@{layout/default_qualityControl}">
 			<div class="accordion-group">
                 <div class="accordion-heading" style="padding-left: 30px;">
                   <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="faq.html#byPassInput">
-                    <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em> Y/N별
+                    <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em> 합격/불합격별
                     </a>
                 </div>
                 <div id="byPassInput" class="accordion-body collapse">
