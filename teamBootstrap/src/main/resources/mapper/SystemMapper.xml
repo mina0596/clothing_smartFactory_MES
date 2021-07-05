@@ -21,6 +21,8 @@
 			<result property="levelName" column="level_name"/>
 		</association>
 	</resultMap>
+	
+	
 	<select id="getHumanResources" resultMap="getHumanResourcesInfo"  resultType="HumanResources" fetchSize="1000">
 		SELECT
 			e.employee_code
@@ -43,10 +45,10 @@
 			on
 			e.level_num = l.level_num;
 	</select>
-
+	
 	<insert id="addHumanResources" parameterType="HumanResources">
 		INSERT INTO employee_info
-		(employee_code
+		( employee_code
 		 ,level_num
 		 ,employee_id
 		 ,employee_pw
@@ -59,7 +61,7 @@
 		 ,employee_info_reg_date
 		 ,employee_info_update_date
 		)VALUES(
-		  #{employeeCode}
+  			sf_newEmployeeCode()
 		 ,#{levelNum}
 		 ,#{employeeId}
 		 ,#{employeePw}
@@ -72,7 +74,56 @@
 		 ,CURDATE()
 		 ,CURDATE());
 	</insert>
-	
+
+	<select id="getEmployeeInfoByCode" parameterType="String" resultMap="getHumanResourcesInfo">
+	SELECT 
+		 employee_id			
+		,employee_pw			
+		,employee_name			
+		,employee_tel		
+		,employee_address		
+		,employee_email			
+		,employee_department		
+		,employee_position		
+	FROM 
+		employee_info AS e
+	WHERE 
+		e.employee_code = #{employeeCode}
+</select>
+<update id="modifyHumanResources" parameterType="HumanResources">
+	UPDATE employee_info 
+	<trim prefix="SET" prefixOverrides=",">
+		<if test="levelNum != null and levelNum != ''.toString()">			
+			,level_num = #{levelNum}
+		</if>
+		<if test="employeeId != null and employeeId != ''.toString()">			
+			,employee_id = #{employeeId}
+		</if>
+		<if test="employeePw != null and employeePw != ''.toString()">			
+			,employee_pw = #{employeePw}
+		</if>
+		<if test="employeeName != null and employeeName != ''.toString()">			
+			,employee_name = #{employeeName}
+		</if>
+		<if test="employeeTel != null and employeeTel != ''.toString()">			
+			,employee_tel = #{employeeTel}
+		</if>		
+		<if test="employeeAddress != null and employeeAddress != ''.toString()">			
+			,employee_address = #{employeeAddress}
+		</if>		
+		<if test="employeeEmail != null and employeeEmail != ''.toString()">			
+			,employee_email = #{employeeEmail}
+		</if>		
+		<if test="employeeDepartment != null and employeeDepartment != ''.toString()">			
+			,employee_department = #{employeeDepartment}
+		</if>		
+		<if test="employeePosition != null and employeePosition != ''.toString()">			
+			,employee_position = #{employeePosition}
+		</if>		
+	</trim>
+	WHERE 
+		employee_code = #{employeeCode};
+</update>
 	
 <!-- =========================================================== -->
 		<resultMap type="Client"  id="getClientInfo">
@@ -87,6 +138,7 @@
 		<result  property="clientInfoRegDate" 				column="client_info_reg_date"/>
 		<result  property="clientInfoUpdateDate" 		column="client_info_update_date"/>
 	</resultMap>
+		 
 	<select id="getClient" resultMap="getClientInfo"  resultType="Client" fetchSize="1000">
 		SELECT
 			c.client_code
@@ -100,9 +152,80 @@
 			,c.client_info_reg_date
 			,c.client_info_update_date
 		FROM
-			client_info as c
-			
+			client_info as c;
 	</select>
+			
+			
+	<insert id="addClient" parameterType="Client">
+		INSERT INTO client_info
+		( client_code
+		 ,client_category
+		 ,client_name
+		 ,client_tel
+		 ,client_employee
+		 ,client_ceo
+		 ,client_business_num
+		 ,client_address
+		 ,client_info_reg_date
+		 ,client_info_update_date
+		)VALUES(
+ 			sf_newClientCode()
+		 ,#{clientCategory}
+		 ,#{clientName}
+		 ,#{clientTel}
+		 ,#{clientEmployee}
+		 ,#{clientCeo}
+		 ,#{clientBusinessNum}
+		 ,#{clientAddress}
+		 ,CURDATE()
+		 ,CURDATE());
+	</insert>
+	
+	<update id="modifyClient" parameterType="Client">
+	UPDATE client_info 
+	<trim prefix="SET" prefixOverrides=",">
+		<if test="clientCategory != null and clientCategory != ''.toString()">			
+			,client_category = #{clientCategory}
+		</if>
+		<if test="clientName != null and clientName != ''.toString()">			
+			,client_name = #{clientName}
+		</if>
+		<if test="clientTel != null and clientTel != ''.toString()">			
+			,client_tel = #{clientTel}
+		</if>
+		<if test="clientCeo != null and clientCeo != ''.toString()">			
+			,client_ceo = #{clientCeo}
+		</if>
+		<if test="clientEmployee != null and clientEmployee != ''.toString()">			
+			,client_employee = #{clientEmployee}
+		</if>		
+		<if test="clientBusinessNum != null and clientBusinessNum != ''.toString()">			
+			,client_business_num = #{clientBusinessNum}
+		</if>		
+		<if test="clientAddress != null and clientAddress != ''.toString()">			
+			,client_address = #{clientAddress}
+		</if>		
+	</trim>
+	WHERE 
+		client_code = #{clientCode};
+</update>
+	
+		<select id="getClientInfoByCode" parameterType="String" resultMap="getClientInfo">
+		SELECT 
+			 client_category			
+			,client_name			
+			,client_tel			
+			,client_ceo		
+			,client_employee		
+			,client_business_num			
+			,client_address		
+		FROM 
+			client_info AS c
+		WHERE 
+			c.client_code = #{clientCode}
+	</select>
+	
+			
 
 <!-- =========================================================== -->
 	<resultMap type="AccountingCategory" id="AccountingCategoryMap">
@@ -113,7 +236,50 @@
 		<result property="categoryUpdateDate" 	column="account_category_update_date"/>
 	</resultMap>
 	
-	<select id="getAccountingSubjectList" resultMap="AccountingCategoryMap">
+	<insert id="addAccountSubject" parameterType="AccountingCategory">
+		INSERT INTO account_category_list
+		(account_category_code
+		,account_category_name
+		,account_category_content
+		,account_category_reg_date
+		,account_category_update_date)
+	VALUES 
+		(sf_newAccountCategoryCode()
+		,#{categoryName}
+		,#{categoryContent}
+		,NOW()
+		,null);
+	</insert>
+	
+	<select id="getAccountSubjectByCode" parameterType="String" resultMap="AccountingCategoryMap">
+		SELECT 
+			account_category_code
+			,account_category_name
+			,account_category_content
+			,account_category_reg_date
+			,account_category_update_date
+		FROM 
+			account_category_list AS acc
+		WHERE
+			acc.account_category_code = #{categoryCode};	
+	</select>
+	
+	<update id="modifyMember" parameterType="AccountingCategory">
+		UPDATE account_category_list
+		<trim prefix="SET" prefixOverrides=",">
+			<if test="categoryName != null and categoryName != ''.toString()">
+				,account_category_name=#{categoryName}
+			</if>
+			<if test="categoryContent != null and categoryContent != ''.toString()">
+				,account_category_content=#{categoryContent}
+			</if>
+				,account_category_update_date=NOW()
+		</trim>
+		WHERE 
+			account_category_code=#{categoryCode};
+	</update>
+	
+	<select id="getAccountingSubjectList" parameterType="map" resultMap="AccountingCategoryMap" fetchSize="1000">
 		SELECT
 			account_category_code
 			,account_category_content
@@ -121,7 +287,12 @@
 			,account_category_reg_date
 			,account_category_update_date
 		FROM
-			account_category_list;
+			account_category_list
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="searchKey != null and searchKey != ''.toString()">
+				${searchKey} LIKE CONCAT('%', #{searchValue} ,'%');
+			</if>
+		</trim>
 	</select>
 	
 	

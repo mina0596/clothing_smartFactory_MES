@@ -4,9 +4,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
 layout:decorate="@{layout/default_system}">
 
 <th:block layout:fragment="pageTitle">
-	   <div class="border-head"> 
-	    <h3>계정 과목 목록</h3>
-	   </div>
+
 	 <script type="text/javascript">
 		$(function(){
 			//#checkAll 버튼 클릭 시 전체 checked
@@ -29,31 +27,29 @@ layout:decorate="@{layout/default_system}">
        
           <h4><i class="fa fa-angle-right"></i>계정과목 조회</h4>
          		 <hr>
-                
-			<div class="form-group">
-				<div class="col-md-2">
-				 <select class="form-control">
-				   <option>계정과목코드</option>
-				   <option>계정과목명</option>
-				   <option>적요</option>
-				   <option>등록일시</option>
-				 </select>
-				</div>
-				<div class="col-md-6">
-				  <input class="form-control" type="text" placeholder="검색어를 입력하세요">
-				</div>
-				<div class="col-md-2">
-				  <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
-				  <button type="button" class="btn btn-primary">검색하여 가져오기</button>
-				</div>
-	       </div>
-	       
+			<form th:action="@{/accountSubjectList}" method="get">
+				<div class="form-group">
+					<div class="col-md-2">					
+					 <select name="searchKey" class="form-control">
+					   <option value="account_category_name">계정과목명</option>
+					   <option value="account_category_content">적요</option>
+					 </select>					 
+					</div>
+					
+					<div class="col-md-6">
+					  <input name="searchValue" class="form-control" type="text" placeholder="검색어를 입력하세요">
+					</div>
+					
+					<div class="col-md-2">          
+					  <button type="submit" class="btn btn-primary">검색하여 가져오기</button>
+					</div>
+		       </div>       
+			</form>
 	      <br>
 	      <br>
 	      <br>
 	      <br>
 	      <br>
-	      
               <h4><i class="fa fa-angle-right"></i>계정과목 목록</h4>    
               <table id="list" class="table table-striped table-advance table-hover">
                 <thead>
@@ -71,15 +67,18 @@ layout:decorate="@{layout/default_system}">
                   <tr th:if="${#lists.size(accountingCategoryList) > 0}" th:each="l,i : ${accountingCategoryList}">
                   	<td><input type="checkbox" class="checked"></td>
                  	<td th:text="${i.index+1}"></td>
-                    <td class="hidden-phone"><a th:href="@{#}">[[${l.categoryCode}]]</a></td>
+                    <td th:text="${l.categoryCode}"></td>
                     <td th:text="${l.categoryName}" class="hidden-phone"></td>
                     <td th:text="${l.categoryContent}"></td>
-                    <td th:text="${l.categoryRegDate}"></td>
+                    <td th:text="${l.categoryRegDate}"></td>                  	
                   	<td>  
-                  		<button class="btn btn-primary btn-xs">
+                  		<a th:href="@{/modifyAccountSubject(categoryCode=${l.categoryCode})}" class="btn btn-primary btn-xs">
                   			<i class="fa fa-pencil"></i>수정
-                  		</button>
+                  		</a>
                   	</td>
+                  </tr>
+                  <tr th:unless="${#lists.size(accountingCategoryList) > 0}">
+                  	<td colspan="7" style="text-align: center;" th:text="${'검색한 결과가 없습니다.'}"> </td>
                   </tr>
 
            		 </tbody>
@@ -93,9 +92,10 @@ layout:decorate="@{layout/default_system}">
 		          </div>
 		        </div>
              
-            </div>
-            </div>
             
 </th:block>
+<th:block layout:fragment="customJs">
 
+
+</th:block>
 </html>

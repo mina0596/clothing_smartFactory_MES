@@ -21,10 +21,10 @@ layout:decorate="@{layout/default_system}">
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">수/발주 구분</label>
                   <div class="col-sm-2">
-                      <select class="form-control">
+                      <select name = "clientCategory" class="form-control">
 						<option>::선택::</option>
-						<option>수주</option>
-						<option>발주</option>
+						<option value = "수주">수주</option>
+						<option value = "발주">발주</option>
 		               </select>
                   </div>
                 </div>
@@ -33,42 +33,42 @@ layout:decorate="@{layout/default_system}">
                   <div class="form-group ">
                     <label for="firstname" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">회사명</font></font></label>
                     <div class="col-lg-6">
-                      <input class=" form-control" id="clientAccountName" name="clientAccountName" type="text">
+                      <input class=" form-control" id="clientName" name="clientName" type="text">
                     </div>
                   </div>
                   
                   <div class="form-group ">
                     <label for="lastname" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">전화번호</font></font></label>
                     <div class="col-lg-6">
-                      <input class=" form-control" id="clientAccountPhone" name="clientAccountPhone" type="text">
+                      <input class=" form-control" name="clientTel"  type="text">
                     </div>
                   </div>
                   
                   <div class="form-group ">
                     <label for="email" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">대표자</font></font></label>
                     <div class="col-lg-6">
-                      <input class="form-control " id="clientAccountCeo" name="clientAccountCeo" type="text">
+                      <input class="form-control " name="clientCeo" type="text">
                     </div>
                   </div>
                   
                   <div class="form-group ">
                     <label for="email" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">담당자</font></font></label>
                     <div class="col-lg-6">
-                      <input class="form-control " id="clientAccountManager" name="clientAccountManager" type="text">
+                      <input class="form-control " name="clientEmployee" type="text">
                     </div>
                   </div>
                   
                   <div class="form-group ">
                     <label for="email" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">사업자번호</font></font></label>
                     <div class="col-lg-6">
-                      <input class="form-control " id="clientAccountPhone" name="clientAccountPhone" type="text">
+                      <input class="form-control " name="clientBusinessNum" type="number">
                     </div>
                   </div>
                   
                   <div class="form-group ">
                     <label for="email" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">주소</font></font></label>
                     <div class="col-lg-6">
-                      <input class="form-control " id="clientAccountAddr" name="clientAccountAddr" type="text">
+                      <input class="form-control " name="clientAddress" type="text">
                     </div>
                   </div>
                   
