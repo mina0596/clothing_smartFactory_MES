@@ -13,26 +13,21 @@ layout:decorate="@{layout/default_production}">
 <th:block layout:fragment="container">
 
             <div class="form-panel">
-              <h4 class="mb"><i class="fa fa-edit"></i>생산계획 등록</h4>
+             <h4 class="mb"><i class="fa fa-edit"></i>생산계획 등록</h4>
               <form th:href="@{/productionPlanList}" class="form-horizontal style-form" method="get">
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">성별별 양복명</label>
                   <div class="col-sm-4">
-                      <select class="form-control">
-						<option>::선택::</option>
-						<option>신사양복</option>
-						<option>여성양복</option>
+                      <select id="genderCate" class="form-control">
+						<option value="">::선택::</option>
 		               </select>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">품목소분류</label>
                   <div class="col-sm-4">
-                      <select class="form-control">
+                      <select id="detailCate" class="form-control">
 						<option>::선택::</option>
-						<option>바지</option>
-						<option>자켓</option>
-						<option>치마</option>
 		               </select>
                   </div>
                 </div>
@@ -67,10 +62,11 @@ layout:decorate="@{layout/default_production}">
 					          <label class="col-sm-2 col-sm-2 control-label">작업마감 예정일</label>
 				          <div class="col-md-4">
 				            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
-				              <input type="text" class="form-control" readonly="readonly" size="16">
+ 				              <input id="endDate" type="text" class="form-control" readonly="readonly" size="16">
+ 				              <input id="test" type="datetime-local">
 				              <div class="input-group-btn">
-				                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
-				                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
+ 				                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
+ 				                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
 				              </div>
 				            </div>
 				          </div>
@@ -111,10 +107,75 @@ layout:decorate="@{layout/default_production}">
 	
 
 
-
+   <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-daterangepicker/daterangepicker.js}"></script>
+  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js}"></script>
+  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-daterangepicker/moment.min.js}"></script>
+  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-timepicker/js/bootstrap-timepicker.js}"></script>
+  <script type="text/javascript" th:src="@{Dashio/lib/advanced-form-components.js}"></script>	
 
 </th:block>
+<th:block layout:fragment="customJs">
+	<script type="text/javascript">
+		$(function(){
+			
+			//성별별 이름 가져오기
+			var genderCate = $('#genderCate');
+			var request = $.ajax({
+				url: "/productCode",
+				method: "get"
+			}); 
+			request.done(function( data ) {
+				
+				if(data != undefined && data != '' && data.length > 0){
+					var html = '';
+					for(var i = 0; i<data.length; i++){
+						html += "<option>"+data[i].gender_categorized_name+"</option>";					
+					}
+					genderCate.append(html);
+				}
+			});
+			request.fail(function( jqXHR, textStatus ) {
+				alert( "Request failed: " + textStatus );
+			});	
+			
+			//소분류 가져오기
+			$('#genderCate').change(function(){
+				
+				var gender = $("#genderCate option:selected").val();
+				var detailCate = $('#detailCate');
+				//옵션 값 초기화	
+				detailCate.html("<option>::선택::</option>");
+				
+				var request = $.ajax({
+					url: "/detailCode",
+					method: "get",
+					data: {gender : gender}
+				}); 
+				request.done(function( data ) {
+					console.log(data);
+					if(data != undefined && data != '' && data.length > 0){
+						var html = '';
+						for(var i = 0; i<data.length; i++){
+							html += "<option>"+data[i].detailed_categorized_name+"</option>";					
+						}
+						detailCate.append(html);
+					}
+					
+				});
+				request.fail(function( jqXHR, textStatus ) {
+					alert( "Request failed: " + textStatus );
+				});									
+			});
+			
+			
+			
+		});
+		
+		
+		
+	</script>
 
+</th:block>
 
 
 </html>

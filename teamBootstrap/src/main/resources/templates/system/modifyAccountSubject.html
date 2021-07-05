@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_system}">
+  <link rel="stylesheet" type="text/css" href="lib/bootstrap-datetimepicker/datertimepicker.css" />
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3>계정과목 수정</h3>
+	    </div>
+</th:block>
+<th:block layout:fragment="container">
+            <div class="form-panel">
+              <h4 class="mb"><i class="fa fa-edit"></i> 계정과목 등록</h4>
+              
+              <form th:action="@{/modifyAccountSubject}" class="form-horizontal style-form" method="post">
+
+               <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">계정과목 코드</label>
+	                  <div class="col-sm-4">
+	                    <input type="text" name="categoryCode" th:value="${accCate.categoryCode}" readonly="readonly" class="form-control">
+	                  </div>
+                </div>
+               
+               <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">계정과목명</label>
+	                  <div class="col-sm-4">
+	                    <input type="text" name="categoryName" th:value="${accCate.categoryName}" class="form-control">
+	                  </div>
+                </div>
+                
+                
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">적요</label>
+	                  <div class="col-sm-4">
+	                    <input type="text" name="categoryContent" th:value="${accCate.categoryContent}" class="form-control">
+	                  </div>
+                </div>
+				 
+				 
+				 <div class="form-group text-right">
+			          <div class="col-lg-offset-2 col-lg-10">
+			            <button class="btn btn-theme" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">등록</font></font></button>
+			            <a th:href="@{/accountSubjectList}" class="btn btn-theme04" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소</font></font></a>
+			          </div>
+			        </div>
+    			</form>            
+                </div>
+
+</body>
+</th:block>
+</html>

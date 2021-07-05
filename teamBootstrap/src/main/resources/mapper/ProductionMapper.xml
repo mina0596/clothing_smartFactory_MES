@@ -22,6 +22,21 @@
 			production_plan;
 </select>
 
+	<select id="getDetailCode" parameterType="String" resultType="Map">
+		SELECT 
+		   detailed_categorized_name
+		FROM 
+			product_code_detail
+      	WHERE 
+			gender_categorized_name = #{gender};
+	</select>
+	
+	<select id="getProductCode" resultType="Map">
+		SELECT 
+			DISTINCT(gender_categorized_name)
+		FROM 
+			product_code_detail;
+	</select>
 
 
 
