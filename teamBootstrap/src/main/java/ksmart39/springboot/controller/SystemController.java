@@ -42,27 +42,38 @@ public class SystemController {
 	
 	//===============================================================
 	
-	//[한빛]사원등록-> 사원목록
-	@PostMapping("/addHumanResources")
-	public String addHumanResources(HumanResources humanResources) {
-		log.info("========================================");
-		log.info("화면에서 입력받은 값(회원가입) humanResources: {}", humanResources);
-		log.info("========================================");
+	
 
+	//수정화면 ->목록
+	@PostMapping("modifyHumanResources")
+	public String modifyHumanResources(HumanResources humanResources) {
+		systemService.modifyHumanResources(humanResources);
 		return "redirect:/humanResourcesList";
 	}
 	
+	//[한빛]사원수정
+	@GetMapping("/modifyHumanResources")
+	public String modifyHumanResources(@RequestParam(name = "employeeCode", required = false) String employeeCode, Model model) {
+		//1. 회원코드로 회원테이블을 조회한 HumanResources객체
+		HumanResources humanResources = systemService.getEmployeeInfoByCode(employeeCode);
+		//2. Model 화면에 전달할 객체 삽입
+		model.addAttribute("title","회원수정폼");
+		model.addAttribute("humanResources",humanResources);
+		return "system/modifyHumanResources";
+	}
+	
+	//[한빛]사원등록-> 사원목록
+	@PostMapping("/addHumanResources")
+	public String addHumanResources(HumanResources humanResources) {
+		systemService.addHumanResources(humanResources);
+		
+		return "redirect:/humanResourcesList";
+	}
 	//[한빛]사원등록
 	@GetMapping("/addHumanResources")
 	public String addHumanResources(Model model) {
-		 model.addAttribute("title", "인사관리");
+		model.addAttribute("title", "인사관리");
 		return"system/addHumanResources";	
-	}
-
-	//[한빛]사원수정
-	@GetMapping("/modifyHumanResources")
-	public String modifyHumanResources() {
-		return "system/modifyHumanResources";
 	}
 	
 	//[한빛]사원목록
@@ -76,29 +87,22 @@ public class SystemController {
 	
 	
 	//==============================================================
-	//[한빛]주문수정 ->목록으로 이동
-	@PostMapping("/modifyClient")
+	//수정화면 ->목록
+	@PostMapping("modifyClient")
 	public String modifyClient(Client client) {
-		log.info("========================================");
-		log.info("화면에서 입력받은 값(수정화면폼) client: {}", client);
-		log.info("========================================");
-
 		systemService.modifyClient(client);
 		return "redirect:/clientList";
 	}
 	
-	//[한빛]거래처 수정
+	//[한빛]사원수정
 	@GetMapping("/modifyClient")
-	public String modifyClient(@RequestParam(name = "clientCode", required = false) String clientCode
-											,Model model) {
-		log.info("========================================");
-		log.info("화면에서 입력받은 값(거래처수정폼) clientCode: {}", clientCode);
-		log.info("========================================");
-		//1. 회원코드로 회원테이블을 조회한 Client 객체
-		systemService.getClientInfoByCode(clientCode);
+	public String modifyClient(@RequestParam(name = "clientCode", required = false) String clientCode, Model model) {
+		//1. 회원코드로 회원테이블을 조회한 HumanResources객체
+		Client client = systemService.getClientInfoByCode(clientCode);
 		//2. Model 화면에 전달할 객체 삽입
 		model.addAttribute("title","거래처수정폼");
-		return"system/modifyClient";
+		model.addAttribute("client",client);
+		return "system/modifyClient";
 	}
 	
 	//[한빛]주문등록 ->목록으로 이동

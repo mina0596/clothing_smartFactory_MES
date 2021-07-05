@@ -21,6 +21,8 @@
 			<result property="levelName" column="level_name"/>
 		</association>
 	</resultMap>
+	
+	
 	<select id="getHumanResources" resultMap="getHumanResourcesInfo"  resultType="HumanResources" fetchSize="1000">
 		SELECT
 			e.employee_code
@@ -43,9 +45,85 @@
 			on
 			e.level_num = l.level_num;
 	</select>
-
-
 	
+	<insert id="addHumanResources" parameterType="HumanResources">
+		INSERT INTO employee_info
+		( employee_code
+		 ,level_num
+		 ,employee_id
+		 ,employee_pw
+		 ,employee_name
+		 ,employee_tel
+		 ,employee_address
+		 ,employee_email
+		 ,employee_department
+		 ,employee_position
+		 ,employee_info_reg_date
+		 ,employee_info_update_date
+		)VALUES(
+  			sf_newEmployeeCode()
+		 ,#{levelNum}
+		 ,#{employeeId}
+		 ,#{employeePw}
+		 ,#{employeeName}
+		 ,#{employeeTel}
+		 ,#{employeeAddress}
+		 ,#{employeeEmail}
+		 ,#{employeeDepartment}
+		 ,#{employeePosition}
+		 ,CURDATE()
+		 ,CURDATE());
+	</insert>
+
+	<select id="getEmployeeInfoByCode" parameterType="String" resultMap="getHumanResourcesInfo">
+	SELECT 
+		 employee_id			
+		,employee_pw			
+		,employee_name			
+		,employee_tel		
+		,employee_address		
+		,employee_email			
+		,employee_department		
+		,employee_position		
+	FROM 
+		employee_info AS e
+	WHERE 
+		e.employee_code = #{employeeCode}
+</select>
+<update id="modifyHumanResources" parameterType="HumanResources">
+	UPDATE employee_info 
+	<trim prefix="SET" prefixOverrides=",">
+		<if test="levelNum != null and levelNum != ''.toString()">			
+			,level_num = #{levelNum}
+		</if>
+		<if test="employeeId != null and employeeId != ''.toString()">			
+			,employee_id = #{employeeId}
+		</if>
+		<if test="employeePw != null and employeePw != ''.toString()">			
+			,employee_pw = #{employeePw}
+		</if>
+		<if test="employeeName != null and employeeName != ''.toString()">			
+			,employee_name = #{employeeName}
+		</if>
+		<if test="employeeTel != null and employeeTel != ''.toString()">			
+			,employee_tel = #{employeeTel}
+		</if>		
+		<if test="employeeAddress != null and employeeAddress != ''.toString()">			
+			,employee_address = #{employeeAddress}
+		</if>		
+		<if test="employeeEmail != null and employeeEmail != ''.toString()">			
+			,employee_email = #{employeeEmail}
+		</if>		
+		<if test="employeeDepartment != null and employeeDepartment != ''.toString()">			
+			,employee_department = #{employeeDepartment}
+		</if>		
+		<if test="employeePosition != null and employeePosition != ''.toString()">			
+			,employee_position = #{employeePosition}
+		</if>		
+	</trim>
+	WHERE 
+		employee_code = #{employeeCode};
+</update>
 	
 <!-- =========================================================== -->
 		<resultMap type="Client"  id="getClientInfo">
@@ -103,36 +181,36 @@
 		 ,CURDATE());
 	</insert>
 	
-		<update id="modifyClient" parameterType="Client">
-		UPDATE client_info 
-		<trim prefix="SET" prefixOverrides=",">
-			<if test="clientCategory != null and clientCategory != ''.toString()">			
-				,client_category = #{clientCategory}
-			</if>
-			<if test="clientName != null and clientName != ''.toString()">			
-				,client_name = #{clientName}
-			</if>
-			<if test="clientTel != null and clientTel != ''.toString()">			
-				,client_tel = #{clientTel}
-			</if>
-			<if test="clientCeo != null and clientCeo != ''.toString()">			
-				,client_ceo = #{clientCeo}
-			</if>
-			<if test="clientEmployee != null and clientEmployee != ''.toString()">			
-				,client_employee = #{clientEmployee}
-			</if>		
-			<if test="clientBusinessNum != null and clientBusinessNum != ''.toString()">			
-				,client_business_num = #{clientBusinessNum}
-			</if>		
-			<if test="clientAddress != null and clientAddress != ''.toString()">			
-				,client_address = #{clientAddress}
-			</if>		
-		</trim>
-		WHERE 
-			client_code = #{clientCode};
-	</update>
+	<update id="modifyClient" parameterType="Client">
+	UPDATE client_info 
+	<trim prefix="SET" prefixOverrides=",">
+		<if test="clientCategory != null and clientCategory != ''.toString()">			
+			,client_category = #{clientCategory}
+		</if>
+		<if test="clientName != null and clientName != ''.toString()">			
+			,client_name = #{clientName}
+		</if>
+		<if test="clientTel != null and clientTel != ''.toString()">			
+			,client_tel = #{clientTel}
+		</if>
+		<if test="clientCeo != null and clientCeo != ''.toString()">			
+			,client_ceo = #{clientCeo}
+		</if>
+		<if test="clientEmployee != null and clientEmployee != ''.toString()">			
+			,client_employee = #{clientEmployee}
+		</if>		
+		<if test="clientBusinessNum != null and clientBusinessNum != ''.toString()">			
+			,client_business_num = #{clientBusinessNum}
+		</if>		
+		<if test="clientAddress != null and clientAddress != ''.toString()">			
+			,client_address = #{clientAddress}
+		</if>		
+	</trim>
+	WHERE 
+		client_code = #{clientCode};
+</update>
 	
-		<select id="getClientInfoByCode" parameterType="String" resultMap="clientResultMap">
+		<select id="getClientInfoByCode" parameterType="String" resultMap="getClientInfo">
 		SELECT 
 			 client_category			
 			,client_name			

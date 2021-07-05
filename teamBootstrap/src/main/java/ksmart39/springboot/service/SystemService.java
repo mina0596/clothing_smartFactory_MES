@@ -24,8 +24,19 @@ public class SystemService {
 		List<HumanResources> humanResources = systemMapper.getHumanResources();
 		return humanResources;
 	}
-	
-
+	//거래처 등록
+	public int addHumanResources (HumanResources humanResources) {
+		int result = systemMapper.addHumanResources(humanResources);
+		return result;
+	}	
+	//회원정보 조회
+	public HumanResources getEmployeeInfoByCode(String employeeCode) {
+		return systemMapper.getEmployeeInfoByCode(employeeCode);
+	}
+	//회원정보 수정
+	public int modifyHumanResources (HumanResources humanResources) {
+		return systemMapper.modifyHumanResources(humanResources);
+	}
 	//============================================================
 	//[한빛] 거래처 전체 조회
 	public List<Client> getClient(){
