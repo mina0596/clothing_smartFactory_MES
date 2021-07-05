@@ -1,6 +1,8 @@
 package ksmart39.springboot.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,28 +44,38 @@ public class SystemController {
 	
 	//===============================================================
 	
-	//[한빛]사원등록-> 사원목록
-	@PostMapping("/addHumanResources")
-	public String addHumanResources(HumanResources humanResources) {
-		log.info("========================================");
-		log.info("화면에서 입력받은 값(회원가입) humanResources: {}", humanResources);
-		log.info("========================================");
+	
 
-		systemService.addHumanResources(humanResources);
+	//수정화면 ->목록
+	@PostMapping("modifyHumanResources")
+	public String modifyHumanResources(HumanResources humanResources) {
+		systemService.modifyHumanResources(humanResources);
 		return "redirect:/humanResourcesList";
 	}
 	
+	//[한빛]사원수정
+	@GetMapping("/modifyHumanResources")
+	public String modifyHumanResources(@RequestParam(name = "employeeCode", required = false) String employeeCode, Model model) {
+		//1. 회원코드로 회원테이블을 조회한 HumanResources객체
+		HumanResources humanResources = systemService.getEmployeeInfoByCode(employeeCode);
+		//2. Model 화면에 전달할 객체 삽입
+		model.addAttribute("title","회원수정폼");
+		model.addAttribute("humanResources",humanResources);
+		return "system/modifyHumanResources";
+	}
+	
+	//[한빛]사원등록-> 사원목록
+	@PostMapping("/addHumanResources")
+	public String addHumanResources(HumanResources humanResources) {
+		systemService.addHumanResources(humanResources);
+		
+		return "redirect:/humanResourcesList";
+	}
 	//[한빛]사원등록
 	@GetMapping("/addHumanResources")
 	public String addHumanResources(Model model) {
-		 model.addAttribute("title", "인사관리");
+		model.addAttribute("title", "인사관리");
 		return"system/addHumanResources";	
-	}
-
-	//[한빛]사원수정
-	@GetMapping("/modifyHumanResources")
-	public String modifyHumanResources() {
-		return "system/modifyHumanResources";
 	}
 	
 	//[한빛]사원목록
@@ -77,21 +89,34 @@ public class SystemController {
 	
 	
 	//==============================================================
-	//[한빛]주문등록 ->목록으로 이동
-	@PostMapping("/addClient")
-	public String addClient() {
+	//수정화면 ->목록
+	@PostMapping("modifyClient")
+	public String modifyClient(Client client) {
+		systemService.modifyClient(client);
 		return "redirect:/clientList";
 	}
 	
-	//[한빛]거래처 수정
+	//[한빛]사원수정
 	@GetMapping("/modifyClient")
-	public String modifyClient() {
-		return"system/modifyClient";
+	public String modifyClient(@RequestParam(name = "clientCode", required = false) String clientCode, Model model) {
+		//1. 회원코드로 회원테이블을 조회한 HumanResources객체
+		Client client = systemService.getClientInfoByCode(clientCode);
+		//2. Model 화면에 전달할 객체 삽입
+		model.addAttribute("title","거래처수정폼");
+		model.addAttribute("client",client);
+		return "system/modifyClient";
+	}
+	
+	//[한빛]주문등록 ->목록으로 이동
+	@PostMapping("/addClient")
+	public String addClient(Client client) {
+		systemService.addClient(client);
+		return "redirect:/clientList";
 	}
 	
 	//[한빛]거래처 조회
 	@GetMapping("/clientList")
-	public String clientList(Model model) {
+	public String getClientList(Model model) {
 		List<Client> client = systemService.getClient();
 		model.addAttribute("title", "거래처관리");
 		model.addAttribute("client", client);
@@ -107,15 +132,45 @@ public class SystemController {
 	
 	
  //==================================================================
+	//[다미]계정과목 수정
+	@PostMapping("/modifyAccountSubject")
+	public String modifyAccountSubject(AccountingCategory accountingCategory) {
+		log.info("===========================================================================");
+		log.info("계정과목 수정화면에서 받아온 값: {}", accountingCategory);
+		log.info("===========================================================================");
+		
+		systemService.modifyMember(accountingCategory);
+		
+		return "redirect:/accountSubjectList";
+	}
+	
+	//[다미]계정과목 수정 화면
+	@GetMapping("/modifyAccountSubject")
+	public String modifyAccountSubject(@RequestParam(name = "categoryCode", required = false)String categoryCode
+									   ,Model model ) {
+		log.info("===========================================================================");
+		log.info("화면에서 받아온 값(계정과목 등록, 계정 과목 명): {}", categoryCode);
+		log.info("===========================================================================");
+		
+		AccountingCategory accCate = systemService.getAccountSubjectByCode(categoryCode);
+
+		log.info("===========================================================================");
+		log.info("아이디로 조회한 계정과목 카테고리: {}", accCate);
+		log.info("===========================================================================");
+		
+		model.addAttribute("accCate", accCate);
+		
+		return "system/modifyAccountSubject";
+	}
+	
 	//[다미]계정과목 등록 후 리스트로 리턴
 	@PostMapping("/addAccountSubject")
-	public String addAccountSubject(@RequestParam(value="account_category_name", required = false )String account_category_name
-									,@RequestParam(value="account_category_content", required = false)String account_category_content) {
+	public String addAccountSubject(AccountingCategory account) {
 		
 		log.info("===========================================================================");
-		log.info("화면에서 받아온 값(계정과목 등록, 계정 과목 명): {}", account_category_name);
-		log.info("화면에서 받아온 값(계정과목 등록, 적요): {}", account_category_content);
+		log.info("화면에서 받아온 값(계정과목 등록, 계정 과목 명): {}", account);
 		log.info("===========================================================================");
+		systemService.addAccountSubject(account);
 		
 		return "redirect:/accountSubjectList";
 	}
@@ -126,18 +181,31 @@ public class SystemController {
 		return "system/addAccountSubject";
 	}
 	
-	//[다미]계정과목 목록
+	//[다미]계정과목 목록&검색
 	@GetMapping("/accountSubjectList")
-	public String getAccountCategoryList(Model model) {
-		List<AccountingCategory> accountingCategoryList = systemService.getAccountingSubjectList();
+	public String getAccountCategoryList(@RequestParam(name="searchKey", required = false) String searchKey
+										,@RequestParam(name="searchValue", required = false)String searchValue
+										,Model model) {
+		
+		log.info("===================================================");
+		log.info("검색 조건 (searchKey):     {}" , searchKey);
+		log.info("검색 조건 (searchValue):     {}" , searchValue);
+		log.info("===================================================");
+	
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("searchKey", searchKey);
+		paramMap.put("searchValue", searchValue);
+		
+		List<AccountingCategory> accountingCategoryList = systemService.getAccountingSubjectList(paramMap);
 		
 		log.info("===================================================");
 		log.info("계정과목 목록 :     {}" , accountingCategoryList);
 		log.info("===================================================");
-
+		
 		model.addAttribute("accountingCategoryList", accountingCategoryList);
 		return "system/accountSubjectList";
 	}
+	
 	
 	//==============================================
 	//[민아]원부자재 목록

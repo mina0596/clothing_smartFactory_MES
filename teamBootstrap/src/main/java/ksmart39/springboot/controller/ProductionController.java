@@ -2,6 +2,7 @@ package ksmart39.springboot.controller;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ksmart39.springboot.domain.ProductionPlan;
@@ -130,6 +132,31 @@ public class ProductionController {
 	
 	
 	//==================================================================
+	
+	//[다미]성별별 양복명에 맞는 소분류 가져오기
+	@RequestMapping(value = "/detailCode", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String, Object>> getDetailCode(@RequestParam(value = "gender", required = false)String gender){
+		List<Map<String, Object>> name = productionService.getDetailCode(gender);
+		log.info("=============================================");
+		log.info("화면에서 받아온 값:            {}", gender);
+		log.info("생산코드 조회 :            {}", name);
+		log.info("=============================================");
+		
+		return name;
+	}
+	
+	//[다미] 성별별 양복명 값 가져오기
+	@RequestMapping(value="/productCode", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String, Object>> addProductionPlan() {
+		List<Map<String, Object>> list = productionService.getProductCode();
+		log.info("=============================================");
+		log.info("생산코드 조회 :            {}", list);
+		log.info("=============================================");
+		return list;
+	}
+	
 	//[다미]생산계획 일별 목록
 	@GetMapping("/productionDailyPlanList")
 	public String productionDailyPlanList() {
