@@ -49,7 +49,6 @@ public class SystemController {
 		log.info("화면에서 입력받은 값(회원가입) humanResources: {}", humanResources);
 		log.info("========================================");
 
-		systemService.addHumanResources(humanResources);
 		return "redirect:/humanResourcesList";
 	}
 	
@@ -77,21 +76,41 @@ public class SystemController {
 	
 	
 	//==============================================================
-	//[한빛]주문등록 ->목록으로 이동
-	@PostMapping("/addClient")
-	public String addClient() {
+	//[한빛]주문수정 ->목록으로 이동
+	@PostMapping("/modifyClient")
+	public String modifyClient(Client client) {
+		log.info("========================================");
+		log.info("화면에서 입력받은 값(수정화면폼) client: {}", client);
+		log.info("========================================");
+
+		systemService.modifyClient(client);
 		return "redirect:/clientList";
 	}
 	
 	//[한빛]거래처 수정
 	@GetMapping("/modifyClient")
-	public String modifyClient() {
+	public String modifyClient(@RequestParam(name = "clientCode", required = false) String clientCode
+											,Model model) {
+		log.info("========================================");
+		log.info("화면에서 입력받은 값(거래처수정폼) clientCode: {}", clientCode);
+		log.info("========================================");
+		//1. 회원코드로 회원테이블을 조회한 Client 객체
+		systemService.getClientInfoByCode(clientCode);
+		//2. Model 화면에 전달할 객체 삽입
+		model.addAttribute("title","거래처수정폼");
 		return"system/modifyClient";
+	}
+	
+	//[한빛]주문등록 ->목록으로 이동
+	@PostMapping("/addClient")
+	public String addClient(Client client) {
+		systemService.addClient(client);
+		return "redirect:/clientList";
 	}
 	
 	//[한빛]거래처 조회
 	@GetMapping("/clientList")
-	public String clientList(Model model) {
+	public String getClientList(Model model) {
 		List<Client> client = systemService.getClient();
 		model.addAttribute("title", "거래처관리");
 		model.addAttribute("client", client);
