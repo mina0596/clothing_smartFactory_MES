@@ -236,7 +236,50 @@
 		<result property="categoryUpdateDate" 	column="account_category_update_date"/>
 	</resultMap>
 	
-	<select id="getAccountingSubjectList" resultMap="AccountingCategoryMap">
+	<insert id="addAccountSubject" parameterType="AccountingCategory">
+		INSERT INTO account_category_list
+		(account_category_code
+		,account_category_name
+		,account_category_content
+		,account_category_reg_date
+		,account_category_update_date)
+	VALUES 
+		(sf_newAccountCategoryCode()
+		,#{categoryName}
+		,#{categoryContent}
+		,NOW()
+		,null);
+	</insert>
+	
+	<select id="getAccountSubjectByCode" parameterType="String" resultMap="AccountingCategoryMap">
+		SELECT 
+			account_category_code
+			,account_category_name
+			,account_category_content
+			,account_category_reg_date
+			,account_category_update_date
+		FROM 
+			account_category_list AS acc
+		WHERE
+			acc.account_category_code = #{categoryCode};	
+	</select>
+	
+	<update id="modifyMember" parameterType="AccountingCategory">
+		UPDATE account_category_list
+		<trim prefix="SET" prefixOverrides=",">
+			<if test="categoryName != null and categoryName != ''.toString()">
+				,account_category_name=#{categoryName}
+			</if>
+			<if test="categoryContent != null and categoryContent != ''.toString()">
+				,account_category_content=#{categoryContent}
+			</if>
+				,account_category_update_date=NOW()
+		</trim>
+		WHERE 
+			account_category_code=#{categoryCode};
+	</update>
+	
+	<select id="getAccountingSubjectList" parameterType="map" resultMap="AccountingCategoryMap" fetchSize="1000">
 		SELECT
 			account_category_code
 			,account_category_content
@@ -244,7 +287,12 @@
 			,account_category_reg_date
 			,account_category_update_date
 		FROM
-			account_category_list;
+			account_category_list
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="searchKey != null and searchKey != ''.toString()">
+				${searchKey} LIKE CONCAT('%', #{searchValue} ,'%');
+			</if>
+		</trim>
 	</select>
 	
 	

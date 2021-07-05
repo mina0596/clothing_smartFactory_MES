@@ -1,9 +1,11 @@
 package ksmart39.springboot.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import ksmart39.springboot.dao.SystemMapper;
 import ksmart39.springboot.domain.AccountingCategory;
 import ksmart39.springboot.domain.Client;
@@ -57,9 +59,27 @@ public class SystemService {
 		return systemMapper.getClientInfoByCode(clientCode);
 	}
 	//============================================================
+	
+	//[다미] 계정과목 수정
+	public int modifyMember(AccountingCategory account) {
+		int result = systemMapper.modifyMember(account);
+		return result;
+	};
+	
+	//[다미] 계정과목 수정 화면
+	public AccountingCategory getAccountSubjectByCode(String categoryCode) {		
+		return systemMapper.getAccountSubjectByCode(categoryCode);
+	};
+	
+	//[다미] 계정과목 추가
+	public int addAccountSubject(AccountingCategory account) {
+		int result = systemMapper.addAccountSubject(account);		
+		return result;
+	}
+	
 	//[다미] 회계과목 조회
-	public List<AccountingCategory> getAccountingSubjectList(){		
-		return systemMapper.getAccountingSubjectList();
+	public List<AccountingCategory> getAccountingSubjectList(Map<String, Object> paramMap){		
+		return systemMapper.getAccountingSubjectList(paramMap);
 		
 	}
 	
