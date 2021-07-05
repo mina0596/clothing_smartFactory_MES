@@ -9,248 +9,151 @@ layout:decorate="@{layout/default_qualityControl}">
 <th:block layout:fragment="customJs">
 
 <script type="text/javascript">
+$(function(){
+	var raws= $('#rawMeterialInspection'); // 공정검사 차트
+	var raws2= $('#rawMeterialInspection2'); // 공정검사 퍼센트
 
-jQuery(document).ready(function() {
-
-
-	//월간검사
-   
-    var barChart1 = [50, 70, 50, 120, 150, 180, 60, 40, 70, 140, 130, 50];//검사건수
-    var barChart2 = [48, 60, 30, 110, 130, 175, 40, 35, 38, 139, 128, 48];//합격건수
-    var barChart3 = [2,10,20,10,20,10,20,5,12,1,2,2];//불량건수
-    var lineChart = [96, 86, 60, 91, 86, 93, 67, 87,82,99,98,96];
-    //주간검사
-    
-     $.jqplot.config.enablePlugins = true;
-  
-      jQuery("#chart").jqplot([barChart1, barChart2,barChart3, lineChart], {
-    	  animate: true, 
-    	  animateReplot: true,
-    	  cursor: {
-
-              show: true,
-              zoom: true,
-              looseZoom: true,
-              showTooltip: true
-			},
-         
-         title:{text:'계약 월별 검사 합격율 ',fontSize:20},  // 챠트  title 및 폰트 사이즈 설정
-
-	  series : [
-        	 
-            {    // barChart1 배열을 막대 그래프로 지정한다
-            	label:'검사건수',
-                renderer : jQuery.jqplot.BarRenderer
-            }
-            , {  label:'합격건수',
-            	// barChart2 배열을 막대 그래프로 지정한다.
-                renderer : jQuery.jqplot.BarRenderer
-            }
-            , {   label:'불합격건수', // barChart3 배열을 막대 그래프로 지정한다.
-                renderer : jQuery.jqplot.BarRenderer
-            },
-            	{label:'합격율'}
-               ]
-        , axes: {
-            xaxis : {
-                  renderer : jQuery.jqplot.CategoryAxisRenderer
-                , ticks : ['1월', '2월', '3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
-            },yaxis: {//y축
-	            	min: 0
-	    		}
-            ,y2axis: {
-                tickOptions: {
-                    formatString: "%'d"
-                },
-                rendererOptions: {
-                    // align the ticks on the y2 axis with the y axis.
-                    alignTicks: true,
-                    forceTickAt0: true
-                }
-            }
-		        }
-    });
- 
-      
-
-
-    
-
-});
-
+	var myChart = new Chart(raws, {
+	    type: 'bar',
+	    data: {
+	        labels: ["1월", "2월", "3월", "4월", "5월", "6월","7월","8월","9월","10월","11월","12월"],
+	        datasets: [{
+	            label: '공정검사요청건수',
+	            data: [50, 60, 70, 60, 70, 60,50, 60, 70, 60, 70, 60],
+	            backgroundColor: [
+	                'rgba(255, 99, 132, 0.2)',
+	             ],
+	            borderColor: [
+	                'rgba(255,99,132,1)',
+	                
+	            ],
+	            borderWidth: 1
+	        },{
+	            label: '공정검사 합격건수',
+	            data: [46, 54, 68, 59, 66, 57,49, 57, 60, 58, 66, 58],
+	            backgroundColor: [
+	            	  'rgba(54, 162, 235, 0.2)'
+	           ],
+	            borderColor: [
+	                'rgba(255,99,132,1)',
+	                'rgba(54, 162, 235, 1)'
+	                
+	            ],
+	            borderWidth: 1
+	        }]
+	    },
+	    options: {
+	        scales: {
+	            yAxes: [{
+	                ticks: {
+	                    beginAtZero:true
+	                }
+	            }]
+	        }
+	    }
+	});
 	
+	
+	var myChart2 = new Chart(raws2, {
+		 type: 'line',
+		 data: {
+		        labels: ["1월", "2월", "3월", "4월", "5월", "6월","7월","8월","9월","10월","11월","12월"],
+		        datasets: [{
+		            label: '공정검사합격율',
+		            data: [98, 85, 89, 98, 89, 87,65, 77, 80,89,89,90],
+		            fill: false,
+		            backgroundColor : [
+		               
+		                "rgb(33, 67, 229)"
+		           ],
+		            borderColor: [
+		                "rgb(33, 67, 229)"
+		            ]
+		        ,tension: 0.1
+		           
+		        }]
+		    }
+		    , options : {
+		        scales : {
+		            yAxes : [{
+		                ticks : { beginAtZero : true,
+		                    min: 0,
+		                	stepSize: 100,
+		                    max: 100,
+		                    labelString: 'percentage'
+		                }
+		            }]
+		        }
+		    }
+		});
+		});
+
+		
 	</script>
 	</th:block>	
 	</th:block>
 <th:block layout:fragment="container">
-	 <div class="row content-panel">
-              <div class="panel-heading">
-                <ul class="nav nav-tabs nav-justified">
-                  <li class="active">
-                    <a data-toggle="tab" href="#overview">합격율월별조회</a>
-                  </li>
-                  <li>
-                    <a data-toggle="tab" href="#contact">합격율주간조회</a>
-                  </li>
-                  <li>
-                    <a data-toggle="tab" href="#edit">합격율 분기별조회 </a>
-                  </li>
-                </ul>
-              </div>
-              <!-- /panel-heading -->
-              <div class="panel-body">
-                <div class="tab-content">
-                  
-                  
-                  <div id="overview" class="tab-pane active">
-               		<div class="panel-body">
-                  
-                  	<div id="chart" style="width:1300px;height:304px;"></div>
-                  	<h4><i class="fa fa-angle-right"></i>2020년 월별 계약건수에따른 검사 합격과불합격 목록</h4>    
-             	 <table class="table table-striped table-advance table-hover"  >
-               	 <thead>
-                  <tr>
-                   <th class="hidden-phone"><i class="fa fa-bookmark"></i>월별</th>
-                    <th class="hidden-phone"><i class="fa fa-bookmark"></i>계약건수</th>
-                    <th><i class=" fa fa-bookmark"></i>검사건수</th>
-                    <th><i class=" fa fa-bookmark"></i>검사합격건수</th>
-                    <th><i class=" fa fa-bookmark"></i>검사불합격건수</th>
-                    <th><i class=" fa fa-bookmark"></i>등록일</th>
-                 </tr>
-                </thead>
-                <tbody >
-                  <tr>
-                 
-                    <td class="hidden-phone">1월</td>
-                    <td class="hidden-phone"> 50 </td>
-                    <td class="hidden-phone"> 50 </td>
-                    <td >48</td>
-                    <td >2</td>
-                    <td >2020-01-30</td>
-                   </tr>
-                  <tr>
-                  
-                    <td class="hidden-phone">2월</td>
-                    <td class="hidden-phone"> 70 </td>
-                    <td class="hidden-phone"> 70 </td>
-                    <td>60</td>
-                    <td>10</td>
-                     <td >2020-02-28</td>
-                   </tr>
-                  <tr>
-                    
-                    <td class="hidden-phone">3월</td>
-                    <td class="hidden-phone"> 50 </td>
-                    <td class="hidden-phone"> 50 </td>
-                    <td>30</td>
-                    <td>20</td>
-                     <td >2020-03-31</td>
-                   </tr>
-                  <tr>
-                    
-                    <td class="hidden-phone">4월</td>
-                    <td class="hidden-phone"> 120 </td>
-                    <td class="hidden-phone"> 120 </td>
-                    <td>110</td>
-                   	<td >10</td>
-                   	 <td >2020-04-30</td>
-                   </tr>
-                  <tr>
-                   
-                    <td class="hidden-phone">5월</td>
-                    <td class="hidden-phone"> 150 </td>
-                    <td class="hidden-phone"> 150 </td>
-                    <td >130</td>
-                    <td >20</td>
-                     <td >2020-05-31</td>
-                   </tr>
-                  <tr>
-                    
-                    <td class="hidden-phone">6월</td>
-                    <td class="hidden-phone"> 185 </td>
-                    <td class="hidden-phone"> 185 </td>
-                    <td >175</td>
-                    <td >10</td>
-                     <td >2020-06-30</td>
-                   </tr>
-                  <tr>
-                    
-                    <td class="hidden-phone">7월</td>
-                    <td class="hidden-phone">60 </td>
-                    <td class="hidden-phone">60 </td>
-                    <td >40</td>
-                    <td >20</td>
-                     <td >2020-07-30</td>
-                   </tr>
-                  <tr>
-                    
-                    <td class="hidden-phone">8월</td>
-                    <td class="hidden-phone">40 </td>
-                    <td class="hidden-phone">40 </td>
-                    <td >35</td>
-                    <td >5</td>
-                     <td >2020-08-30</td>
-                   </tr>
-                  <tr>
-                    
-                    <td class="hidden-phone">9월</td>
-                    <td class="hidden-phone">70 </td>
-                    <td class="hidden-phone">70 </td>
-                    <td >58</td>
-                    <td >12</td>
-                     <td >2020-09-30</td>
-                   </tr>
-                  <tr>
-                    
-                    <td class="hidden-phone">10월</td>
-                    <td class="hidden-phone"> 140 </td>
-                    <td class="hidden-phone"> 140 </td>
-                    <td >139</td>
-                    <td >1</td>
-                     <td >2020-10-30</td>
-                   </tr>
-                  <tr>
-                
-                    <td class="hidden-phone">11월</td>
-                    <td class="hidden-phone"> 130 </td>
-                    <td class="hidden-phone"> 130 </td>
-                    <td >128</td>
-                    <td >2</td>
-                     <td >2020-11-30</td>
-                   </tr>
-                  <tr>
-                    
-                    <td class="hidden-phone">12월</td>
-                    <td class="hidden-phone"> 50 </td>
-                    <td class="hidden-phone"> 50 </td>
-                    <td >48</td>
-                    <td >2</td>
-                     <td >2020-12-30</td>
-                   </tr>
-                  
-                 </tbody>
-              </table>
-                
-	                 </div>
-	                </div>
-  
-                <!-- 두번째 -->
-                  <div id="contact" class="tab-pane">
-                  	
-                   	<div id="chart2" style="width:780px;height:400px;"></div>
-                  
-                  </div>
-            	
+<div class="row mt">
+     <div class="col-md-12">
+       <div class="content">
+       
+          <h4><i class="fa fa-angle-right"></i>검사별 합격조회</h4>
+          <hr>
+         		<form class="form-inline" role="form">
+        
+         <table class="table table-striped table-advance table-hover" >
+         	
+         	<tbody>
+         		<tr>
+         		<td colspan="12" style="padding-right: 1px;">
+         			<div class="form-group col-xs-2"><!-- 년도별 -->
+		               		 <select class="form-control" id="year">
+				   				<option value="">2020년도</option>
+				   				<option value="">2021년도</option>
+				   			 </select>
+		                </div>
+         		<td colspan="12" style="padding-right: 1px;">
+         			<div class="form-group col-xs-2"><!-- 검사명 -->
+		               		 <select class="form-control" id="year">
+				   				<option value="">원자재검사</option>
+				   				<option value="">공정중간검사</option>
+				   				<option value="">완제품검사</option>
+				   			 </select>
+		                </div>
+		                </td>
+		               
+		         		
+		         		<td>
+         				  <button type="submit" class="btn btn-theme">검사합격율 조회하기</button>
+		              	</td>
+		           
+         		</tr>
+         	</tbody>
+         </table>  
+        </form>  
+
+	
+	  <h4><i class="fa fa-angle-right"></i>검사요청건수와 합격건수 </h4>    
+          <div class="form-panel">
                   <!-- 세번째 -->
-                  <div id="edit" class="tab-pane">
+                  <div class="form">
+                  <canvas id="rawMeterialInspection"></canvas>
+                  </div>
+                
+                
+       <h4><i class="fa fa-angle-right"></i>검사별 합격율 </h4>     
+                 <div class="form">
+                  <canvas id="rawMeterialInspection2"></canvas>
+                  </div>
+                
+                 
+                 </div>
+                 </div>
+                 </div>
+                 </div>
                  
           
        	   
-      			</div>
-               </div>
-      		</div>
-      	</div>
-      			
     
 
           
