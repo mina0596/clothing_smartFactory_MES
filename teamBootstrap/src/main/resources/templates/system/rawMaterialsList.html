@@ -115,18 +115,18 @@ layout:decorate="@{layout/default_system}">
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-	                <td><input type="checkbox" class="check"></td>
-	            	<td>1</td>
-                    <td class="hidden-phone">thread01_red</td>
-                    <td id="rawMaterialCate">부자재</td>
-                    <td id="materialCate">실</td>
-                    <td id="materialName">명주실</td>
-                    <td id="colorName">빨간색</td>
-                    <td id="feature"> </td>
-                    <td id="unit">마</td>
+                  <tr th:if="${#lists.size(materialList) > 0}" th:each="l : ${materialList}">
+	                <td></td>
+	            	<td></td>
+                    <td th:text="${l.rawMaterialCode}"></td>
+                    <td th:text="${l.highClass}" id="rawMaterialCate"></td>
+                    <td th:text="${l.medClass}" id="materialCate"></td>
+                    <td th:text="${l.rawMaterialName}" id="materialName"></td>
+                    <td th:text="${l.colorCode}" id="colorName"></td>
+                    <td th:text="${l.feature}" id="feature"> </td>
+                    <td th:text="${l.unit}" id="unit"></td>
                     <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
-                    <td>2021-01-18 16:02</td>
+                    <td th:datetime="rawMaterialRegDate"></td>
                     <td> 
                       <button type="button" class="btn btn-success btn-xs" onclick="location.href='addInWarehousing'" style="padding-right: 5px;"><i class="fa fa-plus-square"></i></button>
                       <button type="button" class="btn btn-danger btn-xs" onclick="location.href='addExWarehousing'"><i class="fa fa-minus-square"></i></button>
@@ -135,73 +135,6 @@ layout:decorate="@{layout/default_system}">
                       <button type="button" class="btn btn-primary btn-xs" id="modifyBtn" ><i class="fa fa-pencil"></i></button>
                     </td>
                   </tr>
-                  
-                  <tr>
-                  	<td><input type="checkbox" class="check"></td>
-	            	<td>2</td>
-                    <td class="hidden-phone">silk01_sandyBrown</td>
-                    <td id="rawMaterialCate">원자재</td>
-                    <td id="materialCate">원단</td>
-                    <td id="materialName">실크</td>
-                    <td id="colorName">모래갈색</td>
-                    <td id="feature">흰색체크</td>
-                    <td id="unit">마</td>
-                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
-                    <td>2021-01-18 16:02</td>
-                    <td> 
-                      <button type="button" class="btn btn-success btn-xs" onclick="location.href='addInWarehousing'" style="padding-right: 5px;"><i class="fa fa-plus-square"></i></button>
-                      <button type="button" class="btn btn-danger btn-xs" onclick="location.href='addExWarehousing'"><i class="fa fa-minus-square"></i></button>
-                    </td>
-                    <td> 
-                      <button type="button" class="btn btn-primary btn-xs" id="modifyBtn" ><i class="fa fa-pencil"></i></button>
-                    </td>
-                  </tr>
-                  
-                  <tr>
-                  	<td><input type="checkbox" class="check"></td>
-	            	<td>3</td>
-                    <td class="hidden-phone">button01_royalBlue</td>
-                    <td id="rawMaterialCate">부자재</td>
-                    <td id="materialCate">단추</td>
-                    <td id="materialName">둥근단추</td>
-                    <td id="colorName">파란색</td>
-                    <td id="feature">4개구멍</td>
-                    <td id="unit">개</td>
-                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
-                    <td>2021-01-18 16:02</td>
-                    <td> 
-                      <button type="button" class="btn btn-success btn-xs" onclick="location.href='addInWarehousing'" style="padding-right: 5px;"><i class="fa fa-plus-square"></i></button>
-                      <button type="button" class="btn btn-danger btn-xs" onclick="location.href='addExWarehousing'"><i class="fa fa-minus-square"></i></button>
-                    </td>
-                    <td> 
-                      <button type="button" class="btn btn-primary btn-xs" id="modifyBtn"><i class="fa fa-pencil"></i></button>
-                    </td>
-                  </tr>
-                  
-                  
-                 <tr>
-                  	<td><input type="checkbox" class="check"></td>
-	            	<td>4</td>
-                    <td class="hidden-phone">thread02_chromeYellow</td>
-                    <td id="rawMaterialCate">부자재</td>
-                    <td id="materialCate">실</td>
-                    <td id="materialName">명주실</td>
-                    <td id="colorName">개나리색</td>
-                    <td id="feature"> </td>
-                    <td id="unit">kg</td>
-                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
-                    <td>2021-01-18 16:02</td>
-                    <td> 
-                      <button type="button" class="btn btn-success btn-xs" onclick="location.href='addInWarehousing'" style="padding-right: 5px;"><i class="fa fa-plus-square"></i></button>
-                      <button type="button" class="btn btn-danger btn-xs" onclick="location.href='addExWarehousing'"><i class="fa fa-minus-square"></i></button>
-                    </td>
-                    <td> 
-                      <button type="button" class="btn btn-primary btn-xs" id="modifyBtn"><i class="fa fa-pencil"></i></button>
-                    </td>
-                 </tr>
-                  
-                  
-                 
                 </tbody>
               </table>
             
