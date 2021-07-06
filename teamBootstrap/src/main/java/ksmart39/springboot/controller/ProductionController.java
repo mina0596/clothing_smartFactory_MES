@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ksmart39.springboot.domain.ProductionPlan;
+import ksmart39.springboot.service.ProductionPlanService;
 import ksmart39.springboot.service.ProductionService;
 
 @Controller
@@ -23,10 +24,10 @@ public class ProductionController {
 	
 	private static final Logger log = LoggerFactory.getLogger(ProductionController.class);
 	
-	private final ProductionService productionService;
+	private final ProductionPlanService productionPlanService;
 	
-	public ProductionController(ProductionService productionService) {
-		this.productionService = productionService;
+	public ProductionController(ProductionPlanService productionPlanService) {
+		this.productionPlanService = productionPlanService;
 	}
 	
 	//[민아+한빛]의뢰품목별 상세 생산 공정 현황 등록
@@ -137,7 +138,7 @@ public class ProductionController {
 	@RequestMapping(value = "/detailCode", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Map<String, Object>> getDetailCode(@RequestParam(value = "gender", required = false)String gender){
-		List<Map<String, Object>> name = productionService.getDetailCode(gender);
+		List<Map<String, Object>> name = productionPlanService.getDetailCode(gender);
 		log.info("=============================================");
 		log.info("화면에서 받아온 값:            {}", gender);
 		log.info("생산코드 조회 :            {}", name);
@@ -150,7 +151,7 @@ public class ProductionController {
 	@RequestMapping(value="/productCode", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Map<String, Object>> addProductionPlan() {
-		List<Map<String, Object>> list = productionService.getProductCode();
+		List<Map<String, Object>> list = productionPlanService.getProductCode();
 		log.info("=============================================");
 		log.info("생산코드 조회 :            {}", list);
 		log.info("=============================================");
@@ -183,7 +184,7 @@ public class ProductionController {
 	@ResponseBody
 	@RequestMapping(value="/productionMonthlyPlanList", method = RequestMethod.POST)
 	public List<ProductionPlan> getProductionMonthlyPlanList(){
-		return productionService.getProductionMonthlyPlanList();
+		return productionPlanService.getProductionMonthlyPlanList();
 	}
 
 	
