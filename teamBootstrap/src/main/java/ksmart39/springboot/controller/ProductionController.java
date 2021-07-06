@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -134,6 +135,16 @@ public class ProductionController {
 	
 	//==================================================================
 	
+	//[다미]생산계획 등록
+	@PostMapping("/addProductionPlan")
+	public String productioncontrolAdd(ProductionPlan productionPlan) {
+		log.info("=============================================");
+		log.info("화면에서 받아온 값:            {}", productionPlan);
+		log.info("=============================================");
+		
+		return "redirect:/productionPlanList";
+	}
+	
 	//[다미]성별별 양복명에 맞는 소분류 가져오기
 	@RequestMapping(value = "/detailCode", method = RequestMethod.GET)
 	@ResponseBody
@@ -150,7 +161,7 @@ public class ProductionController {
 	//[다미] 성별별 양복명 값 가져오기
 	@RequestMapping(value="/productCode", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Map<String, Object>> addProductionPlan() {
+	public List<Map<String, Object>> getProductionCode() {
 		List<Map<String, Object>> list = productionPlanService.getProductCode();
 		log.info("=============================================");
 		log.info("생산코드 조회 :            {}", list);

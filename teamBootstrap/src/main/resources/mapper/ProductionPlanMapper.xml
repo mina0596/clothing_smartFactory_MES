@@ -2,6 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ksmart39.springboot.dao.ProductionPlanMapper">
 
+<resultMap type="ProductionPlan" id="getProductionPlan">
+	<result property="productionPlanCode" column="production_plan_code"/>
+	<result property="productCode" column="product_code"/>
+	<result property="chargeEmployeeCode" column="charge_employee_code"/>
+	<result property="productionPlanQuantity" column="production_plan_quantity"/>
+	<result property="productionPlanQantityUnit" column="production_plan_qantity_unit"/>
+	<result property="expectedProductionStartDate" column="expected_production_start_date"/>
+	<result property="expectedProductionEndDate" column="expected_production_end_date"/>
+	<result property="productionPlanPeriod" column="production_plan_period"/>
+	<result property="productionPlanNote" column="production_plan_note"/>
+	<result property="productionPlanRegDate" column="production_plan_reg_date"/>
+	<result property="productionPlanUpdateDate" column="production_plan_update_date"/>
+</resultMap>
 
 <select id="getProductionMonthlyPlanList" resultType="ProductionPlan">
 		SELECT 
@@ -22,6 +35,10 @@
 			production_plan;
 </select>
 
+	<insert id="addProductionPlan" parameterType="ProductionPlan">
+		
+	</insert>
+	
 	<select id="getDetailCode" parameterType="String" resultType="Map">
 		SELECT 
 		   detailed_categorized_name
