@@ -39,6 +39,7 @@ public class SystemService {
 	public int modifyHumanResources (HumanResources humanResources) {
 		return systemMapper.modifyHumanResources(humanResources);
 	}
+	//회원정보 삭제
 	//============================================================
 	//[한빛] 거래처 전체 조회
 	public List<Client> getClient(){

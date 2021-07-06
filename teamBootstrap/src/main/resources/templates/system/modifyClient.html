@@ -19,12 +19,13 @@ layout:decorate="@{layout/default_system}">
                   
                   
                 <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">수/발주 구분</label>
+                  <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">구분</label>
                   <div class="col-sm-2">
                       <select name = "clientCategory" class="form-control">
 						<option>::선택::</option>
 						<option value = "수주" th:selected="${client.clientCategory == '수주'}">수주</option>
 						<option value = "발주" th:selected="${client.clientCategory == '발주'}">발주</option>
+						<option value = "운송" th:selected="${client.clientCategory == '운송'}">운송</option>
 		               </select>
                   </div>
                 </div>
@@ -40,35 +41,35 @@ layout:decorate="@{layout/default_system}">
                   <div class="form-group ">
                     <label class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">전화번호</font></font></label>
                     <div class="col-lg-6">
-                      <input class=" form-control"  name="clientTel"  th:value="client.clientTel" type="text">
+                      <input class=" form-control"  name="clientTel"  th:value="${client.clientTel}" type="text">
                     </div>
                   </div>
                   
                   <div class="form-group ">
                     <label class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">대표자</font></font></label>
                     <div class="col-lg-6">
-                      <input class="form-control " name="clientCeo" th:value ="clientCeo" type="text">
+                      <input class="form-control " name="clientCeo" th:value ="${client.clientCeo}" type="text">
                     </div>
                   </div>
                   
                   <div class="form-group ">
                     <label class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">담당자</font></font></label>
                     <div class="col-lg-6">
-                      <input class="form-control " name="clientEmployee" th:value="client.clientEmployee" type="text">
+                      <input class="form-control " name="clientEmployee" th:value="${client.clientEmployee}" type="text">
                     </div>
                   </div>
                   
                   <div class="form-group ">
                     <label class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">사업자번호</font></font></label>
                     <div class="col-lg-6">
-                      <input class="form-control " th:value="client.clientBusinessNum" name="clientBusinessNum" type="number">
+                      <input class="form-control " th:value="client.clientBusinessNum" name="${client.clientBusinessNum}" type="number">
                     </div>
                   </div>
                   
                   <div class="form-group ">
                     <label class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">주소</font></font></label>
                     <div class="col-lg-6">
-                      <input class="form-control " th:value ="client.clientAddress" name="clientAddress" type="text">
+                      <input class="form-control " th:value ="${client.clientAddress}" name="clientAddress" type="text">
                     </div>
                   </div>
                   
