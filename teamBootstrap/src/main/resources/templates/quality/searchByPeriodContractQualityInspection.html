@@ -54,14 +54,16 @@ $(function(){
 	});
 	
 	
+	
 	var myChart2 = new Chart(raws2, {
+		
 		 type: 'line',
 		 data: {
 		        labels: ["1월", "2월", "3월", "4월", "5월", "6월","7월","8월","9월","10월","11월","12월"],
 		        datasets: [{
 		            label: '공정검사합격율',
 		            data: [98, 85, 89, 98, 89, 87,65, 77, 80,89,89,90],
-		            fill: false,
+		           
 		            backgroundColor : [
 		               
 		                "rgb(33, 67, 229)"
@@ -73,14 +75,12 @@ $(function(){
 		           
 		        }]
 		    }
-		    , options : {
-		        scales : {
-		            yAxes : [{
-		                ticks : { beginAtZero : true,
-		                    min: 0,
-		                	stepSize: 100,
-		                    max: 100,
-		                    labelString: 'percentage'
+		    ,
+		    options: {
+		        scales: {
+		            yAxes: [{
+		                ticks: {
+		                    beginAtZero:false
 		                }
 		            }]
 		        }

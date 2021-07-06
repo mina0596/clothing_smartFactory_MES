@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org"
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
 layout:decorate="@{layout/default_production}">
-  <link rel="stylesheet" type="text/css" href="lib/bootstrap-datetimepicker/datertimepicker.css" />
 <th:block layout:fragment="pageTitle">
 	   <div class="border-head"> 
 	    <h3>생산계획 등록</h3>
@@ -27,48 +26,36 @@ layout:decorate="@{layout/default_production}">
                   <label class="col-sm-2 col-sm-2 control-label">품목소분류</label>
                   <div class="col-sm-4">
                       <select id="detailCate" class="form-control">
-						<option>::선택::</option>
+						<option value="">::선택::</option>
 		               </select>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">수량</label>
                   <div class="col-sm-2">
-                    <input type="number" class="form-control">
+                    <input id="amount" type="number" class="form-control">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">단위</label>
                   <div class="col-sm-2">
-                      <select class="form-control">
-						<option>::선택::</option>
-						<option>벌</option>
+                      <select id="unit" class="form-control">
+						<option value="">::선택::</option>
+						<option value="벌">벌</option>
 		               </select>
                   </div>
                 </div>
+					
 					<div class="form-group">
-				          <label class="col-sm-2 col-sm-2 control-label">작업시작 예정일</label>
-				          <div class="col-md-4">
-				            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
-				              <input type="text" class="form-control" readonly="readonly" size="16">
-				              <div class="input-group-btn">
-				                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
-				                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
-				              </div>
-				            </div>
+					          <label class="col-sm-2 col-sm-2 control-label">작업시작 예정일</label>
+				          <div class="col-md-2">
+							<input id="startDate" type="date" class="form-control">
 				          </div>
 				        </div>
 					<div class="form-group">
 					          <label class="col-sm-2 col-sm-2 control-label">작업마감 예정일</label>
-				          <div class="col-md-4">
-				            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
- 				              <input id="endDate" type="text" class="form-control" readonly="readonly" size="16">
- 				              <input id="test" type="datetime-local">
-				              <div class="input-group-btn">
- 				                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
- 				                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
-				              </div>
-				            </div>
+				          <div class="col-md-2">
+							<input id="endDate" type="date" class="form-control">
 				          </div>
 				        </div>
 					<div class="form-group">
@@ -81,7 +68,7 @@ layout:decorate="@{layout/default_production}">
 					<div class="form-group">
 						<label class="col-lg-2 col-sm-2 control-label">담당자 사원 코드</label>
 						 <div class="col-lg-10">
-						     <p class="form-control-static">W01</p>
+						     <p id="employeeId" class="form-control-static">W01</p>
 						 </div>
 					</div>
            
@@ -97,8 +84,8 @@ layout:decorate="@{layout/default_production}">
                   
                   <div class="form-group text-right">
 			          <div class="col-lg-offset-2 col-lg-10">
-			            <button class="btn btn-theme" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">등록</font></font></button>
-			            <button class="btn btn-theme04" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소</font></font></button>
+			            <button id="submitBtn" class="btn btn-theme" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">등록</font></font></button>
+			            <a th:href="@{/productionPlanList}" class="btn btn-theme04"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소</font></font></a>
 			          </div>
 			        </div>
 			      </form>
@@ -106,12 +93,6 @@ layout:decorate="@{layout/default_production}">
                 </div>
 	
 
-
-   <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-daterangepicker/daterangepicker.js}"></script>
-  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js}"></script>
-  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-daterangepicker/moment.min.js}"></script>
-  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-timepicker/js/bootstrap-timepicker.js}"></script>
-  <script type="text/javascript" th:src="@{Dashio/lib/advanced-form-components.js}"></script>	
 
 </th:block>
 <th:block layout:fragment="customJs">
@@ -156,7 +137,11 @@ layout:decorate="@{layout/default_production}">
 					if(data != undefined && data != '' && data.length > 0){
 						var html = '';
 						for(var i = 0; i<data.length; i++){
-							html += "<option>"+data[i].detailed_categorized_name+"</option>";					
+							html += "<option value= '";
+							html += data[i].product_code;
+							html += "'>";
+							html += data[i].detailed_categorized_name;
+							html += "</option>";					
 						}
 						detailCate.append(html);
 					}
@@ -167,7 +152,16 @@ layout:decorate="@{layout/default_production}">
 				});									
 			});
 			
+			var submitBtn = $('#submitBtn');
+			var employeeId = $('#employeeId');
+			var endDate = $('#endDate');
+			var startDate = $('#startDate');
+			var unit = $('#unit');
+			var amount = $('#amount');
+			var detailCate = $('#detailCate');
+			var genderCate = $('#genderCate');
 			
+			if()
 			
 		});
 		
