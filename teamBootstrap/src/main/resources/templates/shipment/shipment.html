@@ -11,11 +11,252 @@ layout:decorate="@{layout/default_shipment}">
 
 
 <th:block layout:fragment="container">
-	출하관리
-	<br><br><br><br><br><br><br><br><br><br><br><br>
-	<br><br><br><br><br><br><br><br><br><br><br><br>
-	<br><br><br><br><br><br><br><br><br><br><br><br>
-	<br><br><br><br><br><br><br><br><br><br><br><br>
+
+	<h4><i class="fa fa-angle-right"></i>송장목록</h4>  
+              <hr>  
+              <table id="shipmentInvoicelist" class="table table-striped table-advance table-hover" >
+                <thead>
+                  <tr>
+                    <th>
+                    	<input type="checkbox" class="check" id="checkAll">
+                    </th>
+                    <th class="hidden-phone"><i class="fa fa-bookmark"></i>순번</th>
+                    <th class="hidden-phone"><i class="fa fa-bookmark"></i>송장번호</th>
+                    <th><i class="fa fa-bookmark"></i>출하그룹코드</th>
+                    <th><i class=" fa fa-bookmark"></i>의뢰코드</th>
+                    <th><i class=" fa fa-bookmark"></i>납품처주소</th>
+                    <th><i class=" fa fa-bookmark"></i>택배사</th>
+                    <th><i class=" fa fa-bookmark"></i>송장등록일시</th>
+                    <th><i class=" fa fa-bookmark"></i>수정</th>
+                  </tr>
+                </thead>
+               
+               
+               
+                <tbody>
+                <!--db에서 데이터 넣어야하는 부분 -->
+                  <tr>
+                  <td class="hidden-phone">
+                      <input type="checkbox" class="check">
+                    </td>
+                    <td class="hidden-phone">1</td>
+                    <td class="hidden-phone">
+                    <a th:href="@{#}">801265471254</a></td>
+                    <td class="hidden-phone">출하그룹코드_1</td>
+                    <td>req01</td>
+                    <td>전주시 덕진구 금암동</td>
+                    <td>CJ대한통운</td>
+                    <td>2021-05-12 15:15:00</td>
+                  	<td>  
+                  		<button type="button"  class="btn btn-primary btn-xs" onclick="location.href='/modifyShipmentInvoice'">
+                  			<i class="fa fa-pencil"></i>
+                  				수정
+                  		</button>
+                  	</td>
+                  </tr>
+                  <tr>
+                   <td class="hidden-phone">
+                      <input type="checkbox" class="check">
+                    </td>
+                    <td class="hidden-phone">2</td>
+                    <td class="hidden-phone">
+                    <a th:href="@{#}">812414526578</a></td>
+                    <td class="hidden-phone">출하그룹코드_2</td>
+                    <td>req02</td>
+                    <td>전주시 덕진구 여의동</td>
+                    <td>CJ대한통운</td>
+                    <td>2021-05-13 15:15:00</td>
+                  	<td>  
+                  		<button class="btn btn-primary btn-xs" type="button" onclick="location.href='/modifyShipmentInvoice'">
+                  			<i class="fa fa-pencil"></i>
+                  				수정
+                  		</button>
+                  	</td>
+                  </tr>
+                  <tr>
+                   <td class="hidden-phone">
+                      <input type="checkbox" class="check">
+                    </td>
+                    <td class="hidden-phone">3</td>
+                    <td class="hidden-phone">
+                    <a th:href="@{#}">812414526515</a></td>
+                    <td class="hidden-phone">출하그룹코드_3</td>
+                    <td>req03</td>
+                    <td>김제시 신풍동</td>
+                    <td>CJ대한통운</td>
+                    <td>2021-05-13 15:15:00</td>
+                  	<td>  
+                  		<button type="button"  class="btn btn-primary btn-xs" onclick="location.href='/modifyShipmentInvoice'">
+                  			<i class="fa fa-pencil"></i>
+                  				수정
+                  		</button>
+                  	</td>
+                  </tr>
+                  <tr>
+                   <td class="hidden-phone">
+                      <input type="checkbox" class="check">
+                    </td>
+                    <td class="hidden-phone">4</td>
+                    <td class="hidden-phone">
+                    <a th:href="@{#}">812414526517</a></td>
+                    <td class="hidden-phone">출하그룹코드_4</td>
+                    <td>req04</td>
+                    <td>김포시 장기동</td>
+                    <td>CJ대한통운</td>
+                    <td>2021-05-13 15:15:00</td>
+                  	<td>  
+                  		<button type="button"  class="btn btn-primary btn-xs" onclick="location.href='/modifyShipmentInvoice'">
+                  			<i class="fa fa-pencil"></i>
+                  				수정
+                  		</button>
+                  	</td>
+                  </tr>
+                  
+                 <!-- ----------- -->
+           		 </tbody>
+              </table>
+	<h4><i class="fa fa-truck"></i> 출고 현황 목록</h4>
+			          <hr>
+                
+	        
+              <table class="table table-striped table-advance table-hover" id="list">
+                <thead>
+                  <tr>
+                  	<th><i class="fa fa-check-circle-o"></i> 선택</th>
+		            <th><i class="fa fa-bullhorn"></i> 번호</th>
+                    <th><i class="fa fa-bullhorn"></i>출고 번호</th>
+                    <th><i class="fa fa-bookmark"></i>계약번호</th>
+                    <th><i class="fa fa-bookmark"></i>품목별 의뢰 코드</th>
+                    <th class="hidden-phone"><i class="fa fa-bookmark"></i>품명</th>
+                    <th><i class=" fa fa-bookmark"></i>거래처명</th>
+                    <th><i class=" fa fa-bookmark"></i>출고예정일</th>
+                    <th><i class=" fa fa-bookmark"></i>출고일</th>
+                    <th><i class=" fa fa-bookmark"></i>출고 현황</th>
+                    <th><i class=" fa fa-pencil"></i>수정</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                  	<td><input type="checkbox" class="check"></td>
+		            <td>1</td>
+                    <td class="hidden-phone">shipment_01</td>
+                    <td>1234</td>
+                    <td>req02_MS_pants</td>
+                    <td class="hidden-phone">남성 정장 바지</td>
+                    <td>
+                      <!-- 거래처명을 누르면 거래처 정보를 보여주는 창으로 이동  -->
+                      <a th:href="@{/supplierList}">나이키 의류</a>
+                    </td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>2021-01-18 16:02</td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>2021-01-18 16:30</td>
+                    <td><span class="label label-info label-mini">출고완료</span></td>
+                    <td> 
+                      
+                      <button type="button" class="btn btn-primary btn-xs" id="modifyBtn" onclick="location.href='modifyShipment'"><i class="fa fa-pencil"></i></button>
+                      
+                    </td>
+                  </tr>
+                  
+                  <tr>
+					<td><input type="checkbox" class="check"></td>
+		            <td>2</td>
+                    <td class="hidden-phone">shipment_02</td>
+                    <td>5468 </td>
+                    <td>req02_MS_vest </td>
+                    <td class="hidden-phone">남성 정장 조끼</td>
+                    <td>
+                      <!-- 거래처명을 누르면 거래처 정보를 보여주는 창으로 이동  -->
+                      <a th:href="@{/supplierList}">파크랜드</a>
+                    </td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>2021-01-18 16:02</td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>2021-01-18 16:30</td>
+                    <td><span class="label label-warning label-mini">출고준비중</span></td>
+                    <td> 
+                      
+                      <button type="button" class="btn btn-primary btn-xs" id="modifyBtn" onclick="location.href='modifyShipment'"><i class="fa fa-pencil"></i></button>
+                      
+                    </td>
+                  </tr>
+                  
+                  <tr>
+                  	<td><input type="checkbox" class="check"></td>
+		            <td>3</td>
+                    <td class="hidden-phone">shipment_03</td>
+                    <td>5489</td>
+                    <td>req02_MS_pants</td>
+                    <td class="hidden-phone">남성 정장 바지</td>
+                    <td>
+                      <!-- 거래처명을 누르면 거래처 정보를 보여주는 창으로 이동  -->
+                      <a th:href="@{/supplierList}">Dashio 정장</a>
+                    </td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>2021-01-18 16:02</td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>2021-01-18 16:30</td>
+                    <td><span class="label label-warning label-mini">출고준비중</span></td>
+                    <td> 
+                      
+                      <button type="button" class="btn btn-primary btn-xs" id="modifyBtn" onclick="location.href='modifyShipment'"><i class="fa fa-pencil"></i></button>
+                      
+                    </td>
+                  </tr>
+                  
+                  
+                  <tr>
+                  	<td><input type="checkbox" class="check"></td>
+		            <td>4</td>
+                    <td class="hidden-phone">shipment_04</td>
+                    <td>2548</td>
+                    <td>req03_WS_jacket</td>
+                    <td class="hidden-phone">숙녀 정장 자켓</td>
+                    <td>
+                      <!-- 거래처명을 누르면 거래처 정보를 보여주는 창으로 이동  -->
+                      <a th:href="@{/supplierList}">젠틀맨 정장</a>
+                    </td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>2021-01-18 16:02</td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>2021-01-18 16:30</td>
+                    <td><span class="label label-info label-mini">출고완료</span></td>
+                    <td> 
+                      
+                      <button type="button" class="btn btn-primary btn-xs" id="modifyBtn" onclick="location.href='modifyShipment'"><i class="fa fa-pencil"></i></button>
+                      
+                    </td>
+                  </tr>
+                 
+                 
+                 <tr>
+                 	<td><input type="checkbox" class="check"></td>
+		            <td>5</td>
+                    <td class="hidden-phone">shipment_05</td>
+                    <td>9687</td>
+                    <td>req03_WS_skirt</td>
+                    <td class="hidden-phone">숙녀 정장 치마</td>
+                    <td>
+                      <!-- 거래처명을 누르면 거래처 정보를 보여주는 창으로 이동  -->
+                      <a th:href="@{/supplierList}">맞춤정장스트</a>
+                    </td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>2021-01-18 16:02</td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>2021-01-18 16:30</td>
+                    <td><span class="label label-info label-mini">출고완료</span></td>
+                    <td> 
+                      
+                      <button type="button" class="btn btn-primary btn-xs" id="modifyBtn" onclick="location.href='modifyShipment'"><i class="fa fa-pencil"></i></button>
+                      
+                    </td>
+                  </tr>
+                 
+                 
+                </tbody>
+              </table>
+       	
 </th:block>
 
 </html>
