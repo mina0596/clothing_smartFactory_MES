@@ -77,7 +77,8 @@
 
 	<select id="getEmployeeInfoByCode" parameterType="String" resultMap="getHumanResourcesInfo">
 	SELECT 
-		 employee_id			
+		 employee_code
+		,employee_id			
 		,employee_pw			
 		,employee_name			
 		,employee_tel		
@@ -86,9 +87,9 @@
 		,employee_department		
 		,employee_position		
 	FROM 
-		employee_info AS e
+		employee_info
 	WHERE 
-		e.employee_code = #{employeeCode}
+		employee_code = #{employeeCode}
 </select>
 <update id="modifyHumanResources" parameterType="HumanResources">
 	UPDATE employee_info 
@@ -138,7 +139,7 @@
 		<result  property="clientInfoRegDate" 				column="client_info_reg_date"/>
 		<result  property="clientInfoUpdateDate" 		column="client_info_update_date"/>
 	</resultMap>
-		 
+	<!-- 불러오기	 --> 
 	<select id="getClient" resultMap="getClientInfo"  resultType="Client" fetchSize="1000">
 		SELECT
 			c.client_code
@@ -155,7 +156,7 @@
 			client_info as c;
 	</select>
 			
-			
+	<!-- 추가	 -->	
 	<insert id="addClient" parameterType="Client">
 		INSERT INTO client_info
 		( client_code
@@ -181,6 +182,7 @@
 		 ,CURDATE());
 	</insert>
 	
+	<!-- 수정 -->
 	<update id="modifyClient" parameterType="Client">
 	UPDATE client_info 
 	<trim prefix="SET" prefixOverrides=",">
@@ -210,9 +212,11 @@
 		client_code = #{clientCode};
 </update>
 	
+	<!-- 수정화면 뿌려주기 -->
 		<select id="getClientInfoByCode" parameterType="String" resultMap="getClientInfo">
 		SELECT 
-			 client_category			
+			 client_code
+			,client_category			
 			,client_name			
 			,client_tel			
 			,client_ceo		
@@ -222,9 +226,9 @@
 		FROM 
 			client_info AS c
 		WHERE 
-			c.client_code = #{clientCode}
+			c.client_code = #{clientCode};
 	</select>
-	
+
 			
 
 <!-- =========================================================== -->

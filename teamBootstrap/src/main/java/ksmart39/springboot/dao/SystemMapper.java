@@ -27,13 +27,12 @@ public interface SystemMapper {
 	//회원전체조회(levelName포함)
 	public List<HumanResources> getHumanResources();
 	//회원가입
-	public int addHumanResources(HumanResources humanResources);
-	
+	public int addHumanResources(HumanResources humanResources);	
 	//회원정보 조회
-	public HumanResources getEmployeeInfoByCode(String employeeCode);
-	
+	public HumanResources getEmployeeInfoByCode(String employeeCode);	
 	//회원정보 수정
 	public int modifyHumanResources(HumanResources humanResources);
+	//회원정보 삭제
 	//====================================================
 	//[한빛] 거래처 전체조회
 	public List<Client> getClient();
