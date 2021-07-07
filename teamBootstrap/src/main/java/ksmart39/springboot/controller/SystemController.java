@@ -18,6 +18,7 @@ import ksmart39.springboot.domain.AccountingCategory;
 import ksmart39.springboot.domain.Client;
 import ksmart39.springboot.domain.HumanResources;
 import ksmart39.springboot.domain.QualityInspection;
+import ksmart39.springboot.domain.RawMaterials;
 import ksmart39.springboot.service.SystemService;
 
 @Controller
@@ -208,11 +209,14 @@ public class SystemController {
 	
 	
 	//==============================================
-	//[민아]원부자재 목록
-	@GetMapping("/rawMaterialsList")
-	public String getRawMeterialsList() {
-		return "system/rawMaterialsList";
-	}
+	
+	//[민아]원부자재 리스트 조회
+		@GetMapping("/rawMaterialsList")
+		public String getRawMeterialsList(Model model) {
+			List<RawMaterials> materialList = systemService.getMaterialsList();
+			model.addAttribute("materialList", materialList);
+			return "system/rawMaterialsList";
+		}
 	
 	//[민아]원부자재 등록화면
 	@GetMapping("/addRawMaterials")
