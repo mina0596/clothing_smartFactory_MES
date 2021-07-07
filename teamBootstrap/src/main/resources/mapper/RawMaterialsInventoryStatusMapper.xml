@@ -11,20 +11,33 @@
 		<result property="transactionDate" 			column="raw_material_transaction_date"/>
 		<result property="transactionRegDate" 		column="raw_material_transaction_reg_date"/>
 		<result property="transactionUpdateDate" 	column="raw_material_transaction_update_date"/>
+		<association property="materialsInfo" javaType="RawMaterials">
+			<id property="rawMaterialCode" column="raw_material_code"/>
+			<result property="rawMaterialName" column="raw_material_name"/>
+			<result property="colorCode" column="raw_material_color_code"/>
+			<result property="unit" column="raw_material_unit"/>
+		</association>
 	</resultMap>
 	
 	<select id="getMaterialsTransactionList" resultMap="materialsInventoryResultMap">
 		SELECT 
-			raw_material_code, 
-			raw_material_order_code, 
-			charge_employee_code, 
-			transaction_category, 
-			raw_material_transaction_amount, 
-			raw_material_transaction_date, 
-			raw_material_transaction_reg_date, 
-			raw_material_transaction_update_date
+			rmit.raw_material_code, 
+			rmit.raw_material_order_code, 
+			rmit.charge_employee_code, 
+			rmit.transaction_category, 
+			rmit.raw_material_transaction_amount, 
+			rmit.raw_material_transaction_date, 
+			rmit.raw_material_transaction_reg_date, 
+			rmit.raw_material_transaction_update_date,
+			info.raw_material_name,
+			info.raw_material_color_code,
+			info.raw_material_unit
 		FROM 
-			raw_material_inventory_transaction;
+			raw_material_inventory_transaction AS rmit
+			INNER join
+			raw_material_info AS info
+		ON
+			rmit.raw_material_code = info.raw_material_code;
 	
 	</select>
 	

@@ -10,7 +10,16 @@ public class RawMaterialsInventory {
 	private String transactionRegDate;
 	private String transactionUpdateDate;
 	
+	private RawMaterials materialsInfo;
 	
+	
+	
+	public RawMaterials getMaterialsInfo() {
+		return materialsInfo;
+	}
+	public void setMaterialsInfo(RawMaterials materialsInfo) {
+		this.materialsInfo = materialsInfo;
+	}
 	public String getMaterialCode() {
 		return materialCode;
 	}
@@ -65,8 +74,9 @@ public class RawMaterialsInventory {
 				+ ", chargeEmployeeCode=" + chargeEmployeeCode + ", transactionCate=" + transactionCate
 				+ ", transactionAmount=" + transactionAmount + ", transactionDate=" + transactionDate
 				+ ", transactionRegDate=" + transactionRegDate + ", transactionUpdateDate=" + transactionUpdateDate
-				+ "]";
+				+ ", materialsInfo=" + materialsInfo + "]";
 	}
+	
 	
 	
 }

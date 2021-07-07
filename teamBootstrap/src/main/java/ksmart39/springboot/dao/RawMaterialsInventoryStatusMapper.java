@@ -11,5 +11,5 @@ public interface RawMaterialsInventoryStatusMapper {
 	
 	
 	//[민아]자재 입출고 현황
-	public List<RawMaterialsInventory> getRawMaterialsInventory();
+	public List<RawMaterialsInventory> getMaterialsTransactionList();
 }

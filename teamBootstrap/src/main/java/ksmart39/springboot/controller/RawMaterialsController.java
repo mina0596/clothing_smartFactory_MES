@@ -48,6 +48,7 @@ public class RawMaterialsController {
 		List<RawMaterialsInventory> inventoryList = materialsInventoryStatusService.getRawMaterialsInventory();
 		
 		model.addAttribute("inventoryList", inventoryList);
+		log.info("inventoryList -{}", inventoryList);
 		
 		return "rawMaterials/warehousingList";
 	}

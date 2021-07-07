@@ -20,7 +20,7 @@ public class RawMaterialsInventoryStatusService {
 	
 	//[민아]자재 입출고 현황
 	public List<RawMaterialsInventory> getRawMaterialsInventory(){
-		List<RawMaterialsInventory> materialsInventoryList = materialsInventoryStatusMapper.getRawMaterialsInventory();
+		List<RawMaterialsInventory> materialsInventoryList = materialsInventoryStatusMapper.getMaterialsTransactionList();
 		return materialsInventoryList;
 	}
 	
