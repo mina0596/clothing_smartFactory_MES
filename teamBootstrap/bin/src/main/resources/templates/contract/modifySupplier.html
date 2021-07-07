@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_contract}">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3></h3>
+	    </div>
+	    <th:block layout:fragment="customJs">
+<script>
+$(function(){
+	
+	
+
+
+})
+ 
+
+</script>
+</th:block>
+</th:block>
+
+
+<th:block layout:fragment="container">
+	
+	
+    <div class="form-panel">
+      <h4 class="mb"><i class="fa fa-edit"></i>발주 거래처수정</h4>
+      <hr>
+      <br>
+      
+      <form class="form-horizontal style-form" method="post">
+
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">거래처 코드</label>
+          <div class="col-sm-5">
+            <input class="form-control" id="client_code" type="text" placeholder="DB발주거래처코드" readonly="readonly">
+            <!-- 거래처 코드를 자동증가로 할것인지 아닌지 생각해보기 -->            
+          </div>
+        </div>
+       <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">거래처명</label>
+          <div class="col-sm-5">
+            <input class="form-control" id="disabledInput" type="text" placeholder="" >
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">거래처 연락처</label>
+          <div class="col-sm-5">
+          	<input class="form-control" id="disabledInput" type="tel" placeholder="" >
+          </div>
+        </div>
+           	        
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">거래처직원 담당자</label>
+          <div class="col-sm-5">
+            <input type="text" class="form-control" placeholder="" >
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">거래처 대표자명</label>
+          <div class="col-sm-5">
+            <input type="text" class="form-control" placeholder="">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">거래처사업자번호</label>
+          <div class="col-sm-5">
+            <input type="text" class="form-control" placeholder="">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">거래처주소</label>
+          <div class="col-sm-5">
+            <input type="text" class="form-control" placeholder="">
+          </div>
+        </div>
+     	<div class="form-group text-right">
+                    <div class="col-lg-offset-2 col-lg-10">
+                     <a th:href="@{/supplierList}"><button class="btn btn-theme" type="button" ><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">거래처수정</font></font></button></a>
+                      <button class="btn btn-theme04" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">거래처수정취소</font></font></button>
+                    </div>
+                    </div>
+       		</form>
+      
+    	</div>
+   	 </div>
+	</div>	
+	</th:block>
+
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <div th:fragment="supplierSearch">
+  	<form th:action="@{/supplierOrderList}" method="get">
+  		<select name="supplierOrderSearchKey">
+  			<option>거래처명</option>
+  			<option>원부자재명</option>
+  		
+  			
+  			 			
+  		</select>
+  		<input type="text" name="supplierOrderSearchValue" placeholder="검색어를입력해주세요">
+  		<button type="submit">검색</button>
+  	</form>
+
+  </div>
+</html>

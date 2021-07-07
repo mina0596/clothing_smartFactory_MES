@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_qualityControl}">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3>품질관리</h3>
+	    </div>
+	  <th:block layout:fragment="customJs">
+<script>
+$(function(){
+	$('#finalInspectionResutl').click(function(){
+		
+	})
+});
+
+</script>
+</th:block>	    
+	    
+	
+</th:block>
+
+
+<th:block layout:fragment="container">
+  
+
+</th:block>
+
+<th:block layout:fragment="container">
+	<div class="row mt">
+     <div class="col-xs-12 main-chart">
+       <div class="content">
+       
+          <h4><i class="fa fa-angle-right"></i>원자재 검사 성적서 조회</h4>
+          <hr>
+          <table class="table table-striped table-advance table-hover" >
+         	
+         	<tbody>
+         		<tr>
+         		<td class="col-md-2" >
+         			<div class="form-group "><!-- 발주처별 -->
+		               		 <select class="form-control" id="contractCate">
+				   				<option value=>거래처명</option>
+				   			 </select>
+		                </div>
+		              </td>
+         		<td class="col-md-2" >
+         			<div class="form-group "><!-- 의뢰코드 -->
+		               		 <select class="form-control" id="contractCate">
+				   				<option value=>의뢰코드</option>
+				   			 </select>
+		                </div>
+		                <td>
+         		<td class="col-md-2" >
+         		<div class="form-group"><!-- 품목-->
+		               		 <select class="form-control" id="contractCate">
+				   				<option value=>품목</option>
+				   			 </select>
+		                </div>
+		                </td>
+		       
+		         		<td class="col-md-4" >
+         			<div class="form-group">
+                    		<div class="input-group input-large" data-date="01/01/2014" data-date-format="mm/dd/yyyy">
+                     		 <input type="text" class="form-control dpd1" name="from">
+                      		<span class="input-group-addon">To</span>
+                     		 <input type="text" class="form-control dpd2" name="to">
+                    		</div>
+                   
+	               		</div>
+		         		</td>
+		         		<td>
+         				  <button type="submit" class="btn btn-theme">검사 성적서조회하기</button>
+		              	</td>
+		           
+         		</tr>
+         	</tbody>
+         </table>  
+        </form>  
+	      <br>
+	      <br>
+	      <br>
+	      <br>
+	      <br>
+	      
+              <h4><i class="fa fa-angle-right"></i>성적서목록</h4>    
+              <table id="list" class="table table-striped table-advance table-hover">
+                <thead>
+                  <tr>
+                    
+                  <th> 의뢰품목코드</th>
+                  <th> 거래처명</th>
+                  <th> 품목명</th>
+                  <th> 최종결과</th>
+                  <th> 등록일</th>
+				 </tr>
+                </thead>
+               
+               
+               
+                <tbody>
+                <!--db에서 데이터 넣어야하는 부분 -->
+                  <tr>
+                  	<td>req01_MS_Jacket</td>
+                  	<td>파크랜드</td>
+                  	<td>남성자켓</td>
+                  	<td>합격</td>
+                  	<td>2020-01-08</td>
+                  </tr>
+                  <tr>
+                  	<td>req01_MS_Pants</td>
+                  	<td>파크랜드</td>
+                  	<td>남성바지</td>
+                  	<td>합격</td>
+                  	<td>2020-01-08</td>
+                  </tr>
+                  <tr>
+                  	<td>req01_MS_Blouse</td>
+                  	<td>파크랜드</td>
+                  	<td>남성블라우스</td>
+                  	<td>합격</td>
+                  	<td>2020-01-08</td>
+                  </tr>
+                  <tr>
+                  	<td>req01_MS_Blouse</td>
+                  	<td>파크랜드</td>
+                  	<td>남성블라우스</td>
+                  	<td>합격</td>
+                  	<td>2020-01-08</td>
+                  </tr>
+                  <tr>
+                  	<td>req01_MS_Blouse</td>
+                  	<td>파크랜드</td>
+                  	<td>남성블라우스</td>
+                  	<td>합격</td>
+                  	<td>2020-01-08</td>
+                  </tr>
+                  <tr>
+                  	<td>req01_MS_Blouse</td>
+                  	<td>파크랜드</td>
+                  	<td>남성블라우스</td>
+                  	<td>합격</td>
+                  	<td>2020-01-08</td>
+                  </tr>
+                
+                  </tbody>
+                  </table>
+                  </div>
+                  </div>
+                  </div>
+                 
+</th:block>
+
+</html>

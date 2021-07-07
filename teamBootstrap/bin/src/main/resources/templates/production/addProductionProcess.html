@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_production}">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3>생산관리</h3>
+	    </div>
+</th:block>
+
+<th:block layout:fragment="customJs">
+	<!-- <script>
+		$(function(){
+			$('.form-control').each(function(){
+				$(this).change(function(){
+					console.log(this);
+					var addOption = $(this).children('option').find('#addOption').val();
+					console.log(addOption);
+				});
+			});
+		})
+	</script> -->
+</th:block>
+
+<th:block layout:fragment="container">
+ <div class="row mt">
+  <div class="col-lg-12">
+    <div class="form-panel">
+      <h4 class="mb"><i class="fa fa-edit"></i> 생산공정 등록 </h4>
+      <hr>
+      <br>
+      
+      <form class="form-horizontal style-form" method="post">
+
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">대분류 항목명</label>
+   	  	<div class="col-sm-6">
+     	 <select class="form-control">
+          <option>재단공정</option>
+          <option>봉제공정</option>
+          <option>완성공정</option>
+          <option>마무리공정</option>
+          <option id="addOption" value="추가">추가</option>
+         </select>
+   	  	</div>
+		</div>
+   	  	
+   	  	<div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">중분류 항목명</label>
+   	  	<div class="col-sm-6">
+     	 <select class="form-control">
+          <option>재단 전공정</option>
+          <option>재단 본공정</option>
+          <option>재단 후공정</option>
+          <option>봉제 본봉공정</option>
+          <option>봉제특수공정</option>
+          <option id="addOption">추가</option>
+         </select>
+   	  	</div>
+   	  	</div>
+   	  	
+        
+        <div class="form-group">
+   	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">생산공정순번</label>
+   	  	<div class="col-sm-6">
+            <input class="form-control" id="disabledInput" type="number" placeholder="번호로 입력하세요 (어떻게할지 해결)">
+          </div>
+   	 	</div>
+        
+
+ 		
+         <div class="form-group text-right">
+          <div class="col-lg-offset-2 col-lg-10">
+            <button class="btn btn-theme" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">등록</font></font></button>
+            <button class="btn btn-theme04" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소</font></font></button>
+          </div>
+        </div>
+         
+        
+      </form>
+      
+    </div>
+  </div>
+<!-- col-lg-12-->
+</div>
+</th:block>
+
+</html>

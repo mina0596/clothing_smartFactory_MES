@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_qualityControl}">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3>품질 관리</h3>
+	    </div>
+ <script type="text/javascript">
+		$(function(){
+			$('#deleteBtn').click(function(){			
+				var firstTr = $('#list').find('th').parent();
+				var tr = $('#list').find('td').parent();
+				
+				//체크 버튼 토글
+				var result = $(this).attr('data-change');
+					if(result == 'N' || result == undefined){
+						firstTr.prepend('<th class="th"><input type="checkbox" id="checkAll"></th>');
+						tr.prepend('<td class="td"><input type="checkbox" class = "checked"></td>');
+						$(this).attr('data-change','Y');
+						
+						//#checkAll 버튼 클릭 시 전체 checked
+						$('#checkAll').click(function(){
+							if($('#checkAll').prop('checked')){
+								$('.checked').prop('checked',true);
+							}else{
+								$('.checked').prop('checked',false);
+							}
+						});
+
+					}else if(result == 'Y'){
+						$('#list').find('.th').remove();
+						$('#list').find('.td').remove();
+							$(this).attr('data-change','N');
+				}
+									
+			});
+		});
+	</script>  
+</th:block>
+
+
+<th:block layout:fragment="container">
+       <div class="content">
+	<div class="row mt">
+     <div class="col-xs-12 main-chart">
+       
+          <h4><i class="fa fa-angle-right"></i>품질 검사 측정값 조회</h4>
+          <hr>
+                
+			<div class="form-group">
+				<div class="col-md-3">
+				 <select class="form-control" >
+				   <option>품질검사 요청 코드</option>
+				   <option>계약번호</option>
+				   <option>품목별 의뢰 코드</option>
+				   <option>품질검사 코드</option>
+				   <option>대분류 검사명</option>
+				   <option>중분류 검사명</option>
+				   <option>소분류 검사명</option>
+				   <option>소분류 검사 검사명</option>
+				   <option>샘플링 여부</option>
+				   <option>등록일시</option>
+				 </select>
+				</div>
+				<div class="col-md-6">
+				  <input class="form-control" type="text" placeholder="검색어를 입력하세요">
+				</div>
+				<div class="col-md-2">
+				  <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
+				  <button type="button" class="btn btn-primary">검색하여 가져오기</button>
+				</div>
+	       </div>
+	       
+	      <br>
+	      <br>
+	      <br>
+	      <br>
+	      <br>
+	      
+              <h4><i class="fa fa-angle-right"></i>품질검사 요청 목록</h4>    
+              <table id="list" class="table table-striped table-advance table-hover">
+                <thead>
+                  <tr>
+                    <th><i class="fa fa-bullhorn"></i>번호</th>
+                    <th class="hidden-phone"><i class="fa fa-bookmark"></i>품질검사 요청 코드</th>
+                    <th><i class="fa fa-bookmark"></i>품질검사 코드</th>
+                    <th><i class=" fa fa-bookmark"></i>소분류 검사명</th>
+                    <th><i class=" fa fa-bookmark"></i>소분류 검사 상세명</th>
+                    <th><i class=" fa fa-bookmark"></i>측정회차</th>
+                    <th><i class=" fa fa-bookmark"></i>결과값</th>
+                    <th><i class=" fa fa-bookmark"></i>합/불 여부</th>
+                    <th><i class=" fa fa-bookmark"></i>등록일시</th>
+                    <th><i class=" fa fa-bookmark"></i>수정</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                   <td class="hidden-phone">
+                     1
+                    </td>
+                    <td class="hidden-phone">
+                    <a th:href="@{#}">QC_REQUEST01</a></td>
+                    <td class="hidden-phone">AAee1</td>
+                    <td>원자재검사</td>
+                    <td>원단 이화학검사(파괴검사)</td>
+                    <td>1회차</td>
+                    <td>20</td>
+                    <td>합격</td>
+                    <td>2021-06-18 18:15:11</td>
+                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
+                  </tr>
+                  <tr>
+                   <td class="hidden-phone">
+                     2
+                    </td>
+                    <td class="hidden-phone">
+                    <a th:href="@{#}">QC_REQUEST01</a></td>
+                    <td class="hidden-phone">AAee1</td>
+                    <td>원자재검사</td>
+                    <td>원단 이화학검사(파괴검사)</td>
+                    <td>1회차</td>
+                    <td>20</td>
+                    <td>합격</td>
+                    <td>2021-06-18 18:15:11</td>
+                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
+                  </tr>
+                  <tr>
+                   <td class="hidden-phone">
+                     3
+                    </td>
+                    <td class="hidden-phone">
+                    <a th:href="@{#}">QC_REQUEST01</a></td>
+                    <td class="hidden-phone">AAee1</td>
+                    <td>원자재검사</td>
+                    <td>원단 이화학검사(파괴검사)</td>
+                    <td>1회차</td>
+                    <td>20</td>
+                    <td>합격</td>
+                    <td>2021-06-18 18:15:11</td>
+                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
+                  </tr>
+                  <tr>
+                   <td class="hidden-phone">
+                     4
+                    </td>
+                    <td class="hidden-phone">
+                    <a th:href="@{#}">QC_REQUEST01</a></td>
+                    <td class="hidden-phone">AAee1</td>
+                    <td>원자재검사</td>
+                    <td>원단 이화학검사(파괴검사)</td>
+                    <td>1회차</td>
+                    <td>20</td>
+                    <td>합격</td>
+                    <td>2021-06-18 18:15:11</td>
+                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
+                  </tr>
+                 
+                 
+           		 </tbody>
+              </table>
+      </div>
+            </div>
+</div>
+            <div class="form-group text-right">
+		          <div class="col-lg-offset-2 col-lg-10">
+		           <a th:href="@{/qualityInspectionRequest}" class="btn btn-success btn-xs"><i class="fa fa-check"></i>등록</a>
+		           <a id="deleteBtn" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i>삭제</a>
+		          </div>
+		        </div>
+
+            
+</th:block>
+
+</html>

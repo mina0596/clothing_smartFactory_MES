@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart39.springboot.dao.SystemMapper">
+
+<!-- =========================================================== -->
+		<resultMap type="HumanResources"  id="getHumanResourcesInfo">
+		<result  property="employeeCode" 				column="employee_code"/>
+		<result  property="levelNum" 				column="level_num"/>
+		<result  property="employeeId" 				column="employee_id"/>
+		<result  property="employeePw" 			column="employee_pw"/>
+		<result  property="employeeName" 			column="employee_name"/>
+		<result  property="employeeTel" 				column="employee_tel"/>
+		<result  property="employeeAddress" 				column="employee_address"/>
+		<result  property="employeeEmail" 				column="employee_email"/>
+		<result  property="employeeDepartment" 				column="employee_department"/>
+		<result  property="employeePosition" 		column="employee_position"/>
+		<result  property="employeeInfoRegDate" 		column="employee_info_reg_date"/>
+		<result  property="employeeInfoUpdateDate" 		column="employee_info_update_date"/>
+		<association property="humanResourcesLevel"  javaType="HumanResourcesLevel">
+			<id property="levelNum"  column="level_num"/>	 <!-- join 공통 -->
+			<result property="levelName" column="level_name"/>
+		</association>
+	</resultMap>
+	
+	
+	<select id="getHumanResources" resultMap="getHumanResourcesInfo"  resultType="HumanResources" fetchSize="1000">
+		SELECT
+			e.employee_code
+			,e.level_num
+			,e.employee_id
+			,e.employee_pw
+			,e.employee_name
+			,e.employee_tel
+			,e.employee_address
+			,e.employee_email
+			,e.employee_department
+			,e.employee_position
+			,e.employee_info_reg_date
+			,e.employee_info_update_date
+			,l.level_name
+		FROM
+			employee_info as e
+			INNER JOIN
+			erp_access_level as l
+			on
+			e.level_num = l.level_num;
+	</select>
+	
+	<insert id="addHumanResources" parameterType="HumanResources">
+		INSERT INTO employee_info
+		( employee_code
+		 ,level_num
+		 ,employee_id
+		 ,employee_pw
+		 ,employee_name
+		 ,employee_tel
+		 ,employee_address
+		 ,employee_email
+		 ,employee_department
+		 ,employee_position
+		 ,employee_info_reg_date
+		 ,employee_info_update_date
+		)VALUES(
+  			sf_newEmployeeCode()
+		 ,#{levelNum}
+		 ,#{employeeId}
+		 ,#{employeePw}
+		 ,#{employeeName}
+		 ,#{employeeTel}
+		 ,#{employeeAddress}
+		 ,#{employeeEmail}
+		 ,#{employeeDepartment}
+		 ,#{employeePosition}
+		 ,CURDATE()
+		 ,CURDATE());
+	</insert>
+
+	<select id="getEmployeeInfoByCode" parameterType="String" resultMap="getHumanResourcesInfo">
+	SELECT 
+		 employee_code
+		,employee_id			
+		,employee_pw			
+		,employee_name			
+		,employee_tel		
+		,employee_address		
+		,employee_email			
+		,employee_department		
+		,employee_position		
+	FROM 
+		employee_info
+	WHERE 
+		employee_code = #{employeeCode}
+</select>
+<update id="modifyHumanResources" parameterType="HumanResources">
+	UPDATE employee_info 
+	<trim prefix="SET" prefixOverrides=",">
+		<if test="levelNum != null and levelNum != ''.toString()">			
+			,level_num = #{levelNum}
+		</if>
+		<if test="employeeId != null and employeeId != ''.toString()">			
+			,employee_id = #{employeeId}
+		</if>
+		<if test="employeePw != null and employeePw != ''.toString()">			
+			,employee_pw = #{employeePw}
+		</if>
+		<if test="employeeName != null and employeeName != ''.toString()">			
+			,employee_name = #{employeeName}
+		</if>
+		<if test="employeeTel != null and employeeTel != ''.toString()">			
+			,employee_tel = #{employeeTel}
+		</if>		
+		<if test="employeeAddress != null and employeeAddress != ''.toString()">			
+			,employee_address = #{employeeAddress}
+		</if>		
+		<if test="employeeEmail != null and employeeEmail != ''.toString()">			
+			,employee_email = #{employeeEmail}
+		</if>		
+		<if test="employeeDepartment != null and employeeDepartment != ''.toString()">			
+			,employee_department = #{employeeDepartment}
+		</if>		
+		<if test="employeePosition != null and employeePosition != ''.toString()">			
+			,employee_position = #{employeePosition}
+		</if>		
+	</trim>
+	WHERE 
+		employee_code = #{employeeCode};
+</update>
+	
+<!-- =========================================================== -->
+		<resultMap type="Client"  id="getClientInfo">
+		<result  property="clientCode" 				column="client_code"/>
+		<result  property="clientCategory" 				column="client_category"/>
+		<result  property="clientName" 				column="client_name"/>
+		<result  property="clientTel" 			column="client_tel"/>
+		<result  property="clientEmployee" 			column="client_employee"/>
+		<result  property="clientCeo" 				column="client_ceo"/>
+		<result  property="clientBusinessNum" 				column="client_business_num"/>
+		<result  property="clientAddress" 				column="client_address"/>
+		<result  property="clientInfoRegDate" 				column="client_info_reg_date"/>
+		<result  property="clientInfoUpdateDate" 		column="client_info_update_date"/>
+	</resultMap>
+	<!-- 불러오기	 --> 
+	<select id="getClient" resultMap="getClientInfo"  resultType="Client" fetchSize="1000">
+		SELECT
+			c.client_code
+			,c.client_category
+			,c.client_name
+			,c.client_tel
+			,c.client_employee
+			,c.client_ceo
+			,c.client_business_num
+			,c.client_address
+			,c.client_info_reg_date
+			,c.client_info_update_date
+		FROM
+			client_info as c;
+	</select>
+			
+	<!-- 추가	 -->	
+	<insert id="addClient" parameterType="Client">
+		INSERT INTO client_info
+		( client_code
+		 ,client_category
+		 ,client_name
+		 ,client_tel
+		 ,client_employee
+		 ,client_ceo
+		 ,client_business_num
+		 ,client_address
+		 ,client_info_reg_date
+		 ,client_info_update_date
+		)VALUES(
+ 			sf_newClientCode()
+		 ,#{clientCategory}
+		 ,#{clientName}
+		 ,#{clientTel}
+		 ,#{clientEmployee}
+		 ,#{clientCeo}
+		 ,#{clientBusinessNum}
+		 ,#{clientAddress}
+		 ,CURDATE()
+		 ,CURDATE());
+	</insert>
+	
+	<!-- 수정 -->
+	<update id="modifyClient" parameterType="Client">
+	UPDATE client_info 
+	<trim prefix="SET" prefixOverrides=",">
+		<if test="clientCategory != null and clientCategory != ''.toString()">			
+			,client_category = #{clientCategory}
+		</if>
+		<if test="clientName != null and clientName != ''.toString()">			
+			,client_name = #{clientName}
+		</if>
+		<if test="clientTel != null and clientTel != ''.toString()">			
+			,client_tel = #{clientTel}
+		</if>
+		<if test="clientCeo != null and clientCeo != ''.toString()">			
+			,client_ceo = #{clientCeo}
+		</if>
+		<if test="clientEmployee != null and clientEmployee != ''.toString()">			
+			,client_employee = #{clientEmployee}
+		</if>		
+		<if test="clientBusinessNum != null and clientBusinessNum != ''.toString()">			
+			,client_business_num = #{clientBusinessNum}
+		</if>		
+		<if test="clientAddress != null and clientAddress != ''.toString()">			
+			,client_address = #{clientAddress}
+		</if>		
+	</trim>
+	WHERE 
+		client_code = #{clientCode};
+</update>
+	
+	<!-- 수정화면 뿌려주기 -->
+		<select id="getClientInfoByCode" parameterType="String" resultMap="getClientInfo">
+		SELECT 
+			 client_code
+			,client_category			
+			,client_name			
+			,client_tel			
+			,client_ceo		
+			,client_employee		
+			,client_business_num			
+			,client_address		
+		FROM 
+			client_info AS c
+		WHERE 
+			c.client_code = #{clientCode};
+	</select>
+
+			
+
+<!-- =========================================================== -->
+	<resultMap type="AccountingCategory" id="AccountingCategoryMap">
+		<result property="categoryCode" 		column="account_category_code"/>
+		<result property="categoryName" 		column="account_category_name"/>
+		<result property="categoryContent" 		column="account_category_content"/>
+		<result property="categoryRegDate" 		column="account_category_reg_date"/>
+		<result property="categoryUpdateDate" 	column="account_category_update_date"/>
+	</resultMap>
+	
+	<insert id="addAccountSubject" parameterType="AccountingCategory">
+		INSERT INTO account_category_list
+		(account_category_code
+		,account_category_name
+		,account_category_content
+		,account_category_reg_date
+		,account_category_update_date)
+	VALUES 
+		(sf_newAccountCategoryCode()
+		,#{categoryName}
+		,#{categoryContent}
+		,NOW()
+		,null);
+	</insert>
+	
+	<select id="getAccountSubjectByCode" parameterType="String" resultMap="AccountingCategoryMap">
+		SELECT 
+			account_category_code
+			,account_category_name
+			,account_category_content
+			,account_category_reg_date
+			,account_category_update_date
+		FROM 
+			account_category_list AS acc
+		WHERE
+			acc.account_category_code = #{categoryCode};	
+	</select>
+	
+	<update id="modifyMember" parameterType="AccountingCategory">
+		UPDATE account_category_list
+		<trim prefix="SET" prefixOverrides=",">
+			<if test="categoryName != null and categoryName != ''.toString()">
+				,account_category_name=#{categoryName}
+			</if>
+			<if test="categoryContent != null and categoryContent != ''.toString()">
+				,account_category_content=#{categoryContent}
+			</if>
+				,account_category_update_date=NOW()
+		</trim>
+		WHERE 
+			account_category_code=#{categoryCode};
+	</update>
+	
+	<select id="getAccountingSubjectList" parameterType="map" resultMap="AccountingCategoryMap" fetchSize="1000">
+		SELECT
+			account_category_code
+			,account_category_content
+			,account_category_name
+			,account_category_reg_date
+			,account_category_update_date
+		FROM
+			account_category_list
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="searchKey != null and searchKey != ''.toString()">
+				${searchKey} LIKE CONCAT('%', #{searchValue} ,'%');
+			</if>
+		</trim>
+	</select>
+	
+	
+	<resultMap type="QualityInspection" id="qualityInspectiontMap">
+<result  property="qualityInspectionCode" 				column="quality_inspection_code"/>
+<result  property="highClassificationCode" 				column="high_classification_code"/>
+<result  property="highClassificationName" 				column="high_classification_name1"/>
+<result  property="mediumClassificationCode" 			column="medium_classification_code"/>
+<result  property="mediumClassificationName" 			column="medium_classification_name1"/>
+<result  property="lowClassificationCode" 				column="low_classification_code"/>
+<result  property="lowClassificationName" 				column="low_classification_name1"/>
+<result  property="subClassificationCode" 				column="sub_classification_code"/>
+<result  property="subClassificationName" 				column="sub_classification_name1"/>
+<result  property="quality_inspection_reg_date" 		column="qualityInspectionRegDate"/>
+<result  property="quality_inspection_update_date" 		column="qualityInspectionUpdateDate"/>
+</resultMap>
+
+<!-- =========================================================== -->
+<select id="getQualityInspectionList"  resultType="QualityInspection">
+SELECT 
+	quality_inspection_code				AS	 qualityInspectionCode
+	, high_classification_code			AS	 highClassificationCode
+	, high_classification_name1			AS	 highClassificationName
+	, medium_classification_code		AS	 mediumClassificationCode
+	, medium_classification_name1		AS	 mediumClassificationName
+	, low_classification_code			AS	 lowClassificationCode
+	, low_classification_name1			AS	 lowClassificationName
+	, sub_classification_code			AS	 subClassificationCode
+	, sub_classification_name1			AS	subClassificationName
+	, quality_inspection_reg_date		AS qualityInspectionRegDate
+	, quality_inspection_update_date    AS qualityInspectionUpdateDate
+	FROM 
+	quality_inspection_list;
+
+</select>
+	
+	
+</mapper>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_qualityControl}">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3 >품질관리</h3>
+	    </div>
+	<th:block layout:fragment="customJs">
+		    <script>
+
+	
+	</script>
+	</th:block>	 
+</th:block>
+
+
+<th:block layout:fragment="container">
+	<form role="form" method="post">
+		<input>
+	</form>
+
+	<div class="form-panel">
+      <h4 class="mb"><i class="fa fa-edit"></i>성적서 수정화면</h4>
+      <hr>
+      <br>
+      
+      <form class="form-horizontal style-form" method="post">
+      
+     
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label">품질검사요청코드</label>
+          <div class="col-md-5">
+            <div  class="input-group ">
+              <input type="text" class="form-control"  size="16">
+              <div class="input-group-btn">
+                <button type="button" class=" btn btn-theme03 btn btn-default"><i class="fa"></i>검색하여 가져오기</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+       
+      
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label">계약번호</label>
+          <div class="col-md-5">
+            <input class="form-control" id="disabledInput" type="text" placeholder=""  disabled="disabled">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label">검사대분류명</label>
+          <div class="col-md-5">
+            <input class="form-control" id="disabledInput" type="text" disabled="disabled" >
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label">검사중분류명</label>
+          <div class="col-md-5">
+            <input class="form-control" id="disabledInput" type="text"disabled="disabled" >
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label">검사소분류명</label>
+          <div class="col-md-5">
+            <input class="form-control" id="disabledInput" type="text"disabled="disabled" >
+          </div>
+        </div>
+        <div class="form-group">
+           <label class="col-sm-2 col-sm-2 control-label">1차결과</label>
+          <div class="col-md-4">
+            <input class="form-control" id="disabledInput" type="text" placeholder="검색하면 자동으로 결과값이 불러와집니다" disabled="disabled" >
+           </div>
+           <input style="zoom:2.0;" type="checkbox" class="checkbox">
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label">2차결과</label>
+          <div class="col-md-4">
+            <input class="form-control" id="disabledInput" type="text" placeholder="검색하면 자동으로 결과값이 불러와집니다" disabled="disabled" >
+          </div>
+          <input style="zoom:2.0;" type="checkbox" class="checkbox">
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label">3차결과</label>
+          <div class="col-md-4">
+            <input class="form-control" id="disabledInput" type="text" placeholder="검색하면 자동으로 결과값이 불러와집니다"  disabled="disabled">
+          </div>
+          <input style="zoom:2.0;" type="checkbox" class="checkbox">
+        </div>
+        
+        
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label">검사시작일</label>
+          <div class="col-md-4">
+            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
+              <input type="text" class="form-control" readonly="readonly" size="16">
+              <div class="input-group-btn">
+                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
+                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label">검사종료일</label>
+          <div class="col-md-4">
+            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
+              <input type="text" class="form-control" readonly="readonly" size="16">
+              <div class="input-group-btn">
+                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
+                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+     
+
+        <div class="form-group">
+          <label class="col-lg-2 col-sm-2 control-label">담당 사원명</label>
+          <div class="col-lg-10">
+            <p class="form-control-static">추잔탁</p>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="col-lg-2 col-sm-2 control-label">담당자 사원 코드</label>
+          <div class="col-lg-10">
+            <p class="form-control-static">employee0293</p>
+          </div>
+        </div>
+ 		
+       <div class="form-group text-right">
+                    <div class="col-lg-offset-2 col-lg-10">
+                      <button class="btn btn-theme" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">성적서등록</font></font></button>
+                      <button class="btn btn-theme04" type="button" id="cancleBtn"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">성적서취소</font></font></button>
+                    </div>
+                    </div>
+        
+         
+        
+      </form>
+      
+    </div>
+</th:block>
+
+</html>
