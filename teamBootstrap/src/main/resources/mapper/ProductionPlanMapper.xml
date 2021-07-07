@@ -16,13 +16,33 @@
 	<result property="productionPlanUpdateDate" column="production_plan_update_date"/>
 </resultMap>
 
-<select id="getProductionMonthlyPlanList" resultType="ProductionPlan">
+	<select id="getProductionAllPlanList" resultType="Map">
 		SELECT 
-			production_plan_code
-			,gender_categorized_name
-			,detailed_categorized_name
+			p.production_plan_code
+			,c.gender_categorized_name
+			,c.detailed_categorized_name
+			,e.employee_name
+			,p.production_plan_quantity
+			,p.production_plan_qantity_unit
+			,p.expected_production_start_date
+			,p.expected_production_end_date
+		FROM 
+			production_plan AS p
+		INNER JOIN
+			product_code_detail AS c
+		ON
+			p.product_code = c.product_code
+		INNER JOIn
+			employee_info AS e
+		ON 
+			p.charge_employee_code = e.employee_code;
+	</select>
+
+	<insert id="addProductionPlan" parameterType="ProductionPlan">
+		INSERT INTO production_plan
+			(production_plan_code
+			,product_code
 			,charge_employee_code
-			,charge_employee_name
 			,production_plan_quantity
 			,production_plan_qantity_unit
 			,expected_production_start_date
@@ -30,13 +50,19 @@
 			,production_plan_period
 			,production_plan_note
 			,production_plan_reg_date
-			,production_plan_update_date
-		FROM 
-			production_plan;
-</select>
-
-	<insert id="addProductionPlan" parameterType="ProductionPlan">
-		
+			,production_plan_update_date)
+			VALUES 
+			(sf_productionPlanCode()
+			,#{productCode}
+			,#{chargeEmployeeCode}
+			,#{productionPlanQuantity}
+			,#{productionPlanQantityUnit}
+			,#{expectedProductionStartDate}
+			,#{expectedProductionEndDate}
+			,sf_productionPlanDate(#{expectedProductionStartDate},#{expectedProductionEndDate})
+			,#{productionPlanNote}
+			,NOW()
+			,NULL);
 	</insert>
 	
 	<select id="getDetailCode" parameterType="String" resultType="Map">

@@ -3,23 +3,6 @@
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
 layout:decorate="@{layout/default_production}">
 
-<th:block layout:fragment="pageTitle">
-	   <div class="border-head"> 
-	    <h3>생산 계획 목록</h3>
-	    </div>
-	<script type="text/javascript">
-	$(function(){
-		//#checkAll 버튼 클릭 시 전체 checked
-			$('#checkAll').click(function(){
-				if($('#checkAll').prop('checked')){
-					$('.checked').prop('checked',true);
-						}else{
-							$('.checked').prop('checked',false);
-						}
-					});									
-				});
-	</script>   
-</th:block>
 
 <th:block layout:fragment="container">
 	<div class="col-md-12">
@@ -35,7 +18,6 @@ layout:decorate="@{layout/default_production}">
          		<tr>
          			<th>양복명</th>
          			<th>소분류</th>
-         			<th>수량</th>
          			<th>등록일시</th>
          			<th><!-- 공백 --></th>
          			<th>정렬</th>
@@ -46,36 +28,26 @@ layout:decorate="@{layout/default_production}">
          		
          			<td style="padding-right: 20px;">
          				<div class="form-group">
-		                	<select class="form-control" style="width: 125px;">
-		                		<option>All</option>
-		                		<option>남성양복</option>
-		                		<option>여성양복</option>
+		                	<select id="genderCate" class="form-control" style="width: 125px;">
+		                		<option value="">All</option>
 		                	</select>
 	               		</div>
          			</td>
          			<td style="padding-right: 20px;">
          				<div class="form-group">
-		                	<select class="form-control" style="width: 125px;">
-		                		<option>All</option>
-		                		<option>바지</option>
-		                		<option>자켓</option>
-		                		<option>치마</option>
+		                	<select name="productCode" id="detailCate" class="form-control" style="width: 125px;">
+		                		<option value="">::선택::</option>
 		                	</select>
 	               		</div>
-         			</td>       			
-         			<td style="padding-right: 20px;">
-         				<div class="form-group" >
-		                	<input type="text" class="form-control" style="width: 110px;" placeholder="수량입력">
-	               		</div>
-         			</td>       			        			
+         			</td>      			        			
          			<td>
          				<div class="form-group">
-		                	<input type="date" class="form-control" id="exampleInputPassword2" placeholder="등록일시">&nbsp;&nbsp;&nbsp; ~ 
+		                	<input type="date" class="form-control" placeholder="등록일시">&nbsp;&nbsp;&nbsp; ~ 
 	               		</div>
          			</td>
          			<td style="padding-right: 20px;">
          				<div class="form-group">
-		                	<input type="date" class="form-control" id="exampleInputPassword2" placeholder="등록일시">
+		                	<input type="date" class="form-control" placeholder="등록일시">
 	               		</div>
          			</td>
          			<td style="padding-right: 20px;">
@@ -117,116 +89,26 @@ layout:decorate="@{layout/default_production}">
                     <th><i class=" fa fa-bookmark"></i>담당자 사원명</th>
                     <th><i class=" fa fa-bookmark"></i>수량</th>
                     <th><i class=" fa fa-bookmark"></i>단위</th>
-                    <th><i class=" fa fa-bookmark"></i>등록일시</th>
+                    <th><i class=" fa fa-bookmark"></i>예정 시작일</th>
+                    <th><i class=" fa fa-bookmark"></i>예정 종료일</th>
+                    <th><i class=" fa fa-bookmark"></i>수정</th>
                   </tr>
                 </thead>
                 
                 
                 <tbody>
-                  <tr>
-                  <td><input type="checkbox" class="checked"></td>
-                   <td class="hidden-phone">
-                      1
-                    </td> 
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">production_plan_01</a></td>
-                    <td class="hidden-phone">신사양복</td>
-                    <td>바지</td>
-                    <td>김다미</td>
-                    <td>20</td>
-                    <td>벌</td>
-                    <td>2020-05-22 16:00:00</td>
-                  	<td><a th:href="@{/modifyProductionPlan}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</a></td>
-                  </tr>
-                  <tr>
-                  <td><input type="checkbox" class="checked"></td>
-                   <td class="hidden-phone">
-                      2
-                    </td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">production_plan_01</a></td>
-                    <td class="hidden-phone">신사양복</td>
-                    <td>바지</td>
-                    <td>김다미</td>
-                    <td>20</td>
-                    <td>벌</td>
-                    <td>2020-05-22 16:00:00</td>
-                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  <tr>
-                  <td><input type="checkbox" class="checked"></td>
-                   <td class="hidden-phone">
-                      3
-                    </td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">production_plan_01</a></td>
-                    <td class="hidden-phone">신사양복</td>
-                    <td>바지</td>
-                    <td>김다미</td>
-                    <td>20</td>
-                    <td>벌</td>
-                    <td>2020-05-22 16:00:00</td>
-                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  <tr>
-                  <td><input type="checkbox" class="checked"></td>
-                   <td class="hidden-phone">
-                     4
-                    </td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">production_plan_01</a></td>
-                    <td class="hidden-phone">신사양복</td>
-                    <td>바지</td>
-                    <td>김다미</td>
-                    <td>20</td>
-                    <td>벌</td>
-                    <td>2020-05-22 16:00:00</td>
-                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  <tr>
-                  <td><input type="checkbox" class="checked"></td>
-                   <td class="hidden-phone">
-                     5
-                    </td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">production_plan_01</a></td>
-                    <td class="hidden-phone">신사양복</td>
-                    <td>바지</td>
-                    <td>김다미</td>
-                    <td>20</td>
-                    <td>벌</td>
-                    <td>2020-05-22 16:00:00</td>
-                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  <tr>
-                  <td><input type="checkbox" class="checked"></td>
-                   <td class="hidden-phone">
-                     6
-                    </td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">production_plan_01</a></td>
-                    <td class="hidden-phone">신사양복</td>
-                    <td>바지</td>
-                    <td>김다미</td>
-                    <td>20</td>
-                    <td>벌</td>
-                    <td>2020-05-22 16:00:00</td>
-                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  <tr>
-                  <td><input type="checkbox" class="checked"></td>
-                   <td class="hidden-phone">
-                      7
-                    </td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">production_plan_01</a></td>
-                    <td class="hidden-phone">신사양복</td>
-                    <td>바지</td>
-                    <td>김다미</td>
-                    <td>20</td>
-                    <td>벌</td>
-                    <td>2020-05-22 16:00:00</td>
-                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
+                  <tr th:if="${#lists.size(list)>0}" th:each="l, i: ${list}">
+	                  <td><input type="checkbox" class="checked"></td>
+	                   <td th:text="${i.index+1}"></td> 
+	                    <td><a href="#">[[${l.production_plan_code}]]</a></td>
+	                    <td th:text="${l.gender_categorized_name}"></td>
+	                    <td th:text="${l.detailed_categorized_name}"></td>
+	                    <td th:text="${l.employee_name}"></td>
+	                    <td th:text="${l.production_plan_quantity}"></td>
+	                    <td th:text="${l.production_plan_qantity_unit}"></td>
+	                    <td th:text="${l.expected_production_start_date}"></td>
+	                    <td th:text="${l.expected_production_end_date}"></td>
+	                  	<td><a th:href="@{/modifyProductionPlan}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</a></td>
                   </tr>
               	</tbody>
               </table>
@@ -240,6 +122,21 @@ layout:decorate="@{layout/default_production}">
                 </div>
             </div>
             
+ <th:block layout:fragment="customJs">
+	<script type="text/javascript" th:src="@{productionJs/ProductionCate.js}"></script>
+	<script type="text/javascript">
+	$(function(){
+		//#checkAll 버튼 클릭 시 전체 checked
+			$('#checkAll').click(function(){
+				if($('#checkAll').prop('checked')){
+					$('.checked').prop('checked',true);
+						}else{
+							$('.checked').prop('checked',false);
+						}
+					});									
+				});
+	</script>
+</th:block>           
 </th:block>
 
 </html>
