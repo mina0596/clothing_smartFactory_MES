@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+      <div th:fragment="sidebar_system" id="sidebar" class="nav-collapse ">
+        <!-- sidebar menu start-->
+        <ul class="sidebar-menu" id="nav-accordion">
+          <h5 class="centered">시스템관리</h5>
+
+
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-cogs"></i>
+              <span>사용자관리 ![한빛]</span>
+              </a>
+            <ul class="sub">
+              <li><a th:href="@{/addHumanResources}">사용자등록 ![한빛]</a></li>
+              <li><a th:href="@{/humanResourcesList}">사용자조회 ![한빛]</a></li>
+            </ul>
+          </li>
+          
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-cogs"></i>
+              <span>거래처관리 ![한빛]</span>
+              </a>
+            <ul class="sub">
+              <li><a th:href="@{/addClient}">거래처등록 ![한빛]</a></li>
+              <li><a th:href="@{/clientList}">거래처조회 ![한빛]</a></li>
+            </ul>
+          </li>
+          
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-cogs"></i>
+              <span>회계기초관리 ![다미]</span>
+              </a>
+            <ul class="sub">
+              <li><a th:href="@{/addAccountSubject}">계정과목등록 ![다미]</a></li>
+              <li><a th:href="@{/accountSubjectList}">계정과목조회 ![다미]</a></li>
+            </ul>
+          </li>
+          
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-cogs"></i>
+              <span>자재기초관리 ![민아]</span>
+              </a>
+            <ul class="sub">
+              <li><a th:href="@{/addRawMaterials}">원부자재 등록 ![민아]</a></li>
+              <li><a th:href="@{/rawMaterialsList}">원부자재 조회 ![민아]</a></li>            </ul>
+          </li>
+          
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-cogs"></i>
+              <span>품질기초관리 ![보람]</span>
+              </a>
+            <ul class="sub">
+              <li><a th:href="@{/addQualityInspection}">검사종류 등록 ![보람]</a></li>
+              <li><a th:href="@{/qualityInspectionList}">검사종류 목록/조회 ![보람]</a></li>
+            </ul>
+          </li>
+          
+
+        </ul>
+        <!-- sidebar menu end-->
+      </div>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_qualityControl}">
+
+<th:block layout:fragment="pageTitle">
+
+</th:block>
+
+
+<th:block layout:fragment="container">
+	
+       
+          <h4><i class="fa fa-angle-right"></i>실적
+           <button id="printS" class="btn btn-defalt btn-xs" onClick="content_print()"><i class="fa fa-print"></i></button>
+          </h4>
+         
+          
+         <div  id="print" class="col-lg-8">
+          <div class="row content-panel">
+            <div class="col-lg-10 col-lg-offset-1">
+              <div class="invoice-body">
+                <div class="pull-center">
+                  <h2>품질검사 실적 보고서(2000년 00월)</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+         </div>
+         
+          
+</th:block>
+<th:bloc layout:fragment="customJs">
+<script type="text/javascript">
+	function content_print(){    
+	    var initBody = document.body.innerHTML;
+	    window.onbeforeprint = function(){
+	 
+	        document.body.innerHTML = document.getElementById('print').innerHTML;
+	    }
+	  
+	    window.onafterprint = function(){
+	
+	        document.body.innerHTML = initBody;
+	    }
+	
+	    window.print();     
+	}     
+</script>
+</th:block>
+</html>

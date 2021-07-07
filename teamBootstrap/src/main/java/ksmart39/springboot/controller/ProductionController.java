@@ -142,6 +142,8 @@ public class ProductionController {
 		log.info("화면에서 받아온 값:            {}", productionPlan);
 		log.info("=============================================");
 		
+		productionPlanService.addProductionPlan(productionPlan);
+		
 		return "redirect:/productionPlanList";
 	}
 	
@@ -168,6 +170,7 @@ public class ProductionController {
 		log.info("=============================================");
 		return list;
 	}
+	
 	
 	//[다미]생산계획 일별 목록
 	@GetMapping("/productionDailyPlanList")
@@ -198,10 +201,16 @@ public class ProductionController {
 		return productionPlanService.getProductionMonthlyPlanList();
 	}
 
-	
-	//[다미]생산계획 목록
+	//[다미]전체 생산계획 목록
 	@GetMapping("/productionPlanList")
-	public String productioncontrolList(){
+	public String productionPlanList(Model model) {
+		List<Map<String, Object>> resultMap = productionPlanService.getProductionAllPlanList();
+		log.info("==============================================");
+		log.info("전체 생산계획 목록:         {}", resultMap);
+		log.info("==============================================");
+		
+		model.addAttribute("list", resultMap);
+		
 		return "production/productionPlanList";
 	}
 	

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default}">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3>MES MANUAL</h3>
+	    </div>
+</th:block>
+
+
+<th:block layout:fragment="container">
+<div class="row">
+	<div class="col-lg-11">
+	
+	<div style="text-align: center;">
+	<h1>TEAMONE MES 입니다 (ง •_•)ง</h1>
+	<h2>취업되라 뿅~ (∩^o^)⊃━☆</h2>	
+	</div>
+	
+	<div class="row content-panel form-panel">
+              <div class="col-md-4 profile-text mt mb centered">
+                <div class="right-divider hidden-sm hidden-xs">
+                  <h4>JAVA</h4>
+                  <h4>JAVA SCRIPT</h4>
+                  <h4>SPRING</h4>
+                  <h4>MYBATIS</h4>
+                  <h4>MYSQL</h4>
+                  <h4>JQUERY</h4>
+                </div>
+              </div>
+              <!-- /col-md-4 -->
+              <div class="col-md-4 profile-text ">
+                <h3>본인이름</h3>
+                <h6>취업시켜주세요제발루~</h6>
+                <p>한국형 봉제공장 스마트팩토리 상용화가 활발해짐에 따라<br> 이에 부합한 전사관리시스템을 구축할 목적이다.<br>
+					완전자동화 시스템의 최대장점인 생산성과 품질향상에 기여하는<br> QC 강화 ERP 시스템을 구축함으로써 기업경영의 경쟁력을 향상시킨다.<br>
+					기존 전수검사보다 빠른 속도로 검사를 실행하여 <br>한 개의 불량품도 납품되지 않게 관리할 수 있는 시스템을 구축한다.</p>
+                <br>
+                <p><a th:href="@{/qualityInspectionStatusNow}" class="btn btn-theme">본인이 맡은 주요 화면으로 이동</a>&nbsp<a th:href="@{/qualityInspectionStatusNow}" class="btn btn-theme">블로그 주소?</a></p>
+              </div>
+            </div>
+            
+            <br><br>
+            <div class="row content-panel form-panel">
+             <div class="profile-text" style="text-align: center;">
+                <h3>우리팀 개쩌는 MES 가이드</h3>
+                  <h4>1. 수/발주</h4> 
+                  <p>어쩌구저쩌구 설명 </p>
+                  <h4>2. 자재관리</h4>
+                  <p>어쩌구저쩌구 설명 </p>
+                  <h4>3. 생산관리</h4>
+                  <p>어쩌구저쩌구 설명 </p>
+                  <h4>4. 품질관리</h4>
+                  <p>어쩌구저쩌구 설명 </p>
+                  <h4>5. 출하관리</h4>
+                  <p>어쩌구저쩌구 설명 </p>
+                  <h4>6. 시스템관리</h4>
+                  <p>어쩌구저쩌구 설명 </p>
+               </div>
+            </div>
+	
+	
+		<!-- 그냥 막 넣어봤어요~ -->
+			<h1 style="text-align: center;">주요 기능!!!</h1>
+            <h4><i class="fa fa-angle-right"></i> 생산계획별 현황 목록</h4>    
+            <hr>     
+	        <form class="form-horizontal style-form">
+              <table class="table table-striped table-advance table-hover" id="list">
+                <thead>
+                  <tr>
+             		<th><i class="fa fa-bullhorn"></i> 번호</th>
+                    <th><i class="fa fa-barcode"></i> 생산계획코드</th>
+                    <th><i class="fa fa-bookmark"></i> 양복명</th>
+                    <th><i class="fa fa-bookmark"></i> 품목명</th>
+                    <th><i class="fa fa-bookmark"></i> 계획수량<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><i class="fa fa-bookmark"></i> 생산량<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><i class="fa fa-bookmark"></i> 잔량<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><i class="fa fa-calendar"></i> 작업시작일자<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><i class="fa fa-bookmark"></i> 진행상황<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><i class="fa fa-calendar"></i> 작업마감일자<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><i class="fa fa-calendar"></i> 계획기간<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><i class="fa fa-bookmark"></i> 담당자</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+	                <td>1</td>
+                    <td>production_plan_01</td>
+                    <td>숙녀양복</td>
+                    <td>바지</td>
+                    <td>100벌</td>
+                    <td>60벌</td>
+                    <td>40벌</td>
+                    <td>2021-02-01</td>
+                    <td><span class="badge bg-important" style="padding-top: 5px;">진행중</span></td>
+                    <td>2021-03-01</td>
+                    <td>1개월</td>
+                    <td>박민아</td>
+                  </tr>
+                  
+                  <tr>
+	            	<td>2</td>
+                    <td>production_plan_02</td>
+                    <td>숙녀양복</td>
+                    <td>치마</td>
+                    <td>20벌</td>
+                    <td>26벌</td>
+                    <td></td>
+                    <td>2021-02-01</td>
+                    <td><span class="badge" style="padding-top: 5px;">달성</span></td>
+                    <td>2021-02-08</td>
+                    <td>일주일</td>
+                    <td>김다미</td>
+                  </tr>   
+                  <tr>
+                  	<td>3</td>
+                    <td>production_plan_03</td>
+                    <td>숙녀양복</td>
+                    <td>자켓</td>
+                    <td>5벌</td>
+                    <td>2벌</td>
+                    <td>3벌</td>
+                    <td>2021-02-01</td>
+                    <td><span class="badge bg-important" style="padding-top: 5px;">진행중</span></td>
+                    <td>2021-02-01</td>
+                    <td>하루</td>
+                    <td>이한빛</td>
+                  </tr>
+                 <tr>
+	            	<td>4</td>
+                    <td>production_plan_04</td>
+                    <td>신사양복</td>
+                    <td>자켓</td>
+                    <td>200벌</td>
+                    <td>206벌</td>
+                    <td></td>
+                    <td>2021-02-01</td>
+                    <td><span class="badge" style="padding-top: 5px;">달성</span></td>
+                    <td>2021-04-01</td>
+                    <td>2개월</td>
+                    <td>한보람</td>
+                 </tr>
+                </tbody>
+              </table>
+              
+              <h4><i class="fa fa-angle-right"></i> 수주계약번호별 전체 현황</h4> 
+
+
+		<table style="border-color: #8c8c8c;" class="table table-bordered table-striped table-condensed " id="list">
+         <thead>
+        	<tr> 
+			<th rowspan="2">no.</th> 
+			<th rowspan="2"><input type="checkbox"></th> 
+			<th rowspan="2">공정</th> 
+			<th rowspan="2">공정소분</th> 
+			<th rowspan="2">공정세분</th> 
+			<th rowspan="2">품목코드</th> 
+			<th rowspan="2">품목명</th> 
+			<th rowspan="2">요청시간</th> 
+			<th rowspan="2">검사단위</th> 
+			<th colspan="3" scope="colgroup" id="first">기준</th> 
+			<th colspan="3" scope="colgroup" id="second">측정값</th> 
+			<th colspan="2" scope="colgroup" id="second">처리정보</th> 
+			<th rowspan="2">최종합격여부</th> 
+			<th rowspan="2">기타</th> 
+		</tr> 
+		<tr> 
+			<th scope="col" id="hong">기준값</th> 
+			<th scope="col" id="jeon">최소값</th> 
+			<th scope="col" id="kim">최대값</th> 
+			<th scope="col" id="song">1회차</th> 
+			<th scope="col" id="song">2회차</th> 
+			<th scope="col" id="song">3회차</th> 
+			<th scope="col" id="song">시작시간</th> 
+			<th scope="col" id="song">완료시간</th> 
+		</tr>
+		<tr> 
+			<th scope="row" id="mandatory">1</th> 
+			<td><input type="checkbox"></td> 
+			<td>수입검사</td> 
+			<td>물세탁</td> 
+			<td>변퇴색</td> 
+			<td>req01_MS_pants</td>
+			<td>바지</td>
+			<td>2021-04-22 12:12:22</td>
+			<td>등급</td>
+			<td>4</td>
+			<td>5</td>
+			<td>4</td>
+			<td>5</td>
+			<td>3</td>
+			<td>4</td>
+			<td>2021-04-22 12:12:22</td>
+			<td>2021-04-22 12:12:22</td>
+			<td>합격</td>
+			<td>없음</td>
+		</tr> 
+       </thead>
+       <tbody>
+		<tr> 
+			<th scope="row" id="mandatory">1</th> 
+			<td><input type="checkbox"></td> 
+			<td>수입검사</td> 
+			<td>물세탁</td> 
+			<td>변퇴색</td> 
+			<td>req01_MS_pants</td>
+			<td>바지</td>
+			<td>2021-04-22 12:12:22</td>
+			<td>등급</td>
+			<td>4</td>
+			<td>5</td>
+			<td>4</td>
+			<td>5</td>
+			<td>3</td>
+			<td>4</td>
+			<td>2021-04-22 12:12:22</td>
+			<td>2021-04-22 12:12:22</td>
+			<td>합격</td>
+			<td>없음</td>
+		</tr> 
+                  
+                  
+	                 
+	                </tbody>
+	              </table>
+	              </form>
+	              </div>
+	              </div>
+	              
+</th:block>
+
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_qualityControl}">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3>품질 관리</h3>
+	    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	    </div>
+
+</th:block>
+
+
+<th:block layout:fragment="container">
+	생산한 제품별 불량통계
+	<h4><i class="fa fa-angle-right"></i>불량 현황</h4>
+    <div>
+    <select>
+    	<option>All</option>
+    	<option>숙녀양복</option>
+    	<option>남성양복</option>
+    </select> 
+    <select>
+    	<option>All</option>
+    	<option>수입검사</option>
+    	<option>공정검사</option>
+    	<option>완재품검사</option>
+    </select> 
+    <button type="button">조회</button>
+    	<table class="table">
+    		<thead>
+    			<tr>
+    				<th>구분</th>
+    				<th>제품별 생산량</th>
+    				<th>제품별 불량</th>
+    				<th>너치위치</th>
+    				<th>너치깊이</th>
+    				<th>겉감과 심지 편차</th>
+    				<th>좌우라펠폭</th>
+    				<th>겉칼라의외곽선길이</th>
+    				<th>자켓의몸판총길이</th>
+    				<th>자켓의가슴둘레</th>
+    				<th>자켓의허리둘레</th>
+    			</tr>
+    		</thead>
+    		<tbody>
+    			<tr>
+    				<td></td>
+    				<td></td>
+    			</tr>
+    			<tr>
+    				<td>자켓</td>
+    				<td>322</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    			</tr>
+    			
+    			<tr>
+    				<td>블라우스</td>
+    				<td>124</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    			</tr>
+    			
+    			<tr>
+    				<td>바지</td>
+    				<td>100</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    			</tr>
+    			
+    			<tr>
+    				<td>치마</td>
+    				<td>12</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    			</tr>
+    			
+    			<tr>
+    				<td>여성자켓</td>
+    				<td>120</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    			</tr>
+    			
+    			<tr>
+    				<td>숙녀블라우스</td>
+    				<td>100</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    				<td>1</td>
+    			</tr>
+    			
+    		</tbody>
+    	</table>
+    
+    </div>
+         
+</th:block>
+
+</html>

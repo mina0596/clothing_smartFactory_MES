@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart39.springboot.dao.RawMaterialsInventoryStatusMapper">
+
+	<resultMap type="RawMaterialsInventory" 	id="materialsInventoryResultMap">
+		<result property="materialCode" 			column="raw_material_code"/>
+		<result property="materialOrderCode" 		column="raw_material_order_code"/>
+		<result property="chargeEmployeeCode" 		column="charge_employee_code"/>
+		<result property="transactionCate" 			column="transaction_category"/>
+		<result property="transactionAmount" 		column="raw_material_transaction_amount"/>
+		<result property="transactionDate" 			column="raw_material_transaction_date"/>
+		<result property="transactionRegDate" 		column="raw_material_transaction_reg_date"/>
+		<result property="transactionUpdateDate" 	column="raw_material_transaction_update_date"/>
+	</resultMap>
+	
+	<select id="getMaterialsTransactionList" resultMap="materialsInventoryResultMap">
+		SELECT 
+			raw_material_code, 
+			raw_material_order_code, 
+			charge_employee_code, 
+			transaction_category, 
+			raw_material_transaction_amount, 
+			raw_material_transaction_date, 
+			raw_material_transaction_reg_date, 
+			raw_material_transaction_update_date
+		FROM 
+			raw_material_inventory_transaction;
+	
+	</select>
+	
+	
+	
+</mapper>
+
