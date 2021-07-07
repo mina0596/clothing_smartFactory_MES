@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_rawMaterials}">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3>자재관리</h3>
+	    </div>
+</th:block>
+
+
+<th:block layout:fragment="container">
+<h4><i class="fa fa-th"></i> 원부자재 현재고 현황</h4>
+          <hr>  
+<table class="table table-striped table-advance table-hover" id="list">
+                <thead>
+                  <tr>
+                 	<th><i class="fa fa-check-circle-o"></i> 선택</th>
+             		<th><i class="fa fa-bullhorn"></i> 번호</th>
+                    <th><i class="fa fa-barcode"></i> 원부자재 코드</th>
+                    <th><i class="fa fa-bookmark"></i> 재료명</th>
+                    <th><i class=" fa fa-bookmark"></i> 색상명</th>
+                    <th><i class=" fa fa-bookmark"></i> 단위</th>
+                    <th><i class=" fa fa-bookmark"></i> 현수량</th>
+         
+                    <th><i class=" fa fa-clock-o"></i> 최신업데이트 일자</th>
+                    <th><i class=" fa fa-exchange"></i> 입출고 등록</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+	                <td><input type="checkbox" class="check"></td>
+	            	<td>1</td>
+                    <td class="hidden-phone">thread01_red</td>
+                    <td id="materialName">명주실</td>
+                    <td id="colorName">빨간색</td>
+                    <td id="feature"> </td>
+                    <td id="unit">마</td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>2021-01-18 16:02</td>
+                    <td> 
+                      <button type="button" class="btn btn-success btn-xs" onclick="location.href='addInWarehousing'" style="padding-right: 5px;"><i class="fa fa-plus-square"></i></button>
+                      <button type="button" class="btn btn-danger btn-xs" onclick="location.href='addExWarehousing'"><i class="fa fa-minus-square"></i></button>
+                    </td>
+                  </tr>
+                  
+                  <tr>
+                  	<td><input type="checkbox" class="check"></td>
+	            	<td>2</td>
+                    <td class="hidden-phone">silk01_sandyBrown</td>
+                    <td id="materialName">실크</td>
+                    <td id="colorName">모래갈색</td>
+                    <td id="feature">흰색체크</td>
+                    <td id="unit">마</td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>2021-01-18 16:02</td>
+                    <td> 
+                      <button type="button" class="btn btn-success btn-xs" onclick="location.href='addInWarehousing'" style="padding-right: 5px;"><i class="fa fa-plus-square"></i></button>
+                      <button type="button" class="btn btn-danger btn-xs" onclick="location.href='addExWarehousing'"><i class="fa fa-minus-square"></i></button>
+                    </td>
+                  </tr>
+                  
+                  <tr>
+                  	<td><input type="checkbox" class="check"></td>
+	            	<td>3</td>
+                    <td class="hidden-phone">button01_royalBlue</td>
+                    <td id="materialName">둥근단추</td>
+                    <td id="colorName">파란색</td>
+                    <td id="feature">4개구멍</td>
+                    <td id="unit">개</td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>2021-01-18 16:02</td>
+                    <td> 
+                      <button type="button" class="btn btn-success btn-xs" onclick="location.href='addInWarehousing'" style="padding-right: 5px;"><i class="fa fa-plus-square"></i></button>
+                      <button type="button" class="btn btn-danger btn-xs" onclick="location.href='addExWarehousing'"><i class="fa fa-minus-square"></i></button>
+                    </td>
+                  </tr>
+                  
+                  
+                 <tr>
+                  	<td><input type="checkbox" class="check"></td>
+	            	<td>4</td>
+                    <td class="hidden-phone">thread02_chromeYellow</td>
+                    <td id="materialName">명주실</td>
+                    <td id="colorName">개나리색</td>
+                    <td id="feature"> </td>
+                    <td id="unit">kg</td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>2021-01-18 16:02</td>
+                   <td> 
+                      <button type="button" class="btn btn-success btn-xs" onclick="location.href='addInWarehousing'" style="padding-right: 5px;"><i class="fa fa-plus-square"></i></button>
+                      <button type="button" class="btn btn-danger btn-xs" onclick="location.href='addExWarehousing'"><i class="fa fa-minus-square"></i></button>
+                    </td>
+                 </tr>
+                  
+                  
+                 
+                </tbody>
+              </table>
+              
+              
+               <h4><i class="fa fa-th"></i> 원부자재 출/입고 종합 조회</h4>
+          <hr>  
+          <table id="list" class="table table-striped table-advance table-hover">
+                <thead>
+                  <tr>
+                 	<th class="hidden-phone"><i class="fa fa-check-circle-o"></i> 선택</th>
+             		<th class="hidden-phone"><i class="fa fa-bullhorn"></i> 번호</th>
+             		<th class="hidden-phone"><i class="fa fa-clock-o"></i> 입/출고 일자</th>
+             		<th class="hidden-phone"><i class="fa fa-bookmark"></i> 입/출고 구분</th>
+                    <th class="hidden-phone"><i class="fa fa-barcode"></i> 원부자재 코드</th>
+                    <th class="hidden-phone"><i class="fa fa-bookmark"></i> 재료명</th>
+                    <th class="hidden-phone"><i class=" fa fa-bookmark"></i> 색상명</th>
+                    <th class="hidden-phone"><i class=" fa fa-bookmark"></i> 수량</th>
+                    <th class="hidden-phone"><i class=" fa fa-bookmark"></i> 단위</th>
+                    <th class="hidden-phone"><i class=" fa fa-clock-o"></i> 등록일자</th>
+                    <th class="hidden-phone"><i class=" fa fa-exchange"></i> 입고/출고 등록</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="gradeX">
+	                <td><input type="checkbox" class="check"></td>
+	            	<td>1</td>
+                    <td class="hidden-phone">2021-01-18 16:02</td>
+                    <td class="center hidden-phone" id="inventoryCate">입고</td>
+                    <td class="center hidden-phone">thread01_red</td>
+                    <td id="materialName">명주실</td>
+                    <td id="colorName">빨간색</td>
+                    <td id="quantity">10</td>
+                    <td id="unit">마</td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>2021-01-18 16:02</td>
+                    <td> 
+                      <button type="button" class="btn btn-success btn-xs" onclick="location.href='addInWarehousing'" style="padding-right: 5px;"><i class="fa fa-plus-square"></i></button>
+                      <button type="button" class="btn btn-danger btn-xs" onclick="location.href='addExWarehousing'"><i class="fa fa-minus-square"></i></button>
+                    </td>
+
+                  </tr>
+                  
+                  <tr>
+                  	<td><input type="checkbox" class="check"></td>
+	            	<td>2</td>
+	            	<td>2021-01-18 16:02</td>
+                    <td id="inventoryCate">입고</td>
+                    <td class="hidden-phone">silk01_sandyBrown</td>
+                    <td id="materialName">실크</td>
+                    <td id="colorName">모래갈색</td>
+                    <td id="quantity">10</td>
+                    <td id="unit">마</td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>2021-01-18 16:02</td>
+                    <td> 
+                      <button type="button" class="btn btn-success btn-xs" onclick="location.href='addInWarehousing'" style="padding-right: 5px;"><i class="fa fa-plus-square"></i></button>
+                      <button type="button" class="btn btn-danger btn-xs" onclick="location.href='addExWarehousing'"><i class="fa fa-minus-square"></i></button>
+                    </td>
+
+                  </tr>
+                  
+                  <tr>
+                  	<td><input type="checkbox" class="check"></td>
+	            	<td>3</td>
+	            	<td>2021-01-18 16:02</td>
+                    <td id="inventoryCate">출고</td>
+                    <td class="hidden-phone">button01_royalBlue</td>
+                    <td id="materialName">둥근단추</td>
+                    <td id="colorName">파란색</td>
+                    <td id="quantity">50</td>
+                    <td id="unit">개</td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>2021-01-18 16:02</td>
+                    <td> 
+                      <button type="button" class="btn btn-success btn-xs" onclick="location.href='addInWarehousing'" style="padding-right: 5px;"><i class="fa fa-plus-square"></i></button>
+                      <button type="button" class="btn btn-danger btn-xs" onclick="location.href='addExWarehousing'"><i class="fa fa-minus-square"></i></button>
+                    </td>
+
+                  </tr>
+                  
+                  
+                 <tr>
+                  	<td><input type="checkbox" class="check"></td>
+	            	<td>4</td>
+	            	<td>2021-01-18 16:02</td>
+	            	<td id="inventoryCate">입고</td>
+                    <td class="hidden-phone">thread02_chromeYellow</td>
+                    <td id="materialName">명주실</td>
+                    <td id="colorName">개나리색</td>
+                    <td id="quantity">100</td>
+                    <td id="unit">kg</td>
+                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
+                    <td>2021-01-18 16:02</td>
+                   <td> 
+                      <button type="button" class="btn btn-success btn-xs" onclick="location.href='addInWarehousing'" style="padding-right: 5px;"><i class="fa fa-plus-square"></i></button>
+                      <button type="button" class="btn btn-danger btn-xs" onclick="location.href='addExWarehousing'"><i class="fa fa-minus-square"></i></button>
+                    </td>
+
+                 </tr>
+                  
+                  
+                 
+                </tbody>
+              </table>
+</th:block>
+
+</html>

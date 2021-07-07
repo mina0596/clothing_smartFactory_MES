@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_system}">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3 th:text="${title}"></h3>
+	    </div>
+</th:block>
+
+<th:block layout:fragment="customJs">
+	<script>
+		$(function(){
+			$('#deleteBtn').click(function(){
+				var tdList = $('#list').children().find('tr');
+				tdList.html('<span class="check"><input type="checkbox" class="checked"></span>');
+				console.log(tdList);
+			});
+		})
+		$(function(){
+	//#checkAll 버튼 클릭 시 전체 checked
+		$('#checkAll').click(function(){
+			if($('#checkAll').prop('checked')){
+				$('.checked').prop('checked',true);
+					}else{
+						$('.checked').prop('checked',false);
+					}
+				});									
+			});
+
+	</script>
+</th:block>
+
+<th:block layout:fragment="container">
+
+	
+	
+	<div class="row mt">
+     <div class="col-md-12">
+          <h4><i class="fa fa-truck"></i>사원조회</h4>
+          <hr>  
+			<div class="form-group" style="padding-left: 50px">
+				<div class="col-md-3">
+				 <select class="form-control">
+				   <option>사원명</option>
+				   <option>담당부서</option>
+				   <option>담당직책</option>
+				   <option>이메일</option>
+				   <option>전화번호</option>
+
+				  </select>
+				</div>
+				<div class="col-md-6">
+				  <input class="form-control" type="text" placeholder="검색어를 입력하세요">
+				</div>
+				<div class="col-md-2">
+				  <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
+				  <button type="button" class="btn btn-primary">검색</button>
+				</div>
+	       </div>
+	       
+	 
+	      <br>
+	      <br>
+	      <br>
+	      
+          <h4><i class="fa fa-angle-right"></i>사원 목록</h4>
+                
+	        <form class="form-horizontal style-form">
+              <table class="table table-striped table-advance table-hover" id="list">
+                <thead>
+                  <tr>
+                  	<th><input type="checkbox" id="checkAll"></th>
+                    <th><i class="fa fa-bullhorn"></i>no.</th>
+                    <th><i class="fa fa-info"></i>사원코드</th>
+                    <th><i class="fa fa-user"></i>사원명</th>
+                    <th><i class="fa fa-bookmark"></i>아이디</th>
+                    <th><i class="fa fa-lock"></i>비밀번호</th>
+                    <th><i class="fa fa-bookmark"></i>담당부서</th>
+                    <th><i class=" fa fa-bookmark"></i>담당직책</th>
+                    <th><i class=" fa fa-envelope-o"></i>이메일</th>
+                    <th><i class=" fa fa-mobile"></i>전화번호</th>
+                    <th><i class=" fa fa-bookmark"></i>등록일자</th>
+                    <th><i class=" fa fa-pencil"></i>수정</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each=" h,n : ${humanResources}">
+                  	<td><input type="checkbox"  class="checked"></td>
+                    <td th:text = ${n.index+1}></td>
+                    <td  th:text="${h.employeeCode}"></td>      
+                    <td th:text="${h.employeeName}"></td>
+                    <td  th:text="${h.employeeId}"></td>      
+                    <td  th:text="${h.employeePw}"></td>      
+                    <td th:text="${h.employeeDepartment}"></td>
+                    <td th:text="${h.employeePosition}"></td>
+                    <td th:text="${h.employeeEmail}"></td>
+                    <td th:text="${h.employeeTel}"></td>
+                    <td th:text="${h.employeeInfoRegDate}"></td>
+                    <td>  
+                    	<a th:href="@{/modifyHumanResources(employeeCode=${h.employeeCode})}"  class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</a>
+                    </td>
+                  </tr>
+                  
+                </tbody>
+              </table>
+            
+		        <div class="form-group text-right">
+		          <div class="col-lg-offset-2 col-lg-10">
+		          <a th:href="@{/addHumanResources}" class="btn btn-success btn-xs"><i class="fa fa-plus"></i>사원등록</a>	
+		          <a id="deleteBtn" class="btn btn-danger btn-xs" th:href="@{/removeHumanResources(employeeCode=${h.employeeCode})}"><i class="fa fa-trash-o "></i>삭제</a>          
+		          </div>
+		        </div>
+       		</form>
+       		
+          </div>
+          <!-- /col-md-12 -->
+        </div>
+        <!-- /row -->
+        
+</th:block>
+
+</html>

@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_contract}">
+
+
+<th:block layout:fragment="customJs">
+	<script type="text/javascript">
+		$(function(){
+			//#checkAll 버튼 클릭 시 전체 checked
+			$('#checkAll').click(function(){
+				if($('#checkAll').prop('checked')){
+					$('.checked').prop('checked',true);
+				}else{
+					$('.checked').prop('checked',false);
+				}
+			});	
+				
+		    var tableAttr = $('#list').children();
+			var tdList = tableAttr.find('.radioClass');
+			var radioSelected = tableAttr.find('.radioClass').is(':checked');
+			
+			
+			//원부자재 재료 구분명 가져오는 modal
+			$('#searchBtn1').click(function(){
+				$('#byMaterialCategory').modal("show");
+			});
+			
+			$('#sendMaterialCateNameBtn').click(function(){
+				tdList = tableAttr.find('.radioClass');
+				tdList.each(function(){
+					if($(this).is(':checked')){
+						var par = $(this).parent();
+						var materialCateName = par.parent().find('.materialCate').text();
+						console.log(materialCateName + '<<materialCateName');
+						$('#materialCateName').attr('value', materialCateName);
+						$('#materialCateName').attr('readOnly', true);
+						
+					}				
+					
+				});
+			});
+			
+			//원부자재 재료명 가져오는 modal
+			$('#searchBtn2').click(function(){
+				$('#byMaterialName').modal("show");
+			});
+			
+			$('#sendMaterialNameBtn').click(function(){
+			    var tableAttr = $('#materialNamelist').children();
+				var tdList = tableAttr.find('.radioClass');
+				var radioSelected = tableAttr.find('.radioClass').is(':checked');
+				tdList = tableAttr.find('.radioClass');
+				tdList.each(function(){
+					if($(this).is(':checked')){
+						var par = $(this).parent();
+						var materialName = par.parent().find('.materialName').text();
+						console.log(materialName + '<<materialName');
+						$('#materialName').attr('value', materialName);
+						$('#materialName').attr('readOnly', true);
+						
+					}				
+					
+				});
+			});
+			
+			//색상명 가져오는 modal
+			$('#searchBtn3').click(function(){
+				$('#byColorlName').modal("show");
+			});
+			
+			$('#sendMaterialNameBtn').click(function(){
+			    var tableAttr = $('#colorNamelist').children();
+				var tdList = tableAttr.find('.radioClass');
+				var radioSelected = tableAttr.find('.radioClass').is(':checked');
+				tdList = tableAttr.find('.radioClass');
+				tdList.each(function(){
+					if($(this).is(':checked')){
+						var par = $(this).parent();
+						var materialName = par.parent().find('.materialName').text();
+						console.log(materialName + '<<materialName');
+						$('#materialName').attr('value', materialName);
+						$('#materialName').attr('readOnly', true);
+						
+					}				
+					
+				});
+			});
+			
+			
+			
+	    	$('[data-popup-open]').on('click', function(e)  {
+		       var targeted_popup_class = jQuery(this).attr('data-popup-open');
+		       $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+
+		       e.preventDefault();
+		   });
+
+		    //----- CLOSE
+		    $('[data-popup-close]').on('click', function(e)  {
+		       var targeted_popup_class = jQuery(this).attr('data-popup-close');
+		       $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+
+		       e.preventDefault();
+		    });
+		}) 
+	
+	
+	</script>
+	
+</th:block>
+
+<th:block layout:fragment="container">
+
+    <div class="form-panel form-horizontal">
+      <h4 class="mb"><i class="fa fa-edit"></i> 계약 후 예정 수금/출금 내역 등록</h4>
+      <hr>
+      <br>
+ 
+        <div class="form-group">
+	        <div class="col-md-3" style="padding-left: 50px;">
+	         		<label class="col-sm-2 control-label" style="font-weight: 600;">수금/출금 구분</label>
+	             	</div>
+			<div class="radio" style="font-size: 15px">
+	          <label style="padding-right: 20px; padding-left: 40px;" >
+	            <input type="radio" name="optionsRadios"  id="optionsRadios1" value="수금" checked> 수금
+	          </label>      
+	          <label style="padding-right: 20px;">
+	            <input type="radio" name="optionsRadios" id="optionsRadios2" value="출금"> 출금
+	          </label>
+	        </div>  
+		</div>
+		
+        <div class="form-group">
+        	<div class="col-md-3" style="padding-left: 50px;">
+    		<label class="col-sm-2 control-label" style="font-weight: 600;"> 계약번호</label>
+        	</div>
+         <div class="col-md-5">
+           <div  class="input-group">
+             <input type="text" class="form-control" id="materialCateName" size="16" placeholder="5648">
+             <div class="input-group-btn">
+               <button type="button" class=" btn btn-theme03 btn btn-default" id="searchBtn1"><i class="fa"></i> 검색하여 가져오기</button>
+             </div>
+           </div>
+         </div>
+       </div>
+        
+        
+       
+       <div class="form-group">
+       
+        <div class="col-md-3" style="padding-left: 50px;">
+             <label class="control-label col-lg-2" style="font-weight: 600;"> 예정액</label>
+        </div>
+        <div class="col-xs-2">
+          <select class="form-control">
+	      	<option>::내용::</option>
+	      	<option>계약금</option>
+	      	<option>1차 검수 후</option>
+	      	<option>2차 검수 후</option>
+   		 </select>
+        </div> 
+        
+        <div class="col-md-2">
+            <input type="number" class="form-control" placeholder="가격을 적어주세요.">
+        </div> 
+        <div class="col-md-2" style="padding-left: 0px;">
+            <label class="col-sm-2 control-label" style="font-weight: 600; padding-left: 0px;">원</label>
+        </div> 
+        </div>
+        
+        <div class="form-group">
+        <div class="col-md-3" style="padding-left: 50px;">
+             <label class="control-label col-lg-2" style="font-weight: 600;"> </label>
+        </div>
+        <div class="col-xs-2" >
+          <select class="form-control">
+	      	<option>::내용::</option>
+	      	<option>계약금</option>
+	      	<option>1차 검수 후</option>
+	      	<option>2차 검수 후</option>
+   		 </select>
+        </div> 
+        <div class="col-md-2">
+            <input type="number" class="form-control" placeholder="가격을 적어주세요.">
+        </div> 
+        <div class="col-md-2" style="padding-left: 0px;">
+            <label class="col-sm-2 control-label" style="font-weight: 600; padding-left: 0px;">원</label>
+        </div> 
+        </div>
+        
+        <div class="form-group">
+        <div class="col-md-3" style="padding-left: 50px;">
+             <label class="control-label col-lg-2" style="font-weight: 600;"> </label>
+        </div>
+        <div class="col-xs-2" >
+          <select class="form-control">
+	      	<option>::내용::</option>
+	      	<option>계약금</option>
+	      	<option>1차 검수 후</option>
+	      	<option>2차 검수 후</option>
+   		 </select>
+        </div> 
+        <div class="col-md-2">
+            <input type="number" class="form-control" placeholder="가격을 적어주세요.">
+        </div> 
+        <div class="col-md-2" style="padding-left: 0px;">
+            <label class="col-sm-2 control-label" style="font-weight: 600; padding-left: 0px;">원</label>
+        </div> 
+        </div>
+        
+        <div class="form-group">
+          <div class="col-md-3" style="padding-left: 50px;">
+             <label class="control-label col-lg-2" style="font-weight: 600;"> 수금/출금 예정일자</label>
+          </div>
+          <div class="col-md-5">
+            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
+              <input type="text" class="form-control" readonly="readonly" size="16">
+              <div class="input-group-btn">
+                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
+                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
+              </div>
+            </div>
+          </div>
+    	</div>
+        
+        <div class="form-group">
+          <div class="col-md-3" style="padding-left: 50px;">
+             <label class="control-label col-lg-2" style="font-weight: 600;"> 예정 수금/출금 담당 사원명</label>
+          </div>
+          <div class="col-lg-6">
+            <p class="form-control-static">이한빛</p>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <div class="col-md-3" style="padding-left: 50px;">
+             <label class="control-label col-lg-2" style="font-weight: 600;"> 예정 수금/출금 담당자 사원 코드</label>
+          </div>
+          <div class="col-lg-6">
+            <p class="form-control-static">W01</p>
+          </div>
+     	</div>
+            
+ 		
+         <div class="form-group text-right">
+          <div class="col-lg-offset-2 col-lg-10">
+            <button class="btn btn-theme" type="button" onclick="location.href='invoicePaymentList'">등록</button>
+            <button class="btn btn-theme04" type="button" >취소</button>
+          </div>
+        </div>
+         
+        
+
+      
+    </div>
+    
+    <!-- 모달화면에서의 검색부분 -->
+        <div class="modal fade modal-xl"  id="byMaterialCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" style="width:auto;display:table" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h4 class="modal-title" id="exampleModalLabel"><i class="fa fa-globe"></i> 원부자재 재료 구분 검색</h4>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>     
+		      <div class="modal-body">
+		   <div class="form-group">
+          <div class="col-md-6">
+          <select class="form-control">
+		   <option>::구분선택::</option>
+		   <option>원부재</option>
+		   <option>부자재</option>
+		  </select>
+		  </div>
+		  
+          <div class="input-group col-md-6">
+            <input type="text" class="form-control" size="5">
+            <div class="input-group-btn">
+              <button type="button" class=" btn btn-theme03 btn btn-default"><i class="fa"></i>검색</button>
+            </div>
+          </div>
+		</div>
+
+	<!-- 모달에서 테이블부분  -->
+       <table class="table table-striped table-advance table-hover" id="list">
+         <thead>
+           <tr>
+             <th><i class="fa fa-check-circle-o"></i> 선택</th>
+             <th><i class="fa fa-bullhorn"></i> 번호</th>
+             <th class="hidden-phone"><i class="fa fa-bookmark"></i> 원부자재 구분</th>
+             <th><i class="fa fa-bookmark"></i> 원부자재 재료 구분명</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr>
+             <td><input type="radio" name="radioClass" class="radioClass"></td>
+             <td>1</td>
+             <td>원자재</td>
+             <td class="materialCate">원단</td>
+            </tr>
+           <tr>
+            <td><input type="radio" name="radioClass" class="radioClass"></td>
+            <td>2</td>
+            <td>부자재</td>
+            <td class="materialCate">단추</td>
+           </tr>
+           <tr>
+            <td><input type="radio" name="radioClass" class="radioClass"></td>
+            <td>3</td>
+            <td>부자재</td>
+            <td class="materialCate">실</td>
+           </tr>
+           <tr>
+            <td><input type="radio" name="radioClass" class="radioClass"></td>
+            <td>4</td>
+            <td>부자재</td>
+            <td class="materialCate">지퍼</td>
+           </tr>
+         </tbody>
+       </table>
+	 </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+      <button type="button" class="btn btn-primary" id="sendMaterialCateNameBtn" data-dismiss="modal">값가져오기</button>
+       </div>
+    </div>
+   
+  </div>
+
+		<!-- 모달테스트 끝  -->
+		
+    <!-- 모달화면에서의 검색부분 -->
+        <div class="modal fade modal-xl"  id="byMaterialName" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" style="width:auto;display:table" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h4 class="modal-title" id="exampleModalLabel"><i class="fa fa-globe"></i> 원부자재 재료 구분 검색</h4>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>     
+		      <div class="modal-body">
+		   
+          <div class="col-md-6">
+          <select class="form-control">
+		   <option>::원부자재구분선택::</option>
+		   <option>원부재</option>
+		   <option>부자재</option>
+		  </select>
+		  </div>
+		  
+          <div class="col-md-6">
+          <select class="form-control">
+		   <option>::재료구분선택::</option>
+		   <option>단추</option>
+		   <option>원단</option>
+		   <option>실</option>
+		   <option>지퍼</option>
+		  </select>
+		  </div>
+		
+		
+		 
+          <div class="input-group col-md-8" style="padding-left: 150px; padding-top: 10px;">
+            <input type="text" class="form-control" size="5">
+            <div class="input-group-btn">
+              <button type="button" class=" btn btn-theme03 btn btn-default"><i class="fa"></i>검색</button>
+            </div>
+          </div>
+		 
+
+	<!-- 모달에서 테이블부분  -->
+       <table class="table table-striped table-advance table-hover" id="materialNamelist">
+         <thead>
+           <tr>
+             <th><i class="fa fa-check-circle-o"></i> 선택</th>
+             <th><i class="fa fa-bullhorn"></i> 번호</th>
+             <th class="hidden-phone"><i class="fa fa-bookmark"></i> 원부자재 구분</th>
+             <th><i class="fa fa-bookmark"></i> 원부자재 재료 구분명</th>
+             <th><i class="fa fa-bookmark"></i> 원부자재 재료명</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr>
+             <td><input type="radio" name="radioClass" class="radioClass"></td>
+             <td>1</td>
+             <td>원자재</td>
+             <td>원단</td>
+             <td class="materialName">실크</td>
+            </tr>
+           <tr>
+            <td><input type="radio" name="radioClass" class="radioClass"></td>
+            <td>2</td>
+            <td>부자재</td>
+            <td>단추</td>
+            <td class="materialName">동그라미 단추</td>
+           </tr>
+           <tr>
+            <td><input type="radio" name="radioClass" class="radioClass"></td>
+            <td>3</td>
+            <td>부자재</td>
+            <td>실</td>
+            <td class="materialName">명주실</td>
+           </tr>
+           <tr>
+            <td><input type="radio" name="radioClass" class="radioClass"></td>
+            <td>4</td>
+            <td>부자재</td>
+            <td>지퍼</td>
+            <td class="materialName">지그제그 지퍼</td>
+           </tr>
+         </tbody>
+       </table>
+	 </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+      <button type="button" class="btn btn-primary" id="sendMaterialNameBtn" data-dismiss="modal">값가져오기</button>
+       </div>
+    </div>
+  </div>
+		<!-- 모달테스트 끝  -->
+		
+    <!-- 모달화면에서의 검색부분 -->
+        <div class="modal fade modal-xl"  id="byColorlName" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" style="width:auto;display:table" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h4 class="modal-title" id="exampleModalLabel"><i class="fa fa-globe"></i> 원부자재 재료 구분 검색</h4>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>     
+		      <div class="modal-body">
+		   
+          <div class="col-md-6">
+          <select class="form-control">
+		   <option>::원부자재구분선택::</option>
+		   <option>원부재</option>
+		   <option>부자재</option>
+		  </select>
+		  </div>
+		  
+          <div class="col-md-6">
+          <select class="form-control">
+		   <option>::재료구분선택::</option>
+		   <option>단추</option>
+		   <option>원단</option>
+		   <option>실</option>
+		   <option>지퍼</option>
+		  </select>
+		  </div>
+		
+		
+		 
+          <div class="input-group col-md-8" style="padding-left: 150px; padding-top: 10px;">
+            <input type="text" class="form-control" size="5">
+            <div class="input-group-btn">
+              <button type="button" class=" btn btn-theme03 btn btn-default"><i class="fa"></i>검색</button>
+            </div>
+          </div>
+		 
+
+	<!-- 모달에서 테이블부분  -->
+       <table class="table table-striped table-advance table-hover" id="materialNamelist">
+         <thead>
+           <tr>
+             <th><i class="fa fa-check-circle-o"></i> 선택</th>
+             <th><i class="fa fa-bullhorn"></i> 번호</th>
+             <th class="hidden-phone"><i class="fa fa-bookmark"></i> 원부자재 구분</th>
+             <th><i class="fa fa-bookmark"></i> 원부자재 재료 구분명</th>
+             <th><i class="fa fa-bookmark"></i> 원부자재 재료명</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr>
+             <td><input type="radio" name="radioClass" class="radioClass"></td>
+             <td>1</td>
+             <td>원자재</td>
+             <td>원단</td>
+             <td class="materialName">실크</td>
+            </tr>
+           <tr>
+            <td><input type="radio" name="radioClass" class="radioClass"></td>
+            <td>2</td>
+            <td>부자재</td>
+            <td>단추</td>
+            <td class="materialName">동그라미 단추</td>
+           </tr>
+           <tr>
+            <td><input type="radio" name="radioClass" class="radioClass"></td>
+            <td>3</td>
+            <td>부자재</td>
+            <td>실</td>
+            <td class="materialName">명주실</td>
+           </tr>
+           <tr>
+            <td><input type="radio" name="radioClass" class="radioClass"></td>
+            <td>4</td>
+            <td>부자재</td>
+            <td>지퍼</td>
+            <td class="materialName">지그제그 지퍼</td>
+           </tr>
+         </tbody>
+       </table>
+	 </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+      <button type="button" class="btn btn-primary" id="sendMaterialNameBtn" data-dismiss="modal">값가져오기</button>
+       </div>
+    </div>
+   
+  </div>
+
+		<!-- 모달테스트 끝  -->
+<script th:src="@{Dashio/lib/advanced-form-components.js}"></script>
+</th:block>
+
+</html>

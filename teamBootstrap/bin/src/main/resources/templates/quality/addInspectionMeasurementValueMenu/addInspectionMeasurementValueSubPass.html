@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="subPass">
+
+               
+                <div class="form-inline">
+              		<div class="col-sm-3 input-group">	
+						<input type="text" class="form-control" placeholder="품질검사 요청코드 검색">
+						<div class="input-group-btn">
+							<button id="requestCode" class="btn btn-warning">검색</button>
+						</div>
+					</div>
+	                <div class="col-sm-3 input-group">	
+						<input type="number" id="trCountSubPass" min="1" value="1" class="form-control" placeholder="숫자입력">
+						<div class="input-group-btn">
+							<button id="addRowsSubPass" class=" btn btn-theme03 btn btn-default">측정값 행 추가</button>
+						</div>
+					</div>	                
+                </div>
+				<br>
+                 <table class="table table-bordered table-striped table-condensed">
+                  <thead>
+                    <tr ><!-- 세부에 체크가 되어있으면 세부에 값이 들어간다...? -->
+                      <th><input type="checkbox" id="checkAllSubPass"></th>
+                      <th>*품질검사 요청코드</th>
+                      <th>검사명</th>
+                      <th>*측정홧수</th>
+                      <th>합/불 </th>
+   					  <th>시작일시</th>
+                      <th>완료일시</th>
+                      <th>등록</th>
+                      <th>삭제</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbodySubPass">
+                    <tr id="tableTrSubPass">	
+                      <td><input type="checkbox" class="checkedSubPass"></td>
+                      <td>
+		                <div class="input-group">	
+							<input type="text" class="form-control" placeholder="품질검사요청코드 검색">
+							<div class="input-group-btn">
+								<button id="addRowsSubPass" class="btn btn-default">검색</button>
+							</div>						
+		                </div>
+					  </td>
+					  <td>검사명</td>
+                      <td>
+					      <select class="form-control">
+					      	<option>1회차</option>
+					      	<option>2회차</option>
+					      	<option>3회차</option>
+					      </select>
+					  </td>
+                      <td>
+                      	<input type="radio" name="radio">합                    	
+                      	<input type="radio" name="radio">불                    	
+					  </td>
+                     
+                      <td>
+                      	<input type="text" class="form-control" placeholder="공란일시 등록시간">
+                      </td>
+                      <td>
+                      	<input type="text" class="form-control" placeholder="공란일시 등록시간">
+                      </td>
+                      <td>
+	               		<button type="button">등록</button>
+					  </td>
+                      <td>
+	               		<button type="button" class="removeButtonSubPass">삭제</button>
+					  </td>
+                    </tr>
+
+                  </tbody>
+                </table>  
+                 
+              <div class="form-group text-right">
+                    <div class="col-lg-offset-2 col-lg-10">
+                      <a href="#" class="btn btn-success btn-xs"><i class="fa fa-check"></i>등록</a>
+                      <a class="btn btn-danger btn-xs" id="deleteBtnSubPass"><i class="fa fa-trash-o "></i>삭제</a>
+                    </div>
+                </div>
+                
+ <th:block layout:fragment="customJs">
+	<script type="text/javascript" th:src="@{quality/addInspectionMeasurementValueSubPass.js}"></script>
+</th:block>
+</th:block>
+
+</html>

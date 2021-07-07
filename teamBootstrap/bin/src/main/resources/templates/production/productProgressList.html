@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_production}">
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3>생산관리</h3>
+	    </div>
+</th:block>
+<th:block layout:fragment="customJs"> 
+<script type="text/javascript">
+		$(function(){
+			//원부자재 재료 구분명 가져오는 modal
+			$('#searchReqCodeBtn').click(function(){
+				$('#getRequestCodeModal').modal("show");
+			});
+			
+			//#checkAll 버튼 클릭 시 전체 checked
+			$('#checkAll').click(function(){
+				if($('#checkAll').prop('checked')){
+					$('.checked').prop('checked',true);
+				}else{
+					$('.checked').prop('checked',false);
+				}
+			});	
+				
+		    var tableAttr = $('#list').children();
+			var tdList = tableAttr.find('.radioClass');
+			var radioSelected = tableAttr.find('.radioClass').is(':checked');
+			
+			
+			
+			$('#sendReqProductCodeBtn').click(function(){
+				tdList = tableAttr.find('.radioClass');
+				tdList.each(function(){
+					if($(this).is(':checked')){
+						var par = $(this).parent();
+						var reqProductCode = par.parent().find('.reqProductCode').text();
+						var startDate = par.parent().find('.startDate').text();
+						var finishDate = par.parent().find('.finishDate').text();
+						console.log(par);
+						console.log(reqProductCode + '<<reqProductCode');
+						$('#reqProductCode').attr('value', reqProductCode);
+						$('#startDate').attr('value', startDate);
+						$('#finishDate').attr('value', finishDate);
+						$('#reqProductCode').attr('readOnly', true);
+						
+					}				
+					
+				});
+			});
+			
+			
+	    	$('[data-popup-open]').on('click', function(e)  {
+		       var targeted_popup_class = jQuery(this).attr('data-popup-open');
+		       $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+
+		       e.preventDefault();
+		   });
+
+		    //----- CLOSE
+		    $('[data-popup-close]').on('click', function(e)  {
+		       var targeted_popup_class = jQuery(this).attr('data-popup-close');
+		       $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+
+		       e.preventDefault();
+		    });
+		}) 
+</script>
+</th:block>
+ 
+<th:block layout:fragment="container">
+	<div class="form-panel form-horizontal">
+             <h4 class="mb"><i class="fa fa-edit"></i>의뢰 품목별 생산공정 현황 등록</h4>
+             <hr>
+             <br>
+
+             <div class="form-group">
+		          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품목별 의뢰코드</label>
+		          <div class="col-md-5">
+		            <div  class="input-group date">
+		              <input type="text" class="form-control" id="reqProductCode" size="16">
+		              <div class="input-group-btn">
+		                <button type="button" class="btn btn-theme03 btn btn-default" id="searchReqCodeBtn">검색하여 가져오기</button>
+		              </div>
+		            </div>
+		          </div>
+		        </div>
+               
+			<div class="form-group">
+	          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">생산 시작 일시</label>
+	          <div class="col-md-4">
+	            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
+	              <input type="text" class="form-control" readonly="readonly" size="16" id="startDate">
+	              <div class="input-group-btn">
+	                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
+	                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
+	              </div>
+	            </div>
+	          </div>
+	        </div>
+		        
+			<div class="form-group">
+	          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">생산 완료 일시</label>
+	          <div class="col-md-4">
+	            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
+	              <input type="text" class="form-control" readonly="readonly" size="16" id="finishDate">
+	              <div class="input-group-btn">
+	                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
+	                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
+	              </div>
+	            </div>
+	          </div>
+	        </div>
+	        
+			
+			<div class="form-group">
+				 <label class="col-lg-2 col-sm-2 control-label" style="font-weight: 600;">담당 사원명</label>
+				    <div class="col-lg-10">
+				       <p class="form-control-static">김다미</p>
+				    </div>
+			</div>
+				        
+			<div class="form-group">
+				<label class="col-lg-2 col-sm-2 control-label" style="font-weight: 600;">담당자 사원 코드</label>
+				 <div class="col-lg-10">
+				     <p class="form-control-static">W01</p>
+				 </div>
+			</div>
+         
+                <div class="form-group text-right">
+	          <div class="col-lg-offset-2 col-lg-10">
+	            <button class="btn btn-theme" type="submit" onclick="location.href='completedProductList'"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">등록</font></font></button>
+				<button class="btn btn-theme04" type="button" onclick="location.href='completedProductList'"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소</font></font></button>
+		   	 </div>
+		  	</div>
+		   </div> 
+   
+	<!-- 모달화면에서의 검색부분 -->
+        <div class="modal fade modal-xl"  id="getRequestCodeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" style="width:auto;display:table" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h4 class="modal-title" id="exampleModalLabel"><i class="fa fa-globe"></i> 원부자재 재료 구분 검색</h4>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>     
+		      <div class="modal-body">
+		   <div class="form-group">
+          <div class="col-md-6">
+          <select class="form-control">
+		   <option>::조건선택::</option>
+		   <option>거래처명</option>
+		   <option>계약번호</option>
+		   <option>납치일</option>
+		  </select>
+		  </div>
+		  
+          <div class="input-group col-md-6">
+            <input type="text" class="form-control" size="5">
+            <div class="input-group-btn">
+              <button type="button" class=" btn btn-theme03 btn btn-default"><i class="fa"></i>검색</button>
+            </div>
+          </div>
+		</div>
+
+	<!-- 모달에서 테이블부분  -->
+       <table class="table table-striped table-advance table-hover" id="list">
+         <thead>
+           <tr>
+             <th><i class="fa fa-check-circle-o"></i> 선택</th>
+             <th><i class="fa fa-bullhorn"></i> 번호</th>
+             <th><i class="fa fa-bookmark"></i> 품목별 의뢰코드</th>
+             <th><i class="fa fa-bookmark"></i> 계약번호</th>
+             <th><i class="fa fa-bookmark"></i> 양복명</th>
+             <th><i class="fa fa-bookmark"></i> 품목명</th>
+             <th><i class="fa fa-bookmark"></i> 거래처명</th>
+             <th><i class="fa fa-calendar"></i> 납부일</th>
+             <th><i class="fa fa-calendar"></i> 생산 시작 일시</th>
+             <th><i class="fa fa-calendar"></i> 생산 완료 일시</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr>
+             <td><input type="radio" name="radioClass" class="radioClass"></td>
+             <td>1</td>
+             <td class="reqProductCode">req01_MS_pants</td>
+             <td>100</td>
+             <td>신사양복</td>
+             <td>바지</td>
+             <td>파크랜드</td>
+             <td>2021-06-28</td>
+             <td class="startDate">2021-03-06</td>
+             <td class="finishDate">2021-03-08</td>
+            </tr>
+           <tr>
+            <td><input type="radio" name="radioClass" class="radioClass"></td>
+             <td>2</td>
+             <td class="reqProductCode">req01_MS_jacket</td>
+             <td>100</td>
+             <td>신사양복</td>
+             <td>자켓</td>
+             <td>파크랜드</td>
+             <td>2021-06-28</td>
+             <td class="startDate">2021-04-06</td>
+             <td class="finishDate">2021-06-08</td>
+           <tr>
+            <td><input type="radio" name="radioClass" class="radioClass"></td>
+             <td>1</td>
+             <td class="reqProductCode">req02_WS_skirt</td>
+             <td>101</td>
+             <td>숙녀양복</td>
+             <td>치마</td>
+             <td>인디안</td>
+             <td>2021-06-26</td>
+             <td class="startDate">2021-06-06</td>
+             <td class="finishDate">2021-07-01</td>
+           </tr>
+           <tr>
+            <td><input type="radio" name="radioClass" class="radioClass"></td>
+             <td>1</td>
+             <td class="reqProductCode">req03_WS_pants</td>
+             <td>103</td>
+             <td>숙녀양복</td>
+             <td>바지</td>
+             <td>로가디스</td>
+             <td>2021-05-03</td>
+             <td class="startDate">2021-03-15</td>
+             <td class="finishDate">2021-11-25</td>
+           </tr>
+         </tbody>
+       </table>
+	 </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+      <button type="button" class="btn btn-primary" id="sendReqProductCodeBtn" data-dismiss="modal">값가져오기</button>
+       </div>
+    </div>
+   
+  </div>
+
+		<!-- 모달테스트 끝  -->
+		
+	<!-- 달력사용을 위한 스크립트  -->
+  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-daterangepicker/daterangepicker.js}"></script>
+  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js}"></script>
+  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-daterangepicker/moment.min.js}"></script>
+  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-timepicker/js/bootstrap-timepicker.js}"></script>
+  <script th:src="@{Dashio/lib/advanced-form-components.js}"></script>
+
+
+
+</th:block>
+
+
+
+</html>
