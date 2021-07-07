@@ -18,6 +18,7 @@ import ksmart39.springboot.domain.AccountingCategory;
 import ksmart39.springboot.domain.Client;
 import ksmart39.springboot.domain.HumanResources;
 import ksmart39.springboot.domain.QualityInspection;
+import ksmart39.springboot.domain.SubClassInspection;
 import ksmart39.springboot.service.SystemService;
 
 @Controller
@@ -283,8 +284,12 @@ public class SystemController {
 
 	//===============================================================
 	
-	
-
+	//[보람]품질검사 대분류 
+	@GetMapping()
+	public String getHighClassCate() {
+		
+		return null;
+	}
 	//[보람] 검사 리스트 검사번호클릭시 검사정보 경로
 			@GetMapping("qualityInspectionInfo")
 			public String qualityInspectionInfo() {
@@ -307,10 +312,10 @@ public class SystemController {
 	//검사종류 리스트 메서드
 	@GetMapping("/qualityInspectionList")
 	public String getQualityInspectionList(Model model) {
-		List<QualityInspection> qualityInspectionList =systemService.getQualityInspectionList();
+		List<SubClassInspection> qualityInspectionList = systemService.getQualityInspectionList();
 		
 		log.info("========================================");
-		log.info("qualityInspectionList:",qualityInspectionList);
+		log.info("qualityInspectionList - {}:", qualityInspectionList.toString());
 		log.info("========================================");
 		model.addAttribute("qualityInspectionList", qualityInspectionList);
 	

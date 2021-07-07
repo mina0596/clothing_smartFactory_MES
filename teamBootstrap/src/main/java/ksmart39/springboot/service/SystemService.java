@@ -11,6 +11,7 @@ import ksmart39.springboot.domain.AccountingCategory;
 import ksmart39.springboot.domain.Client;
 import ksmart39.springboot.domain.HumanResources;
 import ksmart39.springboot.domain.QualityInspection;
+import ksmart39.springboot.domain.SubClassInspection;
 
 @Service
 public class SystemService {
@@ -87,9 +88,7 @@ public class SystemService {
 	//=============================================================
 	
 	//[보람 ]품질검사 리스트 조회메서드
-	public List<QualityInspection> getQualityInspectionList(){
-		List<QualityInspection> qualityInspectionList = systemMapper.getQualityInspectionList();
-	
-		return   qualityInspectionList;
+	public List<SubClassInspection> getQualityInspectionList(){
+		return systemMapper.getQualityInspectionList();
 	}
 }
