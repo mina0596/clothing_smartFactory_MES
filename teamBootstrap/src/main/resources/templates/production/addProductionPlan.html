@@ -13,7 +13,7 @@ layout:decorate="@{layout/default_production}">
 
             <div class="form-panel">
              <h4 class="mb"><i class="fa fa-edit"></i>생산계획 등록</h4>
-              <form th:href="@{/productionPlanList}" class="form-horizontal style-form" method="get">
+              <form id="form" th:href="@{/productionPlanList}" class="form-horizontal style-form" method="post">
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">성별별 양복명</label>
                   <div class="col-sm-4">
@@ -25,7 +25,7 @@ layout:decorate="@{layout/default_production}">
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">품목소분류</label>
                   <div class="col-sm-4">
-                      <select id="detailCate" class="form-control">
+                      <select name="productCode" id="detailCate" class="form-control">
 						<option value="">::선택::</option>
 		               </select>
                   </div>
@@ -33,13 +33,13 @@ layout:decorate="@{layout/default_production}">
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">수량</label>
                   <div class="col-sm-2">
-                    <input id="amount" type="number" class="form-control">
+                    <input name="productionPlanQuantity" id="amount" type="number" class="form-control">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">단위</label>
                   <div class="col-sm-2">
-                      <select id="unit" class="form-control">
+                      <select name="productionPlanQantityUnit" id="unit" class="form-control">
 						<option value="">::선택::</option>
 						<option value="벌">벌</option>
 		               </select>
@@ -49,26 +49,26 @@ layout:decorate="@{layout/default_production}">
 					<div class="form-group">
 					          <label class="col-sm-2 col-sm-2 control-label">작업시작 예정일</label>
 				          <div class="col-md-2">
-							<input id="startDate" type="date" class="form-control">
+							<input name="expectedProductionStartDate" id="startDate" type="date" class="form-control">
 				          </div>
 				        </div>
 					<div class="form-group">
 					          <label class="col-sm-2 col-sm-2 control-label">작업마감 예정일</label>
 				          <div class="col-md-2">
-							<input id="endDate" type="date" class="form-control">
+							<input name="expectedProductionEndDate" id="endDate" type="date" class="form-control">
 				          </div>
 				        </div>
 					<div class="form-group">
 						 <label class="col-lg-2 col-sm-2 control-label">담당 사원명</label>
-						    <div class="col-lg-10">
-						       <p class="form-control-static">김다미</p>
+						    <div class="col-lg-2">
+						       <input name="chargeEmployeeName" class="form-control" value="김다미" readonly="readonly">
 						    </div>
 					</div>
 						        
 					<div class="form-group">
 						<label class="col-lg-2 col-sm-2 control-label">담당자 사원 코드</label>
-						 <div class="col-lg-10">
-						     <p id="employeeId" class="form-control-static">W01</p>
+						 <div class="col-lg-2">
+						       <input name="chargeEmployeeCode" class="form-control" value="E0012" readonly="readonly">
 						 </div>
 					</div>
            
@@ -78,13 +78,13 @@ layout:decorate="@{layout/default_production}">
                  <div class="form-group ">
                     <label class="control-label col-lg-2">비고</label>
                     <div class="col-lg-4">
-                      <textarea class="form-control"></textarea>
+                      <textarea name="productionPlanNote" class="form-control"></textarea>
                     </div>
                   </div>
                   
                   <div class="form-group text-right">
 			          <div class="col-lg-offset-2 col-lg-10">
-			            <button id="submitBtn" class="btn btn-theme" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">등록</font></font></button>
+			            <button id="submitBtn" class="btn btn-theme" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">등록</font></font></button>
 			            <a th:href="@{/productionPlanList}" class="btn btn-theme04"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소</font></font></a>
 			          </div>
 			        </div>
@@ -98,19 +98,30 @@ layout:decorate="@{layout/default_production}">
 <th:block layout:fragment="customJs">
 	<script type="text/javascript">
 		$(function(){
+
+			var submitBtn = $('#submitBtn');
+			var employeeId = $('#employeeId');
+			var endDate = $('#endDate');
+			var startDate = $('#startDate');
+			var unit = $('#unit');
+			var amount = $('#amount');
+			var genderCate = $('#genderCate');
+			var detailCate = $('#detailCate');
 			
 			//성별별 이름 가져오기
-			var genderCate = $('#genderCate');
 			var request = $.ajax({
 				url: "/productCode",
 				method: "get"
 			}); 
 			request.done(function( data ) {
-				
-				if(data != undefined && data != '' && data.length > 0){
+				console.log(data);
+				if(data != undefined || data != '' || data.length > 0){
 					var html = '';
 					for(var i = 0; i<data.length; i++){
-						html += "<option>"+data[i].gender_categorized_name+"</option>";					
+						html += "<option value= '";
+						html += data[i].gender_categorized_name;
+						html += "'>";
+						html += data[i].gender_categorized_name+"</option>";					
 					}
 					genderCate.append(html);
 				}
@@ -123,9 +134,8 @@ layout:decorate="@{layout/default_production}">
 			$('#genderCate').change(function(){
 				
 				var gender = $("#genderCate option:selected").val();
-				var detailCate = $('#detailCate');
 				//옵션 값 초기화	
-				detailCate.html("<option>::선택::</option>");
+				detailCate.html("<option value=''>::선택::</option>");
 				
 				var request = $.ajax({
 					url: "/detailCode",
@@ -152,16 +162,36 @@ layout:decorate="@{layout/default_production}">
 				});									
 			});
 			
-			var submitBtn = $('#submitBtn');
-			var employeeId = $('#employeeId');
-			var endDate = $('#endDate');
-			var startDate = $('#startDate');
-			var unit = $('#unit');
-			var amount = $('#amount');
-			var detailCate = $('#detailCate');
-			var genderCate = $('#genderCate');
-			
-			if()
+		
+			$(submitBtn).click(function(){		
+				
+				if(genderCate.val() == '' || genderCate.val() == null || genderCate.val() == undefined){
+					alert('성별별 양복명을 선택해주세요.');
+					genderCate.focus();
+				}
+				else if(detailCate.val() == '' || detailCate.val() == null || detailCate.val() == undefined){
+					alert('품목 소분류를 선택해주세요.');
+					detailCate.focus();				
+				}
+				else if(amount.val() == '' || amount.val() == null || amount.val() == undefined){
+					alert('갯수를 입력 해주세요.');
+					amount.focus();				
+				}
+				else if(unit.val() == '' || unit.val() == null || unit.val() == undefined){
+					alert('단위를 선택해주세요.');
+					unit.focus();				
+				}
+				else if(startDate.val() == '' || startDate.val() == null || startDate.val() == undefined){
+					alert('시작일자를 선택해주세요.');
+					startDate.focus();			
+				}
+				else if(endDate.val() == '' || endDate.val() == null || endDate.val() == undefined){
+					alert('종료일자를 선택해주세요.');
+					endDate.focus();			
+				}else{					
+					$('#form').submit();
+				}
+			});
 			
 		});
 		
