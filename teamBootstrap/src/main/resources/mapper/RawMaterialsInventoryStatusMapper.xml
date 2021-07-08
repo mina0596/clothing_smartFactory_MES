@@ -41,6 +41,32 @@
 	
 	</select>
 	
+	<select id="getInventoryInfoByMCode" parameterType="String" resultMap="materialsInventoryResultMap">
+		SELECT 
+			rmit.raw_material_code, 
+			rmit.raw_material_order_code, 
+			rmit.charge_employee_code, 
+			rmit.transaction_category, 
+			rmit.raw_material_transaction_amount, 
+			rmit.raw_material_transaction_date, 
+			rmit.raw_material_transaction_reg_date, 
+			rmit.raw_material_transaction_update_date,
+			info.raw_material_name,
+			info.raw_material_color_code,
+			info.raw_material_unit
+		FROM 
+			raw_material_inventory_transaction AS rmit
+			INNER join
+			raw_material_info AS info
+		ON
+			rmit.raw_material_code = info.raw_material_code
+		where
+			info.raw_material_code = #{materialCode} AND 
+			rmit.raw_material_code = #{materialCode};
+	
+	
+	</select>
+	
 	
 	
 </mapper>
