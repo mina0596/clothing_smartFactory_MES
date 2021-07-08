@@ -99,10 +99,14 @@ public class SystemController {
 		model.addAttribute("humanResources", humanResources);
 		return "system/humanResourcesList";
 	}
-		
-	//==============================================================
-	//수정화면 ->목록
-	@PostMapping("/modifyClient")
+
+
+
+	// ==============================================================
+	// 수정화면 ->목록
+	@PostMapping("modifyClient")
+
+
 	public String modifyClient(Client client) {
 		systemService.modifyClient(client);
 		log.info("=================");
