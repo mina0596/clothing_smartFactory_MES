@@ -74,9 +74,6 @@ layout:decorate="@{layout/default_system}">
          				<div class="form-group">
 		                	<select class="form-control" style="width: 125px;" name="highClassificationName" id="highClassificationName" onchange="getSelectBox(this)">
 		                		<option value="">대분류 검사명</option>
-		                		<th:block th:each="qualityInspection : ${qualityInspectionList}">
-		                		<option th:value="${qualityInspection.highClassificationCode}" th:text="${qualityInspection.highClassificationName}"></option>
-		                		</th:block>
 		                		
 		                	</select>
 	               		</div>
@@ -133,14 +130,13 @@ layout:decorate="@{layout/default_system}">
                       <input type="checkbox" class="check" name="check">
                     </td>
                     <td th:text="${i.index+1}"><a id="infoBtn"></a></td>
-                    <td th:text="${l.qualityInspectionCode}"></td>
-                    <td th:text =${l.highClassificationName} id="highClassificatonName"></td>
-                    <td th:text =${l.mediumClassificationName} id="mediumClassification"></td>
-                    <td th:text="${l.lowClassificationName}" id="lowClassification"></td>
-                    <td th:text="${l.subClassificationName}" id="subClassification">
-                     
+                    <td th:text="${l.highMedLowSubClassCode}"></td>
+                    <td th:text =${l.highClassInspection.highClassName} ></td>
+                    <td th:text =${l.mediumClassInspection.medClassName} ></td>
+                    <td th:text="${l.lowClassInspection.lowClassName}"></td>
+                    <td th:text="${l.subClassName}">
                     </td>
-                     <td th:text="${l.qualityInspectionRegDate}" id="regDate">
+                    <td th:text="${l.subClassRegDate}" >
                      	
                     </td>
                    <td>  <button class="btn btn-warning btn-xs" type="button" onclick="location.href='/addStandardTable'"><i class="fa fa-pencil"></i>기준표등록</button></td>

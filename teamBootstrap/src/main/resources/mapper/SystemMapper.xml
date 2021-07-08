@@ -300,39 +300,70 @@
 	</select>
 	
 	
-	<resultMap type="QualityInspection" id="qualityInspectiontMap">
-<result  property="qualityInspectionCode" 				column="quality_inspection_code"/>
-<result  property="highClassificationCode" 				column="high_classification_code"/>
-<result  property="highClassificationName" 				column="high_classification_name1"/>
-<result  property="mediumClassificationCode" 			column="medium_classification_code"/>
-<result  property="mediumClassificationName" 			column="medium_classification_name1"/>
-<result  property="lowClassificationCode" 				column="low_classification_code"/>
-<result  property="lowClassificationName" 				column="low_classification_name1"/>
-<result  property="subClassificationCode" 				column="sub_classification_code"/>
-<result  property="subClassificationName" 				column="sub_classification_name1"/>
-<result  property="quality_inspection_reg_date" 		column="qualityInspectionRegDate"/>
-<result  property="quality_inspection_update_date" 		column="qualityInspectionUpdateDate"/>
+<resultMap type="SubClassInspection" id="subClassInspectionMap">
+		<result property="highMedLowSubClassCode" column="quality_inspection_code"/>
+		<result property="highClassCode" column="high_class_code"/>
+		<result property="highMedClassCode" column="high_med_class_code"/>
+		<result property="highMedLowClassCode" column="high_med_low_class_code"/>
+		<result property="subClassCode" column="sub_class_code"/>
+		<result property="subClassName" column="sub_class_name"/>
+		<result property="subClassRegDate" column="sub_class_reg_date"/>
+		<result property="subClassUpdateDate" column="sub_class_update_date"/>
+	<association property="highClassInspection" javaType="highClassInspection">
+		<result property="highClassCode" column="high_class_code"/>
+		<result property="highClassName" column="high_class_name"/>
+		<result property="highClassRegDate" column="high_class_reg_date"/>
+		<result property="highClassUpdateDate" column="high_class_update_date"/>
+		</association>
+	<association property="mediumClassInspection" javaType="mediumClassInspection">
+		<result property="highMedClassCode" column="high_med_class_code"/>
+		<result property="highClassCode" column="high_class_code"/>
+		<result property="medClassCode" column="med_class_code"/>
+		<result property="medClassName" column="med_class_name"/>
+		<result property="medClassRegDate" column="med_class_reg_date"/>
+		<result property="mediClassUpdateDate" column="med_class_update_date"/>
+	</association>	
+	<association property="lowClassInspection" javaType="lowClassInspection">
+		<result property="highMedLowclassCode" column="high_med_low_class_code"/>
+		<result property="highClassCode" column="high_class_code"/>
+		<result property="highMedClassCode" column="high_med_class_code"/>
+		<result property="lowClassCode" column="low_class_code"/>
+		<result property="lowClassName" column="low_class_name"/>
+		<result property="lowClassRegDate" column="low_class_reg_date"/>
+		<result property="lowClassUpdateDate" column="low_class_update_date"/>
+	</association>
 </resultMap>
 
 <!-- =========================================================== -->
-<select id="getQualityInspectionList"  resultType="QualityInspection">
-SELECT 
-	quality_inspection_code				AS	 qualityInspectionCode
-	, high_classification_code			AS	 highClassificationCode
-	, high_classification_name1			AS	 highClassificationName
-	, medium_classification_code		AS	 mediumClassificationCode
-	, medium_classification_name1		AS	 mediumClassificationName
-	, low_classification_code			AS	 lowClassificationCode
-	, low_classification_name1			AS	 lowClassificationName
-	, sub_classification_code			AS	 subClassificationCode
-	, sub_classification_name1			AS	subClassificationName
-	, quality_inspection_reg_date		AS qualityInspectionRegDate
-	, quality_inspection_update_date    AS qualityInspectionUpdateDate
-	FROM 
-	quality_inspection_list;
+<select id="getQualityInspectionList"  resultMap="subClassInspectionMap">
+SELECT
+	s.quality_inspection_code,
+	h.high_class_name,
+	m.med_class_code,
+	m.med_class_name,
+	l.low_class_name,
+	s.sub_class_name,
+	s.sub_class_reg_date
+FROM sub_class_inspection_list AS s
+INNER JOIN
+	low_class_inspection_list AS l
+		ON s.high_med_low_class_code = l.high_med_low_class_code
+INNER JOIN
+	medium_class_inspection_list AS m
+		ON s.high_med_class_code =m.high_med_class_code
+INNER JOIN
+	high_class_inspection_list AS h
+	ON s.high_class_code = h.high_class_code;
 
 </select>
-	
+<!-- 품질검사 대분류 가지고오는메서드 -->	
+<select id="getHighClassCate" resultType="HighClassInspection">
+SELECT
+	high_class_code,
+high_class_name
+	FROM
+high_class_inspection_list;
+</select>	
 	
 	
 	<!-- ===========================================원부자재========================================================== -->
