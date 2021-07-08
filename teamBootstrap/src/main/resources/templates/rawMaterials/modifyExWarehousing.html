@@ -13,37 +13,37 @@ layout:decorate="@{layout/default_rawMaterials}">
 
 <th:block layout:fragment="container">
             <div class="form-panel">
-              <h4 class="mb"><i class="fa fa-edit"></i> 자재 입고 수정</h4>
+              <h4 class="mb"><i class="fa fa-edit"></i> 자재 출고 수정</h4>
               <form th:action="@{/addInWarehousing}" class="form-horizontal style-form" method="post">
                
 		        <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">발주 코드 검색</label>
                   <div class="col-sm-4">
-                    <input type="text" th:value="${materialOrderCode}" class="form-control" disabled="disabled" >
+                    <input type="text" name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
                   </div>
                 </div>
 		        <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">원부자재 코드</label>
                   <div class="col-sm-4">
-                    <input type="text" id="raw_material_code" th:value="${materialsCode}" class="form-control" disabled="disabled" >
+                    <input type="text" id="raw_material_code" name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
                   </div>
                 </div>
 		        <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">재료명</label>
                   <div class="col-sm-4">
-                    <input type="text" id="raw_material_name" th:value="${materialsName}" name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
+                    <input type="text" id="raw_material_name" name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
                   </div>
                 </div>
 		        <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">색상코드</label>
+                  <label class="col-sm-2 col-sm-2 control-label">색상</label>
                   <div class="col-sm-4">
-                    <input type="text" id="raw_material_color_code" th:value="${InventoryInfoByMCode.materialsInfo.colorCode}" name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
+                    <input type="text" id="raw_material_color_code" name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
                   </div>
                 </div>
 		        <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">특징</label>
                   <div class="col-sm-4">
-                    <input type="text" id="raw_material_feature" th:value="${InventoryInfoByMCode.materialsInfo.feature}" class="form-control" disabled="disabled" >
+                    <input type="text" id="raw_material_feature" name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
                   </div>
                 </div>
 		        <div class="form-group">
@@ -63,13 +63,13 @@ layout:decorate="@{layout/default_rawMaterials}">
 		        <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">갯수</label>
                   <div class="col-sm-4"><!-- 값 들어오고 disabled 풀어주기 -->
-                    <input type="text" id="raw_material_order_amount" th:value="${materialsInAmount}" class="form-control" >
+                    <input type="text" id="raw_material_order_amount" name="raw_material_transaction_amount" class="form-control" >
                   </div>
                 </div>
 		        	        
                
                <div class="form-group">
-		          <label class="col-sm-2 col-sm-2 control-label">입고일시</label>
+		          <label class="col-sm-2 col-sm-2 control-label">출고일시</label>
 		          <div class="col-md-4">
 		            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
 		              <input type="text" class="form-control" readonly="readonly" size="16">
