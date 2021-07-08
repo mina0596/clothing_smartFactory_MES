@@ -43,97 +43,98 @@ public class SystemController {
 		return "system/system";
 	}
 
-	// ===============================================================
-
-	// 수정화면 ->목록
+	//===============================================================
+	
+	
+	//수정화면 ->목록
 	@PostMapping("modifyHumanResources")
 	public String modifyHumanResources(HumanResources humanResources) {
 		systemService.modifyHumanResources(humanResources);
 		return "redirect:/humanResourcesList";
 	}
-
-	// [한빛]사원수정
+	
+	//[한빛]사원수정
 	@GetMapping("/modifyHumanResources")
-	public String modifyHumanResources(@RequestParam(name = "employeeCode", required = false) String employeeCode,
-			Model model) {
-		// 1. 회원코드로 회원테이블을 조회한 HumanResources객체
+	public String modifyHumanResources(@RequestParam(name = "employeeCode", required = false) String employeeCode, Model model) {
+		//1. 회원코드로 회원테이블을 조회한 HumanResources객체
 		HumanResources humanResources = systemService.getEmployeeInfoByCode(employeeCode);
-		// 2. Model 화면에 전달할 객체 삽입
-		model.addAttribute("title", "회원수정폼");
-		model.addAttribute("humanResources", humanResources);
+		//2. Model 화면에 전달할 객체 삽입
+		model.addAttribute("title","회원수정폼");
+		model.addAttribute("humanResources",humanResources);
 		return "system/modifyHumanResources";
 	}
-
-	// [한빛]사원등록-> 사원목록
+	
+	//[한빛]사원등록-> 사원목록
 	@PostMapping("/addHumanResources")
 	public String addHumanResources(HumanResources humanResources) {
 		systemService.addHumanResources(humanResources);
-
+		
 		return "redirect:/humanResourcesList";
 	}
-
-	// [한빛]사원등록
+	//[한빛]사원등록
 	@GetMapping("/addHumanResources")
 	public String addHumanResources(Model model) {
 		model.addAttribute("title", "인사관리");
-		return "system/addHumanResources";
+		return"system/addHumanResources";	
 	}
-
-	// [한빛]사원목록
+	
+	//[한빛]사원목록
 	@GetMapping("/humanResourcesList")
-	public String humanResourcesList(Model model, @RequestParam(name = "searchKey", required = false) String searchKey,
-			@RequestParam(name = "searchValue", required = false) String searchValue) {
-
+	public String humanResourcesList(Model model
+									,@RequestParam(name="searchKey",required = false) String searchKey
+									,@RequestParam(name="searchValue",required=false) String searchValue) {
+		
 		log.info("========================================");
 		log.info("화면에서 입력받은 값(회원목록) searchKey: {}", searchKey);
 		log.info("화면에서 입력받은 값(회원목록) searchValue: {}", searchValue);
 		log.info("========================================");
-
-		Map<String, Object> paramMap = new HashMap<String, Object>();
+		
+		
+		Map<String,Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("searchKey", searchKey);
 		paramMap.put("searchValue", searchValue);
-
+		
 		List<HumanResources> humanResources = systemService.getHumanResources(paramMap);
 		model.addAttribute("title", "인사관리");
 		model.addAttribute("humanResources", humanResources);
 		return "system/humanResourcesList";
 	}
 
-
-	// ==============================================================
-	// 수정화면 ->목록
-	@PostMapping("modifyClient")
-
+		
+	//==============================================================
+	//수정화면 ->목록
+	@PostMapping("/modifyClient")
 	public String modifyClient(Client client) {
 		systemService.modifyClient(client);
 		log.info("=================");
 		log.info("{}",client);
 		return "redirect:/clientList";
 	}
-
-	// [한빛]사원수정
+	
+	//[한빛]사원수정
 	@GetMapping("/modifyClient")
 	public String modifyClient(@RequestParam(name = "clientCode", required = false) String clientCode, Model model) {
-		// 1. 회원코드로 회원테이블을 조회한 HumanResources객체
+		//1. 회원코드로 회원테이블을 조회한 HumanResources객체
 		Client client = systemService.getClientInfoByCode(clientCode);
-		// 2. Model 화면에 전달할 객체 삽입
-		model.addAttribute("title", "거래처수정폼");
-		model.addAttribute("client", client);
+		//2. Model 화면에 전달할 객체 삽입
+		model.addAttribute("title","거래처수정폼");
+		model.addAttribute("client",client);
 		return "system/modifyClient";
 	}
-
-	// [한빛]주문등록 ->목록으로 이동
+	
+	//[한빛]주문등록 ->목록으로 이동
 	@PostMapping("/addClient")
 	public String addClient(Client client) {
 		systemService.addClient(client);
 		return "redirect:/clientList";
 	}
-
-	// [한빛]거래처 조회
+	
+	//[한빛]거래처 조회
 	@GetMapping("/clientList")
 	public String getClientList(@RequestParam(name = "searchKey", required = false) String searchKey,
-			@RequestParam(name = "searchValue", required = false) String searchValue, Model model) {
-		Map<String, Object> paramMap = new HashMap<String, Object>();
+													@RequestParam(name = "searchValue", required = false) String searchValue, 
+																					Model model) {
+		Map<String, Object> paramMap = new HashMap<String,Object>();
 		paramMap.put("searchKey", searchKey);
 		paramMap.put("searchValue", searchValue);
 
@@ -143,12 +144,13 @@ public class SystemController {
 		return "system/clientList";
 	}
 
-	// [한빛]수주거래처 등록
+	//[한빛]수주거래처 등록
 	@GetMapping("/addClient")
 	public String addClient(Model model) {
 		model.addAttribute("title", "거래처관리");
 		return "system/addClient";
 	}
+	
 
 	// ==================================================================
 	// [다미]계정과목 수정
