@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_system}">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3 th:text="${title}"></h3>
+	    </div>
+</th:block>
+
+
+
+<th:block layout:fragment="container">
+	
+	<div class="form-panel">
+	 <h4 class="mb"><i class="fa fa-angle-right"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">사원수정</font></font></h4>
+              <div class="form">
+                <form class="cmxform form-horizontal style-form" id="signupForm" method="post"  th:action="@{/modifyHumanResources}">
+                
+                
+                  <div class="form-group ">
+                    <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">사원코드</font></font></label>
+		          <div class="col-md-6">
+		            <div  class="input-group ">
+                      <input class="form-control " name="employeeCode" type="text" th:value = "${humanResources.employeeCode}" disabled="disabled">
+                    </div>
+                  </div>
+                  </div>
+                  
+                <div class="form-group">
+		          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;" >아이디</label>
+		          <div class="col-md-6">
+		            <div  class="input-group ">
+		              <input type="text" name = "employeeId" class="form-control"  size="16" disabled="disabled" th:value="${humanResources.employeeId}">
+		            </div>
+		          </div>
+		        </div>
+                  
+                  <div class="form-group ">
+                    <label for="password" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">패스워드</font></font></label>
+                    <div class="col-lg-6">
+                      <input class="form-control " name="employeePw" type="password" >
+                    </div>
+                  </div>
+                  
+                    <div class="form-group ">
+                    <label for="confirm_password" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">패스워드 확인</font></font></label>
+                    <div class="col-lg-6">
+                      <input class="form-control "  name="employeePwCheck" type="password" >
+                    </div>
+                  </div>
+                  
+                   <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">권한</label>
+                  <div class="col-sm-2">
+                      <select class="form-control" name = "levelNum" >
+						<option>::선택::</option>
+						<option value="1">관리자</option>					
+						<option value="2">본사직원</option>
+						<option value="3">공장직원</option>
+		               </select>
+                  </div>
+                </div>
+                
+                  <div class="form-group ">
+                    <label class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">사원명</font></font></label>
+                    <div class="col-lg-6">
+                      <input class=" form-control" name="employeeName" type="text" th:value="${humanResources.employeeName}">
+                    </div>
+                  </div>
+                  
+                  <div class="form-group ">
+                    <label class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이메일</font></font></label>
+                    <div class="col-lg-6">
+                      <input class="form-control " name="employeeEmail" type="text" th:value="${humanResources.employeeEmail}">
+                    </div>
+                  </div>
+                  
+                  <div class="form-group ">
+                    <label class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">전화번호</font></font></label>
+                    <div class="col-lg-6">
+                      <input class="form-control " name="employeeTel" type="text" th:value="${humanResources.employeeTel}">
+                    </div>
+                  </div>
+                  
+                  <div class="form-group ">
+                    <label class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">주소</font></font></label>
+                    <div class="col-lg-6">
+                      <input class="form-control " name="employeeAddress" type="text" th:value="${humanResources.employeeAddress}">
+                    </div>
+                  </div>
+              
+                  <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">소속</label>
+                  <div class="col-sm-2">
+                      <select class="form-control"  name = "employeeDepartment">
+						<option>::선택::</option>
+						<option value = "본사">본사</option>
+						<option value = "공장">공장</option>
+		               </select>
+                  </div>
+                </div>
+                
+                  <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">직책</label>
+                  <div class="col-sm-2">
+                      <select class="form-control" name = "employeePosition">
+						<option>::선택::</option>
+						<option value = "사원">사원</option>
+						<option value = "주임">주임</option>
+						<option value = "대리">대리</option>
+						<option value = "과장">과장</option>
+						<option value = "차장">차장</option>
+						<option value = "부장">부장</option>
+						<option value = "임원">임원</option>
+		               </select>
+                  </div>
+                </div>
+                
+         <div class="form-group text-right">
+          <div class="col-lg-offset-2 col-lg-10">
+            <button class="btn btn-theme" type="submit" id="modifyEmployeeBtn"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">수정</font></font></button>
+            <button class="btn btn-theme04" type="button" onClick="history.back();"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소</font></font></button>
+          </div>
+        </div>
+      </form>
+    </div>
+ </div>
+
+
+</th:block>
+
+</html>

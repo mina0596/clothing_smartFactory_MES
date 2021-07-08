@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_qualityControl}">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3>품질 관리</h3>
+	   </div>
+
+ <script type="text/javascript">
+		$(function(){
+			//#checkAll 버튼 클릭 시 전체 checked
+				$('#checkAll').click(function(){
+					if($('#checkAll').prop('checked')){
+						$('.checked').prop('checked',true);
+							}else{
+								$('.checked').prop('checked',false);
+							}
+						});									
+					});
+
+	</script>  
+</th:block>
+
+<th:block layout:fragment="container">
+     <div class="col-md-12">
+       <div class="content">
+       
+
+		<h4><i class="fa fa-angle-right"></i>불량품 조회</h4>
+         	 <hr>
+		<form class="form-inline" role="form" >
+        
+         <table class="table table-striped table-advance table-hover">
+         	<thead>
+         		<tr>
+         			<th>발주처별</th>
+         			<th>재료별</th>
+         			<th>입고일별</th>
+         			<th><!-- 공백 --></th>
+         			<th>원부자재구분</th>
+         		</tr>
+         	</thead>
+         	<tbody>
+         		<tr>
+         			<td style="padding-right: 20px;">
+	         			 <div class="form-group"><!-- 발주처별 -->
+		               		<button id="bySupplier" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
+		                	<input type="text" class="form-control" id="bySupplierValue" placeholder="직접 입력 또는 검색">
+		                </div>
+         			</td>
+         			<td style="padding-right: 20px;">
+         				<div class="form-group"><!-- 재료별 -->
+		               		<button id="byMaterialName" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
+		                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="직접 입력 또는 검색">
+	              		</div>
+         			</td>
+         			<td>
+         				<div class="form-group">
+		                	<input type=date class="form-control" id="exampleInputPassword2" placeholder="입고일별">&nbsp&nbsp&nbsp ~ 
+	               		</div>
+         			</td>
+         			<td style="padding-right: 20px;">
+         				<div class="form-group">
+		                	<input type=date class="form-control" id="exampleInputPassword2" placeholder="입고일별">
+	               		</div>
+         			</td>
+         			<td style="padding-right: 20px;">
+         				<div class="form-group">
+		                	<select class="form-control" style="width: 125px;">
+		                		<option>All</option>
+		                		<option>원자재</option>
+		                		<option>부자재</option>
+		                	</select>
+	               		</div>
+         			</td>
+         			<td>
+         				  <button type="submit" class="btn btn-theme">검색</button>
+         			</td>        			
+         		</tr>
+         	</tbody>
+         </table>  
+        </form>  
+         
+         
+         
+ 
+		<div>
+             <div>
+              <h4><i class="fa fa-angle-right"></i>불량품 목록</h4> 
+             </div>
+              <table id="list" class="table table-striped table-advance table-hover">
+                <thead>
+                  <tr>
+                  	<th><input type="checkbox" id="checkAll"></th>
+                 	<th><i class="fa fa-bullhorn"></i>번호</th>
+                    <th class="hidden-phone"><i class="fa fa-bookmark"></i>불량품코드</th>
+                    <th><i class=" fa fa-bookmark"></i>불량원인</th>
+                    <th><i class=" fa fa-bookmark"></i>처리방법</th>
+                    <th><i class=" fa fa-bookmark"></i>비고</th>
+                    <th><i class=" fa fa-bookmark"></i>품질검사 결과코드</th>
+                    <th><i class=" fa fa-bookmark"></i>등록일자</th>
+                    <th><i class=" fa fa-bookmark"></i>수정</th>
+                  </tr>
+                </thead>
+ 
+                <tbody>
+                <!--db에서 데이터 넣어야하는 부분 -->
+                  <tr>
+                  	<td><input type="checkbox" class="checked"></td>
+                  	<td>1</td>
+                    <td class="hidden-phone">
+                    <a th:href="@{#}" data-popup-open="defectiveInfo" >defective01</a></td>
+                    <td>왜 고장났는지 잘 생각해봐</td>
+                    <td>폐기</td>
+                    <td>해당없음</td>
+                    <td>품질검사 결과코드</td>
+                    <td>2021-05-12 15:15:00</td>
+                    <td>  <button class="btn btn-primary btn-xs" type="button" onclick="location.href='/modifyDefectiveProduct'"><i class="fa fa-pencil"></i>수정</button></td>
+                  </tr>
+                  
+           		 </tbody>
+              </table>
+           	 </div>
+            </div>
+            <div class="form-group text-right">
+		          <div class="col-lg-offset-2 col-lg-10">
+		           <a th:href="@{/addDefectiveProduct}" class="btn btn-success btn"><i class="fa fa-plus"></i> 불량품등록</a>
+		           <a id="deleteBtn" class="btn btn-danger"><i class="fa fa-trash-o"></i>삭제</a>
+		          </div>
+		        </div> 
+            </div>
+          
+          <!-- =============================================================== -->
+          <!-- 입고 상세 내역 팝업창 -->
+          <div class="popup" data-popup="defectiveInfo">
+		    <div class="popup-inner" style="width:auto; display:table;">
+				<div class="popup-contents">
+		   		  <a class="popup-close" data-popup-close="defectiveInfo" href="#"><h3><i class="fa fa-times-circle"></i></h3></a> 
+
+		      </div>
+		      <div class="inWarehousingInfoPopUp-skin">
+		              <h4>불량품 상세 정보</h4>
+		              <div>
+			              	<table class="table table-bordered">
+
+				                <tbody>
+				                	<tr>
+				                		<td class="inWarehousingInfoPopUp">불량품코드</td>
+				                		<td>123456</td>
+				                		<td class="inWarehousingInfoPopUp">대분류</td>
+				                		<td>대분류명</td>
+				                	</tr>
+				                	<tr>
+				                		<td class="inWarehousingInfoPopUp">품질검사코드</td>
+				                		<td>품질검사코드123</td>
+				                		<td class="inWarehousingInfoPopUp">중분류</td>
+				                		<td>중분류명</td>
+				                	</tr>
+				                	<tr>
+				                		<td class="inWarehousingInfoPopUp">품질검사결과코드</td>
+				                		<td>품질검사결과123</td>
+				                		<td class="inWarehousingInfoPopUp">소분류명</td>
+				                		<td>소분류상세명</td>
+				                	</tr>
+				                	<tr>
+				                		<td class="inWarehousingInfoPopUp">불량원인</td>
+				                		<td>고장났아</td>
+				                		<td class="inWarehousingInfoPopUp">처리방법</td>
+				                		<td>폐기</td>
+				                	</tr>
+				                	<tr>
+				                		<td class="inWarehousingInfoPopUp">비고</td>
+				                		<td>해당없음</td>
+				                	</tr>
+
+
+				                </tbody>
+			              </table>
+		              </div>
+		              
+		            </div>
+					</div>
+		    </div>
+		<!-- 입고 상세 내역 팝업창 끝 -->	
+		<!-- ========================================================== -->
+			
+			
+		<!-- ========================================================== -->
+		<!-- bySupplierModal 모달 시작 -->
+	     <div class="modal fade modal-xl"  id="bySupplierModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" style="width:auto;display:table" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h4 class="modal-title" id="exampleModalLabel">발주처 검색</h4>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      
+		      <!-- 모달본문 -->
+		   <div class="modal-body">
+		   
+		   <table  class="table table-striped table-advance table-hover">
+         	<tbody>       		
+       			<thead>
+        			<tr>
+	         			<!-- <th style="padding-bottom: 12px;"><label class="control-label">발주처 코드</label></th> -->
+	         			<th colspan="2" style="padding-right: 20px;">
+		         			 <div class="form-inline" style="margin-bottom: 0px;"><!-- 발주처별 -->
+		         			 	<label class="control-label">발주처 코드</label>&nbsp
+			                	<input type="text" class="form-control" id="bySupplierValue" placeholder="검색어를 입력하세요.">
+			                </div>
+	         			</th>
+	         			<!-- <th style="padding-bottom: 12px;"><label class="control-label">발주처 명</label></th> -->
+	         			<th colspan="3" style="padding-right: 20px;">
+	         				<div class="form-inline" style="margin-bottom: 0px;"><!-- 재료별 -->
+		         				<label class="control-label">발주처 명</label>&nbsp
+			                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
+	         				 &nbsp&nbsp&nbsp <button type="submit" class="btn btn-theme">검색</button>
+		              		</div>
+	         			</th>  
+        			</tr>     			
+       			</thead>
+       			<tbody style="text-align: center;">
+       				<tr>
+       					<td><i class="fa fa-check"></i></td>
+       					<td>no.</td>
+       					<td>발주처코드</td>
+       					<td>발주처명</td>
+       				</tr>
+     				<tr>
+     					<td><input type="radio" name="bySupplierModal"></td>
+     					<td>1</td>
+       					<td>123456</td>
+       					<td class="bySupplierModal">나는 단추</td>
+     				</tr>
+     				<tr>
+     					<td><input type="radio" name="bySupplierModal"></td>
+     					<td>2</td>
+       					<td>123456</td>
+       					<td class="bySupplierModal">나는 단추2</td>
+     				</tr>
+     				<tr>
+     					<td><input type="radio" name="bySupplierModal"></td>
+     					<td>3</td>
+       					<td>123456</td>
+       					<td class="bySupplierModal">나는 단추3</td>
+     				</tr>
+       			</tbody>        		
+         	</tbody>
+         </table> 
+         
+		 </div>
+		    <div class="modal-footer">
+			      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			      <button type="button" id="saveSupplier" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<!-- bySupplierModal 끝 -->
+		
+		<!-- byMaterialName 모달 시작 -->
+         <div class="modal fade modal-xl"  id="byMaterialNameModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" style="width:auto;display:table" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+<!-- 		        <h4 class="modal-title" id="exampleModalLabel">재료 검색</h4> -->
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      
+		      <!-- 모달본문 -->
+		   <div class="modal-body">
+		   
+		   <table  class="table table-striped table-advance table-hover">
+         	<tbody>       		
+       			<thead>
+        			<tr>
+	         			<th colspan="2" style="padding-right: 20px;">
+		         			 <div class="form-inline" style="margin-bottom: 0px;"><!-- 발주처별 -->
+		         			 	<label class="control-label">재료코드</label>&nbsp
+			                	<input type="text" class="form-control" id="bySupplierValue" placeholder="검색어를 입력하세요.">
+			                </div>
+	         			</th>
+	         			<th colspan="1" style="padding-right: 20px;">
+	         				<div class="form-inline" style="margin-bottom: 0px;"><!-- 재료별 -->
+		         				<label class="control-label">재료구분</label>&nbsp
+			                	<select class="form-control" style="width: 125px;">
+			                		<option>All</option>
+			                		<option>실</option>
+			                		<option>원단</option>
+		                	</select>
+		              		</div>
+	         			</th>  
+	         			<th colspan="1" style="padding-right: 20px;">
+	         				<div class="form-inline" style="margin-bottom: 0px;"><!-- 재료별 -->
+		         				<label class="control-label">재료명</label>&nbsp
+			                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
+		              		</div>
+	         			</th>  
+	         			<th colspan="2" style="padding-right: 20px;">
+	         				<div class="form-inline" style="margin-bottom: 0px;"><!-- 색상별 -->
+		         				<label class="control-label">색상명</label>&nbsp
+			                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
+	         				 &nbsp&nbsp&nbsp <button type="submit" class="btn btn-theme">검색</button>
+		              		</div>
+	         			</th>  
+        			</tr>     			
+       			</thead>
+       			<tbody style="text-align: center;">
+       				<tr>
+       					<td><i class="fa fa-check"></i></td>
+       					<td>no.</td>
+       					<td>재료코드</td>
+       					<td>재료구분</td>
+       					<td>재료명</td>
+       					<td>색상</td>
+       				</tr>
+     				<tr>
+     					<td><input type="radio" name="materialName"></td>
+     					<td>1</td>
+       					<td>123456</td>
+       					<td>원단</td>
+       					<td class="materialName">실크</td>
+       					<td>곤색</td>
+     				</tr>
+     				<tr>
+     					<td><input type="radio" name="materialName"></td>
+     					<td>1</td>
+       					<td>123456</td>
+       					<td>원단</td>
+       					<td class="materialName">폴리</td>
+       					<td>곤색</td>
+     				</tr>
+     				<tr>
+     					<td><input type="radio" name="materialName"></td>
+     					<td>1</td>
+       					<td>123456</td>
+       					<td>원단</td>
+       					<td class="materialName">test</td>
+       					<td>곤색</td>
+     				</tr>
+     				
+       			</tbody>        		
+         	</tbody>
+         </table> 
+         
+		 </div>
+		    <div class="modal-footer">
+			      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			      <button type="button" id="saveMaterialName" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+        <!-- byMaterialNameModal 끝 -->
+        <!-- ==================================================== --> 
+          
+    	  <!-- 검색창 모달 -->
+          <script type="text/javascript">
+			$(function(){
+				
+				$("button").on('click', function(e){
+					
+					var checkId = $(this).attr('id');
+					if(checkId != null && checkId != undefined){
+						if(checkId == 'bySupplier'){
+							e.preventDefault();
+							$('#bySupplierModal').modal("show");
+							
+							$('#saveSupplier').click(function(){
+								var check = $('input[name=bySupplierModal]:checked');
+								var checkVal = check.parents('tr').find('.bySupplierModal').text();
+								console.log(checkVal);
+								$('#bySupplierValue').attr('value', checkVal);
+							});
+							
+							
+						}
+						if(checkId == 'byMaterialName'){
+							e.preventDefault();
+							$('#byMaterialNameModal').modal("show");
+							
+							
+							$('#saveMaterialName').click(function(){
+								var check = $('input[name=materialName]:checked');
+								var checkVal = check.parents('tr').find('.materialName').text();
+								console.log(checkVal);
+								$('#exampleInputPassword2').attr('value', checkVal);
+							});
+						}
+					}
+				});
+				
+				
+					
+				$('[data-popup-open]').on('click', function(e)  {
+			        var targeted_popup_class = jQuery(this).attr('data-popup-open');
+			        $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+
+			        e.preventDefault();
+			    });
+
+			    //----- CLOSE
+			    $('[data-popup-close]').on('click', function(e)  {
+			        var targeted_popup_class = jQuery(this).attr('data-popup-close');
+			        $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+
+			        e.preventDefault();
+			    });
+				
+			});
+			
+			
+
+	        </script>
+	        
+            
+</th:block>
+
+
+</html>

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_qualityControl}">
+
+
+<th:block layout:fragment="customJs">
+	<script type="text/javascript">
+		$(function(){
+
+		    var tableAttr = $('#list').children();
+			var tdList = tableAttr.find('.radioClass');
+			var radioSelected = tableAttr.find('.radioClass').is(':checked');
+			
+			
+			//원부자재 재료 구분명 가져오는 modal
+			$('#searchBtn1').click(function(){
+				$('#byMaterialCategory').modal("show");
+			});
+			
+			$('#sendMaterialCateNameBtn').click(function(){
+				tdList = tableAttr.find('.radioClass');
+				tdList.each(function(){
+					if($(this).is(':checked')){
+						var par = $(this).parent();
+						var materialCateName = par.parent().find('.materialCate').text();
+						console.log(materialCateName + '<<materialCateName');
+						$('#materialCateName').attr('value', materialCateName);
+						$('#materialCateName').attr('readOnly', true);
+						
+					}				
+					
+				});
+			});
+			
+
+			
+	    	$('[data-popup-open]').on('click', function(e)  {
+		       var targeted_popup_class = jQuery(this).attr('data-popup-open');
+		       $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+
+		       e.preventDefault();
+		   });
+
+		    //----- CLOSE
+		    $('[data-popup-close]').on('click', function(e)  {
+		       var targeted_popup_class = jQuery(this).attr('data-popup-close');
+		       $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+
+		       e.preventDefault();
+		    });
+		}) 
+	
+	
+	</script>
+</th:block>
+
+<th:block layout:fragment="container">
+	<div class="form-panel form-horizontal">
+	   <h4 class="mb"><i class="fa fa-edit"></i> 품질검사 기준표 등록</h4>
+	   <hr>
+	   <br>
+	   <div class="form-group">
+               	<div class="col-md-3" style="padding-left: 50px;">
+	          		<label class="col-sm-2 control-label" style="font-weight: 600;">품질검사코드</label>
+               	</div>
+		          <div class="col-md-5">
+		            <div  class="input-group">
+		              <input type="text" class="form-control" id="materialCateName" size="16">
+		              <div class="input-group-btn">
+		                <button type="button" class=" btn btn-theme03 btn btn-default" id="searchBtn1"><i class="fa"></i>검색하여 가져오기</button>
+		              </div>
+		            </div>
+		          </div>
+		        </div>
+		        
+                <div class="form-group">
+               	<div class="col-md-3" style="padding-left: 50px;">
+	          		<label class="col-sm-2 control-label" style="font-weight: 600;">대분류 검사명</label>
+               	</div>
+		          <div class="col-md-5">
+		              <input type="text" class="form-control" id="materialCateName" disabled="disabled" size="16">
+		          </div>
+		        </div>
+		        
+                <div class="form-group">
+               	<div class="col-md-3" style="padding-left: 50px;">
+	          		<label class="col-sm-2 control-label" style="font-weight: 600;">중분류 검사명</label>
+               	</div>
+		          <div class="col-md-5">
+		              <input type="text" class="form-control" id="materialCateName" disabled="disabled" size="16">
+		          </div>
+		        </div>
+		        
+                <div class="form-group">
+               	<div class="col-md-3" style="padding-left: 50px;">
+	          		<label class="col-sm-2 control-label" style="font-weight: 600;">소분류 검사명</label>
+               	</div>
+		          <div class="col-md-5">
+		              <input type="text" class="form-control" id="materialCateName" disabled="disabled" size="16">
+		          </div>
+		        </div>
+		        
+                <div class="form-group">
+               	<div class="col-md-3" style="padding-left: 50px;">
+	          		<label class="col-sm-2 control-label" style="font-weight: 600;">소분류 세부 검사명</label>
+               	</div>
+		          <div class="col-md-5">
+		              <input type="text" class="form-control" id="materialCateName" disabled="disabled" size="16">
+		          </div>
+		        </div>
+
+		        <div class="form-group">
+			        <div class="col-md-3" style="padding-left: 50px;">
+		          		<label class="col-sm-2 control-label" style="font-weight: 600;">검사 측정 결과값 종류</label>
+	               	</div>
+					<div class="radio" style="font-size: 15px">
+			          <label style="padding-right: 20px; padding-left: 40px;" >
+			            <input type="radio" name="optionsRadios"  id="optionsRadios1" value="등급별" checked> 등급별
+			          </label>      
+			          <label style="padding-right: 20px;">
+			            <input type="radio" name="optionsRadios" id="optionsRadios2" value="수치별"> 수치별
+			          </label>
+			          <label>
+			            <input type="radio" name="optionsRadios" id="optionsRadios3" value="Y/N별"> 합격/불합격별
+			          </label>
+			        </div>  
+				</div>
+		        
+		        
+		  	<!-- 등급별 시작 -->
+              <div class="accordion-group">
+                <div class="accordion-heading"  style="padding-left: 30px;">
+                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="faq.html#byLevelInput">
+                    <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em>등급별
+                    </a>
+                </div>
+                <div id="byLevelInput" class="accordion-body collapse">
+                  <div class="accordion-inner">
+                    <p>
+                    	<div class="form-group">
+				        <div class="col-md-3" style="padding-left: 50px;">
+			                 <label class="control-label col-lg-2" style="font-weight: 600;"> 등급 기준</label>
+			            </div>
+			            <div class="col-md-2">
+		                    <input type="text" class="form-control" placeholder="4등급 이상">
+		               </div>  
+		              </div>
+		              
+		                 
+			           <div class="form-group">
+				        <div class="col-md-3" style="padding-left: 50px;">
+			                 <label class="control-label col-lg-2" style="font-weight: 600;"> 합격을 위한 최소등급값</label>
+			            </div>
+			            <div class="col-md-2">
+		                    <input type="number" class="form-control" placeholder="등급 숫자를 입력하세요">
+		               </div> 
+			            <div class="col-md-2" style="padding-left: 0px;">
+		                    <label class="col-sm-2 control-label" style="font-weight: 600; padding-left: 0px;">급</label>
+		               </div> 
+		              </div> 
+		              
+		              
+			           <div class="form-group">
+		               	<div class="col-md-3" style="padding-left: 50px;">
+			          		<label class="col-sm-2 control-label" style="font-weight: 600;"> 시험방법</label>
+		               	</div>
+				          <div class="col-md-5">
+				            <div  class="input-group">
+				              <input type="text" class="form-control" id="materialCateName" size="16" placeholder="KS K ISO 105-C10">
+				              <div class="input-group-btn">
+				                <button type="button" class=" btn btn-theme03 btn btn-default" id="searchBtn2"><i class="fa"></i> 웹에서 검색하여 가져오기</button>
+				              </div>
+				            </div>
+				          </div>
+				        </div>
+				        
+				        <div class="form-group">
+				        <div class="col-md-3" style="padding-left: 50px;">
+			          		<label class="col-sm-2 control-label" style="font-weight: 600;">필수요소 여부</label>
+		               	</div>
+						<div class="radio" style="font-size: 15px">
+				          <label style="padding-right: 20px; padding-left: 40px;" >
+				            <input type="radio" name="optionsRadios"  id="optionsRadios1" value="Y" checked> YES
+				          </label>      
+				          <label style="padding-right: 20px;">
+				            <input type="radio" name="optionsRadios" id="optionsRadios2" value="N"> NO
+				          </label>
+				        </div>  
+						</div>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            <!-- 등급별 끝 -->
+			
+			<!-- 수치별 시작 -->
+			<div class="accordion-group">
+                <div class="accordion-heading" style="padding-left: 30px;">
+                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="faq.html#byNumInput">
+                    <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em>수치별
+                    </a>
+                </div>
+                <div id="byNumInput" class="accordion-body collapse">
+                  <div class="accordion-inner">
+                    <p>
+
+                    	<div class="form-group">
+			               	<div class="col-md-3" style="padding-left: 50px;">
+				          		<label class="col-sm-2 control-label" style="font-weight: 600;"> 측정 품목명</label>
+			               	</div>
+			               	<div class="col-md-3">
+				            <div  class="input-group">
+				              <input type="text" class="form-control" id="materialCateName" size="16" placeholder="자켓">
+				              <div class="input-group-btn">
+				                <button type="button" class=" btn btn-default" id="searchBtn2"><i class="fa fa-search"></i></button>
+				              </div>
+				            </div>
+				          </div>
+				        </div>
+                    	
+
+                    	<div class="form-group">
+					        <div class="col-md-3" style="padding-left: 50px;">
+				                 <label class="control-label col-lg-2" style="font-weight: 600;"> 측정부위</label>
+				            </div>
+				            <div class="col-md-2">
+			                    <input type="text" class="form-control" placeholder="어깨너비">
+			                </div>  
+		                </div>
+		                
+                    	<div class="form-group">
+					        <div class="col-md-3" style="padding-left: 50px;">
+				                 <label class="control-label col-lg-2" style="font-weight: 600;"> 측정방법</label>
+				            </div>
+				            <div class="col-md-5">
+			                    <input type="text" class="form-control" placeholder="뒤판 몸판에서 뒷목점 통과 양쪽 어깨점 간의 길이">
+			               </div>  
+		                </div>
+		                
+
+			           <div class="form-group">
+					        <div class="col-md-3" style="padding-left: 50px;">
+				                 <label class="control-label col-lg-2" style="font-weight: 600;"> 허용오차</label>
+				            </div>
+				            <div class="col-md-2">
+			                    <input type="number" class="form-control" placeholder="오차 범위  ±를 제외한 숫자를 입력하세요">
+			                </div> 
+				            <div class="col-md-1" style="padding-left: 0px;">
+			                    <select class="form-control">
+							      	<option>::단위::</option>
+							      	<option>mm</option>
+							      	<option>cm</option>
+							      	<option>직접입력</option>
+						      </select>
+			               </div> 
+		              </div> 
+		              
+		              
+			           <div class="form-group">
+				        <div class="col-md-3" style="padding-left: 50px;">
+			          		<label class="col-sm-2 control-label" style="font-weight: 600;">필수요소 여부</label>
+		               	</div>
+						<div class="radio" style="font-size: 15px">
+				          <label style="padding-right: 20px; padding-left: 40px;" >
+				            <input type="radio" name="optionsRadios"  id="optionsRadios1" value="Y" checked> YES
+				          </label>      
+				          <label style="padding-right: 20px;">
+				            <input type="radio" name="optionsRadios" id="optionsRadios2" value="N"> NO
+				          </label>
+				        </div>  
+						</div>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            <!-- 수치별 끝 -->
+            
+            
+			<!-- Y/N별 시작 -->
+			<div class="accordion-group">
+                <div class="accordion-heading" style="padding-left: 30px;">
+                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="faq.html#byPassInput">
+                    <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em> 합격/불합격별
+                    </a>
+                </div>
+                <div id="byPassInput" class="accordion-body collapse">
+                  <div class="accordion-inner">
+                    <p>
+
+                    	<div class="form-group">
+					        <div class="col-md-3" style="padding-left: 50px;">
+				                 <label class="control-label col-lg-2" style="font-weight: 600;"> 검사기준</label>
+				            </div>
+				            <div class="col-md-5">
+			                    <input type="text" class="form-control" placeholder="표면의 변색이 눈에 띄게 보임">
+			               </div>  
+		                </div>
+
+			           <div class="form-group">
+				        <div class="col-md-3" style="padding-left: 50px;">
+			          		<label class="col-sm-2 control-label" style="font-weight: 600;">필수요소 여부</label>
+		               	</div>
+						<div class="radio" style="font-size: 15px">
+				          <label style="padding-right: 20px; padding-left: 40px;" >
+				            <input type="radio" name="optionsRadios"  id="optionsRadios1" value="Y" checked> YES
+				          </label>      
+				          <label style="padding-right: 20px;">
+				            <input type="radio" name="optionsRadios" id="optionsRadios2" value="N"> NO
+				          </label>
+				        </div>  
+						</div>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            <!-- end accordion -->
+            
+            
+            
+            
+            
+				
+			<div class="form-group text-right">
+	         <div class="col-lg-offset-2 col-lg-10">
+	           <button class="btn btn-theme" type="button" onclick="location.href='standardTableList'">등록</button>
+	                 <button class="btn btn-theme04" type="button" onClick="history.back();">취소</button>
+	         </div>
+	       	</div>
+       <!-- 전체 흰색바탕 끝 -->
+       </div>
+
+		        
+		        
+
+
+    <!-- 모달화면에서의 검색부분 -->
+        <div class="modal fade modal-xl"  id="byMaterialCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" style="width:auto;display:table" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h4 class="modal-title" id="exampleModalLabel"><i class="fa fa-globe"></i> 원부자재 재료 구분 검색</h4>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>     
+		      <div class="modal-body">
+		   <div class="form-group">
+          <div class="col-md-6">
+          <select class="form-control">
+		   <option>::구분선택::</option>
+		   <option>원부재</option>
+		   <option>부자재</option>
+		  </select>
+		  </div>
+		  
+          <div class="input-group col-md-6">
+            <input type="text" class="form-control" size="5">
+            <div class="input-group-btn">
+              <button type="button" class=" btn btn-theme03 btn btn-default"><i class="fa"></i>검색</button>
+            </div>
+          </div>
+		</div>
+
+	<!-- 모달에서 테이블부분  -->
+       <table class="table table-striped table-advance table-hover" id="list">
+         <thead>
+           <tr>
+             <th><i class="fa fa-check-circle-o"></i> 선택</th>
+             <th><i class="fa fa-bullhorn"></i> 번호</th>
+             <th class="hidden-phone"><i class="fa fa-bookmark"></i> 원부자재 구분</th>
+             <th><i class="fa fa-bookmark"></i> 원부자재 재료 구분명</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr>
+             <td><input type="radio" class="radioClass"></td>
+             <td>1</td>
+             <td>원자재</td>
+             <td class="materialCate">원단</td>
+            </tr>
+           <tr>
+            <td><input type="radio" class="radioClass"></td>
+            <td>2</td>
+            <td>부자재</td>
+            <td class="materialCate">단추</td>
+           </tr>
+           <tr>
+            <td><input type="radio" class="radioClass"></td>
+            <td>3</td>
+            <td>부자재</td>
+            <td class="materialCate">실</td>
+           </tr>
+           <tr>
+            <td><input type="radio" class="radioClass"></td>
+            <td>4</td>
+            <td>부자재</td>
+            <td class="materialCate">지퍼</td>
+           </tr>
+         </tbody>
+       </table>
+	 </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+      <button type="button" class="btn btn-primary" id="sendMaterialCateNameBtn" data-dismiss="modal">값가져오기</button>
+       </div>
+    </div>
+   
+  </div>
+
+		<!-- 모달테스트 끝  -->
+
+</th:block>
+
+</html>

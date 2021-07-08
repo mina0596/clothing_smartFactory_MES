@@ -16,6 +16,16 @@ public class ProductionPlanService {
 	@Autowired
 	private ProductionPlanMapper productionPlanMapper;
 	
+	//[다미]생산계획 전체 조회
+	public List<Map<String, Object>>getProductionAllPlanList(){
+		return productionPlanMapper.getProductionAllPlanList();
+	};
+	
+	//[다미]생산계획 등록
+	public int addProductionPlan(ProductionPlan productionPlan) {
+		return productionPlanMapper.addProductionPlan(productionPlan);
+	};
+	
 	//[다미]소분류 조회
 	public List<Map<String, Object>> getDetailCode(String gender){
 		return productionPlanMapper.getDetailCode(gender);

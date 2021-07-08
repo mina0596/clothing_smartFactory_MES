@@ -11,7 +11,8 @@ import ksmart39.springboot.domain.AccountingCategory;
 import ksmart39.springboot.domain.Client;
 import ksmart39.springboot.domain.HumanResources;
 import ksmart39.springboot.domain.QualityInspection;
-import ksmart39.springboot.domain.SubClassInspection;
+
+import ksmart39.springboot.domain.RawMaterials;
 
 @Service
 public class SystemService {
@@ -19,7 +20,12 @@ public class SystemService {
 	@Autowired
 	private SystemMapper systemMapper;
 
-	
+
+	//[민아]원부자재 전체 리스트 조회
+	public List<RawMaterials> getMaterialsList(){
+		List<RawMaterials> rawMaterialsList = systemMapper.getMaterialsList();
+		return rawMaterialsList;
+	};
 	
 	//============================================================
 	//[한빛]회원전체조회(levelName포함)
@@ -88,7 +94,8 @@ public class SystemService {
 	//=============================================================
 	
 	//[보람 ]품질검사 리스트 조회메서드
-	public List<SubClassInspection> getQualityInspectionList(){
-		return systemMapper.getQualityInspectionList();
-	}
+	/*
+	 * public List<SubClassInspection> getQualityInspectionList(){ return
+	 * systemMapper.getQualityInspectionList(); }
+	 */
 }

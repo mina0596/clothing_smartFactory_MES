@@ -365,4 +365,56 @@ high_class_name
 high_class_inspection_list;
 </select>	
 	
+	
+	<!-- ===========================================원부자재========================================================== -->
+		
+	<resultMap type="RawMaterials" id="rawMaterialsMap">
+		<result property="rawMaterialCode"			column="raw_material_code"/>
+		<result property="highClass"				column="raw_material_high_classification"/>
+		<result property="medClass"					column="raw_material_medium_classification"/>
+		<result property="medCode"					column="raw_material_medium_code"/>
+		<result property="rawMaterialName"			column="raw_material_name"/>
+		<result property="subCode"					column="raw_material_sub_code"/>
+		<result property="colorCode"				column="raw_material_color_code"/>
+		<result property="feature"					column="raw_material_feature"/>
+		<result property="unit"						column="raw_material_unit"/>
+		<result property="rawMaterialRegDate"		column="raw_material_reg_date"/>
+		<result property="rawMaterialUpdateDate"	column="raw_material_update_date"/>
+	</resultMap>
+	
+	
+	<!-- 원부자재 전체 리스트 조회  -->
+	<select id="getMaterialsList" resultMap="rawMaterialsMap">
+		SELECT 
+			  raw_material_code					
+			, raw_material_high_classification
+			, raw_material_medium_classification
+			, raw_material_medium_code
+			, raw_material_name
+			, raw_material_sub_code
+			, raw_material_color_code
+			, raw_material_feature
+			, raw_material_unit
+			, raw_material_reg_date
+			, raw_material_update_date
+		FROM 
+			raw_material_info;
+	</select>
+	
+	
+	<!-- 원부자재 정보 수정  -->
+	<update id="modifyMaterialInfo">
+		UPDATE raw_material_info
+			SET
+				raw_material_high_classification=#{highClass},
+				raw_material_medium_classification=#{medClass},
+				raw_material_medium_code=#{medCode},
+				raw_material_name=#{materialName},
+				raw_material_color_code=#{colorCode},
+				raw_material_feature=#{feature},
+				raw_material_unit=#{unit},
+				raw_material_update_date=NOW()
+			WHERE raw_material_code=#{materialCode};
+	</update>
+	
 </mapper>

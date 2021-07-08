@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_system}">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3 th:text="${title}"></h3>
+	    </div>
+</th:block>
+
+<th:block layout:fragment="customJs">
+	<script>
+	$(function(){
+		$('#deleteBtn').click(function(){
+			var tdList = $('#list').children().find('tr');
+			tdList.html('<span class="check"><input type="checkbox" class="checked"></span>');
+			console.log(tdList);
+		});
+	})
+	$(function(){
+//#checkAll 버튼 클릭 시 전체 checked
+	$('#checkAll').click(function(){
+		if($('#checkAll').prop('checked')){
+			$('.checked').prop('checked',true);
+				}else{
+					$('.checked').prop('checked',false);
+				}
+			});									
+		});
+
+</script>
+
+</th:block>
+
+<th:block layout:fragment="container">
+
+	
+	
+	<div class="row mt">
+     <div class="col-md-12">
+		<h4><i class="fa fa-angle-right"></i>출고현황 조회</h4>
+         	 <hr>
+		<form class="form-inline" role="form">
+        
+         <table class="table table-striped table-advance table-hover">
+         	<thead>
+         		<tr>
+         			<th>수발주구분</th>
+         			<th>재료별</th>
+         		</tr>
+         	</thead>
+         	<tbody>
+         		<tr>
+         		    <td style="padding-right: 20px;">
+         				<div class="form-group">
+		                	<select class="form-control" style="width: 125px;">
+		                		<option>::선택::</option>
+		                		<option>All</option>
+		                		<option>수주</option>
+		                		<option>발주</option>
+		                	</select>
+	               		</div>
+         			</td>
+         			<td style="padding-right: 20px;">
+						<div class="form-group">
+		                	<select class="form-control" style="width: 125px;">
+		                		<option>::선택::</option>
+		                		<option>거래처명</option>
+		                		<option>원자재</option>
+		                		<option>부자재</option>
+		                	</select>
+	               		</div>
+         				<div class="col-md-6">
+				  			<input class="form-control" type="text" placeholder="검색어를 입력하세요">
+						</div>
+         			</td>
+         			<td style="padding-right: 20px;">
+         			</td>
+         			<td>
+         				  <button type="submit" class="btn btn-theme">검색</button>
+         			</td>        			
+         		</tr>
+         	</tbody>
+         </table>  
+        </form>  
+    	
+	      <br>
+	      
+                
+	        <form class="form-horizontal style-form">
+	        	<h4><i class="fa fa-angle-right"></i>거래처목록</h4>
+	        
+              <table class="table table-striped table-advance table-hover" id="list">
+                <thead>
+                  <tr>
+                  	<th><input type="checkbox" id="checkAll"></th>
+                    <th><i class="fa fa-bullhorn"></i>no.</th>
+                    <th><i class="fa fa-bookmark"></i>수발주구분</th>
+                    <th><i class="fa fa-bookmark"></i>거래처코드</th>
+                    <th><i class="fa fa-bookmark"></i>회사명</th>
+                    <th><i class=" fa fa-bookmark"></i>전화번호</th>
+                    <th><i class="fa fa-bookmark"></i>대표자</th>
+                    <th><i class=" fa fa-bookmark"></i>담당자</th>
+                    <th><i class=" fa fa-bookmark"></i>사업자번호</th>
+                    <th><i class=" fa fa-bookmark"></i>주소</th>
+                    <th><i class=" fa fa-bookmark"></i>등록일자</th>
+                    <th><i class=" fa fa-pencil"></i>수정</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each=" c,n : ${client}">
+                  	<td><input type="checkbox"  class="checked"></td>
+                    <td th:text = ${n.index+1}></td>
+                    <td th:text="${c.clientCategory}" class="badge bg-primary"></td>
+                    <td th:text="${c.clientCode}"></td>
+                    <td th:text="${c.clientName}"></td>
+                    <td th:text="${c.clientTel}"></td>
+                    <td th:text="${c.clientCeo}"></td>
+                    <td th:text="${c.clientEmployee}"></td>
+                    <td th:text="${c.clientBusinessNum}"></td>
+                    <td th:text="${c.clientAddress}"></td>
+                    <td th:text="${c.clientInfoRegDate}"></td>
+                    <td>  
+                    	<a th:href="@{/modifyClient(clientCode=${c.clientCode})}"  class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</a>
+                    </td>
+                    </tr>
+                  
+               
+
+                 
+                 
+                </tbody>
+              </table>
+            
+		        <div class="form-group text-right">
+		          <div class="col-lg-offset-2 col-lg-10">
+		          <a th:href="@{/addClient}" class="btn btn-success btn-xs"><i class="fa fa-plus"></i>거래처등록</a>	          
+		           <a id="deleteBtn" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i>삭제</a>
+		          </div>
+		        </div>
+       		</form>
+       		
+          </div>
+          <!-- /col-md-12 -->
+        </div>
+        <!-- /row -->
+        
+</th:block>
+
+</html>

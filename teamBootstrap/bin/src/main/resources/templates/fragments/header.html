@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <header th:fragment="header" class="header black-bg">
+      <!--logo start-->
+      <a th:href="@{/login}" class="logo"><b>TEAMONE<span>MES</span></b></a>
+      <!--logo end-->
+      <div class="nav notify-row" id="top_menu">
+        <!--  notification start -->
+        
+        <a th:href="@{/login}">
+        	<span class="menu">HOME</span>
+        </a>
+        <a th:href="@{/contract}">
+        	<span class="menu">1.수/발주관리</span>
+        </a>
+        <a th:href="@{/rawMaterials}">
+        	<span class="menu">2.자재관리</span>
+        </a>
+        <a th:href="@{/production}">
+        	<span class="menu">3.생산관리</span>
+        </a>
+        <a th:href="@{/qualityControl}">
+        	<span class="menu">4.품질관리</span>
+        </a>
+        <a th:href="@{/shipment}">
+        	<span class="menu">5.출하관리</span>
+        </a>
+        <a th:href="@{/system}">
+        	<span class="menu">6.시스템관리</span>
+        </a>
+		<a th:href="@{#}">
+        	<span class="menu">🕐배포일시:21-06-30 16:01:00🕐</span>
+        </a>
+
+        <!--  notification end -->
+      </div>
+        
+      
+    </header>
+</html>
