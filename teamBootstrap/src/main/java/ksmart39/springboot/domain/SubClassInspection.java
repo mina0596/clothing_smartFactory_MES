@@ -2,17 +2,18 @@ package ksmart39.springboot.domain;
 
 public class SubClassInspection {
 	private String highMedLowSubClassCode;
-	private String  highClassCode;
-	private String  highMedClassCode;
+	private String highClassCode;
+	private String highMedClassCode;
 	private String highMedLowClassCode;
 	private String subClassCode;
-	private String  subClassName;
+	private String subClassName;
 	private String subClassRegDate;
-	private String  subClassUpdateDate;
+	private String subClassUpdateDate;
 	
 	private HighClassInspection highClassInspection;
 	private MediumClassInspection mediumClassInspection;
 	private LowClassInspection lowClassInspection;
+	
 	public String getHighMedLowSubClassCode() {
 		return highMedLowSubClassCode;
 	}

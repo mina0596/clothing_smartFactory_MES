@@ -13,11 +13,11 @@
               <span>생산 계획 ![다미]</span>
               </a>
             <ul class="sub">
-              <li><a th:href="@{/addProductionPlan}">생산계획 등록 ![다미]</a></li>
-              <li><a th:href="@{/productionPlanList}">생산계획 조회/목록 ![다미]</a></li>
-              <li><a th:href="@{/productionDailyPlanList}">일별 생산계획 조회 ![다미]</a></li>
-              <li><a th:href="@{/productionWeeklyPlanList}">주간별 생산계획 조회 ![다미]</a></li>
-              <li><a th:href="@{/productionMonthlyPlanList}">월별 생산계획 조회 ![다미]</a></li>
+              <li><a th:href="@{/production/addProductionPlan}">생산계획 등록 ![다미]</a></li>
+              <li><a th:href="@{/production/productionPlanList}">생산계획 조회/목록 ![다미]</a></li>
+              <li><a th:href="@{/production/productionDailyPlanList}">일별 생산계획 조회 ![다미]</a></li>
+              <li><a th:href="@{/production/productionWeeklyPlanList}">주간별 생산계획 조회 ![다미]</a></li>
+              <li><a th:href="@{/production/productionMonthlyPlanList}">월별 생산계획 조회 ![다미]</a></li>
             </ul>
           </li>
   
@@ -28,8 +28,8 @@
               <span>작업 지시 ![보람]</span>
               </a>
             <ul class="sub">
-              <li><a th:href="@{/addWorkOrder}">작업지시 등록 ![보람]</a></li>
-              <li><a th:href="@{/workOrderList}">작업지시 조회/목록 ![보람]</a></li>
+              <li><a th:href="@{/production/addWorkOrder}">작업지시 등록 ![보람]</a></li>
+              <li><a th:href="@{/production/workOrderList}">작업지시 조회/목록 ![보람]</a></li>
             </ul>
           </li>
           
@@ -42,7 +42,7 @@
               <span>생산지시 ![민아+한빛]</span>
               </a>
             <ul class="sub">
-              <li><a th:href="@{/productionOrderList}">생산지시조회/목록 ![민아+한빛]</a></li>
+              <li><a th:href="@{/production/productionOrderList}">생산지시조회/목록 ![민아+한빛]</a></li>
             </ul>
           </li>
  
@@ -52,12 +52,12 @@
               <span>생산현황 ![민아+한빛]</span>
               </a>
             <ul class="sub">
-              <li><a th:href="@{/productProgressList}">의뢰품목별 생산공정현황 ![민아+한빛]</a></li>
-              <li><a th:href="@{/stateByWorkOrder}">작업지시별 생산현황 ![민아+한빛]</a></li>
-              <li><a th:href="@{/stateByProductionPlan}">생산계획별 생산현황 ![민아+한빛]</a></li>
-              <li><a th:href="@{/stateByProduct}">의뢰품목별 생산현황 ![민아+한빛]</a></li>
-              <li><a th:href="@{/detailedStateByProduct}">의뢰품목별 상세 생산공정현황 ![민아+한빛]</a></li>
-              <li><a th:href="@{/test}">생산현황</a></li>
+              <li><a th:href="@{/production/productProgressList}">의뢰품목별 생산공정현황 ![민아+한빛]</a></li>
+              <li><a th:href="@{/production/stateByWorkOrder}">작업지시별 생산현황 ![민아+한빛]</a></li>
+              <li><a th:href="@{/production/stateByProductionPlan}">생산계획별 생산현황 ![민아+한빛]</a></li>
+              <li><a th:href="@{/production/stateByProduct}">의뢰품목별 생산현황 ![민아+한빛]</a></li>
+              <li><a th:href="@{/production/detailedStateByProduct}">의뢰품목별 상세 생산공정현황 ![민아+한빛]</a></li>
+              <li><a th:href="@{/production/test}">생산현황</a></li>
             </ul>
           </li>
     
@@ -67,8 +67,8 @@
               <span>완제품관리 ![민아]</span>
               </a>
             <ul class="sub">
-              <li><a th:href="@{/addCompletedProduct}">완제품 등록 ![민아]</a></li>
-              <li><a th:href="@{/completedProductList}">완제품 조회/목록 ![민아]</a></li>
+              <li><a th:href="@{/production/addCompletedProduct}">완제품 등록 ![민아]</a></li>
+              <li><a th:href="@{/production/completedProductList}">완제품 조회/목록 ![민아]</a></li>
             </ul>
           </li>
         </ul>

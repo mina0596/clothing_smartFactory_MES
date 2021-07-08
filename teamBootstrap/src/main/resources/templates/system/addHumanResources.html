@@ -11,25 +11,14 @@ layout:decorate="@{layout/default_system}">
 
 <th:block layout:fragment="customJs">
 	<script>
-/* 		$(function(){
+		$(function(){
 			$('#idCheckBtn').click(function(){
 				var employeeId = $('input[name="employeeId"]').val();
 				console.log('employeeId: ' + employeeId);
 
 				if(employeeId != '' && employeeId != undefined && employeeId != null){
-					var commonAjax = new ksmartAjax();
-					commonAjax.setAjaxUrl('/employeeIdCheck');
-					commonAjax.setAjaxType('post');
-					commonAjax.put('employeeId', employeeId);
-					commonAjax.put('employeePw', 'pw001');
-					commonAjax.setResultType('json');
-					commonAjax.action();
-					var result = commonAjax.getResultObject();
-					console.log(result);
-					
-				
 					var request = $.ajax({
-						url: "/employeeIdCheck",
+						url: "/memberIdCheck",
 						method: "POST", 
 						data: { employeeId : employeeId }, 
 						dataType: "json" 
@@ -48,7 +37,6 @@ layout:decorate="@{layout/default_system}">
 					request.fail(function( jqXHR, textStatus ) {
 						alert( "Request failed: " + textStatus );
 					});	
-					
 				}
 				
 			});
@@ -58,20 +46,20 @@ layout:decorate="@{layout/default_system}">
 				var regexEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 				var submitFlag = true;
 				var memberForm = $('#addEmployeeForm');
-				var inputObj = employeeForm.find('input');
+				var inputObj = memberForm.find('input');
 				
 				$.each(inputObj, function(e){
 					var inputName = $(this).attr('name');
 					var inputValue = $(this).val();
 					var inputLabel = $(this).parent().parent().children().eq(0).text();
-					if(inputName == 'employeePw'){
+					if(inputName == 'memberPw'){
 						if(!regexPw.test(inputValue)){
 							alert(inputLabel + ' 을 다시 입력해주세요.');
 							$(this).focus();
 							submitFlag = false;
 							return submitFlag;
 						}
-					}else if(inputName == 'employeeEmail'){
+					}else if(inputName == 'memberEmail'){
 						if(!regexEmail.test(inputValue)){
 							alert(inputLabel + ' 을 다시 입력해주세요.');
 							$(this).focus();
@@ -88,62 +76,64 @@ layout:decorate="@{layout/default_system}">
 					}
 				});
 				
-				if(submitFlag) employeeForm.submit();
+				if(submitFlag) memberForm.submit();
 				
 			});
-		}); */
+		});
 	</script>
 </th:block>
+
 
 <th:block layout:fragment="container">
 	
 	<div class="form-panel">
 	 <h4 class="mb"><i class="fa fa-angle-right"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 사원등록</font></font></h4>
               <div class="form">
-                <form class="cmxform form-horizontal style-form" id="signupForm" method="post"  th:action="@{/addHumanResources}">
+                <form class="cmxform form-horizontal style-form" id="addEmployeeForm" method="post"  th:action="@{/addHumanResources}">
        
-                <div class="form-group">
-		          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">아이디</label>
-		          <div class="col-md-6">
-		            <div  class="input-group ">
-		              <input type="text" name = "employeeId" class="form-control"  size="16">
-		              <div class="input-group-btn">
-		                <button type="button" id="idCheckBtn" class="btn btn-warning"><i class="fa"></i>중복체크</button>
-		              </div>
-		            </div>
-		          </div>
-		        </div>
-                  
-                  <div class="form-group ">
-                    <label for="password" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">패스워드</font></font></label>
-                    <div class="col-lg-6">
-                      <input class="form-control " name="employeePw" type="password">
-                    </div>
-                  </div>
+	                <div class="form-group">
+			          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">아이디</label>
+			          <div class="col-md-6">
+			            <div  class="input-group ">
+			              <input type="text" name = "employeeId" class="form-control"  size="16">
+			              <div class="input-group-btn">
+			                <button type="button" id="idCheckBtn" class="btn btn-warning"><i class="fa"></i>중복체크</button>
+			              </div>
+			            </div>
+			          </div>
+			        </div>
                   
                     <div class="form-group ">
-                    <label for="confirm_password" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">패스워드 확인</font></font></label>
-                    <div class="col-lg-6">
-                      <input class="form-control "  name="employeePwCheck" type="password" >
+                      <label for="password" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">패스워드</font></font></label>
+                      <div class="col-lg-6">
+                        <input class="form-control " name="employeePw" type="password">
+                      </div>
                     </div>
-                  </div>
+                  
+                    <div class="form-group ">
+                     <label for="confirm_password" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">패스워드 확인</font></font></label>
+                      <div class="col-lg-6">
+                       <input class="form-control "  name="employeePwCheck" type="password" >
+                      </div>
+                    </div>
                   
                    <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">권한</label>
-                  <div class="col-sm-2">
+                    <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">권한</label>
+                     <div class="col-sm-2">
                       <select class="form-control" name = "levelNum" >
 						<option>::선택::</option>
 						<option value="1">관리자</option>					
 						<option value="2">본사직원</option>
 						<option value="3">공장직원</option>
 		               </select>
-                  </div>
-                </div>
+                     </div>
+                    </div>
+                    
                   <div class="form-group ">
                     <label for="firstname" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">사원명</font></font></label>
-                    <div class="col-lg-6">
+                     <div class="col-lg-6">
                       <input class=" form-control" name="employeeName" type="text" >
-                    </div>
+                     </div>
                   </div>
                   
                   <div class="form-group ">

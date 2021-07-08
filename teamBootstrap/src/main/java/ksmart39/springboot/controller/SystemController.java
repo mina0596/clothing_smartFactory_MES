@@ -18,7 +18,10 @@ import ksmart39.springboot.domain.AccountingCategory;
 import ksmart39.springboot.domain.Client;
 import ksmart39.springboot.domain.HumanResources;
 import ksmart39.springboot.domain.QualityInspection;
+
+
 import ksmart39.springboot.domain.RawMaterials;
+
 import ksmart39.springboot.service.SystemService;
 
 @Controller
@@ -46,7 +49,6 @@ public class SystemController {
 	//===============================================================
 	
 	
-
 	//수정화면 ->목록
 	@PostMapping("modifyHumanResources")
 	public String modifyHumanResources(HumanResources humanResources) {
@@ -81,14 +83,26 @@ public class SystemController {
 	
 	//[한빛]사원목록
 	@GetMapping("/humanResourcesList")
-	public String humanResourcesList(Model model) {
-		List<HumanResources> humanResources = systemService.getHumanResources();
+	public String humanResourcesList(Model model
+									,@RequestParam(name="searchKey",required = false) String searchKey
+									,@RequestParam(name="searchValue",required=false) String searchValue) {
+		
+		log.info("========================================");
+		log.info("화면에서 입력받은 값(회원목록) searchKey: {}", searchKey);
+		log.info("화면에서 입력받은 값(회원목록) searchValue: {}", searchValue);
+		log.info("========================================");
+		
+		
+		Map<String,Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("searchKey", searchKey);
+		paramMap.put("searchValue", searchValue);
+		
+		List<HumanResources> humanResources = systemService.getHumanResources(paramMap);
 		model.addAttribute("title", "인사관리");
 		model.addAttribute("humanResources", humanResources);
 		return "system/humanResourcesList";
 	}
-	
-	
+		
 	//==============================================================
 	//수정화면 ->목록
 	@PostMapping("modifyClient")
@@ -117,8 +131,14 @@ public class SystemController {
 	
 	//[한빛]거래처 조회
 	@GetMapping("/clientList")
-	public String getClientList(Model model) {
-		List<Client> client = systemService.getClient();
+	public String getClientList(@RequestParam(name = "searchKey", required = false) String searchKey,
+													@RequestParam(name = "searchValue", required = false) String searchValue, 
+																					Model model) {
+		Map<String, Object> paramMap = new HashMap<String,Object>();
+		paramMap.put("searchKey", searchKey);
+		paramMap.put("searchValue", searchValue);
+
+		List<Client> client = systemService.getClient(paramMap);
 		model.addAttribute("title", "거래처관리");
 		model.addAttribute("client", client);
 		return "system/clientList";
@@ -131,6 +151,7 @@ public class SystemController {
 		return "system/addClient";
 	}
 	
+
 	
  //==================================================================
 	//[다미]계정과목 수정
@@ -287,8 +308,12 @@ public class SystemController {
 
 	//===============================================================
 	
-	
-
+	//[보람]품질검사 대분류 
+	@GetMapping()
+	public String getHighClassCate() {
+		
+		return null;
+	}
 	//[보람] 검사 리스트 검사번호클릭시 검사정보 경로
 			@GetMapping("qualityInspectionInfo")
 			public String qualityInspectionInfo() {
@@ -309,27 +334,27 @@ public class SystemController {
 	
 	
 	//검사종류 리스트 메서드
-	@GetMapping("/qualityInspectionList")
-	public String getQualityInspectionList(Model model) {
-		List<QualityInspection> qualityInspectionList =systemService.getQualityInspectionList();
-		
-		log.info("========================================");
-		log.info("qualityInspectionList:",qualityInspectionList);
-		log.info("========================================");
-		model.addAttribute("qualityInspectionList", qualityInspectionList);
-	
-		
-		return"system/qualityInspectionList";
-	}
-	
-	//검사종류 등록 메서드
-	@GetMapping("/addQualityInspection")
-	public String addQualityInspection(Model model) {
-		
-		model.addAttribute("title", "품질검사:검사등록");
-		return"system/addQualityInspection";
-	}	
-	
+	/*
+	 * @GetMapping("/qualityInspectionList") public String
+	 * getQualityInspectionList(Model model) { List<SubClassInspection>
+	 * qualityInspectionList = systemService.getQualityInspectionList();
+	 * 
+	 * log.info("========================================");
+	 * log.info("qualityInspectionList - {}:", qualityInspectionList.toString());
+	 * log.info("========================================");
+	 * model.addAttribute("qualityInspectionList", qualityInspectionList);
+	 * 
+	 * 
+	 * return"system/qualityInspectionList"; }
+	 * 
+	 * //검사종류 등록 메서드
+	 * 
+	 * @GetMapping("/addQualityInspection") public String addQualityInspection(Model
+	 * model) {
+	 * 
+	 * model.addAttribute("title", "품질검사:검사등록");
+	 * return"system/addQualityInspection"; }
+	 */
 	
 
 }

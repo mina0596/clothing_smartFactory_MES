@@ -1,6 +1,8 @@
 package ksmart39.springboot.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,12 @@ public class RawMaterialsInventoryStatusService {
 	public List<RawMaterialsInventory> getRawMaterialsInventory(){
 		List<RawMaterialsInventory> materialsInventoryList = materialsInventoryStatusMapper.getMaterialsTransactionList();
 		return materialsInventoryList;
+	}
+	
+	//[민아]자재 입고 수정
+		public RawMaterialsInventory getInventoryInfoByMCode(Map<String, Object> paramMap){
+			RawMaterialsInventory InventoryInfoByMCode =materialsInventoryStatusMapper.getInventoryInfoByMCode(paramMap);
+			return InventoryInfoByMCode;
 	}
 	
 	
