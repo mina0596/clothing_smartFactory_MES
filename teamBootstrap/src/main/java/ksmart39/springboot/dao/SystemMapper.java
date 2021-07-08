@@ -34,19 +34,18 @@ public interface SystemMapper {
 	/****************************************************************************/
 	
 	//회원전체조회(levelName포함)
-	public List<HumanResources> getHumanResources();
+	public List<HumanResources> getHumanResources(Map<String, Object> paramMap);
 	//회원가입
 	public int addHumanResources(HumanResources humanResources);	
 	//회원정보 조회
 	public HumanResources getEmployeeInfoByCode(String employeeCode);	
 	//회원정보 수정
 	public int modifyHumanResources(HumanResources humanResources);
-	
 	//회원정보 삭제
 	/****************************************************************************/
 	
 	//[한빛] 거래처 전체조회
-	public List<Client> getClient();
+	public List<Client> getClient(Map<String, Object> paramMap);
 	//거래처 등록
 	public int addClient (Client client);
 	//거래처 수정

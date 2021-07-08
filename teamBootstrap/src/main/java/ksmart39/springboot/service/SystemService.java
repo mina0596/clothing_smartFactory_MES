@@ -29,11 +29,11 @@ public class SystemService {
 	
 	//============================================================
 	//[한빛]회원전체조회(levelName포함)
-	public List<HumanResources> getHumanResources(){
-		List<HumanResources> humanResources = systemMapper.getHumanResources();
+	public List<HumanResources> getHumanResources(Map<String, Object> paramMap){
+		List<HumanResources> humanResources = systemMapper.getHumanResources(paramMap);
 		return humanResources;
 	}
-	//거래처 등록
+	//회원정보 등록
 	public int addHumanResources (HumanResources humanResources) {
 		int result = systemMapper.addHumanResources(humanResources);
 		return result;
@@ -49,8 +49,8 @@ public class SystemService {
 	//회원정보 삭제
 	//============================================================
 	//[한빛] 거래처 전체 조회
-	public List<Client> getClient(){
-		List<Client> client = systemMapper.getClient();
+	public List<Client> getClient(Map<String, Object> paramMap){
+		List<Client> client = systemMapper.getClient(paramMap);
 		return client;
 	}
 	//거래처 등록
