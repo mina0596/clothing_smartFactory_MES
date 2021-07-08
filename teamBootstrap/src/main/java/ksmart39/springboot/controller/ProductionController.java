@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import ksmart39.springboot.domain.ProductionPlan;
 import ksmart39.springboot.service.ProductionPlanService;
-import ksmart39.springboot.service.ProductionService;
 
 @Controller
+@RequestMapping("/production")
 public class ProductionController {
 
 	
@@ -160,7 +160,7 @@ public class ProductionController {
 		return name;
 	}
 	
-	//[다미] 성별별 양복명 값 가져오기
+	//[다미]성별별 양복명 값 가져오기
 	@RequestMapping(value="/productCode", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Map<String, Object>> getProductionCode() {
@@ -187,18 +187,14 @@ public class ProductionController {
 	//[다미]생산계획 월별 목록
 	@GetMapping("/productionMonthlyPlanList")
 	public String getProductionMonthlyPlanList(Model model) {
-//		List<ProductionPlan> monthlyResult = productionService.getProductionMonthlyPlanList();
-//		log.info("=================================================");
-//		log.info("생산 계획 받아온 값 : {}", monthlyResult);
-//		log.info("=================================================");
 		return "production/productionMonthlyPlanList";
 	}
 	
 	//[다미]생산계획 월별 목록test
 	@ResponseBody
-	@RequestMapping(value="/productionMonthlyPlanList", method = RequestMethod.POST)
-	public List<ProductionPlan> getProductionMonthlyPlanList(){
-		return productionPlanService.getProductionMonthlyPlanList();
+	@RequestMapping(value="/production/productionMonthlyPlanList", method = RequestMethod.POST)
+	public String getProductionMonthlyPlanList(){
+		return "production/productionMonthlyPlanList";
 	}
 
 	//[다미]전체 생산계획 목록

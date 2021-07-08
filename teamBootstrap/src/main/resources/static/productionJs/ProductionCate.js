@@ -7,7 +7,7 @@
 
 //성별별 이름 가져오기
 			var request = $.ajax({
-				url: "/productCode",
+				url: "/production/productCode",
 				method: "get"
 			}); 
 			request.done(function( data ) {
@@ -35,7 +35,7 @@
 				detailCate.html("<option value=''>::선택::</option>");
 				
 				var request = $.ajax({
-					url: "/detailCode",
+					url: "/production/detailCode",
 					method: "get",
 					data: {gender : gender}
 				}); 
