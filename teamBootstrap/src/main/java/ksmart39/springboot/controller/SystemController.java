@@ -99,11 +99,15 @@ public class SystemController {
 		return "system/humanResourcesList";
 	}
 
+
 	// ==============================================================
 	// 수정화면 ->목록
 	@PostMapping("modifyClient")
+
 	public String modifyClient(Client client) {
 		systemService.modifyClient(client);
+		log.info("=================");
+		log.info("{}",client);
 		return "redirect:/clientList";
 	}
 
