@@ -49,7 +49,6 @@ public class SystemController {
 	//===============================================================
 	
 	
-
 	//수정화면 ->목록
 	@PostMapping("modifyHumanResources")
 	public String modifyHumanResources(HumanResources humanResources) {
@@ -84,14 +83,26 @@ public class SystemController {
 	
 	//[한빛]사원목록
 	@GetMapping("/humanResourcesList")
-	public String humanResourcesList(Model model) {
-		List<HumanResources> humanResources = systemService.getHumanResources();
+	public String humanResourcesList(Model model
+									,@RequestParam(name="searchKey",required = false) String searchKey
+									,@RequestParam(name="searchValue",required=false) String searchValue) {
+		
+		log.info("========================================");
+		log.info("화면에서 입력받은 값(회원목록) searchKey: {}", searchKey);
+		log.info("화면에서 입력받은 값(회원목록) searchValue: {}", searchValue);
+		log.info("========================================");
+		
+		
+		Map<String,Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("searchKey", searchKey);
+		paramMap.put("searchValue", searchValue);
+		
+		List<HumanResources> humanResources = systemService.getHumanResources(paramMap);
 		model.addAttribute("title", "인사관리");
 		model.addAttribute("humanResources", humanResources);
 		return "system/humanResourcesList";
 	}
-	
-	
+		
 	//==============================================================
 	//수정화면 ->목록
 	@PostMapping("modifyClient")
@@ -120,8 +131,14 @@ public class SystemController {
 	
 	//[한빛]거래처 조회
 	@GetMapping("/clientList")
-	public String getClientList(Model model) {
-		List<Client> client = systemService.getClient();
+	public String getClientList(@RequestParam(name = "searchKey", required = false) String searchKey,
+													@RequestParam(name = "searchValue", required = false) String searchValue, 
+																					Model model) {
+		Map<String, Object> paramMap = new HashMap<String,Object>();
+		paramMap.put("searchKey", searchKey);
+		paramMap.put("searchValue", searchValue);
+
+		List<Client> client = systemService.getClient(paramMap);
 		model.addAttribute("title", "거래처관리");
 		model.addAttribute("client", client);
 		return "system/clientList";
@@ -134,6 +151,7 @@ public class SystemController {
 		return "system/addClient";
 	}
 	
+
 	
  //==================================================================
 	//[다미]계정과목 수정
