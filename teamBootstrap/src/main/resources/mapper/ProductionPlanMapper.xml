@@ -16,7 +16,24 @@
 	<result property="productionPlanUpdateDate" column="production_plan_update_date"/>
 </resultMap>
 
-	<select id="getProductionAllPlanList" resultType="Map">
+	<update id="modifyProductionPlan" parameterMap="getProductionPlan">
+		UPDATE 
+			production_plan
+		SET
+			product_code=#{productCode}
+			,charge_employee_code=#{chargeEmployeeCode}
+			,production_plan_quantity=#{productionPlanQuantity}
+			,production_plan_qantity_unit=#{productionPlanQantityUnit}
+			,expected_production_start_date=#{expectedProductionStartDate}
+			,expected_production_end_date=#{expectedProductionEndDate}
+			,production_plan_period=sf_productionPlanDate(#{expectedProductionStartDate},#{expectedProductionEndDate})
+			,production_plan_note=#{productionPlanNote}
+			,production_plan_update_date=NOW()
+		WHERE 
+			production_plan_code=#{productionPlanCode};
+	</update>
+
+	<select id="getProductionAllPlanList" resultType="Map" parameterType="String">
 		SELECT 
 			p.production_plan_code
 			,c.gender_categorized_name
@@ -35,7 +52,12 @@
 		INNER JOIn
 			employee_info AS e
 		ON 
-			p.charge_employee_code = e.employee_code;
+			p.charge_employee_code = e.employee_code
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="planCode != null and planCode != ''.toString()">
+				p.production_plan_code = #{planCode};
+			</if>
+		</trim>
 	</select>
 
 	<insert id="addProductionPlan" parameterType="ProductionPlan">

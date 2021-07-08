@@ -130,17 +130,18 @@ layout:decorate="@{layout/default_system}">
                       <input type="checkbox" class="check" name="check">
                     </td>
                     <td th:text="${i.index+1}"><a id="infoBtn"></a></td>
-                    <td th:text="${l.highMedLowSubClassCode}"></td>
-                    <td th:text =${l.highClassInspection.highClassName} ></td>
-                    <td th:text =${l.mediumClassInspection.medClassName} ></td>
-                    <td th:text="${l.lowClassInspection.lowClassName}"></td>
-                    <td th:text="${l.subClassName}">
+                    <td th:text="${l.quality_inspection_code}"></td>
+                    <td th:text =${l.high_class_name} ></td>
+                    <td th:text =${l.med_class_name} ></td>
+                    <td th:text="${l.low_class_name}"></td>
+                    <td th:text="${l.sub_class_name}">
                     </td>
-                    <td th:text="${l.subClassRegDate}" >
+                    <td th:text="${l.sub_class_reg_date}" >
                      	
                     </td>
                    <td>  <button class="btn btn-warning btn-xs" type="button" onclick="location.href='/addStandardTable'"><i class="fa fa-pencil"></i>기준표등록</button></td>
-                   <td>  <button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
+                   <td>  <a th:href="@{/modifyQualityInspection(qualityInspectionCode=${l.quality_inspection_code})}" class="btn btn-primary btn-xs"> <i class="fa fa-pencil"></i>수정</a></td>
+                   
                   </tr>
                   
                   
