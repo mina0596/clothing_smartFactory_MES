@@ -135,6 +135,24 @@ public class ProductionController {
 	
 	//==================================================================
 	
+	//[다미]생산계획 수정
+	@PostMapping("/modifyProductionPlan")
+	public String modifyProductionPlan() {
+		return "redirect:productionPlanList";
+	}
+	
+	//[다미]생산계획 수정 폼
+	@GetMapping("/modifyProductionPlan")
+	public String modifyProductionPlan(@RequestParam(value = "planCode", required = false)String planCode
+									  ,Model model) {
+		Map<String, Object> resultMap = productionPlanService.getProductionPlanListByCode(planCode);
+		model.addAttribute("resultMap", resultMap);
+		log.info("=============================================");
+		log.info("계획코드로 조회한 값:            {}", resultMap);
+		log.info("=============================================");
+		return "production/modifyProductionPlan";
+	}
+	
 	//[다미]생산계획 등록
 	@PostMapping("/addProductionPlan")
 	public String productioncontrolAdd(ProductionPlan productionPlan) {
@@ -144,7 +162,7 @@ public class ProductionController {
 		
 		productionPlanService.addProductionPlan(productionPlan);
 		
-		return "redirect:/productionPlanList";
+		return "redirect:productionPlanList";
 	}
 	
 	//[다미]성별별 양복명에 맞는 소분류 가져오기
