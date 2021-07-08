@@ -314,71 +314,107 @@
 		</trim>
 	</select>
 	
+<!-- =========================================================== -->
 	
 <resultMap type="SubClassInspection" id="subClassInspectionMap">
-		<result property="highMedLowSubClassCode" column="quality_inspection_code"/>
+		<result property="qualityInspectionCode" column="quality_inspection_code"/>
 		<result property="highClassCode" column="high_class_code"/>
 		<result property="highMedClassCode" column="high_med_class_code"/>
 		<result property="highMedLowClassCode" column="high_med_low_class_code"/>
 		<result property="subClassCode" column="sub_class_code"/>
 		<result property="subClassName" column="sub_class_name"/>
 		<result property="subClassRegDate" column="sub_class_reg_date"/>
-		<result property="subClassUpdateDate" column="sub_class_update_date"/>
-	<association property="highClassInspection" javaType="highClassInspection">
-		<result property="highClassCode" column="high_class_code"/>
-		<result property="highClassName" column="high_class_name"/>
-		<result property="highClassRegDate" column="high_class_reg_date"/>
-		<result property="highClassUpdateDate" column="high_class_update_date"/>
+		<association property="highClassInspection" javaType="highClassInspection">
+		<result column="high_class_name" property="highClassName"/>
 		</association>
-	<association property="mediumClassInspection" javaType="mediumClassInspection">
-		<result property="highMedClassCode" column="high_med_class_code"/>
-		<result property="highClassCode" column="high_class_code"/>
-		<result property="medClassCode" column="med_class_code"/>
-		<result property="medClassName" column="med_class_name"/>
-		<result property="medClassRegDate" column="med_class_reg_date"/>
-		<result property="mediClassUpdateDate" column="med_class_update_date"/>
-	</association>	
-	<association property="lowClassInspection" javaType="lowClassInspection">
-		<result property="highMedLowclassCode" column="high_med_low_class_code"/>
-		<result property="highClassCode" column="high_class_code"/>
-		<result property="highMedClassCode" column="high_med_class_code"/>
-		<result property="lowClassCode" column="low_class_code"/>
-		<result property="lowClassName" column="low_class_name"/>
-		<result property="lowClassRegDate" column="low_class_reg_date"/>
-		<result property="lowClassUpdateDate" column="low_class_update_date"/>
-	</association>
+		<association property="mediumClassInspection" javaType="mediumClassInspection">
+		<result column="med_class_name" property="medClassName"/>
+		</association>
+		<association property="lowClassInspection" javaType="lowClassInspection">
+		<result column="low_class_name" property="lowClassName"/>
+		</association>
+	
 </resultMap>
-
-<!-- =========================================================== -->
-<select id="getQualityInspectionList"  resultMap="subClassInspectionMap">
-SELECT
-	s.quality_inspection_code,
-	h.high_class_name,
-	m.med_class_code,
-	m.med_class_name,
-	l.low_class_name,
-	s.sub_class_name,
-	s.sub_class_reg_date
-FROM sub_class_inspection_list AS s
-INNER JOIN
-	low_class_inspection_list AS l
+<update id="modifyQualityInspection" parameterType="SubClassInspection">
+UPDATE sub_class_inspection_list AS s  
+		inner join 
+		low_class_inspection_list AS l
 		ON s.high_med_low_class_code = l.high_med_low_class_code
-INNER JOIN
-	medium_class_inspection_list AS m
+		INNER JOIN
+		medium_class_inspection_list AS m
 		ON s.high_med_class_code =m.high_med_class_code
-INNER JOIN
-	high_class_inspection_list AS h
-	ON s.high_class_code = h.high_class_code;
+		INNER JOIN
+		high_class_inspection_list AS h
+		ON s.high_class_code = h.high_class_code
+	<trim prefix="SET" prefixOverrides=",">	
+		<if test="highClassInspection.highClassName != null and highClassInspection.highClassName != ''.toString()">	
+			,h.high_class_name=#{highClassInspection.highClassName}
+		</if>
+		<if test="mediumClassInspection.medClassName != null and mediumClassInspection.medClassName != ''.toString()">	
+			,m.med_class_name=#{mediumClassInspection.medClassName}
+		</if>
+		<if test="lowClassInspection.lowClassName != null and lowClassInspection.lowClassName != ''.toString()">	
+			,l.low_class_name=#{lowClassInspection.lowClassName}
+		</if>
+		<if test="subClassName != null and subClassName != ''.toString()">	
+			,s.sub_class_name =#{subClassName}
+		</if>
+	</trim>
+	where
+		s.quality_inspection_code=#{qualityInspectionCode};
+</update>
 
-</select>
-<!-- 품질검사 대분류 가지고오는메서드 -->	
-<select id="getHighClassCate" resultType="HighClassInspection">
-SELECT
-	high_class_code,
-high_class_name
-	FROM
-high_class_inspection_list;
-</select>	
+	<select id="getQualityInspectionList"  resultType="Map">
+		SELECT
+			s.quality_inspection_code,
+			h.high_class_name,
+			m.med_class_code,
+			m.med_class_name,
+			l.low_class_name,
+			s.sub_class_name,
+			s.sub_class_reg_date
+		FROM sub_class_inspection_list AS s
+			INNER JOIN
+				low_class_inspection_list AS l
+					ON s.high_med_low_class_code = l.high_med_low_class_code
+			INNER JOIN
+				medium_class_inspection_list AS m
+					ON s.high_med_class_code =m.high_med_class_code
+			INNER JOIN
+				high_class_inspection_list AS h
+				ON s.high_class_code = h.high_class_code;
+	</select>
+	<select id="getQualityInspectionCode" parameterType="String" resultMap="subClassInspectionMap">
+		SELECT
+			s.quality_inspection_code,
+			h.high_class_name,
+			m.med_class_code,
+			m.med_class_name,
+			l.low_class_name,
+			s.sub_class_name,
+			s.sub_class_reg_date
+		FROM sub_class_inspection_list AS s
+		INNER JOIN
+			low_class_inspection_list AS l
+				ON s.high_med_low_class_code = l.high_med_low_class_code
+		INNER JOIN
+			medium_class_inspection_list AS m
+				ON s.high_med_class_code =m.high_med_class_code
+		INNER JOIN
+			high_class_inspection_list AS h
+			ON s.high_class_code = h.high_class_code
+		where  quality_inspection_code=#{qualityInspectionCode};
+	</select>
+		<!-- 품질검사 대분류 가지고오는메서드 -->	
+		<select id="getHighClassCate" resultType="HighClassInspection">
+		SELECT
+			high_class_code,
+		high_class_name
+			FROM
+		high_class_inspection_list;
+	</select>	
+
+
 	
 	
 	<!-- ===========================================원부자재========================================================== -->

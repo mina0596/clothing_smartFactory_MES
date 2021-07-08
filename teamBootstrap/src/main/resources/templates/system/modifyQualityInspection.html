@@ -4,54 +4,52 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
 layout:decorate="@{layout/default_system}">
 
 <th:block layout:fragment="pageTitle">
-	   <div class="border-head"> 
-	    <h3 th:text="${title}"></h3>
-	    </div>
-	    	<th:block layout:fragment="customJs">
-		    <script>
-	$(function(){
-		$('#cancleBtn').click(function(){
-			window.history.back();
-		});
-		var middleInspections = false;
-		function update_selected(){
-			$('#middleSelbox').val(0);
-			$('#middleSelbox').find("option[value!=0]").detach();
-			$('#middleSelbox').append(middleInspections.filter('.middleInspection'+$(this).val()));
-		}
-		
+   <div class="border-head"> 
+   	 <h3 th:text="${title}"></h3>
+    </div>
+	<th:block layout:fragment="customJs">
+		<script>
 		$(function(){
-			middleInspections =$('#middleSelbox').find('option[value!=0]');
-			middleInspections.detach();
-			$('#highSelbox').change(update_selected);
-			$('#highSelbox').trigger('change');
-		});
-		
-		
-		
-		$('#seldiv').hide();
-		$('#seldiv2').hide()
-		$('#highSelbox').change(function(){
-		if($('#highSelbox').val()=='inspection04'){
-			$('#seldiv').show();
-		}else{
+			$('#cancleBtn').click(function(){
+				window.history.back();
+			});
+			var middleInspections = false;
+			function update_selected(){
+				$('#middleSelbox').val(0);
+				$('#middleSelbox').find("option[value!=0]").detach();
+				$('#middleSelbox').append(middleInspections.filter('.middleInspection'+$(this).val()));
+			}
+			
+			$(function(){
+				middleInspections =$('#middleSelbox').find('option[value!=0]');
+				middleInspections.detach();
+				$('#highSelbox').change(update_selected);
+				$('#highSelbox').trigger('change');
+			});
+			
+			
+			
 			$('#seldiv').hide();
-		}
-			
-		});//대분류 배열에 따라 중분류 배열값이 가지고오는 chage 메서드써야하는데 거기에다가  hide도 따라와야한다.
-		$('#middleSelbox').change(function(){
-		if($('#middleSelbox').val()=='middleInspectionDriect'){
-			$('#seldiv2').show();
-		}else{
-			$('#seldiv2').hide();
-		}
-			
+			$('#seldiv2').hide()
+			$('#highSelbox').change(function(){
+			if($('#highSelbox').val()=='inspection04'){
+				$('#seldiv').show();
+			}else{
+				$('#seldiv').hide();
+			}
+				
+			});//대분류 배열에 따라 중분류 배열값이 가지고오는 chage 메서드써야하는데 거기에다가  hide도 따라와야한다.
+			$('#middleSelbox').change(function(){
+			if($('#middleSelbox').val()=='middleInspectionDriect'){
+				$('#seldiv2').show();
+			}else{
+				$('#seldiv2').hide();
+			}
+				
+			});
 		});
-		
-		
-	});
 	
-	</script>
+		</script>
 	</th:block>	 
 	    
 </th:block>
@@ -61,94 +59,51 @@ layout:decorate="@{layout/default_system}">
 <th:block layout:fragment="container">
 
     <div class="form-panel">
-      <h4 class="mb"><i class="fa fa-edit"></i> 품질검사등록</h4>
+      <h4 class="mb"><i class="fa fa-edit"></i> 품질검사수정</h4>
       <hr>
       <br>
-      
-      <form class="form-horizontal style-form" method="post">
-
-       
+      <form class="form-horizontal style-form" method="post" th:action="@{/modifyQualityInspection}"  >
+		 <div class="form-group">
+	          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사코드</label>
+	         <div class="col-md-5">
+	            <input class="form-control" name="qualityInspectionCode" type="text"  th:value="${subClassInspection.qualityInspectionCode}" readonly="readonly">
+	          </div>
+	        </div>
+	    <div class="form-group">
+	          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사대분류명</label>
+	         <div class="col-md-5">
+	            <input class="form-control" name="highClassInspection.highClassName" type="text"  th:value="${subClassInspection.highClassInspection.highClassName}"  readonly="readonly">
+	          </div>
+	        </div>
+	     <div class="form-group">
+	          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사중분류명</label>
+	          <div class="col-md-5">
+	          	<input class="form-control"  name="mediumClassInspection.medClassName"  type="text" th:value="${subClassInspection.mediumClassInspection.medClassName}" readonly="readonly">
+	          </div>
+	        </div>
+	      <div class="form-group">
+	       	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사 소분류명</label>
+	       		<div class="col-md-5">
+	           	<input class="form-control" name="lowClassInspection.lowClassName" type="text" th:value="${subClassInspection.lowClassInspection.lowClassName}" readonly="readonly">
+		        </div>
+	        </div>
+	       <div class="form-group">
+	       	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사 상세분류명</label>
+	       		<div class="col-md-5">
+	           	<input class="form-control" name="subClassName" type="text" th:value="${subClassInspection.subClassName}" >
+		     </div>
+	     </div>
+	         <div class="form-group text-right">
+                <div class="col-lg-offset-2 col-lg-10">
+                  <button class="btn btn-theme" type="submit" ><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">수정완료</font></font></button>
+                  <button class="btn btn-theme04" type="button" id="cancleBtn"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">수정취소</font></font></button>
+                </div>
+                </div>
         
-        <div class="form-group">
-       	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사 대분류명</label>
-       	  	<div class="col-sm-5">
-             	 <select class="form-control" name="highClasscificationInspection" id="highSelbox">
-                  <option value="">::품질검사대분류명::</option>
-                  <option value="inspection01">::원자재검사::</option>
-                  <option value="inspection02">::공정중간검사::</option>
-                  <option value="inspection03">::완제품검사::</option>
-                  <option value="inspection04">::대분류직접입력::</option>
-                 </select>
-           	  	</div>
-           	  </div>
-       <div class="form-group" id="seldiv">
-   	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;" >대분류명직접입력</label>
-   	  	<div class="col-sm-5">
-      	<input class="form-control" id="selboxDirect" type="text"  >
-          </div>
-          </div>
-           	  
-        <div class="form-group">
-       	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사 중분류명</label>
-       	  	<div class="col-sm-5">
-             	 <select class="form-control" id="middleSelbox">
-               			<option value="0">::중분류검사명::</option>
-	                    <option class="middleInspection1" value="ramInspection01">::원자재_원단이화학검사(파괴검사)1::</option>
-	                    <option class="middleInspection1" value="ramInspection02">::원자재_원단이화학검사(파괴검사)2::</option>
-	                    <option class="middleInspection1" value="ramInspection03">::원자재_원단이화학검사(파괴검사)3::</option>
-	                    <option class="middleInspection1" value="ramInspection04">::원자재_원단이화학검사(파괴검사)4::</option>
-	                    <option class="middleInspection1" value="ramInspection05">::원자재_원단이화학검사(파괴검사)5::</option>
-	                    <option class="middleInspection1" value="ramInspection06">::원자재_원단이화학검사(파괴검사)6::</option>
-	                    <option class="middleInspection1" value="midInpspection01">::공정중간검사_재단물검사1::</option>
-	                    <option class="middleInspection2" value="midInpspection02">::공정중간검사_재단물검사2::</option>
-	                    <option class="middleInspection2" value="midInpspection03">::공정중간검사_재단물검사3::</option>
-	                    <option class="middleInspection2" value="midInpspection04">::공정중간검사_봉제검사1::</option>
-	                    <option class="middleInspection2" value="midInpspection05">::공정중간검사_봉제검사2::</option>
-	                    <option class="middleInspection2" value="midInpspection06">::공정중간검사_봉제검사3::</option>
-	                    <option class="middleInspection2" value="midInpspection07">::공정중간검사_봉제검사4::</option>
-	                    <option class="middleInspection3" value="finalInpspection01">::완제품검사_봉제검사1::</option>
-	                    <option class="middleInspection3" value="finalInpspection02">::완제품검사_봉제검사2::</option>
-	                    <option class="middleInspection3" value="finalInpspection03">::완제품검사_봉제검사3::</option>
-	                    <option class="middleInspection3" value="finalInpspection04">::완제품검사_봉제검사4::</option>
-	                    <option class="middleInspection3" value="finalInpspection05">::완제품검사_마무리1::</option>
-	                    <option class="middleInspection3" value="finalInpspection06">::완제품검사_마무리2::</option>
-	                    <option class="middleInspection4" value="middleInspectionDriect">::중분류직접입력::</option>
-                 </select>
-           	  	</div>
-           	  	</div>
-          <div class="form-group" id="seldiv2">
-   	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;" >중분류명검사입력</label>
-   	  	<div class="col-sm-5">
-      	<input class="form-control" id="middlebox" type="text"  >
-          </div>
-          </div> 	  	
-           	  	
-        <div class="form-group">
-       	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사 소분류명</label>
-       	  	<div class="col-sm-5">
-          	<input class="form-control" id="" type="text"  >
-          </div>
-           	  
-           	  	</div>
         
-        <div class="form-group">
-       	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사 소분류상세명</label>
-       	  <div class="col-sm-5">
-          	<input class="form-control" id="" type="text"  >
-          </div>
-           	  	</div>
-        
-      
-        <div class="form-group text-right">
-                    <div class="col-lg-offset-2 col-lg-10">
-                      <button class="btn btn-theme" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">품질검사등록</font></font></button>
-                      <button class="btn btn-theme04" type="button" id="cancleBtn"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">품질검사등록취소</font></font></button>
-                    </div>
-                    </div>
        		</form>
       
     	</div>
-    
           
                         <!-- js placed at the end of the document so the pages load faster -->
 
