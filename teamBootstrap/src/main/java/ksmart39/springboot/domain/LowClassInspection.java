@@ -9,10 +9,13 @@ public class LowClassInspection {
 	private String lowClassRegDate;
 	private String lowClassUpdateDate;
 	
-	private HighClassInspection highClassInspection;
-	private MediumClassInspection mediumClassInspection;
-	
-	
+	@Override
+	public String toString() {
+		return "LowClassInspection [highMedLowclassCode=" + highMedLowclassCode + ", highClassCode=" + highClassCode
+				+ ", highMedClassCode=" + highMedClassCode + ", lowClassCode=" + lowClassCode + ", lowClassName="
+				+ lowClassName + ", lowClassRegDate=" + lowClassRegDate + ", lowClassUpdateDate=" + lowClassUpdateDate
+				+ "]";
+	}
 	public String getHighMedLowclassCode() {
 		return highMedLowclassCode;
 	}
@@ -55,27 +58,7 @@ public class LowClassInspection {
 	public void setLowClassUpdateDate(String lowClassUpdateDate) {
 		this.lowClassUpdateDate = lowClassUpdateDate;
 	}
-	public HighClassInspection getHighClassInspection() {
-		return highClassInspection;
-	}
-	public void setHighClassInspection(HighClassInspection highClassInspection) {
-		this.highClassInspection = highClassInspection;
-	}
-	public MediumClassInspection getMediumClassInspection() {
-		return mediumClassInspection;
-	}
-	public void setMediumClassInspection(MediumClassInspection mediumClassInspection) {
-		this.mediumClassInspection = mediumClassInspection;
-	}
 	
-	@Override
-	public String toString() {
-		return "LowClassInspection [highMedLowclassCode=" + highMedLowclassCode + ", highClassCode=" + highClassCode
-				+ ", highMedClassCode=" + highMedClassCode + ", lowClassCode=" + lowClassCode + ", lowClassName="
-				+ lowClassName + ", lowClassRegDate=" + lowClassRegDate + ", lowClassUpdateDate=" + lowClassUpdateDate
-				+ ", highClassInspection=" + highClassInspection + ", mediumClassInspection=" + mediumClassInspection
-				+ "]";
-	}
 	
 
 }

@@ -13,6 +13,7 @@ import ksmart39.springboot.domain.HumanResources;
 import ksmart39.springboot.domain.QualityInspection;
 
 import ksmart39.springboot.domain.RawMaterials;
+import ksmart39.springboot.domain.SubClassInspection;
 
 @Service
 public class SystemService {
@@ -93,9 +94,22 @@ public class SystemService {
 	
 	//=============================================================
 	
+	//[보람 ]품질검사 상세 수정 메서드
+	public int modifyQualityInspection(SubClassInspection subClassInspection) {
+		return systemMapper.modifyQualityInspection(subClassInspection);
+		}
+	//[보람 ]품질검사 한행을 가지고오는메서드
+	public  SubClassInspection getQualityInspectionCode(String qualityInspectionCode) {
+		return systemMapper.getQualityInspectionCode(qualityInspectionCode);
+		
+	}
+	
+	
 	//[보람 ]품질검사 리스트 조회메서드
-	/*
-	 * public List<SubClassInspection> getQualityInspectionList(){ return
-	 * systemMapper.getQualityInspectionList(); }
-	 */
+	
+	 public List<Map<String, Object>> getQualityInspectionList() 
+	 { return	
+			  systemMapper.getQualityInspectionList();
+	 }
+	 
 }
