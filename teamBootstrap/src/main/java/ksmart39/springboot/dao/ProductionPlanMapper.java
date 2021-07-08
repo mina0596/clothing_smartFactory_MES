@@ -22,6 +22,4 @@ public interface ProductionPlanMapper {
 	//[다미]생산계획 등록 폼 - 제품 코드 조회
 	public List<Map<String, Object>> getProductCode();
 	
-	//[다미]생산계획 월별 조회
-	public List<ProductionPlan> getProductionMonthlyPlanList();
 }

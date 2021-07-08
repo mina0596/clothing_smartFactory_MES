@@ -36,7 +36,5 @@ public class ProductionPlanService {
 		return productionPlanMapper.getProductCode();
 	}	
 	
-	public List<ProductionPlan> getProductionMonthlyPlanList(){
-		return productionPlanMapper.getProductionMonthlyPlanList();
-	}
+
 }
