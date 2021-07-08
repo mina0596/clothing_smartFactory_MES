@@ -3,6 +3,7 @@ package ksmart39.springboot.domain;
 public class Client {
 	private String clientCode;
 	private String clientCategory;
+	
 	private String clientName;
 	private String clientTel;
 	private String clientEmployee;

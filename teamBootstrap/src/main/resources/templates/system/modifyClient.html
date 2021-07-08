@@ -28,9 +28,15 @@ layout:decorate="@{layout/default_system}">
 						<option value = "운송" th:selected="${client.clientCategory == '운송'}">운송</option>
 		               </select>
                   </div>
-                </div>
+                </div>                
                 
-                
+                  <div class="form-group ">
+                    <label class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">거래처코드</font></font></label>
+                    <div class="col-lg-6">
+                      <input class=" form-control" name="clientCode" th:value="${client.clientCode}" type="text" readonly="readonly">
+                    </div>
+                  </div>
+                  
                   <div class="form-group ">
                     <label class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">회사명</font></font></label>
                     <div class="col-lg-6">
@@ -62,7 +68,7 @@ layout:decorate="@{layout/default_system}">
                   <div class="form-group ">
                     <label class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">사업자번호</font></font></label>
                     <div class="col-lg-6">
-                      <input class="form-control " th:value="client.clientBusinessNum" name="${client.clientBusinessNum}" type="number">
+                      <input class="form-control " th:value="${client.clientBusinessNum}" name="clientBusinessNum" type="number">
                     </div>
                   </div>
                   
