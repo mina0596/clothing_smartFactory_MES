@@ -108,7 +108,7 @@ layout:decorate="@{layout/default_production}">
 	                    <td th:text="${l.production_plan_qantity_unit}"></td>
 	                    <td th:text="${l.expected_production_start_date}"></td>
 	                    <td th:text="${l.expected_production_end_date}"></td>
-	                  	<td><a th:href="@{/modifyProductionPlan}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</a></td>
+	                  	<td><a th:href="@{/production/modifyProductionPlan(planCode=${l.production_plan_code})}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</a></td>
                   </tr>
               	</tbody>
               </table>

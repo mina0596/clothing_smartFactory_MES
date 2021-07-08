@@ -13,7 +13,7 @@ layout:decorate="@{layout/default_production}">
 
             <div class="form-panel">
              <h4 class="mb"><i class="fa fa-edit"></i>생산계획 등록</h4>
-              <form id="form" th:href="@{/productionPlanList}" class="form-horizontal style-form" method="post">
+              <form id="form" th:action="@{/production/addProductionPlan}" class="form-horizontal style-form" method="post">
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">성별별 양복명</label>
                   <div class="col-sm-4">
@@ -85,7 +85,7 @@ layout:decorate="@{layout/default_production}">
                   <div class="form-group text-right">
 			          <div class="col-lg-offset-2 col-lg-10">
 			            <button id="submitBtn" class="btn btn-theme" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">등록</font></font></button>
-			            <a th:href="@{/productionPlanList}" class="btn btn-theme04"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소</font></font></a>
+			            <a th:href="@{/production/productionPlanList}" class="btn btn-theme04"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소</font></font></a>
 			          </div>
 			        </div>
 			      </form>
