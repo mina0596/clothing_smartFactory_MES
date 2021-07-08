@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_contract}">
+
+<th:block layout:fragment="customJs">
+	<script th:src="@{resizable.js}"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			var gridTable = document.getElementsByTagName('table');
+			for(var i = 0; i < gridTable.length; i++){
+				resizableGrid(gridTable[i]);
+			}
+		}
+	
+		$(function(){
+			//#checkAll 버튼 클릭 시 전체 checked
+			$('#checkAll').click(function(){
+				if($('#checkAll').prop('checked')){
+					$('.checked').prop('checked',true);
+				}else{
+					$('.checked').prop('checked',false);
+				}
+			});		
+			
+			
+			var tbl = $('#list');
+			var profitTbl = $('#profitList');
+			var expenseTbl = $('#expenseList');
+			
+			console.log(profitTbl);
+			
+			var confirmPayment = profitTbl.children().find('#confirmPayment').text();
+			console.log(confirmPayment);
+			
+			if(confirmPayment == '미완료'){
+				$('#confirmPayment').click(function(){
+					location.href='addInvoiceClaim';
+				});
+			}
+			
+			
+		});
+	</script>  
+</th:block>
+
+<th:block layout:fragment="container">
+	   <div>
+          <h4><i class="fa fa-angle-right"></i> 예정 수금/출금 조회</h4>
+          <hr>  
+          
+       <form class="form-horizontal style-form" role="form">
+       	<table class="table table-striped table-advance table-hover" id="list">
+         	<thead>
+         		<tr>
+         			<th> </th>
+         			<th> </th>
+         			<th> </th>
+         			
+         		</tr>
+         	</thead>
+         	<tbody>
+         		<tr>
+         			<td>
+         				<div class="form-inline">
+         				
+	         				<div class=".col-md-4 input-group">
+			                	<select class="form-control" id="searchCate">
+			                		<option>::선택1::</option>
+			                		<option>예정코드</option>
+			                		<option>계약번호</option>
+			                		<option>거래처명</option>
+			                	</select>
+		               		</div>
+	         				<div class=".col-md-4 input-group">
+			                	<select class="form-control" id="searchCate">
+			                		<option>::선택2::</option>
+			                		<option>내용</option>
+			                		<option>수/출금 상세</option>
+			                	</select>
+		                	</div>
+		         			<div class=".col-md-4 .col-md-offset-3 input-group">
+			                	<input type="text" class="form-control" placeholder="직접 입력 또는 검색">
+			                	<div class="input-group-btn">
+								<button class="btn btn-default"><i class="btn fa fa-search" style="padding: 0px;" id="SupplierValue"></i></button>
+								</div>
+			                </div>
+			                
+	               		</div>
+         			</td>
+         			<td>
+         				<div class="form-group">
+		                	<select class="form-control">
+		                		<option>::기간 검색 선택::</option>
+		                		<option>제조시작일시</option>
+		                		<option>제조완료일시</option>
+		                		<option>납기일</option>
+		                	</select>
+	                    </div>
+         				<div class="input-group" data-date="01/01/2014" data-date-format="mm/dd/yyyy">
+	                      <input type="text" class="form-control dpd1" name="from">
+	                      <span class="input-group-addon">To</span>
+	                      <input type="text" class="form-control dpd2" name="to">
+	               		</div>
+         			</td>
+         			<td>
+         				  <button type="submit" class="btn btn-theme">검색</button>
+         			</td>        			
+         		</tr>
+         	</tbody>
+         </table>  
+        </form>
+   		<div class="form-group text-right">
+         <div class="btn-group">
+		        <a th:href="@{/productionMonthlyPlanList}" class="btn btn-default">월별 조회</a>
+		        <a th:href="@{/productionWeeklyPlanList}" class="btn btn-default">주간별 조회</a>
+		        <a th:href="@{/productionDailyPlanList}" class="btn btn-default">일별 조회</a>
+	        </div>
+         </div>
+   
+   
+   
+			<br>
+	       
+	       
+	       
+	       
+	       <h4><i class="fa fa-angle-right"></i> 예정 수금/출금 검색 조회 결과</h4>
+	       계약번호 '63587' 로 검색한 결과 입니다.
+          <hr> 
+       		<form class="form-horizontal style-form">
+              <table class="table table-striped table-advance table-hover" id="profitList">
+                <thead>
+                  <tr>
+                 	<th><input type="checkbox" id="checkAll"></th>
+             		<th><i class="fa fa-bullhorn"></i> 번호</th>
+                    <th><i class="fa fa-bookmark"></i> 수/출금 구분</th>
+                    <th><i class="fa fa-bookmark"></i> 수/출금 상세</th>
+                    <th><i class="fa fa-barcode"></i> 예정코드</th>
+                    <th><i class="fa fa-barcode"></i> 계약번호</th>
+                    <th><i class="fa fa-bookmark"></i> 거래처명</th>
+                    <th><i class="fa fa-bookmark"></i> 내용</th>
+                    <th><i class="fa fa-bookmark"></i> 금액</th>
+                    <th><i class="fa fa-calendar"></i> 예정 제작 시작 일자<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><i class="fa fa-calendar"></i> 예정 제작 종료 일자<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><i class="fa fa-calendar"></i> 결제여부<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                  	<td><input type="checkbox" class="checked"></td>
+	                <td>1</td>
+                    <td>수금</td>
+                    <td>수주계약</td>
+                    <td>expected_payment_01</td>
+                    <td>5687</td>
+                    <td>파크랜드</td>
+                    <td>총계약금</td>
+                    <td>5786700원</td>
+                    <td>2021-02-01</td>
+                    <td>2021-02-01</td>
+                    <td><button class="btn badge bg-warning" type="button" id="confirmPayment">미완료</button></td>
+                  </tr>
+                  <tr>
+                  	<td><input type="checkbox" class="checked"></td>
+	                <td>1</td>
+                    <td>수금</td>
+                    <td>수주계약</td>
+                    <td>expected_payment_01</td>
+                    <td>5687</td>
+                    <td>파크랜드</td>
+                    <td>총계약금</td>
+                    <td>5786700원</td>
+                    <td>2021-02-01</td>
+                    <td>2021-02-01</td>
+                    <td><span class="btn badge bg" id="confirmPayment">완료</span></td>
+                  </tr>
+                  
+                </tbody>
+              </table>
+            
+       		</form>
+	               		
+	   
+	      <br>
+	      <br>
+	      
+            <h4><i class="fa fa-angle-right"></i> 예정 수금/출금 목록</h4>
+            <div class="col-lg-12 mt">
+            <div class="row content-panel">
+
+              <div class="panel-heading">
+                <ul class="nav nav-tabs nav-justified">
+                  <li class="active">
+                    <a data-toggle="tab" href="#byProfit">수금별</a>
+                  </li>
+                  <li>
+                    <a data-toggle="tab" href="#byExpense">출금별</a>
+                  </li>
+                </ul>
+              </div>
+              <!-- /panel-heading -->
+              
+              
+              <div class="panel-body">
+                <div class="tab-content">
+                
+                <!-- 수금별 시작  -->
+                  <div id="byProfit" class="tab-pane active">
+               		<form class="form-horizontal style-form">
+		              <table class="table table-striped table-advance table-hover" id="expenseList">
+		                <thead>
+		                  <tr>
+		             		<th><input type="checkbox" id="checkAll"></th>
+		             		<th><i class="fa fa-bullhorn"></i> 번호</th>
+		                    <th><i class="fa fa-bookmark"></i> 수금 상세</th>
+		                    <th><i class="fa fa-barcode"></i> 예정코드</th>
+		                    <th><i class="fa fa-barcode"></i> 계약번호</th>
+		                    <th><i class="fa fa-bookmark"></i> 거래처명</th>
+		                    <th><i class="fa fa-bookmark"></i> 내용</th>
+		                    <th><i class="fa fa-bookmark"></i> 금액</th>
+		                    <th><i class="fa fa-calendar"></i> 예정 제작 시작 일자<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+		                    <th><i class="fa fa-calendar"></i> 예정 제작 종료 일자<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+		                    <th><i class="fa fa-calendar"></i> 결제여부<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+		                  </tr>
+		                </thead>
+		                <tbody>
+	                  	  <tr>
+		                  	<td><input type="checkbox" class="checked"></td>
+			                <td>1</td>
+		                    <td>수주계약</td>
+		                    <td>expected_payment_01</td>
+		                    <td>5687</td>
+		                    <td>파크랜드</td>
+		                    <td>총계약금</td>
+		                    <td>5786700원</td>
+		                    <td>2021-02-01</td>
+		                    <td>2021-02-01</td>
+		                    <td><span class="btn badge bg-warning" id="confirmPayment">미완료</span></td>
+		                  </tr>
+		                  	<td><input type="checkbox" class="checked"></td>
+			                <td>1</td>
+		                    <td>수주계약</td>
+		                    <td>expected_payment_01</td>
+		                    <td>5687</td>
+		                    <td>파크랜드</td>
+		                    <td>총계약금</td>
+		                    <td>5786700원</td>
+		                    <td>2021-02-01</td>
+		                    <td>2021-02-01</td>
+		                    <td><span class="btn badge bg" id="confirmPayment">완료</span></td>
+		                  </tr>
+		                </tbody>
+		              </table>
+       				</form>
+               	  </div>
+
+
+                <!-- 출금별 시작 -->
+                  <div id="byExpense" class="tab-pane">
+                  	<form class="form-horizontal style-form">
+		              <table class="table table-striped table-advance table-hover" id="list">
+		                <thead>
+		                  <tr>
+		             		<th><input type="checkbox" id="checkAll"></th>
+		             		<th><i class="fa fa-bullhorn"></i> 번호</th>
+		                    <th><i class="fa fa-bookmark"></i> 출금 상세</th>
+		                    <th><i class="fa fa-barcode"></i> 예정코드</th>
+		                    <th><i class="fa fa-barcode"></i> 계약번호</th>
+		                    <th><i class="fa fa-bookmark"></i> 거래처명</th>
+		                    <th><i class="fa fa-bookmark"></i> 내용</th>
+		                    <th><i class="fa fa-bookmark"></i> 금액</th>
+		                    <th><i class="fa fa-calendar"></i> 예정 제작 시작 일자<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+		                    <th><i class="fa fa-calendar"></i> 예정 제작 종료 일자<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+		                    <th><i class="fa fa-calendar"></i> 결제여부<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+		                  </tr>
+		                </thead>
+		                <tbody>
+	                  	  <tr>
+		                  	<td><input type="checkbox" class="checked"></td>
+			                <td>1</td>
+		                    <td>발주계약</td>
+		                    <td>expected_payment_01</td>
+		                    <td>5687</td>
+		                    <td>나는단추</td>
+		                    <td>총계약금</td>
+		                    <td>5786700원</td>
+		                    <td>2021-02-01</td>
+		                    <td>2021-02-01</td>
+		                    <td><span class="btn badge bg-warning" id="confirmPayment">미완료</span></td>
+		                  </tr>
+		                </tbody>
+		              </table>
+       				</form>
+                  </div>
+
+                  
+                  <!-- /tab-pane -->
+                </div>
+                <!-- /tab-content -->
+              </div>
+              <!-- /panel-body -->
+
+		</div>
+	
+       </div>
+
+        </div>
+        <!-- /row -->
+</th:block>
+
+</html>

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class ShipmentController {
 	private static final Logger log = LoggerFactory.getLogger(ShipmentController.class);
 	
+	
+	//==========================================================
 	//[보람] 송장 수정화면 완료
 	@PostMapping("/modifyShipmentInvoice")
 	public String modifyShipmentInvoice() {
@@ -80,18 +82,23 @@ public class ShipmentController {
 	public String getShipment(){
 		return "shipment/shipment";
 	}
-	//운송회사 정보
+	//[민아]운송회사 정보
 	@GetMapping("/courierList")
 	public String getCourierList() {
 		return "shipment/courierList";
 	}
-	//출고등록
+	//[민아]출고등록
 	@GetMapping("/addShipment")
 	public String addShippedProductInfo() {
 		return "shipment/addShipment";
 	}
+	//[민아]출고수정
+	@GetMapping("/modifyShipment")
+	public String modifyShipment() {
+		return "shipment/modifyShipment";
+	}
 	
-	//출고리스트
+	//[민아]출고리스트
 	@GetMapping("/shipmentList")
 	public String getShipmentList() {
 		return "shipment/shipmentList";

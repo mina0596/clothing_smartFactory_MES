@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart39.springboot.dao.RawMaterialsInventoryStatusMapper">
+
+	<resultMap type="RawMaterialsInventory" 	id="materialsInventoryResultMap">
+		<result property="materialCode" 			column="raw_material_code"/>
+		<result property="materialOrderCode" 		column="raw_material_order_code"/>
+		<result property="chargeEmployeeCode" 		column="charge_employee_code"/>
+		<result property="transactionCate" 			column="transaction_category"/>
+		<result property="transactionAmount" 		column="raw_material_transaction_amount"/>
+		<result property="transactionDate" 			column="raw_material_transaction_date"/>
+		<result property="transactionRegDate" 		column="raw_material_transaction_reg_date"/>
+		<result property="transactionUpdateDate" 	column="raw_material_transaction_update_date"/>
+		<association property="materialsInfo" javaType="RawMaterials">
+			<id property="rawMaterialCode" column="raw_material_code"/>
+			<result property="rawMaterialName" column="raw_material_name"/>
+			<result property="colorCode" column="raw_material_color_code"/>
+			<result property="unit" column="raw_material_unit"/>
+		</association>
+	</resultMap>
+	
+	<select id="getMaterialsTransactionList" resultMap="materialsInventoryResultMap">
+		SELECT 
+			rmit.raw_material_code, 
+			rmit.raw_material_order_code, 
+			rmit.charge_employee_code, 
+			rmit.transaction_category, 
+			rmit.raw_material_transaction_amount, 
+			rmit.raw_material_transaction_date, 
+			rmit.raw_material_transaction_reg_date, 
+			rmit.raw_material_transaction_update_date,
+			info.raw_material_name,
+			info.raw_material_color_code,
+			info.raw_material_unit
+		FROM 
+			raw_material_inventory_transaction AS rmit
+			INNER join
+			raw_material_info AS info
+		ON
+			rmit.raw_material_code = info.raw_material_code;
+	
+	</select>
+	
+	<select id="getInventoryInfoByMCode" parameterType="" resultMap="materialsInventoryResultMap">
+		SELECT 
+			rmit.raw_material_code, 
+			rmit.raw_material_order_code, 
+			rmit.charge_employee_code, 
+			rmit.transaction_category, 
+			rmit.raw_material_transaction_amount, 
+			rmit.raw_material_transaction_date, 
+			rmit.raw_material_transaction_reg_date, 
+			rmit.raw_material_transaction_update_date,
+			info.raw_material_name,
+			info.raw_material_color_code,
+			info.raw_material_unit
+		FROM 
+			raw_material_inventory_transaction AS rmit
+			INNER join
+			raw_material_info AS info
+		ON
+			rmit.raw_material_code = info.raw_material_code
+		where
+			info.raw_material_code = 'button01_FF87D2' AND 
+			rmit.raw_material_code = 'button01_FF87D2' and
+			rmit.raw_material_transaction_amount = 50 and
+			rmit.transaction_category = '입고';
+	
+	
+	</select>
+	
+	
+	
+</mapper>
+

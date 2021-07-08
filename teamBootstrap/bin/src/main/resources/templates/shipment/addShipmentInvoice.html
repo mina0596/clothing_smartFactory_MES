@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+	  layout:decorate="@{layout/default_shipment}">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    <h3></h3>
+	    </div>
+<th:block layout:fragment="customJs">
+		    <script>
+	$(function(){
+		$('#cancleBtn').click(function(){
+			location.href='/shipmentInvoiceList'
+		});
+	});
+	
+	</script>
+	</th:block>	 
+</th:block>
+
+
+<th:block layout:fragment="container">
+
+    <div class="form-panel">
+      <h4 class="mb"><i class="fa fa-edit"></i> 송장등록</h4>
+      <hr>
+      <br>
+      
+      <form class="form-horizontal style-form" method="post">
+      
+     
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label">출하그룹코드</label>
+          <div class="col-md-5">
+            <div  class="input-group date form_datetime-adv">
+              <input type="text" class="form-control"  size="16">
+              <div class="input-group-btn">
+                <button type="button" class=" btn btn-theme03 btn btn-default"><i class="fa"></i>검색하여 가져오기</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+       
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label">의뢰코드</label>
+          <div class="col-md-5">
+            <input class="form-control" id="disabledInput" type="text" placeholder="" >
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label">계약번호</label>
+          <div class="col-md-5">
+            <input class="form-control" id="disabledInput" type="text" placeholder="" >
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label">납품처주소</label>
+          <div class="col-md-5">
+            <input class="form-control" id="disabledInput" type="text" placeholder="전주시 덕진구 수정 가능하다" >
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label">납품처연락처</label>
+          <div class="col-md-5">
+            <input class="form-control" id="disabledInput" type="text" placeholder="010-6588-1111" >
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label">택배사</label>
+          <div class="col-md-5">
+            <span>CJ대한통운</span>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label">출하일</label>
+          <div class="col-md-4">
+            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
+              <input type="text" class="form-control" readonly="readonly" size="16">
+              <div class="input-group-btn">
+                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
+                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+     
+
+        <div class="form-group">
+          <label class="col-lg-2 col-sm-2 control-label">담당 사원명</label>
+          <div class="col-lg-10">
+            <p class="form-control-static">추잔탁</p>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="col-lg-2 col-sm-2 control-label">담당자 사원 코드</label>
+          <div class="col-lg-10">
+            <p class="form-control-static">employee0293</p>
+          </div>
+        </div>
+ 		
+       <div class="form-group text-right">
+                    <div class="col-lg-offset-2 col-lg-10">
+                      <button class="btn btn-theme" type="button" onclick="location.href='/shipmentInvoiceList'"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">송장등록</font></font></button>
+                      <button class="btn btn-theme04" type="button" id="cancleBtn"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">송장취소</font></font></button>
+                    </div>
+                    </div>
+        
+         
+        
+      </form>
+      
+    </div>
+
+
+</th:block>

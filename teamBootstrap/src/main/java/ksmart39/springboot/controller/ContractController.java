@@ -13,6 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ContractController {
 	//----------------------------------------수주주문서-----------------------------------------------------
 	
+	//[민아]수주계약 등록 -> 조회
+	@GetMapping("/addBuyerOrder_Minah")
+	public String addBuyerOrder_Minah() {
+		return "contract/addbuyerOrder_Minah";
+	}
+	
 	//[한빛]수주계약 등록 -> 조회
 	@PostMapping("/addBuyerOrder")
 	public String addBuyerOrder() {
@@ -104,32 +110,6 @@ public class ContractController {
 		return "contract/addBuyerRequest";
 	}
 	
-	//---------------------------------------------수주거래처------------------------------------------------------
-	//[한빛]수주주문등록 ->목록으로 이동
-	@PostMapping("/addBuyer")
-	public String addBuyer() {
-		return "redirect:/buyerList";
-	}
-	
-	//[한빛] 수주거래처 수정
-	@GetMapping("/modifyBuyer")
-	public String modifyBuyer() {
-		return"contract/modifyBuyer";
-	}
-	
-	//[한빛]수주거래처 조회
-	@GetMapping("/buyerList")
-	public String buyerList(Model model) {
-		model.addAttribute("title", "수주관리");
-		return "contract/buyerList";
-	}
-
-	//[한빛]수주거래처 등록
-	@GetMapping("/addBuyer")
-	public String addBuyer(Model model) {
-		model.addAttribute("title", "수주관리");
-		return "contract/addBuyer";
-	}
 	//------------------------------------------------------발주----------------------------------------------------------
 	//to[보람] 원부자재라는 단어를 발주로 바꿔주세요 + 메서드명이랑 경로랑 이름 연관성있게 from [민아]
 	//[보람]원부자재 발주리스트 발주코드 클릭시 발주정보 경로 메서드
@@ -198,41 +178,51 @@ public class ContractController {
 		
 		return "contract/addSupplierRequest";
 	}
-	
-	//[보람]원부자재 거래처 리스트에서 코드 클릭시 거래처정보 경로 메서드
-	@GetMapping("/supplierInfo")
-	public String getSupplierInfo() {
-		
-		return "contract/supplierInfo";
+
+
+	//=========================================================
+	//[민아]계약후 예정 수금/출금 등록
+	@GetMapping("/addInvoicePayment")
+	public String addInvoicePayment() {
+		return "contract/addInvoicePayment";
 	}
 	
-	//[보람]원부자재거래처목록경로메서드
-	@GetMapping("/supplierList")
-	public String getSupplierList(Model model) {
-									
-		model.addAttribute("title","거래처목록");
-		return"contract/supplierList";
+	//[민아]수금/출금 청구 등록
+	@GetMapping("/addInvoiceClaim")
+	public String addInvoiceClaim() {
+		return "contract/addInvoiceClaim";
 	}
 	
-	//[보람]원부자재 거래처 수정 경로 메서드 DB연결되면제대로할예정
-	@GetMapping("/supplierModify")
-	public String supplierModify() {
-		return"contract/supplierModify";
+	//[민아] 예정 수금/출금 목록
+	@GetMapping("/expectedPaymentList")
+	public String getExpectedPaymentList() {
+		return "contract/expectedPaymentList";
+	}
+
+	
+	// 결제 등록
+	@GetMapping("/addInvoiceApproval")
+	public String addInvoiceApproval() {
+		return "contract/addInvoiceApproval";
+	}
+
+	// 결제 승인 현황 목록
+	@GetMapping("/invoiceApprovalList")
+	public String getInvoiceApprovalList() {
+		return "contract/invoiceApprovalList";
+	}
+	// [다미] 전표 목록
+	@GetMapping("/paymentInvoiceList")
+	public String paymentInvoiceList(Model model) {
+		return "contract/paymentInvoiceList";
+	}
+
+	// [다미] 전표 등록 화면
+	@GetMapping("/addPaymentInvoice")
+	public String addPaymentInvoice(Model model) {
+		return "contract//addPaymentInvoice";
 	}
 	
-	//[보람]원부자재 거래처 등록후 redirect
-	@PostMapping("/addSuppler")
-	public String addsuplier() {
-		
-		return"redirect:/supplierList";
-	}
-	//[보람]원자재거래처 등록 경로 메서드
-	@GetMapping("/addSupplier")
-	public String supplierAccount(Model model) {
-		model.addAttribute("title", "수/발주관리");
-		return"contract/addSupplier";
-	
-	}
 
 	//수/발주 메인화면
 	@GetMapping("/contract")

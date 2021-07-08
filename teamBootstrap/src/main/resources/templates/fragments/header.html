@@ -2,18 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <header th:fragment="header" class="header black-bg">
       <!--logo start-->
-      <a th:href="@{/}" class="logo"><b>TEAMONE<span>ERP</span></b></a>
+      <a th:href="@{/login}" class="logo"><b>TEAMONE<span>MES</span></b></a>
       <!--logo end-->
       <div class="nav notify-row" id="top_menu">
         <!--  notification start -->
         
-        <a th:href="@{/#}">
+        <a th:href="@{/login}">
         	<span class="menu">HOME</span>
         </a>
         <a th:href="@{/contract}">
         	<span class="menu">1.수/발주관리</span>
         </a>
-        <a th:href="@{/rawMaterials}">
+        <a th:href="@{/rawMaterials/rawMaterials}">
         	<span class="menu">2.자재관리</span>
         </a>
         <a th:href="@{/production}">
@@ -25,25 +25,13 @@
         <a th:href="@{/shipment}">
         	<span class="menu">5.출하관리</span>
         </a>
-
-        <a th:href="@{/accounting}">
-        	<span class="menu">6.회계관리</span>
-        </a>
-        <a th:href="@{/humanResources}">
-        	<span class="menu">7.인사관리</span>
-        </a>
-        <a th:href="@{/community}">
-        	<span class="menu">커뮤니티</span>
-        </a>
         <a th:href="@{/system}">
-        	<span class="menu">8.시스템관리</span>
+        	<span class="menu">6.시스템관리</span>
         </a>
 		<a th:href="@{#}">
         	<span class="menu">🕐배포일시:21-06-30 16:01:00🕐</span>
         </a>
-        
-        
-        
+
         <!--  notification end -->
       </div>
         
