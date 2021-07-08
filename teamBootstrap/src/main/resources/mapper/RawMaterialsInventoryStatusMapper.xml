@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ksmart39.springboot.dao.RawMaterialsInventoryStatusMapper">
 
-	<resultMap type="RawMaterialsInventory" 	id="materialsInventoryResultMap">
+	<resultMap type="RawMaterialsInventory" 		id="materialsInventoryResultMap">
 		<result property="materialCode" 			column="raw_material_code"/>
 		<result property="materialOrderCode" 		column="raw_material_order_code"/>
 		<result property="chargeEmployeeCode" 		column="charge_employee_code"/>
@@ -11,15 +11,23 @@
 		<result property="transactionDate" 			column="raw_material_transaction_date"/>
 		<result property="transactionRegDate" 		column="raw_material_transaction_reg_date"/>
 		<result property="transactionUpdateDate" 	column="raw_material_transaction_update_date"/>
-		<association property="materialsInfo" javaType="RawMaterials">
-			<id property="rawMaterialCode" column="raw_material_code"/>
-			<result property="rawMaterialName" column="raw_material_name"/>
-			<result property="colorCode" column="raw_material_color_code"/>
-			<result property="unit" column="raw_material_unit"/>
-			<result property="feature" column="raw_material_feature"/>
+		
+		<association property="materialsInfo" 		javaType="RawMaterials">
+			<id property="rawMaterialCode"			column="raw_material_code"/>
+			<result property="rawMaterialName" 		column="raw_material_name"/>
+			<result property="colorCode" 			column="raw_material_color_code"/>
+			<result property="unit" 				column="raw_material_unit"/>
+			<result property="feature" 				column="raw_material_feature"/>
 		</association>
+		
+		<association property="employeeInfo" 		javaType="HumanResources">
+			<id property="employeeCode" 			column="employee_code"/>
+			<result property="employeeName" 		column="employee_name"/>
+		</association>
+		
 	</resultMap>
-	
+
+
 	<select id="getMaterialsTransactionList" resultMap="materialsInventoryResultMap">
 		SELECT 
 			rmit.raw_material_code, 
@@ -53,20 +61,22 @@
 			info.raw_material_name,
 			info.raw_material_color_code,
 			info.raw_material_unit,
-			info.raw_material_feature
+			info.raw_material_feature,
+			em.employee_name
 		FROM 
 			raw_material_inventory_transaction AS rmit
 			INNER join
 			raw_material_info AS info
-		ON
+		on
 			rmit.raw_material_code = info.raw_material_code
+			INNER join
+			employee_info AS em
+		on
+			rmit.charge_employee_code = em.employee_code
 		where
-			info.raw_material_code = ${materialCode} AND 
-			rmit.raw_material_code = ${materialCode} and
-			rmit.raw_material_transaction_amount = #{transactionAmount} and
-			rmit.transaction_category = #{transactionCate};
-	
-	
+			rmit.raw_material_order_code = #{materialOrderCode} AND
+			rmit.transaction_category = #{transactionCate} and
+			rmit.raw_material_transaction_date = #{transactionDate};
 	</select>
 	
 	

@@ -27,8 +27,8 @@ public class RawMaterialsInventoryStatusService {
 	}
 	
 	//[민아]자재 입고 수정
-		public List<RawMaterialsInventory> getInventoryInfoByMCode(Map<String, Object> paramMap){
-			List<RawMaterialsInventory> InventoryInfoByMCode =materialsInventoryStatusMapper.getInventoryInfoByMCode(paramMap);
+		public RawMaterialsInventory getInventoryInfoByMCode(Map<String, Object> paramMap){
+			RawMaterialsInventory InventoryInfoByMCode =materialsInventoryStatusMapper.getInventoryInfoByMCode(paramMap);
 			return InventoryInfoByMCode;
 	}
 	

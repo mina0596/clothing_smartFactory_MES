@@ -100,29 +100,41 @@ public class RawMaterialsController {
 	public String modifyInWarehousing(@RequestParam(value = "materialsName", required = false)String materialsName
 									 ,@RequestParam(value = "materialsCode", required = false)String materialsCode
 									 ,@RequestParam(value = "materialsInAmount", required = false)String materialsInAmount
+									 ,@RequestParam(value = "materialOrderCode", required = false)String materialOrderCode
+									 ,@RequestParam(value = "transactionDate", required = false)String transactionDate
 									 ,String transactionCate
 									 ,Model model) {
+		
+		log.info("***********************************");
+		log.info("transactionDate :{}", transactionDate);
+		
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("materialsName", materialsName);
+		paramMap.put("materialsCode", materialsCode);
+		paramMap.put("materialsInAmount", materialsInAmount);
+		paramMap.put("materialOrderCode", materialOrderCode);
+		paramMap.put("transactionDate", transactionDate);
+		paramMap.put("transactionCate", "입고");
+		
+		log.info("-----------------------------");
+		log.info("paramMap :{}", paramMap);
+		
+		RawMaterialsInventory InventoryInfoByMCode = materialsInventoryStatusService.getInventoryInfoByMCode(paramMap);
+		
+		model.addAttribute("InventoryInfoByMCode", InventoryInfoByMCode);
+		
+		
+		log.info("InventoryInfoByMCode :{}", InventoryInfoByMCode);
+		
 		
 		model.addAttribute("materialsCode", materialsCode);
 		model.addAttribute("materialsInAmount", materialsInAmount);
 		model.addAttribute("materialsName", materialsName);
 		
 		
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("materialsName", materialsName);
-		paramMap.put("materialsCode", materialsCode);
-		paramMap.put("materialsInAmount", materialsInAmount);
-		paramMap.put("transactionCate", "입고");
-		
-		log.info("-----------------------------");
-		log.info("paramMap :{}", paramMap);
-		
-		List<RawMaterialsInventory> InventoryInfoByMCode = materialsInventoryStatusService.getInventoryInfoByMCode(paramMap);
-		model.addAttribute("InventoryInfoByMCode", InventoryInfoByMCode);
-		
 		log.info("materialsCode = {} ", materialsCode);
 		log.info("materialsInAmount = {} ", materialsInAmount);
-
+		
 		return "rawMaterials/modifyInWarehousing";
 	}
 

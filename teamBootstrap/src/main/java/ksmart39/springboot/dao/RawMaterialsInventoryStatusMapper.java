@@ -16,5 +16,5 @@ public interface RawMaterialsInventoryStatusMapper {
 	public List<RawMaterialsInventory> getMaterialsTransactionList();
 	
 	//[민아]자재 입고 수정
-	public List<RawMaterialsInventory> getInventoryInfoByMCode(Map<String, Object> paramMap);
+	public RawMaterialsInventory getInventoryInfoByMCode(Map<String, Object> paramMap);
 }

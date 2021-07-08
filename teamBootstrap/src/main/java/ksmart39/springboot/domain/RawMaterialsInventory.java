@@ -12,8 +12,15 @@ public class RawMaterialsInventory {
 	
 	private RawMaterials materialsInfo;
 	
+	private HumanResources employeeInfo;
 	
 	
+	public HumanResources getEmployeeInfo() {
+		return employeeInfo;
+	}
+	public void setEmployeeInfo(HumanResources employeeInfo) {
+		this.employeeInfo = employeeInfo;
+	}
 	public RawMaterials getMaterialsInfo() {
 		return materialsInfo;
 	}
@@ -74,8 +81,11 @@ public class RawMaterialsInventory {
 				+ ", chargeEmployeeCode=" + chargeEmployeeCode + ", transactionCate=" + transactionCate
 				+ ", transactionAmount=" + transactionAmount + ", transactionDate=" + transactionDate
 				+ ", transactionRegDate=" + transactionRegDate + ", transactionUpdateDate=" + transactionUpdateDate
-				+ ", materialsInfo=" + materialsInfo + "]";
+				+ ", materialsInfo=" + materialsInfo + ", employeeInfo=" + employeeInfo + "]";
 	}
+
+	
+	
 	
 	
 	

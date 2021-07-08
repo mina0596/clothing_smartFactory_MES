@@ -19,7 +19,7 @@ layout:decorate="@{layout/default_rawMaterials}">
 		        <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">발주 코드 검색</label>
                   <div class="col-sm-4">
-                    <input type="text" th:value="${materialOrderCode}" class="form-control" disabled="disabled" >
+                    <input type="text" th:value="${InventoryInfoByMCode.materialOrderCode}" class="form-control" disabled="disabled" >
                   </div>
                 </div>
 		        <div class="form-group">
@@ -37,7 +37,7 @@ layout:decorate="@{layout/default_rawMaterials}">
 		        <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">색상코드</label>
                   <div class="col-sm-4">
-                    <input type="text" id="raw_material_color_code" th:value="${InventoryInfoByMCode.materialsInfo.colorCode}" name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
+                    <input type="text" id="raw_material_color_code" th:value="${InventoryInfoByMCode.materialsInfo.colorCode}" class="form-control" disabled="disabled" >
                   </div>
                 </div>
 		        <div class="form-group">
@@ -49,13 +49,13 @@ layout:decorate="@{layout/default_rawMaterials}">
 		        <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">발주 담당자 코드</label>
                   <div class="col-sm-4">
-                    <input type="number"  name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
+                    <input type="number"  name="raw_material_transaction_amount" th:value="${InventoryInfoByMCode.chargeEmployeeCode}" class="form-control" disabled="disabled" >
                   </div>
                 </div>
 		        <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">발주 담당자명</label>
                   <div class="col-sm-4">
-                    <input type="number" name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
+                    <input type="number" name="raw_material_transaction_amount" th:value="${InventoryInfoByMCode.employeeInfo.employeeName}" class="form-control" disabled="disabled" >
                   </div>
                 </div>
                 
@@ -72,7 +72,7 @@ layout:decorate="@{layout/default_rawMaterials}">
 		          <label class="col-sm-2 col-sm-2 control-label">입고일시</label>
 		          <div class="col-md-4">
 		            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
-		              <input type="text" class="form-control" readonly="readonly" size="16">
+		              <input type="text" class="form-control" readonly="readonly" size="16" th:value="${InventoryInfoByMCode.transactionDate}">
 		              <div class="input-group-btn">
 		                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
 		                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>

@@ -93,7 +93,7 @@ layout:decorate="@{layout/default_rawMaterials}">
                     <th><i class=" fa fa-bookmark"></i> 색상코드</th>
                     <th><i class=" fa fa-bookmark"></i> 수량</th>
                     <th><i class=" fa fa-bookmark"></i> 단위</th>
-                    <th><i class=" fa fa-clock-o"></i> 등록일자</th>
+                    <th><i class=" fa fa-bookmark"></i> 발주주문코드</th>
                     <th><i class=" fa fa-exchange"></i> 입고/출고 등록</th>
                     <th><i class=" fa fa-pencil"></i> 수정</th>
                   </tr>
@@ -110,13 +110,17 @@ layout:decorate="@{layout/default_rawMaterials}">
                     <td th:text="${l.transactionAmount}"></td>
                     <td th:text="${l.materialsInfo.unit}" id="unit"></td>
                     <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
-                    <td th:text="${l.transactionRegDate}"></td>
+                    <td th:text="${l.materialOrderCode}"></td>
                     <td> 
                       <button type="button" class="btn btn-success btn-xs" onclick="location.href='addInWarehousing'" style="padding-right: 5px;"><i class="fa fa-plus-square"></i></button>
                       <button type="button" class="btn btn-danger btn-xs" onclick="location.href='addExWarehousing'"><i class="fa fa-minus-square"></i></button>
                     </td>
                     <td>
-                    	<a th:if="${l.transactionCate == '입고'}" th:href="@{/rawMaterials/modifyInWarehousing(materialsCode=${l.materialCode},materialsInAmount=${l.transactionAmount},materialsName=${l.materialsInfo.rawMaterialName})}" class="btn btn-primary btn-xs" id="modifyBtn"><i class="fa fa-pencil"></i>수정</a>
+                    	<a th:if="${l.transactionCate == '입고'}" th:href="@{/rawMaterials/modifyInWarehousing(materialsCode=${l.materialCode}
+                    	,materialsInAmount=${l.transactionAmount}
+                    	,materialsName=${l.materialsInfo.rawMaterialName}
+                    	,materialOrderCode=${l.materialOrderCode}
+                    	,transactionDate=${l.transactionDate})}" class="btn btn-primary btn-xs" id="modifyBtn"><i class="fa fa-pencil"></i>수정</a>
                     	<a th:if="${l.transactionCate == '출고'}" th:href="@{/rawMaterials/modifyExWarehousing(materialsCode=${l.materialCode},materialsInAmount=${l.transactionAmount})}" class="btn btn-primary btn-xs" id="modifyBtn"><i class="fa fa-pencil"></i>수정</a>
 
                     </td>
