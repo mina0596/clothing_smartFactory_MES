@@ -1,6 +1,7 @@
 package ksmart39.springboot.domain;
 
 public class RawMaterialsInventory {
+	private String transactionCode;
 	private String materialCode;
 	private String materialOrderCode;
 	private String chargeEmployeeCode;
@@ -15,6 +16,13 @@ public class RawMaterialsInventory {
 	private HumanResources employeeInfo;
 	
 	
+
+	public String getTransactionCode() {
+		return transactionCode;
+	}
+	public void setTransactionCode(String transactionCode) {
+		this.transactionCode = transactionCode;
+	}
 	public HumanResources getEmployeeInfo() {
 		return employeeInfo;
 	}
@@ -75,18 +83,16 @@ public class RawMaterialsInventory {
 	public void setTransactionUpdateDate(String transactionUpdateDate) {
 		this.transactionUpdateDate = transactionUpdateDate;
 	}
+	
 	@Override
 	public String toString() {
-		return "RawMaterialsInventory [materialCode=" + materialCode + ", materialOrderCode=" + materialOrderCode
-				+ ", chargeEmployeeCode=" + chargeEmployeeCode + ", transactionCate=" + transactionCate
-				+ ", transactionAmount=" + transactionAmount + ", transactionDate=" + transactionDate
-				+ ", transactionRegDate=" + transactionRegDate + ", transactionUpdateDate=" + transactionUpdateDate
-				+ ", materialsInfo=" + materialsInfo + ", employeeInfo=" + employeeInfo + "]";
+		return "RawMaterialsInventory [transactionCode=" + transactionCode + ", materialCode=" + materialCode
+				+ ", materialOrderCode=" + materialOrderCode + ", chargeEmployeeCode=" + chargeEmployeeCode
+				+ ", transactionCate=" + transactionCate + ", transactionAmount=" + transactionAmount
+				+ ", transactionDate=" + transactionDate + ", transactionRegDate=" + transactionRegDate
+				+ ", transactionUpdateDate=" + transactionUpdateDate + ", materialsInfo=" + materialsInfo
+				+ ", employeeInfo=" + employeeInfo + "]";
 	}
-
-	
-	
-	
 	
 	
 }

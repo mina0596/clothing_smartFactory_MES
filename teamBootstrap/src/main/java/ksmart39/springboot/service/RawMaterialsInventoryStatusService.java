@@ -26,11 +26,16 @@ public class RawMaterialsInventoryStatusService {
 		return materialsInventoryList;
 	}
 	
-	//[민아]자재 입고 수정
-		public RawMaterialsInventory getInventoryInfoByMCode(Map<String, Object> paramMap){
-			RawMaterialsInventory InventoryInfoByMCode =materialsInventoryStatusMapper.getInventoryInfoByMCode(paramMap);
+	//[민아]자재 입고 수정 화면
+		public RawMaterialsInventory getInventoryInfoByMCode(String transactionCode){
+			RawMaterialsInventory InventoryInfoByMCode =materialsInventoryStatusMapper.getInventoryInfoByCode(transactionCode);
 			return InventoryInfoByMCode;
 	}
 	
+	//[민아]자재 입고 수정 처리
+	public int modifyMaterialIn(Map<String,Object> paramMap) {
+		int modifyMaterialInInfo = materialsInventoryStatusMapper.modifyMaterialIn(paramMap);
+		return modifyMaterialInInfo;
+	}
 	
 }

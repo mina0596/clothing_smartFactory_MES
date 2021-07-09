@@ -3,6 +3,7 @@
 <mapper namespace="ksmart39.springboot.dao.RawMaterialsInventoryStatusMapper">
 
 	<resultMap type="RawMaterialsInventory" 		id="materialsInventoryResultMap">
+		<result property="transactionCode" 			column="raw_material_transaction_code"/>
 		<result property="materialCode" 			column="raw_material_code"/>
 		<result property="materialOrderCode" 		column="raw_material_order_code"/>
 		<result property="chargeEmployeeCode" 		column="charge_employee_code"/>
@@ -30,6 +31,7 @@
 
 	<select id="getMaterialsTransactionList" resultMap="materialsInventoryResultMap">
 		SELECT 
+			rmit.raw_material_transaction_code, 
 			rmit.raw_material_code, 
 			rmit.raw_material_order_code, 
 			rmit.charge_employee_code, 
@@ -50,14 +52,16 @@
 	
 	</select>
 	
-	<select id="getInventoryInfoByMCode" parameterType="map" resultMap="materialsInventoryResultMap" fetchSize="1000">
+	<select id="getInventoryInfoByCode" parameterType="String" resultMap="materialsInventoryResultMap">
 		SELECT 
+			rmit.raw_material_transaction_code, 
 			rmit.raw_material_order_code, 
-			rmit.charge_employee_code, 
+			rmit.charge_employee_code,
+			rmit.raw_material_transaction_amount,  
+			rmit.raw_material_code,
 			rmit.transaction_category,  
 			rmit.raw_material_transaction_date, 
 			rmit.raw_material_transaction_reg_date, 
-			rmit.raw_material_transaction_update_date,
 			info.raw_material_name,
 			info.raw_material_color_code,
 			info.raw_material_unit,
@@ -74,11 +78,18 @@
 		on
 			rmit.charge_employee_code = em.employee_code
 		where
-			rmit.raw_material_order_code = #{materialOrderCode} AND
-			rmit.transaction_category = #{transactionCate} and
-			rmit.raw_material_transaction_date = #{transactionDate};
+			rmit.raw_material_transaction_code = #{transactionCode};
 	</select>
 	
+	
+	<update id="modifyMaterialIn" parameterType="map">
+		UPDATE raw_material_inventory_transaction
+			SET
+				raw_material_transaction_amount=#{transactionAmount},
+				raw_material_transaction_update_date=NOW()
+			WHERE 
+				raw_material_transaction_code = #{transactionCode};
+	</update>
 	
 	
 </mapper>

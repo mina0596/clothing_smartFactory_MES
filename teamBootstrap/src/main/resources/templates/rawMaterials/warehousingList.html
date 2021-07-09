@@ -84,8 +84,7 @@ layout:decorate="@{layout/default_rawMaterials}">
               <table id="list" class="table table-striped table-advance table-hover">
                 <thead>
                   <tr>
-                 	<th><i class="fa fa-check-circle-o"></i> 선택</th>
-             		<th><i class="fa fa-bullhorn"></i> 번호</th>
+             		<th><i class="fa fa-bullhorn"></i> 입/출고 코드</th>
              		<th><i class="fa fa-clock-o"></i> 입/출고 일자</th>
              		<th><i class="fa fa-bookmark"></i> 입/출고 구분</th>
                     <th><i class="fa fa-barcode"></i> 원부자재 코드</th>
@@ -99,9 +98,8 @@ layout:decorate="@{layout/default_rawMaterials}">
                   </tr>
                 </thead>
                 <tbody>
-                  <tr th:if="${#lists.size(inventoryList) > 0}" th:each="l,n : ${inventoryList}" class="gradeX" >
-	                <td><input type="checkbox" class="check"></td>
-	            	<td th:text="${n.index+1}"></td>
+                  <tr th:if="${#lists.size(inventoryList) > 0}" th:each="l : ${inventoryList}" class="gradeX" >
+	            	<td th:text="${l.transactionCode}"></td>
                     <td th:text="${l.transactionDate}"></td>
                     <td th:text="${l.transactionCate}" id="inventoryCate"></td>
                     <td th:text="${l.materialCode}"></td>
@@ -109,18 +107,13 @@ layout:decorate="@{layout/default_rawMaterials}">
                     <td th:text="${l.materialsInfo.colorCode}" id="colorName"></td>
                     <td th:text="${l.transactionAmount}"></td>
                     <td th:text="${l.materialsInfo.unit}" id="unit"></td>
-                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
                     <td th:text="${l.materialOrderCode}"></td>
                     <td> 
                       <button type="button" class="btn btn-success btn-xs" onclick="location.href='addInWarehousing'" style="padding-right: 5px;"><i class="fa fa-plus-square"></i></button>
                       <button type="button" class="btn btn-danger btn-xs" onclick="location.href='addExWarehousing'"><i class="fa fa-minus-square"></i></button>
                     </td>
                     <td>
-                    	<a th:if="${l.transactionCate == '입고'}" th:href="@{/rawMaterials/modifyInWarehousing(materialsCode=${l.materialCode}
-                    	,materialsInAmount=${l.transactionAmount}
-                    	,materialsName=${l.materialsInfo.rawMaterialName}
-                    	,materialOrderCode=${l.materialOrderCode}
-                    	,transactionDate=${l.transactionDate})}" class="btn btn-primary btn-xs" id="modifyBtn"><i class="fa fa-pencil"></i>수정</a>
+                    	<a th:if="${l.transactionCate == '입고'}" th:href="@{/rawMaterials/modifyInWarehousing(transactionCode=${l.transactionCode})}" class="btn btn-primary btn-xs" id="modifyBtn"><i class="fa fa-pencil"></i>수정</a>
                     	<a th:if="${l.transactionCate == '출고'}" th:href="@{/rawMaterials/modifyExWarehousing(materialsCode=${l.materialCode},materialsInAmount=${l.transactionAmount})}" class="btn btn-primary btn-xs" id="modifyBtn"><i class="fa fa-pencil"></i>수정</a>
 
                     </td>
