@@ -16,8 +16,11 @@ public interface RawMaterialsInventoryStatusMapper {
 	public List<RawMaterialsInventory> getMaterialsTransactionList();
 	
 	//[민아]자재 입고 수정화면
-	public RawMaterialsInventory getInventoryInfoByCode(String transactionCode);
+	public RawMaterialsInventory getTransInfoByCode(String transactionCode);
 	
 	//[민아]자재 입고 수정 처리
 	public int modifyMaterialIn(Map<String,Object> paramMap);
+	
+	//[민아]자재 현재고 리스트
+	public List<RawMaterialsInventory> getInventoryStatusByMCode(String materialCode);
 }

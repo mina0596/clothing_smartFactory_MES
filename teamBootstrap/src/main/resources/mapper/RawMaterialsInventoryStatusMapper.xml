@@ -28,7 +28,7 @@
 		
 	</resultMap>
 
-
+	<!-- [민아]입출고 현황 목록 -->
 	<select id="getMaterialsTransactionList" resultMap="materialsInventoryResultMap">
 		SELECT 
 			rmit.raw_material_transaction_code, 
@@ -52,7 +52,8 @@
 	
 	</select>
 	
-	<select id="getInventoryInfoByCode" parameterType="String" resultMap="materialsInventoryResultMap">
+	<!-- [민아]입출고 코드로 현황 목록 조회 결과 -->
+	<select id="getTransInfoByCode" parameterType="String" resultMap="materialsInventoryResultMap">
 		SELECT 
 			rmit.raw_material_transaction_code, 
 			rmit.raw_material_order_code, 
@@ -81,7 +82,7 @@
 			rmit.raw_material_transaction_code = #{transactionCode};
 	</select>
 	
-	
+	<!-- [민아]입고 정보 수정 -->
 	<update id="modifyMaterialIn" parameterType="map">
 		UPDATE raw_material_inventory_transaction
 			SET
@@ -90,6 +91,51 @@
 			WHERE 
 				raw_material_transaction_code = #{transactionCode};
 	</update>
+	
+	<!-- [민아]원부자재 코드별 현재고 현황 목록 -->
+	
+	<select id="getInventoryStatusByMCode" parameterType="String" resultMap="materialsInventoryResultMap">
+		SELECT
+			if(sub.cate = '입고', @total := @total + sub.amount, @total := @total - sub.amount) AS totalAmount,
+			sub.transDate AS '날짜',
+			info.raw_material_name,
+			info.raw_material_color_code,
+			info.raw_material_feature,
+			info.raw_material_unit
+			
+		FROM
+			(SELECT 
+				trans.raw_material_code AS materialCode,
+				trans.transaction_category AS cate,
+				trans.raw_material_transaction_amount AS amount,
+				trans.raw_material_transaction_date AS transDate
+			FROM 
+				raw_material_inventory_transaction AS trans
+			WHERE
+				trans.raw_material_code = #{materialCode}
+			ORDER BY DATE(transDate) ASC) AS sub
+			INNER join
+			raw_material_info AS info
+			on
+			info.raw_material_code = sub.materialCode
+			join
+			(SELECT @total :=0) AS initial
+			ORDER BY sub.transDate;
+	
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 </mapper>

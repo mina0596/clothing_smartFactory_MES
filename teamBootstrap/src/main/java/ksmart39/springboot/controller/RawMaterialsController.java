@@ -39,9 +39,15 @@ public class RawMaterialsController {
 		this.materialsInventoryStatusService = materialsInventoryStatusService;
 	}
 	
+	//[민아]입출고 검색창
+	@GetMapping("/inventorySearch")
+	public String getInventorySearchKey() {
+		return "rawMaterials/inventorySearch";
+	}
+	
 	//[민아]원부자재 현재고 현황
 	@GetMapping("/inventoryStatus")
-	public String getInventoryStatus() {
+	public String getInventoryStatus(Model model) {
 		
 		return "rawMaterials/inventoryStatus";
 	}
@@ -103,7 +109,7 @@ public class RawMaterialsController {
 									 ,Model model) {
 		
 		
-		RawMaterialsInventory InventoryInfoByCode = materialsInventoryStatusService.getInventoryInfoByMCode(transactionCode);
+		RawMaterialsInventory InventoryInfoByCode = materialsInventoryStatusService.getTransInfoByCode(transactionCode);
 		
 		model.addAttribute("transactionCode", transactionCode);
 		model.addAttribute("InventoryInfoByCode", InventoryInfoByCode);
