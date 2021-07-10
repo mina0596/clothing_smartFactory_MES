@@ -11,8 +11,8 @@ layout:decorate="@{layout/default_production}">
  <script>
 
  $.ajax({ 
-     type : "POST", //보내는 타입을 Post방식으로 할지,  GET방식으로 할지 결정
-     url : "/productionMonthlyPlanList", 
+     type : "get", //보내는 타입을 Post방식으로 할지,  GET방식으로 할지 결정
+     url : "/production/productionMonthlyPlanList", 
      contentType : "application/x-www-form-urlencoded; charset=utf-8",  // 기본값?
      success : function(res) {
         console.log(res);
@@ -99,9 +99,9 @@ layout:decorate="@{layout/default_production}">
    		<!-- 굳이 필요 없을 거 같기도 하고... -->
    		<div class="form-group text-right">
          <div class="btn-group">
-		        <a th:href="@{/productionWeeklyPlanList}" class="btn btn-default">월별 조회</a>
-		        <a th:href="@{/productionPlanList}" class="btn btn-default">전체목록 조회</a>
-		        <a th:href="@{/productionDailyPlanList}" class="btn btn-default">일별 조회</a>
+		        <a th:href="@{/production/productionWeeklyPlanList}" class="btn btn-default">월별 조회</a>
+		        <a th:href="@{/production/productionPlanList}" class="btn btn-default">전체목록 조회</a>
+		        <a th:href="@{/production/productionDailyPlanList}" class="btn btn-default">일별 조회</a>
 	        </div>
          </div>
    		 <table class="table table-striped table-advance table-hover">

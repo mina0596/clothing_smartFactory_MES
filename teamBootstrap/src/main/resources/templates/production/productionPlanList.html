@@ -69,9 +69,9 @@ layout:decorate="@{layout/default_production}">
         </form>
          <div class="form-group text-right">
          <div class="btn-group">
-		        <a th:href="@{/productionMonthlyPlanList}" class="btn btn-default">월별 조회</a>
-		        <a th:href="@{/productionWeeklyPlanList}" class="btn btn-default">주간별 조회</a>
-		        <a th:href="@{/productionDailyPlanList}" class="btn btn-default">일별 조회</a>
+		        <a th:href="@{/production/productionMonthlyPlanList}" class="btn btn-default">월별 조회</a>
+		        <a th:href="@{/production/productionWeeklyPlanList}" class="btn btn-default">주간별 조회</a>
+		        <a th:href="@{/production/productionDailyPlanList}" class="btn btn-default">일별 조회</a>
 	        </div>
          </div>
         <div>
@@ -108,7 +108,7 @@ layout:decorate="@{layout/default_production}">
 	                    <td th:text="${l.production_plan_qantity_unit}"></td>
 	                    <td th:text="${l.expected_production_start_date}"></td>
 	                    <td th:text="${l.expected_production_end_date}"></td>
-	                  	<td><a th:href="@{/modifyProductionPlan}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</a></td>
+	                  	<td><a th:href="@{/production/modifyProductionPlan(planCode=${l.production_plan_code})}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</a></td>
                   </tr>
               	</tbody>
               </table>
@@ -116,14 +116,14 @@ layout:decorate="@{layout/default_production}">
             </div>
             <div class="form-group text-right">
                     <div class="col-lg-offset-2 col-lg-10">
-                      <a th:href="@{/addProductionPlan}" class="btn btn-success btn-xs"><i class="fa fa-check"></i>등록</a>
+                      <a th:href="@{/production/addProductionPlan}" class="btn btn-success btn-xs"><i class="fa fa-check"></i>등록</a>
                       <a class="btn btn-danger btn-xs" id="deleteBtn"><i class="fa fa-trash-o "></i>삭제</a>
                     </div>
                 </div>
             </div>
             
  <th:block layout:fragment="customJs">
-	<script type="text/javascript" th:src="@{productionJs/ProductionCate.js}"></script>
+	<script type="text/javascript" th:src="@{/productionJs/ProductionCate.js}"></script>
 	<script type="text/javascript">
 	$(function(){
 		//#checkAll 버튼 클릭 시 전체 checked

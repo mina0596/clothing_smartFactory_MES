@@ -1,23 +1,23 @@
 package ksmart39.springboot.domain;
 
 public class SubClassInspection {
-	private String highMedLowSubClassCode;
-	private String  highClassCode;
-	private String  highMedClassCode;
+	private String qualityInspectionCode;
+	private String highClassCode;
+	private String highMedClassCode;
 	private String highMedLowClassCode;
 	private String subClassCode;
-	private String  subClassName;
+	private String subClassName;
 	private String subClassRegDate;
-	private String  subClassUpdateDate;
+	private String subClassUpdateDate;
 	
 	private HighClassInspection highClassInspection;
 	private MediumClassInspection mediumClassInspection;
 	private LowClassInspection lowClassInspection;
-	public String getHighMedLowSubClassCode() {
-		return highMedLowSubClassCode;
+	public String getQualityInspectionCode() {
+		return qualityInspectionCode;
 	}
-	public void setHighMedLowSubClassCode(String highMedLowSubClassCode) {
-		this.highMedLowSubClassCode = highMedLowSubClassCode;
+	public void setQualityInspectionCode(String qualityInspectionCode) {
+		this.qualityInspectionCode = qualityInspectionCode;
 	}
 	public String getHighClassCode() {
 		return highClassCode;
@@ -81,13 +81,20 @@ public class SubClassInspection {
 	}
 	@Override
 	public String toString() {
-		return "SubClassInspection [highMedLowSubClassCode=" + highMedLowSubClassCode + ", highClassCode="
-				+ highClassCode + ", highMedClassCode=" + highMedClassCode + ", highMedLowClassCode="
-				+ highMedLowClassCode + ", subClassCode=" + subClassCode + ", subClassName=" + subClassName
-				+ ", subClassRegDate=" + subClassRegDate + ", subClassUpdateDate=" + subClassUpdateDate
-				+ ", highClassInspection=" + highClassInspection + ", mediumClassInspection=" + mediumClassInspection
-				+ ", lowClassInspection=" + lowClassInspection + "]";
+		return "SubClassInspection [qualityInspectionCode=" + qualityInspectionCode + ", highClassCode=" + highClassCode
+				+ ", highMedClassCode=" + highMedClassCode + ", highMedLowClassCode=" + highMedLowClassCode
+				+ ", subClassCode=" + subClassCode + ", subClassName=" + subClassName + ", subClassRegDate="
+				+ subClassRegDate + ", subClassUpdateDate=" + subClassUpdateDate + ", highClassInspection="
+				+ highClassInspection + ", mediumClassInspection=" + mediumClassInspection + ", lowClassInspection="
+				+ lowClassInspection + "]";
 	}
+	
+	
+
+
+	
+	
+	
 	
 	
 
