@@ -3,6 +3,7 @@
 <mapper namespace="ksmart39.springboot.dao.RawMaterialsInventoryStatusMapper">
 
 	<resultMap type="RawMaterialsInventory" 		id="materialsInventoryResultMap">
+		<result property="inventoryAmount" 			column="leftMaterialTotal"/>
 		<result property="transactionCode" 			column="raw_material_transaction_code"/>
 		<result property="materialCode" 			column="raw_material_code"/>
 		<result property="materialOrderCode" 		column="raw_material_order_code"/>
@@ -93,50 +94,50 @@
 	</update>
 	
 	<!-- [민아]원부자재 코드별 현재고 현황 목록 -->
-	
+	<!-- 
+			subSubSelect.leftMaterialTotal AS leftMaterialTotal,
+			subSubSelect.finalTransDate AS transactionDate,
+			subSubSelect.name AS rawMaterialName,
+			subSubSelect.colorCode AS colorCode,
+			subSubSelect.feature AS feature,
+			subSubSelect.unit AS unit
+	 -->
 	<select id="getInventoryStatusByMCode" parameterType="String" resultMap="materialsInventoryResultMap">
-		SELECT
-			if(sub.cate = '입고', @total := @total + sub.amount, @total := @total - sub.amount) AS totalAmount,
-			sub.transDate AS '날짜',
-			info.raw_material_name,
-			info.raw_material_color_code,
-			info.raw_material_feature,
-			info.raw_material_unit
-			
+		SELECT 
+			*
+		FROM
+		 (SELECT
+			if(subSelect.transCate = '입고', 
+			@total := @total + subSelect.transAmount, 
+			@total := @total - subSelect.transAmount) AS leftMaterialTotal,
+			subSelect.transDate AS finalTransDate,
+			subSelect.materialName As name,
+			subSelect.materialColorCode AS colorCode,
+			subSelect.materialFeature AS feature,
+			subSelect.materialUnit AS unit
 		FROM
 			(SELECT 
 				trans.raw_material_code AS materialCode,
-				trans.transaction_category AS cate,
-				trans.raw_material_transaction_amount AS amount,
-				trans.raw_material_transaction_date AS transDate
+				trans.transaction_category AS transCate,
+				trans.raw_material_transaction_amount AS transAmount,
+				trans.raw_material_transaction_date AS transDate,
+				info.raw_material_name AS materialName,
+				info.raw_material_color_code AS materialColorCode,
+				info.raw_material_feature AS materialFeature,.
+				info.raw_material_unit AS materialUnit
 			FROM 
 				raw_material_inventory_transaction AS trans
-			WHERE
+				INNER join
+				raw_material_info AS info
+				on
+				info.raw_material_code = trans.raw_material_code
+				WHERE
 				trans.raw_material_code = #{materialCode}
-			ORDER BY DATE(transDate) ASC) AS sub
-			INNER join
-			raw_material_info AS info
-			on
-			info.raw_material_code = sub.materialCode
+			ORDER BY DATE(trans.raw_material_transaction_date) ASC) AS subSelect
 			join
-			(SELECT @total :=0) AS initial
-			ORDER BY sub.transDate;
+			(SELECT @total :=0) AS initial) AS subSubSelect
+		ORDER BY subSubSelect.finalTransDate DESC LIMIT 1;
 	
 	</select>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 </mapper>
 
