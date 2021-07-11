@@ -1,7 +1,9 @@
 package ksmart39.springboot.controller;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import ksmart39.springboot.domain.HumanResources;
+import ksmart39.springboot.domain.RawMaterials;
 import ksmart39.springboot.domain.RawMaterialsInventory;
 import ksmart39.springboot.service.RawMaterialsInventoryStatusService;
 import ksmart39.springboot.service.RawMaterialsService;
@@ -35,10 +39,16 @@ public class RawMaterialsController {
 		this.materialsInventoryStatusService = materialsInventoryStatusService;
 	}
 	
+	//[민아]입출고 검색창
+	@GetMapping("/inventorySearch")
+	public String getInventorySearchKey() {
+		return "rawMaterials/inventorySearch";
+	}
+	
 	//[민아]원부자재 현재고 현황
 	@GetMapping("/inventoryStatus")
-	public String getInventoryStatus() {
-		
+	public String getInventoryStatus(Model model) {
+		materialsInventoryStatusService.getInventoryStatusByMCode("button03_7A6F95");
 		return "rawMaterials/inventoryStatus";
 	}
 	
@@ -48,6 +58,7 @@ public class RawMaterialsController {
 		List<RawMaterialsInventory> inventoryList = materialsInventoryStatusService.getRawMaterialsInventory();
 		
 		model.addAttribute("inventoryList", inventoryList);
+		log.info("inventoryList -{}", inventoryList);
 		
 		return "rawMaterials/warehousingList";
 	}
@@ -64,6 +75,11 @@ public class RawMaterialsController {
 	@GetMapping("/addExWarehousing")
 	public String addExWarehousing() {
 		return "rawMaterials/addExWarehousing";
+	}	
+	//[민아]출고내역 수정
+	@GetMapping("/modifyExWarehousing")
+	public String modifyExWarehousing() {
+		return "rawMaterials/modifyExWarehousing";
 	}	
 	
 	//[한빛]소요별 자재 정보 입력 후 자재 입고 목록으로 리다이렉트 , 파라미터는 임시 값
@@ -86,12 +102,38 @@ public class RawMaterialsController {
 	
 
 	//===================================================================
-	//[다미]자재입고 수정
+	//[다미]자재입고 수정 + [민아] 자재입고현황에서 수정화면으로 넘어갈때 상황 추가
 	@GetMapping("/modifyInWarehousing")
-	public String modifyInWarehousing(@RequestParam(value = "raw_material_name", required = false)String raw_material_name) {
+	public String modifyInWarehousing(@RequestParam(value = "transactionCode", required = false)String transactionCode
+									 ,String transactionCate
+									 ,Model model) {
+		
+		
+		RawMaterialsInventory InventoryInfoByCode = materialsInventoryStatusService.getTransInfoByCode(transactionCode);
+		
+		model.addAttribute("transactionCode", transactionCode);
+		model.addAttribute("InventoryInfoByCode", InventoryInfoByCode);
+		
 		return "rawMaterials/modifyInWarehousing";
 	}
-		//TO[다미] MATERIALS 빼주세용 METHOD명에, 내가 파일이름이랑 다른것들은 바꿧어요 FROM[민아]
+	
+	
+	//[민아]자재입고 수정 후 자재입고 리스트 출력
+	@PostMapping("/modifyInWarehousing")
+	public String modifyInwarehousing(int transactionAmount, String transactionCode) {
+		log.info("transactionAmount: {}", transactionAmount);
+		log.info("transactionCode: {}", transactionCode);
+		
+		Map<String,Object> paramMap = new HashMap<String,Object>();
+		paramMap.put("transactionAmount", transactionAmount);
+		paramMap.put("transactionCode", transactionCode);
+		
+		log.info("param :{}", paramMap);
+		materialsInventoryStatusService.modifyMaterialIn(paramMap);
+		
+		return "rawMaterials/inWarehousingList";
+	}
+
 	//[다미]자재입고 리스트
 	@GetMapping("/inWarehousingList")
 	public String InWarehousingList() {

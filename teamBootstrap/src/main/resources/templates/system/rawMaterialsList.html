@@ -115,9 +115,9 @@ layout:decorate="@{layout/default_system}">
                   </tr>
                 </thead>
                 <tbody>
-                  <tr th:if="${#lists.size(materialList) > 0}" th:each="l : ${materialList}">
-	                <td></td>
-	            	<td></td>
+                  <tr th:if="${#lists.size(materialList) > 0}" th:each="l,n : ${materialList}">
+	                <td><input type="checkbox" class="check"></td>
+	            	<td th:text="${n.index+1}"></td>
                     <td th:text="${l.rawMaterialCode}"></td>
                     <td th:text="${l.highClass}" id="rawMaterialCate"></td>
                     <td th:text="${l.medClass}" id="materialCate"></td>
