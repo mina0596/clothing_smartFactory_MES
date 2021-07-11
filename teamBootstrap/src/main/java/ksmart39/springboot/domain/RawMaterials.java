@@ -12,13 +12,7 @@ public class RawMaterials {
 	private String unit;
 	private String rawMaterialRegDate;
 	private String rawMaterialUpdateDate;
-	private int num;
-	public int getNum() {
-		return num;
-	}
-	public void setNum(int num) {
-		this.num = num;
-	}
+
 	public String getRawMaterialCode() {
 		return rawMaterialCode;
 	}
@@ -90,7 +84,7 @@ public class RawMaterials {
 		return "RawMaterials [rawMaterialCode=" + rawMaterialCode + ", highClass=" + highClass + ", medClass="
 				+ medClass + ", medCode=" + medCode + ", rawMaterialName=" + rawMaterialName + ", subCode=" + subCode
 				+ ", colorCode=" + colorCode + ", feature=" + feature + ", unit=" + unit + ", rawMaterialRegDate="
-				+ rawMaterialRegDate + ", rawMaterialUpdateDate=" + rawMaterialUpdateDate + ", num=" + num + "]";
+				+ rawMaterialRegDate + ", rawMaterialUpdateDate=" + rawMaterialUpdateDate + "]";
 	}
 
 	
