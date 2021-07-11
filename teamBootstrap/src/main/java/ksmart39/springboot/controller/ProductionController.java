@@ -1,9 +1,15 @@
 package ksmart39.springboot.controller;
 
 
+
+import java.sql.Array;
+import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -135,9 +141,26 @@ public class ProductionController {
 	
 	//==================================================================
 	
+	//[다미]생산계획 검색
+	@RequestMapping(value = "/searchProductionPlan", method = RequestMethod.GET)
+	@ResponseBody
+	public String searchProductionPlan(@RequestParam(value = "genderCate", required = false) String genderCate
+									   ,@RequestParam(value = "detailCate", required = false) String detailCate
+									   ,@RequestParam(value = "startDate", required = false) String startDate
+									   ,@RequestParam(value = "endDate", required = false) String endDate
+									   ,@RequestParam(value = "range", required = false) String range) {
+		log.info("화면에서 받아온 값 genderCate:   {}", genderCate);
+		log.info("화면에서 받아온 값 productCode:   {}", detailCate);
+		log.info("화면에서 받아온 값startDate :   {}", startDate);
+		log.info("화면에서 받아온 값endDate :   {}", endDate);
+		log.info("화면에서 받아온 값 range:   {}", range);
+		return "gg";
+	}
+	
 	//[다미]생산계획 수정
 	@PostMapping("/modifyProductionPlan")
-	public String modifyProductionPlan() {
+	public String modifyProductionPlan(ProductionPlan productionPlan) {
+		productionPlanService.modifyProductionPlan(productionPlan);
 		return "redirect:productionPlanList";
 	}
 	
@@ -205,7 +228,31 @@ public class ProductionController {
 	//[다미]생산계획 월별 목록
 	@GetMapping("/productionMonthlyPlanList")
 	public String getProductionMonthlyPlanList(Model model) {
+
 		return "production/productionMonthlyPlanList";
+	}
+	
+	@RequestMapping(value="/monthPlan", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String, Object>> monthPlan() {
+		List<Map<String, Object>> list = productionPlanService.getProductionAllPlanList();
+		
+		JSONObject jsonObj = new JSONObject();
+		JSONArray jsonArr = new JSONArray();
+		HashMap<String, Object> hash = new HashMap<String, Object>();		
+		
+		for(int i=0; i < list.size(); i++) {			
+			hash.put("title", list.get(i).get("detailed_categorized_name"));
+			hash.put("start", list.get(i).get("expected_production_start_date"));
+			hash.put("end", list.get(i).get("expected_production_end_date"));
+			
+			jsonObj = new JSONObject(hash);
+			jsonArr.add(jsonObj);
+		}
+		
+		log.info("안되겠지..?아냐 될거야ㅜㅜ {}", jsonArr);
+		
+		return jsonArr;
 	}
 	
 	//[다미]생산계획 월별 목록test

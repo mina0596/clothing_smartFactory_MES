@@ -40,25 +40,27 @@ layout:decorate="@{layout/default_system}">
      <div class="col-md-12">
           <h4><i class="fa fa-truck"></i>사원조회</h4>
           <hr>  
-			<div class="form-group" style="padding-left: 50px">
-				<div class="col-md-3">
-				 <select class="form-control">
-				   <option>사원명</option>
-				   <option>담당부서</option>
-				   <option>담당직책</option>
-				   <option>이메일</option>
-				   <option>전화번호</option>
-
-				  </select>
-				</div>
-				<div class="col-md-6">
-				  <input class="form-control" type="text" placeholder="검색어를 입력하세요">
-				</div>
-				<div class="col-md-2">
-				  <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
-				  <button type="button" class="btn btn-primary">검색</button>
-				</div>
-	       </div>
+			<form th:action="@{/humanResourcesList}" method="get">
+				<div class="form-group">
+					<div class="col-md-2">					
+					 <select name="searchKey" class="form-control">
+					   <option value="employee_name">사원명</option>
+					   <option value="employee_id">아이디</option>
+					   <option value="employee_department">소속</option>
+					   <option value="employee_position">직책</option>
+					   <option value="employee_email">이메일</option>
+					 </select>					 
+					</div>
+										
+					<div class="col-md-6">
+					  <input name="searchValue" class="form-control" type="text" placeholder="검색어를 입력하세요">
+					</div>
+					
+					<div class="col-md-2">          
+					  <button type="submit" class="btn btn-primary">검색</button>
+					</div>
+		       </div>       
+			</form>
 	       
 	 
 	      <br>
@@ -77,8 +79,8 @@ layout:decorate="@{layout/default_system}">
                     <th><i class="fa fa-user"></i>사원명</th>
                     <th><i class="fa fa-bookmark"></i>아이디</th>
                     <th><i class="fa fa-lock"></i>비밀번호</th>
-                    <th><i class="fa fa-bookmark"></i>담당부서</th>
-                    <th><i class=" fa fa-bookmark"></i>담당직책</th>
+                    <th><i class="fa fa-bookmark"></i>소속</th>
+                    <th><i class=" fa fa-bookmark"></i>직책</th>
                     <th><i class=" fa fa-envelope-o"></i>이메일</th>
                     <th><i class=" fa fa-mobile"></i>전화번호</th>
                     <th><i class=" fa fa-bookmark"></i>등록일자</th>

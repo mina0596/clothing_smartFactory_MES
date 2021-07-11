@@ -10,11 +10,14 @@ import ksmart39.springboot.domain.ProductionPlan;
 @Mapper
 public interface ProductionPlanMapper {
 	
+	//[다미]생산계획 수정 등록
+	public int modifyProductionPlan(ProductionPlan productionPlan);
+	
 	//[다미]생산계획 수정 폼
 	public Map<String, Object> getProductionAllPlanList(String planCode);
 	
 	//[다미]생산계획 전체 조회
-	public List<Map<String, Object>>getProductionAllPlanList();
+	public List<Map<String, Object>> getProductionAllPlanList();
 	
 	//[다미]생산계획 등록
 	public int addProductionPlan(ProductionPlan productionPlan);

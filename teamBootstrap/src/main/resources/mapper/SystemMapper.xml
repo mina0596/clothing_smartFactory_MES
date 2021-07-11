@@ -160,7 +160,7 @@
 			,c.client_info_reg_date
 			,c.client_info_update_date
 		FROM
-			client_info as c;
+			client_info as c
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test="searchKey != null and searchKey != ''.toString()">
 				${searchKey} LIKE CONCAT('%', #{searchValue} ,'%');
@@ -198,6 +198,9 @@
 	<update id="modifyClient" parameterType="Client">
 	UPDATE client_info 
 	<trim prefix="SET" prefixOverrides=",">
+		<if test="clientCode != null and clientCode != ''.toString()">			
+			,client_code = #{clientCode}
+		</if>
 		<if test="clientCategory != null and clientCategory != ''.toString()">			
 			,client_category = #{clientCategory}
 		</if>

@@ -39,53 +39,30 @@ layout:decorate="@{layout/default_system}">
 	
 	<div class="row mt">
      <div class="col-md-12">
-		<h4><i class="fa fa-angle-right"></i>출고현황 조회</h4>
-         	 <hr>
-		<form class="form-inline" role="form">
-        
-         <table class="table table-striped table-advance table-hover">
-         	<thead>
-         		<tr>
-         			<th>수발주구분</th>
-         			<th>재료별</th>
-         		</tr>
-         	</thead>
-         	<tbody>
-         		<tr>
-         		    <td style="padding-right: 20px;">
-         				<div class="form-group">
-		                	<select class="form-control" style="width: 125px;">
-		                		<option>::선택::</option>
-		                		<option>All</option>
-		                		<option>수주</option>
-		                		<option>발주</option>
-		                	</select>
-	               		</div>
-         			</td>
-         			<td style="padding-right: 20px;">
-						<div class="form-group">
-		                	<select class="form-control" style="width: 125px;">
-		                		<option>::선택::</option>
-		                		<option>거래처명</option>
-		                		<option>원자재</option>
-		                		<option>부자재</option>
-		                	</select>
-	               		</div>
-         				<div class="col-md-6">
-				  			<input class="form-control" type="text" placeholder="검색어를 입력하세요">
-						</div>
-         			</td>
-         			<td style="padding-right: 20px;">
-         			</td>
-         			<td>
-         				  <button type="submit" class="btn btn-theme">검색</button>
-         			</td>        			
-         		</tr>
-         	</tbody>
-         </table>  
-        </form>  
+          <h4><i class="fa fa-angle-right"></i>거래처조회</h4>
+         		 <hr>
+			<form th:action="@{/clientList}" method="get">
+				<div class="form-group">
+					<div class="col-md-2">					
+					 <select name="searchKey" class="form-control">
+					   <option value="client_category">구분</option>
+					   <option value="client_name">거래처명</option>
+					   <option value="client_tel">전화번호</option>
+					 </select>					 
+					</div>
+										
+					<div class="col-md-6">
+					  <input name="searchValue" class="form-control" type="text" placeholder="검색어를 입력하세요">
+					</div>
+					
+					<div class="col-md-2">          
+					  <button type="submit" class="btn btn-primary">검색</button>
+					</div>
+		       </div>       
+			</form>
     	
-	      <br>
+	      <br><br><br><br><br>
+	      
 	      
                 
 	        <form class="form-horizontal style-form">
@@ -96,7 +73,7 @@ layout:decorate="@{layout/default_system}">
                   <tr>
                   	<th><input type="checkbox" id="checkAll"></th>
                     <th><i class="fa fa-bullhorn"></i>no.</th>
-                    <th><i class="fa fa-bookmark"></i>수발주구분</th>
+                    <th><i class="fa fa-bookmark"></i>구분</th>
                     <th><i class="fa fa-bookmark"></i>거래처코드</th>
                     <th><i class="fa fa-bookmark"></i>회사명</th>
                     <th><i class=" fa fa-bookmark"></i>전화번호</th>
@@ -125,11 +102,7 @@ layout:decorate="@{layout/default_system}">
                     	<a th:href="@{/modifyClient(clientCode=${c.clientCode})}"  class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</a>
                     </td>
                     </tr>
-                  
-               
-
-                 
-                 
+              
                 </tbody>
               </table>
             
