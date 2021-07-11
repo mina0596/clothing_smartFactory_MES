@@ -17,7 +17,9 @@
 </resultMap>
 
 
+
 	<update id="modifyProductionPlan" parameterType="ProductionPlan">
+
 
 		UPDATE 
 			production_plan
