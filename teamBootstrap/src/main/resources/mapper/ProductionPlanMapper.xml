@@ -16,7 +16,8 @@
 	<result property="productionPlanUpdateDate" column="production_plan_update_date"/>
 </resultMap>
 
-	<update id="modifyProductionPlan">
+
+	<update id="modifyProductionPlan" parameterType="ProductionPlan">
 		UPDATE 
 			production_plan
 		SET

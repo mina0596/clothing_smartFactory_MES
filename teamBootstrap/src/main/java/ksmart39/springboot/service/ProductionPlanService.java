@@ -20,6 +20,11 @@ public class ProductionPlanService {
 		return productionPlanMapper.getProductionAllPlanList(planCode);
 	}
 	
+	//[다미]생산계획 수정 등록
+	public int modifyProductionPlan(ProductionPlan productionPlan) {
+		return productionPlanMapper.modifyProductionPlan(productionPlan);
+	};
+	
 	//[다미]생산계획 전체 조회
 	public List<Map<String, Object>>getProductionAllPlanList(){
 		return productionPlanMapper.getProductionAllPlanList();
