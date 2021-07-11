@@ -105,8 +105,7 @@
 	INNER join
 		client_info AS c
 	ON r.client_code = c.client_code
-	WHERE i.contract_code LIKE '%supplierContract%'
-	GROUP BY i.contract_code;
+	WHERE i.contract_code LIKE '%supplierContract%';
 	</select>
 
 
