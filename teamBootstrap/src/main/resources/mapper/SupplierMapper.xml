@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart39.springboot.dao.SupplierMapper">
+
+	<!-- 다시 수정해야됨 -->
+	<insert id="addSupplierRequest" parameterType="SupplierRequest">
+	INSERT INTO 
+		raw_material_order
+		(raw_material_order_code,
+		 raw_material_code,
+		 client_code,
+		 charge_employee_code, 
+		 contract_code,
+		 raw_material_order_amount, 
+		 raw_material_order_approval, 
+		 raw_material_order_date, 
+		 raw_material_expected_date, 
+		 raw_material_order_reg_date, 
+		 raw_material_order_update_date)
+	VALUES 
+		(sf_RawMeterial_Order(),
+		 #{rawMeterialCode},
+		 #{clientCode},
+		 #{chargeEmployeeCode}, 
+		 #{supplierContractCode}, 
+		 #{rawMeterialOrderAmount},
+		 '승인요청중', 
+		 NOW(), 
+		 NOW(),
+		 NOW(), 
+		 null);
+	</insert>
+
+	<!-- 원부자재현황 -->
+	<select id="getRawInventoryState" resultType="Map">
+	 SELECT
+		r.raw_material_code,
+		r.raw_material_name,
+		r.raw_material_color_code,
+		t.raw_material_transaction_amount,
+		r.raw_material_unit,
+		t.raw_material_transaction_reg_date
+	FROM raw_material_inventory_transaction AS t
+	INNER JOIN raw_material_info AS r
+	ON t.raw_material_code = r.raw_material_code;
+	</select>
+	<!-- 발주거래처 정보   -->
+	<select id="getClientInfo" resultType="Map">
+	SELECT 
+		client_code,
+		client_name,
+		client_tel,
+		client_employee
+	FROM client_info
+		WHERE client_category='발주';
+	</select>
+	<!--원부자재 정보-->
+	<select id="getRawInfo" resultType="Map">
+	SELECT 
+		raw_material_code,
+ 		raw_material_high_classification,
+  		raw_material_medium_classification, 
+ 		raw_material_name, 
+ 		raw_material_color_code,
+  		raw_material_feature,
+   		raw_material_unit 
+	FROM raw_material_info
+	</select>
+	<!-- 발주요청리스트  -->
+	<select id="getSupplierRequestList" resultType="Map">
+	 SELECT
+		o.raw_material_order_code,
+		c.client_name,
+		r.raw_material_code,
+		r.raw_material_name,
+		r.raw_material_color_code,
+		o.raw_material_order_amount,
+		r.raw_material_unit,
+		o.raw_material_order_approval,
+		o.raw_material_order_date,
+		o.raw_material_expected_date
+	FROM
+		raw_material_order  AS o
+	INNER JOIN
+		raw_material_info  AS r
+	ON o.raw_material_code = r.raw_material_code
+	INNER JOIN 
+	 client_info AS c
+	ON o.client_code = c.client_code;
+	</select>
+	<!-- 발주계약 리스트 -->
+	<select id="getSupplierContractList" resultType="Map">
+	SELECT 
+		i.contract_code,
+		r.raw_material_order_code,
+		c.client_name,
+		i.contract_start_date,
+		i.contract_end_date,
+		i.contract_info_reg_date
+	FROM 
+		contract_info AS i
+	INNER JOIN 
+		raw_material_order AS r
+	ON i.contract_code = r.contract_code
+	INNER join
+		client_info AS c
+	ON r.client_code = c.client_code
+	WHERE i.contract_code LIKE '%supplierContract%'
+	GROUP BY i.contract_code;
+	</select>
+
+
+
+</mapper>

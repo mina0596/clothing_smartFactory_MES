@@ -1,16 +1,36 @@
 package ksmart39.springboot.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.thymeleaf.util.MapUtils;
+
+import ksmart39.springboot.domain.SupplierRequest;
+import ksmart39.springboot.service.SupplierService;
+
 
 @Controller
 public class ContractController {
+	@Autowired
+	private final SupplierService supplierService;
+	
+	
+	 @Autowired public ContractController(SupplierService supplierService) {
+	 this.supplierService = supplierService; }
+	 
+
+	
+	private static final Logger log = LoggerFactory.getLogger(SystemController.class);
+	
 	//----------------------------------------수주주문서-----------------------------------------------------
 	
 	//[민아]수주계약 등록 -> 조회
@@ -133,8 +153,12 @@ public class ContractController {
 	@GetMapping("/supplierContractList")
 	public String getRawmaterialsOrderList(Model model,@RequestParam(name = "supplierOrderSearchKey",required = false)String supplierOrderSearchKey
 			,@RequestParam(name ="supplierOrderSearchValue",required = false )String supplierOrderSearchValue) {
-		
-		model.addAttribute("title","원부자재 발주 리트스");
+		List<Map<String,Object>> resultContract = supplierService.getSupplierContractList();
+		log.info("========================================");
+		log.info("supplierContractList{}",resultContract);
+		log.info("========================================");
+		model.addAttribute("supplierContractList", resultContract);
+	
 		return"contract/supplierContractList";
 	}
 
@@ -153,7 +177,14 @@ public class ContractController {
 	
 	//[보람] 발주 리스트 경로
 	@GetMapping("/supplierRequestList")
-	public String supplierRequestList() {
+	public String supplierRequestList(Model model) {
+		 List<Map<String,Object>> resultList = supplierService.getSupplierRequestList();
+		 log.info("========================================");
+		 log.info("supplierRequestList{}",resultList);
+		 log.info("========================================");
+		
+		 model.addAttribute("supplierRequestList", resultList);
+		 
 		return "contract/supplierRequestList";
 	}
 	//[보람]발주 수정 완료 경로
@@ -168,14 +199,25 @@ public class ContractController {
 	}
 	//[보람]원부자재 발주등록 완료
 	@PostMapping("/addSupplierRequest")
-	public String addSupplierRequestComplete() {
+	public String addSupplierRequestComplete(SupplierRequest supplierRequest) {
+		supplierService.addSupplierRequest(supplierRequest);
 		return "redirect:/supplierRequestList";
 	}
 	
-	//[보람]원부자재 발주등록메서드
+	//[보람]원부자재 발주요청메서드
 	@GetMapping("/addSupplierRequest")
 	public String rawMaterialsOrder(Model model) {
+		 List<Map<String,Object>> resultMap1 = supplierService.getRawInventoryState();
+		 List<Map<String,Object>> resultMap2 = supplierService.getClientInfo();
+		 List<Map<String,Object>> resultMap3 = supplierService.getRawInfo();
 		
+		 log.info("========================================");
+		 log.info("addSupplierRequeststate{}",resultMap1);
+		 log.info("========================================");
+		 model.addAttribute("rawInventoryList", resultMap1);
+		 model.addAttribute("clientList", resultMap2);
+		 model.addAttribute("rawMeterialList", resultMap3);
+		 
 		return "contract/addSupplierRequest";
 	}
 
