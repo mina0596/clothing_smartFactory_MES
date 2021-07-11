@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import ksmart39.springboot.domain.DefectiveProduct;
 import ksmart39.springboot.domain.QualityInspection;
+import ksmart39.springboot.service.DefectiveProductService;
 import ksmart39.springboot.service.QualityControlService;
 
 @Controller
@@ -27,7 +29,9 @@ public class QualityControlController {
 	private static final Logger log = LoggerFactory.getLogger(QualityControlController.class);
 	@Autowired
 	private QualityControlService qualityControlService;
-
+	
+	@Autowired
+	private DefectiveProductService defectiveProductService;
 	
 	//================================================================
 	//[한빛]불량품등록 -> 목록
@@ -55,7 +59,7 @@ public class QualityControlController {
 	//[한빛]불량품 조회
 	@GetMapping("/defectiveProductList")
 	public String getDefectiveProductList(Model model) {
-		
+		List<DefectiveProduct> defectiveProduct = defectiveProductService.getDefectiveProduct();
 		model.addAttribute("title", "품질관리");
 		return"quality/defectiveProductList";
 	}
