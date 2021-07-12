@@ -1,5 +1,6 @@
 package ksmart39.springboot.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,12 @@ import ksmart39.springboot.domain.ProductionPlan;
 
 @Mapper
 public interface ProductionPlanMapper {
+
+	//[다미]생산계획 삭제
+	public int deleteProductionPlan(String delArr);
+	
+	//[다미]생산계획 검색
+	public List<Map<String, Object>> searchProductionPlan(HashMap map);	
 	
 	//[다미]생산계획 수정 등록
 	public int modifyProductionPlan(ProductionPlan productionPlan);

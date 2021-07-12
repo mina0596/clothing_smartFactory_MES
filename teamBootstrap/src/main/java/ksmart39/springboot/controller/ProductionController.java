@@ -141,20 +141,35 @@ public class ProductionController {
 	
 	//==================================================================
 	
+	//[다미]생산계획 삭제
+	@PostMapping("/deleteProductionPlan")
+	@ResponseBody
+	public int deleteProductionPlan(@RequestParam(value = "delArr[]")String[] delArr) {
+		int result = 1;
+
+		for(int i = 0; i<delArr.length; i++) {
+		result	= productionPlanService.deleteProductionPlan(delArr[i]);
+		}
+		return result;
+	}
+	
 	//[다미]생산계획 검색
 	@RequestMapping(value = "/searchProductionPlan", method = RequestMethod.GET)
 	@ResponseBody
-	public String searchProductionPlan(@RequestParam(value = "genderCate", required = false) String genderCate
+	public List<Map<String, Object>> searchProductionPlan(@RequestParam(value = "genderCate", required = false) String genderCate
 									   ,@RequestParam(value = "detailCate", required = false) String detailCate
 									   ,@RequestParam(value = "startDate", required = false) String startDate
 									   ,@RequestParam(value = "endDate", required = false) String endDate
 									   ,@RequestParam(value = "range", required = false) String range) {
-		log.info("화면에서 받아온 값 genderCate:   {}", genderCate);
-		log.info("화면에서 받아온 값 productCode:   {}", detailCate);
-		log.info("화면에서 받아온 값startDate :   {}", startDate);
-		log.info("화면에서 받아온 값endDate :   {}", endDate);
-		log.info("화면에서 받아온 값 range:   {}", range);
-		return "gg";
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("genderCate", genderCate);
+		map.put("detailCate", detailCate);
+		map.put("startDate", startDate);
+		map.put("endDate", endDate);
+		map.put("range", range);
+		List<Map<String, Object>> listMap = productionPlanService.searchProductionPlan(map);
+		log.info("{}", listMap);
+		return listMap;
 	}
 	
 	//[다미]생산계획 수정
@@ -211,13 +226,7 @@ public class ProductionController {
 		log.info("=============================================");
 		return list;
 	}
-	
-	
-	//[다미]생산계획 일별 목록
-	@GetMapping("/productionDailyPlanList")
-	public String productionDailyPlanList() {
-		return "production/productionDailyPlanList";
-	}
+
 	
 	//[다미]생산계획 주간별 목록
 	@GetMapping("/productionWeeklyPlanList")
@@ -232,6 +241,7 @@ public class ProductionController {
 		return "production/productionMonthlyPlanList";
 	}
 	
+	//[다미]생산계획 데이터 가져오기
 	@RequestMapping(value="/monthPlan", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Map<String, Object>> monthPlan() {
@@ -241,10 +251,21 @@ public class ProductionController {
 		JSONArray jsonArr = new JSONArray();
 		HashMap<String, Object> hash = new HashMap<String, Object>();		
 		
+		log.info("{}",list);
+		
 		for(int i=0; i < list.size(); i++) {			
-			hash.put("title", list.get(i).get("detailed_categorized_name"));
+			String genderCate = (String) list.get(i).get("gender_categorized_name");
+			String cateName = (String) list.get(i).get("detailed_categorized_name");
+			
+			hash.put("title", genderCate + "/" + cateName);
 			hash.put("start", list.get(i).get("expected_production_start_date"));
 			hash.put("end", list.get(i).get("expected_production_end_date"));
+			
+			if(genderCate.equals("신사양복")) {
+				hash.put("color", "#F08080");
+			}else if(genderCate.equals("숙녀양복")){
+				hash.put("color", "#006400");				
+			}
 			
 			jsonObj = new JSONObject(hash);
 			jsonArr.add(jsonObj);

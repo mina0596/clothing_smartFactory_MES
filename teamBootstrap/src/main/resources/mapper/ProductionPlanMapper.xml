@@ -16,6 +16,51 @@
 	<result property="productionPlanUpdateDate" column="production_plan_update_date"/>
 </resultMap>
 
+	<delete id="deleteProductionPlan" parameterType="String">
+		DELETE 
+			FROM 
+				production_plan 
+			WHERE 
+				production_plan_code=#{delArr};
+	</delete>
+
+	<select id="searchProductionPlan" parameterType="hashmap" resultType="Map">
+		SELECT 
+			p.production_plan_code
+			,d.gender_categorized_name
+			,d.detailed_categorized_name
+			,e.employee_name
+			,p.production_plan_period
+			,p.production_plan_qantity_unit
+			,p.expected_production_start_date
+			,p.expected_production_end_date
+		FROM 
+			production_plan AS p
+			JOIN
+			product_code_detail AS d
+			ON p.product_code = d.product_code
+			JOIN
+			employee_info AS e
+			ON p.charge_employee_code = e.employee_code	
+	
+		<trim prefix="WHERE" prefixOverrides="AND">
+			<if test="genderCate != null and genderCate != ''.toString()">
+			AND	d.gender_categorized_name = #{genderCate}
+			</if>
+			<if test="detailCate != null and detailCate != ''.toString()">
+			AND	d.product_code = #{detailCate}
+			</if>
+			<if test="startDate != null and startDate != ''.toString()">
+			AND	p.expected_production_start_date &gt;= DATE(#{startDate})
+			</if>
+			<if test="endDate != null and endDate != ''.toString()">
+			AND	p.expected_production_end_date &lt;= DATE(#{endDate})
+			</if>
+		</trim>
+		<trim prefix="ORDER BY" suffixOverrides="WHERE">
+				p.expected_production_start_date ${range};
+		</trim>
+	</select>
 
 
 	<update id="modifyProductionPlan" parameterType="ProductionPlan">
