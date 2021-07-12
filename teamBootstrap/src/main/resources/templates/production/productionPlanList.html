@@ -19,7 +19,7 @@ layout:decorate="@{layout/default_production}">
          			<th>양복명</th>
          			<th>소분류</th>
          			<th colspan="2">계획일자</th>
-         			<th>정렬</th>
+         			<th>계획시작일 정렬</th>
          		</tr>
          	</thead>
          	<tbody>
@@ -44,8 +44,8 @@ layout:decorate="@{layout/default_production}">
          			</td>
          			<td style="padding-right: 20px;">
 	                	<select id="range" class="form-control" style="width: 125px;">
-	                		<option value="asc">최신순</option>
-	                		<option value="desc">오래된순</option>
+	                		<option value="desc">최신순</option>
+	                		<option value="asc">오래된순</option>
 	                	</select>
          			</td>     
          			
@@ -61,7 +61,6 @@ layout:decorate="@{layout/default_production}">
          <div class="btn-group">
 		        <a th:href="@{/production/productionMonthlyPlanList}" class="btn btn-default">월별 조회</a>
 		        <a th:href="@{/production/productionWeeklyPlanList}" class="btn btn-default">주간별 조회</a>
-		        <a th:href="@{/production/productionDailyPlanList}" class="btn btn-default">일별 조회</a>
 	        </div>
          </div>
         <div>
@@ -86,9 +85,9 @@ layout:decorate="@{layout/default_production}">
                 </thead>
                 
                 
-                <tbody>
+                <tbody id="mainTbody">
                   <tr th:if="${#lists.size(list)>0}" th:each="l, i: ${list}">
-	                  <td><input type="checkbox" class="checked"></td>
+	                  <td><input type="checkbox" class="checked" th:value="${l.production_plan_code}"></td>
 	                   <td th:text="${i.index+1}"></td> 
 	                    <td><a href="#">[[${l.production_plan_code}]]</a></td>
 	                    <td th:text="${l.gender_categorized_name}"></td>
@@ -126,12 +125,13 @@ layout:decorate="@{layout/default_production}">
 					});		
 	
 	$('#searchBtn').click(function(){
+			var html = '';
 			var array = {
-							genderCate : $('#genderCate').val()
-							, detailCate: $('#detailCate').val()
-							, startDate: $('#startDate').val()
-							, endDate: $('#endDate').val()
-							, range :$('#range').val()
+					genderCate : $('#genderCate').val()
+					, detailCate: $('#detailCate').val()
+					, startDate: $('#startDate').val()
+					, endDate: $('#endDate').val()
+					, range :$('#range').val()
 						};
 			console.log(array)
 			
@@ -140,20 +140,81 @@ layout:decorate="@{layout/default_production}">
 				  method: "GET",
 				  type: "post",
 				  data: array,
-				  dataType: "text"
+				  dataType: "json"
 				});
 				 
 				request.done(function( data ) {
 					console.log(data);
+			        $( '#list > tbody').empty();
+
+			        if(data.length > 0){
+				        for(i=0; i<data.length; i++){
+					        html += "<tr>";
+				        	html += "<td><input type='checkbox' class='checked' value = " + data[i].production_plan_code + "></td>"
+				        	html += "<td>" + [i + 1] + "</td>"
+				        	html += "<td>" + data[i].production_plan_code + "</td>";
+				        	html += "<td>" + data[i].gender_categorized_name + "</td>";
+				        	html += "<td>" + data[i].detailed_categorized_name + "</td>";
+				        	html += "<td>" + data[i].employee_name + "</td>";
+				        	html += "<td>" + data[i].production_plan_period + "</td>";
+				        	html += "<td>" + data[i].production_plan_qantity_unit + "</td>";
+				        	html += "<td>" + data[i].expected_production_start_date + "</td>";
+				        	html += "<td>" + data[i].expected_production_end_date + "</td>";
+				 			html += "<td><a href='/production/modifyProductionPlan?planCode=" + data[i].production_plan_code + "' class='btn btn-primary btn-xs'><i class='fa fa-pencil'></i>수정</a></td>";
+					        html += "</tr>";						
+						}
+			        }else{
+							html += "<tr><td colspan='11' style='text-align: center;'> 검색된 결과가 없습니다. </td></tr>";
+						}
+			        $('#mainTbody').append(html);
 				});
 				 
 				request.fail(function( jqXHR, textStatus ) {
 				  alert( "Request failed: " + textStatus );
-				});		
-		});				
+				});	
+			
+		});	
+	
+		$('#deleteBtn').click(function(){
+			var delArr = new Array();
+			var list = $('.checked');
+			
+			for(var i = 0; i < list.length; i++){
+				if(list[i].checked){
+					delArr.push(list[i].value);
+				}
+			}
+			if(delArr.length == 0){
+				alert('선택해주세요.');
+			}
+			else{
+				var delCheck = confirm('정말 삭제하시겠습니까?');
+				if(delCheck){
+					$.ajax({
+						url : "/production/deleteProductionPlan",
+						method : 'post',
+						async : true,
+						dataType : "json",
+						data : {'delArr':delArr},
+						success: function(data){
+							console.log(data);
+							if(data != 1){
+								alert('오류 : 삭제 실패');
+							}else{
+								alert('삭제 되었습니다.');
+								location.replace("productionPlanList");
+							}
+						}
+			    	});
+				}else{
+					return false;
+				}
+			}
+		});
+	
 	});
 	</script>
-</th:block>           
+</th:block>
 </th:block>
 
 </html>
