@@ -48,7 +48,8 @@ public class RawMaterialsController {
 	//[민아]원부자재 현재고 현황
 	@GetMapping("/inventoryStatus")
 	public String getInventoryStatus(Model model) {
-		materialsInventoryStatusService.getInventoryStatusByMCode("button03_7A6F95");
+		List<Map<String,Object>> inventoryStatusList = materialsInventoryStatusService.getInventoryStatusByMCode();
+		model.addAttribute("inventoryStatusList", inventoryStatusList);
 		return "rawMaterials/inventoryStatus";
 	}
 	

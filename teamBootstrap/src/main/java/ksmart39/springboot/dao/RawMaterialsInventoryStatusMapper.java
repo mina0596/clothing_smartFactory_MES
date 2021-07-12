@@ -22,5 +22,5 @@ public interface RawMaterialsInventoryStatusMapper {
 	public int modifyMaterialIn(Map<String,Object> paramMap);
 	
 	//[민아]자재 현재고 리스트
-	public List<RawMaterialsInventory> getInventoryStatusByMCode(String materialCode);
+	public Map<String,Object> getInventoryStatusByMCode(String materialCode);
 }

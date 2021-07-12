@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jdk.internal.org.jline.utils.Log;
+
 import ksmart39.springboot.controller.RawMaterialsController;
 import ksmart39.springboot.dao.RawMaterialsInventoryStatusMapper;
 import ksmart39.springboot.dao.SystemMapper;
@@ -49,32 +49,32 @@ public class RawMaterialsInventoryStatusService {
 	}
 	
 	//[민아]자재 현재고 리스트
-	public List<RawMaterialsInventory> getInventoryStatusByMCode(String materialCode){
+	public List<Map<String,Object>> getInventoryStatusByMCode(){
 		
 		//materialCode 있는거 다 받아오는 과정
 		List<RawMaterials> materialCodeList = systemMapper.getMaterialsList();
 		//materialCodeList.get(0).getRawMaterialCode();
 		//List<String> materialCodeArray = new ArrayList<String>();
 		
-		List<RawMaterialsInventory> getInventoryStatusResult;
+		List<Map<String,Object>> getInventoryStatusResult = new ArrayList<Map<String,Object>>();
 		
 		for(int i=0; i < materialCodeList.size(); i++) {
 			String materialCodeFromSystem = materialCodeList.get(i).getRawMaterialCode();
 			//materialCodeArray.add(materialCodeFromSystem);
 			//list에 담아서 가져온 materialCode를 하나씩 꺼내서 현재자재현황 mapper의 메서드에 넣어서 실행시키기
 			//getInventoryStatusResult.add(null)
-			getInventoryStatusResult = materialsInventoryStatusMapper.getInventoryStatusByMCode(materialCodeFromSystem);
 			
-				log.info("-=========================================");
-				log.info("getInventoryStatusResult : {}", getInventoryStatusResult);
-				log.info("-=========================================");
+			//if(getInventoryStatusResult)
+			Map<String,Object> inventoryStatusResult = materialsInventoryStatusMapper.getInventoryStatusByMCode(materialCodeFromSystem);
+			if(inventoryStatusResult != null) {
+			getInventoryStatusResult.add(inventoryStatusResult);
+			}
 		}
-		
-		
-		
-		
-		
-		return null;
+
+		Map<String, Object> print = getInventoryStatusResult.get(0);
+		log.info("print :{}", print);
+		log.info("getInventoryStatusResult :{}", getInventoryStatusResult);
+		return getInventoryStatusResult;
 	}
 	
 }
