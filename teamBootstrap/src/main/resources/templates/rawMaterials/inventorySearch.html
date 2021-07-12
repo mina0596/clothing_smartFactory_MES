@@ -5,7 +5,7 @@
 	<div th:fragment="searchFragment">
 		<form th:action="@{/rawMaterials/warehousingList}" method="get">
 			<div>
-				<select>
+				<select name="searchKey">
 				   <option>입/출고 코드</option>
 				   <option>원부자재 코드</option>
 				   <option>재료명</option>
@@ -27,7 +27,45 @@
 		</form>
 	</div>
 	<!-- End Search -->
-	
+	<div th:fragment="inventoryStatusSearchFragment">
+		<form th:action="@{/rawMaterials/inventoryStatus}" method="get">
+	<div class="form-group">
+		<div class="col-md-3">
+			<select class="form-control" name="searchKey">
+			  <option value="materialCode">원부자재코드</option>
+			  <option value="materialName">재료명</option>
+			  <!-- 수량 이하로 보여줘라 -->
+			 <option>수량</option>
+			 <option>최신업데이트 일자</option>
+			</select>
+		</div>
+			<div class="col-xs-3">
+			  <input class="form-control col-xs-3" type="text" placeholder="검색어를 입력하세요">
+			</div>
+		<div class="col-md-3">
+		 <select class="form-control" name="searchKey">
+		   <option value="materialCode">원부자재코드</option>
+		   <option value="materialName">재료명</option>
+		   <!-- 수량 이하로 보여줘라 -->
+		   <option>수량</option>
+		   <option>최신업데이트 일자</option>
+		  </select>
+		</div>
+		<div class="col-xs-3">
+		  <input class="form-control col-xs-3" type="text" placeholder="검색어를 입력하세요">
+		</div>
+		<div class="col-md-3 input-group">
+           		<input type=date class="form-control" id="exampleInputPassword2">
+				<span class="input-group-addon">To</span>
+				<input type=date class="form-control" id="exampleInputPassword2">
+       		</div>
+		<div class="col-md-2">         
+		  <button type="button" class="btn btn-theme">검색</button>
+		</div>
+      </div>
+
+		</form>
+	</div>	
 	<!-- 첫번째 옵션 -->
 	
 	<div class="form-group">

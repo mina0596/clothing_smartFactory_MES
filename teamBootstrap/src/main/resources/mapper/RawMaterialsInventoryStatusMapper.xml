@@ -102,7 +102,7 @@
 			subSubSelect.feature AS feature,
 			subSubSelect.unit AS unit
 	 -->
-	<select id="getInventoryStatusByMCode" parameterType="String" resultMap="materialsInventoryResultMap">
+	<select id="getInventoryStatusByMCode" parameterType="String" resultType="map">
 		SELECT 
 			*
 		FROM
@@ -114,7 +114,8 @@
 			subSelect.materialName As name,
 			subSelect.materialColorCode AS colorCode,
 			subSelect.materialFeature AS feature,
-			subSelect.materialUnit AS unit
+			subSelect.materialUnit AS unit,
+			subSelect.materialCode AS materialCode
 		FROM
 			(SELECT 
 				trans.raw_material_code AS materialCode,

@@ -86,12 +86,12 @@ layout:decorate="@{layout/default_rawMaterials}">
                     <td th:text="${l.materialsInfo.unit}" id="unit"></td>
                     <td th:text="${l.materialOrderCode}"></td>
                     <td> 
-                      <button type="button" class="btn btn-success btn-xs" onclick="location.href='addInWarehousing'" style="padding-right: 5px;"><i class="fa fa-plus-square"></i></button>
-                      <button type="button" class="btn btn-danger btn-xs" onclick="location.href='addExWarehousing'"><i class="fa fa-minus-square"></i></button>
+                      <a th:href="@{/rawMaterials/addInWarehousing(materialCode=${l.materialCode})}" class="btn btn-success btn-xs" style="padding-right: 5px;"><i class="fa fa-plus-square"></i></a>
+                      <a th:href="@{/rawMaterials/addExWarehousing(materialCode=${l.materialCode})}" class="btn btn-danger btn-xs" style="padding-right: 5px;"><i class="fa fa-minus-square"></i></a>
                     </td>
                     <td>
                     	<a th:if="${l.transactionCate == '입고'}" th:href="@{/rawMaterials/modifyInWarehousing(transactionCode=${l.transactionCode})}" class="btn btn-primary btn-xs" id="modifyBtn"><i class="fa fa-pencil"></i>수정</a>
-                    	<a th:if="${l.transactionCate == '출고'}" th:href="@{/rawMaterials/modifyExWarehousing(materialsCode=${l.materialCode},materialsInAmount=${l.transactionAmount})}" class="btn btn-primary btn-xs" id="modifyBtn"><i class="fa fa-pencil"></i>수정</a>
+                    	<a th:if="${l.transactionCate == '출고'}" th:href="@{/rawMaterials/modifyExWarehousing(materialsCode=${l.materialCode})}" class="btn btn-primary btn-xs" id="modifyBtn"><i class="fa fa-pencil"></i>수정</a>
 
                     </td>
                   </tr>
