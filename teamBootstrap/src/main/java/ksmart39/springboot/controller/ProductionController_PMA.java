@@ -4,6 +4,7 @@ package ksmart39.springboot.controller;
 
 import java.sql.Array;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,10 +23,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sun.el.parser.AstTrue;
+
 import ksmart39.springboot.domain.ProductProductionProcessStatus;
 import ksmart39.springboot.domain.ProductionPlan;
 import ksmart39.springboot.domain.WorkOrder;
 import ksmart39.springboot.service.ProductionPlanService;
+import ksmart39.springboot.service.ProductionService;
 import ksmart39.springboot.service.ProductionStatusService;
 import ksmart39.springboot.service.WorkOrderService;
 
@@ -37,19 +41,38 @@ public class ProductionController_PMA {
 	private static final Logger log = LoggerFactory.getLogger(ProductionController_PMA.class);
 	
 	private final WorkOrderService workOrderService;
-	private final ProductionPlanService productionPlanService;
-	private final ProductionStatusService productionStatusService;
+	private final ProductionService productionService;
+
 	
-	public ProductionController_PMA(ProductionPlanService productionPlanService, WorkOrderService workOrderService,ProductionStatusService productionStatusService) {
-		this.productionPlanService = productionPlanService;
+	public ProductionController_PMA(ProductionService productionService, WorkOrderService workOrderService) {
+		this.productionService = productionService;
 		this.workOrderService = workOrderService;
-		this.productionStatusService = productionStatusService;
 	}
 	
 	//[민아+한빛]의뢰품목별 상세 생산 공정 현황 등록
 	@GetMapping("/productionOrderList")
-	public String productionOrderList() {
+	public String productionOrderList(Model model) {
+		
+		
+		List<Map<String,Object>> workOrderList = workOrderService.getWorkOrderList();
+		List<Map<String,Object>> readyProductInfoList = new ArrayList<Map<String,Object>>();
+		for (Map<String, Object> workOrderValues : workOrderList) {
+			String workOrderStatus = (String) workOrderValues.get("status");
+			if(workOrderStatus.equals("대기중")) {
+				readyProductInfoList.add(workOrderValues);
+			}
+		}
+		
+		log.info("readyProductInfoList :{}", readyProductInfoList);
+		
+		model.addAttribute("readyProductInfo", readyProductInfoList);
+		
 		return "production/productionOrderList";
+	}
+	@PostMapping(value = "/pCodeToStartSend")
+	public String startPCodeProduction() {
+		//여기에 받아온 품목코드를 가지고 insert 문 해주는 처리과정 넣어주기
+		return null;
 	}
 	
 	//[민아+한빛]의뢰품목별 상세 생산 공정 현황 등록
@@ -92,6 +115,14 @@ public class ProductionController_PMA {
 	//[민아]완제품 등록
 	@GetMapping("/addCompletedProduct")
 	public String addCompletedProduct() {
+		
+		return "production/addCompletedProduct";
+	}
+	@PostMapping("/addCompletedProduct")
+	public String addCompletedProduct(@RequestParam (name = "productCode", required = true) String productCode,
+								      Model model) {
+		Map<String,String> completedProductInfo = new HashMap<String,String>();
+		productionService.addCompletedProduct(completedProductInfo);
 		return "production/addCompletedProduct";
 	}
 	
@@ -108,16 +139,7 @@ public class ProductionController_PMA {
 		
 		List<Map<String,Object>> workOrderList = workOrderService.getWorkOrderList();
 		model.addAttribute("workOrderList", workOrderList);
-		
-		workOrderService.getProcessStatusByWorkOrder();
-		
-	
-		/*
-		 * model.addAttribute("title", "작업지시관리: 작업지시목록"); Map<String, Object> paramMap =
-		 * new HashMap<String, Object>(); paramMap.put("workOrderSearchKey",
-		 * workOrderSearchKey); paramMap.put("workOrderSearchValue",
-		 * workOrderSearchValue);
-		 */
+
 		return "production/workOrderList";
 	}
 }

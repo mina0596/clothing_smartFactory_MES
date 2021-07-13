@@ -141,38 +141,52 @@ layout:decorate="@{layout/default_production}">
 		  <div class="modal-dialog" style="width:auto;display:table" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <h4 class="modal-title" id="exampleModalLabel"><i class="fa fa-globe"></i> 원부자재 재료 구분 검색</h4>
+		        <h4 class="modal-title" id="exampleModalLabel"><i class="fa fa-globe"></i> 품목별 의뢰코드 검색</h4>
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		          <span aria-hidden="true">&times;</span>
 		        </button>
 		      </div>     
 		      <div class="modal-body">
 		   <div class="form-group">
-          <div class="col-md-6">
-          <select class="form-control">
-		   <option>::조건선택::</option>
-		   <option>거래처명</option>
-		   <option>계약번호</option>
-		   <option>납치일</option>
-		  </select>
+          <div class="col-md-4">
+	          <select class="form-control">
+			   <option>::조건선택::</option>
+			   <option>거래처명</option>
+			   <option>계약코드</option>
+			   <option>품목명</option>
+			  </select>
 		  </div>
 		  
-          <div class="input-group col-md-6">
-            <input type="text" class="form-control" size="5">
-            <div class="input-group-btn">
+          <div class="input-group col-md-4">
+            <input type="text" class="form-control">
+          </div>
+          <div class="col-md-4">
+	          <select class="form-control">
+			   <option>::기간선택::</option>
+			   <option>납기일</option>
+			   <option>생산시작일</option>
+			   <option>생산완료일시</option>
+			  </select>
+		  </div>
+          <div class="col-md-4">
+            <input type="date" class="form-control" >
+          </div>
+          <div class="col-md-4">
+            <input type="date" class="form-control" >
+          </div>
+          
+            <div class="col-xs-1">
               <button type="button" class=" btn btn-theme03 btn btn-default"><i class="fa"></i>검색</button>
             </div>
-          </div>
-		</div>
+		
 
 	<!-- 모달에서 테이블부분  -->
        <table class="table table-striped table-advance table-hover" id="list">
          <thead>
            <tr>
              <th><i class="fa fa-check-circle-o"></i> 선택</th>
-             <th><i class="fa fa-bullhorn"></i> 번호</th>
              <th><i class="fa fa-bookmark"></i> 품목별 의뢰코드</th>
-             <th><i class="fa fa-bookmark"></i> 계약번호</th>
+             <th><i class="fa fa-bookmark"></i> 계약코드</th>
              <th><i class="fa fa-bookmark"></i> 양복명</th>
              <th><i class="fa fa-bookmark"></i> 품목명</th>
              <th><i class="fa fa-bookmark"></i> 거래처명</th>

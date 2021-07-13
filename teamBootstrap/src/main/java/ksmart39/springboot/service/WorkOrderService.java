@@ -32,22 +32,34 @@ public class WorkOrderService {
 	//[민아]작업지시 목록
 	public List<Map<String,Object>> getWorkOrderList(){
 		List<Map<String,Object>> workOrderList = workOrderMapper.getWorkOrderList();
-		log.info("workOrderList :{}", workOrderList);
+		
+		String status = "";
+		List<Map<String,Object>> pCodeFromProductionStatus = workOrderMapper.getPcodeFromProcessStatus();
+		List<String> pCodeListFromProcess = new ArrayList<String>();
+		List<String> pCodeListFromWorkOrder = new ArrayList<String>();
+		
+		for (Map<String, Object> pCodeList : pCodeFromProductionStatus) {
+			String pCodeFromProcess = (String) pCodeList.get("pCode");
+			pCodeListFromProcess.add(pCodeFromProcess);
+		}
+		
+		for(int i=0; i < workOrderList.size(); i++) {
+			String pCode = (String) workOrderList.get(i).get("pCode");
+			pCodeListFromWorkOrder.add(pCode);
+		}
+			
+		for(int i=0; i < pCodeListFromWorkOrder.size(); i++) {
+			String searchPCode = pCodeListFromWorkOrder.get(i);
+			int pCodeCheck = pCodeListFromProcess.indexOf(searchPCode);
+			if(pCodeCheck >= 0) {
+				status = "진행중";
+			}else {
+				status = "대기중";
+			}
+			workOrderList.get(i).put("status", status);
+		}
 		return workOrderList;
 	}
-	
-	//[민아]작업지시목록에서의 생산현황표시
-	public String getProcessStatusByWorkOrder(){
-		List<String> pCodeFromProductionStatus = new ArrayList<String>();
-		//pCodeFromProductionStatus = workOrderMapper.getPcodeFromProcessStatus();
-		
-		log.info("pCodeFromProductionStatus :{}", pCodeFromProductionStatus);
 
-		
-
-		
-		return null;
-	}
-	
 
 }

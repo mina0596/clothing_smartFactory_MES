@@ -37,6 +37,7 @@
 			inner join
 			(SELECT 
 				de.requested_product_code AS pCode,
+				de.requested_due_date AS dueDate,
 				cli.client_code AS cCode,
 				cli.client_name AS cName
 			FROM 
