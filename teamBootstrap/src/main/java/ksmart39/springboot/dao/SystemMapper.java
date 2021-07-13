@@ -31,6 +31,7 @@ public interface SystemMapper {
 	
 	//[다미] 계정과목 추가
 	public int addAccountSubject(AccountingCategory account);
+	public List<AccountingCategory> getAccountingSubjectList(Map<String, Object> paramMap);	
 	
 	/****************************************************************************/
 	
@@ -56,7 +57,6 @@ public interface SystemMapper {
 	
 	/****************************************************************************/
 	
-	public List<AccountingCategory> getAccountingSubjectList(Map<String, Object> paramMap);	
 	
 	/****************************************************************************/
 	//[보람 ]품질검사 수정 
