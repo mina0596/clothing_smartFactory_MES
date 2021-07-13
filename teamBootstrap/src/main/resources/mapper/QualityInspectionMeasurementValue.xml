@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart39.springboot.dao.QualityInsMeasurementValueMapper">
+
+	<select id="getQualityInspectionRequestCount" resultType="int">
+		<![CDATA[
+		SELECT 
+			COUNT(1)
+		FROM
+			quality_inspection_request AS q INNER JOIN requested_product_detail AS r ON q.requested_product_code = r.requested_product_code
+			INNER JOIN sub_class_inspection_list AS s ON q.quality_inspection_code = s.quality_inspection_code
+			INNER JOIN used_raw_material AS m ON q.requested_product_code = m.requested_product_code
+			INNER JOIN raw_material_info AS i	ON m.raw_material_code = i.raw_material_code;
+		]]>
+	</select>
+	
+	<select id="searchQualityInspectionRequest" resultType="Map" parameterType="Map">
+    SELECT
+			q.quality_inspection_request_code
+			,q.requested_product_code
+			,r.contract_code
+			,s.sub_class_name
+			,m.raw_material_code
+			,i.raw_material_name
+			,q.inspection_request_date
+			,c.client_name
+		FROM
+			quality_inspection_request AS q INNER JOIN requested_product_detail AS r ON q.requested_product_code = r.requested_product_code
+			INNER JOIN sub_class_inspection_list AS s ON q.quality_inspection_code = s.quality_inspection_code
+			INNER JOIN used_raw_material AS m ON q.requested_product_code = m.requested_product_code
+			INNER JOIN raw_material_info AS i	ON m.raw_material_code = i.raw_material_code
+			INNER JOIN client_info AS c ON r.client_code = c.client_code
+		<trim prefix="WHERE" prefixOverrides="AND">
+			<if test="contractCode != null and contractCode != ''.toString()">
+				AND	r.contract_code LIKE CONCAT('%', #{contractCode} ,'%')
+			</if>
+			<if test="requestedProductCode != null and requestedProductCode != ''.toString()">
+				AND q.requested_product_code LIKE CONCAT('%', #{requestedProductCode} ,'%')
+			</if>
+			<if test="inspectionRequestStartDate != null and inspectionRequestStartDate != ''.toString()">
+				AND q.inspection_request_date &gt;= DATE(#{inspectionRequestStartDate})
+			</if>
+			<if test="inspectionRequestEndDate != null and inspectionRequestEndDate != ''.toString()">
+				AND	q.inspection_request_date &lt;= DATE(#{inspectionRequestEndDate})
+			</if>
+			<if test="subClassName != null and subClassName != ''.toString()">
+				AND s.sub_class_name LIKE CONCAT('%', #{subClassName} ,'%')
+			</if>
+			<if test="rawMaterialName != null and rawMaterialName != ''.toString()">
+				AND i.raw_material_name LIKE CONCAT('%', #{rawMaterialName} ,'%')
+			</if>
+			<if test="clientName != null and clientName != ''.toString()">
+				AND c.client_name LIKE CONCAT('%', #{clientName} ,'%');
+			</if>
+		</trim>
+	</select>
+</mapper>

@@ -3,33 +3,101 @@
  */
 
 	$(function(){	
-		
-		//새로고침 방지(새로고침하면 탭이 넘어가버려서 막아놓을까 생각중입니다.)
-// 		function noEvent() { // 새로 고침 방지
-// 		    if (event.keyCode == 116) {
-// 		        alert("새로고침을 할 수 없습니다.");
-// 		        event.keyCode = 2;
-// 		        return false;
-// 		    } else if (event.ctrlKey
-// 		            && (event.keyCode == 78 || event.keyCode == 82)) {
-// 		        return false;
-// 		    }
-// 		}
-// 		document.onkeydown = noEvent;
-		
-		
-		
+
 		//모달 실행
 		$(document).on('click', '#requestCode', function(){
 			$('#requestCodeModal').modal("show");
+			
+			//검색버튼 클릭
+			$('#serchBtnModal').click(function(){
+				$('.removeTr').remove();
+				//검색값 넣기
+				var param = [];
+				var searchValue = {
+						contractCode : $('#contractCode').val()
+						, qualityInspectionRequestCode: $('#qualityInspectionRequestCode').val()
+						, inspectionRequestStartDate: $('#inspectionRequestStartDate').val()
+						, inspectionRequestEndDate: $('#inspectionRequestEndDate').val()
+						, subClassName :$('#subClassName').val()
+						, rawMaterialName :$('#rawMaterialName').val()
+						, clientName :$('#clientName').val()
+					};
+				//param.push(searchValue);
+				//console.log(param);
+				
+				//param 데이터 직렬화
+				var jsonData = JSON.stringify(searchValue);
+				
+				var html = "";
+				var request = $.ajax({
+					url: "/quality/searchQualityInspectionRequest",
+					method: "post",
+					type: "post",
+					traditional :true,
+					data: {"jsonData" : jsonData},
+					dataType: "json"
+				});
+				
+				request.done(function( data ) {
+					console.log(data);
+					
+					if(data.length > 0){
+						for(i=0; i<data.length; i++){
+							var date =  data[i].inspection_request_date;
+							
+							//date 포맷 변경 yyyy-MM-dd hh:mm:ss
+							function formatDate(date) {
+								var d = new Date(date),
+								month = '' + (d.getMonth() + 1),
+								day = '' + d.getDate(),
+								year = d.getFullYear(),
+								hour = d.getHours(),
+								min = d.getMinutes(),
+								sec = d.getSeconds();
+								
+								if (month.length < 2) month = '0' + month;
+								if (day.length < 2) day = '0' + day;
+								
+								return [year, month, day].join('-') + ' ' + [hour, min, sec].join(':');
+							}
+							
+							var dateText = "/Date(1519794794410)/";
+							var myDate = new Date(dateText.match(/\d+/) * 1);
+							date = formatDate(myDate);
+							
+							html += "<tr class='removeTr'>";
+							html += "<td><input type='checkbox' class='checkedModal' value = '예시'" + "></td>"
+							html += "<td>" + [i + 1] + "</td>"
+							html += "<td>" + data[i].contract_code + "</td>";
+							html += "<td>" + data[i].requested_product_code + "</td>";
+							html += "<td>" + data[i].sub_class_name + "</td>";
+							html += "<td>" + data[i].raw_material_name + "</td>";
+							html += "<td>" + date + "</td>";
+							html += "</tr>";						
+						}
+					}else{
+						$('.removeTr').remove();
+						html += "<tr class='removeTr'><td colspan='11' style='text-align: center;'> 검색된 결과가 없습니다. </td></tr>";
+					}
+					//$('#mainTbody').remove();
+
+					$('#mainTbody').append(html);
+					
+				});
+				
+				request.fail(function( jqXHR, textStatus ) {
+					alert( "Request failed: " + textStatus );
+				});
+			});
+			
 		});
 		
 		// 전체 체크
-		$(document).on('click', '#checkAll', function(){
-			if($('#checkAll').prop('checked')){
-				$('.checked').prop('checked',true);
+		$(document).on('click', '#checkAllModal', function(){
+			if($('#checkAllModal').prop('checked')){
+				$('.checkedModal').prop('checked',true);
 			}else{
-				$('.checked').prop('checked',false);
+				$('.checkedModal').prop('checked',false);
 			}
 		});
 		

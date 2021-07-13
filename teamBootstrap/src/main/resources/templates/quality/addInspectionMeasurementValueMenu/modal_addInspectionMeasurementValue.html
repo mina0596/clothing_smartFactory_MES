@@ -3,8 +3,8 @@
 
 <th:block th:fragment="modal_addInspectionMeasurementValue">
  <!-- 모달시작 -->
-          <div class="modal fade modal-xl"  id="requestCodeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog" style="width:auto;display:table" role="document">
+          <div class="modal fade modal-xl" style=" height: 700px;"  id="requestCodeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" style="width:auto; display:table;" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <h4 class="modal-title" id="exampleModalLabel">품질검사요청코드 목록</h4>
@@ -23,20 +23,20 @@
 	         			<th colspan="3"	>
 		         			 <div class="form-inline">
 		         			 	<label class="control-label">계약번호</label>
-			                	<input type="text" class="form-control" id="bySupplierValue" placeholder="검색어를 입력하세요.">
+			                	<input type="text" class="form-control" id="contractCode" placeholder="검색어를 입력하세요.">
 			                </div>
 	         			</th>
 	         			<th>
 	         				<div class="form-inline">
 		         				<label class="control-label">품목별 의뢰 코드</label>
-			                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
+			                	<input type="text" class="form-control" id="requestedProductCode" placeholder="검색어를 입력하세요.">
 		              		</div>
 	         			</th>
 	         			<th colspan="3">
 	         				<div class="form-inline">
 		         				<label class="control-label">요청날짜</label>
-			                	<input type="date" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">&nbsp ~
-			                	<input type="date" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
+			                	<input type="date" class="form-control" id="inspectionRequestStartDate" placeholder="검색어를 입력하세요.">&nbsp ~
+			                	<input type="date" class="form-control" id="inspectionRequestEndDate" placeholder="검색어를 입력하세요.">
 		              		</div>
 	         			</th>  
 	         			</tr>  
@@ -44,28 +44,29 @@
 	         			<th colspan="3">
 	         				<div class="form-inline">
 		         				<label class="control-label">품질검사 명</label>
-			                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
+			                	<input type="text" class="form-control" id="subClassName" placeholder="검색어를 입력하세요.">
 		              		</div>
 	         			</th>  
 	         			<th>
 	         				<div class="form-inline">
 		         				<label class="control-label">원부자재명</label>
-			                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
+			                	<input type="text" class="form-control" id="rawMaterialName" placeholder="검색어를 입력하세요.">
 		              		</div>
 	         			</th>  
-	         			<th colspan="2">
+	         			<th colspan="3">
 	         				<div class="form-inline">
 		         				<label class="control-label">거래처명</label>
-			                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
-	         				 <button type="submit" class="btn btn-theme" style="width: 40%; margin-left: 20px;">검색</button>
+			                	<input type="text" class="form-control" id="clientName" placeholder="검색어를 입력하세요.">
+	         				 <button type="submit" id="serchBtnModal" class="btn btn-theme" style="width: 17%; margin-left: 10px;">검색</button>
+	         				 <button type="submit" class="btn btn-warning" style="width: 17%;">save</button>
 		              		</div>
 	         			</th>
 	         			
         			</tr>     			
        			</thead>
-       			<tbody style="text-align: center;">
+       			<tbody id="mainTbody" style="text-align: center;">
        				<tr>
-       					<td><input type="checkbox"></td>
+       					<td><input type="checkbox" id="checkAllModal"></td>
        					<td>no.</td>
        					<td>계약번호</td>
        					<td>품목별 의뢰 코드</td>
@@ -73,39 +74,28 @@
        					<td>원부자재명</td>
        					<td>요청날짜</td>
        				</tr>
-     				<tr>
-						<td><input type="checkbox"></td>
-						<td>1</td>
-						<td>1234</td>
-						<td>req01_MS_pants</td>
-						<td>이화학검사</td>
-						<td>실크</td>
-						<td>2021-07-01</td>
-     				</tr>
-     				<tr>
-						<td><input type="checkbox"></td>
-						<td>1</td>
-						<td>1234</td>
-						<td>req01_MS_pants</td>
-						<td>이화학검사</td>
-						<td>실크</td>
-						<td>2021-07-01</td>
-     				</tr>
-     				<tr>
-						<td><input type="checkbox"></td>
-						<td>1</td>
-						<td>1234</td>
-						<td>req01_MS_pants</td>
-						<td>이화학검사</td>
-						<td>실크</td>
-						<td>2021-07-01</td>
-     				</tr>
-     			</tbody>        		
-         	</tbody>
+       				<tr class="removeTr">
+       					<td colspan="7">검색 버튼을 눌러주세요.</td>
+       				</tr>
+     			</tbody> 
          </table> 
-         
+<!--          <div> -->
+<!--          	<input type="text" th:value="${currentPage}"> -->
+<!--          </div> -->
+<!-- 		   	 <div class="btn-group"> -->
+<!-- 	             <a th:href="@{/quality/searchQualityInspectionRequest}" class="btn btn-default">처음으로</a> -->
+<!-- 	             <a th:if="${currentPage > 1}" th:href="@{/quality/searchQualityInspectionRequest(currentPage=${currentPage - 1})}">[이전]</a> -->
+<!-- 						<th:block th:each="num:${#numbers.sequence(pageStartNum, pageEndNum)}"> -->
+<!-- 							<a th:if="${num != currentPage}" th:href="@{/quality/searchQualityInspectionRequest(currentPage=${num})}" th:text="${'[' + num + ']'}"></a> -->
+<!-- 							<span th:unless="${num != currentPage}" th:text="${'[' + num + ']'}"></span> -->
+<!-- 						</th:block> -->
+<!-- 						<a th:if="${currentPage < lastPage}" th:href="@{/quality/searchQualityInspectionRequest(currentPage=${currentPage + 1})}">[다음]</a> -->
+<!-- 						<a th:href="@{/quality/searchQualityInspectionRequest(currentPage=${lastPage})}">[맨마지막]</a> -->
+<!-- 	         </div> -->
 		 </div>
+		 	
 		    <div class="modal-footer">
+		
 			      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 			      <button type="button" id="saveSupplier" class="btn btn-primary" data-dismiss="modal">Save changes</button>
 		      </div>

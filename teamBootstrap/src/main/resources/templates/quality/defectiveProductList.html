@@ -109,7 +109,7 @@ layout:decorate="@{layout/default_qualityControl}">
                 <!--db에서 데이터 넣어야하는 부분 -->
                   <tr th:each=" d,n : ${defectiveProduct}">
                   	<td><input type="checkbox" class="checked"></td>
-                  	<td th:text="${i.index+1}"></td>
+                  	<td th:text="${n.index+1}"></td>
                     <td th:text="${d.defectiveProductCode}"></td>
                     <td th:text="${d.qualityInspectionRequestCode}"></td>
                     <td th:text="${d.qualityInspectionCode}"></td>
