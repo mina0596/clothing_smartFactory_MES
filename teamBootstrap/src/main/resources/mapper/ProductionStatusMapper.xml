@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ksmart39.springboot.dao.ContractMapper">
-<resultMap type="ProductionStatus"  id="getProductionStatusInfo">
+<mapper namespace="ksmart39.springboot.dao.ProductionStatusMapper">
+<resultMap type="ProductProductionProcessStatus"  id="getProductionStatusInfo">
 	<result  property="productProductionProcessStatusCode" 				column="product_production_process_status_code"/>
 	<result  property="productionProcessCode" 				column="production_process_code"/>
 	<result  property="requestedProductCode" 				column="requested_product_code"/>
@@ -15,6 +15,23 @@
 		<result property="requestedDueDate" column="requested_due_date"/>
 		<result property="contractCode" column="contract_code"/>
 	</association>
-	
 </resultMap>
+
+
+		<select id="getProductionStatusInfo" resultType="ProductProductionProcessStatus" fetchSize="1000">
+		SELECT
+			p.requested_product_code
+			,p.productionProcessStatusRegDate
+			,p.processStatus
+			,p.completedProductUpdateDate
+			,r.contract_code
+			,r.requested_due_date
+		FROM
+			product_production_process_status as p
+			INNER JOIN
+			requested_product_detail as r
+			on
+			p.requested_product_code = r.requested_product_code;
+	</select>
+	
 </mapper>
