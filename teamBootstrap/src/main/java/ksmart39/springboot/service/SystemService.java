@@ -40,6 +40,10 @@ public class SystemService {
 		return result;
 	}	
 	//회원정보 조회
+	public HumanResources getEmployeeInfoById(String employeeId) {
+		return systemMapper.getEmployeeInfoById(employeeId);
+	}
+	//회원정보 조회
 	public HumanResources getEmployeeInfoByCode(String employeeCode) {
 		return systemMapper.getEmployeeInfoByCode(employeeCode);
 	}

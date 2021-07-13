@@ -100,6 +100,19 @@ public class SystemController {
 		return "system/humanResourcesList";
 	}
 
+	@PostMapping("/memberIdCheck")
+	@ResponseBody
+	public boolean memberIdCheck(@RequestParam(value = "employeeId") String employeeId) {
+		
+		boolean idCheck = true;
+		
+		HumanResources humanResources = systemService.getEmployeeInfoById(employeeId);
+		
+		if(humanResources != null) idCheck = false;
+		
+		return idCheck;
+	}
+	
 
 
 
@@ -154,6 +167,8 @@ public class SystemController {
 		model.addAttribute("title", "거래처관리");
 		return "system/addClient";
 	}
+	
+
 	
 
 	// ==================================================================

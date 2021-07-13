@@ -40,6 +40,8 @@ public interface SystemMapper {
 	//회원가입
 	public int addHumanResources(HumanResources humanResources);	
 	//회원정보 조회
+	public HumanResources getEmployeeInfoById(String employeeId);	
+	//회원정보 조회
 	public HumanResources getEmployeeInfoByCode(String employeeCode);	
 	//회원정보 수정
 	public int modifyHumanResources(HumanResources humanResources);

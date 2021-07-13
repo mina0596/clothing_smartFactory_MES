@@ -94,7 +94,24 @@
 		FROM 
 			employee_info
 		WHERE 
-			employee_code = #{employeeCode}
+			employee_code = #{employeeCode};
+	</select>
+	
+	<select id="getEmployeeInfoById" parameterType="String" resultMap="getHumanResourcesInfo">
+		SELECT 
+			 employee_code
+			,employee_id			
+			,employee_pw			
+			,employee_name			
+			,employee_tel		
+			,employee_address		
+			,employee_email			
+			,employee_department		
+			,employee_position		
+		FROM 
+			employee_info
+		WHERE 
+			employee_id = #{employeeId};
 	</select>
 	
 	<update id="modifyHumanResources" parameterType="HumanResources">
