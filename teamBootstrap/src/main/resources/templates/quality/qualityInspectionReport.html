@@ -7,21 +7,19 @@ layout:decorate="@{layout/default_qualityControl}">
 	   <div class="border-head"> 
 	    <h3>품질관리</h3>
 	    </div>
-<th:block layout:fragment="customJs">
 <script type="text/javascript" th:src="@{/quality/QualityInspection.js}"></script>	  
+<th:block layout:fragment="customJs">
 <script>
 $(function(){
 	$('#finalInspectionResutl').click(function(){
 		
 	})
-	/* $('#finalResultBtn').click(function(){
+	 $('#finalResultBtn').click(function(){
 		var html = '';
 		var array = {
 				clientCate : $('#clientCate').val()
-				, detailCate: $('#detailCate').val()
-				, startDate: $('#startDate').val()
-				, endDate: $('#endDate').val()
-				, range :$('#range').val()
+				, requestCate: $('#requestCate').val()
+								
 					};
 		console.log(array)
 		
@@ -33,7 +31,7 @@ $(function(){
 			  dataType: "json"
 			});
 			 
-			request.done(function( data ) {
+			 request.done(function( data ) {
 				console.log(data);
 		        $( '#list > tbody').empty();
 
@@ -61,9 +59,9 @@ $(function(){
 			 
 			request.fail(function( jqXHR, textStatus ) {
 			  alert( "Request failed: " + textStatus );
-			});	
-		 */
-	});	
+			});	 
+	 });
+	
 });
 
 </script>
@@ -128,7 +126,7 @@ $(function(){
          		</tr>
          	</tbody>
          </table>  
-        </form>  
+      
 	      <br>
 	      <br>
 	      <br>
@@ -156,7 +154,7 @@ $(function(){
                 <!--db에서 데이터 넣어야하는 부분 -->
                   <tr th:if="${#lists.size(finalResultList) > 0}" th:each="f,i:${finalResultList}">
                   		<td th:text="${i.index+1}"></td>
-                  		<td th:text="${f.requested_product_code}"></td>
+                  		<td> <a>[[${f.requested_product_code}]]</a></td>
                   		<td th:text="${f.client_name}"></td>
                   		<td th:text="${f.gender_categorized_name}"></td>
                   		<td th:text="${f.detailed_categorized_name}"></td>
@@ -171,6 +169,29 @@ $(function(){
                   </div>
                   </div>
                  
+                 <div id="modal" class="searchModal">
+					<div class="search-modal-content">
+					<div class="page-header">
+					<h1>품질검사 성적서</h1>
+					</div>
+					<div class="row">
+					<div class="col-sm-12">
+					<div class="row">
+					<div class="col-sm-12">
+					<h2>품질검사 성적서</h2>
+					</div>
+					</div>
+					</div>
+					</div>
+					<hr>
+					<div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onClick="closeModal();">
+					<span class="pop_bt modalCloseBtn" style="font-size: 13pt;">
+					</span>
+					</div>
+					</div>
+					</div>
+	
+
 </th:block>
 
 </html>

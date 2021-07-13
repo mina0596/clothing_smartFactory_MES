@@ -8,6 +8,13 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface QualityInsepctionResultMapper {
 	
+	//[다미+보람]검사현황 조회 품목명가지고오기 
+	public List<Map<String,Object>> getProductName(String requestNum);
+	
+	//[다미+보람]검사현황 조회 의뢰코드명가지고오기 
+	public List<Map<String,Object>>	 getRequestProductCode(String client);
+	
+	
 	//[다미+보람]검사현황 조회 거래처명가지고오기
 	public List<Map<String, Object>> getClientName();
 

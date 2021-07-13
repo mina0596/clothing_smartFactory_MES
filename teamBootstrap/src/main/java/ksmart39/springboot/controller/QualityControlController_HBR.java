@@ -35,6 +35,33 @@ public class QualityControlController_HBR {
 	private QualityInsepctionResultService qualityInsepctionResultService;
 	
 	//================================================================
+	
+	//[다미+보람]검사현황 조회 품목명 가지고오기
+	@RequestMapping(value = "/requestName", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String,Object>> getProductName(@RequestParam(value = "requestNum", required = false)String requestNum){
+		List<Map<String,Object>> productName = qualityInsepctionResultService.getProductName(requestNum);
+		log.info("=============================================");
+	  	log.info("화면에서 받아온 값:   {}",requestNum );
+	  	log.info("품목명 :      {}", productName);
+	  	log.info("============================================="); 
+		return productName;
+	}
+	
+	  //[다미+보람]검사현황 조회 의뢰코드가지고오기
+	  
+	  @RequestMapping(value = "/requestCode", method = RequestMethod.GET)
+	  @ResponseBody 
+	  public List<Map<String,Object>> getRequestProductCode(@RequestParam(value = "client",required =	  false)String client ){ 
+		 List<Map<String,Object>> reqeustCode =	 qualityInsepctionResultService.getRequestProductCode(client);
+	  	log.info("=============================================");
+	  	log.info("화면에서 받아온 값:   {}",client );
+	  	log.info("의로코드조회 :      {}", reqeustCode);
+	  	log.info("============================================="); 
+	 return reqeustCode; 
+	 }
+	
+	
 
 		//[다미+보람]검사현황 조회 거래처명가지고오기
 		@RequestMapping(value = "/clientName", method =RequestMethod.GET)

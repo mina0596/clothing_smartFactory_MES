@@ -16,12 +16,22 @@ public class QualityInsepctionResultService {
 	
 	@Autowired
 	private QualityInsepctionResultMapper qualityInsepctionResultMapper;
+	
+	//[다미+보람]검사현황 조회 품목명가지고오기 
+		public List<Map<String,Object>> getProductName(String requestNum){
+			return qualityInsepctionResultMapper.getProductName(requestNum);
+		}
 
+	 //[다미+보람]검사현황 조회 의뢰코드명가지고오기 
+		public List<Map<String,Object>>	 getRequestProductCode(String client){
+			return qualityInsepctionResultMapper.getRequestProductCode(client);
+		}
+	
 	//[다미+보람]검사현황 조회 거래처명가지고오기
 		public List<Map<String, Object>> getClientName(){
 			
 			List<Map<String, Object>> client = qualityInsepctionResultMapper.getClientName();
-			log.info("거래처명{}",client);
+			
 			
 			return client;
 		}
