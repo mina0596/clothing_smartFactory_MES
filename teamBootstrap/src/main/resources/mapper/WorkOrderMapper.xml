@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ksmart39.springboot.dao.WorkOrder">
+<mapper namespace="ksmart39.springboot.dao.WorkOrderMapper">
 
-	<resultMap type="WorkOrder" id="workOrderResultMap">
+	<resultMap type="WorkOrder" 							id="workOrderResultMap">
 		<result property="workOrderCode"  					column="work_order_code"/>
 		<result property="requestedProductCode"  			column="requested_product_code"/>
 		<result property="chargeEmployeeCode"  				column="charge_employee_code"/>
@@ -10,22 +10,40 @@
 		<result property="expectedProductionEndDate"  		column="expected_production_end_date"/>
 		<result property="workOrderRegDate"  				column="work_order_reg_date"/>
 		<result property="workOrderUpdateDate"  			column="work_order_update_date"/>
+		
+		<association property="requestedProductInfo"		javaType="RequestedProduct">
+			<id property="requestedProductCode"				column="requested_product_code"/>
+			<result property="clientCode"					column="client_code"/>
+			<result property="contractCode"					column="contract_code"/>				
+		</association>
+		
+		<association property="client"						javaType="Client">
+			<id property="clientCode"						column="client_code"/>
+			<result property="clientName"					column="client_name"/>
+		</association>
 	</resultMap>
 	
-	<select id="getWorOrderList" resultMap="workOrderResultMap">
+	<select id="getWorkOrderList" resultMap="workOrderResultMap">
 		SELECT 
-			work_order_code, 
-			requested_product_code, 
-			charge_employee_code, 
-			expected_production_start_date, 
-			expected_production_end_date, 
-			work_order_reg_date, 
-			work_order_update_date
+			wo.work_order_code, 
+			wo.requested_product_code,
+			wo.expected_production_start_date, 
+			wo.expected_production_end_date, 
+			sub.*
 		FROM 
-			work_order
+			work_order AS wo
+			inner join
+			(SELECT 
+				de.requested_product_code AS pCode,
+				cli.client_code AS cCode,
+				cli.client_name AS cName
+			FROM 
+				requested_product_detail AS de
+				INNER join
+				client_info AS cli
+				on
+				de.client_code = cli.client_code) AS sub
+			on
+			wo.requested_product_code = sub.pCode;
 	</select>
-
-
-
-
 </mapper>

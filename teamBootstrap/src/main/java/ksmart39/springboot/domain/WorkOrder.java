@@ -9,11 +9,33 @@ public class WorkOrder {
 	private String workOrderRegDate;
 	private String workOrderUpdateDate;
 	
+	private RequestedProduct requestedProductInfo;
+	
+	private Client client;
+	
 	private  HumanResources humanResources;
 	/*private  품목자바도 가지고와야됨**/
 
+	
+	
 	public String getWorkOrderCode() {
 		return workOrderCode;
+	}
+
+	public RequestedProduct getRequestedProductInfo() {
+		return requestedProductInfo;
+	}
+
+	public void setRequestedProductInfo(RequestedProduct requestedProductInfo) {
+		this.requestedProductInfo = requestedProductInfo;
+	}
+
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
 	}
 
 	public void setWorkOrderCode(String workOrderCode) {
@@ -82,7 +104,10 @@ public class WorkOrder {
 				+ ", chargeEmployeeCode=" + chargeEmployeeCode + ", expectedProductionStartDate="
 				+ expectedProductionStartDate + ", expectedProductionEndDate=" + expectedProductionEndDate
 				+ ", workOrderRegDate=" + workOrderRegDate + ", workOrderUpdateDate=" + workOrderUpdateDate
-				+ ", humanResources=" + humanResources + "]";
+				+ ", requestedProductInfo=" + requestedProductInfo + ", client=" + client + ", humanResources="
+				+ humanResources + "]";
 	}
+
+	
 
 }

@@ -20,12 +20,12 @@
 			<result property="colorCode" 			column="raw_material_color_code"/>
 			<result property="unit" 				column="raw_material_unit"/>
 			<result property="feature" 				column="raw_material_feature"/>
+			<association property="employeeInfo" 		javaType="HumanResources">
+				<id property="employeeCode" 			column="employee_code"/>
+				<result property="employeeName" 		column="employee_name"/>
+			</association>
 		</association>
 		
-		<association property="employeeInfo" 		javaType="HumanResources">
-			<id property="employeeCode" 			column="employee_code"/>
-			<result property="employeeName" 		column="employee_name"/>
-		</association>
 		
 	</resultMap>
 
