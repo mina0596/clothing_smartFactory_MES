@@ -12,6 +12,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +23,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ksmart39.springboot.domain.ProductionPlan;
+import ksmart39.springboot.domain.WorkOrder;
 import ksmart39.springboot.service.ProductionPlanService;
+import ksmart39.springboot.service.WorkOrderService;
 
 @Controller
 @RequestMapping("/production")
@@ -31,10 +34,12 @@ public class ProductionController {
 	
 	private static final Logger log = LoggerFactory.getLogger(ProductionController.class);
 	
+	private final WorkOrderService workOrderService;
 	private final ProductionPlanService productionPlanService;
 	
-	public ProductionController(ProductionPlanService productionPlanService) {
+	public ProductionController(ProductionPlanService productionPlanService, WorkOrderService workOrderService) {
 		this.productionPlanService = productionPlanService;
+		this.workOrderService = workOrderService;
 	}
 	
 	//[민아+한빛]의뢰품목별 상세 생산 공정 현황 등록
@@ -99,14 +104,21 @@ public class ProductionController {
 	}
 	
 	//=====================================================================
+	
+	
+	
+	
 	//[보람]작업지시정보
 	@GetMapping("/workOrderInfo")
 	public String workOrderInfo() {
 		return "production/workOrderInfo";
 	}
-	//[보람]작업지시 목록
+	//[보람]작업지시 목록 + [민아]작업지시 목록 화면에 뿌려주기
 	@GetMapping("/workOrderList")
-	public String workerOrderList() {
+	public String workerOrderList(Model model) {
+		
+		List<WorkOrder> workOrderList = workOrderService.getWorkOrderList();
+		model.addAttribute("workOrderList", workOrderList);
 		
 		/*
 		 * model.addAttribute("title", "작업지시관리: 작업지시목록"); Map<String, Object> paramMap =

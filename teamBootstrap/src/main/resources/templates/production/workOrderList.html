@@ -105,7 +105,7 @@ $(function(){
                     <th><i class="fa fa-bullhorn"></i>순번</th>
                     <th><i class="fa fa-bookmark"></i>작업지시코드</th>
                     <th><i class="fa fa-bookmark"></i>거래처명</th>
-                    <th><i class="fa fa-bookmark"></i>양복명</th>
+                    <th><i class="fa fa-bookmark"></i>의뢰품목코드</th>
                     <th><i class=" fa fa-bookmark"></i>품목명</th>
                     <th><i class=" fa fa-bookmark"></i>생산시작예정일</th>
                     <th><i class=" fa fa-bookmark"></i>생산종료예정일</th>
@@ -116,13 +116,11 @@ $(function(){
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                  	<td class="hidden-phone">
-                      <input type="checkbox" class="check">
-                    </td>
-                     <td class="hidden-phone">1</td>
-                    <td class="hidden-phone"><a >operation_order_01</a></td>
-                    <td class="hidden-phone"><a >파크랜드</a></td>
+                  <tr th:each="l,n : ${workOrderList}">
+                  	<td><input type="checkbox" class="check"></td>
+                    <td th:text="${n.index+1}"></td>
+                    <td th:text="${l.workOrderCode}"></td>
+                    <td th:text="${l.requestedProductCode}"></td>
                     <td class="hidden-phone">신사양복</td>
                     <td class="hidden-phone">바지</td>
                    <td class="hidden-phone">2021-04-30</td>
