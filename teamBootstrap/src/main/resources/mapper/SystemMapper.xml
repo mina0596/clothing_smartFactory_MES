@@ -44,6 +44,11 @@
 			erp_access_level as l
 			on
 			e.level_num = l.level_num;
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="searchKey != null and searchKey != ''.toString()">
+				${searchKey} LIKE CONCAT('%', #{searchValue} ,'%');
+			</if>
+		</trim>
 	</select>
 	
 	<insert id="addHumanResources" parameterType="HumanResources">
@@ -90,11 +95,6 @@
 			employee_info
 		WHERE 
 			employee_code = #{employeeCode}
-		<trim prefix="WHERE" prefixOverrides="AND |OR ">
-			<if test="searchKey != null and searchKey != ''.toString()">
-				${searchKey} LIKE CONCAT('%', #{searchValue} ,'%');
-			</if>
-		</trim>
 	</select>
 	
 	<update id="modifyHumanResources" parameterType="HumanResources">
@@ -335,9 +335,9 @@
 		</association>
 		<association property="lowClassInspection" javaType="lowClassInspection">
 		<result column="low_class_name" property="lowClassName"/>
-		</association>
-	
+		</association>	
 </resultMap>
+
 <update id="modifyQualityInspection" parameterType="SubClassInspection">
 UPDATE sub_class_inspection_list AS s  
 		inner join 
