@@ -12,6 +12,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +22,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import ksmart39.springboot.domain.ProductProductionProcessStatus;
 import ksmart39.springboot.domain.ProductionPlan;
+import ksmart39.springboot.domain.WorkOrder;
 import ksmart39.springboot.service.ProductionPlanService;
+import ksmart39.springboot.service.ProductionStatusService;
+import ksmart39.springboot.service.WorkOrderService;
 
 @Controller
 @RequestMapping("/production")
@@ -31,82 +36,34 @@ public class ProductionController {
 	
 	private static final Logger log = LoggerFactory.getLogger(ProductionController.class);
 	
+	private final WorkOrderService workOrderService;
 	private final ProductionPlanService productionPlanService;
+	private final ProductionStatusService productionStatusService;
 	
-	public ProductionController(ProductionPlanService productionPlanService) {
+	public ProductionController(ProductionPlanService productionPlanService, WorkOrderService workOrderService,ProductionStatusService productionStatusService) {
 		this.productionPlanService = productionPlanService;
+		this.workOrderService = workOrderService;
+		this.productionStatusService = productionStatusService;
 	}
 	
-	//[민아+한빛]의뢰품목별 상세 생산 공정 현황 등록
-	@GetMapping("/productionOrderList")
-	public String productionOrderList() {
-		return "production/productionOrderList";
-	}
-	
-	//[민아+한빛]의뢰품목별 상세 생산 공정 현황 등록
-	@GetMapping("/test")
-	public String test() {
-		return "production/test";
-	}
-	//================================================================
-	//[민아+한빛]의뢰품목별 상세 생산 공정 현황 등록
-	@GetMapping("/productProgressList")
-	public String getproductProgressList() {
-		return "production/productProgressList";
-	}
-	
-	//[민아+한빛]의뢰품목별 상세 생산 공정 현황 조회
-	@GetMapping("/detailedStateByProduct")
-	public String getDetailedStateByProduct() {
-		return "production/detailedStateByProduct";
-	}
-	
-	//[민아+한빛]의뢰품목별 생산 현황 조회
-	@GetMapping("/stateByProduct")
-	public String getStateByProduct() {
-		return "production/stateByProduct";
-	}
-	
-	//[민아+한빛]작업지시별 생산 현황 조회
-	@GetMapping("/stateByWorkOrder")
-	public String getStateByWorkOrder() {
-		return "production/stateByWorkOrder";
-	}
-	
-	//[민아+한빛]생산계획별 생산 현황 조회
-	@GetMapping("/stateByProductionPlan")
-	public String getStateByProductionPlan() {
-		return "production/stateByProductionPlan";
-	}
-	
-	//===================================================================
-	//[민아]완제품 수정
-	@GetMapping("/modifyCompletedProduct")
-	public String modifyCompletedProduct() {
-		return "production/modifyCompletedProduct";
-	}
-	
-	//[민아]완제품 등록
-	@GetMapping("/addCompletedProduct")
-	public String addCompletedProduct() {
-		return "production/addCompletedProduct";
-	}
-	
-	//[민아]완제품 목록
-	@GetMapping("/completedProductList")
-	public String getCompletedProductList() {
-		return "production/completedProductList";
-	}
+
 	
 	//=====================================================================
+	
+	
+	
+	
 	//[보람]작업지시정보
 	@GetMapping("/workOrderInfo")
 	public String workOrderInfo() {
 		return "production/workOrderInfo";
 	}
-	//[보람]작업지시 목록
+	//[보람]작업지시 목록 + [민아]작업지시 목록 화면에 뿌려주기
 	@GetMapping("/workOrderList")
-	public String workerOrderList() {
+	public String workerOrderList(Model model) {
+		
+		List<WorkOrder> workOrderList = workOrderService.getWorkOrderList();
+		model.addAttribute("workOrderList", workOrderList);
 		
 		/*
 		 * model.addAttribute("title", "작업지시관리: 작업지시목록"); Map<String, Object> paramMap =

@@ -138,7 +138,6 @@
 			join
 			(SELECT @total :=0) AS initial) AS subSubSelect
 		ORDER BY subSubSelect.finalTransDate DESC LIMIT 1;
-	
 	</select>
 </mapper>
 
