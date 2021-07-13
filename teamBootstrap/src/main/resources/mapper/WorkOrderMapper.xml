@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart39.springboot.dao.WorkOrder">
+
+	<resultMap type="WorkOrder" id="workOrderResultMap">
+		<result property="workOrderCode"  					column="work_order_code"/>
+		<result property="requestedProductCode"  			column="requested_product_code"/>
+		<result property="chargeEmployeeCode"  				column="charge_employee_code"/>
+		<result property="expectedProductionStartDate"  	column="expected_production_start_date"/>
+		<result property="expectedProductionEndDate"  		column="expected_production_end_date"/>
+		<result property="workOrderRegDate"  				column="work_order_reg_date"/>
+		<result property="workOrderUpdateDate"  			column="work_order_update_date"/>
+	</resultMap>
+	
+	<select id="getWorOrderList" resultMap="workOrderResultMap">
+		SELECT 
+			work_order_code, 
+			requested_product_code, 
+			charge_employee_code, 
+			expected_production_start_date, 
+			expected_production_end_date, 
+			work_order_reg_date, 
+			work_order_update_date
+		FROM 
+			work_order
+	</select>
+
+
+
+
+</mapper>
