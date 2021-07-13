@@ -10,28 +10,37 @@
 	<result  property="processStatus" 				column="process_status"/>
 	<result  property="productionProcessStatusRegDate" 				column="production_process_status_reg_date"/>
 	<result  property="productionProcessStatusUpdateDate" 				column="production_process_status_update_date"/>
-	<association property="requestedProductCode"  javaType="RequestedProduct">
+	<association property="requestedProduct"  javaType="RequestedProduct">
 		<id property="requestedProductCode"  column="requested_product_code"/>	 <!-- join 공통 -->
 		<result property="requestedDueDate" column="requested_due_date"/>
 		<result property="contractCode" column="contract_code"/>
 	</association>
+	<association property="workOrder"  javaType="WorkOrder">
+		<id property="requestedProductCode"  column="requested_product_code"/>	 <!-- join 공통 -->
+		<result property="workOrderCode" column="work_order_code"/>
+	</association>
 </resultMap>
 
 
-		<select id="getProductionStatusInfo" resultType="ProductProductionProcessStatus" fetchSize="1000">
+		<select id="getProductionStatus" resultType="map" fetchSize="1000">
 		SELECT
 			p.requested_product_code
-			,p.productionProcessStatusRegDate
-			,p.processStatus
-			,p.completedProductUpdateDate
+			,p.production_process_status_reg_date
+			,p.process_status
+			,p.completed_product_update_date
 			,r.contract_code
 			,r.requested_due_date
+			,w.work_order_code
 		FROM
 			product_production_process_status as p
-			INNER JOIN
+			JOIN
 			requested_product_detail as r
 			on
-			p.requested_product_code = r.requested_product_code;
+			p.requested_product_code = r.requested_product_code
+			JOIN
+			work_order AS w
+			on
+			p.requested_product_code = w.requested_product_code;
 	</select>
 	
 </mapper>
