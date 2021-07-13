@@ -12,6 +12,15 @@ public class ProductProductionProcessStatus {
 	
 	private RequestedProduct requestedProduct;
 	private Client client;
+	private WorkOrder workOrder;
+	
+	public WorkOrder getWorkOrder() {
+		return workOrder;
+	}
+
+	public void setWorkOrder(WorkOrder workOrder) {
+		this.workOrder = workOrder;
+	}
 
 	public Client getClient() {
 		return client;
@@ -101,8 +110,9 @@ public class ProductProductionProcessStatus {
 				+ ", completedProductUpdateDate=" + completedProductUpdateDate + ", processStatus=" + processStatus
 				+ ", productionProcessStatusRegDate=" + productionProcessStatusRegDate
 				+ ", productionProcessStatusUpdateDate=" + productionProcessStatusUpdateDate + ", requestedProduct="
-				+ requestedProduct + ", client=" + client + "]";
+				+ requestedProduct + ", client=" + client + ", workOrder=" + workOrder + "]";
 	}
+
 
 	
 	
