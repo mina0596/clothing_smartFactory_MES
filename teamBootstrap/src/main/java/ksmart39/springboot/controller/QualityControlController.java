@@ -89,22 +89,7 @@ public class QualityControlController {
 		return"quality/addDefectInspectionResultStatus";
 	}
 	
-	//검사현황 성적서조회 및리스트
-	@GetMapping("/qualityInspectionReport")
-	public String qualityInspectionReport(Model model) {
-		
-		model.addAttribute("title", "검사현황관리:성적서조회및 리스트");
-		return"quality/qualityInspectionReport";
-	}
 	
-	
-	//[다미+보람]검사현황최종결과등록
-	@GetMapping("/addFinalnspectionMeasurementValue")
-	public String addQualityInspectionReport(Model model) {
-		
-		model.addAttribute("title", "품질관리");
-		return"quality/addFinalnspectionMeasurementValue";
-	}
 	
 
 	
@@ -140,11 +125,6 @@ public class QualityControlController {
 			return"quality/stateBuyerContractQualityInspection";
 		}
 
-	//[다미&보람]수주계약별 기간별조회
-		@GetMapping("/searchByPeriodContractQualityInspection")
-		public String searchByPeriodContractQualityInspection() {
-			return"quality/searchByPeriodContractQualityInspection";
-		}
 
 	//[다미&보람]의뢰품목별검사현황
 		@GetMapping("/stateByProductQualityInspection")
