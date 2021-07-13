@@ -16,6 +16,8 @@ public class RequestedProduct {
 	private String requestedProductDetailRegDate;
 	private String requestedProductDetailUpdateDate;
 	
+	private Client client;
+	
 	public String getRequestedProductCode() {
 		return requestedProductCode;
 	}

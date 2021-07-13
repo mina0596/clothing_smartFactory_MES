@@ -12,7 +12,7 @@ import ksmart39.springboot.domain.RawMaterialsInventory;
 public interface RawMaterialsInventoryStatusMapper {
 	
 	
-	//[민아]자재 입출고 현황
+	//[민아]자재 입출고 현황 리스트
 	public List<RawMaterialsInventory> getMaterialsTransactionList();
 	
 	//[민아]자재 입고 수정화면
