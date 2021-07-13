@@ -29,8 +29,8 @@ import ksmart39.springboot.service.QualityInsepctionResultService;
 
 @Controller
 @RequestMapping("/quality")
-public class QualityControlController_hbr {
-	private static final Logger log = LoggerFactory.getLogger(QualityControlController_hbr.class);
+public class QualityControlController_HBR {
+	private static final Logger log = LoggerFactory.getLogger(QualityControlController_HBR.class);
 	@Autowired
 	private QualityInsepctionResultService qualityInsepctionResultService;
 	
