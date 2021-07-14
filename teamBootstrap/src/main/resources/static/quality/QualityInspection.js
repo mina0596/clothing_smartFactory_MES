@@ -31,8 +31,6 @@ $(function(){
 //의뢰코드가지고오기			
 	$('#clientCate').change(function(){
 		var client =$('#clientCate option:selected').val();
-		requestCate.html("<option value=''>::선택::</option>");
-		
 		var request = $.ajax({
 			url: "/quality/requestCode",
 			method: "get",
@@ -44,9 +42,9 @@ $(function(){
 				var html = '';
 				for(var i = 0; i<data.length; i++){
 					html += "<option value= '";
-					html += data[i].requested_product_code;
+					html += data[i].product_request_code;
 					html += "'>";
-					html += data[i].requested_product_code;
+					html += data[i].product_request_code;
 					html += "</option>";					
 				}
 				requestCate.append(html);
