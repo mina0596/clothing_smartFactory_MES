@@ -96,10 +96,10 @@ layout:decorate="@{layout/default_qualityControl}">
                   	<th><input type="checkbox" id="checkAll"></th>
                  	<th><i class="fa fa-bullhorn"></i>번호</th>
                     <th class="hidden-phone"><i class="fa fa-bookmark"></i>불량품코드</th>
+                    <th><i class=" fa fa-bookmark"></i>품질검사요청코드</th>
+                    <th><i class=" fa fa-bookmark"></i>품질검사코드</th>
                     <th><i class=" fa fa-bookmark"></i>불량원인</th>
                     <th><i class=" fa fa-bookmark"></i>처리방법</th>
-                    <th><i class=" fa fa-bookmark"></i>비고</th>
-                    <th><i class=" fa fa-bookmark"></i>품질검사 결과코드</th>
                     <th><i class=" fa fa-bookmark"></i>등록일자</th>
                     <th><i class=" fa fa-bookmark"></i>수정</th>
                   </tr>
@@ -115,6 +115,7 @@ layout:decorate="@{layout/default_qualityControl}">
                     <td th:text="${d.qualityInspectionCode}"></td>
                     <td th:text="${d.defectCause}"></td>
                     <td th:text="${d.defectiveProductMeasure}"></td>
+                    <td th:text="${d.defectiveProductRegDate}"></td>
                     <td>  <button class="btn btn-primary btn-xs" type="button" onclick="location.href='/modifyDefectiveProduct'"><i class="fa fa-pencil"></i>수정</button></td>
                   </tr>
                   

@@ -56,6 +56,8 @@ public interface SystemMapper {
 	public int modifyClient(Client client);
 	//거래처 정보 가져오기 (뿌려진 화면에서)
 	public Client getClientInfoByCode(String clientCode);
+	//거래처 삭제
+	public int deleteClient(String delArr);
 	
 	/****************************************************************************/
 	

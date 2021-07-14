@@ -71,6 +71,10 @@ public class SystemService {
 	public Client getClientInfoByCode(String clientCode) {
 		return systemMapper.getClientInfoByCode(clientCode);
 	}
+	//[다미]생산계획 삭제
+	public int deleteClient(String delArr) {
+		return systemMapper.deleteClient(delArr);
+	};	
 	//============================================================
 	
 	//[다미] 계정과목 수정

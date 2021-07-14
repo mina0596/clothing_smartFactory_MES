@@ -264,6 +264,13 @@
 			c.client_code = #{clientCode};
 	</select>
 
+	<delete id="deleteClient" parameterType="String">
+		DELETE 
+			FROM 
+				client_info 
+			WHERE 
+				client_code=#{delArr};
+	</delete>
 			
 
 <!-- =========================================================== -->
