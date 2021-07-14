@@ -23,18 +23,21 @@
 		</association>
 	</resultMap>
 	
-	<select id="getWorkOrderList" resultMap="workOrderResultMap">
+
+	
+	<select id="getWorkOrderList" resultType="map">
 		SELECT 
-			wo.work_order_code, 
-			wo.requested_product_code,
-			wo.expected_production_start_date, 
-			wo.expected_production_end_date, 
+			wo.work_order_code AS workOrderCode, 
+			wo.requested_product_code AS pCode,
+			wo.expected_production_start_date AS expectedStartDate, 
+			wo.expected_production_end_date AS expectedStartDate, 
 			sub.*
 		FROM 
 			work_order AS wo
 			inner join
 			(SELECT 
 				de.requested_product_code AS pCode,
+				de.requested_due_date AS dueDate,
 				cli.client_code AS cCode,
 				cli.client_name AS cName
 			FROM 
@@ -46,4 +49,12 @@
 			on
 			wo.requested_product_code = sub.pCode;
 	</select>
+	
+	<select id="getPcodeFromProcessStatus" resultType="map">
+		SELECT DISTINCT
+			requested_product_code AS pCode
+		FROM
+			product_production_process_status;
+	</select>
+	
 </mapper>

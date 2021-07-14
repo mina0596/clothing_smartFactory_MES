@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -21,24 +20,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import ksmart39.springboot.domain.DefectiveProduct;
-import ksmart39.springboot.service.DefectiveProductService;
-import ksmart39.springboot.service.QualityControlService;
+import ksmart39.springboot.domain.QualityInspectionResult;
 import ksmart39.springboot.service.QualityInsMeasurementValueService;
 
 @Controller
 @RequestMapping("/quality")
 public class QualityControlController_KDM {
 	private static final Logger log = LoggerFactory.getLogger(QualityControlController_KDM.class);
-	@Autowired
-	private QualityControlService qualityControlService;
-	
-	@Autowired
-	private DefectiveProductService defectiveProductService;
 	
 	@Autowired 
 	private QualityInsMeasurementValueService qualityInsMeasurementValueService;
-	
 	
 	//=============================================================================
 	//[다미] 실시간 검사 현황
@@ -71,13 +62,24 @@ public class QualityControlController_KDM {
 			return"quality/searchByPeriodByProductQualityInspection";
 		}
 	
-	//[다미&보람] 품질검사 측정값 목록
+	//[다미] 품질검사 측정값 목록
 	@GetMapping("/inspectionMeasurementValueList")
 	public String inspectionMeasurementValueList(Model model) {
 		return "quality/inspectionMeasurementValueList";
 	}
 	
-	//[다미&보람] 품질검사 측정값 등록
+	//[다미] 품질검사 측정값 등록
+	@PostMapping("/addInspectionMeasurementValue")
+	public String addInspectionMeasurementValue(QualityInspectionResult qualityInspectionResult) {
+												
+		log.info("qualityInspectionResult: {}",qualityInspectionResult );
+		
+		
+		
+		return "redirect:inspectionMeasurementValueList";		
+	}
+	
+	//[다미] 품질검사 측정값 등록 화면
 	@GetMapping("/addInspectionMeasurementValue")
 	public String addInspectionMeasurementValue(Model model) {
 		return "quality/addInspectionMeasurementValue";
@@ -91,10 +93,7 @@ public class QualityControlController_KDM {
 	@RequestMapping(value = "searchQualityInspectionRequest", method = RequestMethod.POST)
 	@ResponseBody
 	public List<Map<String, Object>> searchQualityInspectionRequest(@RequestParam(value = "jsonData", required = false)String jsonData) {
-		
-		
-
-		
+				
 		log.info("1. 처음 들어온 데이터(json문자열): jsonData: {} " , jsonData);
 		
 		JSONParser parser = new JSONParser();

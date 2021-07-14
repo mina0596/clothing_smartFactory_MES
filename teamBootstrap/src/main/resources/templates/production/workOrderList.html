@@ -4,12 +4,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
 layout:decorate="@{layout/default_production}">
 
 
-<th:block layout:fragment="pageTitle">
-	   <div class="border-head"> 
-	    <h3></h3>
-	    </div>
 
-  
   <th:block layout:fragment="customJs">
 <script>
 $(function(){
@@ -50,7 +45,7 @@ $(function(){
 	<div class="row mt">
      <div class="col-md-12">
        <div class="content">
-        <h4><i class="fa fa-angle-right"></i>작업지시 조회</h4>
+        <h4><i class="fa fa-check-circle"></i> 작업지시 조회</h4>
           <hr>
           <form class="form-inline" role="form">
         
@@ -96,18 +91,20 @@ $(function(){
          	</tbody>
          </table>  
         </form>  
-			<h4><i class="fa fa-angle-right"></i>작업지시 목록</h4>
+			<h4><i class="fa fa-folder"></i> 작업지시 목록</h4>
 			          <hr>
+	         <div class="content-panel">
               <table class="table table-striped table-advance table-hover" id="workerOrderList">
                 <thead>
                   <tr>
                     <th><input type="checkbox" class="check" id="checkAll"></th>
                     <th><i class="fa fa-bullhorn"></i>순번</th>
-                    <th><i class="fa fa-bookmark"></i>작업지시코드</th>
-                    <th><i class="fa fa-bookmark"></i>의뢰품목코드</th>
+                    <th><i class="fa fa-barcode"></i>작업지시코드</th>
+                    <th><i class="fa fa-barcode"></i>의뢰품목코드</th>
                     <th><i class="fa fa-bookmark"></i>거래처명</th>
-                    <th><i class=" fa fa-bookmark"></i>생산시작예정일</th>
-                    <th><i class=" fa fa-bookmark"></i>생산종료예정일</th>
+                    <th><i class=" fa fa-calendar"></i>납기일</th>
+                    <th><i class=" fa fa-calendar"></i>생산시작예정일</th>
+                    <th><i class=" fa fa-calendar"></i>생산종료예정일</th>
                     <th><i class=" fa fa-bookmark"></i>생산현황</th>
                     <th><i class=" fa fa-bookmark"></i>수정</th>
                     
@@ -118,25 +115,26 @@ $(function(){
                   <tr th:each="l,n : ${workOrderList}">
                   	<td><input type="checkbox" class="check"></td>
                     <td th:text="${n.index+1}"></td>
-                    <td th:text="${l.workOrderCode}"></td>
-                    
-                    <td th:text="${l.requestedProductCode}"></td>
-                    <td th:text="${l.expectedProductionStartDate}"></td>
-                    <td th:text="${l.expectedProductionEndDate}"></td>
-                   <td class="hidden-phone"></td>
-                    <td class="hidden-phone"></td>
-                    <td><a onclick="location.href='stateByWorkOrder'" id="add-regular"  class="btn btn-theme03" style="padding-top: 5px ;" >생산시작</a></td>                 	
-                    <td>  <button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
+                    <td th:text="${l.workOrderCode}"></td>                   
+                    <td th:text="${l.pCode}"></td>
+                    <td th:text="${l.cName}"></td>
+                    <td th:text="${l.dueDate}"></td>
+                    <td th:text="${l.expectedStartDate}"></td>
+                    <td th:text="${l.expectedStartDate}"></td>
+                    <td th:if="${l.status eq '진행중'}"><span class="badge bg-important" style="padding-top: 5px;">진행중</span></td>
+                    <td th:if="${l.status eq '대기중'}"><span class="badge bg-success" style="padding-top: 5px;">대기중</span></td>
+                    <td><button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
                   </tr>
                 </tbody>
               </table>
-             <div class="form-group">
-                    <div class="col-lg-offset-1 col-lg-11 text-right">
-                      <button class="btn btn-success btn-xs" th:href="@{/!addWorkOrder}"><i class="fa fa-check"></i>거래처등록</button>
-                      <button class="btn btn-danger btn-xs" type="button" id="deleteBtn"><i class="fa fa-trash-o "></i>거래처삭제</button>
-                    </div>
-                    </div>
             </div>
+             <div class="form-group">
+	             <div class="col-lg-offset-1 col-lg-11 text-right">
+	               <a th:href="@{/production/addWorkOrder}" class="btn btn-success btn-xs"><i class="fa fa-check">작업지시등록</i></a>
+	               <button class="btn btn-danger btn-xs" type="button" id="deleteBtn"><i class="fa fa-trash-o "></i>작업지시삭제</button>
+	             </div>
+             </div>
+          </div>
             <!-- /content-panel -->
           </div>
           <!-- /col-md-12 -->

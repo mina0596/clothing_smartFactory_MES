@@ -13,6 +13,17 @@ public class RawMaterials {
 	private String rawMaterialRegDate;
 	private String rawMaterialUpdateDate;
 
+	private HumanResources employeeInfo;
+	
+	
+	
+	
+	public HumanResources getEmployeeInfo() {
+		return employeeInfo;
+	}
+	public void setEmployeeInfo(HumanResources employeeInfo) {
+		this.employeeInfo = employeeInfo;
+	}
 	public String getRawMaterialCode() {
 		return rawMaterialCode;
 	}
@@ -84,8 +95,11 @@ public class RawMaterials {
 		return "RawMaterials [rawMaterialCode=" + rawMaterialCode + ", highClass=" + highClass + ", medClass="
 				+ medClass + ", medCode=" + medCode + ", rawMaterialName=" + rawMaterialName + ", subCode=" + subCode
 				+ ", colorCode=" + colorCode + ", feature=" + feature + ", unit=" + unit + ", rawMaterialRegDate="
-				+ rawMaterialRegDate + ", rawMaterialUpdateDate=" + rawMaterialUpdateDate + "]";
+				+ rawMaterialRegDate + ", rawMaterialUpdateDate=" + rawMaterialUpdateDate + ", employeeInfo="
+				+ employeeInfo + "]";
 	}
+	
+
 
 	
 	

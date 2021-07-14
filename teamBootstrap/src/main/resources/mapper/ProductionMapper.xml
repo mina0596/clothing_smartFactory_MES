@@ -3,7 +3,9 @@
 <mapper namespace="ksmart39.springboot.dao.ProductionMapper">
 
 
-<select id="getProductionMonthlyPlanList" resultType="ProductionPlan">
+
+
+	<select id="getProductionMonthlyPlanList" resultType="ProductionPlan">
 		SELECT 
 			production_plan_code
 			,gender_categorized_name
@@ -20,9 +22,9 @@
 			,production_plan_update_date
 		FROM 
 			production_plan;
-</select>
+	</select>
 
-	<select id="getDetailCode" parameterType="String" resultType="Map">
+	<select id="getDetailCode" parameterType="String" resultType="map">
 		SELECT 
 		   detailed_categorized_name
 		FROM 
@@ -31,14 +33,48 @@
 			gender_categorized_name = #{gender};
 	</select>
 	
-	<select id="getProductCode" resultType="Map">
+	<select id="getProductCode" resultType="map">
 		SELECT 
 			DISTINCT(gender_categorized_name)
 		FROM 
 			product_code_detail;
 	</select>
-
-
+	
+	
+	<!-- ====================[민아]완제품 품목 등록========================= -->
+	<insert id="addCompletedProduct" parameterType="map">
+		INSERT INTO 
+			completed_product_list(
+				requested_product_code, 
+				production_start_date, 
+				production_finish_date, 
+				completed_product_reg_date, 
+				completed_product_update_date)
+		VALUES(
+			#{productCode}, 
+			#{startedDate}, 
+			#{finishedDate}, 
+			NOW(), 
+			NOW());	
+	</insert>
+	<insert id="startProduction" parameterType="String">
+		INSERT INTO 
+			product_production_process_status(
+				production_process_code, 
+				requested_product_code, 
+				process_start_date, 
+				completed_product_update_date, 
+				process_status, 
+				production_process_status_reg_date)
+			VALUES(
+				'process_01', 
+				#{pCode}, 
+				NOW(), 
+				null, 
+				'진행중', 
+				NOW());
+	</insert>
+	
 
 
 
