@@ -45,6 +45,13 @@ layout:decorate="@{layout/default_production}">
 						method: "POST",
 						data: {pCodeToStart : pCodeToStart}
 					});
+					request.done(function(data){
+						console.log(data);
+						location.reload();
+					});
+					request.fail(function(jqXHR, textStatus){
+						alert("생산시작에 실패했습니다." + textStatus);
+					});
 				}
 			});
 			

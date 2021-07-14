@@ -101,7 +101,7 @@ public class ProductionController_PMA {
 		
 		model.addAttribute("readyProductInfo", readyProductInfoList);
 		
-		return "production/productionOrderList";
+		return "/production/productionOrderList";
 	}
 	
 	//[민아]생산공정 시작 - 생산현황에 insert됨
@@ -110,7 +110,7 @@ public class ProductionController_PMA {
 		log.info("sentPCode :{}", sentPCode);
 		//여기에 받아온 품목코드를 가지고 insert 문 해주는 처리과정 넣어주기
 		productionService.startProduction(sentPCode);
-		return "production/productionOrderList";
+		return "redirect:/productionOrderList";
 	}
 	
 	//[민아+한빛]의뢰품목별 상세 생산 공정 현황 등록
