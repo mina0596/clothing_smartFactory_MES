@@ -20,46 +20,34 @@
          	<tbody>       		
        			<thead>
         			<tr>
-	         			<th colspan="3"	>
-		         			 <div class="form-inline">
-		         			 	<label class="control-label">계약번호</label>
-			                	<input type="text" class="form-control" id="contractCode" placeholder="검색어를 입력하세요.">
-			                </div>
+	         			<th colspan="3"	class="form-inline">
+	         			 	<label class="control-label">계약번호</label>
+		                	<input type="text" class="form-control" id="contractCode" placeholder="검색어를 입력하세요.">
 	         			</th>
-	         			<th>
-	         				<div class="form-inline">
-		         				<label class="control-label">품목별 의뢰 코드</label>
-			                	<input type="text" class="form-control" id="requestedProductCode" placeholder="검색어를 입력하세요.">
-		              		</div>
+	         			<th colspan="3" class="form-inline">
+	         				<label class="control-label">품목별 의뢰 코드</label>
+		                	<input type="text" class="form-control" id="requestedProductCode" placeholder="검색어를 입력하세요.">
 	         			</th>
-	         			<th colspan="3">
-	         				<div class="form-inline">
-		         				<label class="control-label">요청날짜</label>
-			                	<input type="date" class="form-control" id="inspectionRequestStartDate" placeholder="검색어를 입력하세요.">&nbsp ~
-			                	<input type="date" class="form-control" id="inspectionRequestEndDate" placeholder="검색어를 입력하세요.">
-		              		</div>
+	         			<th colspan="4" class="form-inline">
+	         				<label class="control-label">요청날짜</label>
+		                	<input type="date" class="form-control" id="inspectionRequestStartDate" placeholder="검색어를 입력하세요.">&nbsp ~
+		                	<input type="date" class="form-control" id="inspectionRequestEndDate" placeholder="검색어를 입력하세요.">
 	         			</th>  
-	         			</tr>  
+	         			</tr>
 	         			<tr>
-	         			<th colspan="3">
-	         				<div class="form-inline">
-		         				<label class="control-label">품질검사 명</label>
-			                	<input type="text" class="form-control" id="subClassName" placeholder="검색어를 입력하세요.">
-		              		</div>
+	         			<th colspan="3" class="form-inline">
+	         				<label class="control-label">품질검사 명</label>
+		                	<input type="text" class="form-control" id="subClassName" placeholder="검색어를 입력하세요.">
 	         			</th>  
-	         			<th>
-	         				<div class="form-inline">
-		         				<label class="control-label">원부자재명</label>
-			                	<input type="text" class="form-control" id="rawMaterialName" placeholder="검색어를 입력하세요.">
-		              		</div>
+	         			<th colspan="3" class="form-inline" style="padding-left: 50px;">
+	         				<label class="control-label">원부자재명</label>
+		                	<input type="text" class="form-control" id="rawMaterialName" placeholder="검색어를 입력하세요.">
 	         			</th>  
-	         			<th colspan="3">
-	         				<div class="form-inline">
+	         			<th colspan="4" class="form-inline">
 		         				<label class="control-label">거래처명</label>
 			                	<input type="text" class="form-control" id="clientName" placeholder="검색어를 입력하세요.">
 	         				 <button type="submit" id="serchBtnModal" class="btn btn-theme" style="width: 17%; margin-left: 10px;">검색</button>
-	         				 <button type="submit" class="btn btn-warning" style="width: 17%;">save</button>
-		              		</div>
+	         				 <button type="submit" id="saveBtn" class="btn btn-primary" style="width: 17%;">Save</button>
 	         			</th>
 	         			
         			</tr>     			
@@ -70,34 +58,24 @@
        					<td>no.</td>
        					<td>계약번호</td>
        					<td>품목별 의뢰 코드</td>
-       					<td>품질검사명</td>
+       					<td>품질검사대분류</td>
+       					<td>품질검사중분류</td>
+       					<td>품질검사소분류</td>
+       					<td>거래처명</td>
        					<td>원부자재명</td>
        					<td>요청날짜</td>
        				</tr>
        				<tr class="removeTr">
-       					<td colspan="7">검색 버튼을 눌러주세요.</td>
+       					<td colspan="13">검색 버튼을 눌러주세요.</td>
        				</tr>
      			</tbody> 
          </table> 
-<!--          <div> -->
-<!--          	<input type="text" th:value="${currentPage}"> -->
-<!--          </div> -->
-<!-- 		   	 <div class="btn-group"> -->
-<!-- 	             <a th:href="@{/quality/searchQualityInspectionRequest}" class="btn btn-default">처음으로</a> -->
-<!-- 	             <a th:if="${currentPage > 1}" th:href="@{/quality/searchQualityInspectionRequest(currentPage=${currentPage - 1})}">[이전]</a> -->
-<!-- 						<th:block th:each="num:${#numbers.sequence(pageStartNum, pageEndNum)}"> -->
-<!-- 							<a th:if="${num != currentPage}" th:href="@{/quality/searchQualityInspectionRequest(currentPage=${num})}" th:text="${'[' + num + ']'}"></a> -->
-<!-- 							<span th:unless="${num != currentPage}" th:text="${'[' + num + ']'}"></span> -->
-<!-- 						</th:block> -->
-<!-- 						<a th:if="${currentPage < lastPage}" th:href="@{/quality/searchQualityInspectionRequest(currentPage=${currentPage + 1})}">[다음]</a> -->
-<!-- 						<a th:href="@{/quality/searchQualityInspectionRequest(currentPage=${lastPage})}">[맨마지막]</a> -->
-<!-- 	         </div> -->
 		 </div>
 		 	
 		    <div class="modal-footer">
 		
 			      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			      <button type="button" id="saveSupplier" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+			      <button type="button" id="saveBtn2" class="btn btn-primary" data-dismiss="modal">Save</button>
 		      </div>
 		    </div>
 		  </div>

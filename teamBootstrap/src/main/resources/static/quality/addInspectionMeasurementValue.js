@@ -3,16 +3,25 @@
  */
 
 	$(function(){	
+		
+		
+		//등록 버튼
+		$(document).on('click', '#addInsValue', function(){
+			console.log('test');
+			
+		});
 
 		//모달 실행
-		$(document).on('click', '#requestCode', function(){
+		$(document).on('click', '#requestCode, #requestCode2', function(){
 			$('#requestCodeModal').modal("show");
 			
+			//검색조건, 체크박스 초기화
+			$('#requestCodeModal').find('input[type=text]').val('');
+			$("input[type=checkbox]:checked").attr('checked',false);
 			//검색버튼 클릭
 			$('#serchBtnModal').click(function(){
 				$('.removeTr').remove();
 				//검색값 넣기
-				var param = [];
 				var searchValue = {
 						contractCode : $('#contractCode').val()
 						, qualityInspectionRequestCode: $('#qualityInspectionRequestCode').val()
@@ -22,8 +31,6 @@
 						, rawMaterialName :$('#rawMaterialName').val()
 						, clientName :$('#clientName').val()
 					};
-				//param.push(searchValue);
-				//console.log(param);
 				
 				//param 데이터 직렬화
 				var jsonData = JSON.stringify(searchValue);
@@ -33,7 +40,6 @@
 					url: "/quality/searchQualityInspectionRequest",
 					method: "post",
 					type: "post",
-					traditional :true,
 					data: {"jsonData" : jsonData},
 					dataType: "json"
 				});
@@ -65,21 +71,59 @@
 							var myDate = new Date(dateText.match(/\d+/) * 1);
 							date = formatDate(myDate);
 							
-							html += "<tr class='removeTr'>";
-							html += "<td><input type='checkbox' class='checkedModal' value = '예시'" + "></td>"
-							html += "<td>" + [i + 1] + "</td>"
-							html += "<td>" + data[i].contract_code + "</td>";
-							html += "<td>" + data[i].requested_product_code + "</td>";
-							html += "<td>" + data[i].sub_class_name + "</td>";
-							html += "<td>" + data[i].raw_material_name + "</td>";
-							html += "<td>" + date + "</td>";
-							html += "</tr>";						
+							html += '<tr class="removeTr">';
+							html += '<td><input type="checkbox" class="checkedModal" value="';
+							html += data[i].quality_inspection_request_code;
+							html += '"></td>';
+							html += '<td>' + [i + 1] + '</td>';
+							
+							//계약번호
+							html += '<td class="contract_code" value="';
+							html +=  data[i].contract_code
+							html += '">' + data[i].contract_code + '</td>';
+							
+							//품목별의뢰번호
+							html += '<td class="requested_product_code" value="';
+							html += data[i].requested_product_code;
+							html += '">' + data[i].requested_product_code + '</td>';
+							
+							//품질검사대분류명
+							html += '<td class="high_class_name" value="';
+							html += data[i].high_class_name;
+							html += '">' + data[i].high_class_name + '</td>';
+							
+							//품질검사중분류명
+							html += '<td class="med_class_name" value="';
+							html += data[i].med_class_name;
+							html += '">' + data[i].med_class_name + '</td>';						
+							
+							//품질검사명
+							html += '<td class="sub_class_name" value="';
+							html += data[i].sub_class_name;
+							html += '">' + data[i].sub_class_name + '</td>';
+							
+							//품질검사 코드
+							html += '<td style="display:none" class="quality_inspection_code" value="';
+							html += data[i].quality_inspection_code;
+							html += '">' + data[i].quality_inspection_code + '</td>';
+
+							//거래처명
+							html += '<td class="client_name" value="';
+							html += data[i].client_name;
+							html += '">' + data[i].client_name + '</td>';
+							
+							//원부자재명
+							html += '<td class="raw_material_name" value="';
+							html += data[i].raw_material_name;
+							html += '">' + data[i].raw_material_name + '</td>';
+							
+							html += '<td>' + date + '</td>';
+							html += '</tr>';						
 						}
 					}else{
 						$('.removeTr').remove();
-						html += "<tr class='removeTr'><td colspan='11' style='text-align: center;'> 검색된 결과가 없습니다. </td></tr>";
+						html += '<tr class="removeTr"><td colspan="15" style="text-align: center;"> 검색된 결과가 없습니다. </td></tr>';
 					}
-					//$('#mainTbody').remove();
 
 					$('#mainTbody').append(html);
 					
@@ -92,12 +136,73 @@
 			
 		});
 		
-		// 전체 체크
+		//모달 save 눌렀을때
+		$('#saveBtn , #saveBtn2').click(function(){
+			$('#tableTr').remove();
+				//체크된 것 값 가져오기
+				$('.checkedModal:checked').each(function(index,item){
+					var requestCode = $(this).val();
+					var qualityInspectionCode = $(this).parent().parent().find('td.quality_inspection_code').text();
+					var contractCode = $(this).parent().parent().find('td.contract_code').text();
+					var subClassName = $(this).parent().parent().find('td.sub_class_name').text();
+					var rawMaterialName = $(this).parent().parent().find('td.raw_material_name').text();
+					var insReqCode = $('.insReqCode');
+					var inspectionName = $('.inspectionName');
+					var materialsName = $('.materialsName');
+					
+					console.log($(this));
+					console.log(contractCode);
+					console.log(subClassName);
+					console.log(rawMaterialName);
+					console.log(qualityInspectionCode);
+					
+					//체크된 수만큼 측정값 등록 행 추가
+					if(index >= 0 && index !=null && index != undefined){
+
+						var tbody = $('#tbody');
+						
+						for(var i = 0; i < index+2; i++){
+							var innerHtml = '<tr>';
+							innerHtml += '<td><input type="checkbox" class="checked"></td>';
+							innerHtml += '<td><div class="input-group"><input type="text" class="form-control" value="';
+							innerHtml += requestCode;
+							innerHtml += '" placeholder="품질검사요청코드 검색"><div class="input-group-btn"><button id="requestCode2" class="btn btn-default">검색</button></div></div></td>';
+							innerHtml += '<td><input type="text" class="form-control" value="' + subClassName  + '" readonly="readonly"></td>';
+							innerHtml += '<input type="hidden" name="qualityInspectionCode" class="form-control" value="' + qualityInspectionCode + '">';
+							innerHtml += '<td><input type="text" class="form-control" value="' + rawMaterialName  + '" readonly="readonly"></td>';
+							innerHtml += '<td><select class="form-control"><option>1회차</option><option>2회차</option><option>3회차</option></select></td>';
+							innerHtml += '<td><input type="number" class="form-control" placeholder="측정값"></td>';
+							innerHtml += '<td><input type="datetime-local" class="form-control" placeholder="공란일시 등록시간"></td>';
+							innerHtml += '<td><input type="datetime-local" class="form-control" placeholder="공란일시 등록시간"></td>';
+							innerHtml += '<td><button type="button" class="addBtn">등록</button></td>';
+							innerHtml += '<td><button type="button" class="removeButton">삭제</button></td>';
+							innerHtml += '</tr>';
+							tbody.append(innerHtml);
+							break;
+						}
+					}
+				
+				});
+				//모달 닫기
+				$('#requestCodeModal').modal("hide");
+		});
+		
+		
+		//모달 전체 체크
 		$(document).on('click', '#checkAllModal', function(){
 			if($('#checkAllModal').prop('checked')){
 				$('.checkedModal').prop('checked',true);
 			}else{
 				$('.checkedModal').prop('checked',false);
+			}
+		});
+
+		//메인 전체 체크
+		$(document).on('click', '#checkAll', function(){
+			if($('#checkAll').prop('checked')){
+				$('.checked').prop('checked',true);
+			}else{
+				$('.checked').prop('checked',false);
 			}
 		});
 		
@@ -128,8 +233,6 @@
 				
 				var lastTrRemoveBtnObj = $('#tbody tr:last td').find('.removeButton');
 				
-// 				lastTrRemoveBtnObj.attr('class', 'addButton');
-// 				lastTrRemoveBtnObj.text('추가');
             } else {
                 // 취소 버튼 클릭 시 동작
                 alert("동작을 취소했습니다.");
@@ -139,28 +242,26 @@
 		});
 		
 		
-		//행 추가
+		//행 추가 기능
 		$('#addRows').click(function(){
 			var count = $('#trCount').val();
 			var tbody = $('#tbody');
 			
 			if(count != null && count != undefined && count > 0){
-// 				$('#tbody tr:last td:last button').attr('class', 'removeButton');
-// 				$('#tbody tr:last td:last button').text('삭제');
 				
 				for(var i = 0; i < count; i++){
 					var lastIndex = $(tbody).find('tr:last').length;
 					var innerHtml = '<tr>';
 					innerHtml += '<td><input type="checkbox" class="checked"></td>';
-					innerHtml += '<td><div class="input-group"><input type="text" class="form-control" placeholder="숫자입력"><div class="input-group-btn"><button id="addRows" class="btn btn-default">검색</button></div></div></td>';
-					innerHtml += '<td>검사명</td>';
-					innerHtml += '<td>원부자재이름</td>';
+					innerHtml += '<td><input type="text" class="form-control" placeholder="품질검사요청코드 직접입력"><div class="input-group-btn"></td>';
+					innerHtml += '<td><input type="text" class="form-control" placeholder="검사명 직접입력"></td>';
+					innerHtml += '<input type="hidden" name="qualityInspectionCode" class="form-control" value="quality_inspection_code"></td>';
+					innerHtml += '<td><input type="text" class="form-control" placeholder="원부자재명 직접입력"></td>';
 					innerHtml += '<td><select class="form-control"><option>1회차</option><option>2회차</option><option>3회차</option></select></td>';
 					innerHtml += '<td><input type="number" class="form-control" placeholder="측정값"></td>';
-					innerHtml += '<td><select class="form-control"><option>mm</option><option>cm</option><option>직접입력</option></select></td>';
-					innerHtml += '<td><input type="text" class="form-control" placeholder="공란일시 등록시간"></td>';
-					innerHtml += '<td><input type="text" class="form-control" placeholder="공란일시 등록시간"></td>';
-					innerHtml += '<td><button type="button">등록</button></td>';
+					innerHtml += '<td><input type="datetime-local" class="form-control" placeholder="공란일시 등록시간"></td>';
+					innerHtml += '<td><input type="datetime-local" class="form-control" placeholder="공란일시 등록시간"></td>';
+					innerHtml += '<td><button type="button" id="addInsValue">등록</button></td>';
 					
 					if(i == (count - 1)){
 						innerHtml += '<td><button type="button" class="removeButton">삭제</button></td>';
