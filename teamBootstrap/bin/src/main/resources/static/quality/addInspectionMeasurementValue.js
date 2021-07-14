@@ -4,21 +4,6 @@
 
 	$(function(){	
 		
-		//새로고침 방지(새로고침하면 탭이 넘어가버려서 막아놓을까 생각중입니다.)
-// 		function noEvent() { // 새로 고침 방지
-// 		    if (event.keyCode == 116) {
-// 		        alert("새로고침을 할 수 없습니다.");
-// 		        event.keyCode = 2;
-// 		        return false;
-// 		    } else if (event.ctrlKey
-// 		            && (event.keyCode == 78 || event.keyCode == 82)) {
-// 		        return false;
-// 		    }
-// 		}
-// 		document.onkeydown = noEvent;
-		
-		
-		
 		//모달 실행
 		$(document).on('click', '#requestCode', function(){
 			$('#requestCodeModal').modal("show");
@@ -59,9 +44,7 @@
 				});
 				
 				var lastTrRemoveBtnObj = $('#tbody tr:last td').find('.removeButton');
-				
-// 				lastTrRemoveBtnObj.attr('class', 'addButton');
-// 				lastTrRemoveBtnObj.text('추가');
+
             } else {
                 // 취소 버튼 클릭 시 동작
                 alert("동작을 취소했습니다.");
@@ -77,16 +60,14 @@
 			var tbody = $('#tbody');
 			
 			if(count != null && count != undefined && count > 0){
-// 				$('#tbody tr:last td:last button').attr('class', 'removeButton');
-// 				$('#tbody tr:last td:last button').text('삭제');
 				
 				for(var i = 0; i < count; i++){
 					var lastIndex = $(tbody).find('tr:last').length;
 					var innerHtml = '<tr>';
 					innerHtml += '<td><input type="checkbox" class="checked"></td>';
 					innerHtml += '<td><div class="input-group"><input type="text" class="form-control" placeholder="숫자입력"><div class="input-group-btn"><button id="addRows" class="btn btn-default">검색</button></div></div></td>';
-					innerHtml += '<td>검사명</td>';
-					innerHtml += '<td>원부자재이름</td>';
+					innerHtml += '<td><input type="text" class="form-control" value="검사명" readonly="readonly"></td>';
+					innerHtml += '<td><input type="text" class="form-control" value="원부자재이름" readonly="readonly"></td>';
 					innerHtml += '<td><select class="form-control"><option>1회차</option><option>2회차</option><option>3회차</option></select></td>';
 					innerHtml += '<td><input type="number" class="form-control" placeholder="측정값"></td>';
 					innerHtml += '<td><select class="form-control"><option>mm</option><option>cm</option><option>직접입력</option></select></td>';
