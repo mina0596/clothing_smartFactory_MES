@@ -1,6 +1,5 @@
 package ksmart39.springboot.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ksmart39.springboot.dao.QualityInsMeasurementValueMapper;
-import ksmart39.springboot.domain.QualityInspection;
 
 @Service
 public class QualityInsMeasurementValueService {
@@ -25,7 +23,7 @@ public class QualityInsMeasurementValueService {
 
 	
 	//품질검사 요청 검색 모달
-	public List<Map<String, Object>> searchQualityInspectionRequest(Map map){			
+	public List<Map<String, Object>> searchQualityInspectionRequest(Map<String,Object> map){			
 		return qualityInsMeasurementValueMapper.searchQualityInspectionRequest(map);
 	};
 }
