@@ -30,4 +30,29 @@
 			defective_product_management;
 	</select>
 
+	<insert id = "addDefectiveProduct" parameterType="DefectiveProduct">
+		INSERT INTO defective_product_management
+		(defective_product_code
+			,quality_inspection_request_code
+			,charge_employee_code
+			,quality_inspection_code
+			,inspection_result_code
+			,defect_cause
+			,defective_product_measure
+			,management_note
+			,defective_product_reg_date
+			,defective_product_update_date
+		)VALUES(
+			sf_defectiveProductCode()
+			,#{qualityInspectionRequestCode}
+			,#{chargeEmployeeCode}
+			,#{qualityInspectionCode}
+			,#{inspectionResultCode}
+			,#{defectCause}
+			,#{defectiveProductMeasure}
+			,#{managementNote}
+			,NOW()
+			,null);
+	</insert>
+	
 </mapper>

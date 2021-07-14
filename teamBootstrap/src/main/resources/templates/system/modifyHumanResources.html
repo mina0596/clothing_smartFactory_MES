@@ -9,6 +9,34 @@ layout:decorate="@{layout/default_system}">
 	    </div>
 </th:block>
 
+<th:block layout:fragment="customJs">
+	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+	<script>
+		
+		  $(function(){
+		    	$("#alert-success").hide();
+		    	$("#alert-danger").hide();
+		    	
+		    	$("input").keyup(function(){
+		    		var pwd1 = $("#employeePw").val();
+		    		var pwd2 = $("#employeePwCheck").val();
+		    		
+		    		if(pwd1 != "" || pwd2 != ""){
+		    			if(pwd1 == pwd2){
+		    				$("#alert-success").show();
+		    				$("#alert-danger").hide();
+		    				$("#signUp").removeAttr("disabled");
+		    			}else{
+		    				$("#alert-success").hide();
+		    				$("#alert-danger").show();
+		    				$("#signUp").Attr("disabled","disabled" );
+		    			}
+		    		}
+		    	});
+		    });
+	</script>
+</th:block>
 
 
 <th:block layout:fragment="container">
@@ -40,16 +68,20 @@ layout:decorate="@{layout/default_system}">
                   <div class="form-group ">
                     <label for="password" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">패스워드</font></font></label>
                     <div class="col-lg-6">
-                      <input class="form-control " name="employeePw" type="password" >
+                      <input class="form-control " name="employeePw" id = "employeePw" type="password" >
                     </div>
                   </div>
                   
                     <div class="form-group ">
                     <label for="confirm_password" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">패스워드 확인</font></font></label>
                     <div class="col-lg-6">
-                      <input class="form-control "  name="employeePwCheck" type="password" >
+                      <input class="form-control "  name="employeePwCheck" id= "employeePwCheck" type="password" >
                     </div>
                   </div>
+                  
+                                      
+	                <div class = "alert alert-success"  id="alert-success">비밀번호가 일치합니다.</div>
+					<div class = "alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
                   
                    <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">권한</label>
@@ -96,8 +128,8 @@ layout:decorate="@{layout/default_system}">
                   <div class="col-sm-2">
                       <select class="form-control"  name = "employeeDepartment">
 						<option>::선택::</option>
-						<option value = "본사">본사</option>
-						<option value = "공장">공장</option>
+						<option value = "본사" th:selected="${humanResources.employeeDepartment== '본사'}">본사</option>
+						<option value = "공장" th:selected="${humanResources.employeeDepartment== '공장'}">공장</option>
 		               </select>
                   </div>
                 </div>
@@ -107,13 +139,13 @@ layout:decorate="@{layout/default_system}">
                   <div class="col-sm-2">
                       <select class="form-control" name = "employeePosition">
 						<option>::선택::</option>
-						<option value = "사원">사원</option>
-						<option value = "주임">주임</option>
-						<option value = "대리">대리</option>
-						<option value = "과장">과장</option>
-						<option value = "차장">차장</option>
-						<option value = "부장">부장</option>
-						<option value = "임원">임원</option>
+						<option value = "사원" th:selected="${humanResources.employeePosition== '사원'}">사원</option>
+						<option value = "주임" th:selected="${humanResources.employeePosition== '주임'}">주임</option>
+						<option value = "대리" th:selected="${humanResources.employeePosition== '대리'}">대리</option>
+						<option value = "과장" th:selected="${humanResources.employeePosition== '과장'}">과장</option>
+						<option value = "차장" th:selected="${humanResources.employeePosition== '차장'}">차장</option>
+						<option value = "부장" th:selected="${humanResources.employeePosition== '부장'}">부장</option>
+						<option value = "임원" th:selected="${humanResources.employeePosition== '임원'}">임원</option>
 		               </select>
                   </div>
                 </div>

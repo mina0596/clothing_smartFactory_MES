@@ -11,4 +11,7 @@ import ksmart39.springboot.domain.DefectiveProduct;
 public interface DefectiveProductMapper {
 	
 	public List<DefectiveProduct> getDefectiveProduct();
+	
+	//추가
+	public int addDefectiveProduct(DefectiveProduct defectiveProduct);
 }

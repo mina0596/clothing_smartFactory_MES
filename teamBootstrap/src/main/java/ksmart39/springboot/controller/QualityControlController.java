@@ -42,7 +42,8 @@ public class QualityControlController {
 	//================================================================
 	//[한빛]불량품등록 -> 목록
 	@PostMapping("/addDefectiveProduct")
-	public String addDefectiveProduct() {
+	public String addDefectiveProduct(DefectiveProduct defectiveProduct) {
+		defectiveProductService.addDefectiveProduct(defectiveProduct);
 		return "redirect:/defectiveProductList";
 	}
 	
