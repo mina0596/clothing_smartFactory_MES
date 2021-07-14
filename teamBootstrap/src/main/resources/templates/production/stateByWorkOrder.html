@@ -168,13 +168,13 @@ layout:decorate="@{layout/default_production}">
 	                <td><input type="checkbox" class="check"></td>
 	            	<td th:text = "${n.index+1}"></td>
                     <td th:text = "${p.work_order_code}"></td>
-                    <td th:text = "${p.requestedProductCode}"><a th:href="@{/stateByProduct}"></a></td>
+                    <td th:text = "${p.requested_product_code}"><a th:href="@{/stateByProduct}"></a></td>
                     <td>파크랜드</td>
                     <td>2021-06-06</td>
-                    <td th:text = "${p.processStatus}"><span class="badge" style="padding-top: 5px;">완료</span></td>
+                    <td th:text = "${p.process_status}"><span class="badge" style="padding-top: 5px;">완료</span></td>
                     <td>1시간50분</td>
                     <td>2021-06-16</td>
-                    <td th:text = "${p.requestedDueDate}"></td>
+                    <td th:text = "${p.requested_due_date}"></td>
                   </tr>
                   
                              

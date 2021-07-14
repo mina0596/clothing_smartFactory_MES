@@ -40,6 +40,8 @@ public interface SystemMapper {
 	//회원가입
 	public int addHumanResources(HumanResources humanResources);	
 	//회원정보 조회
+	public HumanResources getEmployeeInfoById(String employeeId);	
+	//회원정보 조회
 	public HumanResources getEmployeeInfoByCode(String employeeCode);	
 	//회원정보 수정
 	public int modifyHumanResources(HumanResources humanResources);
@@ -54,6 +56,8 @@ public interface SystemMapper {
 	public int modifyClient(Client client);
 	//거래처 정보 가져오기 (뿌려진 화면에서)
 	public Client getClientInfoByCode(String clientCode);
+	//거래처 삭제
+	public int deleteClient(String delArr);
 	
 	/****************************************************************************/
 	

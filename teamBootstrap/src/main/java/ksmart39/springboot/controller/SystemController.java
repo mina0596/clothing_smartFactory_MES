@@ -100,22 +100,38 @@ public class SystemController {
 		return "system/humanResourcesList";
 	}
 
+	@PostMapping("/memberIdCheck")
+	@ResponseBody
+	public boolean memberIdCheck(@RequestParam(value = "employeeId") String employeeId) {
+		
+		boolean idCheck = true;
+		
+		HumanResources humanResources = systemService.getEmployeeInfoById(employeeId);
+		
+		if(humanResources != null) idCheck = false;
+		
+		return idCheck;
+	}
+	
 
 
 
 	// ==============================================================
-	// 수정화면 ->목록
-	@PostMapping("modifyClient")
 
-
-	public String modifyClient(Client client) {
-		systemService.modifyClient(client);
-		log.info("=================");
-		log.info("{}",client);
+	//[한빛]거래처 등록
+	@GetMapping("/addClient")
+	public String addClient(Model model) {
+		model.addAttribute("title", "거래처관리");
+		return "system/addClient";
+	}	
+	//[한빛]거래처등록 ->목록으로 이동
+	@PostMapping("/addClient")
+	public String addClient(Client client) {
+		systemService.addClient(client);
 		return "redirect:/clientList";
 	}
 	
-	//[한빛]사원수정
+	//[한빛]거래처수정
 	@GetMapping("/modifyClient")
 	public String modifyClient(@RequestParam(name = "clientCode", required = false) String clientCode, Model model) {
 		//1. 회원코드로 회원테이블을 조회한 HumanResources객체
@@ -126,12 +142,14 @@ public class SystemController {
 		return "system/modifyClient";
 	}
 	
-	//[한빛]주문등록 ->목록으로 이동
-	@PostMapping("/addClient")
-	public String addClient(Client client) {
-		systemService.addClient(client);
+	// 거래처수정화면 ->목록
+	@PostMapping("modifyClient")
+	public String modifyClient(Client client) {
+		systemService.modifyClient(client);
+		log.info("=================");
+		log.info("{}",client);
 		return "redirect:/clientList";
-	}
+	}		
 	
 	//[한빛]거래처 조회
 	@GetMapping("/clientList")
@@ -148,12 +166,23 @@ public class SystemController {
 		return "system/clientList";
 	}
 
-	//[한빛]수주거래처 등록
-	@GetMapping("/addClient")
-	public String addClient(Model model) {
-		model.addAttribute("title", "거래처관리");
-		return "system/addClient";
+	//[한빛]거래처 삭제
+	@PostMapping("/deleteClient")
+	@ResponseBody
+	public int deleteClient(@RequestParam(value = "delArr[]")String[] delArr) {
+		int result = 1;
+
+		for(int i = 0; i<delArr.length; i++) {
+		result	= systemService.deleteClient(delArr[i]);
+		}
+		return result;
 	}
+	
+
+	
+
+	
+
 	
 
 	// ==================================================================

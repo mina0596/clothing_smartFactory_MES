@@ -19,4 +19,10 @@ public class DefectiveProductService {
 		List<DefectiveProduct> defectiveProduct = defectiveProductMapper.getDefectiveProduct();
 		return defectiveProduct;
 	}
+	
+	//등록
+	public int addDefectiveProduct(DefectiveProduct defectiveProduct) {
+		int result = defectiveProductMapper.addDefectiveProduct(defectiveProduct);
+		return result;
+	}
 }
