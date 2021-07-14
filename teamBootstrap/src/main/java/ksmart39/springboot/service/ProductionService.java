@@ -33,5 +33,9 @@ public class ProductionService {
 			
 			return workOrderList;
 		}
-
+		
+	//[민아]생산 시작하기 - 생산현황에 첫공정 insert
+	public int startProduction(String sentPCode) {
+		return productionMapper.startProduction(sentPCode);
+	}
 }

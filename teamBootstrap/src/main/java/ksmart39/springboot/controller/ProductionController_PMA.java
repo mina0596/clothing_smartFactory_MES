@@ -9,8 +9,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +55,34 @@ public class ProductionController_PMA {
 		this.workOrderService = workOrderService;
 	}
 	
+	//[민아]의뢰품목별 생산공정 지시
+	@GetMapping("/orderProductionProcess")
+	public String orderProductionProcess() {
+		return "production/orderProductionProcess";
+	}
+	
+	/*
+	 * //[민아]생산공정 지시를 위한 의뢰코드 검색 modal
+	 * 
+	 * @PostMapping("/searchOrderProductionProcess") public List<Map<String,Object>>
+	 * getSearchKey(@RequestParam(value = "param", required = false)String param){
+	 * JSONParser parser = new JSONParser(); Object obj = parser.parse(param);
+	 * JSONObject jsonObj = (JSONObject) obj;
+	 * 
+	 * log.info("param :{}", param); return null; }
+	 * 
+	 * @RequestMapping(value = "searchOrderProductionProcess", method =
+	 * RequestMethod.POST)
+	 * 
+	 * @ResponseBody public List<Map<String,Object>>
+	 * getSearchKey1(@RequestParam(value = "param", required = false)String param)
+	 * throws Exception{ JSONParser parser = new JSONParser(); Object obj =
+	 * parser.parse(param); JSONObject jsonObj = (JSONObject) obj;
+	 * 
+	 * log.info("param :{}", param);
+	 * 
+	 * return null; }
+	 */
 	//[민아+한빛]의뢰품목별 상세 생산 공정 현황 등록
 	@GetMapping("/productionOrderList")
 	public String productionOrderList(Model model) {
@@ -69,10 +103,14 @@ public class ProductionController_PMA {
 		
 		return "production/productionOrderList";
 	}
-	@PostMapping(value = "/pCodeToStartSend")
-	public String startPCodeProduction() {
+	
+	//[민아]생산공정 시작 - 생산현황에 insert됨
+	@PostMapping("/pCodeToStartSend")
+	public String startPCodeProduction(@RequestParam(value = "pCodeToStart") String sentPCode) {
+		log.info("sentPCode :{}", sentPCode);
 		//여기에 받아온 품목코드를 가지고 insert 문 해주는 처리과정 넣어주기
-		return null;
+		productionService.startProduction(sentPCode);
+		return "production/productionOrderList";
 	}
 	
 	//[민아+한빛]의뢰품목별 상세 생산 공정 현황 등록

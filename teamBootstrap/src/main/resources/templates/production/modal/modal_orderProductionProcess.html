@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout">
+
+<th:block layout:fragment="customJs">
+<script type="text/javascript" th:src="@{/productionJs/searchClientNameModal.js}"></script>
+</th:block>
+
+<th:block th:fragment="modal_orderProductionProcess">
+ <!-- 모달시작 -->
+          <div class="modal fade modal-xl" style=" height: 700px;"  id="byClientNameModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" style="width:auto; display:table;" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h4 class="modal-title" id="exampleModalLabel">거래처명 검색 목록</h4>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      
+		   
+		   <div class="modal-body">
+		   
+		   <table  class="table table-striped table-advance table-hover" id="searchClientTable">
+         	<tbody>       		
+       			<thead>
+        			<tr>
+	         			<th colspan="3"	>
+		         			 <div class="form-inline">
+		         			 	<label class="control-label">거래처코드</label>
+			                	<input type="text" class="form-control" id="clientCode" placeholder="검색어를 입력하세요.">
+			                </div>
+	         			</th>
+	         			<th colspan="3">
+	         				<div class="form-inline">
+		         				<label class="control-label">의뢰등록일자</label>
+			                	<input type="date" class="form-control" id="reqeustRegDateFrom" placeholder="검색어를 입력하세요.">&nbsp ~
+			                	<input type="date" class="form-control" id="reqeustRegDateTo" placeholder="검색어를 입력하세요.">
+		              		</div>
+	         			</th>  
+	         			</tr>  
+	         			<tr>
+	         			<th colspan="3">
+	         				<div class="form-inline">
+		         				<label class="control-label">계약코드</label>
+			                	<input type="text" class="form-control" id="contractCode" placeholder="검색어를 입력하세요.">
+		              		</div>
+	         			</th>  
+	         			<th>
+	         				<div class="form-inline">
+		         				<label class="control-label">계약승인여부</label>
+			                	<input type="text" class="form-control" id="contractAcceptCheck" placeholder="검색어를 입력하세요.">
+		              		</div>
+	         			</th>  
+	         			<th colspan="3">
+	         				<div class="form-inline">
+	         				 <button type="submit" id="modalSearchBtn" class="btn btn-theme" >검색</button>
+		              		</div>
+	         			</th>
+	         			
+        			</tr>     			
+       			</thead>
+       			<tbody id="mainTbody" style="text-align: center;">
+       				<tr>
+       					<td><input type="radio" id="checkedData"></td>
+       					<td>no.</td>
+       					<td>계약번호</td>
+       					<td>품목별 의뢰 코드</td>
+       					<td>품질검사명</td>
+       					<td>원부자재명</td>
+       					<td>요청날짜</td>
+       				</tr>
+       				<tr class="removeTr">
+       					<td colspan="7">검색 버튼을 눌러주세요.</td>
+       				</tr>
+     			</tbody> 
+         </table> 
+<!--          <div> -->
+<!--          	<input type="text" th:value="${currentPage}"> -->
+<!--          </div> -->
+<!-- 		   	 <div class="btn-group"> -->
+<!-- 	             <a th:href="@{/quality/searchQualityInspectionRequest}" class="btn btn-default">처음으로</a> -->
+<!-- 	             <a th:if="${currentPage > 1}" th:href="@{/quality/searchQualityInspectionRequest(currentPage=${currentPage - 1})}">[이전]</a> -->
+<!-- 						<th:block th:each="num:${#numbers.sequence(pageStartNum, pageEndNum)}"> -->
+<!-- 							<a th:if="${num != currentPage}" th:href="@{/quality/searchQualityInspectionRequest(currentPage=${num})}" th:text="${'[' + num + ']'}"></a> -->
+<!-- 							<span th:unless="${num != currentPage}" th:text="${'[' + num + ']'}"></span> -->
+<!-- 						</th:block> -->
+<!-- 						<a th:if="${currentPage < lastPage}" th:href="@{/quality/searchQualityInspectionRequest(currentPage=${currentPage + 1})}">[다음]</a> -->
+<!-- 						<a th:href="@{/quality/searchQualityInspectionRequest(currentPage=${lastPage})}">[맨마지막]</a> -->
+<!-- 	         </div> -->
+		 </div>
+		 	
+		    <div class="modal-footer">
+		
+			      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			      <button type="button" id="saveClientName" class="btn btn-primary" data-dismiss="modal">선택</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		</th:block>
+</html>

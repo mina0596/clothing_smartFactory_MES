@@ -57,8 +57,23 @@
 			NOW(), 
 			NOW());	
 	</insert>
-
-	
+	<insert id="startProduction" parameterType="String">
+		INSERT INTO 
+			product_production_process_status(
+				production_process_code, 
+				requested_product_code, 
+				process_start_date, 
+				completed_product_update_date, 
+				process_status, 
+				production_process_status_reg_date)
+			VALUES(
+				'process_01', 
+				#{pCode}, 
+				NOW(), 
+				null, 
+				'진행중', 
+				NOW());
+	</insert>
 	
 
 

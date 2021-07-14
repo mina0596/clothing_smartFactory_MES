@@ -15,4 +15,7 @@ public interface ProductionMapper {
 	
 	//[민아]생산 대기중인 품목 목록
 	public List<Map<String,String>> getProductReadyToStart();
+	
+	//[민아]생산 시작하기 - 생산현황에 첫공정 insert
+	public int startProduction(String sentPCode);
 }

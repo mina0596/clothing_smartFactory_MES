@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_production}">
+
+<th:block layout:fragment="customJs">
+<script type="text/javascript" th:src="@{/productionJs/searchClientNameModal.js}"></script>
+	<script>
+	$(function(){
+			/* var startButton = tableAttr.children().find('#startProduction');
+			var pCodeToStart = '';
+			startButton.click(function(){
+				console.log('버튼눌리나 확인');
+				pCodeToStart = $(this).parents('tr').find('#pCodeToStart').text();
+				console.log(pCodeToStart);
+				if(pCodeToStart != ''){
+					var request = $.ajax({
+						url: "/production/pCodeToStartSend",
+						method: "POST",
+						data: {pCodeToStart : pCodeToStart}
+					});
+				}
+			}); */
+			
+			
+			$('#byClientName').click(function(){
+				$('#byClientNameModal').modal("show");
+			});
+			
+		
+			
+			
+				
+			$('[data-popup-open]').on('click', function(e)  {
+		        var targeted_popup_class = jQuery(this).attr('data-popup-open');
+		        $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+
+		        e.preventDefault();
+		    });
+
+		    //----- CLOSE
+		    $('[data-popup-close]').on('click', function(e)  {
+		        var targeted_popup_class = jQuery(this).attr('data-popup-close');
+		        $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+
+		        e.preventDefault();
+		    });
+			
+	
+			
+	});
+	
+	
+	</script>
+</th:block>
+
+
+
+<th:block layout:fragment="container" >
+
+     <div class="col-md-12">
+       <div class="content">
+        <h4><i class="fa fa-angle-right"></i>의뢰 품목코드별 생산현황 조회</h4>
+          <hr>
+          <form class="form-inline" role="form">
+        
+         <table class="table table-striped table-advance table-hover">
+         	<thead>
+         		<tr>
+         			<th>품목명</th>
+         			<th>거래처명</th>
+         			<th>기간선택</th>
+         		</tr>
+         	</thead>
+         	<tbody>
+         		<tr>
+         			<td style="padding-right: 20px;">
+	         			 <div class="form-group">
+		               		<select class="form-control" name="searchKey">
+							   <option>::양복종류::</option>
+							   <option>신사양복</option>
+							   <option>숙녀양복</option>
+							</select>
+		                </div>
+	         			 <div class="form-group">
+		               		<select class="form-control" name="searchKey">
+							   <option>::품목종류::</option>
+							   <option>바지</option>
+							   <option>자켓</option>
+							   <option>셔츠</option>
+							   <option>조끼</option>
+							   <option>블라우스</option>
+							   <option>치마</option>
+							</select>
+		                </div>
+         			</td>
+         			<td style="padding-right: 20px;">
+         				<div class="form-group"><!-- 거래처명 -->
+		               		<button id="byClientName" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
+		                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="직접 입력 또는 검색">
+	              		</div>
+         			</td>
+         			<td>
+         				<select class="form-control">
+							<option>::기간 선택::</option>
+							<option>최초 생산시작일시</option>
+							<option>납기일</option>
+						</select>
+         				<input type=date class="form-control">
+						<span>to</span>
+						<input type=date class="form-control">
+         			</td>
+         			<td>
+         				  <button type="submit" class="btn btn-theme">검색</button>
+         			</td>        			
+         		</tr>
+         	</tbody>
+         </table>  
+        </form>  
+			<h4><i class="fa fa-angle-right"></i>생산 대기중 품목 목록</h4>
+			          <hr>
+              <table class="table table-striped table-advance table-hover" id="workerOrderList">
+                <thead>
+                  <tr>
+                    <th><i class="fa fa-bookmark"></i>작업지시코드</th>
+                    <th><i class="fa fa-bookmark"></i>품목별 의뢰코드</th>
+                    <th><i class="fa fa-bookmark"></i>거래처명</th>
+                    <th><i class="fa fa-bookmark"></i>계약코드</th>
+                    <th><i class=" fa fa-bookmark"></i>납기일</th>
+                    <th><i class=" fa fa-bookmark"></i>작업시작예정일</th>
+                    <th><i class=" fa fa-bookmark"></i>요청</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="l : ${readyProductInfo}">
+                    <td th:text="${l.workOrderCode}"></td>
+                    <td th:text="${l.pCode}" id="pCodeToStart"></td>
+                    <td th:text="${l.cName}"></td>
+                    <td th:text="${l.cCode}"></td>
+                   	<td th:text="${l.dueDate}"></td>
+                   	<td th:text="${l.expectedStartDate}"></td>
+                    <td><button class="btn btn-success btn-xs" type="button" id="startProduction"><i class="fa fa-check"></i>생산시작</button></td>                 	
+                  </tr>
+                </tbody>
+              </table>
+            
+            <!-- /content-panel -->
+          </div>
+          <!-- /col-md-12 -->
+        </div>
+        <!-- /row -->
+        
+        <th:block th:replace="/production/modal/modal_orderProductionProcess::modal_orderProductionProcess"></th:block>
+        
+       
+</th:block>
+
+</html>
