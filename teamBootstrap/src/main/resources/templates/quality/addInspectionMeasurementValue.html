@@ -17,7 +17,7 @@ layout:decorate="@{layout/default_qualityControl}">
               <div class="panel-heading">
                 <ul class="nav nav-tabs nav-justified">
                   <li class="active">
-                    <a data-toggle="tab" href="#overview">원부자재 측정값 등록</a>
+                    <a data-toggle="tab" href="#overview">원부자재 수입 화학검사 측정값 등록</a>
                   </li>
                   <li>
                     <a data-toggle="tab" href="#contact">수치별로 등록</a>
@@ -30,6 +30,7 @@ layout:decorate="@{layout/default_qualityControl}">
               <!-- /panel-heading -->
               <div class="panel-body">
                 <div class="tab-content">
+                
                   <div id="overview" class="tab-pane active">
                
                 <div class="form-inline">
@@ -42,11 +43,13 @@ layout:decorate="@{layout/default_qualityControl}">
 	                <div class="col-sm-3 input-group">	
 						<input type="number" id="trCount" min="1" value="1" class="form-control" placeholder="숫자입력">
 						<div class="input-group-btn">
-							<button id="addRows" class=" btn btn-theme03 btn btn-default">측정값 행 추가</button>
+							<button id="addRows" class=" btn btn-theme03 btn btn-default">직접입력 행 추가</button>
 						</div>
 					</div>	                
                 </div>
 				<br>
+				
+                <form th:action="@{/quality/addInspectionMeasurementValue}" method="post">
                  <table class="table table-bordered table-striped table-condensed">
                   <thead>
                     <tr ><!-- 세부에 체크가 되어있으면 세부에 값이 들어간다...? -->
@@ -56,8 +59,7 @@ layout:decorate="@{layout/default_qualityControl}">
                       <th>원부자재명</th>
                       <th>*측정홧수</th>
                       <th>측정값 </th>
-   					  <th>단위</th>
-   					  <th>시작일시</th>
+   					  <th>시작일시*공란일시 현재시간</th>
                       <th>완료일시</th>
                       <th>등록</th>
                       <th>삭제</th>
@@ -68,14 +70,17 @@ layout:decorate="@{layout/default_qualityControl}">
                       <td><input type="checkbox" class="checked"></td>
                       <td>
 		                <div class="input-group">	
-							<input type="text" class="form-control" placeholder="품질검사요청코드 검색">
+							<input type="text" name="qualityInspectionRequestCode" class="form-control insReqCode" placeholder="품질검사요청코드 검색">
 							<div class="input-group-btn">
-								<button id="addRows" class="btn btn-default">검색</button>
+								<button id="requestCode2" class="btn btn-default">검색</button>
 							</div>						
 		                </div>
 					  </td>
-					  <td>검사명</td>
-					  <td>원부자재이름</td>
+					  <td class="inspectionName">
+					  	<input type="text" class="form-control" value="검사명" readonly="readonly">
+					  	<input type="hidden" name="qualityInspectionCode" class="form-control" value="quality_inspection_code">
+					  </td>
+					  <td class="materialsName"><input type="text" class="form-control" value="원부자재명" readonly="readonly"></td>
                       <td>
 					      <select class="form-control">
 					      	<option>1회차</option>
@@ -84,20 +89,13 @@ layout:decorate="@{layout/default_qualityControl}">
 					      </select>
 					  </td>
                       <td>
-                      	<input type="number" class="form-control" placeholder="측정값">                      	
+                      	<input type="number" name="inspectionMeasurementValue" class="form-control" placeholder="측정값">                      	
 					  </td>
                       <td>
-                      	<select class="form-control">
-					      	<option>mm</option>
-					      	<option>cm</option>
-					      	<option>직접입력</option>
-					      </select>         	
-					  </td>
-                      <td>
-                      	<input type="text" class="form-control" placeholder="공란일시 등록시간">
+                      	<input type="datetime-local" name="inspectionStartDate" class="form-control">
                       </td>
                       <td>
-                      	<input type="text" class="form-control" placeholder="공란일시 등록시간">
+                      	<input type="datetime-local" name="inspectionEndDate" class="form-control">
                       </td>
                       <td>
 	               		<button type="button">등록</button>
@@ -109,16 +107,17 @@ layout:decorate="@{layout/default_qualityControl}">
 
                   </tbody>
                 </table>  
-                 
+                
               <div class="form-group text-right">
                     <div class="col-lg-offset-2 col-lg-10">
-                      <a href="#" class="btn btn-success btn-xs"><i class="fa fa-check"></i>등록</a>
-                      <a class="btn btn-danger btn-xs" id="deleteBtn"><i class="fa fa-trash-o "></i>삭제</a>
+                      <button type="submit" id="addInsValue" class="btn btn-success btn-xs"><i class="fa fa-check"></i>등록</button>
+                      <a id="deleteBtn" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i>삭제</a>
                     </div>
                 </div>
-                
+                 </form> 
                 <!-- 등급별로 등록 -->
                </div>
+               
 
 
                 <!-- 두번째 -->

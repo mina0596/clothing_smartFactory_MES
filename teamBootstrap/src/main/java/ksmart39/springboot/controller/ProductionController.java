@@ -58,21 +58,7 @@ public class ProductionController {
 	public String workOrderInfo() {
 		return "production/workOrderInfo";
 	}
-	//[보람]작업지시 목록 + [민아]작업지시 목록 화면에 뿌려주기
-	@GetMapping("/workOrderList")
-	public String workerOrderList(Model model) {
-		
-		List<WorkOrder> workOrderList = workOrderService.getWorkOrderList();
-		model.addAttribute("workOrderList", workOrderList);
-		
-		/*
-		 * model.addAttribute("title", "작업지시관리: 작업지시목록"); Map<String, Object> paramMap =
-		 * new HashMap<String, Object>(); paramMap.put("workOrderSearchKey",
-		 * workOrderSearchKey); paramMap.put("workOrderSearchValue",
-		 * workOrderSearchValue);
-		 */
-		return "production/workOrderList";
-	}
+	
 	
 	//[보람]작업지시등록
 	@GetMapping("/addWorkOrder")

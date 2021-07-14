@@ -2,9 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ksmart39.springboot.dao.QualityInsepctionResultMapper">
 
+
 <!-- 품질검사 최종결과 리스트 -->
-<select id="getInsepectionFinalResult" resultType="Map">
+<select id="getInsepectionFinalResult" resultType="map">
 	SELECT 
+		r.product_request_code,
 		r.requested_product_code,
 		c.client_name,
 		p.gender_categorized_name,
@@ -28,7 +30,7 @@
 	
 </select>
 
-<select id="getClientName" resultType="Map">
+<select id="getClientName" resultType="map">
 	SELECT 
  		DISTINCT(c.client_name)
 	FROM inspection_final_result AS  i
@@ -46,7 +48,121 @@
 		ON  r.client_code = c.client_code;
 </select>
 
+<select id="getRequestProductCode" parameterType="String" resultType="map">
+	SELECT 
+	    DISTINCT(r.product_request_code)
+	FROM inspection_final_result AS  i
+		INNER JOIN 
+			quality_inspection_request AS q
+			ON i.quality_inspection_request_code = q.quality_inspection_request_code
+		INNER JOIN 
+			requested_product_detail AS r
+			ON q.requested_product_code = r.requested_product_code
+		INNER join
+			product_code_detail AS p
+			ON r.product_code =p.product_code
+		INNER join
+			client_info AS c 
+			ON  r.client_code = c.client_code
+		WHERE c.client_name = #{client};			
 
+</select>
+<select id="getProductName" parameterType="String" resultType="map">
+	SELECT 
+   		 DISTINCT(p.detailed_categorized_name)
+    FROM inspection_final_result AS  i
+	INNER JOIN 
+		quality_inspection_request AS q
+		ON i.quality_inspection_request_code = q.quality_inspection_request_code
+	INNER JOIN 
+		requested_product_detail AS r
+		ON q.requested_product_code = r.requested_product_code
+	INNER join
+		product_code_detail AS p
+		ON r.product_code =p.product_code
+	INNER join
+		client_info AS c 
+		ON  r.client_code = c.client_code
+	WHERE r.product_request_code =#{requestNum}
+</select>
+
+<select id="getFinalResultReport" parameterType="String" resultType="map">
+	SELECT 
+		q.requested_product_code,
+		i.quality_inspection_request_code,
+		m.med_class_name,
+		l.low_class_name,
+		s.sub_class_name,
+		IFNULL(GROUP_CONCAT(if(inspection_measurement_num='1회차', inspection_pass_check, NULL)),'심사중') AS inspection_first,
+		IFNULL(GROUP_CONCAT(if(inspection_measurement_num='2회차', inspection_pass_check, NULL)),'심사중') AS inspection_second,
+		IFNULL(GROUP_CONCAT(if(inspection_measurement_num='3회차', inspection_pass_check, NULL)),'심사중') AS inspection_third,
+		f.low_cate_final_pass_check,
+		DATE_FORMAT(f.final_result_reg_date,'%Y-%m-%d %T') AS final_Date
+	FROM inspection_result AS i
+		INNER JOIN 
+			quality_inspection_request AS q
+		ON i.quality_inspection_request_code = q.quality_inspection_request_code
+		INNER JOIN
+			sub_class_inspection_list AS s
+		ON q.quality_inspection_code = s.quality_inspection_code
+		INNER JOIN
+			low_class_inspection_list AS l
+		on s.high_med_low_class_code = l.high_med_low_class_code
+		INNER JOIN
+			medium_class_inspection_list AS m
+		on l.high_med_class_code =m.high_med_class_code
+		INNER JOIN 
+			inspection_final_result AS f
+		ON q.quality_inspection_request_code=f.quality_inspection_request_code
+	WHERE q.requested_product_code = #{requestProductCode}
+		GROUP BY i.quality_inspection_request_code;
+
+
+</select>
+
+<!--검색 버튼 눌러서 조회하기   -->
+<select id="getQualityInspectionReport" parameterType="hashmap" resultType="map">
+	SELECT 
+		r.product_request_code,
+		r.requested_product_code,
+		c.client_name,
+		p.gender_categorized_name,
+		p.detailed_categorized_name,
+		i.low_cate_final_pass_check,
+		q.inspection_request_date,
+		i.inspection_end_date
+	FROM inspection_final_result AS  i
+	INNER JOIN 
+		quality_inspection_request AS q
+		ON i.quality_inspection_request_code = q.quality_inspection_request_code
+	INNER JOIN 
+		requested_product_detail AS r
+		ON q.requested_product_code = r.requested_product_code
+	INNER join
+		product_code_detail AS p
+		ON r.product_code =p.product_code
+	INNER join
+		client_info AS c 
+		ON  r.client_code = c.client_code
+		<trim prefix="WHERE" prefixOverrides="AND">
+			<if test="clientCate != null and clientCate !=''.toString()">
+			 AND c.client_name =#{clientCate}
+			</if>
+			<if test="requestCate != null and requestCate !=''.toString()">
+			AND r.product_request_code =#{requestCate}
+			</if>
+			<if test="productCate != null and productCate !=''.toString()">
+			AND p.detailed_categorized_name =#{productCate}
+			</if>
+			<if test="InspectionStartDate != null and InspectionStartDate !=''.toString()">
+			AND q.inspection_request_date &gt;= DATE(#{inspectionStartDate})
+			</if>
+			<if test="inspectionEndDate != null and inspectionEndDate !=''.toString()">
+			AND i.inspection_end_date &lt;= DATE(#{inspectionEndDate})
+			</if>
+		</trim>
+	GROUP BY q.requested_product_code;
+</select>
 
 
 </mapper>

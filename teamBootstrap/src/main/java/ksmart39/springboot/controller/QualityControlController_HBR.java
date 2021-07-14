@@ -35,17 +35,74 @@ public class QualityControlController_HBR {
 	private QualityInsepctionResultService qualityInsepctionResultService;
 	
 	//================================================================
+	//[다미+보람]검사현황 조회 성적서 모달창값전달하기
+	@RequestMapping(value = "/finalResult",method = RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String,Object>> getFinalResultReport(@RequestParam(value = "requestProductCode", required = false)String requestProductCode){
+		List<Map<String,Object>> finalResultReport = qualityInsepctionResultService.getFinalResultReport(requestProductCode);
+		log.info("=============================================");
+	  	log.info("finalResultReport  {}",finalResultReport);
+	  	log.info("=============================================");
+		return finalResultReport;
+	}
+	
+	
+	
+	
+	
+	//[다미+보람]검사현황 조회 성적서 결과값보여주기
+	@RequestMapping(value = "/searchfinalResult",method = RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String,Object>> getQualityInspectionReport(@RequestParam(value ="clientCate",required = false)String clientCate,
+															@RequestParam(value = "requestCate",required = false)String requestCate,
+															@RequestParam(value = "productCate",required = false)String productCate,
+															@RequestParam(value = "InspectionStartDate",required = false)String InspectionStartDate,
+															@RequestParam(value = "inspectionEndDate",required = false)String inspectionEndDate){
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("clientCate", clientCate);
+		map.put("requestCate", requestCate);
+		map.put("productCate", productCate);
+		map.put("InspectionStartDate",InspectionStartDate);
+		map.put("inspectionEndDate", inspectionEndDate);
+		List<Map<String,Object>> searchListMap = qualityInsepctionResultService.getQualityInspectionReport(map);
+		log.info("검색 :  {}", searchListMap);
+		
+		return searchListMap;
+	}
+	
+	
+	
+	//[다미+보람]검사현황 조회 품목명 가지고오기
+	@RequestMapping(value = "/requestName", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String,Object>> getProductName(@RequestParam(value = "requestNum", required = false)String requestNum){
+		List<Map<String,Object>> productName = qualityInsepctionResultService.getProductName(requestNum);
+		
+		return productName;
+	}
+	
+	  //[다미+보람]검사현황 조회 의뢰코드가지고오기
+	  
+	  @RequestMapping(value = "/requestCode", method = RequestMethod.GET)
+	  @ResponseBody 
+	  public List<Map<String,Object>> getRequestProductCode(@RequestParam(value = "client",required =	  false)String client ){ 
+		 List<Map<String,Object>> reqeustCode =	 qualityInsepctionResultService.getRequestProductCode(client);
+	  	
+	 return reqeustCode; 
+	 }
+	
+	
 
-		//[다미+보람]검사현황 조회 거래처명가지고오기
-		@RequestMapping(value = "/clientName", method =RequestMethod.GET)
-		@ResponseBody
-		public List<Map<String,Object>> getClientName(){
-			List<Map<String,Object>> clientList =qualityInsepctionResultService.getClientName();
-			log.info("=============================================");
-			log.info("거래처명 :  {}", clientList);
-			log.info("=============================================");
-			return clientList;
-		}
+	//[다미+보람]검사현황 조회 거래처명가지고오기
+	@RequestMapping(value = "/clientName", method =RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String,Object>> getClientName(){
+		List<Map<String,Object>> clientList =qualityInsepctionResultService.getClientName();
+		log.info("=============================================");
+		log.info("거래처명 :  {}", clientList);
+		log.info("=============================================");
+		return clientList;
+	}
 	
 	//검사현황 성적서조회 및리스트
 	@GetMapping("/qualityInspectionReport")

@@ -2,23 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ksmart39.springboot.dao.QualityInsMeasurementValueMapper">
 
-	<select id="getQualityInspectionRequestCount" resultType="int">
-		<![CDATA[
-		SELECT 
-			COUNT(1)
-		FROM
-			quality_inspection_request AS q INNER JOIN requested_product_detail AS r ON q.requested_product_code = r.requested_product_code
-			INNER JOIN sub_class_inspection_list AS s ON q.quality_inspection_code = s.quality_inspection_code
-			INNER JOIN used_raw_material AS m ON q.requested_product_code = m.requested_product_code
-			INNER JOIN raw_material_info AS i	ON m.raw_material_code = i.raw_material_code;
-		]]>
-	</select>
+
 	
 	<select id="searchQualityInspectionRequest" resultType="Map" parameterType="Map">
-    SELECT
+		select
 			q.quality_inspection_request_code
 			,q.requested_product_code
 			,r.contract_code
+			,h.high_class_name
+			,md.med_class_name
+			,s.quality_inspection_code
 			,s.sub_class_name
 			,m.raw_material_code
 			,i.raw_material_name
@@ -27,6 +20,8 @@
 		FROM
 			quality_inspection_request AS q INNER JOIN requested_product_detail AS r ON q.requested_product_code = r.requested_product_code
 			INNER JOIN sub_class_inspection_list AS s ON q.quality_inspection_code = s.quality_inspection_code
+			INNER JOIN medium_class_inspection_list AS md ON s.high_med_class_code = md.high_med_class_code
+			INNER JOIN high_class_inspection_list AS h ON md.high_class_code = h.high_class_code
 			INNER JOIN used_raw_material AS m ON q.requested_product_code = m.requested_product_code
 			INNER JOIN raw_material_info AS i	ON m.raw_material_code = i.raw_material_code
 			INNER JOIN client_info AS c ON r.client_code = c.client_code
