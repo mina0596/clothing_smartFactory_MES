@@ -4,13 +4,6 @@
 
 	$(function(){	
 		
-		
-		//등록 버튼
-		$(document).on('click', '#addInsValue', function(){
-			console.log('test');
-			
-		});
-
 		//모달 실행
 		$(document).on('click', '#requestCode, #requestCode2', function(){
 			$('#requestCodeModal').modal("show");
@@ -210,6 +203,15 @@
 				$('.checked').prop('checked',false);
 			}
 		});
+		
+		
+		//다중 등록
+		
+		$(document).on('click', '#addInsValue', function(){
+			
+			
+		});
+		
 		
 		// 체크된 행 삭제
 		$(document).on('click', '#deleteBtn', function(){
