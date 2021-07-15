@@ -31,11 +31,13 @@ import com.sun.el.parser.AstTrue;
 
 import ksmart39.springboot.domain.ProductProductionProcessStatus;
 import ksmart39.springboot.domain.ProductionPlan;
+import ksmart39.springboot.domain.RequestedProduct;
 import ksmart39.springboot.domain.WorkOrder;
 import ksmart39.springboot.service.ProductionPlanService;
 import ksmart39.springboot.service.ProductionService;
 import ksmart39.springboot.service.ProductionStatusService;
 import ksmart39.springboot.service.WorkOrderService;
+import net.sf.json.JSON;
 
 @Controller
 @RequestMapping("/production")
@@ -60,22 +62,38 @@ public class ProductionController_PMA {
 	//[민아]생산공정 지시를 위한 의뢰코드 검색 modal
 	@RequestMapping(value = "searchOrderProductionProcess", method = RequestMethod.POST)
 	
-	public @ResponseBody Object getSearchKey(@RequestParam(value = "param", required = false) String param){
+	public @ResponseBody Object getSearchKey(@RequestParam(value = "param", required = false) String param, Model model){
 		log.info("json으로 받아온 param 값: {}", param);
 		
-		Map<String,Object> result = new HashMap<String,Object>();
 		Map<String,Object> paramMap = new HashMap<String,Object>();
+
+		//직렬화 시켜 가져온 오브젝트 배열을 java 형식으로 map에 넣어주는 과정
+		net.sf.json.JSONArray array = net.sf.json.JSONArray.fromObject(param);
 		
-		/*
-		 * JSONArray array = JSONArray. /JSONParser parser = new JSONParser(); Object
-		 * obj = null; try { obj = parser.parse(param); } catch (ParseException e) {
-		 * e.printStackTrace(); } JSONObject jsonObj = (JSONObject) obj;
-		 * 
-		 * log.info("param :{}", param);
-		 */
-		 
-		 
-		return null; 
+		log.info("fromObject메서드 사용한: {}", array);
+		
+		for(int i=0; i<array.size(); i++) {
+			net.sf.json.JSONObject obj = array.getJSONObject(i);
+			
+			
+			paramMap.put("clientCode", obj.get("clientCode"));
+			paramMap.put("clientName", obj.get("clientName"));
+			paramMap.put("requestRegDateFrom", obj.get("requestRegDateFrom"));
+			paramMap.put("requestRegDateTo", obj.get("requestRegDateTo"));
+			paramMap.put("contractCode", obj.get("contractCode"));
+			paramMap.put("contractAcceptCheck", obj.get("contractAcceptCheck"));
+		}
+		
+
+		log.info("paramMap 보장 : {}", paramMap);
+		
+		//DB에서 검색결과 받아와서 modal에 보내주기
+		List<Map<String,Object>> searchClientNameResult = productionService.searchClientName(paramMap);
+		log.info("DB에서 결과 받아오는 clinetName List : {}", searchClientNameResult);
+
+		log.info("어디모델이지? :{}", model.toString());
+		
+		return searchClientNameResult;
 	}
 	  
 	 
@@ -120,12 +138,6 @@ public class ProductionController_PMA {
 	@GetMapping("/productProgressList")
 	public String getproductProgressList() {
 		return "production/productProgressList";
-	}
-
-	// [민아+한빛]의뢰품목별 상세 생산 공정 현황 조회
-	@GetMapping("/detailedStateByProduct")
-	public String getDetailedStateByProduct() {
-		return "production/detailedStateByProduct";
 	}
 
 	// [민아+한빛]의뢰품목별 생산 현황 조회

@@ -5,53 +5,8 @@ layout:decorate="@{layout/default_production}">
 
 <th:block layout:fragment="customJs">
 <script type="text/javascript" th:src="@{/productionJs/searchClientNameModal.js}"></script>
-	<script>
-	$(function(){
-			/* var startButton = tableAttr.children().find('#startProduction');
-			var pCodeToStart = '';
-			startButton.click(function(){
-				console.log('버튼눌리나 확인');
-				pCodeToStart = $(this).parents('tr').find('#pCodeToStart').text();
-				console.log(pCodeToStart);
-				if(pCodeToStart != ''){
-					var request = $.ajax({
-						url: "/production/pCodeToStartSend",
-						method: "POST",
-						data: {pCodeToStart : pCodeToStart}
-					});
-				}
-			}); */
-			
-			
-			$('#byClientName').click(function(){
-				$('#byClientNameModal').modal("show");
-			});
-			
-		
-			
-			
-				
-			$('[data-popup-open]').on('click', function(e)  {
-		        var targeted_popup_class = jQuery(this).attr('data-popup-open');
-		        $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+<script type="text/javascript" th:src="@{/productionJs/orderProductionProcess.js}"></script>
 
-		        e.preventDefault();
-		    });
-
-		    //----- CLOSE
-		    $('[data-popup-close]').on('click', function(e)  {
-		        var targeted_popup_class = jQuery(this).attr('data-popup-close');
-		        $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
-
-		        e.preventDefault();
-		    });
-			
-	
-			
-	});
-	
-	
-	</script>
 </th:block>
 
 
@@ -97,7 +52,7 @@ layout:decorate="@{layout/default_production}">
          			<td style="padding-right: 20px;">
          				<div class="form-group"><!-- 거래처명 -->
 		               		<button id="byClientName" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
-		                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="직접 입력 또는 검색">
+		                	<input type="text" class="form-control" id="searchedClientName" placeholder="직접 입력 또는 검색">
 	              		</div>
          			</td>
          			<td>
