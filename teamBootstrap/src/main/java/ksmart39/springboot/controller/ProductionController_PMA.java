@@ -59,20 +59,21 @@ public class ProductionController_PMA {
 
 	//[민아]생산공정 지시를 위한 의뢰코드 검색 modal
 	@RequestMapping(value = "searchOrderProductionProcess", method = RequestMethod.POST)
-	@ResponseBody
-	public List<Map<String,Object>> getSearchKey(@RequestParam(value = "param", required = false) String param){
+	
+	public @ResponseBody Object getSearchKey(@RequestParam(value = "param", required = false) String param){
 		log.info("json으로 받아온 param 값: {}", param);
 		
-		JSONParser parser = new JSONParser(); 
-		Object obj = null;
-		try {
-			obj = parser.parse(param);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		  JSONObject jsonObj = (JSONObject) obj;
-		  
-		  log.info("param :{}", param);
+		Map<String,Object> result = new HashMap<String,Object>();
+		Map<String,Object> paramMap = new HashMap<String,Object>();
+		
+		/*
+		 * JSONArray array = JSONArray. /JSONParser parser = new JSONParser(); Object
+		 * obj = null; try { obj = parser.parse(param); } catch (ParseException e) {
+		 * e.printStackTrace(); } JSONObject jsonObj = (JSONObject) obj;
+		 * 
+		 * log.info("param :{}", param);
+		 */
+		 
 		 
 		return null; 
 	}
