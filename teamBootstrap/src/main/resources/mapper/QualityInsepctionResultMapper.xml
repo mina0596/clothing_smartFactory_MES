@@ -130,7 +130,8 @@
 		p.detailed_categorized_name,
 		i.low_cate_final_pass_check,
 		q.inspection_request_date,
-		i.inspection_end_date
+		i.inspection_end_date,
+		DATE_FORMAT(i.final_result_reg_date,'%Y-%m-%d %T') AS final_Date
 	FROM inspection_final_result AS  i
 	INNER JOIN 
 		quality_inspection_request AS q

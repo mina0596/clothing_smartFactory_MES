@@ -35,6 +35,17 @@ public class QualityControlController_HBR {
 	private QualityInsepctionResultService qualityInsepctionResultService;
 	
 	//================================================================
+	//[다미+보람]품질검사 최종등록 검색모달창 
+	@RequestMapping(value = "/addfinalresult",method = RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String,Object>> searchRequesetInspection(){
+		
+		return null;
+	}
+	
+	
+	
+	
 	//[다미+보람]검사현황 조회 성적서 모달창값전달하기
 	@RequestMapping(value = "/finalResult",method = RequestMethod.GET)
 	@ResponseBody
