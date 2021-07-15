@@ -72,11 +72,11 @@ public class QualityControlController_KDM {
 	@PostMapping("/addInspectionMeasurementValue")
 	public String addInspectionMeasurementValue(QualityInspectionResult qualityInspectionResult) {
 												
-		log.info("qualityInspectionResult: {}",qualityInspectionResult );
+		log.info("qualityInspectionResult: {}", qualityInspectionResult.getInspectionMeasurementValue() );
 		
 		
 		
-		return "redirect:inspectionMeasurementValueList";		
+		return "redirect:addInspectionMeasurementValue";		
 	}
 	
 	//[다미] 품질검사 측정값 등록 화면
