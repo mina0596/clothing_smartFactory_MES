@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import ksmart39.springboot.domain.RequestedProduct;
+
 
 
 @Mapper
@@ -18,4 +20,7 @@ public interface ProductionMapper {
 	
 	//[민아]생산 시작하기 - 생산현황에 첫공정 insert
 	public int startProduction(String sentPCode);
+	
+	//[민아]거래처명 검색 모달 결과
+	public List<Map<String,Object>> searchClientName(Map<String,Object> infoMap);
 }

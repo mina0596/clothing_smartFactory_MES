@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ksmart39.springboot.domain.ProductProductionProcessStatus;
 import ksmart39.springboot.domain.ProductionPlan;
 import ksmart39.springboot.domain.WorkOrder;
+import ksmart39.springboot.service.ProductStateService;
 import ksmart39.springboot.service.ProductionPlanService;
 import ksmart39.springboot.service.ProductionStatusService;
 import ksmart39.springboot.service.WorkOrderService;
@@ -37,9 +38,11 @@ public class ProductionController_LHB {
 	private static final Logger log = LoggerFactory.getLogger(ProductionController_LHB.class);
 	
 	private final ProductionStatusService productionStatusService;
+	private final ProductStateService productStateService;
 	
-	public ProductionController_LHB(ProductionStatusService productionStatusService) {
+	public ProductionController_LHB(ProductionStatusService productionStatusService, ProductStateService productStateService) {
 		this.productionStatusService = productionStatusService;
+		this.productStateService = productStateService;
 	}
 	
 	
@@ -55,6 +58,14 @@ public class ProductionController_LHB {
 
 	//===================================================================
 
+	@GetMapping("/detailedStateByProduct")
+	public String getProductState(Model model) {
+		List<Map<String,Object>> resultMap = productStateService.getProductState();
+		model.addAttribute("title", "생산현황");
+		model.addAttribute("productState", resultMap);
+		log.info("resultMap:{}", resultMap);
+		return "production/detailedStateByProduct";
+	}
 	
 	
 	

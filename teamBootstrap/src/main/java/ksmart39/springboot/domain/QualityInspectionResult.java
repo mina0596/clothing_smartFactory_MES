@@ -17,7 +17,9 @@ public class QualityInspectionResult {
 	private int inspectionDuration;
 	private String inspectionEndDate;
 	private String inspectionResultRegDate;
-	private String inspectionResult_updateDate;
+	private String inspectionResultUpdateDate;
+	private String rawMaterialCode;
+	
 	public String getInspectionResultCode() {
 		return inspectionResultCode;
 	}
@@ -108,11 +110,17 @@ public class QualityInspectionResult {
 	public void setInspectionResultRegDate(String inspectionResultRegDate) {
 		this.inspectionResultRegDate = inspectionResultRegDate;
 	}
-	public String getInspectionResult_updateDate() {
-		return inspectionResult_updateDate;
+	public String getInspectionResultUpdateDate() {
+		return inspectionResultUpdateDate;
 	}
-	public void setInspectionResult_updateDate(String inspectionResult_updateDate) {
-		this.inspectionResult_updateDate = inspectionResult_updateDate;
+	public void setInspectionResultUpdateDate(String inspectionResultUpdateDate) {
+		this.inspectionResultUpdateDate = inspectionResultUpdateDate;
+	}
+	public String getRawMaterialCode() {
+		return rawMaterialCode;
+	}
+	public void setRawMaterialCode(String rawMaterialCode) {
+		this.rawMaterialCode = rawMaterialCode;
 	}
 	@Override
 	public String toString() {
@@ -124,9 +132,11 @@ public class QualityInspectionResult {
 				+ ", minTolerance=" + minTolerance + ", maxTolerance=" + maxTolerance + ", errorRange=" + errorRange
 				+ ", inspectionPassCheck=" + inspectionPassCheck + ", inspectionStartDate=" + inspectionStartDate
 				+ ", inspectionDuration=" + inspectionDuration + ", inspectionEndDate=" + inspectionEndDate
-				+ ", inspectionResultRegDate=" + inspectionResultRegDate + ", inspectionResult_updateDate="
-				+ inspectionResult_updateDate + "]";
+				+ ", inspectionResultRegDate=" + inspectionResultRegDate + ", inspectionResultUpdateDate="
+				+ inspectionResultUpdateDate + ", rawMaterialCode=" + rawMaterialCode + "]";
 	}
+
+	
 	
 	
 	
