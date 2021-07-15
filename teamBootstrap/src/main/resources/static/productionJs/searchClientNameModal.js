@@ -18,37 +18,36 @@ $(function(){
 				var thList = $(this).parents('thead').children().find('th');
 				var inputList = thList.find('input');
 				console.log(inputList);
-				$(inputList).each(function(){
-					idName.push($(this).attr('id'));
-					idValue.push($(this).val());
-				});
-				console.log(idName);
-				console.log(idValue);
-				for(var i=0; i < idName.length; i++){
-					var key = idName[i];
-					param[key] = idValue[i];
+				
+				var param = {
+					clientCode : $('#clientCode').val(),
+					requestRegDateFrom : $('#requestRegDateFrom').val(),
+					requestRegDateTo : $('#requestRegDateTo').val(),
+					contractCode : $('#contractCode').val(),
+					contractAcceptCheck : $('#contractAcceptCheck').val()
 				}
+				
+				
 				console.log(param);
+				var jsonData = JSON.stringify(param);
+				console.log("jsonData 직렬화시킨거" + jsonData);
+				var request = $.ajax({
+					url: "/production/searchOrderProductionProcess",
+					method: "POST",
+					data: { "param" : jsonData },
+					dataType: "json"
+					
+				}); 
+				request.done(function( data ) {
+					console.log(data);
+					
+				});
+				request.fail(function( jqXHR, textStatus ) {
+					alert( "Request failed: " + textStatus );
+				});	
 				
 			});
 			
-			var jsonData = JSON.stringify(param);
-			jQuery.ajaxSettings.traditional = true;
-
-			var request = $.ajax({
-				url: "/production/searchOrderProductionProcess",
-				method: "POST",
-				data: { param : jsonData },
-				dataType: "json"
-				
-			}); 
-			request.done(function( data ) {
-				console.log(data);
-				
-			});
-			request.fail(function( jqXHR, textStatus ) {
-				alert( "Request failed: " + textStatus );
-			});	
 			
 								
 	
