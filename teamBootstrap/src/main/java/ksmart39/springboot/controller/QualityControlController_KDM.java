@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -69,10 +70,10 @@ public class QualityControlController_KDM {
 	}
 	
 	//[다미] 품질검사 측정값 등록
-	@PostMapping("/addInspectionMeasurementValue")
-	public String addInspectionMeasurementValue(QualityInspectionResult qualityInspectionResult) {
+	@RequestMapping(value = "/addInspectionMeasurementValue", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=UTF-8")
+	public String addInspectionMeasurementValue(@RequestBody List<QualityInspectionResult> qualityInspectionResult) {
 												
-		log.info("qualityInspectionResult: {}", qualityInspectionResult.getInspectionMeasurementValue() );
+		log.info("qualityInspectionResult: {}", qualityInspectionResult );
 		
 		
 		
