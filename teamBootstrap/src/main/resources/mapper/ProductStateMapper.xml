@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart39.springboot.dao.ProductStateMapper">
+	<resultMap type="ProductionProcessList" id="getProductStateInfo">
+		<result property="productionProcessCode" column="production_process_code"/>
+		<result property="requestedProductCode" column="requested_product_code"/>
+		<result property="processStartDate" column="process_start_date"/>
+		<result property="completedProductUpdateDate" column="completed_product_update_date"/>
+		<result property="processStatus" column="process_status"/>
+			<association property="productionProcessList"  javaType="ProductionProcessList">
+				<id property="requestedProductCode"  column="requested_product_code"/>	 <!-- join 공통 -->
+				<result property="processOrderNum" column="process_order_num"/>
+			</association>		
+	</resultMap>
+	
+	<select id = "getProductState" resultMap="getProductStateInfo" fetchSize="1000">
+		SELECT
+				 ps.requested_product_code
+				,MAX(pl.process_order_num)
+				,MAX(ps.process_status)
+				,MIN(ps.process_start_date)
+				,MAX(ps.completed_product_update_date)
+				,( SELECT 
+						ppl.production_process_low_classification
+				   FROM
+						production_process_list AS ppl
+				   WHERE  
+						ppl.production_process_code = MAX(ps.production_process_code) )
+		FROM
+			product_production_process_status AS ps
+			INNER JOIN 
+			production_process_list AS pl
+			ON 
+			ps.production_process_code = pl.production_process_code
+		GROUP BY ps.requested_product_code;
+	</select>
+</mapper>

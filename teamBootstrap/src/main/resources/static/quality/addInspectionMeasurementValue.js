@@ -39,7 +39,6 @@
 				
 				request.done(function( data ) {
 					console.log(data);
-					
 					if(data.length > 0){
 						for(i=0; i<data.length; i++){
 							var date =  data[i].inspection_request_date;
@@ -99,6 +98,11 @@
 							html += '<td style="display:none" class="quality_inspection_code" value="';
 							html += data[i].quality_inspection_code;
 							html += '">' + data[i].quality_inspection_code + '</td>';
+							
+							//원부자재 코드
+							html += '<td style="display:none" class="raw_material_code" value="';
+							html += data[i].raw_material_code;
+							html += '">' + data[i].raw_material_code + '</td>';
 
 							//거래처명
 							html += '<td class="client_name" value="';
@@ -139,15 +143,16 @@
 					var contractCode = $(this).parent().parent().find('td.contract_code').text();
 					var subClassName = $(this).parent().parent().find('td.sub_class_name').text();
 					var rawMaterialName = $(this).parent().parent().find('td.raw_material_name').text();
+					var rawMaterialCode = $(this).parent().parent().find('td.raw_material_code').text();
 					var insReqCode = $('.insReqCode');
 					var inspectionName = $('.inspectionName');
 					var materialsName = $('.materialsName');
 					
-					console.log($(this));
-					console.log(contractCode);
-					console.log(subClassName);
-					console.log(rawMaterialName);
-					console.log(qualityInspectionCode);
+					//console.log($(this));
+					//console.log(contractCode);
+					//console.log(subClassName);
+					//console.log(rawMaterialName);
+					//console.log(qualityInspectionCode);
 					
 					//체크된 수만큼 측정값 등록 행 추가
 					if(index >= 0 && index !=null && index != undefined){
@@ -160,10 +165,12 @@
 							//품질검사요청코드
 							innerHtml += '<td><div class="input-group"><input type="text" name="qualityInspectionRequestCode" class="form-control" value="';
 							innerHtml += requestCode;
-							innerHtml += '" placeholder="품질검사요청코드 검색"><div class="input-group-btn"><button id="requestCode2" class="btn btn-default">검색</button></div></div></td>';
+							innerHtml += '" placeholder="품질검사요청코드 검색"></div></td>';
 							innerHtml += '<td><input type="text" class="form-control" value="' + subClassName  + '" readonly="readonly"></td>';
 							//품질검사코드
 							innerHtml += '<input type="hidden" name="qualityInspectionCode" class="form-control" value="' + qualityInspectionCode + '">';
+							//원부자재코드
+							innerHtml += '<input type="hidden" name="rawMaterialCode" class="form-control" value="' + rawMaterialCode + '">';
 							//원부자재명
 							innerHtml += '<td><input type="text" class="form-control" value="' + rawMaterialName  + '" readonly="readonly"></td>';
 							innerHtml += '<td><select class="form-control"><option>1회차</option><option>2회차</option><option>3회차</option></select></td>';
@@ -204,11 +211,67 @@
 			}
 		});
 		
+		//다중 등록 ajax
+		var addInsValueAjax = function(array){
+			$.ajax({
+		        url     : '/quality/addInspectionMeasurementValue',
+		        type    : 'POST',
+		        data    : JSON.stringify(array),
+		        contentType : 'application/json; charset=UTF-8',
+		        dataType: 'text',
+		        success : function(data) {
+		        	console.log(data);
+		        	
+		        	//리로드
+		        	//if(data) location.reload();
+		        },
+		        error : function(xhr,status,error) {
+		        	console.log("xhr: " + xhr);
+		        	console.log("status: " + status);
+		        	console.log("error: " + error);
+		        }
+		    });
+		}
 		
-		//다중 등록
-		
+		//다중 등록		
 		$(document).on('click', '#addInsValue', function(){
+			var insValueNum = $('input[name="inspectionMeasurementValue"]');
+			var insReqCode = $('input[name="qualityInspectionRequestCode"]');
+			var validationCheck = false;
 			
+			if(insReqCode.val() == null || insReqCode.val() == undefined || insReqCode.val() == '' ){
+				insReqCode.focus();
+				alert('품질검사 요청 코드를 입력해주세요');
+			}else if(insValueNum.val() == null || insValueNum.val() == undefined || insValueNum.val() == '' ){
+				insValueNum.focus();
+				alert('측정값을 입력해주세요');
+			}else{
+				
+				var addIns = $('#tbody tr');
+				var insArray = [];
+				
+				for(var i = 0; i < addIns.length; i ++){
+					var insInfo = {};
+					var bindElement = addIns.eq(i).find('input');
+					
+					$.each(bindElement, function(){
+						var insKey = $(this).attr('name');
+						var insValue = $(this).val();
+						console.log("key: ", insKey);
+						console.log("value: ", insValue);
+						
+						if(insKey != null || insKey != undefined || insKey != ''){
+							insInfo[insKey] = insValue;
+							validationCheck = true;
+						}	
+						
+					});
+					insArray.push(insInfo);
+				};
+				
+			}			
+			console.log(JSON.stringify(insArray));
+			if(validationCheck) addInsValueAjax(insArray);
 			
 		});
 		

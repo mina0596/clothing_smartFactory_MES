@@ -5,9 +5,18 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import ksmart39.springboot.domain.QualityBiochemFabricLevelStandard;
+import ksmart39.springboot.domain.QualityInspectionResult;
+import ksmart39.springboot.domain.QualityInspectionStandard;
+
 @Mapper
 public interface QualityInsMeasurementValueMapper {
 
+	//품질검사 기준표
+	public List<QualityInspectionStandard> getQualityInspectionStandard(String qualityInspectionCode);
+	
+	//원부자재 이화학검사 원단별 등급 기준치 
+	public List<QualityBiochemFabricLevelStandard> getBiochemFabricLevelStandard(QualityInspectionResult qualityInspectionResult);
 	
 	//품질검사 요청 검색 모달
 	public List<Map<String, Object>> searchQualityInspectionRequest(Map<String, Object> map);
