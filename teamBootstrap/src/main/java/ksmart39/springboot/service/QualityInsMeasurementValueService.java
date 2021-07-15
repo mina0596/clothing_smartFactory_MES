@@ -26,8 +26,9 @@ public class QualityInsMeasurementValueService {
 	//원부자재 이화학검사 원단별 등급 결과값 등록
 	public int addQualityInspectionResult(List<QualityInspectionResult> qualityInspectionResult) {
 		int result = 0;
-		int measuredLevel = 0; //판정 등급값
-		String passValue = null; //합/불
+		int measuredLevel = 0; //등급값
+		int passCheckValue = 0; //판정 기준 최소값
+		String passValue = null; //최종 합/불
 		
 		log.info("01. 처음 들어오는 배열 :  {}", qualityInspectionResult.get(0));
 		
@@ -54,12 +55,19 @@ public class QualityInsMeasurementValueService {
 				List<QualityInspectionStandard> insStandard 
 					= qualityInsMeasurementValueMapper.getQualityInspectionStandard(qualityInspectionResult.get(i).getQualityInspectionCode());
 		
-				int passCheckValue = insStandard.get(0).getMinValue();
+				passCheckValue = insStandard.get(0).getMinValue();
 				log.info("04. 최소 등급 가져오기  :  {}", passCheckValue);
-				
-				//02-2 최소 등급과 현재 등급 비교해서 합/불 판정하기
+								
 			}
-						
+			
+			//02-2 최소 등급과 현재 등급 비교해서 합/불 판정하기
+			if(measuredLevel >= passCheckValue) {
+				passValue = "합격";
+			}else if(measuredLevel <= passCheckValue) {
+				passValue = "불합격";
+			}
+			log.info("05. 최종 합/불  :  {}", passValue);
+			
 		}
 						
 		return result;
