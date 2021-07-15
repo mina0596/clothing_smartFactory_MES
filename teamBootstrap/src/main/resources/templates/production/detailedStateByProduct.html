@@ -132,47 +132,17 @@ layout:decorate="@{layout/default_production}">
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr th:each = "p,n: ${productState}">
                   	<td><input type="checkbox" class="checked"></td>
-	                <td>1</td>
-                    <td>req03_WS_pants</td>
-                    <td>2021-02-01</td>
-                    <td><span class="badge bg" style="padding-top: 5px;">봉제 본봉공정</span></td>
-                    <td>4</td>
+	                <td th:text = "${n.index+1}"></td>
+                    <td th:text = "${p.requestedProductCode}"></td>
+                    <td th:text = "${p.processOrderNum}"></td>
+                    <td th:text = "${p.productionProcessLowClassification}"><span class="badge bg" style="padding-top: 5px;"></span></td>
+                    <td th:text = "${p.processStartDate}"></td>
+                    <td th:text = "${p.completedProductUpdateDate}"></td>
+                    <td th:text = "${p.processStartDate}"></td>
                     <td></td>
-                    <td>2021-03-01</td>
                   </tr>
-                  
-                  <tr>
-                  	<td><input type="checkbox" class="checked"></td>
-	            	<td>2</td>
-                    <td>req11_WS_jacket</td>
-                    <td>2021-03-21</td>
-                    <td><span class="badge bg" style="padding-top: 5px;">완성가공</span></td>
-                    <td>6</td>
-                    <td>2021-03-27</td>
-                    <td>2021-03-01</td>
-                  </tr>   
-                  <tr>
-                  	<td><input type="checkbox" class="checked"></td>
-                  	<td>3</td>
-                    <td>req13_WS_jacket</td>
-                    <td>2021-03-21</td>
-                    <td><span class="badge bg" style="padding-top: 5px;">봉제 특수 공정</span></td>
-                    <td>6</td>
-                    <td>2021-03-27</td>
-                    <td>2021-03-01</td>
-                  </tr>
-                 <tr>
-                 	<td><input type="checkbox" class="checked"></td>
-	            	<td>4</td>
-                    <td>req19_WS_skirt</td>
-                    <td>2021-03-21</td>
-                    <td><span class="badge bg" style="padding-top: 5px;">재단 후공정</span></td>
-                    <td>6</td>
-                    <td></td>
-                    <td>2021-03-01</td>
-                 </tr>
                 </tbody>
               </table>
             
