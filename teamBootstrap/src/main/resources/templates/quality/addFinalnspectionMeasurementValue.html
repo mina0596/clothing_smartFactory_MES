@@ -1,4 +1,4 @@
-2<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
 layout:decorate="@{layout/default_qualityControl}">
@@ -13,8 +13,30 @@ layout:decorate="@{layout/default_qualityControl}">
 		$('#cancleBtn').click(function(){
 			window.history.back();
 		});
+		
+		$('#searchRequesetCode').click(function(){
+			/* ajax 결과값 done (data) mymodal*/
+			var request = $.ajax({
+				  url: "/quality/addfinalresult",
+				  method: "GET",
+				  type: "post",
+				  dataType: "json"
+				});
+			var html = '';
+			 
+			 request.done(function( data ) {
+					$('#myModal').modal();
+					
+				        
+				       
+					});
+			 			
+			 
+			request.fail(function( jqXHR, textStatus ) {
+			  alert( "Request failed: " + textStatus );
+			});	 
+		});
 	});
-	
 	</script>
 	</th:block>	 
 </th:block>
@@ -25,123 +47,137 @@ layout:decorate="@{layout/default_qualityControl}">
       <h4 class="mb"><i class="fa fa-edit"></i>최종결과입력</h4>
       <hr>
       <br>
-      
-      <form class="form-horizontal style-form" method="post">
-      
-     
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label">품질검사요청코드</label>
-          <div class="col-md-5">
-            <div  class="input-group ">
-              <input type="text" class="form-control"  size="16">
-              <div class="input-group-btn">
-                <button type="button" class=" btn btn-theme03 btn btn-default"><i class="fa"></i>검색하여 가져오기</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-       
-      
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label">계약번호</label>
-          <div class="col-md-5">
-            <input class="form-control" id="disabledInput" type="text" placeholder=""  disabled="disabled">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label">검사대분류명</label>
-          <div class="col-md-5">
-            <input class="form-control" id="disabledInput" type="text" disabled="disabled" >
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label">검사중분류명</label>
-          <div class="col-md-5">
-            <input class="form-control" id="disabledInput" type="text"disabled="disabled" >
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label">검사소분류명</label>
-          <div class="col-md-5">
-            <input class="form-control" id="disabledInput" type="text"disabled="disabled" >
-          </div>
-        </div>
-        <div class="form-group">
-           <label class="col-sm-2 col-sm-2 control-label">1차결과</label>
-          <div class="col-md-4">
-            <input class="form-control" id="disabledInput" type="text" placeholder="검색하면 자동으로 결과값이 불러와집니다" disabled="disabled" >
-           </div>
-           <input style="zoom:2.0;" type="checkbox" class="checkbox">
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label">2차결과</label>
-          <div class="col-md-4">
-            <input class="form-control" id="disabledInput" type="text" placeholder="검색하면 자동으로 결과값이 불러와집니다" disabled="disabled" >
-          </div>
-          <input style="zoom:2.0;" type="checkbox" class="checkbox">
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label">3차결과</label>
-          <div class="col-md-4">
-            <input class="form-control" id="disabledInput" type="text" placeholder="검색하면 자동으로 결과값이 불러와집니다"  disabled="disabled">
-          </div>
-          <input style="zoom:2.0;" type="checkbox" class="checkbox">
-        </div>
-        
-        
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label">검사시작일</label>
-          <div class="col-md-4">
-            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
-              <input type="text" class="form-control" readonly="readonly" size="16">
-              <div class="input-group-btn">
-                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
-                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label">검사종료일</label>
-          <div class="col-md-4">
-            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
-              <input type="text" class="form-control" readonly="readonly" size="16">
-              <div class="input-group-btn">
-                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
-                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
-              </div>
-            </div>
-          </div>
-        </div>
-     
-
-        <div class="form-group">
-          <label class="col-lg-2 col-sm-2 control-label">담당 사원명</label>
-          <div class="col-lg-10">
-            <p class="form-control-static">추잔탁</p>
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label class="col-lg-2 col-sm-2 control-label">담당자 사원 코드</label>
-          <div class="col-lg-10">
-            <p class="form-control-static">employee0293</p>
-          </div>
-        </div>
- 		
-       <div class="form-group text-right">
-                    <div class="col-lg-offset-2 col-lg-10">
-                      <button class="btn btn-theme" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">최종결과등록</font></font></button>
-                      <button class="btn btn-theme04" type="button" id="cancleBtn"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">최종결과취소</font></font></button>
-                    </div>
-                    </div>
+      <div class="col-md-3 input-group">	
+		<input type="text" class="form-control" placeholder="품질검사 요청코드 검색">
+		<div class="input-group-btn">
+			<button id="searchRequesetCode" class="btn btn-warning">검색</button>
+		</div>
+		</div>
+		<br>
+		<br>
+				
+		<form class="form-horizontal style-form" method="post">
+		
+		 <table class="table table-bordered table-striped table-condensed">
+                  <thead>
+                    <tr >
+                      <th>품질검사 요청코드</th>
+                      <th>중분류검사명</th>
+                      <th>소분류검사명</th>
+                      <th>상세분류검사명</th>
+                      <th>측정회차</th>
+                      <th>측정결과 </th>
+   	                   <th>검사시작일</th>
+                      <th>검사등록일</th>
+                    </tr>
+                   </thead>
+                  <tbody>
+	                  <tr>
+	                  		<td><input type="text" class="form-control"  readonly="readonly"></td>
+	                  		<td><input type="text" class="form-control"  readonly="readonly"></td>
+	                  		<td><input type="text" class="form-control"  readonly="readonly"></td>
+	                  		<td><input type="text" class="form-control"  readonly="readonly"></td>
+	                  		<td><input type="text" class="form-control"  readonly="readonly"></td>
+	                  		<td><input type="text" class="form-control"  readonly="readonly"></td>
+	                  		 <td>
+	                      	<input type="datetime-local" name="inspectionStartDate" class="form-control">
+	                      	</td>
+	                      	<td>
+	                      	<input type="datetime-local" name="inspectionEndDate" class="form-control">
+	                      	</td>
+	                   </tr>
+	                  <tr>
+	                  		<td><input type="text" class="form-control"  readonly="readonly"></td>
+	                  		<td><input type="text" class="form-control"  readonly="readonly"></td>
+	                  		<td><input type="text" class="form-control"  readonly="readonly"></td>
+	                  		<td><input type="text" class="form-control"  readonly="readonly"></td>
+	                  		<td><input type="text" class="form-control col-xs-1"  readonly="readonly"></td>
+	                  		<td><input type="text" class="form-control"  readonly="readonly"></td>
+	                  		 <td>
+	                      	<input type="datetime-local" name="inspectionStartDate" class="form-control">
+	                      	</td>
+	                      	<td>
+	                      	<input type="datetime-local" name="inspectionEndDate" class="form-control">
+	                      	</td>
+	                   </tr>
+	                  <tr>
+	                  		<td><input type="text" class="form-control"  readonly="readonly"></td>
+	                  		<td><input type="text" class="form-control"  readonly="readonly"></td>
+	                  		<td><input type="text" class="form-control"  readonly="readonly"></td>
+	                  		<td><input type="text" class="form-control"  readonly="readonly"></td>
+	                  		<td><input type="text" class="form-control col-xs-1"  readonly="readonly"></td>
+	                  		<td><input type="text" class="form-control"  readonly="readonly"></td>
+	                  		 <td>
+	                      	<input type="datetime-local" name="inspectionStartDate" class="form-control">
+	                      	</td>
+	                      	<td>
+	                      	<input type="datetime-local" name="inspectionEndDate" class="form-control">
+	                      	</td>
+	                   </tr>
+                  </tbody>
+              </table>
+           <div class="form-group text-right">
+                <div class="col-lg-offset-2 col-lg-10">
+                  <button class="btn btn-theme" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">최종결과등록</font></font></button>
+                  <button class="btn btn-theme04" type="button" id="cancleBtn"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">최종결과취소</font></font></button>
+                </div>
+                </div>
         
          
         
       </form>
       
     </div>
+    <!-- 품질검사 결과 검색창 모달 시작  -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+  			<div class="modal-content">
+   		 		<div class="modal-header">
+      			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title " id="myModalLabel">품질검사결과 검색</h4>
+      	</div>
+    	<div class="modal-body">
+	      <div class="row content-panel">
+	      <div>
+	      	<table border="1" class="col-lg-12"style="text-align: center;" id="">
+   				<thead>
+   					<tr>
+   						<th >의뢰품목코드명</th>
+   						<th>중분류검사명</th>
+   						<th>소분류검사명</th>
+   						<th>상세검사명</th>
+   						<th>검사 회차</th>
+   						<th>검사 회차결과</th>
+   						<th>검사 회차등록일</th>
+     				</tr>
+   					
+   				</thead>
+   				<tbody>
+   				<tr>
+   					<td></td>
+   					<td ></td>
+   					<td></td>
+   					<td></td>
+   					<td></td>
+   					<td></td>
+   					<td></td>
+   					<td></td>
+   					<td></td>
+   					<td ></td>
+   				</tr>
+   				</tbody>
+   			</table>
+		      </div>
+	        
+	      </div>
+	      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div></div>
+
+    
 </th:block>
 
 </html>
