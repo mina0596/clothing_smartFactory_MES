@@ -69,12 +69,8 @@ layout:decorate="@{layout/default_qualityControl}">
                     <tr id="tableTr">	
                       <td><input type="checkbox" class="checked"></td>
                       <td>
-		                <div class="input-group">	
-							<input type="text" name="qualityInspectionRequestCode" class="form-control insReqCode" placeholder="품질검사요청코드 검색">
-							<div class="input-group-btn">
-								<button id="requestCode2" class="btn btn-default">검색</button>
-							</div>						
-		                </div>
+							<input type="text" name="qualityInspectionRequestCode" class="form-control" placeholder="품질검사요청코드">					
+
 					  </td>
 					  <td class="inspectionName">
 					  	<input type="text" class="form-control" value="검사명" readonly="readonly">
@@ -110,7 +106,7 @@ layout:decorate="@{layout/default_qualityControl}">
                 
               <div class="form-group text-right">
                     <div class="col-lg-offset-2 col-lg-10">
-                      <button type="submit" id="addInsValue" class="btn btn-success btn-xs"><i class="fa fa-check"></i>등록</button>
+                      <button type="button" id="addInsValue" class="btn btn-success btn-xs"><i class="fa fa-check"></i>등록</button>
                       <a id="deleteBtn" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i>삭제</a>
                     </div>
                 </div>

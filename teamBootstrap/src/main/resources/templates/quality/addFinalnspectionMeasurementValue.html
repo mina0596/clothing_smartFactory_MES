@@ -1,4 +1,4 @@
-2<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
 layout:decorate="@{layout/default_qualityControl}">
@@ -7,13 +7,14 @@ layout:decorate="@{layout/default_qualityControl}">
 	   <div class="border-head"> 
 	    <h3 >품질관리</h3>
 	    </div>
+	    <script type="text/javascript" th:src="@{/quality/QualityInspectionFinalResult.js}"></script>	  
 	<th:block layout:fragment="customJs">
 		    <script>
 	$(function(){
 		$('#cancleBtn').click(function(){
 			window.history.back();
 		});
-	});
+				});
 	
 	</script>
 	</th:block>	 
@@ -25,123 +26,133 @@ layout:decorate="@{layout/default_qualityControl}">
       <h4 class="mb"><i class="fa fa-edit"></i>최종결과입력</h4>
       <hr>
       <br>
-      
-      <form class="form-horizontal style-form" method="post">
-      
-     
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label">품질검사요청코드</label>
-          <div class="col-md-5">
-            <div  class="input-group ">
-              <input type="text" class="form-control"  size="16">
-              <div class="input-group-btn">
-                <button type="button" class=" btn btn-theme03 btn btn-default"><i class="fa"></i>검색하여 가져오기</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-       
-      
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label">계약번호</label>
-          <div class="col-md-5">
-            <input class="form-control" id="disabledInput" type="text" placeholder=""  disabled="disabled">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label">검사대분류명</label>
-          <div class="col-md-5">
-            <input class="form-control" id="disabledInput" type="text" disabled="disabled" >
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label">검사중분류명</label>
-          <div class="col-md-5">
-            <input class="form-control" id="disabledInput" type="text"disabled="disabled" >
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label">검사소분류명</label>
-          <div class="col-md-5">
-            <input class="form-control" id="disabledInput" type="text"disabled="disabled" >
-          </div>
-        </div>
-        <div class="form-group">
-           <label class="col-sm-2 col-sm-2 control-label">1차결과</label>
-          <div class="col-md-4">
-            <input class="form-control" id="disabledInput" type="text" placeholder="검색하면 자동으로 결과값이 불러와집니다" disabled="disabled" >
-           </div>
-           <input style="zoom:2.0;" type="checkbox" class="checkbox">
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label">2차결과</label>
-          <div class="col-md-4">
-            <input class="form-control" id="disabledInput" type="text" placeholder="검색하면 자동으로 결과값이 불러와집니다" disabled="disabled" >
-          </div>
-          <input style="zoom:2.0;" type="checkbox" class="checkbox">
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label">3차결과</label>
-          <div class="col-md-4">
-            <input class="form-control" id="disabledInput" type="text" placeholder="검색하면 자동으로 결과값이 불러와집니다"  disabled="disabled">
-          </div>
-          <input style="zoom:2.0;" type="checkbox" class="checkbox">
-        </div>
-        
-        
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label">검사시작일</label>
-          <div class="col-md-4">
-            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
-              <input type="text" class="form-control" readonly="readonly" size="16">
-              <div class="input-group-btn">
-                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
-                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label">검사종료일</label>
-          <div class="col-md-4">
-            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
-              <input type="text" class="form-control" readonly="readonly" size="16">
-              <div class="input-group-btn">
-                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
-                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
-              </div>
-            </div>
-          </div>
-        </div>
-     
-
-        <div class="form-group">
-          <label class="col-lg-2 col-sm-2 control-label">담당 사원명</label>
-          <div class="col-lg-10">
-            <p class="form-control-static">추잔탁</p>
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label class="col-lg-2 col-sm-2 control-label">담당자 사원 코드</label>
-          <div class="col-lg-10">
-            <p class="form-control-static">employee0293</p>
-          </div>
-        </div>
- 		
-       <div class="form-group text-right">
-                    <div class="col-lg-offset-2 col-lg-10">
-                      <button class="btn btn-theme" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">최종결과등록</font></font></button>
-                      <button class="btn btn-theme04" type="button" id="cancleBtn"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">최종결과취소</font></font></button>
-                    </div>
-                    </div>
+      <div class="col-md-3 input-group">	
+		<input type="text" class="form-control" placeholder="품질검사 요청코드 검색">
+		<div class="input-group-btn">
+			<button id="searchRequesetCode" class="btn btn-warning">검색</button>
+		</div>
+		</div>
+		<br>
+		<br>
+				
+		<form class="form-horizontal style-form" method="post">
+		
+		 <table class="table table-bordered table-striped table-condensed">
+                  <thead>
+                    <tr >                      
+                      <th>품목별 의뢰 코드</th>
+                      <th>품질검사 요청코드</th>
+                      <th>중분류검사명</th>
+                      <th>소분류검사명</th>
+                      <th>상세분류검사명</th>
+                      <th>측정회차</th>
+                      <th>측정결과 </th>
+   	                  <th>검사시작일</th>
+   	                  <th>검사소요시간</th>
+   	                  <th>검사완료시간</th>
+                      <th>검사등록일</th>
+                    </tr>
+                   </thead>
+                  <tbody>
+	                  <tr>
+	                  		<td><input type="text"  class="requestProductCode" readonly="readonly"placeholder="품목별의뢰코드"></td>
+	                  		<td><input type="text" class="qualityInspectionReqestCode"  readonly="readonly" placeholder="품질검사요청코드"></td>
+	                  		<td><input type="text" class="mediumInspectionName"  readonly="readonly" placeholder="중분류검사명"></td>
+	                  		<td><input type="text" class="lowInspectionName"  readonly="readonly" placeholder="소분류검사명"></td>
+	                  		<td><input type="text" class="subInspectionName"  readonly="readonly" placeholder="상세분류검사명"></td>
+	                  		<td><input type="text" class="measurementNum"  readonly="readonly" placeholder="측정회차"></td>
+	                  		<td><input type="text" class="measuermentResult"  readonly="readonly" placeholder="측정결과"></td>
+	                  		<td><input type="text" class="inspectionStartDate"  readonly="readonly" placeholder="검사시작일"></td>
+	                  		<td><input type="text" class="inspectionDuration"  readonly="readonly" placeholder="검사소요시간"></td>
+	                  		<td><input type="text" class="inspectionCompleteDate"  readonly="readonly" placeholder="검사완료시간"></td>
+	                  		<td><input type="text" class="inspectionRegDate"  readonly="readonly" placeholder="검사등록일"></td>
+	                   </tr>
+	                 
+	                  
+	                  
+	                 
+                  </tbody>
+              </table>
+           <div class="form-group text-right">
+                <div class="col-lg-offset-2 col-lg-10">
+                  <button class="btn btn-theme" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">최종결과등록</font></font></button>
+                  <button class="btn btn-theme04" type="button" id="cancleBtn"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">최종결과취소</font></font></button>
+                </div>
+                </div>
         
          
         
       </form>
       
     </div>
+    <!-- 품질검사 결과 검색창 모달 시작  -->
+    <div class="modal fade modal-xl"style=" height: 700px;"  id="inspectionResultModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog "style="width:auto; display:table;" role="document">
+  			<div class="modal-content">
+   		 		<div class="modal-header">
+      			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title " id="myModalLabel">품질검사결과 검색</h4>
+      	</div>
+    	<div class="modal-body">
+	      <div class="row content-panel">
+	      <div>
+	      	 <table  class="table table-striped table-advance table-hover">
+	         	<tbody>       		
+	       			<thead>
+	        			<tr>
+		         			<th colspan="3"	class="form-inline">
+		         			 	<label class="control-label">계약번호</label>
+			                	<input type="text" class="form-control" id="contractCode" placeholder="검색어를 입력하세요.">
+		         			</th>
+		         			<th colspan="3" class="form-inline">
+		         				<label class="control-label">품목별 의뢰 코드</label>
+			                	<input type="text" class="form-control" id="requestedProductCode" placeholder="검색어를 입력하세요.">
+		         			</th>
+		         			<th colspan="3" class="form-inline">
+		         				<label class="control-label">품질검사 명</label>
+			                	<input type="text" class="form-control" id="subClassName" placeholder="검색어를 입력하세요.">
+		         			</th>  
+		          			<th colspan="4" class="form-inline">
+			         				<label class="control-label">거래처명</label>
+			                	<input type="text" class="form-control" id="clientName" placeholder="검색어를 입력하세요.">
+		         				 <button type="submit" id="serchBtnModal" class="btn btn-theme" style="width: 17%; margin-left: 10px;">검색</button>
+		         				 <button type="submit" id="saveBtn" class="btn btn-primary" style="width: 17%;">Save</button>
+		         			</th>
+		         			
+	        			</tr>     			
+	       			</thead>
+	       			<tbody id="searchTbody" style="text-align: center;">
+	       				<tr>
+	       					<td><input type="checkbox" id="checkAllModal"></td>
+	       					<td>no.</td>
+	       					<td>계약번호</td>
+	       					<td>거래처명</td>
+	       					<td>품목별 의뢰 코드</td>	       					
+	       					<td>품질검사중분류</td>
+	       					<td>품질검사소분류</td>
+	       					<td>품질검사상세</td>
+	       					<td>검사회차</td>
+	       					<td>검사결과</td>
+	       					<td>검사시작시간</td>
+	       					<td>검사소요시간</td>
+	       					<td>검사종료시간</td>
+	       					<td>검사결과 등록날짜</td>
+	       				</tr>
+	       				
+	     			</tbody> 
+         </table> 
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  
+
+    
 </th:block>
 
 </html>

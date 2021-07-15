@@ -7,7 +7,11 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface QualityInsepctionResultMapper {
+public interface QualityInsepctionFinalResultMapper {
+	
+	//[다미+보람]검사등록  검사결과 모달창 리스트
+	public List<Map<String,Object>> searchRequesetInspection();
+	
 	//[다미+보람]검사현황 조회 성적서 결과값보여주기
 	public List<Map<String,Object>> getQualityInspectionReport(HashMap map);
 	
