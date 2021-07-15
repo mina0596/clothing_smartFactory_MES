@@ -4,13 +4,6 @@
 
 	$(function(){	
 		
-		
-		//등록 버튼
-		$(document).on('click', '#addInsValue', function(){
-			console.log('test');
-			
-		});
-
 		//모달 실행
 		$(document).on('click', '#requestCode, #requestCode2', function(){
 			$('#requestCodeModal').modal("show");
@@ -164,16 +157,21 @@
 						for(var i = 0; i < index+2; i++){
 							var innerHtml = '<tr>';
 							innerHtml += '<td><input type="checkbox" class="checked"></td>';
-							innerHtml += '<td><div class="input-group"><input type="text" class="form-control" value="';
+							//품질검사요청코드
+							innerHtml += '<td><div class="input-group"><input type="text" name="qualityInspectionRequestCode" class="form-control" value="';
 							innerHtml += requestCode;
 							innerHtml += '" placeholder="품질검사요청코드 검색"><div class="input-group-btn"><button id="requestCode2" class="btn btn-default">검색</button></div></div></td>';
 							innerHtml += '<td><input type="text" class="form-control" value="' + subClassName  + '" readonly="readonly"></td>';
+							//품질검사코드
 							innerHtml += '<input type="hidden" name="qualityInspectionCode" class="form-control" value="' + qualityInspectionCode + '">';
+							//원부자재명
 							innerHtml += '<td><input type="text" class="form-control" value="' + rawMaterialName  + '" readonly="readonly"></td>';
 							innerHtml += '<td><select class="form-control"><option>1회차</option><option>2회차</option><option>3회차</option></select></td>';
-							innerHtml += '<td><input type="number" class="form-control" placeholder="측정값"></td>';
-							innerHtml += '<td><input type="datetime-local" class="form-control" placeholder="공란일시 등록시간"></td>';
-							innerHtml += '<td><input type="datetime-local" class="form-control" placeholder="공란일시 등록시간"></td>';
+							//측정값
+							innerHtml += '<td><input type="number" name="inspectionMeasurementValue" class="form-control" placeholder="측정값"></td>';
+							//측정시간
+							innerHtml += '<td><input type="datetime-local" name="inspectionStartDate" class="form-control" placeholder="공란일시 등록시간"></td>';
+							innerHtml += '<td><input type="datetime-local" name="inspectionEndDate" class="form-control" placeholder="공란일시 등록시간"></td>';
 							innerHtml += '<td><button type="button" class="addBtn">등록</button></td>';
 							innerHtml += '<td><button type="button" class="removeButton">삭제</button></td>';
 							innerHtml += '</tr>';
@@ -205,6 +203,15 @@
 				$('.checked').prop('checked',false);
 			}
 		});
+		
+		
+		//다중 등록
+		
+		$(document).on('click', '#addInsValue', function(){
+			
+			
+		});
+		
 		
 		// 체크된 행 삭제
 		$(document).on('click', '#deleteBtn', function(){
