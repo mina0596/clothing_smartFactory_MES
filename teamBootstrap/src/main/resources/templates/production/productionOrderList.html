@@ -7,31 +7,8 @@ layout:decorate="@{layout/default_production}">
  <th:block layout:fragment="customJs">
 	<script>
 	$(function(){
-		//#checkAll 버튼 클릭 시 전체 checked
-			$('#checkAll').click(function(){
-				if($('#checkAll').prop('checked')){
-					$('.check').prop('checked',true);
-						}else{
-							$('.check').prop('checked',false);
-						}
-					});
-	
-			//삭제하기
+		
 			var tableAttr = $('#workerOrderList').children();
-			var tdList = tableAttr.find('.check');
-			
-			$('#deleteBtn').click(function(){
-				tdList = tableAttr.find('.check');
-				var parent = tdList.parent();
-				parent.each(function(){
-					console.log($(this).parent());	
-					var removeRow = $(this).parent();			
-					if($(this).find('.check').is(':checked')){		
-						removeRow.remove();
-					}
-				});
-	
-			});
 
 			var startButton = tableAttr.children().find('#startProduction');
 			var pCodeToStart = '';
@@ -44,6 +21,13 @@ layout:decorate="@{layout/default_production}">
 						url: "/production/pCodeToStartSend",
 						method: "POST",
 						data: {pCodeToStart : pCodeToStart}
+					});
+					request.done(function(data){
+						console.log(data);
+						location.reload();
+					});
+					request.fail(function(jqXHR, textStatus){
+						alert("생산시작에 실패했습니다." + textStatus);
 					});
 				}
 			});
