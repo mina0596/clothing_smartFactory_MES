@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart39.springboot.dao.QualityInsMeasurementValueMapper">
+
+
+	<resultMap type="QualityBiochemFabricLevelStandard" 	id="QualityBiochemFabricLevelStandardResultMap">
+		<result property="rawMaterialCode" 						column="raw_material_code" />
+		<result property="qualityInspectionCode" 				column="quality_inspection_code" />
+		<result property="minValue" 							column="min_value" />
+		<result property="maxValue" 							column="max_value" />
+		<result property="measuredLevel" 						column="measured_level" />
+		<result property="biochemInspectionStandardRegDate" 	column="biochem_inspection_standard_reg_date" />
+		<result property="biochemInspectionStandardUpdateDate" 	column="biochem_inspection_standard_update_date" />
+	</resultMap>
+	
+	<resultMap type="QualityInspectionStandard" 			id="QualityInspectionStandardResultMap">
+		<result property="qualityInspectionCode" 				column="quality_inspection_code"/>
+		<result property="category" 							column="category"/>
+		<result property="minValue" 							column="min_value"/>
+		<result property="maxValue" 							column="max_value"/>
+		<result property="method" 								column="method"/>
+		<result property="standardMeasurementUnit" 				column="standard_measurement_unit"/>
+		<result property="standardTolerance" 					column="standard_tolerance"/>
+		<result property="requiredInspectionCheck" 				column="required_inspection_check"/>
+		<result property="inspectionStandardRegDate" 			column="inspection_standard_reg_date"/>
+		<result property="inspectionStandardUpdateDate" 		column="inspection_standard_update_date"/>
+	</resultMap>
+	
+	<select id="getQualityInspectionStandard" parameterType="String" resultMap="QualityInspectionStandardResultMap" >
+		SELECT 
+			quality_inspection_code
+			,category
+			,min_value
+			,max_value
+			,method
+			,standard_measurement_unit
+			,standard_tolerance
+			,required_inspection_check
+			,inspection_standard_reg_date
+			,inspection_standard_update_date
+		FROM
+			inspection_standard AS i
+		WHERE 
+			i.quality_inspection_code = #{qualityInspectionCode};
+	</select>
+	
+	<select id="getBiochemFabricLevelStandard" parameterType="QualityInspectionResult" resultMap="QualityBiochemFabricLevelStandardResultMap">
+		SELECT 
+			raw_material_code
+			,quality_inspection_code
+			,min_value
+			,max_value
+			,measured_level
+			,biochem_inspection_standard_reg_date
+			,biochem_inspection_standard_update_date
+		FROM 
+			biochem_fabric_level_standard AS b
+		WHERE
+			b.quality_inspection_code = #{qualityInspectionCode}
+			AND
+			b.raw_material_code = #{rawMaterialCode};
+	</select>
+	
+	<select id="searchQualityInspectionRequest" resultType="Map" parameterType="Map">
+		select
+			q.quality_inspection_request_code
+			,q.requested_product_code
+			,r.contract_code
+			,h.high_class_name
+			,md.med_class_name
+			,s.quality_inspection_code
+			,s.sub_class_name
+			,m.raw_material_code
+			,i.raw_material_name
+			,q.inspection_request_date
+			,c.client_name
+		FROM
+			quality_inspection_request AS q INNER JOIN requested_product_detail AS r ON q.requested_product_code = r.requested_product_code
+			INNER JOIN sub_class_inspection_list AS s ON q.quality_inspection_code = s.quality_inspection_code
+			INNER JOIN medium_class_inspection_list AS md ON s.high_med_class_code = md.high_med_class_code
+			INNER JOIN high_class_inspection_list AS h ON md.high_class_code = h.high_class_code
+			INNER JOIN used_raw_material AS m ON q.requested_product_code = m.requested_product_code
+			INNER JOIN raw_material_info AS i	ON m.raw_material_code = i.raw_material_code
+			INNER JOIN client_info AS c ON r.client_code = c.client_code
+		<trim prefix="WHERE" prefixOverrides="AND">
+			<if test="contractCode != null and contractCode != ''.toString()">
+				AND	r.contract_code LIKE CONCAT('%', #{contractCode} ,'%')
+			</if>
+			<if test="requestedProductCode != null and requestedProductCode != ''.toString()">
+				AND q.requested_product_code LIKE CONCAT('%', #{requestedProductCode} ,'%')
+			</if>
+			<if test="inspectionRequestStartDate != null and inspectionRequestStartDate != ''.toString()">
+				AND q.inspection_request_date &gt;= DATE(#{inspectionRequestStartDate})
+			</if>
+			<if test="inspectionRequestEndDate != null and inspectionRequestEndDate != ''.toString()">
+				AND	q.inspection_request_date &lt;= DATE(#{inspectionRequestEndDate})
+			</if>
+			<if test="subClassName != null and subClassName != ''.toString()">
+				AND s.sub_class_name LIKE CONCAT('%', #{subClassName} ,'%')
+			</if>
+			<if test="rawMaterialName != null and rawMaterialName != ''.toString()">
+				AND i.raw_material_name LIKE CONCAT('%', #{rawMaterialName} ,'%')
+			</if>
+			<if test="clientName != null and clientName != ''.toString()">
+				AND c.client_name LIKE CONCAT('%', #{clientName} ,'%');
+			</if>
+		</trim>
+	</select>
+</mapper>

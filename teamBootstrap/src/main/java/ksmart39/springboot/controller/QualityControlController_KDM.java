@@ -70,14 +70,22 @@ public class QualityControlController_KDM {
 	}
 	
 	//[다미] 품질검사 측정값 등록
-	@RequestMapping(value = "/addInspectionMeasurementValue", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=UTF-8")
-	public String addInspectionMeasurementValue(@RequestBody List<QualityInspectionResult> qualityInspectionResult) {
-												
-		log.info("qualityInspectionResult: {}", qualityInspectionResult );
+	@PostMapping("/addInspectionMeasurementValue")
+	@ResponseBody
+	public boolean addInspectionMeasurementValue(@RequestBody List<QualityInspectionResult> qualityInspectionResult) {
+		
+		int value = qualityInsMeasurementValueService.addQualityInspectionResult(qualityInspectionResult);
+		
+		//boolean 결과값
+		boolean result = false;
+		
+		//insert 완료
+		//result = true;
+		log.info("qualityInspectionResult@@: {}", qualityInspectionResult );
 		
 		
 		
-		return "redirect:addInspectionMeasurementValue";		
+		return result;		
 	}
 	
 	//[다미] 품질검사 측정값 등록 화면
@@ -110,11 +118,9 @@ public class QualityControlController_KDM {
 		//3. JsonObject로 변환
 		JSONObject jsonObj = (JSONObject) obj;
 		
-		String str = (String)jsonObj.get("qualityInspectionRequestCode");
-		log.info("3. String으로 변환 {}", str);
-		
 	    Map<String, Object> map = new HashMap<String, Object>();
 		
+	    //json -> map으로 바꿔야합니다.
 		List<Map<String, Object>> map2 = qualityInsMeasurementValueService.searchQualityInspectionRequest(jsonObj);
 		log.info("searchQualityInspectionRequest: {} " , map2);
 		
