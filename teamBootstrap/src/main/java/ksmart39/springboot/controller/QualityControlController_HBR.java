@@ -25,22 +25,25 @@ import ksmart39.springboot.domain.DefectiveProduct;
 import ksmart39.springboot.service.DefectiveProductService;
 import ksmart39.springboot.service.QualityControlService;
 import ksmart39.springboot.service.QualityInsMeasurementValueService;
-import ksmart39.springboot.service.QualityInsepctionResultService;
+import ksmart39.springboot.service.QualityInsepctionFinalResultService;
 
 @Controller
 @RequestMapping("/quality")
 public class QualityControlController_HBR {
 	private static final Logger log = LoggerFactory.getLogger(QualityControlController_HBR.class);
 	@Autowired
-	private QualityInsepctionResultService qualityInsepctionResultService;
+	private QualityInsepctionFinalResultService qualityInsepctionFinalResultService;
 	
 	//================================================================
 	//[다미+보람]품질검사 최종등록 검색모달창 
 	@RequestMapping(value = "/addfinalresult",method = RequestMethod.GET)
 	@ResponseBody
 	public List<Map<String,Object>> searchRequesetInspection(){
-		
-		return null;
+		 List<Map<String,Object>> requestList = qualityInsepctionFinalResultService.searchRequesetInspection();
+		 log.info("=============================================");
+		  	log.info("requestList  {}",requestList);
+		  	log.info("=============================================");
+		return requestList;
 	}
 	
 	
@@ -50,7 +53,7 @@ public class QualityControlController_HBR {
 	@RequestMapping(value = "/finalResult",method = RequestMethod.GET)
 	@ResponseBody
 	public List<Map<String,Object>> getFinalResultReport(@RequestParam(value = "requestProductCode", required = false)String requestProductCode){
-		List<Map<String,Object>> finalResultReport = qualityInsepctionResultService.getFinalResultReport(requestProductCode);
+		List<Map<String,Object>> finalResultReport = qualityInsepctionFinalResultService.getFinalResultReport(requestProductCode);
 		log.info("=============================================");
 	  	log.info("finalResultReport  {}",finalResultReport);
 	  	log.info("=============================================");
@@ -75,7 +78,7 @@ public class QualityControlController_HBR {
 		map.put("productCate", productCate);
 		map.put("InspectionStartDate",InspectionStartDate);
 		map.put("inspectionEndDate", inspectionEndDate);
-		List<Map<String,Object>> searchListMap = qualityInsepctionResultService.getQualityInspectionReport(map);
+		List<Map<String,Object>> searchListMap = qualityInsepctionFinalResultService.getQualityInspectionReport(map);
 		log.info("검색 :  {}", searchListMap);
 		
 		return searchListMap;
@@ -87,7 +90,7 @@ public class QualityControlController_HBR {
 	@RequestMapping(value = "/requestName", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Map<String,Object>> getProductName(@RequestParam(value = "requestNum", required = false)String requestNum){
-		List<Map<String,Object>> productName = qualityInsepctionResultService.getProductName(requestNum);
+		List<Map<String,Object>> productName = qualityInsepctionFinalResultService.getProductName(requestNum);
 		
 		return productName;
 	}
@@ -97,7 +100,7 @@ public class QualityControlController_HBR {
 	  @RequestMapping(value = "/requestCode", method = RequestMethod.GET)
 	  @ResponseBody 
 	  public List<Map<String,Object>> getRequestProductCode(@RequestParam(value = "client",required =	  false)String client ){ 
-		 List<Map<String,Object>> reqeustCode =	 qualityInsepctionResultService.getRequestProductCode(client);
+		 List<Map<String,Object>> reqeustCode =	 qualityInsepctionFinalResultService.getRequestProductCode(client);
 	  	
 	 return reqeustCode; 
 	 }
@@ -108,7 +111,7 @@ public class QualityControlController_HBR {
 	@RequestMapping(value = "/clientName", method =RequestMethod.GET)
 	@ResponseBody
 	public List<Map<String,Object>> getClientName(){
-		List<Map<String,Object>> clientList =qualityInsepctionResultService.getClientName();
+		List<Map<String,Object>> clientList =qualityInsepctionFinalResultService.getClientName();
 		log.info("=============================================");
 		log.info("거래처명 :  {}", clientList);
 		log.info("=============================================");
@@ -118,7 +121,7 @@ public class QualityControlController_HBR {
 	//검사현황 성적서조회 및리스트
 	@GetMapping("/qualityInspectionReport")
 	public String qualityInspectionReport(Model model) {
-		List<Map<String,Object>> finalResultList = qualityInsepctionResultService.getInsepectionFinalResult();
+		List<Map<String,Object>> finalResultList = qualityInsepctionFinalResultService.getInsepectionFinalResult();
 		log.info("=============================================");
 		log.info("최종성적리스트 :  {} ", finalResultList);
 		log.info("=============================================");
