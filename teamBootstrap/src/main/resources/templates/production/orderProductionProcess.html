@@ -76,7 +76,7 @@ layout:decorate="@{layout/default_production}">
         <br><br>
 			<h4><i class="fa fa-angle-right"></i>의뢰 품목별 생산 현황</h4>
 			          <hr>
-              <table class="table table-striped table-advance table-hover" id="workerOrderList">
+              <table class="table table-striped table-advance table-hover" id="workerOrderList" style="text-align: center;">
                 <thead>
                   <tr>
                     <th><i class="fa fa-barcode"></i>품목별 의뢰코드</th>
@@ -85,15 +85,14 @@ layout:decorate="@{layout/default_production}">
                     <th><i class="fa fa-bookmark"></i>거래처명</th>
                     <th><i class=" fa fa-barcode"></i>생산공정코드</th>
                     <th><i class=" fa fa-bookmark"></i>생산공정명</th>
+                    <th><i class=" fa fa-bookmark"></i>생산순서</th>
                     <th><i class=" fa fa-bookmark"></i>공정시작일자</th>
                     <th><i class=" fa fa-bookmark"></i>공정완료일자</th>
-                    <th><i class=" fa fa-bookmark"></i>공정현황</th>
+                    <th><i class=" fa fa-bookmark"></i>시작/완료버튼</th>
                   </tr>
                 </thead>
                 <tbody id="resultTableBody">
-                  
-                    <td><button class="btn btn-success btn-xs" type="button" id="startProcess"><i class="fa fa-check"></i>공정시작</button></td>                 	
-                 
+                <!-- ajax의 결과값이 들어갈 자리 -->
                 </tbody>
               </table>
             

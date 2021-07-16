@@ -23,6 +23,17 @@
 	</resultMap>
 	
 	
+	<!-- 의뢰 품목별 생산 현황  -->
+	<resultMap type="ProductProductionProcessStatus"				id="productionProcessResultMap">
+		<result property="productionProcessCode"					column="production_process_code"/>
+		<result property="requestedProductCode"						column="requested_product_code"/>
+		<result property="processStartDate"							column="process_start_date"/>
+		<result property="completedProductUpdateDate"				column="completed_product_update_date"/>
+		<result property="processStatus"							column="process_status"/>
+		<result property="productionProcessStatusRegDate"			column="production_process_status_reg_date"/>
+	</resultMap>
+	
+	
 	<select id="getProductionMonthlyPlanList" resultType="ProductionPlan">
 		SELECT 
 			production_plan_code
@@ -136,8 +147,8 @@
 		SELECT 
 			pps.production_process_code						AS processCode, 
 			pps.requested_product_code						AS productCode, 
-			pps.process_start_date							AS processStartDate, 
-			DATE_FORMAT(pps.completed_product_update_date,	'%Y-%m-%d %T')			AS processFinishDate, 
+			DATE_FORMAT(pps.process_start_date, '%Y-%m-%d %T')						AS processStartDate, 
+			DATE_FORMAT(pps.completed_product_update_date, '%Y-%m-%d %T')			AS processFinishDate, 
 			pps.process_status								AS processStatus, 
 			rpd.client_code									AS clientCode,
 			c.client_name									AS clientName,
@@ -146,8 +157,7 @@
 			pd.detailed_categorized_name					AS productType,
 			detail.production_process_high_classification	AS highClassName,
 			detail.production_process_low_classification	AS lowClassName,
-			detail.process_order_num						AS orderNum
-			DATE_FORMAT(f.final_result_reg_date,'%Y-%m-%d %T')
+			detail.process_order_num						AS processOrderNum
 		FROM
 			product_production_process_status AS pps
 			INNER join
@@ -210,6 +220,47 @@
 		WHERE
 			production_process_code = #{processCode};
 	</select>
+	
+	
+	<!-- =========생산완료버튼 누르면 그에 해당하는 공정 완료일지 update되는 쿼리================ -->
+	
+	<update id="completeProcess" parameterType="ProductProductionProcessStatus">
+		UPDATE product_production_process_status
+			<trim prefix="SET" prefixOverrides=",">
+				<if test="processStartDate != null and processStartDate != ''.toString()">			
+					,process_start_date = #{processStartDate}
+				</if>
+				<if test="completedProductUpdateDate != null and completedProductUpdateDate != ''.toString()">			
+					,completed_product_update_date = #{completedProductUpdateDate}
+				</if>
+				<if test="processStatus != null and processStatus != ''.toString()">			
+					,process_status = #{processStatus}
+				</if>
+			</trim>
+			WHERE 	
+				requested_product_code=#{productCode}
+				AND
+				production_process_code = #{productionProcessCode};
+	</update>
+	
+	
+	<!-- =========생산완료버튼 누르면 다음 공정 insert되는 쿼리================ -->
+	<insert id="insertNextProcess" parameterType="String">
+		INSERT INTO product_production_process_status(
+			production_process_code, 
+			requested_product_code, 
+			process_start_date, 
+			completed_product_update_date, 
+			process_status, 
+			production_process_status_reg_date)
+		VALUES(
+			'process_01', 
+			#{productCode}, 
+			'1111-11-11 11:11:11', 
+			1111-11-11 11:11:11, 
+			'대기중', 
+			NOW());
+	</insert>
 	
 
 </mapper>

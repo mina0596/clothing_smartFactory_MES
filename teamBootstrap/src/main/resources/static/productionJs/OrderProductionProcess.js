@@ -74,23 +74,29 @@ $(function(){
 					html += productToStartResult[i].clientName;						
 					html += '</td>';
 					html += '<td class="processCode">';
-					html += productToStartResult[i].processCode;						
+					html += productToStartResult[i].processCode;
 					html += '</td>';
 					html += '<td class="processName">';
 					html += productToStartResult[i].highClassName;						
 					html += '-';						
-					html += productToStartResult[i].lowClassName;						
+					html += productToStartResult[i].lowClassName;					
+					html += '</td>';
+					html += '<td class="processOrderNum">';
+					html += productToStartResult[i].processOrderNum;			
 					html += '</td>';
 					html += '<td class="processStartDate">';
 					html += formatDate(productToStartResult[i].processStartDate);					
 					html += '</td>';
-					//if(productToStartResult[i].processFinishDate == ''){}
-					html += '<td class="processFinishDate">';
-					html += formatDate(productToStartResult[i].processFinishDate);					
-					html += '</td>';
-					html += '<td class="processStatus">';
-					html += productToStartResult[i].processStatus;						
-					html += '</td>';
+					if(productToStartResult[i].processFinishDate == '1111-11-11 11:11:11'){
+						html += '<td style="font-weight: bold; font-style: italic;">공정 진행중</td>';
+						html += '<td><button id="startProcess" class="btn btn-success btn-xs" type="button" id="startProcess"><i class="fa fa-power-off"></i>공정완료</button></td>'
+					}else{
+						html += '<td class="processFinishDate">';
+						html += formatDate(productToStartResult[i].processFinishDate);					
+						html += '</td>';
+						html += '<td></td>';
+					}
+
 					html += '</tr>';
 				}
 			}else{
@@ -98,12 +104,47 @@ $(function(){
 				html += '<tr class="removeTr"><td colspan="15" style="text-align: center;"> 검색된 결과가 없습니다. </td></tr>';
 			}
 			$('#resultTableBody').append(html);
+			
+			//공정이 진행중인 공정을 완료했을때의 버튼 + 누르면 그 다음 공정이 시작될 수 있게 insert가 되는 처리과정 
+			$('#startProcess').click(function(){
+				console.log('공정을 시작해볼까요?');
+				
+				var selectedProductCode = $(this).parent().parent().find('.productCode').text();
+				var selectedProcessCode = $(this).parent().parent().find('.processCode').text();
+				console.log(selectedProductCode);
+				
+				var selectedProductInfo={
+						requestedProductCode : selectedProductCode,
+						productionProcessCode : selectedProcessCode
+				}
+				
+				var request = $.ajax({
+					url: "/production/stopProcessByProduct",
+					method: "post",
+					traditional: true,
+					data: JSON.stringify(selectedProductInfo),
+					contentType: 'application/json',
+					dataType: "json"
+				});
+				
+				request.done(function(data){
+					console.log(data);
+				});
+				
+				request.fail(function( jqXHR, textStatus ) {
+					alert( "완료버튼을 다시 눌러주세요." + textStatus );
+				});
+			})
 		});
 		
+		
+		
 		request.fail(function( jqXHR, textStatus ) {
-					alert( "Request failed: " + textStatus );
+					alert( "검색어들을 확인해주세요. " + textStatus );
 		});	
+		
 	});
+	
 	
 	
 	

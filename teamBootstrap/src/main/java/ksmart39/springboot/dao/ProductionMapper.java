@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import ksmart39.springboot.domain.ProductProductionProcessStatus;
 import ksmart39.springboot.domain.ProductionProcessList;
 import ksmart39.springboot.domain.RequestedProduct;
 
@@ -30,4 +31,10 @@ public interface ProductionMapper {
 	
 	//[민아]생산 프로세스의 정보 가겨오기
 	public ProductionProcessList getProcessDetails(String processCode);
+	
+	//[민아]생산완료버튼 누르면 그에 해당하는 공정 완료일지 update
+	public int completeProcess(ProductProductionProcessStatus processStatus);
+	
+	//[민아]생산완료버튼 누르면 다음 공정 insert
+	public int insertNextProcess(String productCode);
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import ksmart39.springboot.controller.ProductionController_PMA;
 import ksmart39.springboot.dao.ProductionMapper;
 import ksmart39.springboot.dao.WorkOrderMapper;
+import ksmart39.springboot.domain.ProductProductionProcessStatus;
 import ksmart39.springboot.domain.ProductionProcessList;
 import ksmart39.springboot.domain.RequestedProduct;
 
@@ -57,6 +58,14 @@ public class ProductionService {
 		log.info("productToStartInfo 맵퍼에서 가져오는 값 확인 : {}", productToStartInfo);
 		
 		return productionMapper.searchProductToStart(searchKeys);
+	}
+	
+	//[민아]생산공정 완료 버튼을 누르면 완료시간들어가고, 그 다음 공정 insert됨
+	public int completeProcess(ProductProductionProcessStatus processStatus) {
+		String productCode = processStatus.getRequestedProductCode();
+		productionMapper.completeProcess(processStatus);
+		productionMapper.insertNextProcess(productCode);
+		return productionMapper.completeProcess(processStatus);
 	}
 	
 }
