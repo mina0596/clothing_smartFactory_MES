@@ -5,11 +5,13 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import ksmart39.springboot.domain.ProductProductionProcessStatus;
+
 
 
 @Mapper
 public interface ProductStateMapper {
 	
 	//
-	public List<Map<String,Object>> getProductState();
+	public List<ProductProductionProcessStatus> getProductState();
 }

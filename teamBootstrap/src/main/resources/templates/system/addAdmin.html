@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="@{layout/add&ModifyDefault}">
+
+<th:block layout:fragment="pageTitle">
+	<title th:text="${title}">login title</title>
+	<div></div>
+	<div class="col-sm-12" th:align="center">
+		<h1 class="m-0">🌟관리자회원가입🌟</h1>
+	</div>
+	<div class="col-sm-12" th:align="right">
+		<ol class="breadcrumb float-sm-right">
+			<li class="breadcrumb-item"><a href="/">addAdmin</a></li>
+			<li class="breadcrumb-item active">addAdmin.html</li>
+		</ol>
+	</div>
+</th:block>
+
+
+<th:block layout:fragment="container">
+	<div class="content">
+		<!-- /.container-fluid -->
+		<div class="container-fluid">
+			<section class="content">
+				<div class="row">
+					<!-- ChallengeInsertCard1 Start -->
+					<div class="col-md">
+						<div class="card card-default" id="addNormalForm">
+							<div class="card-body">
+								<div class="register-box">
+									<div class="card card-outline card-primary">
+										<div class="card-header text-center">
+											<b>
+												<font style="vertical-align: inherit;"> 
+													<font style="vertical-align: inherit;">
+													<h2>관리자 회원가입</h2></font>
+												</font> 
+											</b>
+										</div>
+										<div class="card-body">
+											<form id="addForm" th:action="@{/addAdmin}" method="post">
+												<div>
+													<div>이메일</div>
+													<div class="input-group mb-3">
+														<input type="email" id="Email" class="form-control" name="adminEmail"  placeholder="회원이메일을 입력해주세요.">
+														<button type="button" class="btn btn-primary " id="emailCheckBtn" >
+																<font style="vertical-align: inherit;"> 
+																	<font style="vertical-align: inherit;">이메일 중복체크</font>
+																</font>
+															</button>
+													</div>
+												</div>
+												<div>	
+													<div>패스워드</div>
+													<div class="input-group mb-3">
+														<input type="password" id="Password" class="form-control" name="adminPassword"  placeholder="비밀번호를 입력해주세요.">
+														<div class="input-group-append">
+															<div class="input-group-text">
+																<span class="fas fa-lock"></span>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div>	
+													<div>패스워드 확인</div>
+													<div class="input-group mb-3">
+														<input type="password" id="PasswordConfirm" class="form-control" placeholder="비밀번호를 다시 한 번 입력해주세요.">
+														<div class="input-group-append">
+															<div class="input-group-text">
+																<span class="fas fa-lock"></span>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class = "alert alert-success" id="alert-success">비밀번호가 일치합니다.</div>
+												<div class = "alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
+												
+												<div>	
+													<div>이름</div>
+													<div class="input-group mb-3">
+														<input type="text" id="Name" class="form-control" name="adminName" placeholder="회원이름을 입력해주세요."/>
+														<div class="input-group-append">
+															<div class="input-group-text">
+																<span class="fas fa-lock"></span>
+															</div>
+														</div>
+													</div>
+												</div>
+												
+												<div>
+													<div>연락처</div>
+													<div class="input-group mb-3">
+														<input type="text" id="Mobile" class="form-control"  name="adminMobile"  maxlength="13" placeholder="010-0000-0000" />
+														<div class="input-group-text">
+															<span class="fas fa-lock"></span>
+														</div>
+													</div>
+												</div>
+													<div>	
+													<div>권한</div>
+													<div class="input-group mb-3">
+													<div class="col-8">
+													
+														<select id="Level" class="form-control" name="adminLevel">
+															<option value="">::코치권한::</option>
+															<option value="회원정보_관리자">회원정보_관리자</option>
+															<option value="코치승인_관리자">코치승인_관리자</option>
+														</select>
+													</div>	
+														<div class="col-4">
+															<div>
+																<button type="button" class="btn btn-primary btn-block" id="addUserBtn" >
+																	<font style="vertical-align: inherit;"> 
+																		<font style="vertical-align: inherit;">회원가입</font>
+																	</font>
+																</button>
+															</div>
+														</div>
+													</div>
+												</div>
+												</form>
+												<a th:href="@{login}" class="text-center">
+													<font style="vertical-align: inherit;">
+														<font style="vertical-align: inherit;">이미 회원가입을 하셨습니까?</font>
+													</font>
+												</a>
+											</div>
+										</div>
+										<!-- /.form-box -->
+									</div>
+									<!-- /.card -->
+								</div>
+
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card -->
+					</div>
+			</section>
+		</div>
+		<!-- /.container-fluid -->
+	</div>
+	<th:block>
+	<script>
+	//전화번호 자동 하이폰
+	var autoHypenPhone = function(str) {
+		str = str.replace(/[^0-9]/g, '');
+		var tmp = '';
+		if (str.length < 4) {
+			return str;
+		} else if (str.length < 7) {
+			tmp += str.substr(0, 3);
+			tmp += '-';
+			tmp += str.substr(3);
+			return tmp;
+		} else if (str.length < 11) {
+			tmp += str.substr(0, 3);
+			tmp += '-';
+			tmp += str.substr(3, 3);
+			tmp += '-';
+			tmp += str.substr(6);
+			return tmp;
+		} else {
+			tmp += str.substr(0, 3);
+			tmp += '-';
+			tmp += str.substr(3, 4);
+			tmp += '-';
+			tmp += str.substr(7);
+			return tmp;
+		}
+
+		return str;
+	}
+
+	var Mobile = document.getElementById('Mobile');
+
+	Mobile.onkeyup = function() {
+		console.log(this.value);
+		this.value = autoHypenPhone(this.value);
+	}
+
+	
+	// 아이디 중복체크
+	$(function() {
+		$('#emailCheckBtn').click(function() {
+			var adminEmail = $('#Email').val();
+			console.log('adminEmail: ' + adminEmail);
+			var regexEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+			
+			if(!regexEmail.test($('#Email').val())){
+				alert('이메일을 형식을 확인해주세요.');
+				return $('#Email').focus();
+			}
+			
+			if (adminEmail != '' && adminEmail != undefined && adminEmail != null) {
+				var request = $.ajax({
+					url : "/adminEmailCheck",
+					method : "POST",
+					data : { adminEmail : adminEmail},
+					dataType : "json"
+				});
+
+				request.done(function(data) {
+					if (data) {
+						alert('사용가능한 이메일입니다.');
+						console.log(data);
+					} else {
+						alert('중복된 이메일입니다.');
+						$('#Email').focus();
+					}
+				});
+
+				request.fail(function(jqXHR, textStatus) {
+					alert("Request failed: " + textStatus);
+				});
+			}
+
+		});
+		
+		//패스워드와 패스워드확인 일치여부
+		$("#alert-success").hide();
+		$("#alert-danger").hide();
+
+		$("input").keyup(function() {
+			var pwd1 = $("#Password").val();
+			var pwd2 = $("#PasswordConfirm").val();
+
+			if (pwd1 != "" || pwd2 != "") {
+				if (pwd1 == pwd2) {
+					$("#alert-success").show();
+					$("#alert-danger").hide();
+				} else {
+					$("#alert-success").hide();
+					$("#alert-danger").show();
+				}
+			}
+		});
+		
+		//회원가입  유효성 검사
+		$('#addUserBtn').click(function(){
+			var regexPw = /^[a-z0-9_-]{6,18}$/ // 숫자, 영문만 입력 가능 6자에서 18자 사이!!
+			var regexEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+			var submitFlag = true;
+			var addForm  = $('#addForm');
+			var inputObj = addForm.find('input');
+			
+			$.each(inputObj, function(e){
+				var inputId = $(this).attr('id');
+				var inputValue = $(this).val();
+				var inputLabel = $(this).parent().parent().children().eq(0).text();
+				
+				if(inputId == 'Email'){
+					if(inputValue == ''){
+						alert(inputLabel + '을 입력해주세요.');
+						$(this).focus();
+						submitFlag = false;
+						return submitFlag;
+					}else if(!regexEmail.test(inputValue)){
+						alert(inputLabel + '을 형식에 맞게 다시 입력해주세요.');
+						$(this).focus();
+						submitFlag = false;
+						return submitFlag;
+					}
+					
+				}else if(inputId == 'Password'){
+					if(inputValue == ''){
+						alert(inputLabel + '을 입력해주세요.');
+						$(this).focus();
+						submitFlag = false;
+						return submitFlag;
+					}else if(!regexPw.test(inputValue)){
+						alert('숫자, 영문만 입력 가능 6자에서 18자 사이!!  '+ inputLabel +'형식으로 입력해주세요.');
+						$(this).focus();
+						submitFlag = false;
+						return submitFlag;
+					}
+				}else{
+					if(inputValue == '' || inputValue == undefined || inputValue == null){
+						alert(inputLabel + ' 을 입력해주세요.');
+						$(this).focus();
+						submitFlag = false;
+						return submitFlag;
+					}
+				}
+			});
+			
+			if(submitFlag) addForm.submit();
+			
+		});
+
+	});
+
+	</script>
+</th:block>
+</th:block>
+
+
+</html>
+
