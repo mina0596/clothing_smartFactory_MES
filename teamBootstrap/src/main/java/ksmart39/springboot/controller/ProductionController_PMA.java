@@ -73,16 +73,22 @@ public class ProductionController_PMA {
 	}
 	
 	
-	//[민아]공정완료버튼 눌렀을때
+	//[민아]공정마침버튼 눌렀을때
 	@PostMapping("/stopProcessByProduct")
 	@ResponseBody
-	public String stopProcess(@RequestBody ProductProductionProcessStatus selectedProductInfo) {
+	public ProductProductionProcessStatus stopProcess(@RequestBody ProductProductionProcessStatus selectedProductInfo) {
 		log.info("ajax에서 잘 받아오나요? {}", selectedProductInfo);
-		String test="test";
-		String productCode = selectedProductInfo.getRequestedProductCode();
-		log.info("processCode :{}", productCode);
 		productionService.completeProcess(selectedProductInfo);
-		return test;
+		productionService.insertNextProcess(selectedProductInfo);
+		return selectedProductInfo;
+	}
+	
+	//[민아]공정시작버튼 눌렀을때
+	@PostMapping("/startProcessByProduct")
+	@ResponseBody
+	public ProductProductionProcessStatus startProcess(@RequestBody ProductProductionProcessStatus selectedProductInfo) {
+		productionService.startProcess(selectedProductInfo);
+		return selectedProductInfo;
 	}
 	
 	

@@ -36,5 +36,8 @@ public interface ProductionMapper {
 	public int completeProcess(ProductProductionProcessStatus processStatus);
 	
 	//[민아]생산완료버튼 누르면 다음 공정 insert
-	public int insertNextProcess(String productCode);
+	public int insertNextProcess(ProductProductionProcessStatus processStatus);
+	
+	//[민아]생산시작 버튼 누르면 시간 update
+	public int startProcess(ProductProductionProcessStatus processStatus);
 }

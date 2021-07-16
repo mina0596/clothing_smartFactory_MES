@@ -23,13 +23,13 @@ $(function(){
 	date = formatDate(myDate);
 	
 	$('#searchBtn').click(function(){
+		$('.removeTr').remove();
 		var suitType = $('#suitType').children(':selected');
 		var productType = $('#productType').children(':selected');
 		var dateType = $('#dateType').children(':selected');
 
 		var selectedFromDate = $('#fromDate').val();
 		var selectedToDate = $('#toDate').val();
-		
 		if(selectedToDate != null && selectedToDate != undefined && selectedToDate != "" && selectedToDate < selectedFromDate){
 			alert('뒤의 날짜가 더 빠릅니다. 날짜를 확인해주세요');
 		}
@@ -84,19 +84,25 @@ $(function(){
 					html += '<td class="processOrderNum">';
 					html += productToStartResult[i].processOrderNum;			
 					html += '</td>';
-					html += '<td class="processStartDate">';
-					html += formatDate(productToStartResult[i].processStartDate);					
-					html += '</td>';
-					if(productToStartResult[i].processFinishDate == '1111-11-11 11:11:11'){
+					if(productToStartResult[i].processStartDate == '1111-11-11 11:11:11' && productToStartResult[i].processFinishDate == '1111-11-11 11:11:11'){
+						html += '<td style="font-weight: bold; font-style: italic;">공정 대기중</td>';
+						html += '<td style="font-weight: bold; font-style: italic;">공정 대기중</td>';
+						html += '<td><button id="startProcess" class="btn btn-success btn-xs" type="button"><i class="fa fa-power-off"></i>공정시작</button></td>'
+					}else if(productToStartResult[i].processStartDate != '1111-11-11 11:11:11' && productToStartResult[i].processFinishDate == '1111-11-11 11:11:11'){
+						html += '<td class="processStartDate">';
+						html += formatDate(productToStartResult[i].processStartDate);					
+						html += '</td>';
 						html += '<td style="font-weight: bold; font-style: italic;">공정 진행중</td>';
-						html += '<td><button id="startProcess" class="btn btn-success btn-xs" type="button" id="startProcess"><i class="fa fa-power-off"></i>공정완료</button></td>'
-					}else{
+						html += '<td><button id="completeProcess" class="btn btn-danger btn-xs" type="button"><i class="fa fa-power-off"></i>공정마침</button></td>'
+					}else if(productToStartResult[i].processStartDate != '1111-11-11 11:11:11' && productToStartResult[i].processFinishDate != '1111-11-11 11:11:11'){
+						html += '<td class="processStartDate">';
+						html += formatDate(productToStartResult[i].processStartDate);					
+						html += '</td>';
 						html += '<td class="processFinishDate">';
 						html += formatDate(productToStartResult[i].processFinishDate);					
 						html += '</td>';
 						html += '<td></td>';
 					}
-
 					html += '</tr>';
 				}
 			}else{
@@ -106,7 +112,7 @@ $(function(){
 			$('#resultTableBody').append(html);
 			
 			//공정이 진행중인 공정을 완료했을때의 버튼 + 누르면 그 다음 공정이 시작될 수 있게 insert가 되는 처리과정 
-			$('#startProcess').click(function(){
+			$('#completeProcess').click(function(){
 				console.log('공정을 시작해볼까요?');
 				
 				var selectedProductCode = $(this).parent().parent().find('.productCode').text();
@@ -129,12 +135,51 @@ $(function(){
 				
 				request.done(function(data){
 					console.log(data);
+					location.reload();
+					
 				});
 				
 				request.fail(function( jqXHR, textStatus ) {
-					alert( "완료버튼을 다시 눌러주세요." + textStatus );
+					alert( "공정마침버튼을 다시 눌러주세요." + textStatus );
 				});
 			})
+			
+			
+			//공정시작 버튼을 누르면 현재시간으로 시작시간이 insert되는 처리과정
+			$('#startProcess').click(function(){
+				var selectedProductCode = $(this).parent().parent().find('.productCode').text();
+				var selectedProcessCode = $(this).parent().parent().find('.processCode').text();
+				
+				var selectedProductInfo={
+						requestedProductCode : selectedProductCode,
+						productionProcessCode : selectedProcessCode
+				}
+				
+				var request = $.ajax({
+					url: "/production/startProcessByProduct",
+					method: "post",
+					traditional: true,
+					data: JSON.stringify(selectedProductInfo),
+					contentType: 'application/json',
+					dataType: "json"
+				});
+				
+				request.done(function(data){
+					console.log(data);
+					location.reload();
+					
+				});
+				
+				request.fail(function( jqXHR, textStatus ) {
+					alert( "공정시작버튼을 다시 눌러주세요." + textStatus );
+				});
+				
+				
+			});
+			
+			
+			
+			
 		});
 		
 		
