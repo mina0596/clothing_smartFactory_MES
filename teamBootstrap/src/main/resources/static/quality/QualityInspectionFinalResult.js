@@ -80,23 +80,4 @@ $(function(){
 		  alert( "Request failed: " + textStatus );
 			});	 
 		});
-	$('#saveBtn').click(function(){
-		$('#tableTr').remove();
-			//체크된 것 값 가져오기
-			$('.checkedModal:checked').each(function(index,item){
-				var requestCode = $(this).val();
-				var qualityInspectionCode = $(this).parent().parent().find('td.quality_inspection_code').text();
-				var contractCode = $(this).parent().parent().find('td.contract_code').text();
-				var subClassName = $(this).parent().parent().find('td.sub_class_name').text();
-				var rawMaterialName = $(this).parent().parent().find('td.raw_material_name').text();
-				var insReqCode = $('.insReqCode');
-				var inspectionName = $('.inspectionName');
-				var materialsName = $('.materialsName');
-				
-				console.log($(this));
-				console.log(contractCode);
-				console.log(subClassName);
-				console.log(rawMaterialName);
-				console.log(qualityInspectionCode);
-
-})
+	});

@@ -237,6 +237,9 @@
 		$(document).on('click', '#addInsValue', function(){
 			var insValueNum = $('input[name="inspectionMeasurementValue"]');
 			var insReqCode = $('input[name="qualityInspectionRequestCode"]');
+			var insStart = $('input[name="inspectionStartDate"]');
+			var insEnd = $('input[name="inspectionEndDate"]');
+			
 			var validationCheck = false;
 			
 			if(insReqCode.val() == null || insReqCode.val() == undefined || insReqCode.val() == '' ){
@@ -245,6 +248,12 @@
 			}else if(insValueNum.val() == null || insValueNum.val() == undefined || insValueNum.val() == '' ){
 				insValueNum.focus();
 				alert('측정값을 입력해주세요');
+			}else if(insStart.val() == null || insStart.val() == undefined || insStart.val() == '' ){
+				insStart.focus();
+				alert('시작시간을 입력해주세요');
+			}else if(insEnd.val() == null || insEnd.val() == undefined || insEnd.val() == '' ){
+				insEnd.focus();
+				alert('종료시간을 입력해주세요');
 			}else{
 				
 				var addIns = $('#tbody tr');
