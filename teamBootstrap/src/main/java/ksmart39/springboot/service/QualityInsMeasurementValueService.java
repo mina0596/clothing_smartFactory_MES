@@ -68,8 +68,20 @@ public class QualityInsMeasurementValueService {
 			}
 			log.info("05. 최종 합/불  :  {}", passValue);
 			
+			
+			//03. 해당 DTO에 담기
+			qualityInspectionResult.get(i).setInspectionMeasurementValue(resultValue);
+			qualityInspectionResult.get(i).setInspectionPassCheck(passValue);
+			qualityInspectionResult.get(i).setInspectionMeasurementLevelResult(measuredLevel);
+			qualityInspectionResult.get(i).setMinTolerance(passCheckValue);
+			//SESSION 완료 되면 바꿔야함
+			qualityInspectionResult.get(i).setChargeEmployeeCode("E0014");
+			log.info("06. 측정값, 최종 합/불 set  :  {}", qualityInspectionResult.get(i));
+			
+			//04. Insert 실행
+			qualityInsMeasurementValueMapper.addQualityRawMaterialInspectionResult(qualityInspectionResult.get(i));
 		}
-						
+
 		return result;
 	};
 	
