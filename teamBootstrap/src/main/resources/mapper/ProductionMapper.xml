@@ -137,7 +137,7 @@
 			pps.production_process_code						AS processCode, 
 			pps.requested_product_code						AS productCode, 
 			pps.process_start_date							AS processStartDate, 
-			pps.completed_product_update_date				AS processFinishDate, 
+			DATE_FORMAT(pps.completed_product_update_date,	'%Y-%m-%d %T')			AS processFinishDate, 
 			pps.process_status								AS processStatus, 
 			rpd.client_code									AS clientCode,
 			c.client_name									AS clientName,
@@ -147,6 +147,7 @@
 			detail.production_process_high_classification	AS highClassName,
 			detail.production_process_low_classification	AS lowClassName,
 			detail.process_order_num						AS orderNum
+			DATE_FORMAT(f.final_result_reg_date,'%Y-%m-%d %T')
 		FROM
 			product_production_process_status AS pps
 			INNER join
