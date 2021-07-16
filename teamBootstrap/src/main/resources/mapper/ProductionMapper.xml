@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ksmart39.springboot.dao.ProductionMapper">
-
-
-
+	<resultMap type="RequestedProduct" id="requestedProductResultMap">
+		<result property="requestedProductCode"			column="requested_product_code"/>
+		<result property="clientCode"					column="client_code"/>
+		<result property="contractCode"					column="contract_code"/>
+		<result property="contractCode"					column="contract_code"/>
+		<result property="productRequestCode"			column="requested_product_detail_reg_date"/>
+		<result property="approvalStatus"				column="approval_status"/>
+		<association property="client"	javaType="Client">
+			<id property="clientCode"					column="client_code"/>
+			<result property="clientName"				column="client_name"/>
+		</association>
+	</resultMap>
 
 	<select id="getProductionMonthlyPlanList" resultType="ProductionPlan">
 		SELECT 
@@ -75,7 +84,42 @@
 				NOW());
 	</insert>
 	
-
+	<select id="searchClientName" resultType="map" parameterType="map">
+		SELECT 
+			rpd.requested_product_code	AS pCode,
+			rpd.contract_code			AS contractCode,
+			rpd.client_code				AS clientCode, 
+			ci.client_name				AS clientName,		
+			rpd.approval_status			AS approvalStatus, 
+			rpd.requested_product_detail_reg_date	AS regDate
+		FROM 
+			requested_product_detail AS rpd
+			INNER join
+			client_info AS ci
+			on
+			rpd.client_code = ci.client_code
+		<trim prefix="WHERE" prefixOverrides="AND">
+			<if test="clientCode != null and clientCode != ''.toString()">
+				AND	rpd.client_code LIKE CONCAT('%', #{clientCode} ,'%')
+			</if>
+			<if test="clientName != null and clientName != ''.toString()">
+				AND	ci.client_Name LIKE CONCAT('%', #{clientName} ,'%')
+			</if>
+			<if test="contractCode != null and contractCode != ''.toString()">
+				AND rpd.contract_code LIKE CONCAT('%', #{contractCode} ,'%')
+			</if>
+			<if test="requestRegDateFrom != null and requestRegDateFrom != ''.toString()">
+				AND rpd.requested_product_detail_reg_date &gt;= DATE(#{requestRegDateFrom})
+			</if>
+			<if test="requestRegDateTo != null and requestRegDateTo != ''.toString()">
+				AND	rpd.requested_product_detail_reg_date &lt;= DATE(#{requestRegDateTo})
+			</if>
+			<if test="contractAcceptCheck != null and contractAcceptCheck != ''.toString()">
+				AND rpd.approval_status LIKE CONCAT('%', #{contractAcceptCheck} ,'%')
+			</if>
+		</trim>
+	</select>
+	
 
 
 </mapper>

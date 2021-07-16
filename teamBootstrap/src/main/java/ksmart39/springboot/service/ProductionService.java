@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import ksmart39.springboot.dao.ProductionMapper;
 import ksmart39.springboot.dao.WorkOrderMapper;
+import ksmart39.springboot.domain.RequestedProduct;
 
 
 @Service
@@ -37,5 +38,10 @@ public class ProductionService {
 	//[민아]생산 시작하기 - 생산현황에 첫공정 insert
 	public int startProduction(String sentPCode) {
 		return productionMapper.startProduction(sentPCode);
+	}
+	
+	//[민아]거래처명 검색 모달 결과
+	public List<Map<String,Object>> searchClientName(Map<String,Object> infoMap){
+		return productionMapper.searchClientName(infoMap);
 	}
 }
