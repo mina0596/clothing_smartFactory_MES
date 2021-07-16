@@ -22,6 +22,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -58,7 +59,33 @@ public class ProductionController_PMA {
 	public String orderProductionProcess() {
 		return "production/orderProductionProcess";
 	}
+	
+	//[민아]의뢰 품목별 생산공정 현황 조회
+	@PostMapping("/searchProductToStart")
+	@ResponseBody
+	public List<Map<String,Object>> getProductToStartResult(@RequestBody Map<String,Object> searchKeyAndValue){
 
+		log.info("ajax에서 받아오는 map : {}", searchKeyAndValue);
+		
+		List<Map<String,Object>> productToStartInfo = productionService.searchProductToStart(searchKeyAndValue);
+		
+		return productToStartInfo;
+	}
+	
+	
+	//[민아]공정완료버튼 눌렀을때
+	@PostMapping("/stopProcessByProduct")
+	@ResponseBody
+	public String stopProcess(@RequestBody ProductProductionProcessStatus selectedProductInfo) {
+		log.info("ajax에서 잘 받아오나요? {}", selectedProductInfo);
+		String test="test";
+		String productCode = selectedProductInfo.getRequestedProductCode();
+		log.info("processCode :{}", productCode);
+		productionService.completeProcess(selectedProductInfo);
+		return test;
+	}
+	
+	
 	//[민아]생산공정 지시를 위한 의뢰코드 검색 modal
 	@RequestMapping(value = "searchOrderProductionProcess", method = RequestMethod.POST)
 	
