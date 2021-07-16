@@ -136,11 +136,10 @@ layout:decorate="@{layout/default_production}">
                   	<td><input type="checkbox" class="checked"></td>
 	                <td th:text = "${n.index+1}"></td>
                     <td th:text = "${p.requestedProductCode}"></td>
-                    <td th:text = "${p.processOrderNum}"></td>
+                   <!--  <td th:text = "${p.productionProcessList.processOrderNum}"></td> -->
                     <td th:text = "${p.productionProcessLowClassification}"><span class="badge bg" style="padding-top: 5px;"></span></td>
                     <td th:text = "${p.processStartDate}"></td>
                     <td th:text = "${p.completedProductUpdateDate}"></td>
-                    <td th:text = "${p.processStartDate}"></td>
                     <td></td>
                   </tr>
                 </tbody>

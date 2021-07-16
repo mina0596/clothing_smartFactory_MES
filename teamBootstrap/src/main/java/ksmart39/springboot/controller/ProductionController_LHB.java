@@ -60,7 +60,7 @@ public class ProductionController_LHB {
 
 	@GetMapping("/detailedStateByProduct")
 	public String getProductState(Model model) {
-		List<Map<String,Object>> resultMap = productStateService.getProductState();
+		List<ProductProductionProcessStatus> resultMap = productStateService.getProductState();
 		model.addAttribute("title", "생산현황");
 		model.addAttribute("productState", resultMap);
 		log.info("resultMap:{}", resultMap);
