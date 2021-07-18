@@ -26,6 +26,53 @@
 		<result property="inspectionStandardUpdateDate" 		column="inspection_standard_update_date"/>
 	</resultMap>
 	
+	<resultMap type="QualityInspectionResult" 			id="QualityInspectionResultMap">
+		<result property="inspectionResultCode" 				column="inspection_result_code"/>
+		<result property="qualityInspectionRequestCode" 		column="quality_inspection_request_code"/>
+		<result property="chargeEmployeeCode" 					column="charge_employee_code"/>
+		<result property="qualityInspectionCode" 				column="quality_inspection_code"/>
+		<result property="inspectionMeasurementNum" 			column="inspection_measurement_num"/>
+		<result property="inspectionMeasurementValue" 			column="inspection_measurement_value"/>
+		<result property="inspectionMeasurementLevelResult" 	column="inspection_measurement_level_result"/>
+		<result property="minTolerance" 						column="min_tolerance"/>
+		<result property="maxTolerance" 						column="max_tolerance"/>
+		<result property="errorRange" 							column="error_range"/>
+		<result property="inspectionPassCheck" 					column="inspection_pass_check"/>
+		<result property="inspectionStartDate" 					column="inspection_start_date"/>
+		<result property="inspectionDuration" 					column="inspection_duration"/>
+		<result property="inspectionEndDate" 					column="inspection_end_date"/>
+		<result property="inspectionResultRegDate" 				column="inspection_result_reg_date"/>
+		<result property="inspectionResultUpdateDate" 			column="inspection_result_update_date"/>
+		<result property="rawMaterialCode" 						column="raw_material_code"/>
+	</resultMap>
+	
+	
+	<!-- 품질검사 측정값 목록 -->
+	<select id="getInspectionMeasurementValueList" resultMap="QualityInspectionResultMap">
+		SELECT 
+			inspection_result_code
+			,quality_inspection_request_code
+			,charge_employee_code
+			,quality_inspection_code
+			,raw_material_code
+			,inspection_measurement_num
+			,inspection_measurement_value
+			,inspection_measurement_level_result
+			,min_tolerance
+			,max_tolerance
+			,error_range
+			,inspection_pass_check
+			,inspection_start_date
+			,inspection_duration
+			,inspection_end_date
+			,inspection_result_reg_date
+			,inspection_result_update_date
+		FROM 
+			inspection_result AS i
+		GROUP BY i.quality_inspection_request_code;
+	</select>
+	
+	<!-- 품질검사 측정값 등록 -->
 	<insert id="addQualityRawMaterialInspectionResult" parameterType="QualityInspectionResult">
 		INSERT INTO inspection_result
 			(
@@ -52,7 +99,7 @@
 			,#{chargeEmployeeCode}
 			,#{qualityInspectionCode}
 			,#{rawMaterialCode}
-			,sf_inspectionRawMaterialMeasurement(#{rawMaterialCode})
+			,sf_inspectionMeasurementNum(#{qualityInspectionRequestCode})
 			,#{inspectionMeasurementValue}
 			,#{inspectionMeasurementLevelResult}
 			,#{minTolerance}
@@ -68,6 +115,7 @@
 			
 	</insert>
 	
+	<!-- 품질검사 측정값 기준치 -->
 	<select id="getQualityInspectionStandard" parameterType="String" resultMap="QualityInspectionStandardResultMap" >
 		SELECT 
 			quality_inspection_code
@@ -86,6 +134,7 @@
 			i.quality_inspection_code = #{qualityInspectionCode};
 	</select>
 	
+	<!-- 품질검사 원부자재 기준치 목록 -->
 	<select id="getBiochemFabricLevelStandard" parameterType="QualityInspectionResult" resultMap="QualityBiochemFabricLevelStandardResultMap">
 		SELECT 
 			raw_material_code
@@ -103,8 +152,9 @@
 			b.raw_material_code = #{rawMaterialCode};
 	</select>
 	
+	<!-- 품질검사 요청목록 목록 -->
 	<select id="searchQualityInspectionRequest" resultType="Map" parameterType="Map">
-		SELECT 
+		SELECT
 			q.quality_inspection_request_code
 			,q.requested_product_code
 			,r.contract_code
@@ -112,19 +162,27 @@
 			,md.med_class_name
 			,s.quality_inspection_code
 			,s.sub_class_name
-			,m.raw_material_code
-			,m.raw_material_name	
-			,q.inspection_request_date	
+			,q.raw_material_code
+			,m.raw_material_name
+			,q.inspection_request_date
 			,c.client_name
-		FROM quality_inspection_request AS q INNER JOIN requested_product_detail AS r ON q.requested_product_code = r.requested_product_code
+		FROM
+			quality_inspection_request AS q INNER JOIN requested_product_detail AS r ON q.requested_product_code = r.requested_product_code
 			INNER JOIN sub_class_inspection_list AS s ON q.quality_inspection_code = s.quality_inspection_code
 			INNER JOIN medium_class_inspection_list AS md ON s.high_med_class_code = md.high_med_class_code
 			INNER JOIN high_class_inspection_list AS h ON md.high_class_code = h.high_class_code
+			LEFT JOIN raw_material_info AS m ON q.raw_material_code = m.raw_material_code
 			LEFT JOIN client_info AS c ON r.client_code = c.client_code
-			INNER JOIN used_raw_material AS u ON u.requested_product_code = q.requested_product_code
-			LEFT JOIN raw_material_info AS m ON u.raw_material_code = m.raw_material_code
 			LEFT JOIN inspection_result AS re ON q.quality_inspection_request_code = re.quality_inspection_request_code
 		<trim prefix="WHERE" prefixOverrides="AND">
+			AND 
+			q.quality_inspection_request_code NOT IN 
+				( select
+					ins.quality_inspection_request_code
+					from
+					 inspection_result AS ins
+					WHERE 
+						ins.inspection_measurement_num='3회차')
 			<if test="contractCode != null and contractCode != ''.toString()">
 				AND	r.contract_code LIKE CONCAT('%', #{contractCode} ,'%')
 			</if>
@@ -144,10 +202,9 @@
 				AND m.raw_material_name LIKE CONCAT('%', #{rawMaterialName} ,'%')
 			</if>
 			<if test="clientName != null and clientName != ''.toString()">
-				AND c.client_name LIKE CONCAT('%', #{clientName} ,'%');
+				AND c.client_name LIKE CONCAT('%', #{clientName} ,'%')
 			</if>
-				AND re.inspection_measurement_num IS NULL
-				OR re.inspection_measurement_num NOT IN ('3회차');
+				GROUP BY q.quality_inspection_request_code;
 		</trim>
 	</select>
 </mapper>

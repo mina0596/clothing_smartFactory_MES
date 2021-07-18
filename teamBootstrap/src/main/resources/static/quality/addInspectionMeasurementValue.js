@@ -63,6 +63,10 @@
 							var myDate = new Date(dateText.match(/\d+/) * 1);
 							date = formatDate(myDate);
 							
+							if(data[i].raw_material_name == undefined){
+								data[i].raw_material_name = '해당없음';
+							}
+							
 							html += '<tr class="removeTr">';
 							html += '<td><input type="checkbox" class="checkedModal" value="';
 							html += data[i].quality_inspection_request_code;
@@ -136,6 +140,7 @@
 		//모달 save 눌렀을때
 		$('#saveBtn , #saveBtn2').click(function(){
 			$('#tableTr').remove();
+			
 				//체크된 것 값 가져오기
 				$('.checkedModal:checked').each(function(index,item){
 					var requestCode = $(this).val();
@@ -147,46 +152,78 @@
 					var insReqCode = $('.insReqCode');
 					var inspectionName = $('.inspectionName');
 					var materialsName = $('.materialsName');
+					var cate = '';
+					var cateRadio = '';
+					var valueT = '';
+					var valueF = '';
 					
-					//console.log($(this));
-					//console.log(contractCode);
-					//console.log(subClassName);
-					//console.log(rawMaterialName);
-					//console.log(qualityInspectionCode);
 					
-					//체크된 수만큼 측정값 등록 행 추가
-					if(index >= 0 && index !=null && index != undefined){
+					//품질검사 카테고리 가져오기
+					var request = $.ajax({
+						  url: "/quality/getQulityInspectionCategory",
+						  method: "POST",
+						  data: { qualityInspectionCode : qualityInspectionCode },
+						  dataType: "text"
+						});
+						 
+						request.done(function( data ) {
+							console.log(data);
+							
+							if(data != '' && data != undefined && data != null){
+								
+								if(data == '합격/불합격'){
+									cate = '<input type="checkbox" name="inspectionPassCheck" value="합격">합 <input type="checkbox" name="inspectionPassCheck" value="불합격">불';
+									rawMaterialName = '해당없음';
+									rawMaterialCode = '해당없음';
+									
+								}else if(data == '수치'){
+									cate = '<input type="number" name="inspectionMeasurementValue" class="form-control" placeholder="측정값">';
+									rawMaterialName = '해당없음';
+									rawMaterialCode = '해당없음';
+									
+								}else if(data == '등급')
+									cate = '<input type="number" name="inspectionMeasurementValue" class="form-control" placeholder="측정값">';
+								
+								//체크된 수만큼 측정값 등록 행 추가
+								if(index >= 0 && index !=null && index != undefined){
 
-						var tbody = $('#tbody');
-						
-						for(var i = 0; i < index+2; i++){
-							var innerHtml = '<tr>';
-							innerHtml += '<td><input type="checkbox" class="checked"></td>';
-							//품질검사요청코드
-							innerHtml += '<td><div class="input-group"><input type="text" name="qualityInspectionRequestCode" class="form-control" value="';
-							innerHtml += requestCode;
-							innerHtml += '" placeholder="품질검사요청코드 검색"></div></td>';
-							innerHtml += '<td><input type="text" class="form-control" value="' + subClassName  + '" readonly="readonly"></td>';
-							//품질검사코드
-							innerHtml += '<input type="hidden" name="qualityInspectionCode" class="form-control" value="' + qualityInspectionCode + '">';
-							//원부자재코드
-							innerHtml += '<input type="hidden" name="rawMaterialCode" class="form-control" value="' + rawMaterialCode + '">';
-							//원부자재명
-							innerHtml += '<td><input type="text" class="form-control" value="' + rawMaterialName  + '" readonly="readonly"></td>';
-							innerHtml += '<td><select class="form-control"><option>1회차</option><option>2회차</option><option>3회차</option></select></td>';
-							//측정값
-							innerHtml += '<td><input type="number" name="inspectionMeasurementValue" class="form-control" placeholder="측정값"></td>';
-							//측정시간
-							innerHtml += '<td><input type="datetime-local" name="inspectionStartDate" class="form-control" placeholder="공란일시 등록시간"></td>';
-							innerHtml += '<td><input type="datetime-local" name="inspectionEndDate" class="form-control" placeholder="공란일시 등록시간"></td>';
-							innerHtml += '<td><button type="button" class="addBtn">등록</button></td>';
-							innerHtml += '<td><button type="button" class="removeButton">삭제</button></td>';
-							innerHtml += '</tr>';
-							tbody.append(innerHtml);
-							break;
-						}
-					}
-				
+									var tbody = $('#tbody');
+									
+									for(var i = 0; i < index+2; i++){
+										var innerHtml = '<tr>';
+										innerHtml += '<td><input type="checkbox" class="checked"></td>';
+										//품질검사요청코드
+										innerHtml += '<td><div class="input-group"><input type="text" name="qualityInspectionRequestCode" class="form-control" value="';
+										innerHtml += requestCode;
+										innerHtml += '" placeholder="품질검사요청코드 검색"></div></td>';
+										innerHtml += '<td><input type="text" class="form-control" value="' + subClassName  + '" readonly="readonly"></td>';
+										//품질검사코드
+										innerHtml += '<td><input type="text" name="qualityInspectionCode" class="form-control" value="' + qualityInspectionCode + '"</td>';
+										//원부자재명
+										innerHtml += '<td><input type="text" class="form-control" value="' + rawMaterialName  + '" readonly="readonly"></td>';
+										//원부자재코드
+										innerHtml += '<td><input type="text" name="rawMaterialCode" class="form-control" value="' + rawMaterialCode + '">';
+										//측정값
+										innerHtml += '<td>';
+										innerHtml += cate;
+										innerHtml += '</td>';
+										//측정시간
+										innerHtml += '<td><input type="text" name="inspectionStartDate" class="form-control" placeholder="yyyy-MM-dd hh:mm:ss"></td>';
+										innerHtml += '<td><input type="text" name="inspectionEndDate" class="form-control" placeholder="yyyy-MM-dd hh:mm:ss"></td>';
+										innerHtml += '<td><button type="button" class="addBtn">등록</button></td>';
+										innerHtml += '<td><button type="button" class="removeButton">삭제</button></td>';
+										innerHtml += '</tr>';
+										tbody.append(innerHtml);
+										break;
+									}
+								}
+							}
+						});
+												 
+						request.fail(function( jqXHR, textStatus ) {
+						  alert( "Request failed: " + textStatus );
+						});
+								
 				});
 				//모달 닫기
 				$('#requestCodeModal').modal("hide");
@@ -223,12 +260,13 @@
 		        	console.log(data);
 		        	
 		        	//리로드
-		        	//if(data) location.reload();
+		        	if(data) location.reload(true);
+		        	else{
+		        		alert('오류가 발생했습니다. 관리자에게 문의해주세요.');
+		        	}
 		        },
 		        error : function(xhr,status,error) {
-		        	console.log("xhr: " + xhr);
-		        	console.log("status: " + status);
-		        	console.log("error: " + error);
+		        	console.log('오류가 발생했습니다. 관리자에게 문의해주세요.');
 		        }
 		    });
 		}
@@ -237,6 +275,7 @@
 		$(document).on('click', '#addInsValue', function(){
 			var insValueNum = $('input[name="inspectionMeasurementValue"]');
 			var insReqCode = $('input[name="qualityInspectionRequestCode"]');
+			var insValueCheck = $('input[name="inspectionPassCheck"]');
 			var insStart = $('input[name="inspectionStartDate"]');
 			var insEnd = $('input[name="inspectionEndDate"]');
 			
@@ -247,6 +286,9 @@
 				alert('품질검사 요청 코드를 입력해주세요');
 			}else if(insValueNum.val() == null || insValueNum.val() == undefined || insValueNum.val() == '' ){
 				insValueNum.focus();
+				alert('측정값을 입력해주세요');
+			}else if(insValueCheck.val() == null || insValueCheck.val() == undefined || insValueCheck.val() == '' ){
+				insStart.focus();
 				alert('측정값을 입력해주세요');
 			}else if(insStart.val() == null || insStart.val() == undefined || insStart.val() == '' ){
 				insStart.focus();
@@ -261,7 +303,7 @@
 				
 				for(var i = 0; i < addIns.length; i ++){
 					var insInfo = {};
-					var bindElement = addIns.eq(i).find('input');
+					var bindElement = addIns.eq(i).find('input[type=text], input[type=number], input[type=checkbox]:checked');
 					
 					$.each(bindElement, function(){
 						var insKey = $(this).attr('name');
@@ -332,14 +374,23 @@
 					var lastIndex = $(tbody).find('tr:last').length;
 					var innerHtml = '<tr>';
 					innerHtml += '<td><input type="checkbox" class="checked"></td>';
-					innerHtml += '<td><input type="text" class="form-control" placeholder="품질검사요청코드 직접입력"><div class="input-group-btn"></td>';
+					//품질검사 요청 코드
+					innerHtml += '<td><input type="text" name="qualityInspectionRequestCode" class="form-control" placeholder="품질검사요청코드 직접입력"><div class="input-group-btn"></td>';
+					//검사명
 					innerHtml += '<td><input type="text" class="form-control" placeholder="검사명 직접입력"></td>';
-					innerHtml += '<input type="hidden" name="qualityInspectionCode" class="form-control" value="quality_inspection_code"></td>';
+					//품질검사 코드
+					innerHtml += '<td><input type="text" name="qualityInspectionCode" class="form-control" </td>';
+					//원부자재명
 					innerHtml += '<td><input type="text" class="form-control" placeholder="원부자재명 직접입력"></td>';
-					innerHtml += '<td><select class="form-control"><option>1회차</option><option>2회차</option><option>3회차</option></select></td>';
-					innerHtml += '<td><input type="number" class="form-control" placeholder="측정값"></td>';
-					innerHtml += '<td><input type="datetime-local" class="form-control" placeholder="공란일시 등록시간"></td>';
-					innerHtml += '<td><input type="datetime-local" class="form-control" placeholder="공란일시 등록시간"></td>';
+					//원부자재코드
+					innerHtml += '<td><input type="text" name="rawMaterialCode" class="form-control" placeholder="원부자재명 직접입력"></td>';
+					//측정값
+					innerHtml += '<td><input type="number" name="inspectionMeasurementValue" class="form-control" placeholder="측정값"></td>';
+					//측정시작시간
+					innerHtml += '<td><input type="text" name="inspectionStartDate" class="form-control" placeholder="yyyy-MM-dd hh:mm:ss"></td>';
+					//측정종료시간
+					innerHtml += '<td><input type="text" name="inspectionEndDate" class="form-control" placeholder="yyyy-MM-dd hh:mm:ss""></td>';
+					//등록버튼
 					innerHtml += '<td><button type="button" id="addInsValue">등록</button></td>';
 					
 					if(i == (count - 1)){
@@ -349,9 +400,7 @@
 					}
 					
 					innerHtml += '</tr>';
-					tbody.append(innerHtml);	
-					
-					
+					tbody.append(innerHtml);										
 				}
 			}else{
 				alert('확인');
