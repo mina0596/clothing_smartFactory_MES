@@ -88,7 +88,7 @@ $(function(){
 							html += '<td name="clientNameCheck" class="clientName">';
 							html += clientNameResultList[i].clientName;						
 							html += '</td>';
-							html += '<td name="clientNameCheck">';
+							html += '<td name="clientNameCheck" class="clientCode">';
 							html += clientNameResultList[i].clientCode;						
 							html += '</td>';
 							html += '<td name="clientNameCheck">';
@@ -122,7 +122,9 @@ $(function(){
 			//modal에서 선택한 거래처명 주인화면으로 가져와서 입력해주기
 			$('#getClientName').click(function(){
 				var checkedClientName = $('[name=clientNameCheck]:checked').parent().parent().find('.clientName').text();
+				var checkedClientCode = $('[name=clientNameCheck]:checked').parent().parent().find('.clientCode').text();
 				$('#searchedClientName').attr('value', checkedClientName);
+				$('#searchedClientCode').attr('value', checkedClientCode);
 				$("input[type=radio]:checked").attr('checked',false);
 				$('#searchClientTable').find('input[type=text]').val('');
 				$('#searchClientTable').find('input[type=date]').val('');

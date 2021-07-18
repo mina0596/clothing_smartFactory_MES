@@ -42,6 +42,7 @@ layout:decorate="@{layout/default_qualityControl}">
                     <tr >                      
                       <th>품목별 의뢰 코드</th>
                       <th>품질검사 요청코드</th>
+                      <th>품질검사코드</th>
                       <th>중분류검사명</th>
                       <th>소분류검사명</th>
                       <th>상세분류검사명</th>
@@ -55,18 +56,48 @@ layout:decorate="@{layout/default_qualityControl}">
                    </thead>
                   <tbody>
 	                  <tr>
-	                  		<td><input type="text"  class="requestProductCode" readonly="readonly"placeholder="품목별의뢰코드"></td>
-	                  		<td><input type="text" class="qualityInspectionReqestCode"  readonly="readonly" placeholder="품질검사요청코드"></td>
-	                  		<td><input type="text" class="mediumInspectionName"  readonly="readonly" placeholder="중분류검사명"></td>
-	                  		<td><input type="text" class="lowInspectionName"  readonly="readonly" placeholder="소분류검사명"></td>
-	                  		<td><input type="text" class="subInspectionName"  readonly="readonly" placeholder="상세분류검사명"></td>
-	                  		<td><input type="text" class="measurementNum"  readonly="readonly" placeholder="측정회차"></td>
-	                  		<td><input type="text" class="measuermentResult"  readonly="readonly" placeholder="측정결과"></td>
-	                  		<td><input type="text" class="inspectionStartDate"  readonly="readonly" placeholder="검사시작일"></td>
-	                  		<td><input type="text" class="inspectionDuration"  readonly="readonly" placeholder="검사소요시간"></td>
-	                  		<td><input type="text" class="inspectionCompleteDate"  readonly="readonly" placeholder="검사완료시간"></td>
-	                  		<td><input type="text" class="inspectionRegDate"  readonly="readonly" placeholder="검사등록일"></td>
+	                  		<td><input type="text" name="requestedProduct.productRequestCode"  readonly="readonly"placeholder="품목별의뢰코드"></td>
+	                  		<td><input type="text" name="qualityInspectionRequestCode"  readonly="readonly" placeholder="품질검사요청코드"></td>
+	                  		<td><input type="text" name="qualityInspectionCode"  readonly="readonly" placeholder="품질검사코드"></td>
+	                  		<td><input type="text" name="mediumClassInspection.medClassName"  readonly="readonly" placeholder="중분류검사명"></td>
+	                  		<td><input type="text" name="lowClassInspection.lowClassName" readonly="readonly" placeholder="소분류검사명"></td>
+	                  		<td><input type="text" name="subClassInspection.subClassName"  readonly="readonly" placeholder="상세분류검사명"></td>
+	                  		<td><input type="text" name="qualityInspectionResult.inspectionMeasurementNum" readonly="readonly" placeholder="측정회차"></td>
+	                  		<td><input type="text" name="qualityInspectionResult.inspectionPassCheck"  readonly="readonly" placeholder="측정결과"></td>
+	                  		<td><input type="text" name="qualityInspectionResult.inspectionStartDate"  readonly="readonly" placeholder="검사시작일"></td>
+	                  		<td><input type="text" name="qualityInspectionResult.inspectionDuration" readonly="readonly" placeholder="검사소요시간"></td>
+	                  		<td><input type="text" name="qualityInspectionResult.inspectionDuration" readonly="readonly" placeholder="검사완료시간"></td>
+	                  		<td><input type="text" name="qualityInspectionResult.inspectionResultRegDate"  readonly="readonly" placeholder="검사등록일"></td>
 	                   </tr>
+	                  <tr>
+	                  		<td><input type="text" name="requestedProduct.productRequestCode"  readonly="readonly"placeholder="품목별의뢰코드"></td>
+	                  		<td><input type="text" name="qualityInspectionRequestCode"  readonly="readonly" placeholder="품질검사요청코드"></td>
+	                  		<td><input type="text" name="qualityInspectionCode"  readonly="readonly" placeholder="품질검사코드"></td>
+	                  		<td><input type="text" name="mediumClassInspection.medClassName"  readonly="readonly" placeholder="중분류검사명"></td>
+	                  		<td><input type="text" name="lowClassInspection.lowClassName" readonly="readonly" placeholder="소분류검사명"></td>
+	                  		<td><input type="text" name="subClassInspection.subClassName"  readonly="readonly" placeholder="상세분류검사명"></td>
+	                  		<td><input type="text" name="qualityInspectionResult.inspectionMeasurementNum" readonly="readonly" placeholder="측정회차"></td>
+	                  		<td><input type="text" name="qualityInspectionResult.inspectionPassCheck"  readonly="readonly" placeholder="측정결과"></td>
+	                  		<td><input type="text" name="qualityInspectionResult.inspectionStartDate"  readonly="readonly" placeholder="검사시작일"></td>
+	                  		<td><input type="text" name="qualityInspectionResult.inspectionDuration" readonly="readonly" placeholder="검사소요시간"></td>
+	                  		<td><input type="text" name="qualityInspectionResult.inspectionDuration" readonly="readonly" placeholder="검사완료시간"></td>
+	                  		<td><input type="text" name="qualityInspectionResult.inspectionResultRegDate"  readonly="readonly" placeholder="검사등록일"></td>
+	                   </tr>
+	                  <tr>
+	                  		<td><input type="text" name="requestedProduct.productRequestCode"  readonly="readonly"placeholder="품목별의뢰코드"></td>
+	                  		<td><input type="text" name="qualityInspectionRequestCode"  readonly="readonly" placeholder="품질검사요청코드"></td>
+	                  		<td><input type="text" name="qualityInspectionCode"  readonly="readonly" placeholder="품질검사코드"></td>
+	                  		<td><input type="text" name="mediumClassInspection.medClassName"  readonly="readonly" placeholder="중분류검사명"></td>
+	                  		<td><input type="text" name="lowClassInspection.lowClassName" readonly="readonly" placeholder="소분류검사명"></td>
+	                  		<td><input type="text" name="subClassInspection.subClassName"  readonly="readonly" placeholder="상세분류검사명"></td>
+	                  		<td><input type="text" name="qualityInspectionResult.inspectionMeasurementNum" readonly="readonly" placeholder="측정회차"></td>
+	                  		<td><input type="text" name="qualityInspectionResult.inspectionPassCheck"  readonly="readonly" placeholder="측정결과"></td>
+	                  		<td><input type="text" name="qualityInspectionResult.inspectionStartDate"  readonly="readonly" placeholder="검사시작일"></td>
+	                  		<td><input type="text" name="qualityInspectionResult.inspectionDuration" readonly="readonly" placeholder="검사소요시간"></td>
+	                  		<td><input type="text" name="qualityInspectionResult.inspectionDuration" readonly="readonly" placeholder="검사완료시간"></td>
+	                  		<td><input type="text" name="qualityInspectionResult.inspectionResultRegDate"  readonly="readonly" placeholder="검사등록일"></td>
+	                   </tr>
+
 	                 
 	                  
 	                  

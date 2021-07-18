@@ -9,11 +9,29 @@ public class ProductProductionProcessStatus {
 	private String processStatus;
 	private String productionProcessStatusRegDate;
 	private String productionProcessStatusUpdateDate;
+	private String productionProcessLowClassification;
 	
+	public String getProductionProcessLowClassification() {
+		return productionProcessLowClassification;
+	}
+
+	public void setProductionProcessLowClassification(String productionProcessLowClassification) {
+		this.productionProcessLowClassification = productionProcessLowClassification;
+	}
+
 	private RequestedProduct requestedProduct;
 	private Client client;
 	private WorkOrder workOrder;
+	private ProductionProcessList productionProcessList;
 	
+	public ProductionProcessList getProductionProcessList() {
+		return productionProcessList;
+	}
+
+	public void setProductionProcessList(ProductionProcessList productionProcessList) {
+		this.productionProcessList = productionProcessList;
+	}
+
 	public WorkOrder getWorkOrder() {
 		return workOrder;
 	}
@@ -109,12 +127,12 @@ public class ProductProductionProcessStatus {
 				+ ", requestedProductCode=" + requestedProductCode + ", processStartDate=" + processStartDate
 				+ ", completedProductUpdateDate=" + completedProductUpdateDate + ", processStatus=" + processStatus
 				+ ", productionProcessStatusRegDate=" + productionProcessStatusRegDate
-				+ ", productionProcessStatusUpdateDate=" + productionProcessStatusUpdateDate + ", requestedProduct="
-				+ requestedProduct + ", client=" + client + ", workOrder=" + workOrder + "]";
+				+ ", productionProcessStatusUpdateDate=" + productionProcessStatusUpdateDate
+				+ ", productionProcessLowClassification=" + productionProcessLowClassification + ", requestedProduct="
+				+ requestedProduct + ", client=" + client + ", workOrder=" + workOrder + ", productionProcessList="
+				+ productionProcessList + "]";
 	}
 
 
-	
-	
 	
 }
