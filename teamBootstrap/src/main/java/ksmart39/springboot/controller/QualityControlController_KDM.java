@@ -22,11 +22,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ksmart39.springboot.domain.QualityInspectionResult;
+import ksmart39.springboot.domain.QualityInspectionStandard;
 import ksmart39.springboot.service.QualityInsMeasurementValueService;
 
 @Controller
 @RequestMapping("/quality")
 public class QualityControlController_KDM {
+	
 	private static final Logger log = LoggerFactory.getLogger(QualityControlController_KDM.class);
 	
 	@Autowired 
@@ -66,6 +68,13 @@ public class QualityControlController_KDM {
 	//[다미] 품질검사 측정값 목록
 	@GetMapping("/inspectionMeasurementValueList")
 	public String inspectionMeasurementValueList(Model model) {
+		
+		List<QualityInspectionResult> list = qualityInsMeasurementValueService.getInspectionMeasurementValueList();
+		
+		model.addAttribute("list", list);
+		
+		log.info("{}", list);
+		
 		return "quality/inspectionMeasurementValueList";
 	}
 	
@@ -75,17 +84,29 @@ public class QualityControlController_KDM {
 	public boolean addInspectionMeasurementValue(@RequestBody List<QualityInspectionResult> qualityInspectionResult) {
 		
 		int value = qualityInsMeasurementValueService.addQualityInspectionResult(qualityInspectionResult);
-		
-		//boolean 결과값
-		boolean result = false;
+		boolean result = false;			
 		
 		//insert 완료
-		//result = true;
-		log.info("qualityInspectionResult@@: {}", qualityInspectionResult );
-		
-		
+		if(value > 0) {
+			result = true;			
+		//insert 실패
+		}else {
+			result = false;			
+		}
 		
 		return result;		
+	}
+	
+	//[다미] 품질검사 측정값 카테고리에 맞는 행 만들기
+	@PostMapping("/getQulityInspectionCategory")
+	@ResponseBody
+	public String getQulityInspectionCategory(@RequestParam(value = "qualityInspectionCode")String qualityInspectionCode){
+		
+		List<QualityInspectionStandard> cate = qualityInsMeasurementValueService.getQualityInspectionStandard(qualityInspectionCode);
+		
+		String result = cate.get(0).getCategory();
+		
+		return result;	
 	}
 	
 	//[다미] 품질검사 측정값 등록 화면

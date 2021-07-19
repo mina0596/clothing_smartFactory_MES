@@ -77,7 +77,10 @@ public interface SystemMapper {
 	
 	/** 카테고리 4번 ajax로해야고  그것을 dto로 해서 map으로 해서 등록하면 된다고하심 
 	 * 일단 ajax부터 성공하고나서 dto로 map 해서 해보기 안되면 물어보기***/
-	//[보람]품질검사 대분류 카테고리 가져오는 메서드
-	public List<HighClassInspection> getHighClassCate();
-
+	//[보람]품질검사등록  대분류 카테고리 가져오는 메서드
+	 public List<Map<String,Object>> getHighClassCate();
+	//[보람]품질 검사 등록 중분류
+	public List<Map<String,Object>> getMediumClassCate(String highClassCateName);
+	//[보람]품질검사 소분류
+	public List<Map<String,Object>> getLowClassCate(String middleClassCateName);
 }

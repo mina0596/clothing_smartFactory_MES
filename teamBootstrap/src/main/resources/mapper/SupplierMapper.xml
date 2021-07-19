@@ -32,7 +32,7 @@
 	</insert>
 
 	<!-- 원부자재현황 -->
-	<select id="getRawInventoryState" resultType="Map">
+	<select id="getRawInventoryState" resultType="map">
 	 SELECT
 		r.raw_material_code,
 		r.raw_material_name,
@@ -45,7 +45,7 @@
 	ON t.raw_material_code = r.raw_material_code;
 	</select>
 	<!-- 발주거래처 정보   -->
-	<select id="getClientInfo" resultType="Map">
+	<select id="getClientInfo" resultType="map">
 	SELECT 
 		client_code,
 		client_name,
@@ -55,7 +55,7 @@
 		WHERE client_category='발주';
 	</select>
 	<!--원부자재 정보-->
-	<select id="getRawInfo" resultType="Map">
+	<select id="getRawInfo" resultType="map">
 	SELECT 
 		raw_material_code,
  		raw_material_high_classification,
@@ -67,7 +67,7 @@
 	FROM raw_material_info
 	</select>
 	<!-- 발주요청리스트  -->
-	<select id="getSupplierRequestList" resultType="Map">
+	<select id="getSupplierRequestList" resultType="map">
 	 SELECT
 		o.raw_material_order_code,
 		c.client_name,
@@ -89,7 +89,7 @@
 	ON o.client_code = c.client_code;
 	</select>
 	<!-- 발주계약 리스트 -->
-	<select id="getSupplierContractList" resultType="Map">
+	<select id="getSupplierContractList" resultType="map">
 	SELECT 
 		i.contract_code,
 		r.raw_material_order_code,
