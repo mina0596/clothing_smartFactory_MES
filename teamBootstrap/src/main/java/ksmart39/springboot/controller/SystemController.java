@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -24,6 +26,7 @@ import ksmart39.springboot.domain.SubClassInspection;
 import ksmart39.springboot.service.SystemService;
 
 @Controller
+@RequestMapping("/system")
 public class SystemController {
 
 	private final SystemService systemService;
@@ -341,11 +344,37 @@ public class SystemController {
 
 	
 	
-	// [보람]품질검사 대분류
-	@GetMapping()
-	public String getHighClassCate() {
-
-		return null;
+	// [보람]품질검사 대분류 ajax 처리
+	@RequestMapping(value = "/highClassCate" ,method = RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String,Object>> getHighClassCate() {
+		List<Map<String,Object>> highCate =systemService.getHighClassCate();
+		log.info("========================================");
+		log.info("highCate {}",highCate);
+		log.info("========================================");
+		return highCate;
+	}
+	//[보람] 품질검사 중분류 가지고오기
+	@RequestMapping(value = "/mediumClassCate" ,method = RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String,Object>> getMediumClassCate(@RequestParam(value = "highClassCateName", required = false)String highClassCateName) {
+		List<Map<String,Object>> mediumCate = systemService.getMediumClassCate(highClassCateName);
+		log.info("========================================");
+		log.info("mediumCate {}",mediumCate);
+		log.info("========================================");
+		
+		return mediumCate;
+	}
+	//[보람] 품질검사 소분류 가지고오기
+	@RequestMapping(value = "/lowClassCate" ,method = RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String,Object>> getLowClassCate(@RequestParam(value = "middleClassCateName", required = false)String middleClassCateName) {
+		List<Map<String,Object>> lowCate = systemService.getLowClassCate(middleClassCateName);
+		log.info("========================================");
+		log.info("mediumCate {}",lowCate);
+		log.info("========================================");
+		
+		return lowCate;
 	}
 
 	// [보람] 검사 리스트 검사번호클릭시 검사정보 경로
@@ -398,8 +427,8 @@ public class SystemController {
 	  
 	  //검사종류 등록 메서드
 	  
-	  @GetMapping("/addQualityInspection") public String addQualityInspection(Model
-	  model) {
+	  @GetMapping("/addQualityInspection") 
+	  public String addQualityInspection(Model  model) {
 	  
 	  model.addAttribute("title", "품질검사:검사등록");
 	  return"system/addQualityInspection"; }
