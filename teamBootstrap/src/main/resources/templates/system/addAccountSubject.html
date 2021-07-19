@@ -12,7 +12,7 @@ layout:decorate="@{layout/default_system}">
             <div class="form-panel">
               <h4 class="mb"><i class="fa fa-edit"></i> 계정과목 등록</h4>
               
-              <form id="addAccountCate" th:action="@{/addAccountSubject}" class="form-horizontal style-form" method="post">
+              <form id="addAccountCate" th:action="@{/system/addAccountSubject}" class="form-horizontal style-form" method="post">
               
                <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">계정과목명</label>
@@ -33,7 +33,7 @@ layout:decorate="@{layout/default_system}">
 				 <div class="form-group text-right">
 			          <div class="col-lg-offset-2 col-lg-10">
 			            <button id="addBtn" class="btn btn-theme" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">등록</font></font></button>
-			            <button class="btn btn-theme04" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소</font></font></button>
+			            <a th:href="@{/system/accountSubjectList}" class="btn btn-theme04" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소</font></font></a>
 			          </div>
 			        </div>
     			</form>            
