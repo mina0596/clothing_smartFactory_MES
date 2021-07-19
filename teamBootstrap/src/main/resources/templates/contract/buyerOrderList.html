@@ -118,7 +118,7 @@ layout:decorate="@{layout/default_contract}">
  
                 <tbody>
                 <!--db에서 데이터 넣어야하는 부분 -->
-                  <tr>
+                  <tr th:each >
                   	<td><input type="checkbox" class="checked"></td>
                   	<td>1</td>
                   	<td><a onclick="location.href='buyerOrderInfo'" id="add-regular"  class="btn btn-default btn-sm" style="padding-top: 5px ;" >[주문서]</a></td>                 	
