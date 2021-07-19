@@ -3,6 +3,8 @@
 <mapper namespace="ksmart39.springboot.dao.RawMaterialsInventoryStatusMapper">
 
 	<resultMap type="RawMaterialsInventory" 		id="materialsInventoryResultMap">
+		<result property="inventoryAmount" 			column="leftMaterialTotal"/>
+		<result property="transactionCode" 			column="raw_material_transaction_code"/>
 		<result property="materialCode" 			column="raw_material_code"/>
 		<result property="materialOrderCode" 		column="raw_material_order_code"/>
 		<result property="chargeEmployeeCode" 		column="charge_employee_code"/>
@@ -18,18 +20,19 @@
 			<result property="colorCode" 			column="raw_material_color_code"/>
 			<result property="unit" 				column="raw_material_unit"/>
 			<result property="feature" 				column="raw_material_feature"/>
+			<association property="employeeInfo" 		javaType="HumanResources">
+				<id property="employeeCode" 			column="employee_code"/>
+				<result property="employeeName" 		column="employee_name"/>
+			</association>
 		</association>
 		
-		<association property="employeeInfo" 		javaType="HumanResources">
-			<id property="employeeCode" 			column="employee_code"/>
-			<result property="employeeName" 		column="employee_name"/>
-		</association>
 		
 	</resultMap>
 
-
+	<!-- [민아]입출고 현황 목록 -->
 	<select id="getMaterialsTransactionList" resultMap="materialsInventoryResultMap">
 		SELECT 
+			rmit.raw_material_transaction_code, 
 			rmit.raw_material_code, 
 			rmit.raw_material_order_code, 
 			rmit.charge_employee_code, 
@@ -50,14 +53,17 @@
 	
 	</select>
 	
-	<select id="getInventoryInfoByMCode" parameterType="map" resultMap="materialsInventoryResultMap" fetchSize="1000">
+	<!-- [민아]입출고 코드로 현황 목록 조회 결과 -->
+	<select id="getTransInfoByCode" parameterType="String" resultMap="materialsInventoryResultMap">
 		SELECT 
+			rmit.raw_material_transaction_code, 
 			rmit.raw_material_order_code, 
-			rmit.charge_employee_code, 
+			rmit.charge_employee_code,
+			rmit.raw_material_transaction_amount,  
+			rmit.raw_material_code,
 			rmit.transaction_category,  
 			rmit.raw_material_transaction_date, 
 			rmit.raw_material_transaction_reg_date, 
-			rmit.raw_material_transaction_update_date,
 			info.raw_material_name,
 			info.raw_material_color_code,
 			info.raw_material_unit,
@@ -74,12 +80,64 @@
 		on
 			rmit.charge_employee_code = em.employee_code
 		where
-			rmit.raw_material_order_code = #{materialOrderCode} AND
-			rmit.transaction_category = #{transactionCate} and
-			rmit.raw_material_transaction_date = #{transactionDate};
+			rmit.raw_material_transaction_code = #{transactionCode};
 	</select>
 	
+	<!-- [민아]입고 정보 수정 -->
+	<update id="modifyMaterialIn" parameterType="map">
+		UPDATE raw_material_inventory_transaction
+			SET
+				raw_material_transaction_amount=#{transactionAmount},
+				raw_material_transaction_update_date=NOW()
+			WHERE 
+				raw_material_transaction_code = #{transactionCode};
+	</update>
 	
-	
+	<!-- [민아]원부자재 코드별 현재고 현황 목록 -->
+	<!-- 
+			subSubSelect.leftMaterialTotal AS leftMaterialTotal,
+			subSubSelect.finalTransDate AS transactionDate,
+			subSubSelect.name AS rawMaterialName,
+			subSubSelect.colorCode AS colorCode,
+			subSubSelect.feature AS feature,
+			subSubSelect.unit AS unit
+	 -->
+	<select id="getInventoryStatusByMCode" parameterType="String" resultType="map">
+		SELECT 
+			*
+		FROM
+		 (SELECT
+			if(subSelect.transCate = '입고', 
+			@total := @total + subSelect.transAmount, 
+			@total := @total - subSelect.transAmount) AS leftMaterialTotal,
+			subSelect.transDate AS finalTransDate,
+			subSelect.materialName As name,
+			subSelect.materialColorCode AS colorCode,
+			subSelect.materialFeature AS feature,
+			subSelect.materialUnit AS unit,
+			subSelect.materialCode AS materialCode
+		FROM
+			(SELECT 
+				trans.raw_material_code AS materialCode,
+				trans.transaction_category AS transCate,
+				trans.raw_material_transaction_amount AS transAmount,
+				trans.raw_material_transaction_date AS transDate,
+				info.raw_material_name AS materialName,
+				info.raw_material_color_code AS materialColorCode,
+				info.raw_material_feature AS materialFeature,.
+				info.raw_material_unit AS materialUnit
+			FROM 
+				raw_material_inventory_transaction AS trans
+				INNER join
+				raw_material_info AS info
+				on
+				info.raw_material_code = trans.raw_material_code
+				WHERE
+				trans.raw_material_code = #{materialCode}
+			ORDER BY DATE(trans.raw_material_transaction_date) ASC) AS subSelect
+			join
+			(SELECT @total :=0) AS initial) AS subSubSelect
+		ORDER BY subSubSelect.finalTransDate DESC LIMIT 1;
+	</select>
 </mapper>
 

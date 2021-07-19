@@ -7,12 +7,96 @@ layout:decorate="@{layout/default_qualityControl}">
 	   <div class="border-head"> 
 	    <h3>품질관리</h3>
 	    </div>
-	  <th:block layout:fragment="customJs">
+<script type="text/javascript" th:src="@{/quality/QualityInspection.js}"></script>	  
+<th:block layout:fragment="customJs">
 <script>
 $(function(){
-	$('#finalInspectionResutl').click(function(){
+	$('.productInfoModal').click(function(){
+		console.log($(this).text());
+		var str = $(this).text();
+		/* ajax 결과값 done (data) mymodal*/
+		var request = $.ajax({
+			  url: "/quality/finalResult",
+			  method: "GET",
+			  type: "post",
+			  data: {requestProductCode:str},
+			  dataType: "json"
+			});
+		var html = '';
+			 
+			 request.done(function( data ) {
+					$('#myModal').modal();
+					if(data.length > 0){
+					        for(i=0; i<data.length; i++){
+						        html += "<tr>";
+					           	html += "<td>" + data[i].requested_product_code + "</td>";
+					        	html += "<td>" + data[i].med_class_name + "</td>";
+					        	html += "<td>" + data[i].low_class_name + "</td>";
+					        	html += "<td>" + data[i].sub_class_name + "</td>";
+					        	html += "<td>" + data[i].inspection_first + "</td>";
+					        	html += "<td>" + data[i].inspection_second + "</td>";
+					        	html += "<td>" + data[i].inspection_third + "</td>";
+					        	html += "<td>" + data[i].low_cate_final_pass_check + "</td>";
+					        	html += "<td>" + data[i].final_Date +"</td>";
+						        html += "</tr>";						
+							}
+				        }
+				        $('#finalList').append(html);
+					});
+			 			$('#finalList tbody').empty();
+			 
+			request.fail(function( jqXHR, textStatus ) {
+			  alert( "Request failed: " + textStatus );
+			});	 
+	});
+	
+	
+	 $('#finalResultBtn').click(function(){
+		var html = '';
+		var array = {
+				clientCate : $('#clientCate').val()
+				, requestCate: $('#requestCate').val()
+				, productCate: $('#productCate').val()
+				, InspectionStartDate: $('#inspectionStartDate').val()
+				, inspectionEndDate: $('#inspectionEndDate').val()
+				};
+		console.log(array)
 		
-	})
+		var request = $.ajax({
+			  url: "/quality/searchfinalResult",
+			  method: "GET",
+			  type: "post",
+			  data: array,
+			  dataType: "json"
+			});
+			 
+			 request.done(function( data ) {
+				console.log(data);
+		        $('#searchFinalResultList > tbody' ).empty();
+					if(data.length > 0){
+			        for(i=0; i<data.length; i++){
+				        html += "<tr>";
+			          	html += "<td>" + [i + 1] + "</td>"
+			        	html += "<td>" + data[i].product_request_code + "</td>";
+			        	html += "<td>" + data[i].requested_product_code + "</td>";
+			        	html += "<td>" + data[i].client_name + "</td>";
+			        	html += "<td>" + data[i].gender_categorized_name + "</td>";
+			        	html += "<td>" + data[i].detailed_categorized_name + "</td>";
+			        	html += "<td>" + data[i].low_cate_final_pass_check + "</td>";
+			        	html += "<td>" + data[i].final_Date + "</td>";
+			 	        html += "</tr>";						
+					}
+		        }else{
+					html += "<tr><td colspan='8' style='text-align: center;'> 검색된 결과가 없습니다. </td></tr>";
+					}
+		        $('#mainTbody2').append(html);
+			});
+			 
+			request.fail(function( jqXHR, textStatus ) {
+			  alert( "Request failed: " + textStatus );
+			});	 
+	 });
+	
 });
 
 </script>
@@ -22,76 +106,72 @@ $(function(){
 </th:block>
 
 
-<th:block layout:fragment="container">
-  
-
-</th:block>
 
 <th:block layout:fragment="container">
 	<div class="row mt">
      <div class="col-xs-12 main-chart">
        <div class="content">
        
-          <h4><i class="fa fa-angle-right"></i>원자재 검사 성적서 조회</h4>
+          <h4><i class="fa fa-angle-right"></i>품질검사 성적서 조회</h4>
           <hr>
+          <form class="form-inline" role="form">
           <table class="table table-striped table-advance table-hover" >
-         	
          	<tbody>
          		<tr>
-         		<td class="col-md-2" >
+         		<td class="col-md-3" >
          			<div class="form-group "><!-- 발주처별 -->
-		               		 <select class="form-control" id="contractCate">
-				   				<option value=>거래처명</option>
+		               		 <select class="form-control" id="clientCate">
+				   				<option value="">거래처명</option>
 				   			 </select>
 		                </div>
 		              </td>
          		<td class="col-md-2" >
          			<div class="form-group "><!-- 의뢰코드 -->
-		               		 <select class="form-control" id="contractCate">
-				   				<option value=>의뢰코드</option>
+		               		 <select class="form-control" id="requestCate">
+				   				<option value="">의뢰코드</option>
 				   			 </select>
 		                </div>
 		                <td>
-         		<td class="col-md-2" >
+         		<td class="col-md-3" >
          		<div class="form-group"><!-- 품목-->
-		               		 <select class="form-control" id="contractCate">
-				   				<option value=>품목</option>
+		               		 <select class="form-control" id="productCate">
+				   				<option value="">품목</option>
 				   			 </select>
 		                </div>
 		                </td>
-		       
-		         		<td class="col-md-4" >
-         			<div class="form-group">
-                    		<div class="input-group input-large" data-date="01/01/2014" data-date-format="mm/dd/yyyy">
-                     		 <input type="text" class="form-control dpd1" name="from">
-                      		<span class="input-group-addon">To</span>
-                     		 <input type="text" class="form-control dpd2" name="to">
-                    		</div>
-                   
+		       			<td>
+	                	<input type="date" id="inspectionStartDate" class="form-control">
+         			</td>
+         			<td style="padding-right: 20px;">
+         				<div class="form-group">
+		                	<input type="date" id="inspectionEndDate" class="form-control">
 	               		</div>
-		         		</td>
+		         	
 		         		<td>
-         				  <button type="submit" class="btn btn-theme">검사 성적서조회하기</button>
+         				  <button type="button" id="finalResultBtn" class="btn btn-theme">검사 성적서조회하기</button>
 		              	</td>
 		           
          		</tr>
          	</tbody>
          </table>  
-        </form>  
+      </form>
 	      <br>
 	      <br>
 	      <br>
 	      <br>
 	      <br>
-	      
-              <h4><i class="fa fa-angle-right"></i>성적서목록</h4>    
-              <table id="list" class="table table-striped table-advance table-hover">
+	      <div >
+              <h4 ><i class="fa fa-angle-right"></i>성적서목록</h4>    
+              <table id="searchFinalResultList"  class="table table-striped table-advance table-hover">
                 <thead>
                   <tr>
                     
+                  <th> 순번</th>
+                  <th> 의로코드</th>
                   <th> 의뢰품목코드</th>
                   <th> 거래처명</th>
-                  <th> 품목명</th>
+                  <th> 양복명</th>
+                  <th> 소분류</th>
                   <th> 최종결과</th>
                   <th> 등록일</th>
 				 </tr>
@@ -99,57 +179,84 @@ $(function(){
                
                
                
-                <tbody>
+                <tbody id="mainTbody2">
                 <!--db에서 데이터 넣어야하는 부분 -->
-                  <tr>
-                  	<td>req01_MS_Jacket</td>
-                  	<td>파크랜드</td>
-                  	<td>남성자켓</td>
-                  	<td>합격</td>
-                  	<td>2020-01-08</td>
+                  <tr th:if="${#lists.size(finalResultList) > 0}" th:each="f,i:${finalResultList}">
+                  		<td th:text="${i.index+1}"></td>
+                  		<td th:text="${f.product_request_code}"></td>
+                   		<td id="requestProductCode"><a class="productInfoModal">[[${f.requested_product_code}]]</a></td>
+                  		<td th:text="${f.client_name}"></td>
+                  		<td th:text="${f.gender_categorized_name}"></td>
+                  		<td th:text="${f.detailed_categorized_name}"></td>
+                  		<td th:text="${f.low_cate_final_pass_check}"></td>
+                  		<td th:text="${f.final_result_reg_date}"></td>
                   </tr>
-                  <tr>
-                  	<td>req01_MS_Pants</td>
-                  	<td>파크랜드</td>
-                  	<td>남성바지</td>
-                  	<td>합격</td>
-                  	<td>2020-01-08</td>
-                  </tr>
-                  <tr>
-                  	<td>req01_MS_Blouse</td>
-                  	<td>파크랜드</td>
-                  	<td>남성블라우스</td>
-                  	<td>합격</td>
-                  	<td>2020-01-08</td>
-                  </tr>
-                  <tr>
-                  	<td>req01_MS_Blouse</td>
-                  	<td>파크랜드</td>
-                  	<td>남성블라우스</td>
-                  	<td>합격</td>
-                  	<td>2020-01-08</td>
-                  </tr>
-                  <tr>
-                  	<td>req01_MS_Blouse</td>
-                  	<td>파크랜드</td>
-                  	<td>남성블라우스</td>
-                  	<td>합격</td>
-                  	<td>2020-01-08</td>
-                  </tr>
-                  <tr>
-                  	<td>req01_MS_Blouse</td>
-                  	<td>파크랜드</td>
-                  	<td>남성블라우스</td>
-                  	<td>합격</td>
-                  	<td>2020-01-08</td>
-                  </tr>
+                  
                 
                   </tbody>
                   </table>
                   </div>
                   </div>
                   </div>
-                 
+                  </div>
+                  
+      	<div class="modal fade" id="finalResultModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  			<div class="modal-dialog modal-lg" role="document">
+    		<div class="modal-content">
+     		 <div class="modal-header">
+        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title " id="myModalLabel">품질검사 최종성적서</h4>
+      	</div>
+	      <div class="modal-body">
+	      <div class="row content-panel">
+	      <div>
+	      	<table border="1" class="col-lg-12"style="text-align: center;" id="finalList">
+   				<thead>
+   					<tr >
+   						
+   						<th rowspan="2">의뢰품목코드명</th>
+   						<th rowspan="2">중분류검사명</th>
+   						<th rowspan="2">소분류검사명</th>
+   						<th rowspan="2">상세검사명</th>
+   						<th colspan="3">검사 회수결과</th>
+   						<th rowspan="2">최종결과</th>
+   						<th rowspan="2">최종결과 등록일</th>
+   					</tr>
+   					<tr>
+   						<th>1차결과</th>
+   						<th>2차결과</th>
+   						<th>3차결과</th>
+   					</tr>
+   				</thead>
+   				<tbody>
+   				<tr>
+   					<td></td>
+   					<td ></td>
+   					<td></td>
+   					<td></td>
+   					<td></td>
+   					<td></td>
+   					<td></td>
+   					<td></td>
+   					<td></td>
+   					<td ></td>
+   				</tr>
+   				</tbody>
+   			</table>
+		      </div>
+	        
+	      </div>
+	      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div></div>
+
+
+
+
+
 </th:block>
 
 </html>

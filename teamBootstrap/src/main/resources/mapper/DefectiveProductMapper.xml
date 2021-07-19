@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart39.springboot.dao.DefectiveProductMapper">
+	<resultMap type="DefectiveProduct" id="getDefectiveProductInfo">
+		<result property="defectiveProductCode" column="defective_product_code"/>
+		<result property="qualityInspectionRequestCode" column="quality_inspection_request_code"/>
+		<result property="chargeEmployeeCode" column="charge_employee_code"/>
+		<result property="qualityInspectionCode" column="quality_inspection_code"/>
+		<result property="inspectionResultCode" column="inspection_result_code"/>
+		<result property="defectCause" column="defect_cause"/>
+		<result property="defectiveProductMeasure" column="defective_product_measure"/>
+		<result property="managementNote" column="management_note"/>
+		<result property="defectiveProductRegDate" column="defective_product_reg_date "/>
+		<result property="defectiveProductUpdateDate" column="defective_product_update_date"/>
+	</resultMap>
+
+	<select id="getDefectiveProduct" resultMap="getDefectiveProductInfo" resultType="DefectiveProduct" fetchSize="1000">
+		SELECT
+			defective_product_code
+			,quality_inspection_request_code
+			,charge_employee_code
+			,quality_inspection_code
+			,inspection_result_code
+			,defect_cause
+			,defective_product_measure
+			,management_note
+			,defective_product_reg_date
+			,defective_product_update_date
+		FROM
+			defective_product_management;
+	</select>
+
+	<insert id = "addDefectiveProduct" parameterType="DefectiveProduct">
+		INSERT INTO defective_product_management
+		(defective_product_code
+			,quality_inspection_request_code
+			,charge_employee_code
+			,quality_inspection_code
+			,inspection_result_code
+			,defect_cause
+			,defective_product_measure
+			,management_note
+			,defective_product_reg_date
+			,defective_product_update_date
+		)VALUES(
+			sf_defectiveProductCode()
+			,#{qualityInspectionRequestCode}
+			,#{chargeEmployeeCode}
+			,#{qualityInspectionCode}
+			,#{inspectionResultCode}
+			,#{defectCause}
+			,#{defectiveProductMeasure}
+			,#{managementNote}
+			,NOW()
+			,null);
+	</insert>
+	
+</mapper>

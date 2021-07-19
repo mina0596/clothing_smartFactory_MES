@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org"
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
 layout:decorate="@{layout/default_production}">
-  <link rel="stylesheet" type="text/css" href="lib/bootstrap-datetimepicker/datertimepicker.css" />
 <th:block layout:fragment="pageTitle">
 	   <div class="border-head"> 
 	    <h3>생산계획 등록</h3>
@@ -13,108 +12,209 @@ layout:decorate="@{layout/default_production}">
 <th:block layout:fragment="container">
 
             <div class="form-panel">
-              <h4 class="mb"><i class="fa fa-edit"></i>생산계획 등록</h4>
-              <form th:href="@{/modifyProductionPlan}" class="form-horizontal style-form" method="post">
+             <h4 class="mb"><i class="fa fa-edit"></i>생산계획 수정</h4>
+              <form id="form" th:action="@{/production/modifyProductionPlan}" class="form-horizontal style-form" method="post">
+               <input type="hidden" name="productionPlanCode" th:value="${resultMap.production_plan_code}">
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">성별별 양복명</label>
                   <div class="col-sm-4">
-                      <select class="form-control">
-						<option>::선택::</option>
-						<option>신사양복</option>
-						<option>여성양복</option>
+                      <select id="genderCate" class="form-control">
+						<option value="">::선택::</option>
 		               </select>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">품목소분류</label>
                   <div class="col-sm-4">
-                      <select class="form-control">
-						<option>::선택::</option>
-						<option>바지</option>
-						<option>자켓</option>
-						<option>치마</option>
+                      <select name="productCode" id="detailCate" class="form-control">
+						<option value="">::선택::</option>
 		               </select>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">수량</label>
                   <div class="col-sm-2">
-                    <input type="number" class="form-control">
+                    <input name="productionPlanQuantity" id="amount" type="number" class="form-control" th:value="${resultMap.production_plan_quantity}">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">단위</label>
                   <div class="col-sm-2">
-                      <select class="form-control">
-						<option>::선택::</option>
-						<option>벌</option>
+                      <select name="productionPlanQantityUnit" id="unit" class="form-control">
+						<option value="">::선택::</option>
+						<option value="벌" selected="selected">벌</option>
 		               </select>
                   </div>
                 </div>
+					
 					<div class="form-group">
-				          <label class="col-sm-2 col-sm-2 control-label">작업시작 예정일</label>
+					          <label class="col-sm-2 col-sm-2 control-label">작업시작 예정일</label>
 				          <div class="col-md-4">
-				            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
-				              <input type="text" class="form-control" readonly="readonly" size="16">
-				              <div class="input-group-btn">
-				                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
-				                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
-				              </div>
-				            </div>
+							<input name="expectedProductionStartDate" id="startDate" type="date" class="form-control" th:value="${resultMap.expected_production_start_date}">
 				          </div>
 				        </div>
 					<div class="form-group">
 					          <label class="col-sm-2 col-sm-2 control-label">작업마감 예정일</label>
 				          <div class="col-md-4">
-				            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
-				              <input type="text" class="form-control" readonly="readonly" size="16">
-				              <div class="input-group-btn">
-				                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
-				                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
-				              </div>
-				            </div>
+							<input name="expectedProductionEndDate" id="endDate" type="date" class="form-control" th:value="${resultMap.expected_production_end_date}">
 				          </div>
 				        </div>
 					<div class="form-group">
-						 <label class="col-lg-2 col-sm-2 control-label">담당 사원명</label>
-						    <div class="col-lg-10">
-						       <p class="form-control-static">김다미</p>
+						 <label class="col-lg-2 col-sm-2 control-label">수정자 사원명</label>
+						    <div class="col-lg-2">
+						       <input name="chargeEmployeeName" class="form-control" value="세션에서 가져온 값" readonly="readonly">
 						    </div>
 					</div>
 						        
 					<div class="form-group">
-						<label class="col-lg-2 col-sm-2 control-label">담당자 사원 코드</label>
-						 <div class="col-lg-10">
-						     <p class="form-control-static">W01</p>
+						<label class="col-lg-2 col-sm-2 control-label">수정자 사원 코드</label>
+						 <div class="col-lg-2">
+						       <input name="chargeEmployeeCode" class="form-control" value="E0001" readonly="readonly">
 						 </div>
 					</div>
-           
-                            
-              
-                
-                 <div class="form-group ">
+                <div class="form-group ">
                     <label class="control-label col-lg-2">비고</label>
                     <div class="col-lg-4">
-                      <textarea class="form-control"></textarea>
+                      <textarea name="productionPlanNote" class="form-control"></textarea>
                     </div>
                   </div>
                   
                   <div class="form-group text-right">
 			          <div class="col-lg-offset-2 col-lg-10">
-			            <button class="btn btn-theme" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">수정</font></font></button>
-			            <button class="btn btn-theme04" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소</font></font></button>
+			            <button id="submitBtn" class="btn btn-theme" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">등록</font></font></button>
+			            <a th:href="@{/production/productionPlanList}" class="btn btn-theme04"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소</font></font></a>
 			          </div>
 			        </div>
 			      </form>
-
                 </div>
+                
+	<!-- 양복 카테고리 가져오기 -->
+	<script th:inline="javascript">
+		/*<![CDATA[*/ 
+			
+			//타임리프로 값 가져오기
+			var genderName = /*[[ ${resultMap.gender_categorized_name} ]]*/; 
+			var cateName = /*[[ ${resultMap.detailed_categorized_name} ]]*/; 
+			var unit = /*[[ ${resultMap.production_plan_qantity_unit} ]]*/; 
+			
+			if(genderName != null || genderName != '' || genderName != undefined){
+		 		var genderCate = $('#genderCate');
+		 		var detailCate = $('#detailCate');
+				
+		 	//성별별 이름 가져오기
+		 		var request = $.ajax({
+		 			url: "/production/productCode",
+		 			method: "get"
+		 		}); 
+		 		request.done(function( data ) {
+		 			console.log(data);
+		 			if(data != undefined || data != '' || data.length > 0){
+		 				var html = '';
+		 				for(var i = 0; i<data.length; i++){
+		 					html += "<option value= '";
+		 					html += data[i].gender_categorized_name;
+		 					html += "'>";
+		 					html += data[i].gender_categorized_name+"</option>";					
+				 				
+		 						if(genderName == data[i].gender_categorized_name){
+				 					genderName = data[i].gender_categorized_name;
+				 				}
+		 				}
+		 				genderCate.append(html);
+		 				
+		 				genderCate.val(genderName).prop("selected", true);
+		 			}
+		 		});
+		 		request.fail(function( jqXHR, textStatus ) {
+		 			alert( "Request failed: " + textStatus );
+		 		});	
+		 		
+		 		
+		 		//소분류 가져오기
+
+		 			//옵션 값 초기화	
+		 			detailCate.html("<option value=''>::선택::</option>");
+					
+		 			var request = $.ajax({
+		 				url: "/production/detailCode",
+		 				method: "get",
+		 				data: {gender : genderName}
+		 			}); 
+		 			request.done(function( data ) {
+		 				console.log(data);
+		 				if(data != undefined && data != '' && data.length > 0){
+		 					var html = '';
+		 					for(var i = 0; i<data.length; i++){
+		 						html += "<option value= '";
+		 						html += data[i].product_code;
+		 						html += "'>";
+		 						html += data[i].detailed_categorized_name;
+		 						html += "</option>";	
+		 							
+		 							//타임리프에서 가져온 값으로 selected 설정
+		 							if(cateName == data[i].detailed_categorized_name){
+		 								cateName = data[i].product_code;
+		 							}
+		 					}
+		 					detailCate.append(html);
+		 					
+		 					detailCate.val(cateName).prop("selected",true);
+		 				}
+						
+		 			});
+		 			request.fail(function( jqXHR, textStatus ) {
+		 				alert( "Request failed: " + textStatus );
+		 			});	
+
+		 			
+				}
+			
+				//유효성 검사
+				$('#submitBtn').click(function(){		
+				var submitBtn = $('#submitBtn');
+				var employeeId = $('#employeeId');
+				var endDate = $('#endDate');
+				var startDate = $('#startDate');
+				var unit = $('#unit');
+				var amount = $('#amount');
+				var genderCate = $('#genderCate');
+				var detailCate = $('#detailCate');
+					
+					if(genderCate.val() == '' || genderCate.val() == null || genderCate.val() == undefined){
+						alert('성별별 양복명을 선택해주세요.');
+						genderCate.focus();
+					}
+					else if(detailCate.val() == '' || detailCate.val() == null || detailCate.val() == undefined){
+						alert('품목 소분류를 선택해주세요.');
+						detailCate.focus();				
+					}
+					else if(amount.val() == '' || amount.val() == null || amount.val() == undefined){
+						alert('갯수를 입력 해주세요.');
+						amount.focus();				
+					}
+					else if(unit.val() == '' || unit.val() == null || unit.val() == undefined){
+						alert('단위를 선택해주세요.');
+						unit.focus();				
+					}
+					else if(startDate.val() == '' || startDate.val() == null || startDate.val() == undefined){
+						alert('시작일자를 선택해주세요.');
+						startDate.focus();			
+					}
+					else if(endDate.val() == '' || endDate.val() == null || endDate.val() == undefined){
+						alert('종료일자를 선택해주세요.');
+						endDate.focus();			
+					}else{					
+						$('#form').submit();
+					}
+				});
+				
+		/*]]*/
+	</script>
+
 	
 
-
-
-
+	
 </th:block>
-
 
 
 </html>

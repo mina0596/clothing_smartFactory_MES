@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import ksmart39.springboot.domain.HumanResources;
 import ksmart39.springboot.domain.RawMaterials;
 import ksmart39.springboot.domain.RawMaterialsInventory;
 import ksmart39.springboot.service.RawMaterialsInventoryStatusService;
@@ -38,10 +39,17 @@ public class RawMaterialsController {
 		this.materialsInventoryStatusService = materialsInventoryStatusService;
 	}
 	
+	//[민아]입출고 검색창
+	@GetMapping("/inventorySearch")
+	public String getInventorySearchKey() {
+		return "rawMaterials/inventorySearch";
+	}
+	
 	//[민아]원부자재 현재고 현황
 	@GetMapping("/inventoryStatus")
-	public String getInventoryStatus() {
-		
+	public String getInventoryStatus(Model model) {
+		List<Map<String,Object>> inventoryStatusList = materialsInventoryStatusService.getInventoryStatusByMCode();
+		model.addAttribute("inventoryStatusList", inventoryStatusList);
 		return "rawMaterials/inventoryStatus";
 	}
 	
@@ -97,45 +105,34 @@ public class RawMaterialsController {
 	//===================================================================
 	//[다미]자재입고 수정 + [민아] 자재입고현황에서 수정화면으로 넘어갈때 상황 추가
 	@GetMapping("/modifyInWarehousing")
-	public String modifyInWarehousing(@RequestParam(value = "materialsName", required = false)String materialsName
-									 ,@RequestParam(value = "materialsCode", required = false)String materialsCode
-									 ,@RequestParam(value = "materialsInAmount", required = false)String materialsInAmount
-									 ,@RequestParam(value = "materialOrderCode", required = false)String materialOrderCode
-									 ,@RequestParam(value = "transactionDate", required = false)String transactionDate
+	public String modifyInWarehousing(@RequestParam(value = "transactionCode", required = false)String transactionCode
 									 ,String transactionCate
 									 ,Model model) {
 		
-		log.info("***********************************");
-		log.info("transactionDate :{}", transactionDate);
 		
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("materialsName", materialsName);
-		paramMap.put("materialsCode", materialsCode);
-		paramMap.put("materialsInAmount", materialsInAmount);
-		paramMap.put("materialOrderCode", materialOrderCode);
-		paramMap.put("transactionDate", transactionDate);
-		paramMap.put("transactionCate", "입고");
+		RawMaterialsInventory InventoryInfoByCode = materialsInventoryStatusService.getTransInfoByCode(transactionCode);
 		
-		log.info("-----------------------------");
-		log.info("paramMap :{}", paramMap);
-		
-		RawMaterialsInventory InventoryInfoByMCode = materialsInventoryStatusService.getInventoryInfoByMCode(paramMap);
-		
-		model.addAttribute("InventoryInfoByMCode", InventoryInfoByMCode);
-		
-		
-		log.info("InventoryInfoByMCode :{}", InventoryInfoByMCode);
-		
-		
-		model.addAttribute("materialsCode", materialsCode);
-		model.addAttribute("materialsInAmount", materialsInAmount);
-		model.addAttribute("materialsName", materialsName);
-		
-		
-		log.info("materialsCode = {} ", materialsCode);
-		log.info("materialsInAmount = {} ", materialsInAmount);
+		model.addAttribute("transactionCode", transactionCode);
+		model.addAttribute("InventoryInfoByCode", InventoryInfoByCode);
 		
 		return "rawMaterials/modifyInWarehousing";
+	}
+	
+	
+	//[민아]자재입고 수정 후 자재입고 리스트 출력
+	@PostMapping("/modifyInWarehousing")
+	public String modifyInwarehousing(int transactionAmount, String transactionCode) {
+		log.info("transactionAmount: {}", transactionAmount);
+		log.info("transactionCode: {}", transactionCode);
+		
+		Map<String,Object> paramMap = new HashMap<String,Object>();
+		paramMap.put("transactionAmount", transactionAmount);
+		paramMap.put("transactionCode", transactionCode);
+		
+		log.info("param :{}", paramMap);
+		materialsInventoryStatusService.modifyMaterialIn(paramMap);
+		
+		return "rawMaterials/inWarehousingList";
 	}
 
 	//[다미]자재입고 리스트

@@ -1,11 +1,18 @@
 package ksmart39.springboot.controller;
 
 
+
+import java.sql.Array;
+import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,8 +22,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import ksmart39.springboot.domain.ProductProductionProcessStatus;
 import ksmart39.springboot.domain.ProductionPlan;
+import ksmart39.springboot.domain.WorkOrder;
 import ksmart39.springboot.service.ProductionPlanService;
+import ksmart39.springboot.service.ProductionStatusService;
+import ksmart39.springboot.service.WorkOrderService;
 
 @Controller
 @RequestMapping("/production")
@@ -25,91 +36,29 @@ public class ProductionController {
 	
 	private static final Logger log = LoggerFactory.getLogger(ProductionController.class);
 	
+	private final WorkOrderService workOrderService;
 	private final ProductionPlanService productionPlanService;
+	private final ProductionStatusService productionStatusService;
 	
-	public ProductionController(ProductionPlanService productionPlanService) {
+	public ProductionController(ProductionPlanService productionPlanService, WorkOrderService workOrderService,ProductionStatusService productionStatusService) {
 		this.productionPlanService = productionPlanService;
+		this.workOrderService = workOrderService;
+		this.productionStatusService = productionStatusService;
 	}
 	
-	//[민아+한빛]의뢰품목별 상세 생산 공정 현황 등록
-	@GetMapping("/productionOrderList")
-	public String productionOrderList() {
-		return "production/productionOrderList";
-	}
-	
-	//[민아+한빛]의뢰품목별 상세 생산 공정 현황 등록
-	@GetMapping("/test")
-	public String test() {
-		return "production/test";
-	}
-	//================================================================
-	//[민아+한빛]의뢰품목별 상세 생산 공정 현황 등록
-	@GetMapping("/productProgressList")
-	public String getproductProgressList() {
-		return "production/productProgressList";
-	}
-	
-	//[민아+한빛]의뢰품목별 상세 생산 공정 현황 조회
-	@GetMapping("/detailedStateByProduct")
-	public String getDetailedStateByProduct() {
-		return "production/detailedStateByProduct";
-	}
-	
-	//[민아+한빛]의뢰품목별 생산 현황 조회
-	@GetMapping("/stateByProduct")
-	public String getStateByProduct() {
-		return "production/stateByProduct";
-	}
-	
-	//[민아+한빛]작업지시별 생산 현황 조회
-	@GetMapping("/stateByWorkOrder")
-	public String getStateByWorkOrder() {
-		return "production/stateByWorkOrder";
-	}
-	
-	//[민아+한빛]생산계획별 생산 현황 조회
-	@GetMapping("/stateByProductionPlan")
-	public String getStateByProductionPlan() {
-		return "production/stateByProductionPlan";
-	}
-	
-	//===================================================================
-	//[민아]완제품 수정
-	@GetMapping("/modifyCompletedProduct")
-	public String modifyCompletedProduct() {
-		return "production/modifyCompletedProduct";
-	}
-	
-	//[민아]완제품 등록
-	@GetMapping("/addCompletedProduct")
-	public String addCompletedProduct() {
-		return "production/addCompletedProduct";
-	}
-	
-	//[민아]완제품 목록
-	@GetMapping("/completedProductList")
-	public String getCompletedProductList() {
-		return "production/completedProductList";
-	}
+
 	
 	//=====================================================================
+	
+	
+	
+	
 	//[보람]작업지시정보
 	@GetMapping("/workOrderInfo")
 	public String workOrderInfo() {
 		return "production/workOrderInfo";
 	}
-	//[보람]작업지시 목록
-	@GetMapping("/workOrderList")
-	public String workerOrderList() {
-		
-		/*
-		 * model.addAttribute("title", "작업지시관리: 작업지시목록"); Map<String, Object> paramMap =
-		 * new HashMap<String, Object>(); paramMap.put("workOrderSearchKey",
-		 * workOrderSearchKey); paramMap.put("workOrderSearchValue",
-		 * workOrderSearchValue);
-		 */
-		return "production/workOrderList";
-	}
+	
 	
 	//[보람]작업지시등록
 	@GetMapping("/addWorkOrder")
@@ -135,6 +84,56 @@ public class ProductionController {
 	
 	//==================================================================
 	
+	//[다미]생산계획 삭제
+	@PostMapping("/deleteProductionPlan")
+	@ResponseBody
+	public int deleteProductionPlan(@RequestParam(value = "delArr[]")String[] delArr) {
+		int result = 1;
+
+		for(int i = 0; i<delArr.length; i++) {
+		result	= productionPlanService.deleteProductionPlan(delArr[i]);
+		}
+		return result;
+	}
+	
+	//[다미]생산계획 검색
+	@RequestMapping(value = "/searchProductionPlan", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String, Object>> searchProductionPlan(@RequestParam(value = "genderCate", required = false) String genderCate
+									   ,@RequestParam(value = "detailCate", required = false) String detailCate
+									   ,@RequestParam(value = "startDate", required = false) String startDate
+									   ,@RequestParam(value = "endDate", required = false) String endDate
+									   ,@RequestParam(value = "range", required = false) String range) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("genderCate", genderCate);
+		map.put("detailCate", detailCate);
+		map.put("startDate", startDate);
+		map.put("endDate", endDate);
+		map.put("range", range);
+		List<Map<String, Object>> listMap = productionPlanService.searchProductionPlan(map);
+		log.info("{}", listMap);
+		return listMap;
+	}
+	
+	//[다미]생산계획 수정
+	@PostMapping("/modifyProductionPlan")
+	public String modifyProductionPlan(ProductionPlan productionPlan) {
+		productionPlanService.modifyProductionPlan(productionPlan);
+		return "redirect:productionPlanList";
+	}
+	
+	//[다미]생산계획 수정 폼
+	@GetMapping("/modifyProductionPlan")
+	public String modifyProductionPlan(@RequestParam(value = "planCode", required = false)String planCode
+									  ,Model model) {
+		Map<String, Object> resultMap = productionPlanService.getProductionPlanListByCode(planCode);
+		model.addAttribute("resultMap", resultMap);
+		log.info("=============================================");
+		log.info("계획코드로 조회한 값:            {}", resultMap);
+		log.info("=============================================");
+		return "production/modifyProductionPlan";
+	}
+	
 	//[다미]생산계획 등록
 	@PostMapping("/addProductionPlan")
 	public String productioncontrolAdd(ProductionPlan productionPlan) {
@@ -144,7 +143,7 @@ public class ProductionController {
 		
 		productionPlanService.addProductionPlan(productionPlan);
 		
-		return "redirect:/productionPlanList";
+		return "redirect:productionPlanList";
 	}
 	
 	//[다미]성별별 양복명에 맞는 소분류 가져오기
@@ -170,13 +169,7 @@ public class ProductionController {
 		log.info("=============================================");
 		return list;
 	}
-	
-	
-	//[다미]생산계획 일별 목록
-	@GetMapping("/productionDailyPlanList")
-	public String productionDailyPlanList() {
-		return "production/productionDailyPlanList";
-	}
+
 	
 	//[다미]생산계획 주간별 목록
 	@GetMapping("/productionWeeklyPlanList")
@@ -187,7 +180,43 @@ public class ProductionController {
 	//[다미]생산계획 월별 목록
 	@GetMapping("/productionMonthlyPlanList")
 	public String getProductionMonthlyPlanList(Model model) {
+
 		return "production/productionMonthlyPlanList";
+	}
+	
+	//[다미]생산계획 데이터 가져오기
+	@RequestMapping(value="/monthPlan", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String, Object>> monthPlan() {
+		List<Map<String, Object>> list = productionPlanService.getProductionAllPlanList();
+		
+		JSONObject jsonObj = new JSONObject();
+		JSONArray jsonArr = new JSONArray();
+		HashMap<String, Object> hash = new HashMap<String, Object>();		
+		
+		log.info("{}",list);
+		
+		for(int i=0; i < list.size(); i++) {			
+			String genderCate = (String) list.get(i).get("gender_categorized_name");
+			String cateName = (String) list.get(i).get("detailed_categorized_name");
+			
+			hash.put("title", genderCate + "/" + cateName);
+			hash.put("start", list.get(i).get("expected_production_start_date"));
+			hash.put("end", list.get(i).get("expected_production_end_date"));
+			
+			if(genderCate.equals("신사양복")) {
+				hash.put("color", "#F08080");
+			}else if(genderCate.equals("숙녀양복")){
+				hash.put("color", "#006400");				
+			}
+			
+			jsonObj = new JSONObject(hash);
+			jsonArr.add(jsonObj);
+		}
+		
+		log.info("안되겠지..?아냐 될거야ㅜㅜ {}", jsonArr);
+		
+		return jsonArr;
 	}
 	
 	//[다미]생산계획 월별 목록test

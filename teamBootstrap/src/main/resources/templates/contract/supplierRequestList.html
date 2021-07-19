@@ -79,7 +79,7 @@ layout:decorate="@{layout/default_contract}">
          			<td style="padding-right: 20px;">
 	         			 <div class="form-group"><!-- 발주처별 -->
 		               		<button id="bySupplier" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
-		                	<input type="text" class="form-control" id="bySupplierValue" placeholder="직접 입력 또는 검색">
+		                	<input type="text" class="form-control"  placeholder="직접 입력 또는 검색">
 		                </div>
          			</td>
          			<td style="padding-right: 20px;">
@@ -90,12 +90,12 @@ layout:decorate="@{layout/default_contract}">
          			</td>
          			<td>
          				<div class="form-group">
-		                	<input type=date class="form-control" id="exampleInputPassword2" placeholder="입고일별">&nbsp&nbsp&nbsp ~ 
+		                	<input type=date class="form-control" placeholder="입고일별">&nbsp&nbsp&nbsp ~ 
 	               		</div>
          			</td>
          			<td style="padding-right: 20px;">
          				<div class="form-group">
-		                	<input type=date class="form-control" id="exampleInputPassword2" placeholder="입고일별">
+		                	<input type=date class="form-control" >
 	               		</div>
          			</td>
          			<td style="padding-right: 20px;">
@@ -138,107 +138,27 @@ layout:decorate="@{layout/default_contract}">
                   </tr>
                 </thead>
                 <tbody >
-                  <tr>
-                   <td class="hidden-phone">
-                      <input type="checkbox" class="check">
-                    </td>
-                    <td class="hidden-phone">1</td>
-                    <td class="hidden-phone">
-                    <a >suplier01</a></td>
-                    <td class="hidden-phone" ><a >나는단추</a></td>
-                    <td id="materialName">단추</td>
-                    <td id="materialColer">RoyalBule</td>
-                    <td>50</td>
-                    <td>개</td>
-                    <td>
-                     	2021-02-10 
-                    </td>
-                    <!--승인상태는 승인담당자만 셀렉트할수있게해워야됨  -->
-                    <td>
-                     	2021-01-29 13:30
-                    </td>
+                  <tr th:if="${#lists.size(supplierRequestList) > 0}" th:each="s,i : ${supplierRequestList}">
+                   <td><input type="checkbox" class="check"> </td>
+                    <td th:text="${i.index+1}"></td>
+                    <td th:text="${s.raw_material_order_code}"></td>
+                    <td th:text="${s.client_name}"> </td>
+                    <td th:text="${s.raw_material_name}"></td>
+                    <td th:text="${s.raw_material_color_code}"></td>
+                    <td th:text="${s.raw_material_order_amount}" ></td>
+                    <td th:text="${s.raw_material_unit}" ></td>
+                    <td th:text="${s.raw_material_expected_date}"></td>
+                    <td th:text="${s.raw_material_order_date}"></td>
                    <td> <button  type="button" class="btn btn-info btn-xs"  onclick="location.href='/addInWarehousing'" ><i class="fa fa-check"></i>입고등록</button></td>
                    <td> <a class="btn btn-primary btn-xs" th:href="@{/modifySupplierRequest}" ><i class="fa fa-pencil"></i>수정</a></td>
                   </tr>
-                  
-                  <tr>
-                   <td class="hidden-phone">
-                      <input type="checkbox" class="check">
-                    </td>
-                    <td class="hidden-phone">2</td>
-                    <td class="hidden-phone">
-                    <a >suplier02</a></td>
-                    <td class="hidden-phone"><a >부드러운실크컴퍼니</a></td>
-                    <td id="materialName">실크</td>
-                    <td id="materialColer">Silver</td>
-                    <td>10</td>
-                    <td>필</td>
-                    <td>
-                     	2021-02-15 
-                    </td>
-                    
-                    <td>
-                     	2021-01-30 11:30
-                    </td>
-                    <td> <button class="btn btn-info btn-xs" type="button" onclick="location.href='/addInWarehousing'"><i class="fa fa-check"></i>입고등록</button></td>
-                  	<td> <button class="btn btn-primary btn-xs" type="button" onclick="location.href='/modifySupplierContract'"><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  
-                  <tr>
-                   <td class="hidden-phone">
-                      <input type="checkbox" class="check">
-                    </td>
-                    <td class="hidden-phone">3</td>
-                    <td class="hidden-phone">
-                    <a >suplier03</a></td>
-                    <td class="hidden-phone"><a>견고한지퍼나라</a></td>
-                    <td>지퍼</td>
-                    <td>Gold</td>
-                    <td>100</td>
-                    <td>개</td>
-                    <td>
-                     	2021-02-18 
-                    </td>
-                    
-                    <td>
-                     	2021-01-29 12:30
-                    </td>
-                         <td> <button class="btn btn-info btn-xs" type="button" onclick="location.href='/addInWarehousing'"><i class="fa fa-check"></i>입고등록</button></td>              
-                  	    <td> <button class="btn btn-primary btn-xs" type="button" onclick="location.href='/modifySupplierContract'"><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  <tr>
-                   <td class="hidden-phone">
-                      <input type="checkbox" class="check">
-                    </td>
-                    <td class="hidden-phone">4</td>
-                    <td class="hidden-phone">
-                    <a>suplier04</a></td>
-                    <td class="hidden-phone"><a>정교한심지</a></td>
-                    <td>접착심지</td>
-                    <td>White</td>
-                    <td>150</td>
-                    <td>개</td>
-                    <td>
-                     	2021-02-15 
-                    </td>
-                    
-                    <td>
-                     	2021-01-30 15:30
-                    </td>
-                    <td> <button class="btn btn-info btn-xs" type="button" onclick="location.href='/addInWarehousing'"><i class="fa fa-check"></i>입고등록</button></td>
-                   <td> <button class="btn btn-primary btn-xs" type="button" onclick="location.href='/modifySupplierContract'"><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  
-                 
-           		 </tbody>
+                 </tbody>
               </table>
             </div>
-             
-                    <div class=" col-xs-12 text-right">
-                   
-                      <button class="btn btn-success btn-xs" type="button" onclick="location.href='/addSupplierRequest'"><i class="fa fa-check"></i>발주등록</button>
-                      <button class="btn btn-danger btn-xs" type="button" id="deleteBtn"><i class="fa fa-trash-o "></i>발주삭제</button>
-                    </div>
+            <div class=" col-xs-12 text-right">
+             <button class="btn btn-success btn-xs" type="button" onclick="location.href='/addSupplierRequest'"><i class="fa fa-check"></i>발주등록</button>
+             <button class="btn btn-danger btn-xs" type="button" id="deleteBtn"><i class="fa fa-trash-o "></i>발주삭제</button>
+              </div>
                  
             </div>
             </div>
@@ -273,7 +193,7 @@ layout:decorate="@{layout/default_contract}">
 	         			<th colspan="3" style="padding-right: 20px;">
 	         				<div class="form-inline" style="margin-bottom: 0px;"><!-- 재료별 -->
 		         				<label class="control-label">발주처 명</label>&nbsp
-			                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
+			                	<input type="text" class="form-control" id="" placeholder="검색어를 입력하세요.">
 	         				 &nbsp&nbsp&nbsp <button type="submit" class="btn btn-theme">검색</button>
 		              		</div>
 	         			</th>  

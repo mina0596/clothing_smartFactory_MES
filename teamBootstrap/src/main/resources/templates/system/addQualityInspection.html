@@ -7,19 +7,14 @@ layout:decorate="@{layout/default_system}">
 	   <div class="border-head"> 
 	    <h3 th:text="${title}"></h3>
 	    </div>
+<script type="text/javascript" th:src="@{/systemQuality/systemQualityInspection.js}"></script>	  	    
 	    	<th:block layout:fragment="customJs">
 		    <script>
 	$(function(){
 		$('#cancleBtn').click(function(){
 			window.history.back();
 		});
-	
-		$('#seldiv').hide();
-		$('#seldiv2').hide();
-		$('#seldiv3').hide();
-		$('#seldiv4').hide();
 		
-		$('#detailInspection').hide();
 		
 		
 	});
@@ -39,112 +34,49 @@ layout:decorate="@{layout/default_system}">
       <br>
       
       <form class="form-horizontal style-form" method="post">
-
-       
-        
-        <div class="form-group">
-       	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사 대분류명</label>
-       	  	<div class="col-sm-5">
-             	 <select class="form-control" name="highClassificationName" id="highSelbox" >
-                  <option value="">::대분류검사명::</option>
-                  <option value="원자재검사">::원자재검사::</option>
-                  <option value="공정중간검사">::공정중간검사::</option>
-                  <option value="완제품검사">::완제품검사::</option>
-                  <option value="직접입력">::직접입력::</option>
-               
-                  
-                
-                  
-                 </select>
-           	  	</div>
-           	  </div>
-           	 
-       <div class="form-group" id="seldiv">
-   	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;" >대분류명직접입력</label>
-   	  	<div class="col-sm-5">
-      	<input class="form-control" id="selboxDirect" type="text"  >
-          </div>
-          </div>
-           	  
-        <div class="form-group">
-       	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사 중분류명</label>
-       	  	<div class="col-sm-5">
-             	 <select class="form-control" name="mediumClassificationName" id="middleSelbox">
-               			<option class="middleInspection"  value="">::중분류검사명::</option>
-	                     
-                 </select>
-           	  	</div>
-           	  	</div>
-          <div class="form-group" id="seldiv2">
-   	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;" >중분류명검사입력</label>
-   	  	<div class="col-sm-5">
-      	<input class="form-control" id="middlebox" type="text"  >
-          </div>
-          </div> 	  	
-           	  	
-        <div class="form-group">
-       	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사 소분류명</label>
-       	  	<div class="col-sm-5">
-          	<select class="form-control" name="mediumClassificationName" id="middleSelbox">
-               			<option class="middleInspection"  value="">::소분류검사명::</option>
-	             </select>
-          </div>
-         </div>
-           <div class="form-group" id="seldiv3">
-   	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;" >소분류검사입력</label>
-   	  	<div class="col-sm-5">
-      	<input class="form-control" id="middlebox" type="text"  >
-          </div>
-          </div> 	 
-       <div class="form-group" id="">
-       	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사 소분류상세명</label>
-      	  <div class="col-sm-5">
-          	<select class="form-control" name="mediumClassificationName" id="middleSelbox">
-               			<option class="middleInspection"  value="">::상세분류검사명::</option>
-	             </select>
-           	  	</div>
-           	  	</div>
-       <div class="form-group" id="seldiv4">
-   	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;" >상세검사입력</label>
-   	  	<div class="col-sm-5">
-      	<input class="form-control" id="middlebox" type="text"  >
-          </div>
-          </div> 	 
-     
-        
+		<div class="form-group">
+	   	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사 대분류명</label>
+	   	  		<div class="col-sm-5">
+	         	 <select class="form-control" name="highClassificationName" id="highClassCateName" >
+	              <option value="">::대분류검사명::</option>
+	              </select>
+	       	  	</div>
+	        </div>  
+	        <div class="form-group">
+	       	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사 중분류명</label>
+	       	  	<div class="col-sm-5">
+	           	 <select class="form-control" name="mediumClassificationName" id="middleClassCateName">
+	             	<option  value="">::중분류검사명::</option>
+	              </select>
+	         	 </div>
+	         </div>
+	       <div class="form-group">
+	       	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사 소분류명</label>
+	       	  		<div class="col-sm-5">
+	          		<select class="form-control" name="mediumClassificationName" id="lowClassCateName">
+	               		<option  value="">::소분류검사명::</option>
+		             </select>
+	          		</div>
+	        	 </div>
+	       <div class="form-group" >
+	       	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사 소분류상세명</label>
+	     	  	  	<div class="col-sm-5">
+	      			<input class="form-control" name="" type="text" >
+	         	 </div>
+	          </div> 	 
+	     <div class="form-group text-right" >
+	           <div class="col-lg-offset-2 col-lg-10">
+	             <button class="btn btn-theme" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">품질검사등록</font></font></button>
+	             <button class="btn btn-theme04" type="button" id="cancleBtn"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">품질검사등록취소</font></font></button>
+	           </div>
+	          </div>
+       </form>
       
-        <div class="form-group text-right" >
-                    <div class="col-lg-offset-2 col-lg-10">
-                      <button class="btn btn-theme" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">품질검사등록</font></font></button>
-                      <button class="btn btn-theme04" type="button" id="cancleBtn"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">품질검사등록취소</font></font></button>
-                    </div>
-                    </div>
-       		</form>
-      
-    	</div>
+    </div>
     
           
-                        <!-- js placed at the end of the document so the pages load faster -->
-
-  <!--script for this page-->
-  <script th:src="@{Dashio/lib/jquery-ui-1.9.2.custom.min.js}"></script>
-  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-fileupload/bootstrap-fileupload.js}"></script>
-  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
-  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-daterangepicker/date.js}"></script>
-  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-daterangepicker/daterangepicker.js}"></script>
-  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js}"></script>
-  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-daterangepicker/moment.min.js}"></script>
-  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-timepicker/js/bootstrap-timepicker.js}"></script>
-  <script th:src="@{Dashio/lib/advanced-form-components.js}"></script>
-  <script src="lib/jquery/jquery.min.js"></script>
-
-  <script src="lib/bootstrap/js/bootstrap.min.js"></script>
-  <script class="include" type="text/javascript" src="lib/jquery.dcjqaccordion.2.7.js"></script>
-  <script src="lib/jquery.scrollTo.min.js"></script>
-  <script src="lib/jquery.nicescroll.js" type="text/javascript"></script>
-  <!--common script for all pages-->
-  <script src="lib/common-scripts.js"></script>
-  <!--script for this page-->
+                       
+ 
 	
 </th:block>
 

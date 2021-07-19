@@ -19,91 +19,51 @@ layout:decorate="@{layout/default_qualityControl}">
          
         
                   <div class="form-group ">
+                    <label for="password" class="control-label col-lg-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">품질검사요청코드</font></font></label>
+                    <div class="col-lg-6">
+                      <input class="form-control " id="qualityInspectionRequestCode" name="qualityInspectionRequestCode" type="text">
+                    </div>
+                  </div>
+                  
+                  <div class="form-group ">
+                    <label for="password" class="control-label col-lg-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">담당자코드</font></font></label>
+                    <div class="col-lg-6">
+                      <input class="form-control " id="chargeEmployeeCode" name="chargeEmployeeCode" type="text">
+                    </div>
+                  </div>
+                  
+                  <div class="form-group ">
                     <label for="password" class="control-label col-lg-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">품질검사코드</font></font></label>
                     <div class="col-lg-6">
-                      <input class="form-control " id="workerPw" name="workerPw" type="password">
+                      <input class="form-control " id="qualityInspectionCode" name="qualityInspectionCode" type="text">
                     </div>
                   </div>
                   
                     <div class="form-group ">
-                    <label for="confirm_password" class="control-label col-lg-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">담당자 사원코드</font></font></label>
+                    <label for="confirm_password" class="control-label col-lg-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">품질검사결과코드</font></font></label>
                     <div class="col-lg-6">
-                      <input class="form-control " id="workerPwCheck" name="workerPwCheck" type="password">
+                      <input class="form-control " id="inspectionResultCode" name="inspectionResultCode" type="text">
                     </div>
                   </div>
                  
                     <div class="form-group ">
                     <label for="confirm_password" class="control-label col-lg-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">담당자 사원명</font></font></label>
                     <div class="col-lg-6">
-                      <input class="form-control " id="workerPwCheck" name="workerPwCheck" type="password">
+                      <input class="form-control " id="defectCause" name="defectCause" type="text">
                     </div>
                   </div>
                  
-                   <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">대분류 검사명</label>
-                  <div class="col-sm-6">
-                      <select class="form-control">
-						<option>::선택::</option>
-						<option>원자재검사</option>
-						<option>공정중간검사</option>
-						<option>완재품검사</option>
-		               </select>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">중분류 검사명</label>
-                  <div class="col-sm-6">
-                      <select class="form-control">
-						<option>::선택::</option>
-						<option>원단 이화학검사(파괴검사)</option>
-						<option>재단물검사</option>
-						<option>봉제검사</option>
-						<option>마무리</option>
-		               </select>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">소분류 검사명</label>
-                  <div class="col-sm-6">
-                      <select class="form-control">
-						<option>::선택::</option>
-						<option>물세탁</option>
-						<option>드라이클리닝_염색성</option>
-						<option>땀,일광복합견뢰도</option>
-						<option>마찰변색도</option>
-		               </select>
-                  </div>
-                </div>
-                
-                <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">소분류 검사 상세명</label>
-                  <div class="col-sm-6">
-                      <select class="form-control">
-						<option>::선택::</option>
-						<option>변퇴색</option>
-						<option>직물 외관변화</option>
-						<option>자체이염</option>
-						<option>건</option>
-		               </select>
-                  </div>
-                </div>
-                
-                 <div class="form-group ">
-                    <label for="email" class="control-label col-lg-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">불량원인</font></font></label>
-                    <div class="col-lg-6">
-                      <input class="form-control " id="workerEmail" name="workerEmail" type="text">
-                    </div>
-                  </div>
-                
+                 
                  
                   <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">처리방법</label>
                   <div class="col-sm-6">
-                      <select class="form-control">
+                      <select class="form-control" name ="defectiveProductMeasure">
 						<option>::선택::</option>
-						<option>폐기</option>
-						<option>품목대체</option>
-						<option>정상사용</option>
+						<option value = "폐기">폐기</option>
+						<option value = "품목대체">품목대체</option>
+						<option value = "정상사용">정상사용</option>
+						<option value = "기타">기타</option>
 		               </select>
                   </div>
                 </div>
@@ -111,13 +71,13 @@ layout:decorate="@{layout/default_qualityControl}">
                   <div class="form-group ">
                     <label for="email" class="control-label col-lg-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">비고</font></font></label>
                     <div class="col-lg-6">
-                      <input class="form-control " id="workerPhone" name="workerPhone" type="text">
+                      <input class="form-control " id="managementNote" name="managementNote" type="text">
                     </div>
                   </div>
                 
  		         <div class="form-group text-right">
 		         <div class="col-lg-offset-2 col-lg-10">
-		           <button class="btn btn-theme" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">등록</font></font></button>
+		           <button id="addBtn" class="btn btn-theme" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">등록</font></font></button>
 		           <button class="btn btn-theme04" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소</font></font></button>
 		         </div>
 		       </div>

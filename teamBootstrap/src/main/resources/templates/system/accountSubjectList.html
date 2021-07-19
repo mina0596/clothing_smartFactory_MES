@@ -27,7 +27,7 @@ layout:decorate="@{layout/default_system}">
        
           <h4><i class="fa fa-angle-right"></i>계정과목 조회</h4>
          		 <hr>
-			<form th:action="@{/accountSubjectList}" method="get">
+			<form th:action="@{/system/accountSubjectList}" method="get">
 				<div class="form-group">
 					<div class="col-md-2">					
 					 <select name="searchKey" class="form-control">
@@ -72,7 +72,7 @@ layout:decorate="@{layout/default_system}">
                     <td th:text="${l.categoryContent}"></td>
                     <td th:text="${l.categoryRegDate}"></td>                  	
                   	<td>  
-                  		<a th:href="@{/modifyAccountSubject(categoryCode=${l.categoryCode})}" class="btn btn-primary btn-xs">
+                  		<a th:href="@{/system/modifyAccountSubject(categoryCode=${l.categoryCode})}" class="btn btn-primary btn-xs">
                   			<i class="fa fa-pencil"></i>수정
                   		</a>
                   	</td>
@@ -87,7 +87,7 @@ layout:decorate="@{layout/default_system}">
             </div>
               <div class="form-group text-right">
 		          <div class="col-lg-offset-2 col-lg-10">
-		           <a th:href="@{/addAccountSubject}" class="btn btn-success btn-xs"><i class="fa fa-check"></i>등록</a>
+		           <a th:href="@{/system/addAccountSubject}" class="btn btn-success btn-xs"><i class="fa fa-check"></i>등록</a>
 		           <a id="deleteBtn" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i>삭제</a>
 		          </div>
 		        </div>

@@ -9,6 +9,58 @@ layout:decorate="@{layout/default_system}">
 	    </div>
 </th:block>
 
+<th:block layout:fragment="customJs">
+	<script type="text/javascript">
+		$(function(){
+			$('#addBtn').click(function(){
+				var clientName = $('input[name=clientName]').val();
+				var clientTel = $('input[name=clientTel]').val();
+				var clientCeo = $('input[name=clientCeo]').val();
+				var clientEmployee = $('input[name=clientEmployee]').val();
+				var clientBusinessNum = $('input[name=clientBusinessNum]').val();
+				var clientAddress = $('input[name=clientAddress]').val();
+				var addAccountCate = $('#addAccountCate');
+				var submitFlag = true;
+			
+				if(clientName == null || clientName == undefined || clientName == ''){			
+					alert('회사명을 입력해주세요.');
+					$('input[name=clientName]').focus();
+					submitFlag = false;
+					return submitFlag;
+				}else if(clientTel == null || clientTel == undefined || clientTel == ''){
+					alert('연락처를 입력해주세요.');
+					$('input[name=clientTel]').focus();
+					submitFlag = false;
+					return submitFlag;
+				}else if(clientCeo == null || clientCeo == undefined || clientCeo == ''){
+					alert('대표자를 입력해주세요.');
+					$('input[name=clientCeo]').focus();
+					submitFlag = false;
+					return submitFlag;
+				}else if(clientEmployee == null || clientEmployee == undefined || clientEmployee == ''){
+					alert('담당자를 입력해주세요.');
+					$('input[name=clientEmployee]').focus();
+					submitFlag = false;
+					return submitFlag;
+				}else if(clientBusinessNum == null || clientBusinessNum == undefined || clientBusinessNum == ''){
+					alert('사업자번호를 입력해주세요.');
+					$('input[name=clientBusinessNum]').focus();
+					submitFlag = false;
+					return submitFlag;
+				}else if(clientAddress == null || clientAddress == undefined || clientAddress == ''){
+					alert('주소를 입력해주세요.');
+					$('input[name=clientAddress]').focus();
+					submitFlag = false;
+					return submitFlag;
+				}
+				
+				if(submitFlag) addClient.submit();
+			});			
+		});
+		
+		
+	</script>
+</th:block>
 
 <th:block layout:fragment="container">
 
@@ -28,9 +80,15 @@ layout:decorate="@{layout/default_system}">
 						<option value = "운송" th:selected="${client.clientCategory == '운송'}">운송</option>
 		               </select>
                   </div>
-                </div>
+                </div>                
                 
-                
+                  <div class="form-group ">
+                    <label class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">거래처코드</font></font></label>
+                    <div class="col-lg-6">
+                      <input class=" form-control" name="clientCode" th:value="${client.clientCode}" type="text" readonly="readonly">
+                    </div>
+                  </div>
+                  
                   <div class="form-group ">
                     <label class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">회사명</font></font></label>
                     <div class="col-lg-6">
@@ -62,7 +120,7 @@ layout:decorate="@{layout/default_system}">
                   <div class="form-group ">
                     <label class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">사업자번호</font></font></label>
                     <div class="col-lg-6">
-                      <input class="form-control " th:value="client.clientBusinessNum" name="${client.clientBusinessNum}" type="number">
+                      <input class="form-control " th:value="${client.clientBusinessNum}" name="clientBusinessNum" type="number">
                     </div>
                   </div>
                   

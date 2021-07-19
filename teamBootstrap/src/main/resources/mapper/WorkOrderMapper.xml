@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart39.springboot.dao.WorkOrderMapper">
+
+	<resultMap type="WorkOrder" 							id="workOrderResultMap">
+		<result property="workOrderCode"  					column="work_order_code"/>
+		<result property="requestedProductCode"  			column="requested_product_code"/>
+		<result property="chargeEmployeeCode"  				column="charge_employee_code"/>
+		<result property="expectedProductionStartDate"  	column="expected_production_start_date"/>
+		<result property="expectedProductionEndDate"  		column="expected_production_end_date"/>
+		<result property="workOrderRegDate"  				column="work_order_reg_date"/>
+		<result property="workOrderUpdateDate"  			column="work_order_update_date"/>
+		
+		<association property="requestedProductInfo"		javaType="RequestedProduct">
+			<id property="requestedProductCode"				column="requested_product_code"/>
+			<result property="clientCode"					column="client_code"/>
+			<result property="contractCode"					column="contract_code"/>				
+		</association>
+		
+		<association property="client"						javaType="Client">
+			<id property="clientCode"						column="client_code"/>
+			<result property="clientName"					column="client_name"/>
+		</association>
+	</resultMap>
+	
+
+	
+	<select id="getWorkOrderList" resultType="map">
+		SELECT 
+			wo.work_order_code AS workOrderCode, 
+			wo.requested_product_code AS pCode,
+			wo.expected_production_start_date AS expectedStartDate, 
+			wo.expected_production_end_date AS expectedStartDate, 
+			sub.*
+		FROM 
+			work_order AS wo
+			inner join
+			(SELECT 
+				de.requested_product_code AS pCode,
+				de.requested_due_date AS dueDate,
+				cli.client_code AS cCode,
+				cli.client_name AS cName
+			FROM 
+				requested_product_detail AS de
+				INNER join
+				client_info AS cli
+				on
+				de.client_code = cli.client_code) AS sub
+			on
+			wo.requested_product_code = sub.pCode;
+	</select>
+	
+	<select id="getPcodeFromProcessStatus" resultType="map">
+		SELECT DISTINCT
+			requested_product_code AS pCode
+		FROM
+			product_production_process_status;
+	</select>
+	
+</mapper>
