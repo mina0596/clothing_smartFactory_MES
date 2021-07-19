@@ -24,9 +24,9 @@ import ksmart39.springboot.service.RawMaterialsService;
 
 @Controller
 @RequestMapping("/rawMaterials")
-public class RawMaterialsController {
+public class RawMaterialsController_KDM {
 	
-	private static final Logger log = LoggerFactory.getLogger(RawMaterialsController.class);
+	private static final Logger log = LoggerFactory.getLogger(RawMaterialsController_KDM.class);
 	
 	
 	
@@ -35,18 +35,32 @@ public class RawMaterialsController {
 	private final RawMaterialsInventoryStatusService materialsInventoryStatusService;
 	
 	@Autowired
-	public RawMaterialsController(RawMaterialsInventoryStatusService materialsInventoryStatusService) {
+	public RawMaterialsController_KDM(RawMaterialsInventoryStatusService materialsInventoryStatusService) {
 		this.materialsInventoryStatusService = materialsInventoryStatusService;
 	}
-	
-	
-	
-	
-	
-	//=============================================================================
-	//자재관리 메인화면
-	@GetMapping("/rawMaterials")
-	public String meterials() {
-		return "rawMaterials/rawMaterials";
+
+
+
+	//[다미]자재입고 리스트
+	@GetMapping("/inWarehousingList")
+	public String InWarehousingList() {
+		return "rawMaterials/inWarehousingList";
 	}
+	
+	//[다미]자재 입고 등록 후 자재 입고 목록으로 리다이렉트 , 파라미터는 임시 값
+	@PostMapping("/addInWarehousing")
+	public String addInWarehousing(@RequestParam(value = "raw_material_name", required = false )String raw_material_name) {
+		return "redirect:/inWarehousingList";
+	}
+	
+	//[다미]자재 입고 등록
+	@GetMapping("/addInWarehousing")
+	public String addInWarehousing(@RequestParam(name = "materialName", required = false) String materialName
+										  , Model model) {
+		model.addAttribute("materialName", materialName);
+		log.info("materialName 받아온값 {}", materialName);
+		return "rawMaterials/addInWarehousing";
+	}
+	
+	
 }
