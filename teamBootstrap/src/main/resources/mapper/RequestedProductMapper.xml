@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart39.springboot.dao.ContractMapper">
+	<resultMap type="RequestedProduct" id = "getRequestedProduct">
+		<result property="productCode" 									column="product_code"/>
+		<result property="chargeEmployeeCode" 						column="charge_employee_code"/>
+		<result property="clientCode" 										column="client_code"/>
+		<result property="contractCode" 									column="contract_code"/>
+		<result property="productRequestCode"			   	 		column="product_request_code"/>
+		<result property="designDrawingAttachment" 				column="design_drawing_attachment"/>
+		<result property="requestedDueDate" 							column="requested_due_date"/>
+		<result property="requestedDeliveryAddress" 				column="requested_delivery_address"/>
+		<result property="requestedDeliveryTel" 						column="requested_delivery_tel"/>
+		<result property="requestedSpecialNote" 					column="requested_special_note"/>
+		<result property="approvalStatus" 								column="approval_status"/>
+		<result property="requestedProductDetailRegDate"  	column="requested_product_detail_reg_date"/>
+		<result property="requestedProductDetailUpdateDate" column="requested_product_detail_update_date"/>
+		<association property="client" javaType="Client">
+			<id property="clientCode" column="client_code"></id>
+			<result property="clientName" column="client_name"></result>
+		</association>
+	</resultMap>
+	
+	<select id = "getRequestedProductList" resultMap="getRequestedProduct" resultType="RequestedProduct" fetchSize="1000">
+		SELECT
+			r.product_request_code
+			,c.client_name
+			,r.requested_due_date
+			,r.approval_status
+			,r.requested_product_detail_reg_date
+			,r.requested_delivery_address
+			,r.requested_delivery_tel
+		FROM 
+				requested_product_detail AS r
+				INNER JOIn
+				client_info AS c
+				GROUP BY r.product_request_code;			
+	</select>
+</mapper>
