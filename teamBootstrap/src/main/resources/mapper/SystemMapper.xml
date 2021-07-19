@@ -361,6 +361,71 @@
 		<result column="low_class_name" property="lowClassName"/>
 		</association>	
 </resultMap>
+<!-- 대분류카테고리 -->
+<select id="getHighClassCate" resultType="map">
+	SELECT
+	 h.high_class_code AS highClassCode,
+	 h.high_class_name AS highClassName
+	FROM
+	high_class_inspection_list AS h
+	INNER JOIN
+	medium_class_inspection_list AS m
+	ON h.high_class_code=m.high_class_code
+	INNER JOIN
+	low_class_inspection_list AS l
+	ON m.high_med_class_code= l.high_med_class_code
+	INNER JOIN
+	sub_class_inspection_list AS s
+	ON l.high_med_low_class_code =s.high_med_low_class_code
+	GROUP BY h.high_class_code;
+</select>
+<!--중분류카테고리 -->
+<select id="getMediumClassCate"  parameterType="String" resultType="map">
+	SELECT
+		 h.high_class_code AS highClassCode,
+		 h.high_class_name AS highClassName,
+		 m.high_med_class_code AS highMediumClassCode,
+		 m.med_class_code AS mediumClassCode,
+		 m.med_class_name AS mediumClassName
+	FROM
+		high_class_inspection_list AS h
+	INNER JOIN
+		medium_class_inspection_list AS m
+	ON h.high_class_code=m.high_class_code
+	INNER JOIN
+		low_class_inspection_list AS l
+	ON m.high_med_class_code= l.high_med_class_code
+	INNER JOIN
+		sub_class_inspection_list AS s
+	ON l.high_med_low_class_code =s.high_med_low_class_code
+	WHERE h.high_class_code =#{highClassCateName}
+	GROUP BY m.high_med_class_code;
+</select>
+<select id="getLowClassCate" parameterType="String" resultType="map">
+	SELECT
+		 h.high_class_code AS highClassCode,
+		 h.high_class_name AS highClassName,
+		m.high_med_class_code AS highMediumClassCode,
+		 m.med_class_code AS mediumClassCode,
+		 m.med_class_name AS mediumClassName,
+		 l.high_med_low_class_code AS highMedLowClassCode,
+		 l.low_class_code AS lowClassCode,
+		 l.low_class_name AS lowClassName
+	FROM
+		high_class_inspection_list AS h
+	INNER JOIN
+		medium_class_inspection_list AS m
+	ON h.high_class_code=m.high_class_code
+	INNER JOIN
+		low_class_inspection_list AS l
+	ON m.high_med_class_code= l.high_med_class_code
+	INNER JOIN
+		sub_class_inspection_list AS s
+	ON l.high_med_low_class_code =s.high_med_low_class_code
+	WHERE 
+	 m.high_med_class_code=#{middleClassCateName}
+	GROUP BY l.high_med_low_class_code
+</select>
 
 <update id="modifyQualityInspection" parameterType="SubClassInspection">
 UPDATE sub_class_inspection_list AS s  
@@ -432,15 +497,7 @@ UPDATE sub_class_inspection_list AS s
 			ON s.high_class_code = h.high_class_code
 		where  quality_inspection_code=#{qualityInspectionCode};
 	</select>
-		<!-- 품질검사 대분류 가지고오는메서드 -->	
-		<select id="getHighClassCate" resultType="HighClassInspection">
-		SELECT
-			high_class_code,
-		high_class_name
-			FROM
-		high_class_inspection_list;
-	</select>	
-
+	
 
 	
 	
