@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart39.springboot.dao.CompletedProductMapper">
+	<resultMap type="CompletedProduct"							id="completedProductResultMap">
+		<result property="requestedProductCode"					column="requested_product_code"/>
+		<result property="productionStartDate"					column="production_start_date"/>
+		<result property="productionFinishDate"					column="production_finish_date"/>
+		<result property="completedProductRegDate"				column="completed_product_reg_date"/>
+		<result property="completedProductUpdateDate"			column="processcompleted_product_update_date_status"/>
+	</resultMap>
+	
+	
+	
+	<!-- 완제품등록을 위한 정보들 가져오는 쿼리 -->
+	<select id="getCompletedProductInfo" resultType="CompletedProduct">
+		SELECT
+			requested_product_code AS requestedProductCode,
+			MIN(process_start_date) AS productionStartDate,
+			MAX(completed_product_update_date) AS productionFinishDate
+		FROM
+			product_production_process_status
+		where requested_product_code IN (SELECT
+											requested_product_code AS productCode	
+										from
+											product_production_process_status
+										WHERE 
+											requested_product_code IN (SELECT
+																			requested_product_code AS productCode
+																		FROM
+																			product_production_process_status
+																			GROUP by
+																			requested_product_code
+																			HAVING
+																			MAX(production_process_code) = 'process_07') 
+																			and
+																			production_process_code = 'process_07' AND process_status = '완료')
+			GROUP BY requested_product_code;
+	</select>
+	
+	<!-- 가져온 정보로 완제품 검사 목록에 insert해주는 쿼리 -->
+	<insert id="addCompletedProduct" parameterType="CompletedProduct">
+		INSERT INTO completed_product_list(
+			requested_product_code, 
+			production_start_date, 
+			production_finish_date, 
+			completed_product_reg_date, 
+			completed_product_update_date)
+		VALUES (
+		#{requestedProductCode}, 
+		#{productionStartDate}, 
+		#{productionFinishDate}, 
+		NOW(), 
+		NOW())
+	</insert>
+	
+	<select id="getCompletedProductList" resultType="map">
+		SELECT 
+			pss.requested_product_code			AS productCode, 
+			pss.production_start_date			AS startDate, 
+			pss.production_finish_date			AS finishDate, 
+			rpd.requested_due_date				AS dueDate,
+			pDetail.gender_categorized_name		AS suitType,
+			pDetail.detailed_categorized_name	AS productType,
+			rpd.contract_code					AS contractCode,
+			cInfo.client_name					AS clientName
+		FROM 
+			completed_product_list AS pss
+			INNER join
+			requested_product_detail AS rpd
+			on
+			rpd.requested_product_code = pss.requested_product_code
+			INNER join
+			product_code_detail AS pDetail
+			on
+			rpd.product_code = pDetail.product_code
+			INNER join
+			client_info AS cInfo
+			on
+			rpd.client_code = cInfo.client_code
+	</select>
+
+</mapper>

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ksmart39.springboot.dao.SystemMapper;
 import ksmart39.springboot.domain.AccountingCategory;
@@ -101,6 +102,19 @@ public class SystemService {
 	}
 	
 	//=============================================================
+	//[보람]품질검사 등록 대분류 
+	public List<Map<String,Object>> getHighClassCate(){
+		return systemMapper.getHighClassCate();
+				
+	}
+	//[보람]품질 검사 등록 중분류
+	public List<Map<String,Object>> getMediumClassCate(String highClassCateName){
+		return systemMapper.getMediumClassCate(highClassCateName);
+	}
+	//[보람]품질검사 소분류
+	public List<Map<String,Object>> getLowClassCate(String middleClassCateName){
+		return systemMapper.getLowClassCate(middleClassCateName);
+	}
 	
 	//[보람 ]품질검사 상세 수정 메서드
 	public int modifyQualityInspection(SubClassInspection subClassInspection) {
@@ -111,8 +125,7 @@ public class SystemService {
 		return systemMapper.getQualityInspectionCode(qualityInspectionCode);
 		
 	}
-	
-	
+		
 	//[보람 ]품질검사 리스트 조회메서드
 	
 	 public List<Map<String, Object>> getQualityInspectionList() 

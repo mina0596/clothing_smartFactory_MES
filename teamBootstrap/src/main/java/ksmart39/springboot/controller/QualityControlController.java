@@ -93,15 +93,7 @@ public class QualityControlController {
 	
 	//=============================================================================
 
-	@GetMapping("/addStandardTable")
-	public String addStandardTable() {
-		return "quality/addStandardTable";
-	}
-	//[민아]품질검사 기준표 목록
-	@GetMapping("/standardTableList")
-	public String getStandardTableList() {
-		return "quality/standardTableList";
-	}
+
 	
 	
 	//품질관리 메인화면

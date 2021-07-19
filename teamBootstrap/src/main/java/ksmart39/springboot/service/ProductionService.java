@@ -28,11 +28,6 @@ public class ProductionService {
 		this.workOrderMapper = workOrderMapper;
 	}
 	
-	//[민아]완제품 품목 등록
-	public int addCompletedProduct(Map<String,String> comProductInfo) {
-		return productionMapper.addCompletedProduct(comProductInfo);
-	}
-	
 	//[민아]생산 대기중인 품목 목록
 	public List<Map<String,Object>> getProductReadyToStart(){
 		List<Map<String,Object>> workOrderList = workOrderMapper.getWorkOrderList();
@@ -60,12 +55,31 @@ public class ProductionService {
 		return productionMapper.searchProductToStart(searchKeys);
 	}
 	
-	//[민아]생산공정 완료 버튼을 누르면 완료시간들어가고, 그 다음 공정 insert됨
+	//[민아]생산공정 완료 버튼을 누르면 완료시간들어감
 	public int completeProcess(ProductProductionProcessStatus processStatus) {
-		String productCode = processStatus.getRequestedProductCode();
-		productionMapper.completeProcess(processStatus);
-		productionMapper.insertNextProcess(productCode);
 		return productionMapper.completeProcess(processStatus);
 	}
 	
+	//[민아]생산공정 완료 버튼 누르면 다음 공정 insert됨
+	public int insertNextProcess(ProductProductionProcessStatus processStatus) {
+		String previousProcessCode = processStatus.getProductionProcessCode();
+		log.info("===============================================");
+		log.info("previousProcessCode : {}", previousProcessCode);
+		//맨마지막 숫자만 자르고 int로 변환
+		int processOrderNum = Integer.parseInt(previousProcessCode.substring(9,10));
+		log.info("processOrderNum : {}", processOrderNum);
+		String NextProcessNum = Integer.toString(processOrderNum + 1);
+		log.info("NextProcessNum : {}", NextProcessNum);
+		String NextProcessCode = (previousProcessCode.substring(0, 9)).concat(NextProcessNum);
+		log.info("NextProcessCode : {}", NextProcessCode);
+		processStatus.setProductionProcessCode(NextProcessCode);
+		log.info("processStatus 프로세스코드에 1을 더해 setting해준 dto :{}", processStatus);
+		
+		return productionMapper.insertNextProcess(processStatus);
+	}
+	
+	//[민아]생산시작 버튼 누르면 시간 update
+	public int startProcess(ProductProductionProcessStatus processStatus) {
+		return productionMapper.startProcess(processStatus);
+	}
 }

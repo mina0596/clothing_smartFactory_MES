@@ -4,173 +4,373 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
 layout:decorate="@{layout/default_qualityControl}">
 
 <th:block layout:fragment="pageTitle">
-	   <div class="border-head"> 
-	    <h3>품질 관리</h3>
-	    </div>
  <script type="text/javascript">
 		$(function(){
-			$('#deleteBtn').click(function(){			
-				var firstTr = $('#list').find('th').parent();
-				var tr = $('#list').find('td').parent();
-				
-				//체크 버튼 토글
-				var result = $(this).attr('data-change');
-					if(result == 'N' || result == undefined){
-						firstTr.prepend('<th class="th"><input type="checkbox" id="checkAll"></th>');
-						tr.prepend('<td class="td"><input type="checkbox" class = "checked"></td>');
-						$(this).attr('data-change','Y');
-						
-						//#checkAll 버튼 클릭 시 전체 checked
-						$('#checkAll').click(function(){
-							if($('#checkAll').prop('checked')){
-								$('.checked').prop('checked',true);
+			//#checkAll 버튼 클릭 시 전체 checked
+				$('#checkAll').click(function(){
+					if($('#checkAll').prop('checked')){
+						$('.checked').prop('checked',true);
 							}else{
 								$('.checked').prop('checked',false);
 							}
-						});
-
-					}else if(result == 'Y'){
-						$('#list').find('.th').remove();
-						$('#list').find('.td').remove();
-							$(this).attr('data-change','N');
-				}
-									
-			});
-		});
+						});									
+					});
 	</script>  
 </th:block>
 
 
 <th:block layout:fragment="container">
+     <div class="col-md-12">
        <div class="content">
-	<div class="row mt">
-     <div class="col-xs-12 main-chart">
        
-          <h4><i class="fa fa-angle-right"></i>품질 검사 측정값 조회</h4>
-          <hr>
-                
-			<div class="form-group">
-				<div class="col-md-3">
-				 <select class="form-control" >
-				   <option>품질검사 요청 코드</option>
-				   <option>계약번호</option>
-				   <option>품목별 의뢰 코드</option>
-				   <option>품질검사 코드</option>
-				   <option>대분류 검사명</option>
-				   <option>중분류 검사명</option>
-				   <option>소분류 검사명</option>
-				   <option>소분류 검사 검사명</option>
-				   <option>샘플링 여부</option>
-				   <option>등록일시</option>
-				 </select>
-				</div>
-				<div class="col-md-6">
-				  <input class="form-control" type="text" placeholder="검색어를 입력하세요">
-				</div>
-				<div class="col-md-2">
-				  <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
-				  <button type="button" class="btn btn-primary">검색하여 가져오기</button>
-				</div>
-	       </div>
-	       
-	      <br>
-	      <br>
-	      <br>
-	      <br>
-	      <br>
-	      
-              <h4><i class="fa fa-angle-right"></i>품질검사 요청 목록</h4>    
+          <h4><i class="fa fa-angle-right"></i>품질 검사 요청 조회</h4>
+         	 <hr>
+           <form class="form-inline" role="form">
+        
+         <table class="table table-striped table-advance table-hover">
+         	<thead>
+         		<tr>
+         			<th>품질검사코드</th>
+         			<th>품목별 의뢰 코드</th>
+         			<th>요청일</th>
+         			<th><!-- 공백 --></th>
+         			<th>샘플링구분</th>
+         		</tr>
+         	</thead>
+         	<tbody>
+         		<tr>
+         			<td style="padding-right: 20px;">
+	         			 <div class="form-group"><!-- 품질검사코드별 -->
+		               		<button id="byQualityInspectionCode" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
+		                	<input type="text" class="form-control" id="byQualityInspectionCodeValue" placeholder="직접 입력 또는 검색">
+		                </div>
+         			</td>
+         			<td style="padding-right: 20px;">
+         				<div class="form-group"><!-- 품목별 의뢰 코드별 -->
+		               		<button id="byRequestedProductCode" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
+		                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="직접 입력 또는 검색">
+	              		</div>
+         			</td>
+         			<td>
+         				<div class="form-group">
+		                	<input type=date class="form-control" id="exampleInputPassword2" placeholder="등록일별">&nbsp&nbsp&nbsp ~ 
+	               		</div>
+         			</td>
+         			<td style="padding-right: 20px;">
+         				<div class="form-group">
+		                	<input type=date class="form-control" id="exampleInputPassword2" placeholder="등록일별">
+	               		</div>
+         			</td>
+         			<td style="padding-right: 20px;">
+         				<div class="form-group">
+		                	<select class="form-control" style="width: 125px;">
+		                		<option>All</option>
+		                		<option>샘플링</option>
+		                		<option>해당없음</option>
+		                	</select>
+	               		</div>
+         			</td>
+         			<td>
+         				  <button type="submit" class="btn btn-theme">검색</button>
+         			</td>        			
+         		</tr>
+         	</tbody>
+         </table>  
+        </form>  
+        
+        <div>
+        	<div>
+        	  <h4><i class="fa fa-angle-right"></i>품질검사 요청 목록</h4>    
               <table id="list" class="table table-striped table-advance table-hover">
                 <thead>
                   <tr>
+                 	<th><input type="checkbox" id="checkAll"></th>
                     <th><i class="fa fa-bullhorn"></i>번호</th>
                     <th class="hidden-phone"><i class="fa fa-bookmark"></i>품질검사 요청 코드</th>
                     <th><i class="fa fa-bookmark"></i>품질검사 코드</th>
-                    <th><i class=" fa fa-bookmark"></i>소분류 검사명</th>
-                    <th><i class=" fa fa-bookmark"></i>소분류 검사 상세명</th>
-                    <th><i class=" fa fa-bookmark"></i>측정회차</th>
-                    <th><i class=" fa fa-bookmark"></i>결과값</th>
-                    <th><i class=" fa fa-bookmark"></i>합/불 여부</th>
-                    <th><i class=" fa fa-bookmark"></i>등록일시</th>
+                    <th><i class=" fa fa-bookmark"></i>합격여부</th>
+                    <th><i class=" fa fa-bookmark"></i>현황</th>
                     <th><i class=" fa fa-bookmark"></i>수정</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                   <td class="hidden-phone">
-                     1
-                    </td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">QC_REQUEST01</a></td>
-                    <td class="hidden-phone">AAee1</td>
-                    <td>원자재검사</td>
-                    <td>원단 이화학검사(파괴검사)</td>
-                    <td>1회차</td>
-                    <td>20</td>
-                    <td>합격</td>
-                    <td>2021-06-18 18:15:11</td>
-                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  <tr>
-                   <td class="hidden-phone">
-                     2
-                    </td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">QC_REQUEST01</a></td>
-                    <td class="hidden-phone">AAee1</td>
-                    <td>원자재검사</td>
-                    <td>원단 이화학검사(파괴검사)</td>
-                    <td>1회차</td>
-                    <td>20</td>
-                    <td>합격</td>
-                    <td>2021-06-18 18:15:11</td>
-                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  <tr>
-                   <td class="hidden-phone">
-                     3
-                    </td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">QC_REQUEST01</a></td>
-                    <td class="hidden-phone">AAee1</td>
-                    <td>원자재검사</td>
-                    <td>원단 이화학검사(파괴검사)</td>
-                    <td>1회차</td>
-                    <td>20</td>
-                    <td>합격</td>
-                    <td>2021-06-18 18:15:11</td>
-                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  <tr>
-                   <td class="hidden-phone">
-                     4
-                    </td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">QC_REQUEST01</a></td>
-                    <td class="hidden-phone">AAee1</td>
-                    <td>원자재검사</td>
-                    <td>원단 이화학검사(파괴검사)</td>
-                    <td>1회차</td>
-                    <td>20</td>
-                    <td>합격</td>
-                    <td>2021-06-18 18:15:11</td>
-                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                 
-                 
+                  <tr th:if="${#lists.size(list)>0}" th:each="l, i: ${list}">
+                   <td><input type="checkbox" class="checked" th:value="${l.inspectionResultCode}"></td>
+                   	<td th:text="${i.index+1}"></td>
+                    <td>
+                    <a th:href="@{#}">[[${l.qualityInspectionRequestCode}]]</a></td>
+                    <td th:text="${l.qualityInspectionCode}"></td>
+                    <td th:text="${l.inspectionPassCheck}"></td>
+                  	<td><a th:href="@{/addQualityInspectionStatus}" class="btn btn-warning btn-xs"><i class="fa fa-bar-chart-o"></i>현황</a></td>
+                  	<td><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
+                  </tr>                
            		 </tbody>
               </table>
-      </div>
             </div>
-</div>
-            <div class="form-group text-right">
+           </div>
+           <div class="form-group text-right">
 		          <div class="col-lg-offset-2 col-lg-10">
 		           <a th:href="@{/qualityInspectionRequest}" class="btn btn-success btn-xs"><i class="fa fa-check"></i>등록</a>
 		           <a id="deleteBtn" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i>삭제</a>
 		          </div>
 		        </div>
+            </div>
+           </div>
+           
+           
+         <!-- ========================================================== -->
+         <!-- byQualityInspectionCode 모달 시작 -->
+         <div class="modal fade modal-xl"  id="qualityInspectionCode" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" style="width:auto;display:table" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h4 class="modal-title" id="exampleModalLabel">품질검사 목록</h4>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      
+		      <!-- 모달본문 -->
+		   <div class="modal-body">
+		   
+		   <table  class="table table-striped table-advance table-hover">
+         	<tbody>       		
+       			<thead>
+        			<tr>
+	         			<th colspan="3" style="padding-right: 20px;">
+		         			 <div class="form-inline" style="margin-bottom: 0px;">
+		         			 	<label class="control-label">품질검사 코드</label>&nbsp
+			                	<input type="text" class="form-control" id="bySupplierValue" placeholder="검색어를 입력하세요.">
+			                </div>
+	         			</th>
+	         			<th style="padding-right: 20px;">
+	         				<div class="form-inline" style="margin-bottom: 0px;"><!-- 재료별 -->
+		         				<label class="control-label">대분류</label>&nbsp
+			                	<select class="form-control" style="width: 125px;">
+		                		<option>All</option>
+		                		<option>샘플링</option>
+		                		<option>해당없음</option>
+		                	</select>
+		              		</div>
+	         			</th>  
+	         			<th style="padding-right: 20px;">
+	         				<div class="form-inline" style="margin-bottom: 0px;"><!-- 재료별 -->
+		         				<label class="control-label">중분류</label>&nbsp
+			                	<select class="form-control" style="width: 125px;">
+		                		<option>All</option>
+		                		<option>샘플링</option>
+		                		<option>해당없음</option>
+		                	</select>
+		              		</div>
+	         			</th>  
+	         			<th style="padding-right: 20px;">
+	         				<div class="form-inline" style="margin-bottom: 0px;"><!-- 재료별 -->
+		         				<label class="control-label">소분류</label>&nbsp
+			                	<select class="form-control" style="width: 125px;">
+		                		<option>All</option>
+		                		<option>샘플링</option>
+		                		<option>해당없음</option>
+		                	</select>
+		              		</div>
+	         			</th>  
+	         			<th style="padding-right: 20px;">
+	         				<div class="form-inline" style="margin-bottom: 0px;"><!-- 재료별 -->
+		         				<label class="control-label">소분류 상세</label>&nbsp
+			                	<select class="form-control" style="width: 125px;">
+		                		<option>All</option>
+		                		<option>샘플링</option>
+		                		<option>해당없음</option>
+		                	</select>
+	         				 &nbsp&nbsp&nbsp <button type="submit" class="btn btn-theme">검색</button>
+		              		</div>
+	         			</th>  
+        			</tr>     			
+       			</thead>
+       			<tbody style="text-align: center;">
+       				<tr>
+       					<td><i class="fa fa-check"></i></td>
+       					<td>no.</td>
+       					<td>품질검사 코드</td>
+       					<td>품질검사 대분류</td>
+       					<td>품질검사 중분류</td>
+       					<td>품질검사 소분류</td>
+       					<td>품질검사 소분류 상세</td>
+       				</tr>
+     				<tr>
+     					<td><input type="radio" name="byQualityInspectionModal"></td>
+     					<td>1</td>
+       					<td class="byQualityInspectionModal">3218</td>
+       					<td>원자재검사</td>
+       					<td>원단 이화학검사(파괴검사)</td>
+       					<td>마찰변색도</td>
+       					<td>땀,일광복합견뢰도</td>
+     				</tr>
+     				<tr>
+     					<td><input type="radio" name="byQualityInspectionModal"></td>
+     					<td>1</td>
+       					<td class="byQualityInspectionModal">245432</td>
+       					<td>원자재검사</td>
+       					<td>원단 이화학검사(파괴검사)</td>
+       					<td>마찰변색도</td>
+       					<td>땀,일광복합견뢰도</td>
+     				</tr>
+     				<tr>
+     					<td><input type="radio" name="byQualityInspectionModal"></td>
+     					<td>1</td>
+       					<td class="byQualityInspectionModal">436543</td>
+       					<td>원자재검사</td>
+       					<td>원단 이화학검사(파괴검사)</td>
+       					<td>마찰변색도</td>
+       					<td>땀,일광복합견뢰도</td>
+     				</tr>
+     				<tr>
+     					<td><input type="radio" name="byQualityInspectionModal"></td>
+     					<td>1</td>
+       					<td class="byQualityInspectionModal">436542</td>
+       					<td>원자재검사</td>
+       					<td>원단 이화학검사(파괴검사)</td>
+       					<td>마찰변색도</td>
+       					<td>땀,일광복합견뢰도</td>
+     				</tr>
+     				
+       			</tbody>        		
+         	</tbody>
+         </table> 
+         
+		 </div>
+		    <div class="modal-footer">
+			      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			      <button type="button" id="saveQualityInspectionCode" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<!-- byQualityInspectionCode 끝 -->
+		
+		<!-- byRequestedProductCode 모달 시작 -->
+         <div class="modal fade modal-xl"  id="byMaterialNameModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" style="width:auto;display:table" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      
+		      <!-- 모달본문 -->
+		   <div class="modal-body">
+		   
+		   <table  class="table table-striped table-advance table-hover">
+         	<tbody>       		
+       			<thead>
+        			<tr>
+	         			<th colspan="2" style="padding-right: 20px;">
+		         			 <div class="form-inline" style="margin-bottom: 0px;">
+		         			 	<label class="control-label">계약번호</label>&nbsp
+			                	<input type="text" class="form-control" id="bySupplierValue" placeholder="검색어를 입력하세요.">
+			                </div>
+	         			</th>
+	         			<th style="padding-right: 20px;">
+		         			 <div class="form-inline" style="margin-bottom: 0px;">
+		         			 	<label class="control-label">품목별의뢰코드</label>&nbsp
+			                	<input type="text" class="form-control" id="bySupplierValue" placeholder="검색어를 입력하세요.">
+			                </div>
+	         			</th>         			
+	         			<th colspan="2" style="padding-right: 20px;">
+	         				<div class="form-inline" style="margin-bottom: 0px;">
+		         				<label class="control-label">계약날짜</label>&nbsp
+			                	<input type="date" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">&nbsp ~
+			                	<input type="date" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
+	         				 &nbsp&nbsp&nbsp <button type="submit" class="btn btn-theme">검색</button>
+		              		</div>
+	         			</th> 
+        			</tr>     			
+       			</thead>
+       			<tbody style="text-align: center;">
+       				<tr>
+       					<td><i class="fa fa-check"></i></td>
+       					<td>no.</td>
+       					<td>계약번호</td>
+       					<td>품목별의뢰코드</td>
+       					<td>계약시작일자</td>
+       				</tr>
+     				<tr>
+     					<td><input type="radio" name="materialName"></td>
+     					<td>1</td>
+       					<td>2222</td>
+       					<td class="materialName">req01_MS_jacket</td>
+       					<td>2021-02-12</td>
+     				</tr>
+     				<tr>
+     					<td><input type="radio" name="materialName"></td>
+     					<td>1</td>
+       					<td>2222</td>
+       					<td class="materialName">req01_MS_jacket</td>
+       					<td>2021-02-12</td>
+     				</tr>
+     				<tr>
+     					<td><input type="radio" name="materialName"></td>
+     					<td>1</td>
+       					<td>2222</td>
+       					<td class="materialName">req01_MS_jacket</td>
+       					<td>2021-02-12</td>
+     				</tr>
+     				
+     				
+     				
+       			</tbody>        		
+         	</tbody>
+         </table> 
+         
+		 </div>
+		    <div class="modal-footer">
+			      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			      <button type="button" id="saveMaterialName" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+        <!-- byMaterialNameModal 끝 -->
+        <!-- ==================================================== --> 
+           
 
-            
-</th:block>
+	<script type="text/javascript">
+			$(function(){
+				$("button").on('click', function(e){
+					var checkId = $(this).attr('id');
+					if(checkId != null && checkId != undefined){
+						if(checkId == 'byQualityInspectionCode'){
+							e.preventDefault();
+							$('#qualityInspectionCode').modal("show");
+							
+							$('#saveQualityInspectionCode').click(function(){
+								var check = $('input[name=byQualityInspectionModal]:checked');
+								var checkVal = check.parents('tr').find('.byQualityInspectionModal').text();
+								console.log(checkVal);
+								$('#byQualityInspectionCodeValue').attr('value', checkVal);
+							});
+							
+							
+						}
+						if(checkId == 'byRequestedProductCode'){
+							e.preventDefault();
+							$('#byMaterialNameModal').modal("show");
+							
+							
+							$('#saveMaterialName').click(function(){
+								var check = $('input[name=materialName]:checked');
+								var checkVal = check.parents('tr').find('.materialName').text();
+								console.log(checkVal);
+								$('#exampleInputPassword2').attr('value', checkVal);
+							});
+						}
+					}
+				});
+				
+			});
+			
+			
 
+	        </script>
+	        </th:block>
 </html>
