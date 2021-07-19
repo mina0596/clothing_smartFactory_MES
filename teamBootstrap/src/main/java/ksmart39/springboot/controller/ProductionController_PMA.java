@@ -34,6 +34,7 @@ import ksmart39.springboot.domain.ProductProductionProcessStatus;
 import ksmart39.springboot.domain.ProductionPlan;
 import ksmart39.springboot.domain.RequestedProduct;
 import ksmart39.springboot.domain.WorkOrder;
+import ksmart39.springboot.service.CompletedProductService;
 import ksmart39.springboot.service.ProductionPlanService;
 import ksmart39.springboot.service.ProductionService;
 import ksmart39.springboot.service.ProductionStatusService;
@@ -48,17 +49,23 @@ public class ProductionController_PMA {
 
 	private final WorkOrderService workOrderService;
 	private final ProductionService productionService;
+	private final CompletedProductService completedProductService;
 
-	public ProductionController_PMA(ProductionService productionService, WorkOrderService workOrderService) {
+	public ProductionController_PMA(ProductionService productionService, WorkOrderService workOrderService, CompletedProductService completedProductService) {
 		this.productionService = productionService;
 		this.workOrderService = workOrderService;
+		this.completedProductService = completedProductService;
 	}
 
+	
 	// [민아]의뢰품목별 생산공정 지시
 	@GetMapping("/orderProductionProcess")
-	public String orderProductionProcess() {
+	public String orderProductionProcess(Model model) {
+		List<Map<String,Object>> productToStartList = productionService.searchProductToStart(null);
+		model.addAttribute("productToStartList", productToStartList);
 		return "production/orderProductionProcess";
 	}
+	
 	
 	//[민아]의뢰 품목별 생산공정 현황 조회
 	@PostMapping("/searchProductToStart")
@@ -79,7 +86,13 @@ public class ProductionController_PMA {
 	public ProductProductionProcessStatus stopProcess(@RequestBody ProductProductionProcessStatus selectedProductInfo) {
 		log.info("ajax에서 잘 받아오나요? {}", selectedProductInfo);
 		productionService.completeProcess(selectedProductInfo);
-		productionService.insertNextProcess(selectedProductInfo);
+		if(selectedProductInfo.getProductionProcessCode().equals("process_07")) {
+			completedProductService.addCompletedProduct(null);
+		}else {
+			productionService.insertNextProcess(selectedProductInfo);			
+		}
+		
+		
 		return selectedProductInfo;
 	}
 	
@@ -129,7 +142,7 @@ public class ProductionController_PMA {
 		return searchClientNameResult;
 	}
 	  
-	 
+	
 	
 	// [민아+한빛]의뢰품목별 상세 생산 공정 현황 등록
 	@GetMapping("/productionOrderList")
@@ -151,6 +164,7 @@ public class ProductionController_PMA {
 		return "/production/productionOrderList";
 	}
 
+	
 	// [민아]생산공정 시작 - 생산현황에 insert됨
 	@PostMapping("/pCodeToStartSend")
 	public @ResponseBody String startPCodeProduction(@RequestParam(value = "pCodeToStart") String sentPCode) {
@@ -160,12 +174,14 @@ public class ProductionController_PMA {
 		return null;
 	}
 
+	
 	// [민아+한빛]의뢰품목별 상세 생산 공정 현황 등록
 	@GetMapping("/test")
 	public String test() {
 		return "production/test";
 	}
 
+	
 	// ================================================================
 	// [민아+한빛]의뢰품목별 상세 생산 공정 현황 등록
 	@GetMapping("/productProgressList")
@@ -192,24 +208,12 @@ public class ProductionController_PMA {
 		return "production/modifyCompletedProduct";
 	}
 
-	// [민아]완제품 등록
-	@GetMapping("/addCompletedProduct")
-	public String addCompletedProduct() {
-
-		return "production/addCompletedProduct";
-	}
-
-	@PostMapping("/addCompletedProduct")
-	public String addCompletedProduct(@RequestParam(name = "productCode", required = true) String productCode,
-			Model model) {
-		Map<String, String> completedProductInfo = new HashMap<String, String>();
-		productionService.addCompletedProduct(completedProductInfo);
-		return "production/addCompletedProduct";
-	}
-
 	// [민아]완제품 목록
 	@GetMapping("/completedProductList")
-	public String getCompletedProductList() {
+	public String getCompletedProductList(Model model) {
+		List<Map<String,Object>> completedProductList = completedProductService.getCompletedProductList();
+		log.info("완제품 목록 :{}", completedProductList);
+		model.addAttribute("completedProductList", completedProductList);
 		return "production/completedProductList";
 	}
 

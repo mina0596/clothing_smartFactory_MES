@@ -28,11 +28,6 @@ public class ProductionService {
 		this.workOrderMapper = workOrderMapper;
 	}
 	
-	//[민아]완제품 품목 등록
-	public int addCompletedProduct(Map<String,String> comProductInfo) {
-		return productionMapper.addCompletedProduct(comProductInfo);
-	}
-	
 	//[민아]생산 대기중인 품목 목록
 	public List<Map<String,Object>> getProductReadyToStart(){
 		List<Map<String,Object>> workOrderList = workOrderMapper.getWorkOrderList();

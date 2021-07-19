@@ -136,14 +136,12 @@ $(function(){
 				request.done(function(data){
 					console.log(data);
 					location.reload();
-					
 				});
 				
 				request.fail(function( jqXHR, textStatus ) {
 					alert( "공정마침버튼을 다시 눌러주세요." + textStatus );
 				});
 			})
-			
 			
 			//공정시작 버튼을 누르면 현재시간으로 시작시간이 insert되는 처리과정
 			$('#startProcess').click(function(){
@@ -167,32 +165,74 @@ $(function(){
 				request.done(function(data){
 					console.log(data);
 					location.reload();
-					
 				});
-				
 				request.fail(function( jqXHR, textStatus ) {
 					alert( "공정시작버튼을 다시 눌러주세요." + textStatus );
 				});
-				
-				
 			});
-			
-			
-			
-			
 		});
-		
-		
 		
 		request.fail(function( jqXHR, textStatus ) {
 					alert( "검색어들을 확인해주세요. " + textStatus );
 		});	
-		
 	});
-	
-	
-	
-	
-	
+	$('#completeProcess').click(function(){
+				console.log('공정을 시작해볼까요?');
+				
+				var selectedProductCode = $(this).parent().parent().find('.productCode').text();
+				var selectedProcessCode = $(this).parent().parent().find('.processCode').text();
+				console.log(selectedProductCode);
+				
+				var selectedProductInfo={
+						requestedProductCode : selectedProductCode,
+						productionProcessCode : selectedProcessCode
+				}
+				
+				var request = $.ajax({
+					url: "/production/stopProcessByProduct",
+					method: "post",
+					traditional: true,
+					data: JSON.stringify(selectedProductInfo),
+					contentType: 'application/json',
+					dataType: "json"
+				});
+				
+				request.done(function(data){
+					console.log(data);
+					location.reload();
+				});
+				
+				request.fail(function( jqXHR, textStatus ) {
+					alert( "공정마침버튼을 다시 눌러주세요." + textStatus );
+				});
+			})
+			
+			//공정시작 버튼을 누르면 현재시간으로 시작시간이 insert되는 처리과정
+			$('#startProcess').click(function(){
+				var selectedProductCode = $(this).parent().parent().find('.productCode').text();
+				var selectedProcessCode = $(this).parent().parent().find('.processCode').text();
+				
+				var selectedProductInfo={
+						requestedProductCode : selectedProductCode,
+						productionProcessCode : selectedProcessCode
+				}
+				
+				var request = $.ajax({
+					url: "/production/startProcessByProduct",
+					method: "post",
+					traditional: true,
+					data: JSON.stringify(selectedProductInfo),
+					contentType: 'application/json',
+					dataType: "json"
+				});
+				
+				request.done(function(data){
+					console.log(data);
+					location.reload();
+				});
+				request.fail(function( jqXHR, textStatus ) {
+					alert( "공정시작버튼을 다시 눌러주세요." + textStatus );
+				});
+			});
 	
 })

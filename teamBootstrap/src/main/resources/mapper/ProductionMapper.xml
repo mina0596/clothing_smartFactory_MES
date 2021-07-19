@@ -87,6 +87,22 @@
 			NOW());	
 	</insert>
 	
+	<insert id="startProduction" parameterType="String">
+		INSERT INTO product_production_process_status(
+			production_process_code, 
+			requested_product_code, 
+			process_start_date, 
+			completed_product_update_date, 
+			process_status, 
+			production_process_status_reg_date)
+		VALUES(
+			'process_01', 
+			#{pCodeToStart}, 
+			'1111-11-11 11:11:11', 
+			'1111-11-11 11:11:11', 
+			'대기중', 
+			NOW());
+	</insert>
 	
 	
 	<!-- ===================의뢰 품목별 생산현황 조회 modal에서 거래처명 조회====================== -->
@@ -126,7 +142,96 @@
 		</trim>
 	</select>
 	
+	<!-- ============================의뢰 품목별 생산현황 조회 attemp01================================== -->
 	<select id="searchProductToStart" resultType="map" parameterType="map">
+		SELECT 
+			pps.production_process_code						AS processCode, 
+			pps.requested_product_code						AS productCode, 
+			DATE_FORMAT(pps.process_start_date, '%Y-%m-%d %T')						AS processStartDate, 
+			DATE_FORMAT(pps.completed_product_update_date, '%Y-%m-%d %T')			AS processFinishDate, 
+			pps.process_status								AS processStatus, 
+			rpd.client_code									AS clientCode,
+			c.client_name									AS clientName,
+			rpd.requested_due_date							AS dueDate,
+			pd.gender_categorized_name						AS suitType,
+			pd.detailed_categorized_name					AS productType,
+			detail.production_process_high_classification	AS highClassName,
+			detail.production_process_low_classification	AS lowClassName,
+			detail.process_order_num						AS processOrderNum
+		from
+			product_production_process_status AS pps
+			left join
+			(SELECT
+				requested_product_code AS pCode	
+			from
+				product_production_process_status
+			WHERE 
+				requested_product_code IN (SELECT
+												requested_product_code AS productCode
+											FROM
+												product_production_process_status
+												GROUP by
+												requested_product_code
+												HAVING
+												MAX(production_process_code) = 'process_07') 
+			and
+				production_process_code = 'process_07' AND process_status = '완료') AS pps2
+			ON 
+				pps.requested_product_code = pps2.pCode
+			INNER join
+				requested_product_detail AS rpd
+				on
+				pps.requested_product_code = rpd.requested_product_code
+				INNER join
+				product_code_detail AS pd
+				on
+				pd.product_code = rpd.product_code
+				INNER join
+				client_info AS c
+				ON 
+				rpd.client_code = c.client_code
+				INNER join
+				production_process_list AS detail
+				on
+				pps.production_process_code = detail.production_process_code
+			WHERE pCode IS null
+			<trim prefix="WHERE" prefixOverrides="AND">
+			<if test="suitType != null and suitType != ''.toString()">
+				AND	pd.gender_categorized_name LIKE CONCAT('%', #{suitType} ,'%')
+			</if>
+			<if test="productType != null and productType != ''.toString()">
+				AND	pd.detailed_categorized_name LIKE CONCAT('%', #{productType} ,'%')
+			</if>
+			<if test="clientCode != null and clientCode != ''.toString()">
+				AND rpd.client_code LIKE CONCAT('%', #{clientCode} ,'%')
+			</if>
+			<if test="DateType == 'dueDate' and fromDate != null and fromDate != ''.toString()">
+				<![CDATA[
+				AND rpd.requested_due_date >= #{fromDate}
+				]]>
+			</if>
+			<if test="DateType == 'dueDate' and toDate != null and toDate != ''.toString()">
+				<![CDATA[
+				AND rpd.requested_due_date <= #{toDate}
+				]]>
+			</if>
+			<if test="DateType == 'startDate' and fromDate != null and fromDate != ''.toString()">
+				<![CDATA[
+				AND pps.process_start_date >= #{fromDate}
+				]]>
+			</if>
+			<if test="DateType == 'startDate' and toDate != null and toDate != ''.toString()">
+				<![CDATA[
+				AND pps.process_start_date <= #{toDate}
+				]]>
+			</if>
+		</trim>
+		ORDER by
+					pps.requested_product_code;
+		</select>
+		
+	
+<!-- 	<select id="searchProductToStart" resultType="map" parameterType="map">
 		SELECT 
 			pps.production_process_code						AS processCode, 
 			pps.requested_product_code						AS productCode, 
@@ -208,8 +313,8 @@
 		ORDER by
 					pps.requested_product_code;
 	</select>
-
-	<!-- ============================의뢰 품목별 생산현황 조회================================== -->
+ -->
+	<!-- ============================의뢰 품목별 생산현황 조회 attemp01================================== -->
 	<!-- 
 	<select id="searchProductToStart" resultType="map" parameterType="map">
 		SELECT 
