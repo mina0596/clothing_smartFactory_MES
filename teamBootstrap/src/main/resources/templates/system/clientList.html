@@ -37,7 +37,7 @@ layout:decorate="@{layout/default_system}">
 				var delCheck = confirm('정말 삭제하시겠습니까?');
 				if(delCheck){
 					$.ajax({
-						url: "/deleteClient",
+						url: "/system/deleteClient",
 						method : 'post',
 						async: true,
 						dataType : "json",
@@ -70,7 +70,7 @@ layout:decorate="@{layout/default_system}">
      <div class="col-md-12">
           <h4><i class="fa fa-angle-right"></i>거래처조회</h4>
          		 <hr>
-			<form th:action="@{/clientList}" method="get">
+			<form th:action="@{/system/clientList}" method="get">
 				<div class="form-group">
 					<div class="col-md-2">					
 					 <select name="searchKey" class="form-control">
