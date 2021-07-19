@@ -424,6 +424,12 @@ public class SystemController {
 	  
 	  return"system/qualityInspectionList"; 
 	  }
+	  //[보람]품질검사 등록 메서드
+	  @PostMapping("/addQualityInspection")
+	  public String addQualityInspection() {
+		  
+		  return "redirect:/qualityInspectionList";
+	  }
 	  
 	  //검사종류 등록 메서드
 	  

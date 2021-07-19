@@ -6,7 +6,7 @@ $(function(){
 	var middleClassCateName = $('#middleClassCateName');
 	var lowClassCateName = $('#lowClassCateName');
 
-//거래처명가지고오기
+//검사대분류명가지고오기
 	var request = $.ajax({
 		url: "/system/highClassCate",
 		method: "get"
@@ -30,7 +30,8 @@ $(function(){
 		alert( "Request failed: " + textStatus );
 	});	
 	
-//중분류가지고오기			
+//중분류가지고오기	
+	//대분류명 검사를 선택하게되면  data 화면에서 선택된 키와 값으로 data를 전송
 	$('#highClassCateName').change(function(){
 		var highClassCateName =$('#highClassCateName option:selected').val();
 		var request = $.ajax({
