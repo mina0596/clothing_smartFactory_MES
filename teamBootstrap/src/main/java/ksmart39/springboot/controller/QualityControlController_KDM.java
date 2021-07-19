@@ -35,6 +35,16 @@ public class QualityControlController_KDM {
 	private QualityInsMeasurementValueService qualityInsMeasurementValueService;
 	
 	//=============================================================================
+	//검사현황 실적 
+	@GetMapping("/inspectionPerformance")
+	public String inspectionPerformance(Model model) {
+		
+		model.addAttribute("title", "검사현황관리:실적");
+		return"quality/inspectionPerformance";
+	}
+	
+	
+	
 	//[다미] 실시간 검사 현황
 	@GetMapping("/qualityInspectionStatusNow")
 	public String qualityInspectionStatusNow() {

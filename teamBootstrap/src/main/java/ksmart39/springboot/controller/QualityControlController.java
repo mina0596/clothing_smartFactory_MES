@@ -30,66 +30,8 @@ import ksmart39.springboot.service.QualityInsMeasurementValueService;
 @RequestMapping("/quality")
 public class QualityControlController {
 	private static final Logger log = LoggerFactory.getLogger(QualityControlController.class);
-	@Autowired
-	private QualityControlService qualityControlService;
-	
-	@Autowired
-	private DefectiveProductService defectiveProductService;
-	
-	@Autowired 
-	private QualityInsMeasurementValueService qualityInsMeasurementValueService;
-	
-	//================================================================
-	//[한빛]불량품등록 -> 목록
-	@PostMapping("/addDefectiveProduct")
-	public String addDefectiveProduct(DefectiveProduct defectiveProduct) {
-		defectiveProductService.addDefectiveProduct(defectiveProduct);
-		return "redirect:/defectiveProductList";
-	}
-	
-
-	//[한빛]불량품 등록
-	@GetMapping("/addDefectiveProduct")
-	public String addDefectiveProduct(Model model) {
-		
-		model.addAttribute("title", "품질관리");
-		return"quality/addDefectiveProduct";
-	}
-		
-	//[한빛]불량품 수정
-	@GetMapping("/modifyDefectiveProduct")
-	public String modifyDefectiveProduct(Model model) {
-		model.addAttribute("title", "불량품수정");
-		return"quality/modifyDefectiveProduct";
-	}
-	
-	//[한빛]불량품 조회
-	@GetMapping("/defectiveProductList")
-	public String getDefectiveProductList(Model model) {
-		List<DefectiveProduct> defectiveProduct = defectiveProductService.getDefectiveProduct();
-		model.addAttribute("title", "품질관리");
-		model.addAttribute("defectiveProduct", defectiveProduct);
-		return"quality/defectiveProductList";
-	}
-
-	
-	//================================================================
-	//검사현황 실적 
-	@GetMapping("/inspectionPerformance")
-	public String inspectionPerformance(Model model) {
-		
-		model.addAttribute("title", "검사현황관리:실적");
-		return"quality/inspectionPerformance";
-	}
-	
-	
-	
-	
-	//=============================================================================
 
 
-	
-	
 	//품질관리 메인화면
 	@GetMapping("/qualityControl")
 	public String getQulity() {
