@@ -171,6 +171,7 @@
 							
 							if(data != '' && data != undefined && data != null){
 								
+								//카테고리에 따른 측정값 폼 변경
 								if(data == '합격/불합격'){
 									cate = '<input type="checkbox" name="inspectionPassCheck" value="합격">합 <input type="checkbox" name="inspectionPassCheck" value="불합격">불';
 									rawMaterialName = '해당없음';
