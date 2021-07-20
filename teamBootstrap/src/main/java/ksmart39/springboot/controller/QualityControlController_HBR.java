@@ -118,7 +118,7 @@ public class QualityControlController_HBR {
 	
 	//검사현황 성적서조회 및리스트
 	@GetMapping("/qualityInspectionReport")
-	public String qualityInspectionReport(Model model) {
+	public String getQualityInspectionReport(Model model) {
 		List<Map<String,Object>> finalResultList = qualityInsepctionFinalResultService.getInsepectionFinalResult();
 		log.info("=============================================");
 		log.info("최종성적리스트 :  {} ", finalResultList);
