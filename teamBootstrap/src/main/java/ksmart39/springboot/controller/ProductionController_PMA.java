@@ -144,9 +144,9 @@ public class ProductionController_PMA {
 	  
 	
 	
-	// [민아+한빛]의뢰품목별 상세 생산 공정 현황 등록
+	// [민아+한빛]의뢰품목별 상세 생산 공정 현황 
 	@GetMapping("/productionOrderList")
-	public String productionOrderList(Model model) {
+	public String getProductionOrderList(Model model) {
 
 		List<Map<String, Object>> workOrderList = workOrderService.getWorkOrderList();
 		List<Map<String, Object>> readyProductInfoList = new ArrayList<Map<String, Object>>();
@@ -183,13 +183,8 @@ public class ProductionController_PMA {
 
 	
 	// ================================================================
-	// [민아+한빛]의뢰품목별 상세 생산 공정 현황 등록
-	@GetMapping("/productProgressList")
-	public String getproductProgressList() {
-		return "production/productProgressList";
-	}
 
-	// [민아+한빛]의뢰품목별 생산 현황 조회
+	// [민아+한빛]의뢰품목별 생산 현황 조회 - 삭제할 예정
 	@GetMapping("/stateByProduct")
 	public String getStateByProduct() {
 		return "production/stateByProduct";
@@ -202,7 +197,7 @@ public class ProductionController_PMA {
 	}
 
 	// ===================================================================
-	// [민아]완제품 수정
+	// [민아]완제품 수정 - 넣지 않을 예정
 	@GetMapping("/modifyCompletedProduct")
 	public String modifyCompletedProduct() {
 		return "production/modifyCompletedProduct";
@@ -220,7 +215,7 @@ public class ProductionController_PMA {
 	// =====================================================================
 	// [보람]작업지시 목록 + [민아]작업지시 목록 화면에 뿌려주기
 	@GetMapping("/workOrderList")
-	public String workerOrderList(Model model) {
+	public String getWorkerOrderList(Model model) {
 
 		List<Map<String, Object>> workOrderList = workOrderService.getWorkOrderList();
 		model.addAttribute("workOrderList", workOrderList);

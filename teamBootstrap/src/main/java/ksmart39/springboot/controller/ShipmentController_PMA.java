@@ -14,7 +14,7 @@ public class ShipmentController_PMA {
 	
 	//==========================================================	
 
-	//[민아]운송회사 정보
+	//[민아]운송회사 정보 - system에 잇음
 	@GetMapping("/courierList")
 	public String getCourierList() {
 		return "shipment/courierList";

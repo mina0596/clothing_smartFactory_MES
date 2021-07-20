@@ -106,7 +106,7 @@ public class SystemController_PMA {
 	// [민아]원부자재 재료 구분 검색후 처리
 	@PostMapping("/searchRawMaterialName")
 	@ResponseBody
-	public String sendMaterialName(@RequestParam(name = "materialName", required = false) String materialName,
+	public String sendMaterialsName(@RequestParam(name = "materialName", required = false) String materialName,
 			Model model) {
 
 		log.info("MaterialNameCheck 	materialName :::::: {}", materialName);
@@ -121,17 +121,17 @@ public class SystemController_PMA {
 		return "system/searchMaterialName";
 	}
 	//================================================================
-		//[민아]생산공정 등록
-		@GetMapping("/addProductionProcess")
-		public String addProductionProcess() {
-			return "system/addProductionProcess";
-		}
-		
-		//[민아]생산공정 목록
-		@GetMapping("/productionProcessList")
-		public String getProductionProcessList() {
-			return "system/productionProcessList";
-		}
+	//[민아]생산공정 등록
+	@GetMapping("/addProductionProcess")
+	public String addProductionProcess() {
+		return "system/addProductionProcess";
+	}
+	
+	//[민아]생산공정 목록
+	@GetMapping("/productionProcessList")
+	public String getProductionProcessList() {
+		return "system/productionProcessList";
+	}
 		
 
 }

@@ -87,13 +87,13 @@ $(function(){
 					if(productToStartResult[i].processStartDate == '1111-11-11 11:11:11' && productToStartResult[i].processFinishDate == '1111-11-11 11:11:11'){
 						html += '<td style="font-weight: bold; font-style: italic;">공정 대기중</td>';
 						html += '<td style="font-weight: bold; font-style: italic;">공정 대기중</td>';
-						html += '<td><button id="startProcess" class="btn btn-success btn-xs" type="button"><i class="fa fa-power-off"></i>공정시작</button></td>'
+						html += '<td><button class="btn btn-success btn-xs startProcess" type="button"><i class="fa fa-power-off"></i>공정시작</button></td>'
 					}else if(productToStartResult[i].processStartDate != '1111-11-11 11:11:11' && productToStartResult[i].processFinishDate == '1111-11-11 11:11:11'){
 						html += '<td class="processStartDate">';
 						html += formatDate(productToStartResult[i].processStartDate);					
 						html += '</td>';
 						html += '<td style="font-weight: bold; font-style: italic;">공정 진행중</td>';
-						html += '<td><button id="completeProcess" class="btn btn-danger btn-xs" type="button"><i class="fa fa-power-off"></i>공정마침</button></td>'
+						html += '<td><button class="btn btn-danger btn-xs completeProcess" type="button"><i class="fa fa-power-off"></i>공정마침</button></td>'
 					}else if(productToStartResult[i].processStartDate != '1111-11-11 11:11:11' && productToStartResult[i].processFinishDate != '1111-11-11 11:11:11'){
 						html += '<td class="processStartDate">';
 						html += formatDate(productToStartResult[i].processStartDate);					
@@ -112,7 +112,7 @@ $(function(){
 			$('#resultTableBody').append(html);
 			
 			//공정이 진행중인 공정을 완료했을때의 버튼 + 누르면 그 다음 공정이 시작될 수 있게 insert가 되는 처리과정 
-			$('#completeProcess').click(function(){
+			$('.completeProcess').click(function(){
 				console.log('공정을 시작해볼까요?');
 				
 				var selectedProductCode = $(this).parent().parent().find('.productCode').text();
@@ -144,7 +144,7 @@ $(function(){
 			})
 			
 			//공정시작 버튼을 누르면 현재시간으로 시작시간이 insert되는 처리과정
-			$('#startProcess').click(function(){
+			$('.startProcess').click(function(){
 				var selectedProductCode = $(this).parent().parent().find('.productCode').text();
 				var selectedProcessCode = $(this).parent().parent().find('.processCode').text();
 				
@@ -176,7 +176,7 @@ $(function(){
 					alert( "검색어들을 확인해주세요. " + textStatus );
 		});	
 	});
-	$('#completeProcess').click(function(){
+	$('.completeProcess').click(function(){
 				console.log('공정을 시작해볼까요?');
 				
 				var selectedProductCode = $(this).parent().parent().find('.productCode').text();
@@ -208,7 +208,7 @@ $(function(){
 			})
 			
 			//공정시작 버튼을 누르면 현재시간으로 시작시간이 insert되는 처리과정
-			$('#startProcess').click(function(){
+			$('.startProcess').click(function(){
 				var selectedProductCode = $(this).parent().parent().find('.productCode').text();
 				var selectedProcessCode = $(this).parent().parent().find('.processCode').text();
 				
