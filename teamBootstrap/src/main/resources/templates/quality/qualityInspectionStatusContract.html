@@ -207,48 +207,28 @@ layout:decorate="@{layout/default_qualityControl}">
 			<th scope="col" id="song">시작시간</th> 
 			<th scope="col" id="song">완료시간</th> 
 		</tr>
-		<tr> 
-			<th scope="row" id="mandatory">1</th> 
-			<td><input type="checkbox"></td> 
-			<td>수입검사</td> 
-			<td>물세탁</td> 
-			<td>변퇴색</td> 
-			<td>req01_MS_pants</td>
-			<td>바지</td>
-			<td>2021-04-22 12:12:22</td>
-			<td>등급</td>
-			<td>4</td>
-			<td>5</td>
-			<td>4</td>
-			<td>5</td>
-			<td>3</td>
-			<td>4</td>
-			<td>2021-04-22 12:12:22</td>
-			<td>2021-04-22 12:12:22</td>
-			<td>합격</td>
-			<td>없음</td>
-		</tr> 
+		
        </thead>
        <tbody>
-		<tr> 
-			<th scope="row" id="mandatory">1</th> 
+		<tr th:if="${#lists.size(inspectionStateList) > 0}" th:each="q,i:${inspectionStateList}"> 
+			<th th:text="${i.index+1}"  scope="row" id="mandatory"></th> 
 			<td><input type="checkbox"></td> 
-			<td>수입검사</td> 
-			<td>물세탁</td> 
-			<td>변퇴색</td> 
-			<td>req01_MS_pants</td>
+			<td th:text="${q.highClassName}"></td> 
+			<td th:text="${q.lowClassName}"></td> 
+			<td th:text="${q.subClassName}"></td> 
+			<td th:text="${q.requestProductCode}"></td>
 			<td>바지</td>
-			<td>2021-04-22 12:12:22</td>
-			<td>등급</td>
-			<td>4</td>
-			<td>5</td>
-			<td>4</td>
-			<td>5</td>
-			<td>3</td>
-			<td>4</td>
-			<td>2021-04-22 12:12:22</td>
-			<td>2021-04-22 12:12:22</td>
-			<td>합격</td>
+			<td th:text="${q.inspectionRequestDate}">2021-04-22 12:12:22</td>
+			<td th:text="${q.stanardUnit}">등급</td>
+			<td th:text="${q.standardTolerance}">4</td>
+			<td th:text="${q.minTolerance}">5</td>
+			<td th:text="${q.maxTolerance}">4</td>
+			<td th:text="${q.inspection_first}">5</td>
+			<td th:text="${q.inspection_second}">3</td>
+			<td th:text="${q.inspection_third}">4</td>
+			<td th:text="${q.inspectionStartDate}">2021-04-22 12:12:22</td>
+			<td th:text="${q.inspectionEndDate}">2021-04-22 12:12:22</td>
+			<td th:text="${q.finalResult}">합격</td>
 			<td>없음</td>
 		</tr> 
                   
