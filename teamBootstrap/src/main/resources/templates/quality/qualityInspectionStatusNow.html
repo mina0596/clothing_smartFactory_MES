@@ -6,8 +6,7 @@ layout:decorate="@{layout/default_qualityControl}">
 <th:block layout:fragment="pageTitle">
 
 	<th:block layout:fragment="customJs">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	</th:block>	 
 	    
 </th:block>
@@ -105,7 +104,7 @@ layout:decorate="@{layout/default_qualityControl}">
            <div class="col-md-3 col-sm-4 mb">
                 <div class="grey-panel pn donut-chart">
                   <div class="grey-header">
-                    <h5>여기다뭐넣지</h5>
+                    <h5>현황</h5>
                   </div>
 	            <div style="width:180px; display: inline-block;">
 				    <canvas id="myChart0"></canvas>
@@ -263,78 +262,8 @@ layout:decorate="@{layout/default_qualityControl}">
 <!-- 품질검사코드 검색 모달 --> 
 <th:block th:replace="/quality/modal_SearchInspectionCode::modal_SearchInspectionCode"></th:block>
 
-<script type="text/javascript">
-var ctx = document.getElementById('myChart0').getContext('2d');
-var data  = {
-		  type: 'doughnut',
-		  data: {
-			  labels: [
-				    '완료',
-				    '진행율'
-				  ],
-				  datasets: [{
-				    label: 'My First Dataset',
-				    data: [50, 100],
-				    backgroundColor: [
-				      'rgb(54, 162, 235)',
-				      'rgb(255, 205, 86)'
-				    ],
-				    hoverOffset: 4
-			}]
-		  },
-		};
-
-var chart = new Chart(ctx, data);
-
-
-var ctx = document.getElementById('myChart').getContext('2d');
-var data  = {
-		  type: 'doughnut',
-		  data: {
-			  labels: [
-				    '합격',
-				    '불합격'
-				  ],
-				  datasets: [{
-				    label: 'My First Dataset',
-				    data: [50, 100],
-				    backgroundColor: [
-				      'rgb(54, 162, 235)',
-				      'rgb(255, 205, 86)'
-				    ],
-				    hoverOffset: 4
-			}]
-		  },
-		};
-
-var chart = new Chart(ctx, data);
-
-var ctx2 = document.getElementById('myChart2').getContext('2d');
-var data2  = {
-		  type: 'doughnut',
-		  data: {
-			  labels: [
-				    '수입검사',
-				    '공정검사',
-				    '완재품검사'
-				  ],
-				  datasets: [{
-				    label: 'My First Dataset',
-				    data: [20, 30, 10],
-				    backgroundColor: [
-				      'rgb(54, 162, 235)',
-				      'rgb(255, 205, 86)',
-				      'rgb(120, 205, 86)'
-				    ],
-				    hoverOffset: 4
-			}]
-		  },
-		};
-
-var chart2 = new Chart(ctx2, data2);
-
-</script>
-
+<script type="text/javascript" th:src="@{/quality/qualityInspectionStatusNow.js}"></script>
+<script type="text/javascript" th:src="@{/productionJs/ProductionCate.js}"></script>
 <!-- 품목 가져오는 js -->
 
 
