@@ -15,6 +15,12 @@ public class ShipmentController_HBR {
 	
 	
 	//==========================================================
+	//[보람]송장삭제
+	@PostMapping("/deleteShipmentInvoice")
+	public String deleteShipmentInvoice() {
+		return "redirect:/shipmentInvoiceList";
+	}
+	
 	//[보람] 송장 수정화면 완료
 	@PostMapping("/modifyShipmentInvoice")
 	public String modifyShipmentInvoice() {
@@ -22,7 +28,7 @@ public class ShipmentController_HBR {
 	}
 	//[보람]송장 수정화면
 	@GetMapping("/modifyShipmentInvoice")
-	public String shipmentInvoiceModify(){
+	public String modifyShipmentInvoice(Model model){
 		return"shipment/modifyShipmentInvoice";
 	}
 	//송장관리의 송장 목록및 조회
@@ -40,6 +46,12 @@ public class ShipmentController_HBR {
 		return"shipment/addShipmentInvoice";
 	}
 	
+	
+	//[보람]출하지시 삭제
+	@PostMapping("/deleteShipmentOrder")
+	public String deleteShipmentOrder() {
+		return "redirect:/shipmentOrderList";
+	}
 	//[보람 ]출하지시  수정화면 수정후
 	@PostMapping("/modifyShipmentOrder")
 	public String modifyShipmentOrder1() {

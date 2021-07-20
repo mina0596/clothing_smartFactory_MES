@@ -39,6 +39,11 @@ public class SystemController_HBR {
 	private static final Logger log = LoggerFactory.getLogger(SystemController_HBR.class);
 
 
+	//[보람]품질검사 삭제
+	@PostMapping("deleteQualityInspection")
+	public String deleteQualityInspection() {
+		return "redirect:/qualityInspectionList";
+	}
 	
 	// [보람]품질검사 대분류 ajax 처리
 	@RequestMapping(value = "/highClassCate" ,method = RequestMethod.GET)
@@ -92,7 +97,7 @@ public class SystemController_HBR {
 
 	// [보람] 검사 수정 경로
 	@GetMapping("/modifyQualityInspection")
-	public String getModifyQualityInspection(Model model
+	public String modifyQualityInspection(Model model
 			,@RequestParam(name ="qualityInspectionCode",required = false) String qualityInspectionCode) {
 		log.info("========================================");
 		log.info("화면에서입력받은검사수정폼 qualityInspectionCode:{}",qualityInspectionCode);
