@@ -40,27 +40,18 @@ public class QualityControlController_LHB {
 	private QualityInsMeasurementValueService qualityInsMeasurementValueService;
 	
 	//================================================================
+	//[한빛]불량품 등록
+	@GetMapping("/addDefectiveProduct")
+	public String addDefectiveProduct(Model model) {		
+		model.addAttribute("title", "품질관리");
+		return"quality/addDefectiveProduct";
+	}		
+	
 	//[한빛]불량품등록 -> 목록
 	@PostMapping("/addDefectiveProduct")
 	public String addDefectiveProduct(DefectiveProduct defectiveProduct) {
 		defectiveProductService.addDefectiveProduct(defectiveProduct);
 		return "redirect:/defectiveProductList";
-	}
-	
-
-	//[한빛]불량품 등록
-	@GetMapping("/addDefectiveProduct")
-	public String addDefectiveProduct(Model model) {
-		
-		model.addAttribute("title", "품질관리");
-		return"quality/addDefectiveProduct";
-	}
-		
-	//[한빛]불량품 수정
-	@GetMapping("/modifyDefectiveProduct")
-	public String modifyDefectiveProduct(Model model) {
-		model.addAttribute("title", "불량품수정");
-		return"quality/modifyDefectiveProduct";
 	}
 	
 	//[한빛]불량품 조회
@@ -71,5 +62,14 @@ public class QualityControlController_LHB {
 		model.addAttribute("defectiveProduct", defectiveProduct);
 		return"quality/defectiveProductList";
 	}
+	
+	//[한빛]불량품 수정
+	@GetMapping("/modifyDefectiveProduct")
+	public String modifyDefectiveProduct(Model model) {
+		model.addAttribute("title", "불량품수정");
+		return"quality/modifyDefectiveProduct";
+	}
+	
+
 	
 }
