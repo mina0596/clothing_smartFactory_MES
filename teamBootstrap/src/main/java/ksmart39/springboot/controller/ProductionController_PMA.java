@@ -1,23 +1,15 @@
 package ksmart39.springboot.controller;
 
-import java.sql.Array;
-import java.sql.Date;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,18 +20,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sun.el.parser.AstTrue;
+
 
 import ksmart39.springboot.domain.ProductProductionProcessStatus;
-import ksmart39.springboot.domain.ProductionPlan;
-import ksmart39.springboot.domain.RequestedProduct;
-import ksmart39.springboot.domain.WorkOrder;
 import ksmart39.springboot.service.CompletedProductService;
-import ksmart39.springboot.service.ProductionPlanService;
 import ksmart39.springboot.service.ProductionService;
-import ksmart39.springboot.service.ProductionStatusService;
 import ksmart39.springboot.service.WorkOrderService;
-import net.sf.json.JSON;
 
 @Controller
 @RequestMapping("/production")

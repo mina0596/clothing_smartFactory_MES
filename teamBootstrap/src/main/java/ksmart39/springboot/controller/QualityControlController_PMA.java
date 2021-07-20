@@ -1,8 +1,5 @@
 package ksmart39.springboot.controller;
 
-
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -14,14 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import ksmart39.springboot.domain.DefectiveProduct;
-import ksmart39.springboot.service.DefectiveProductService;
 import ksmart39.springboot.service.QualityControlService;
-import ksmart39.springboot.service.QualityInsMeasurementValueService;
+
 
 @Controller
 @RequestMapping("/quality")
