@@ -264,12 +264,15 @@
 			c.client_code = #{clientCode};
 	</select>
 
-	<delete id="deleteClient" parameterType="String">
+	<delete id="deleteClient" parameterType="java.util.List">
 		DELETE 
 			FROM 
 				client_info 
 			WHERE 
-				client_code=#{delArr};
+				client_code in
+				<foreach collection="list" item="code" open="(" close=")" separator=",">
+					#{code}
+				</foreach>
 	</delete>
 			
 

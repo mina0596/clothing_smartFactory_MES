@@ -161,12 +161,10 @@ public class SystemController_LHB {
 	//[한빛]거래처 삭제
 	@PostMapping("/deleteClient")
 	@ResponseBody
-	public int deleteClient(@RequestParam(value = "delArr[]")String[] delArr) {
-		int result = 1;
-
-		for(int i = 0; i<delArr.length; i++) {
-		result	= systemService.deleteClient(delArr[i]);
-		}
+	public int deleteClient(@RequestParam(value = "delArr[]")List<String> delArr) {
+		System.out.println(delArr);
+		int result = 0;
+		result	= systemService.deleteClient(delArr);
 		return result;
 	}
 }	
