@@ -9,6 +9,94 @@ layout:decorate="@{layout/default_system}">
 	    </div>
 </th:block>
 
+
+<th:block layout:fragment="container">
+	<div class="row mt">
+     <div class="col-md-12">
+          <h4><i class="fa fa-angle-right"></i>거래처조회</h4>
+         		 
+			<form th:action="@{/system/clientList}" method="get">
+				<div class="form-group">
+					<div class="col-md-2">					
+					 <select name="searchKey" class="form-control">
+					   <option value="client_category">구분</option>
+					   <option value="client_name">회사명</option>
+					   <option value="client_tel">전화번호</option>
+					   <option value="client_ceo">대표자</option>
+					   <option value="client_business_num">사업자번호</option>
+					   <option value="client_address">주소</option>
+					 </select>					 
+					</div>
+										
+					<div class="col-md-6">
+					  <input name="searchValue" class="form-control" type="text" placeholder="검색어를 입력하세요">
+					</div>
+					
+					<div class="col-md-2">          
+					  <button type="submit" class="btn btn-primary">검색</button>
+					</div>
+		       </div>       
+			</form>
+    	
+	      <br><br><br><br><br>
+                
+        <form class="form-horizontal style-form">
+        	<h4><i class="fa fa-angle-right"></i>거래처목록</h4>
+	        
+              <table class="table table-striped table-advance table-hover" id="list">
+                <thead>
+                  <tr>
+                  	<th><input type="checkbox" id="checkAll"></th>
+                    <th><i class="fa fa-bullhorn"></i>no.</th>
+                    <th><i class="fa fa-bookmark"></i>구분</th>
+                    <th><i class="fa fa-bookmark"></i>거래처코드</th>
+                    <th><i class="fa fa-bookmark"></i>회사명</th>
+                    <th><i class=" fa fa-bookmark"></i>전화번호</th>
+                    <th><i class="fa fa-bookmark"></i>대표자</th>
+                    <th><i class=" fa fa-bookmark"></i>담당자</th>
+                    <th><i class=" fa fa-bookmark"></i>사업자번호</th>
+                    <th><i class=" fa fa-bookmark"></i>주소</th>
+                    <th><i class=" fa fa-bookmark"></i>등록일자</th>
+                    <th><i class=" fa fa-pencil"></i>수정</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each=" c,n : ${client}">
+                  	<td><input type="checkbox"  class="checked"  th:value="${c.clientCode}"></td>
+                    <td th:text = ${n.index+1}></td>
+                    <td th:if="${c.clientCategory eq '수주'}"><span class="badge bg-important" style="padding-top: 5px;">수주</span></td>
+                    <td th:if="${c.clientCategory eq '발주'}"><span class="badge bg-info" style="padding-top: 5px;">발주</span></td>
+                    <td th:if="${c.clientCategory eq '운송'}"><span class="badge bg-primary" style="padding-top: 5px;">운송</span></td>   
+                    <td th:text="${c.clientCode}"></td>
+                    <td th:text="${c.clientName}"></td>
+                    <td th:text="${c.clientTel}"></td>
+                    <td th:text="${c.clientCeo}"></td>
+                    <td th:text="${c.clientEmployee}"></td>
+                    <td th:text="${c.clientBusinessNum}"></td>
+                    <td th:text="${c.clientAddress}"></td>
+                    <td th:text="${c.clientInfoRegDate}"></td>
+                    <td>  
+                    	<a th:href="@{/system/modifyClient(clientCode=${c.clientCode})}"  class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</a>
+                    </td>
+                    </tr>            
+                </tbody>
+              </table>
+            
+		        <div class="form-group text-right">
+		          <div class="col-lg-offset-2 col-lg-10">
+		          	 <a th:href="@{/system/addClient}" class="btn btn-success btn-xs"><i class="fa fa-plus"></i>거래처등록</a>	          
+	                 <a class="btn btn-danger btn-xs" id="deleteBtn"><i class="fa fa-trash-o "></i>삭제</a>
+		          </div>
+		        </div>
+	      	</form>
+       		
+          </div>
+          <!-- /col-md-12 -->
+        </div>
+        <!-- /row -->
+        
+</th:block>
+
 <th:block layout:fragment="customJs">
 	<script>
 
@@ -63,94 +151,5 @@ layout:decorate="@{layout/default_system}">
 
 </th:block>
 
-<th:block layout:fragment="container">
-
-	
-	
-	<div class="row mt">
-     <div class="col-md-12">
-          <h4><i class="fa fa-angle-right"></i>거래처조회</h4>
-         		 <hr>
-			<form th:action="@{/system/clientList}" method="get">
-				<div class="form-group">
-					<div class="col-md-2">					
-					 <select name="searchKey" class="form-control">
-					   <option value="client_category">구분</option>
-					   <option value="client_name">거래처명</option>
-					   <option value="client_tel">전화번호</option>
-					 </select>					 
-					</div>
-										
-					<div class="col-md-6">
-					  <input name="searchValue" class="form-control" type="text" placeholder="검색어를 입력하세요">
-					</div>
-					
-					<div class="col-md-2">          
-					  <button type="submit" class="btn btn-primary">검색</button>
-					</div>
-		       </div>       
-			</form>
-    	
-	      <br><br><br><br><br>
-	      
-	      
-                
-	        <form class="form-horizontal style-form">
-	        	<h4><i class="fa fa-angle-right"></i>거래처목록</h4>
-	        
-              <table class="table table-striped table-advance table-hover" id="list">
-                <thead>
-                  <tr>
-                  	<th><input type="checkbox" id="checkAll"></th>
-                    <th><i class="fa fa-bullhorn"></i>no.</th>
-                    <th><i class="fa fa-bookmark"></i>구분</th>
-                    <th><i class="fa fa-bookmark"></i>거래처코드</th>
-                    <th><i class="fa fa-bookmark"></i>회사명</th>
-                    <th><i class=" fa fa-bookmark"></i>전화번호</th>
-                    <th><i class="fa fa-bookmark"></i>대표자</th>
-                    <th><i class=" fa fa-bookmark"></i>담당자</th>
-                    <th><i class=" fa fa-bookmark"></i>사업자번호</th>
-                    <th><i class=" fa fa-bookmark"></i>주소</th>
-                    <th><i class=" fa fa-bookmark"></i>등록일자</th>
-                    <th><i class=" fa fa-pencil"></i>수정</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr th:each=" c,n : ${client}">
-                  	<td><input type="checkbox"  class="checked"  th:value="${c.clientCode}"></td>
-                    <td th:text = ${n.index+1}></td>
-                    <td th:if="${c.clientCategory eq '수주'}"><span class="badge bg-important" style="padding-top: 5px;">수주</span></td>
-                    <td th:if="${c.clientCategory eq '발주'}"><span class="badge bg-info" style="padding-top: 5px;">발주</span></td>
-                    <td th:if="${c.clientCategory eq '운송'}"><span class="badge bg-primary" style="padding-top: 5px;">운송</span></td>   
-                    <td th:text="${c.clientCode}"></td>
-                    <td th:text="${c.clientName}"></td>
-                    <td th:text="${c.clientTel}"></td>
-                    <td th:text="${c.clientCeo}"></td>
-                    <td th:text="${c.clientEmployee}"></td>
-                    <td th:text="${c.clientBusinessNum}"></td>
-                    <td th:text="${c.clientAddress}"></td>
-                    <td th:text="${c.clientInfoRegDate}"></td>
-                    <td>  
-                    	<a th:href="@{/modifyClient(clientCode=${c.clientCode})}"  class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</a>
-                    </td>
-                    </tr>
-              
-                </tbody>
-              </table>
-            
-		        <div class="form-group text-right">
-		          <div class="col-lg-offset-2 col-lg-10">
-		          <a th:href="@{/addClient}" class="btn btn-success btn-xs"><i class="fa fa-plus"></i>거래처등록</a>	          
-                  <a class="btn btn-danger btn-xs" id="deleteBtn"><i class="fa fa-trash-o "></i>삭제</a>
-		          </div>
-		        </div>
-       		</form>
-       		
-          </div>
-          <!-- /col-md-12 -->
-        </div>
-        <!-- /row -->
-        
-</th:block>
 
 </html>

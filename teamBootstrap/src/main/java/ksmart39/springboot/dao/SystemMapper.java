@@ -46,6 +46,8 @@ public interface SystemMapper {
 	//회원정보 수정
 	public int modifyHumanResources(HumanResources humanResources);
 	//회원정보 삭제
+	public int deleteHumanResources(List<String> delArr);
+
 	/****************************************************************************/
 	
 	//[한빛] 거래처 전체조회

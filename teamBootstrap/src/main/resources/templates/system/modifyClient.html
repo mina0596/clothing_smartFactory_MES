@@ -9,65 +9,12 @@ layout:decorate="@{layout/default_system}">
 	    </div>
 </th:block>
 
-<th:block layout:fragment="customJs">
-	<script type="text/javascript">
-		$(function(){
-			$('#addBtn').click(function(){
-				var clientName = $('input[name=clientName]').val();
-				var clientTel = $('input[name=clientTel]').val();
-				var clientCeo = $('input[name=clientCeo]').val();
-				var clientEmployee = $('input[name=clientEmployee]').val();
-				var clientBusinessNum = $('input[name=clientBusinessNum]').val();
-				var clientAddress = $('input[name=clientAddress]').val();
-				var addAccountCate = $('#addAccountCate');
-				var submitFlag = true;
-			
-				if(clientName == null || clientName == undefined || clientName == ''){			
-					alert('회사명을 입력해주세요.');
-					$('input[name=clientName]').focus();
-					submitFlag = false;
-					return submitFlag;
-				}else if(clientTel == null || clientTel == undefined || clientTel == ''){
-					alert('연락처를 입력해주세요.');
-					$('input[name=clientTel]').focus();
-					submitFlag = false;
-					return submitFlag;
-				}else if(clientCeo == null || clientCeo == undefined || clientCeo == ''){
-					alert('대표자를 입력해주세요.');
-					$('input[name=clientCeo]').focus();
-					submitFlag = false;
-					return submitFlag;
-				}else if(clientEmployee == null || clientEmployee == undefined || clientEmployee == ''){
-					alert('담당자를 입력해주세요.');
-					$('input[name=clientEmployee]').focus();
-					submitFlag = false;
-					return submitFlag;
-				}else if(clientBusinessNum == null || clientBusinessNum == undefined || clientBusinessNum == ''){
-					alert('사업자번호를 입력해주세요.');
-					$('input[name=clientBusinessNum]').focus();
-					submitFlag = false;
-					return submitFlag;
-				}else if(clientAddress == null || clientAddress == undefined || clientAddress == ''){
-					alert('주소를 입력해주세요.');
-					$('input[name=clientAddress]').focus();
-					submitFlag = false;
-					return submitFlag;
-				}
-				
-				if(submitFlag) addClient.submit();
-			});			
-		});
-		
-		
-	</script>
-</th:block>
-
 <th:block layout:fragment="container">
 
 	<div class="form-panel">
 	 <h4 class="mb"><i class="fa fa-angle-right"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">거래처수정</font></font></h4>
               <div class="form">
-                <form class="cmxform form-horizontal style-form" id="signupForm" method="post" th:action="@{modifyClient}">
+                <form class="cmxform form-horizontal style-form" id="signupForm" method="post" th:action="@{/system/modifyClient}">
                   
                   
                 <div class="form-group">
@@ -142,7 +89,59 @@ layout:decorate="@{layout/default_system}">
 		   </div>
 		</div>
 
+</th:block>
 
+<th:block layout:fragment="customJs">
+	<script type="text/javascript">
+		$(function(){
+			$('#addBtn').click(function(){
+				var clientName = $('input[name=clientName]').val();
+				var clientTel = $('input[name=clientTel]').val();
+				var clientCeo = $('input[name=clientCeo]').val();
+				var clientEmployee = $('input[name=clientEmployee]').val();
+				var clientBusinessNum = $('input[name=clientBusinessNum]').val();
+				var clientAddress = $('input[name=clientAddress]').val();
+				var addAccountCate = $('#addAccountCate');
+				var submitFlag = true;
+			
+				if(clientName == null || clientName == undefined || clientName == ''){			
+					alert('회사명을 입력해주세요.');
+					$('input[name=clientName]').focus();
+					submitFlag = false;
+					return submitFlag;
+				}else if(clientTel == null || clientTel == undefined || clientTel == ''){
+					alert('연락처를 입력해주세요.');
+					$('input[name=clientTel]').focus();
+					submitFlag = false;
+					return submitFlag;
+				}else if(clientCeo == null || clientCeo == undefined || clientCeo == ''){
+					alert('대표자를 입력해주세요.');
+					$('input[name=clientCeo]').focus();
+					submitFlag = false;
+					return submitFlag;
+				}else if(clientEmployee == null || clientEmployee == undefined || clientEmployee == ''){
+					alert('담당자를 입력해주세요.');
+					$('input[name=clientEmployee]').focus();
+					submitFlag = false;
+					return submitFlag;
+				}else if(clientBusinessNum == null || clientBusinessNum == undefined || clientBusinessNum == ''){
+					alert('사업자번호를 입력해주세요.');
+					$('input[name=clientBusinessNum]').focus();
+					submitFlag = false;
+					return submitFlag;
+				}else if(clientAddress == null || clientAddress == undefined || clientAddress == ''){
+					alert('주소를 입력해주세요.');
+					$('input[name=clientAddress]').focus();
+					submitFlag = false;
+					return submitFlag;
+				}
+				
+				if(submitFlag) addClient.submit();
+			});			
+		});
+		
+		
+	</script>
 </th:block>
 
 </html>

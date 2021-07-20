@@ -100,11 +100,21 @@ public class SystemController_LHB {
 		return "system/modifyHumanResources";
 	}
 	
-	//수정화면 ->목록
+	//[한빛] 사용자 수정화면 ->목록
 	@PostMapping("modifyHumanResources")
 	public String modifyHumanResources(HumanResources humanResources) {
 		systemService.modifyHumanResources(humanResources);
 		return "redirect:/humanResourcesList";
+	}
+	
+	//[한빛]사용자 삭제
+	@PostMapping("/deleteHumanResources")
+	@ResponseBody
+	public int deleteHumanResources(@RequestParam(value = "delArr[]")List<String> delArr) {
+		System.out.println(delArr);
+		int result = 0;
+		result	= systemService.deleteHumanResources(delArr);
+		return result;
 	}
 
 

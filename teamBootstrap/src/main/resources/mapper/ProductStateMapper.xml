@@ -25,7 +25,7 @@
 		</association>
 	</resultMap>
 	
-	<select id = "getProductState" resultMap="testGetSomething" fetchSize="1000">
+	<select id = "getProductState" resultType="map" fetchSize="1000">
 		SELECT
 				 ps.requested_product_code
 				,MAX(pl.process_order_num)
