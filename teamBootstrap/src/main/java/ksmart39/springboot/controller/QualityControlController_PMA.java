@@ -52,11 +52,11 @@ public class QualityControlController_PMA {
 		return productInfo;
 	}
 	
-	//[민아]불량현황등록 메서드
-	@GetMapping("/addDefectInspectionResultStatus")
-	public String addDefectInspectionResultStatus(Model model) {
+	//[민아]품질검사별 불량률 현황
+	@GetMapping("/defectiveRateStatus")
+	public String getDefectiveRate(Model model) {
 		
 		model.addAttribute("title", "검사현황관리:불량현황");
-		return"quality/addDefectInspectionResultStatus";
+		return"quality/defectiveRateStatus";
 	}
 }
