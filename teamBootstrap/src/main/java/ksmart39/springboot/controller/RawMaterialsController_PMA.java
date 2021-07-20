@@ -90,7 +90,7 @@ public class RawMaterialsController_PMA {
 	
 	//[민아]자재입고 수정 후 자재입고 리스트 출력
 	@PostMapping("/modifyInWarehousing")
-	public String modifyInwarehousing(int transactionAmount, String transactionCode) {
+	public String modifyInWarehousing(int transactionAmount, String transactionCode) {
 		log.info("transactionAmount: {}", transactionAmount);
 		log.info("transactionCode: {}", transactionCode);
 		

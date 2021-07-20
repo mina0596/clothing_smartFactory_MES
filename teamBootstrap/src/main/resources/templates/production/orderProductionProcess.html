@@ -105,7 +105,7 @@ layout:decorate="@{layout/default_production}">
                 			<th:block th:if="${l.processFinishDate == '1111-11-11 11:11:11'}">
 	                			<td style="font-weight: bold; font-style: italic;" th:text="'공정 대기중'"></td>
 	                			<td style="font-weight: bold; font-style: italic;" th:text="'공정 대기중'"></td>
-	                			<td><button id="startProcess" class="btn btn-success btn-xs" type="button"><i class="fa fa-power-off"></i>공정시작</button></td>
+	                			<td><button class="btn btn-success btn-xs startProcess" type="button"><i class="fa fa-power-off"></i>공정시작</button></td>
 	                		</th:block>
                 		</th:block>
                 		
@@ -113,7 +113,7 @@ layout:decorate="@{layout/default_production}">
                 			<th:block th:if="${l.processFinishDate == '1111-11-11 11:11:11'}">
 	                			<td class="processStartDate" th:text="${l.processStartDate}"></td>
 	                			<td style="font-weight: bold; font-style: italic;">공정 진행중</td>
-	                			<td><button id="completeProcess" class="btn btn-danger btn-xs" type="button"><i class="fa fa-power-off"></i>공정마침</button></td>
+	                			<td><button class="btn btn-danger btn-xs completeProcess" type="button"><i class="fa fa-power-off"></i>공정마침</button></td>
 	                		</th:block>
                 			<th:block th:unless="${l.processFinishDate == '1111-11-11 11:11:11'}">
 	                			<td class="processStartDate" th:text="${l.processStartDate}"></td>
