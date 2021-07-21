@@ -53,6 +53,23 @@ public class QualityControlController_KDM {
 //		List<Map<String, Object>> map = qualityInsMeasurementValueService.getQualityInspectionStatusNow();
 //		return map;
 //	}
+	
+	//[다미] 거래처이름 검색
+	@PostMapping("/searchByClientName")
+	@ResponseBody List<Map<String, Object>> searchByClientName(@RequestParam(value = "clientName", required = false)String clientName){
+		List<Map<String, Object>> clientNameMap = null;
+		log.info("화면에서 받아온 값: {}", clientName);
+		return clientNameMap;
+	}
+	
+	//[다미] 계약번호 검색
+	@PostMapping("/searchByContractNum")
+	@ResponseBody
+	public List<Map<String, Object>> searchByContractNum(@RequestBody Map<String, Object> searchByContractNum){
+		log.info("화면에서 받아온 값: {}", searchByContractNum);
+		List<Map<String, Object>> ContractNumMap = qualityInsMeasurementValueService.searchByContractNum(searchByContractNum);
+		return ContractNumMap;
+	}
 
 	//[다미] 실시간 검사 현황
 	@PostMapping("/qualityInspectionStatusNow")
@@ -63,13 +80,11 @@ public class QualityControlController_KDM {
 		
 		return map;
 	}
-	
-	
+
 	
 	//[다미] 실시간 검사 현황
 	@GetMapping("/qualityInspectionStatusNow")
-	public String qualityInspectionStatusNow(Model model) {
-		log.info("###############test : {}", qualityInsMeasurementValueService.getQualityInspectionStatusNow());		
+	public String qualityInspectionStatusNow(Model model) {		
 		
 		return "quality/qualityInspectionStatusNow";
 	}
@@ -83,25 +98,6 @@ public class QualityControlController_KDM {
 		return"quality/inspectionPerformance";
 	}
 	
-		
-	//[다미&보람]수주계약별 검사현황
-		@GetMapping("/stateBuyerContractQualityInspection")
-		public String stateBuyerContractQualityInspection() {
-			
-			return"quality/stateBuyerContractQualityInspection";
-		}
-
-
-	//[다미&보람]의뢰품목별검사현황
-		@GetMapping("/stateByProductQualityInspection")
-		public String stateByProductQualityInspection() {
-			return"quality/stateByProductQualityInspection";
-		}
-	//[다미&보람]의뢰품목별 기간별조회
-		@GetMapping("/searchByPeriodByProductQualityInspection")
-		public String searchByPeriodByProductQualityInspection() {
-			return"quality/searchByPeriodByProductQualityInspection";
-		}
 	
 	//[다미] 품질검사 측정값 목록
 	@GetMapping("/inspectionMeasurementValueList")

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<th:block th:fragment="modal_SearchInspectionCode">
+<th:block th:fragment="modal_SearchBuyerName">
  <!-- 모달시작 -->
+  
  
- 
-        <div class="modal fade" id="SearchInspectionCode" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal fade" id="SearchBuyer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		  <div class="modal-dialog" style="width:auto; display:table;" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
@@ -19,17 +19,11 @@
 		   <div class="modal-body">
 		   
 		   <div class="form-inline">
-				 <select class="form-control" name="highClassificationName" id="highClassCateName" >
-	              <option value="">::대분류검사명::</option>
-	              </select>
-			     <select class="form-control" name="mediumClassificationName" id="middleClassCateName">
-	             	<option  value="">::중분류검사명::</option>
-	              </select>
-			  	 <select class="form-control" name="mediumClassificationName" id="lowClassCateName">
-	               		<option  value="">::소분류검사명::</option>
-		         </select>
-	   			<button type="button" class="btn btn-theme">검색</button>
-	   			
+				
+			   	<label class="control-label">거래처명</label>
+			    <input type="text" name="clientName" class="form-control" placeholder="검색어를 입력하세요.">
+			    
+	   			<button id="searchClientModal" type="button" class="btn btn-theme">검색</button>
 		   </div>
 		<br>
 		   <table  class="table table-striped table-advance table-hover">
@@ -38,10 +32,7 @@
        				<tr>
        					<th><input type="radio" name="check"></th>
        					<th>no.</th>
-       					<th>대분류 검사명</th>
-       					<th>중분류 검사명</th>
-       					<th>소분류 검사명</th>
-       					<th>소분류 상세 검사명</th>
+       					<th>거래처명</th>
        				</tr>
        			</thead>
        			<tbody id="mainTbody" style="text-align: center;">

@@ -2,6 +2,121 @@
  * 
  */
 $(function(){
+	var contractVal = '';
+	var html = '';
+	var searchKey = '';
+	var searchValue = '';
+	var searchObj = {};
+	
+	//계약번호 모달
+	$('#bycontractNum').click(function(){
+		var bindElement = $('#searchContractForm').find('input, select');
+		var mainTbodyContract = $('#mainTbodyContract');		
+		
+			$('#searchContractModal').click(function(){	
+				$('.removeTr').remove();
+				html = '';
+				searchKey = '';
+				searchValue = '';
+				searchObj = {};
+
+				
+				$.each(bindElement, function(){
+					searchKey = $(this).attr('name');
+					searchValue = $(this).val();
+					
+					if(searchValue != null && searchValue != undefined && searchValue != ''){
+						searchObj[searchKey] = searchValue;
+					}				
+				});
+				
+				var request = $.ajax({
+					url: "/quality/searchByContractNum",
+					method: "POST",
+					data: JSON.stringify(searchObj),
+					contentType: "application/json",
+					dataType: "json"
+				});
+				
+				request.done(function( data ) {
+					console.log(data);
+					if(data.length >  0){
+						for(var i = 0; i<data.length; i++){						
+							html += "<tr class='removeTr'>";
+							html += "<td><input type='radio' name='check' value='" +  data[i].contractCode + "'</td>";
+							html += "<td>"+ [i+1] +"</td>";
+							html += "<td>"+ data[i].contractCode +"</td>";
+							html += "<td>"+ data[i].clientName +"</td>";
+							html += "<td>"+ data[i].contractedAmount +"</td>";
+							html += "<td>"+ data[i].contractedDate +"</td>";
+							html += "</tr>";					
+						}						
+					}else{
+						html += "<tr class='removeTr'><td style='text-align:center;' colspan='6'>검색 결과가 없습니다.</td></tr>"
+					}
+					mainTbodyContract.append(html);
+					
+					//메인화면 input박스에 넣기
+					$('input[type=radio]').click(function(){
+						contractVal = $(this).val();
+						$('#contractNum').val(contractVal);
+					});
+					
+				});
+				
+				request.fail(function( jqXHR, textStatus ) {
+					alert( "Request failed: " + textStatus );
+				});
+			});
+		});
+	
+	
+	//거래처 검색 모달
+	$('#byBuyer').click(function(){
+		
+		$('#searchClientModal').click(function(){
+			$('.removeTr').remove();
+			html = '';
+			searchKey = '';
+			searchValue = '';
+			searchObj = {};
+			var clientName = $('input[name=clientName]').val();
+			
+			var request = $.ajax({
+				url: "/quality/searchByClientName",
+				method: "POST",
+				data: clientName,
+				dataType: "json"
+			});
+			
+			request.done(function( data ) {
+				cosole.log(data);
+			});
+			
+			request.fail(function( jqXHR, textStatus ) {
+				alert( "Request failed: " + textStatus );
+			});
+		});
+		
+	});
+	
+	//품질검사 코드 검색 모달
+//	$('#byInspectionCode').click(function(){
+//		var request = $.ajax({
+//			url: "/quality/",
+//			method: "POST",
+//			data: { id : menuId },
+//			dataType: "json"
+//		});
+//		
+//		request.done(function( data ) {
+//		});
+//		
+//		request.fail(function( jqXHR, textStatus ) {
+//			alert( "Request failed: " + textStatus );
+//		});
+//	});
+	
 	//수주계약번호		
 	var contractCode = '';
 	//품질검사 요청 총갯수

@@ -46,6 +46,39 @@
 		<result property="rawMaterialCode" 						column="raw_material_code"/>
 	</resultMap>
 	
+	<!-- 품질검사 현황 계약번호 불러오기 -->
+	<select id="searchByContractNum" resultType="Map" parameterType="Map">
+		SELECT 
+			co.contract_code AS contractCode
+			,ci.client_name AS clientName
+			,co.contracted_amount AS contractedAmount
+			,co.contracted_date	AS contractedDate
+		FROM 
+			client_info AS ci
+		INNER JOIN
+			requested_product_detail AS r ON ci.client_code = r.client_code
+		INNER JOIN
+			contract_info AS co ON co.contract_code = r.contract_code
+		<trim prefix="WHERE" prefixOverrides="AND">
+			<if test="contractCode != null and contractCode != ''.toString()">
+				 co.contract_code LIKE CONCAT ('%', #{contractCode}, '%')
+			</if>
+			<if test="clientName != null and clientName != ''.toString()">
+				AND ci.client_name LIKE CONCAT ('%', #{clientName}, '%')
+			</if>
+			<if test="contractedStrartDate != null and contractedStrartDate != ''.toString()">
+				AND co.contracted_date &gt;= DATE#{contractedStrartDate}
+			</if>
+			<if test="contractedEndDate != null and contractedEndDate != ''.toString()">
+				AND co.contracted_date &lt;= DATE#{contractedEndDate}
+			</if>
+		</trim>
+		GROUP BY 
+			co.contract_code
+		<trim prefix="ORDER BY" suffixOverrides="WHERE">
+				co.contracted_date ${range};
+		</trim>
+	</select>
 	
 	<!-- 품질검사 현황 -->
 	<select id="getQualityInspectionStatusNow" resultType="Map" parameterType="Map">

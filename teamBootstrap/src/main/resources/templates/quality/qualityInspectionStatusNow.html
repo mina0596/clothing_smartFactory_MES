@@ -24,12 +24,12 @@ layout:decorate="@{layout/default_qualityControl}">
 		         			<th class="form-inline">
 		         			 	<label class="control-label">계약번호</label>
 			                	<input type="text" class="form-control" id="contractNum" placeholder="검색어를 입력하세요.">
-			                	<button id="bycontractNum" type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
+			                	<button id="bycontractNum" data-toggle="modal" data-target="#SearchContractNum" type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
 		         			</th>
 		         			<th class="form-inline">
 		         				<label class="control-label">거래처명</label>
-			                	<input type="text" class="form-control" id="supplier" placeholder="검색어를 입력하세요.">
-			                	<button id="bySupplier" type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
+			                	<input type="text" class="form-control" id="buyer" placeholder="검색어를 입력하세요.">
+			                	<button id="byBuyer" data-toggle="modal" data-target="#SearchBuyer" type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
 		         			</th>
 		         			<th class="form-inline">
 		         				<label class="control-label">검사요청일</label>
@@ -53,7 +53,7 @@ layout:decorate="@{layout/default_qualityControl}">
 		         			<th class="form-inline">
 		         				<label class="control-label">품질검사코드</label>
 			                	<input type="text" class="form-control" id="inspectionCode" placeholder="검색어를 입력하세요.">
-			                	<button id="byInspectionCode" type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
+			                	<button id="byInspectionCode" data-toggle="modal" data-target="#SearchInspectionCode" type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
 		         			</th>  
 		         			<th class="form-inline">
 		         				<label class="control-label">검사실시일</label>
@@ -125,7 +125,7 @@ layout:decorate="@{layout/default_qualityControl}">
           <div class="col-md-3 col-sm-4 mb">
                 <div class="grey-panel pn donut-chart">
                   <div class="grey-header">
-                    <h5>검사별 합격/불합격</h5>
+                    <h5>검사별 불합격 비율</h5>
                   </div>
 	            <div style="width:190px; display: inline-block;">
 				    <canvas id="myChart2"></canvas>
@@ -168,11 +168,12 @@ layout:decorate="@{layout/default_qualityControl}">
 		</div>	
 	</div>
 </div>
-
+<!-- 품질검사 대중소 -->
+<script type="text/javascript" th:src="@{/systemQuality/systemQualityInspection.js}"></script>	
 <!-- 계약번호 검색 모달 -->
 <th:block th:replace="/quality/modal_SearchContractNum::modal_SearchContractNum"></th:block>
 <!-- 거래처명 검색 모달 -->
-<th:block th:replace="/quality/modal_SearchSupplierName::modal_SearchSupplierName"></th:block>
+<th:block th:replace="/quality/modal_SearchBuyerName::modal_SearchBuyerName"></th:block>
 <!-- 품질검사코드 검색 모달 --> 
 <th:block th:replace="/quality/modal_SearchInspectionCode::modal_SearchInspectionCode"></th:block>
 

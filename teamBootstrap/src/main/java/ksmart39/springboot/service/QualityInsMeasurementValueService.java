@@ -23,6 +23,11 @@ public class QualityInsMeasurementValueService {
 	@Autowired
 	private QualityInsMeasurementValueMapper qualityInsMeasurementValueMapper;
 	
+	//거래처별 검색
+		public List<Map<String, Object>> searchByContractNum(Map<String, Object> searchByContractNum){
+			return qualityInsMeasurementValueMapper.searchByContractNum(searchByContractNum);
+		};
+	
 	//품질검사 측정값 현황
 	public List<Map<String, Object>> getQualityInspectionStatusNow(){
 		return qualityInsMeasurementValueMapper.getQualityInspectionStatusNow();
