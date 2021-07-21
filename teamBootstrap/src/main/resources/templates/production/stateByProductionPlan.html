@@ -3,51 +3,14 @@
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
 layout:decorate="@{layout/default_production}">
 
+<th:block layout:fragment="customJs">
+  <script th:src="@{/Dashio/lib/chart-master/Chart.js}"></script>
+  <script th:src="@{/Dashio/lib/chartjs-conf.js}"></script>
+</th:block>
 <th:block layout:fragment="container">
 	<div class="row mt">
      <div class="col-md-12">
-     <div class="border-head">
-              <h3>USER VISITS</h3>
-            </div>
-            <div class="custom-bar-chart">
-              <ul class="y-axis">
-                <li><span>10.000</span></li>
-                <li><span>8.000</span></li>
-                <li><span>6.000</span></li>
-                <li><span>4.000</span></li>
-                <li><span>2.000</span></li>
-                <li><span>0</span></li>
-              </ul>
-              <div class="bar">
-                <div class="title">JAN</div>
-                <div class="value tooltips" data-original-title="8.500" data-toggle="tooltip" data-placement="top" style="height: 85%;">85%</div>
-              </div>
-              <div class="bar ">
-                <div class="title">FEB</div>
-                <div class="value tooltips" data-original-title="5.000" data-toggle="tooltip" data-placement="top">50%</div>
-              </div>
-              <div class="bar ">
-                <div class="title">MAR</div>
-                <div class="value tooltips" data-original-title="6.000" data-toggle="tooltip" data-placement="top">60%</div>
-              </div>
-              <div class="bar ">
-                <div class="title">APR</div>
-                <div class="value tooltips" data-original-title="4.500" data-toggle="tooltip" data-placement="top">45%</div>
-              </div>
-              <div class="bar">
-                <div class="title">MAY</div>
-                <div class="value tooltips" data-original-title="3.200" data-toggle="tooltip" data-placement="top">32%</div>
-              </div>
-              <div class="bar ">
-                <div class="title">JUN</div>
-                <div class="value tooltips" data-original-title="6.200" data-toggle="tooltip" data-placement="top">62%</div>
-              </div>
-              <div class="bar">
-                <div class="title">JUL</div>
-                <div class="value tooltips" data-original-title="7.500" data-toggle="tooltip" data-placement="top">75%</div>
-              </div>
-            </div>
-            
+    
      
           <h4><i class="fa fa-angle-right"></i> 생산계획별 현황 조회</h4>
           <hr>  
@@ -124,13 +87,13 @@ layout:decorate="@{layout/default_production}">
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-	                <td>1</td>
-                    <td>production_plan_01</td>
-                    <td>숙녀양복</td>
-                    <td>바지</td>
-                    <td>100벌</td>
-                    <td>60벌</td>
+                  <tr th:each="l, i : ${achievePercentageByPlanList}">
+	                <td th:text="${i.index+1}"></td>
+                    <td th:text="${l.productionPlanCode}"></td>
+                    <td th:text="${l.suitType}"></td>
+                    <td th:text="${l.productType}"></td>
+                    <td th:text="${l.plannedQuantity}"></td>
+                    <td th:text="${l.leftProductNum}"></td>
                     <td>40벌</td>
                     <td>2021-02-01</td>
                     <td><span class="badge bg-important" style="padding-top: 5px;">진행중</span></td>
@@ -139,54 +102,10 @@ layout:decorate="@{layout/default_production}">
                     <td>박민아</td>
                   </tr>
                   
-                  <tr>
-	            	<td>2</td>
-                    <td>production_plan_02</td>
-                    <td>숙녀양복</td>
-                    <td>치마</td>
-                    <td>20벌</td>
-                    <td>26벌</td>
-                    <td></td>
-                    <td>2021-02-01</td>
-                    <td><span class="badge" style="padding-top: 5px;">달성</span></td>
-                    <td>2021-02-08</td>
-                    <td>일주일</td>
-                    <td>김다미</td>
-                  </tr>   
-                  <tr>
-                  	<td>3</td>
-                    <td>production_plan_03</td>
-                    <td>숙녀양복</td>
-                    <td>자켓</td>
-                    <td>5벌</td>
-                    <td>2벌</td>
-                    <td>3벌</td>
-                    <td>2021-02-01</td>
-                    <td><span class="badge bg-important" style="padding-top: 5px;">진행중</span></td>
-                    <td>2021-02-01</td>
-                    <td>하루</td>
-                    <td>이한빛</td>
-                  </tr>
-                 <tr>
-	            	<td>4</td>
-                    <td>production_plan_04</td>
-                    <td>신사양복</td>
-                    <td>자켓</td>
-                    <td>200벌</td>
-                    <td>206벌</td>
-                    <td></td>
-                    <td>2021-02-01</td>
-                    <td><span class="badge" style="padding-top: 5px;">달성</span></td>
-                    <td>2021-04-01</td>
-                    <td>2개월</td>
-                    <td>한보람</td>
-                 </tr>
-                </tbody>
-              </table>
-            
+          
        		</form>    
 	       
-	               		
+	 achievePercentageByPlanList : [{suitType=신사양복, employeeName=박수현, productCode=MS_jacket, plannedStartDate=2021-07-01, plannedPeriod=30일, achievePercentage=0.8333, plannedQuantity=120벌, productionPlanCode=production_plan_09, plannedEndDate=2021-07-31, productType=자켓}, {suitType=숙녀양복, employeeName=박수현, productCode=WS_blouse, plannedStartDate=2021-08-01, plannedPeriod=-1일, achievePercentage=0.0000, plannedQuantity=200벌, productionPlanCode=production_plan_10, plannedEndDate=2021-07-31, productType=블라우스}, {suitType=숙녀양복, employeeName=류준혁, productCode=WS_skirt, plannedStartDate=2021-06-01, plannedPeriod=91일, achievePercentage=0.5000, plannedQuantity=200벌, productionPlanCode=production_plan_11, plannedEndDate=2021-08-31, productType=치마}]              		
 	   
 	      <br>
 	      <br>

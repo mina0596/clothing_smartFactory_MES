@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart39.springboot.dao.ProductionStatusByProductionPlanMapper">
+
+	<resultMap type="ProductionPlan" 					id="getProductionPlan">
+		<result property="productionPlanCode" 			column="production_plan_code"/>
+		<result property="productCode" 					column="product_code"/>
+		<result property="chargeEmployeeCode" 			column="charge_employee_code"/>
+		<result property="productionPlanQuantity" 		column="production_plan_quantity"/>
+		<result property="productionPlanQantityUnit" 	column="production_plan_qantity_unit"/>
+		<result property="expectedProductionStartDate"	column="expected_production_start_date"/>
+		<result property="expectedProductionEndDate" 	column="expected_production_end_date"/>
+		<result property="productionPlanPeriod"			column="production_plan_period"/>
+		<result property="productionPlanNote" 			column="production_plan_note"/>
+		<result property="productionPlanRegDate" 		column="production_plan_reg_date"/>
+		<result property="productionPlanUpdateDate" 	column="production_plan_update_date"/>
+	</resultMap>
+	
+	
+	
+	<select id="getAchievePercentageByPlan" resultType="map"> 
+		SELECT
+			pp.production_plan_code AS productionPlanCode, 
+			pp.product_code AS productCode,
+			CONCAT(pp.production_plan_quantity, pp.production_plan_qantity_unit) AS plannedQuantity,
+			pp.production_plan_quantity AS quantityNum,
+			pp.expected_production_start_date AS plannedStartDate, 
+			pp.expected_production_end_date AS plannedEndDate, 
+			CONCAT(pp.production_plan_period, '일') AS plannedPeriod,
+			pcd.gender_categorized_name AS suitType,
+			pcd.detailed_categorized_name AS productType,
+			einfo.employee_name AS employeeName,
+			(select
+				COUNT(*)
+			from
+				completed_product_list AS cpl
+			where
+				cpl.requested_product_code LIKE CONCAT('%', pp.product_code)
+				AND
+				DATE(cpl.production_finish_date)
+				BETWEEN 
+				DATE(pp.expected_production_start_date) AND DATE(pp.expected_production_end_date)
+			
+			)/pp.production_plan_quantity * 100 AS achievePercentage,	
+			(select
+				COUNT(*)
+			from
+				completed_product_list AS cpl
+			where
+				cpl.requested_product_code LIKE CONCAT('%', pp.product_code)
+				AND
+				DATE(cpl.production_finish_date)
+				BETWEEN 
+				DATE(pp.expected_production_start_date) AND DATE(pp.expected_production_end_date)
+			
+			) AS leftProductNum
+				
+		FROM
+			production_plan AS pp
+			INNER join
+			product_code_detail as pcd
+			on
+			pp.product_code = pcd.product_code
+			INNER join
+			employee_info AS einfo
+			on
+			pp.charge_employee_code = einfo.employee_code
+		WHERE
+			DATE(pp.expected_production_end_date) > NOW();
+	
+	</select>
+	
+	
+	<!-- SELECT
+	(select
+		COUNT(*)
+	from
+		completed_product_list AS cpl
+	where
+		cpl.requested_product_code LIKE CONCAT('%', pp.product_code)
+		AND
+		DATE(cpl.production_finish_date)
+		BETWEEN 
+		DATE(pp.expected_production_start_date) AND DATE(pp.expected_production_end_date)
+	
+	) AS compeletedNum,
+	
+FROM
+	production_plan AS pp
+WHERE
+	pp.production_plan_code = 'production_plan_01';
+	 -->
+</mapper>

@@ -56,9 +56,8 @@ public class ProductionController_HBR {
 	public String deleteWorkOrder() {
 		
 		return "redirect:/workOrderList";
-
 	}
-
+	
 	//[보람]작업지시수정
 	@GetMapping("/modifyWorkOrder")
 	public String modifyWorkOrder(Model model) {
