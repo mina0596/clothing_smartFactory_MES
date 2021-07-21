@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ksmart39.springboot.domain.QualityInspectionResult;
 import ksmart39.springboot.domain.QualityInspectionStandard;
 import ksmart39.springboot.service.QualityInsMeasurementValueService;
+import ksmart39.springboot.service.QualityInsepctionStauteService;
 
 @Controller
 @RequestMapping("/quality")
@@ -33,6 +34,14 @@ public class QualityControlController_KDM {
 	
 	@Autowired 
 	private QualityInsMeasurementValueService qualityInsMeasurementValueService;
+	@Autowired
+	private QualityInsepctionStauteService qualityInsepctionStauteService;
+	
+	@Autowired
+	public QualityControlController_KDM(QualityInsMeasurementValueService qualityInsMeasurementValueService,QualityInsepctionStauteService qualityInsepctionStauteService) {
+		this.qualityInsepctionStauteService = qualityInsepctionStauteService;
+		this.qualityInsMeasurementValueService =qualityInsMeasurementValueService;
+	}
 	
 	//=============================================================================
 	
@@ -74,11 +83,11 @@ public class QualityControlController_KDM {
 		return"quality/inspectionPerformance";
 	}
 	
-
 		
 	//[다미&보람]수주계약별 검사현황
 		@GetMapping("/stateBuyerContractQualityInspection")
 		public String stateBuyerContractQualityInspection() {
+			
 			return"quality/stateBuyerContractQualityInspection";
 		}
 

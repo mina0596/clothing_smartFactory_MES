@@ -24,6 +24,7 @@ import ksmart39.springboot.service.DefectiveProductService;
 import ksmart39.springboot.service.QualityControlService;
 import ksmart39.springboot.service.QualityInsMeasurementValueService;
 import ksmart39.springboot.service.QualityInsepctionFinalResultService;
+import ksmart39.springboot.service.QualityInsepctionStauteService;
 
 @Controller
 @RequestMapping("/quality")
@@ -31,8 +32,28 @@ public class QualityControlController_HBR {
 	private static final Logger log = LoggerFactory.getLogger(QualityControlController_HBR.class);
 	@Autowired
 	private QualityInsepctionFinalResultService qualityInsepctionFinalResultService;
+	@Autowired
+	private QualityInsepctionStauteService qualityInsepctionStauteService;
 	
 	//================================================================
+	//[다미&보람] 수주계약별 검색 
+	@RequestMapping(value = "searchQualityInspection",method = RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String,Object>> getSearchQualityInspectionState(@RequestParam(value ="bySupplierValue",required = false)String bySupplierValue,
+																	@RequestParam(value = "clientName",required = false)String clientName){
+		return null;
+	}
+	
+	//[다미&보람]수주계약별 검색 품질검사 현황
+		@GetMapping("/qualityInspectionStatusContract")
+		public String qualityInspectionStatusContract(Model model) {
+			List<Map<String, Object>> inspectionStateList = qualityInsepctionStauteService.getStateBuyerContractQualityInspection();
+			
+			model.addAttribute("inspectionStateList", inspectionStateList);
+			return "quality/qualityInspectionStatusContract";
+		}
+	
+	
 	//[다미+보람]품질검사 최종등록 검색모달창 
 	@RequestMapping(value = "/addfinalresult",method = RequestMethod.GET)
 	@ResponseBody
