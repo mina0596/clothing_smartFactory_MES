@@ -53,27 +53,31 @@ public class SystemService {
 		return systemMapper.modifyHumanResources(humanResources);
 	}
 	//회원정보 삭제
+	public int deleteHumanResources(List<String> delArr) {
+		return systemMapper.deleteHumanResources(delArr);
+	};	
+	
 	//============================================================
 	//[한빛] 거래처 전체 조회
 	public List<Client> getClient(Map<String, Object> paramMap){
 		List<Client> client = systemMapper.getClient(paramMap);
 		return client;
 	}
-	//거래처 등록
+	//[한빛]거래처 등록
 	public int addClient (Client client) {
 		int result = systemMapper.addClient(client);
 		return result;
 	}
-	//거래처 수정
+	//[한빛]거래처 수정
 	public int modifyClient (Client client) {
 		return systemMapper.modifyClient(client);
 	}
-	//거래처 수정 뿌려주기
+	//[한빛]거래처 수정 뿌려주기
 	public Client getClientInfoByCode(String clientCode) {
 		return systemMapper.getClientInfoByCode(clientCode);
 	}
-	//[다미]생산계획 삭제
-	public int deleteClient(String delArr) {
+	//[한빛]거래처삭제
+	public int deleteClient(List<String> delArr) {
 		return systemMapper.deleteClient(delArr);
 	};	
 	//============================================================

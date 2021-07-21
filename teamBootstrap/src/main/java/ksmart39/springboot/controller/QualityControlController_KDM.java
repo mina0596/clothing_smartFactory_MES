@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ksmart39.springboot.domain.QualityInspectionResult;
 import ksmart39.springboot.domain.QualityInspectionStandard;
 import ksmart39.springboot.service.QualityInsMeasurementValueService;
+import ksmart39.springboot.service.QualityInsepctionStauteService;
 
 @Controller
 @RequestMapping("/quality")
@@ -33,8 +34,47 @@ public class QualityControlController_KDM {
 	
 	@Autowired 
 	private QualityInsMeasurementValueService qualityInsMeasurementValueService;
+	@Autowired
+	private QualityInsepctionStauteService qualityInsepctionStauteService;
+	
+	@Autowired
+	public QualityControlController_KDM(QualityInsMeasurementValueService qualityInsMeasurementValueService,QualityInsepctionStauteService qualityInsepctionStauteService) {
+		this.qualityInsepctionStauteService = qualityInsepctionStauteService;
+		this.qualityInsMeasurementValueService =qualityInsMeasurementValueService;
+	}
 	
 	//=============================================================================
+	
+//	//[다미] 실시간 검사 현황
+//	@PostMapping("/qualityInspectionStatusNow")
+//	@ResponseBody
+//	public List<Map<String, Object>> qualityInspectionStatusNow() {
+//		log.info("###############test : {}", qualityInsMeasurementValueService.getQualityInspectionStatusNow());
+//		List<Map<String, Object>> map = qualityInsMeasurementValueService.getQualityInspectionStatusNow();
+//		return map;
+//	}
+
+	//[다미] 실시간 검사 현황
+	@PostMapping("/qualityInspectionStatusNow")
+	@ResponseBody
+	public List<Map<String, Object>> qualityInspectionStatusNow() {
+		
+		List<Map<String, Object>> map = qualityInsMeasurementValueService.getQualityInspectionStatusNow();
+		
+		return map;
+	}
+	
+	
+	
+	//[다미] 실시간 검사 현황
+	@GetMapping("/qualityInspectionStatusNow")
+	public String qualityInspectionStatusNow(Model model) {
+		log.info("###############test : {}", qualityInsMeasurementValueService.getQualityInspectionStatusNow());		
+		
+		return "quality/qualityInspectionStatusNow";
+	}
+	
+
 	//검사현황 실적 
 	@GetMapping("/inspectionPerformance")
 	public String inspectionPerformance(Model model) {
@@ -43,23 +83,11 @@ public class QualityControlController_KDM {
 		return"quality/inspectionPerformance";
 	}
 	
-	
-	
-	//[다미] 실시간 검사 현황
-	@GetMapping("/qualityInspectionStatusNow")
-	public String qualityInspectionStatusNow() {
-		return "quality/qualityInspectionStatusNow";
-	}
-	
-	//[다미&보람]수주계약별 검색 품질검사 현황
-	@GetMapping("/qualityInspectionStatusContract")
-	public String qualityInspectionStatusContract() {
-		return "quality/qualityInspectionStatusContract";
-	}
 		
 	//[다미&보람]수주계약별 검사현황
 		@GetMapping("/stateBuyerContractQualityInspection")
 		public String stateBuyerContractQualityInspection() {
+			
 			return"quality/stateBuyerContractQualityInspection";
 		}
 

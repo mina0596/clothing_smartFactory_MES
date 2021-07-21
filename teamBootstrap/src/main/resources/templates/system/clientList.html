@@ -9,74 +9,22 @@ layout:decorate="@{layout/default_system}">
 	    </div>
 </th:block>
 
-<th:block layout:fragment="customJs">
-	<script>
-
-	$(function(){
-	//#checkAll 버튼 클릭 시 전체 checked
-		$('#checkAll').click(function(){
-			if($('#checkAll').prop('checked')){
-				$('.checked').prop('checked',true);
-					}else{
-						$('.checked').prop('checked',false);
-					}
-				});									
-		$('#deleteBtn').click(function(){
-			var delArr = new Array();
-			var list = $('.checked');
-			
-			for(var i = 0; i < list.length; i++){
-				if(list[i].checked){
-					delArr.push(list[i].value);
-				}
-			}
-			if(delArr.length == 0){
-				alert('선택해주세요.');
-			}
-			else{
-				var delCheck = confirm('정말 삭제하시겠습니까?');
-				if(delCheck){
-					$.ajax({
-						url: "/system/deleteClient",
-						method : 'post',
-						async: true,
-						dataType : "json",
-						data : {'delArr':delArr},
-						success: function(data){
-							console.log(data);
-							if(data != 1){
-								alert('오류: 삭제 실패');
-							}else{
-								alert('삭제 되었습니다.');
-								location.replace("clientList");
-							}
-						}
-					});
-				}else{
-					return false;
-				}
-			}
-			});
-		});
-</script>
-
-</th:block>
 
 <th:block layout:fragment="container">
-
-	
-	
 	<div class="row mt">
      <div class="col-md-12">
           <h4><i class="fa fa-angle-right"></i>거래처조회</h4>
-         		 <hr>
+         		 
 			<form th:action="@{/system/clientList}" method="get">
 				<div class="form-group">
 					<div class="col-md-2">					
 					 <select name="searchKey" class="form-control">
 					   <option value="client_category">구분</option>
-					   <option value="client_name">거래처명</option>
+					   <option value="client_name">회사명</option>
 					   <option value="client_tel">전화번호</option>
+					   <option value="client_ceo">대표자</option>
+					   <option value="client_business_num">사업자번호</option>
+					   <option value="client_address">주소</option>
 					 </select>					 
 					</div>
 										
@@ -91,11 +39,9 @@ layout:decorate="@{layout/default_system}">
 			</form>
     	
 	      <br><br><br><br><br>
-	      
-	      
                 
-	        <form class="form-horizontal style-form">
-	        	<h4><i class="fa fa-angle-right"></i>거래처목록</h4>
+        <form class="form-horizontal style-form">
+        	<h4><i class="fa fa-angle-right"></i>거래처목록</h4>
 	        
               <table class="table table-striped table-advance table-hover" id="list">
                 <thead>
@@ -116,7 +62,7 @@ layout:decorate="@{layout/default_system}">
                 </thead>
                 <tbody>
                   <tr th:each=" c,n : ${client}">
-                  	<td><input type="checkbox"  class="checked"></td>
+                  	<td><input type="checkbox"  class="checked"  th:value="${c.clientCode}"></td>
                     <td th:text = ${n.index+1}></td>
                     <td th:if="${c.clientCategory eq '수주'}"><span class="badge bg-important" style="padding-top: 5px;">수주</span></td>
                     <td th:if="${c.clientCategory eq '발주'}"><span class="badge bg-info" style="padding-top: 5px;">발주</span></td>
@@ -130,20 +76,19 @@ layout:decorate="@{layout/default_system}">
                     <td th:text="${c.clientAddress}"></td>
                     <td th:text="${c.clientInfoRegDate}"></td>
                     <td>  
-                    	<a th:href="@{/modifyClient(clientCode=${c.clientCode})}"  class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</a>
+                    	<a th:href="@{/system/modifyClient(clientCode=${c.clientCode})}"  class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</a>
                     </td>
-                    </tr>
-              
+                    </tr>            
                 </tbody>
               </table>
             
 		        <div class="form-group text-right">
 		          <div class="col-lg-offset-2 col-lg-10">
-		          <a th:href="@{/addClient}" class="btn btn-success btn-xs"><i class="fa fa-plus"></i>거래처등록</a>	          
-                  <a class="btn btn-danger btn-xs" id="deleteBtn"><i class="fa fa-trash-o "></i>삭제</a>
+		          	 <a th:href="@{/system/addClient}" class="btn btn-success btn-xs"><i class="fa fa-plus"></i>거래처등록</a>	          
+	                 <a class="btn btn-danger btn-xs" id="deleteBtn"><i class="fa fa-trash-o "></i>삭제</a>
 		          </div>
 		        </div>
-       		</form>
+	      	</form>
        		
           </div>
           <!-- /col-md-12 -->
@@ -151,5 +96,60 @@ layout:decorate="@{layout/default_system}">
         <!-- /row -->
         
 </th:block>
+
+<th:block layout:fragment="customJs">
+	<script>
+
+	$(function(){
+	//#checkAll 버튼 클릭 시 전체 checked
+		$('#checkAll').click(function(){
+			if($('#checkAll').prop('checked')){
+				$('.checked').prop('checked',true);
+					}else{
+						$('.checked').prop('checked',false);
+					}
+				});
+	
+		$('#deleteBtn').click(function(){
+			var delArr = new Array();
+			var list = $('.checked');
+			
+			for(var i = 0; i < list.length; i++){
+				if(list[i].checked){
+					delArr.push(list[i].value);
+				}
+			}
+			if(delArr.length == 0){
+				alert('삭제할 항목을 선택해주세요.');
+			}
+			else{
+				var delCheck = confirm('정말 삭제하시겠습니까?');
+				if(delCheck){
+					$.ajax({
+						url: "deleteClient",
+						method : 'post',
+						async: true,
+						dataType : "json",
+						data : {'delArr':delArr},
+						success: function(data){
+							console.log(data);
+							if(data > 0){
+								alert('삭제 되었습니다.');
+								location.replace("clientList");
+							}else{
+								alert('오류: 삭제 실패');
+							}
+						}
+					});
+				}else{
+					return false;
+				}
+			}
+			});
+		});
+</script>
+
+</th:block>
+
 
 </html>

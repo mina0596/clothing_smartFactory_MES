@@ -23,6 +23,11 @@ public class QualityInsMeasurementValueService {
 	@Autowired
 	private QualityInsMeasurementValueMapper qualityInsMeasurementValueMapper;
 	
+	//품질검사 측정값 현황
+	public List<Map<String, Object>> getQualityInspectionStatusNow(){
+		return qualityInsMeasurementValueMapper.getQualityInspectionStatusNow();
+	}
+	
 	//품질검사 측정값 목록
 	public List<QualityInspectionResult> getInspectionMeasurementValueList(){
 		return qualityInsMeasurementValueMapper.getInspectionMeasurementValueList();
