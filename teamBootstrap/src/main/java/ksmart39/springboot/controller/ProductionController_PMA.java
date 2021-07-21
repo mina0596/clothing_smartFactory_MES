@@ -9,7 +9,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ksmart39.springboot.domain.ProductProductionProcessStatus;
 import ksmart39.springboot.service.CompletedProductService;
 import ksmart39.springboot.service.ProductionService;
+import ksmart39.springboot.service.ProductionStatusByProductionPlanService;
 import ksmart39.springboot.service.WorkOrderService;
 
 @Controller
@@ -36,11 +37,17 @@ public class ProductionController_PMA {
 	private final WorkOrderService workOrderService;
 	private final ProductionService productionService;
 	private final CompletedProductService completedProductService;
-
-	public ProductionController_PMA(ProductionService productionService, WorkOrderService workOrderService, CompletedProductService completedProductService) {
+	private final ProductionStatusByProductionPlanService productionStatusByProductionPlanService;
+	
+	@Autowired
+	public ProductionController_PMA(ProductionService productionService
+								  , WorkOrderService workOrderService
+								  , CompletedProductService completedProductService
+								  , ProductionStatusByProductionPlanService productionStatusByProductionPlanService) {
 		this.productionService = productionService;
 		this.workOrderService = workOrderService;
 		this.completedProductService = completedProductService;
+		this.productionStatusByProductionPlanService = productionStatusByProductionPlanService;
 	}
 
 	
@@ -178,7 +185,11 @@ public class ProductionController_PMA {
 
 	// [민아+한빛]생산계획별 생산 현황 조회
 	@GetMapping("/stateByProductionPlan")
-	public String getStateByProductionPlan() {
+	public String getStateByProductionPlan(Model model) {
+		
+		List<Map<String,Object>> achievePercentageByPlanList = productionStatusByProductionPlanService.getAchievePercentageByPlan();
+		model.addAttribute("achievePercentageByPlanList", achievePercentageByPlanList);
+		log.info("achievePercentageByPlanList : {}", achievePercentageByPlanList);
 		return "production/stateByProductionPlan";
 	}
 
