@@ -47,6 +47,80 @@
 	</resultMap>
 	
 	
+	<!-- 품질검사 현황 -->
+	<select id="getQualityInspectionStatusNow" resultType="Map" parameterType="Map">
+		SELECT
+			(select
+ 				COUNT(*)
+			 from
+ 				inspection_result AS i
+ 			WHERE
+ 				i.inspection_measurement_num = '1회차') AS 'progressRate'
+			,
+			(select
+				COUNT(*)
+				from
+					inspection_final_result AS i
+				WHERE 
+					i.low_cate_final_pass_check='합격') AS finalPassCount
+			,(select
+				COUNT(*)
+				from
+					inspection_final_result AS i
+				WHERE 
+					i.low_cate_final_pass_check='불합격') AS finalFailCount
+			,(SELECT
+				COUNT(*)
+				FROM
+				quality_inspection_request AS q) AS requestCount
+			,(SELECT
+				COUNT(*)
+				FROM
+				inspection_final_result AS f) AS finalCompleteCount
+			,re.quality_inspection_request_code AS inspectionRequestCode
+			,high.high_class_name AS highClassName
+			,med.med_class_name AS medClassName
+			,low.low_class_name AS lowClassName
+			,sub.sub_class_name AS subClassName
+			,p.requested_product_code AS requestProductCode
+			,pc.detailed_categorized_name AS detailedCateName
+			,q.inspection_request_date AS inspectionRequestDate
+			,res.category AS inspectionCategory
+			,ifnull(group_concat(if(re.inspection_measurement_num='1회차', re.inspection_pass_check, NULL)),'심사중') AS insFirst
+			,ifnull(group_concat(if(re.inspection_measurement_num='2회차', re.inspection_pass_check, NULL)),'심사중') AS insSecond
+			,ifnull(group_concat(if(re.inspection_measurement_num='3회차', re.inspection_pass_check, NULL)),'심사중') AS insThird	
+			,ifnull(group_concat(if(re.inspection_measurement_num='1회차', re.inspection_start_date, NULL)),'시작전') AS insStart
+			,ifnull(group_concat(if(re.inspection_measurement_num='3회차', re.inspection_end_date, NULL)),'종료전') AS insEnd
+			,IFNULL(ref.low_cate_final_pass_check,'종료전') AS finalPassCheck
+			,p.contract_code AS contractCode
+		
+		FROM
+			requested_product_detail AS p
+		INNER JOIN
+			quality_inspection_request AS q ON p.requested_product_code = q.requested_product_code
+		LEFT JOIN
+			inspection_result AS re ON q.quality_inspection_request_code = re.quality_inspection_request_code
+		LEFT JOIN
+			inspection_final_result AS ref ON re.quality_inspection_request_code = ref.quality_inspection_request_code
+		INNER JOIN
+			inspection_standard AS res ON q.quality_inspection_code = res.quality_inspection_code
+		INNER JOIN
+			sub_class_inspection_list AS sub ON q.quality_inspection_code = sub.quality_inspection_code
+		INNER JOIN
+			low_class_inspection_list AS low ON sub.high_med_low_class_code = low.high_med_low_class_code
+		INNER JOIN
+			medium_class_inspection_list AS med ON low.high_med_class_code = med.high_med_class_code
+		INNER JOIN
+			high_class_inspection_list AS high ON med.high_class_code = high.high_class_code
+		INNER JOIN
+			product_code_detail AS pc ON p.product_code = pc.product_code
+		INNER JOIN
+			client_info AS c ON p.client_code = c.client_code
+		WHERE 
+			p.contract_code = 'buyerContract002'
+		GROUP BY q.quality_inspection_request_code;
+	</select>
+	
 	<!-- 품질검사 측정값 목록 -->
 	<select id="getInspectionMeasurementValueList" resultMap="QualityInspectionResultMap">
 		SELECT 

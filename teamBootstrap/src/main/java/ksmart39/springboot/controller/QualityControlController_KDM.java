@@ -44,6 +44,37 @@ public class QualityControlController_KDM {
 	}
 	
 	//=============================================================================
+	
+//	//[다미] 실시간 검사 현황
+//	@PostMapping("/qualityInspectionStatusNow")
+//	@ResponseBody
+//	public List<Map<String, Object>> qualityInspectionStatusNow() {
+//		log.info("###############test : {}", qualityInsMeasurementValueService.getQualityInspectionStatusNow());
+//		List<Map<String, Object>> map = qualityInsMeasurementValueService.getQualityInspectionStatusNow();
+//		return map;
+//	}
+
+	//[다미] 실시간 검사 현황
+	@PostMapping("/qualityInspectionStatusNow")
+	@ResponseBody
+	public List<Map<String, Object>> qualityInspectionStatusNow() {
+		
+		List<Map<String, Object>> map = qualityInsMeasurementValueService.getQualityInspectionStatusNow();
+		
+		return map;
+	}
+	
+	
+	
+	//[다미] 실시간 검사 현황
+	@GetMapping("/qualityInspectionStatusNow")
+	public String qualityInspectionStatusNow(Model model) {
+		log.info("###############test : {}", qualityInsMeasurementValueService.getQualityInspectionStatusNow());		
+		
+		return "quality/qualityInspectionStatusNow";
+	}
+	
+
 	//검사현황 실적 
 	@GetMapping("/inspectionPerformance")
 	public String inspectionPerformance(Model model) {
@@ -51,15 +82,6 @@ public class QualityControlController_KDM {
 		model.addAttribute("title", "검사현황관리:실적");
 		return"quality/inspectionPerformance";
 	}
-	
-	
-	
-	//[다미] 실시간 검사 현황
-	@GetMapping("/qualityInspectionStatusNow")
-	public String qualityInspectionStatusNow() {
-		return "quality/qualityInspectionStatusNow";
-	}
-	
 	
 		
 	//[다미&보람]수주계약별 검사현황
