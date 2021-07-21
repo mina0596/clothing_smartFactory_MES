@@ -12,6 +12,9 @@ import ksmart39.springboot.domain.QualityInspectionStandard;
 @Mapper
 public interface QualityInsMeasurementValueMapper {
 
+	//품질검사 현황
+	public List<Map<String, Object>> getQualityInspectionStatusNow();
+	
 	//품질검사 측정 목록
 	public List<QualityInspectionResult> getInspectionMeasurementValueList();
 	

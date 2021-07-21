@@ -21,6 +21,9 @@ public class QualityInsepctionFinalResultService {
 	@Autowired
 	private QualityInsepctionFinalResultMapper qualityInsepctionFinalResultMapper;
 	
+	
+	
+	
 	//[다미+보람]검사등록  검사결과 모달창 리스트
 		public List<Map<String,Object>> searchRequesetInspection(){
 			return qualityInsepctionFinalResultMapper.searchRequesetInspection();
