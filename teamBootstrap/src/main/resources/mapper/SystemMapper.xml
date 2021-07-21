@@ -149,6 +149,17 @@
 			employee_code = #{employeeCode};
 	</update>
 	
+	<delete id="deleteHumanResources" parameterType="java.util.List">
+		DELETE 
+			FROM 
+				employee_info 
+			WHERE 
+				employee_code in
+				<foreach collection="list" item="code" open="(" close=")" separator=",">
+					#{code}
+				</foreach>
+	</delete>	
+	
 <!-- =========================================================== -->
 <resultMap type="Client"  id="getClientInfo">
 	<result  property="clientCode" 				column="client_code"/>
@@ -264,12 +275,15 @@
 			c.client_code = #{clientCode};
 	</select>
 
-	<delete id="deleteClient" parameterType="String">
+	<delete id="deleteClient" parameterType="java.util.List">
 		DELETE 
 			FROM 
 				client_info 
 			WHERE 
-				client_code=#{delArr};
+				client_code in
+				<foreach collection="list" item="code" open="(" close=")" separator=",">
+					#{code}
+				</foreach>
 	</delete>
 			
 

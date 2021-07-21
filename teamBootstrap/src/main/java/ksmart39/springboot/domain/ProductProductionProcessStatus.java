@@ -20,7 +20,6 @@ public class ProductProductionProcessStatus {
 	}
 
 	private RequestedProduct requestedProduct;
-	private Client client;
 	private WorkOrder workOrder;
 	private ProductionProcessList productionProcessList;
 	
@@ -40,13 +39,7 @@ public class ProductProductionProcessStatus {
 		this.workOrder = workOrder;
 	}
 
-	public Client getClient() {
-		return client;
-	}
 
-	public void setClient(Client client) {
-		this.client = client;
-	}
 
 	public String getProductProductionProcessStatusCode() {
 		return productProductionProcessStatusCode;
@@ -129,7 +122,7 @@ public class ProductProductionProcessStatus {
 				+ ", productionProcessStatusRegDate=" + productionProcessStatusRegDate
 				+ ", productionProcessStatusUpdateDate=" + productionProcessStatusUpdateDate
 				+ ", productionProcessLowClassification=" + productionProcessLowClassification + ", requestedProduct="
-				+ requestedProduct + ", client=" + client + ", workOrder=" + workOrder + ", productionProcessList="
+				+ requestedProduct +  ", workOrder=" + workOrder + ", productionProcessList="
 				+ productionProcessList + "]";
 	}
 

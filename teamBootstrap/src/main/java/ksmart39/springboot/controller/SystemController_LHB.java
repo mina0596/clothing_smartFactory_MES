@@ -50,6 +50,7 @@ public class SystemController_LHB {
 	@ResponseBody
 	public boolean memberIdCheck(@RequestParam(value = "employeeId") String employeeId) {
 		
+		log.info("============{}" + employeeId);
 		boolean idCheck = true;
 		
 		HumanResources humanResources = systemService.getEmployeeInfoById(employeeId);
@@ -64,7 +65,7 @@ public class SystemController_LHB {
 	public String addHumanResources(HumanResources humanResources) {
 		systemService.addHumanResources(humanResources);
 		
-		return "redirect:/humanResourcesList";
+		return "redirect:humanResourcesList";
 	}
 	
 	//[한빛]사원목록
@@ -100,11 +101,21 @@ public class SystemController_LHB {
 		return "system/modifyHumanResources";
 	}
 	
-	//수정화면 ->목록
+	//[한빛] 사용자 수정화면 ->목록
 	@PostMapping("modifyHumanResources")
 	public String modifyHumanResources(HumanResources humanResources) {
 		systemService.modifyHumanResources(humanResources);
 		return "redirect:/humanResourcesList";
+	}
+	
+	//[한빛]사용자 삭제
+	@PostMapping("/deleteHumanResources")
+	@ResponseBody
+	public int deleteHumanResources(@RequestParam(value = "delArr[]")List<String> delArr) {
+		System.out.println(delArr);
+		int result = 0;
+		result	= systemService.deleteHumanResources(delArr);
+		return result;
 	}
 
 
@@ -120,7 +131,7 @@ public class SystemController_LHB {
 	@PostMapping("/addClient")
 	public String addClient(Client client) {
 		systemService.addClient(client);
-		return "redirect:/clientList";
+		return "redirect:clientList";
 	}
 	
 	//[한빛]거래처 조회
@@ -155,20 +166,19 @@ public class SystemController_LHB {
 		systemService.modifyClient(client);
 		log.info("=================");
 		log.info("{}",client);
-		return "redirect:/clientList";
+		return "redirect:clientList";
 	}			
 
 	//[한빛]거래처 삭제
 	@PostMapping("/deleteClient")
 	@ResponseBody
-	public int deleteClient(@RequestParam(value = "delArr[]")String[] delArr) {
-		int result = 1;
-
-		for(int i = 0; i<delArr.length; i++) {
-		result	= systemService.deleteClient(delArr[i]);
-		}
+	public int deleteClient(@RequestParam(value = "delArr[]")List<String> delArr) {
+		System.out.println(delArr);
+		int result = 0;
+		result	= systemService.deleteClient(delArr);
 		return result;
 	}
+	
 }	
 	
 	

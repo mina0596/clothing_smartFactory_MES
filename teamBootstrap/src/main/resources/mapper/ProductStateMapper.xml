@@ -25,13 +25,14 @@
 		</association>
 	</resultMap>
 	
-	<select id = "getProductState" resultMap="testGetSomething" fetchSize="1000">
+	<select id = "getProductState" resultType="map" fetchSize="1000">
 		SELECT
 				 ps.requested_product_code
 				,MAX(pl.process_order_num)
 				,MAX(ps.process_status)
 				,MIN(ps.process_start_date)
 				,MAX(ps.completed_product_update_date)
+				,rp.requested_due_date
 				,( SELECT 
 						ppl.production_process_low_classification
 				   FROM
@@ -44,6 +45,10 @@
 			production_process_list AS pl
 			ON 
 			ps.production_process_code = pl.production_process_code
+			INNER join
+			requested_product_detail AS rp
+			on
+			ps.requested_product_code = rp.requested_product_code
 		GROUP BY ps.requested_product_code;
 	</select>
 </mapper>
