@@ -60,20 +60,12 @@ public class QualityControlController_KDM {
 		return "quality/qualityInspectionStatusNow";
 	}
 	
-	//[다미&보람]수주계약별 검색 품질검사 현황
-	@GetMapping("/qualityInspectionStatusContract")
-	public String qualityInspectionStatusContract() {
-		return "quality/qualityInspectionStatusContract";
-	}
+	
 		
 	//[다미&보람]수주계약별 검사현황
 		@GetMapping("/stateBuyerContractQualityInspection")
-		public String stateBuyerContractQualityInspection(Model model) {
-			List<Map<String,Object>> inspectionStateList = qualityInsepctionStauteService.getStateBuyerContractQualityInspection();
-			log.info("========================================");
-			log.info("{}",inspectionStateList);
-			log.info("========================================");
-			model.addAttribute("inspectionStateList", inspectionStateList);
+		public String stateBuyerContractQualityInspection() {
+			
 			return"quality/stateBuyerContractQualityInspection";
 		}
 

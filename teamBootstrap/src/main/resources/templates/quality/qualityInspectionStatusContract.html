@@ -4,8 +4,9 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
 layout:decorate="@{layout/default_qualityControl}">
 
 <th:block layout:fragment="pageTitle">
+<script type="text/javascript" th:src="@{/quality/qualityInspectionStatusContract.js}"></script>	  
 	<th:block layout:fragment="customJs">
-
+ 
 	</th:block>	 
 	    
 </th:block>
@@ -32,14 +33,14 @@ layout:decorate="@{layout/default_qualityControl}">
 	         			<th>
 	         				<div class="form-inline">
 		         				<label class="control-label">거래처명</label>
-			                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
+			                	<input type="text" class="form-control" id="clientName" placeholder="검색어를 입력하세요.">
 		              		</div>
 	         			</th>
 	         			<th>
 	         				<div class="form-inline">
 		         				<label class="control-label">검사일</label>
-			                	<input type="date" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">&nbsp; ~
-			                	<input type="date" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
+			                	<input type="date" class="form-control" id="inspectionStartDate" placeholder="검색어를 입력하세요.">&nbsp; ~
+			                	<input type="date" class="form-control" id="inspectionEndDate" placeholder="검색어를 입력하세요.">
 		              		</div>
 	         			</th>  
 	         			</tr>  
@@ -47,20 +48,20 @@ layout:decorate="@{layout/default_qualityControl}">
 	         			<th>
 	         				<div class="form-inline">
 		         				<label class="control-label">품목</label>
-			                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
+			                	<input type="text" class="form-control" id="requestProduct" placeholder="검색어를 입력하세요.">
 		              		</div>
 	         			</th>  
 	         			<th>
 	         				<div class="form-inline">
 		         				<label class="control-label">품질검사코드</label>
-			                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
+			                	<input type="text" class="form-control" id="inspectionCode" placeholder="검색어를 입력하세요.">
 		              		</div>
 	         			</th>  
 	         			<th>
 	         				<div class="form-inline">
 		         				<label class="control-label">공정</label>
-			                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
-	         				 <button type="submit" class="btn btn-theme" style="width: 40%; margin-left: 20px;">검색</button>
+			                	<input type="text" class="form-control" id="inspectionClassName" placeholder="검색어를 입력하세요.">
+	         				 <button type="button" class="btn btn-theme"  id="searchBtn1" style="width: 40%; margin-left: 20px;">검색</button>
 		              		</div>
 	         			</th>
 	         			
@@ -69,109 +70,66 @@ layout:decorate="@{layout/default_qualityControl}">
          </table>
 		<br>
 		<br>
-		<div id="print">
+		<div id="print" class="searchInspectionResult">
 		 <h4><i class="fa fa-angle-right"></i> 수주계약번호별 현황 검색 결과</h4> 
           	  수주계약번호 '1234' 로 검색한 결과 입니다.     
-	
 		<button id="printS" class="btn btn-primary btn-xs" onClick="content_print()"><i class="fa fa-print"></i></button><br><br>
-		<table style="border-color: #8c8c8c;" class="table table-bordered table-striped table-condensed " id="list">
-         <thead>
-        	<tr> 
-			<th rowspan="2">no.</th> 
-			<th rowspan="2"><input type="checkbox"></th> 
-			<th rowspan="2">공정</th> 
-			<th rowspan="2">공정소분</th> 
-			<th rowspan="2">공정세분</th> 
-			<th rowspan="2">품목코드</th> 
-			<th rowspan="2">품목명</th> 
-			<th rowspan="2">요청시간</th> 
-			<th rowspan="2">검사단위</th> 
-			<th colspan="3" scope="colgroup" id="first">기준</th> 
-			<th colspan="3" scope="colgroup" id="second">측정값</th> 
-			<th colspan="2" scope="colgroup" id="second">처리정보</th> 
-			<th rowspan="2">최종합격여부</th> 
-			<th rowspan="2">기타</th> 
-		</tr> 
-		<tr> 
-			<th scope="col" id="hong">기준값</th> 
-			<th scope="col" id="jeon">최소값</th> 
-			<th scope="col" id="kim">최대값</th> 
-			<th scope="col" id="song">1회차</th> 
-			<th scope="col" id="song">2회차</th> 
-			<th scope="col" id="song">3회차</th> 
-			<th scope="col" id="song">시작시간</th> 
-			<th scope="col" id="song">완료시간</th> 
-		</tr>
-		<tr> 
-			<th scope="row" id="mandatory">1</th> 
-			<td><input type="checkbox"></td> 
-			<td>수입검사</td> 
-			<td>물세탁</td> 
-			<td>변퇴색</td> 
-			<td>req01_MS_pants</td>
-			<td>바지</td>
-			<td>2021-04-22 12:12:22</td>
-			<td>등급</td>
-			<td>4</td>
-			<td>5</td>
-			<td>4</td>
-			<td>5</td>
-			<td>3</td>
-			<td>4</td>
-			<td>2021-04-22 12:12:22</td>
-			<td>2021-04-22 12:12:22</td>
-			<td>합격</td>
-			<td>없음</td>
-		</tr> 
-       </thead>
-       <tbody>
-		<tr> 
-			<th scope="row" id="mandatory">1</th> 
-			<td><input type="checkbox"></td> 
-			<td>수입검사</td> 
-			<td>물세탁</td> 
-			<td>변퇴색</td> 
-			<td>req01_MS_pants</td>
-			<td>바지</td>
-			<td>2021-04-22 12:12:22</td>
-			<td>등급</td>
-			<td>4</td>
-			<td>5</td>
-			<td>4</td>
-			<td>5</td>
-			<td>3</td>
-			<td>4</td>
-			<td>2021-04-22 12:12:22</td>
-			<td>2021-04-22 12:12:22</td>
-			<td>합격</td>
-			<td>없음</td>
-		</tr> 
-		<tr> 
-			<th scope="row" id="mandatory">1</th> 
-			<td><input type="checkbox"></td> 
-			<td>공정검사</td> 
-			<td>재단물검사</td> 
-			<td>너치표시</td> 
-			<td>req01_MS_pants</td>
-			<td>바지</td>
-			<td>2021-04-22 12:12:22</td>
-			<td>등급</td>
-			<td>-</td>
-			<td>-</td>
-			<td>-</td>
-			<td>합</td>
-			<td>불</td>
-			<td>불</td>
-			<td>2021-04-22 12:12:22</td>
-			<td>2021-04-22 12:12:22</td>
-			<td>불합격</td>
-			<td>없음</td>
-		</tr> 
-                  
-                  
-                 
-                </tbody>
-              </table>
+			<table style="border-color: #8c8c8c;" class="table table-bordered table-striped table-condensed " id="list">
+	         <thead>
+	        	<tr> 
+				<th rowspan="2">no.</th> 
+				<th rowspan="2"><input type="checkbox"></th> 
+				<th rowspan="2">공정</th> 
+				<th rowspan="2">공정소분</th> 
+				<th rowspan="2">공정세분</th> 
+				<th rowspan="2">품목코드</th> 
+				<th rowspan="2">품목명</th> 
+				<th rowspan="2">요청시간</th> 
+				<th rowspan="2">검사단위</th> 
+				<th colspan="3" scope="colgroup" id="first">기준</th> 
+				<th colspan="3" scope="colgroup" id="second">측정값</th> 
+				<th colspan="2" scope="colgroup" id="second">처리정보</th> 
+				<th rowspan="2">최종합격여부</th> 
+				<th rowspan="2">기타</th> 
+			</tr> 
+			<tr> 
+				<th scope="col" id="hong">기준값</th> 
+				<th scope="col" id="jeon">최소값</th> 
+				<th scope="col" id="kim">최대값</th> 
+				<th scope="col" id="song">1회차</th> 
+				<th scope="col" id="song">2회차</th> 
+				<th scope="col" id="song">3회차</th> 
+				<th scope="col" id="song">시작시간</th> 
+				<th scope="col" id="song">완료시간</th> 
+			</tr>
+			
+	       </thead>
+	       <tbody>
+			<tr> 
+				<th scope="row" id="mandatory">1</th> 
+				<td><input type="checkbox"></td> 
+				<td>수입검사</td> 
+				<td>물세탁</td> 
+				<td>변퇴색</td> 
+				<td>req01_MS_pants</td>
+				<td>바지</td>
+				<td>2021-04-22 12:12:22</td>
+				<td>등급</td>
+				<td>4</td>
+				<td>5</td>
+				<td>4</td>
+				<td>5</td>
+				<td>3</td>
+				<td>4</td>
+				<td>2021-04-22 12:12:22</td>
+				<td>2021-04-22 12:12:22</td>
+				<td>합격</td>
+				<td>없음</td>
+			</tr> 
+		</tbody>
+      </table>
+     </div>
+     
               
          <br>
          <br>    
@@ -236,7 +194,7 @@ layout:decorate="@{layout/default_qualityControl}">
 	                 
 	                </tbody>
 	              </table>
-				</div>
+				
 			</div>
 		</div>
 	</div>

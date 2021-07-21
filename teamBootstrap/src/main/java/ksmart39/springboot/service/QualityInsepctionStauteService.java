@@ -24,7 +24,9 @@ public class QualityInsepctionStauteService {
 	private QualityInsepctionStauteMapper qualityInsepctionStauteMapper;
 	
 	//[다미&보람]수주계약별 검사현황 리스트
-	public List<Map<String,Object>> getStateBuyerContractQualityInspection() {
+	public List<Map<String, Object>> getStateBuyerContractQualityInspection() {
+		
+		
 		
 		return qualityInsepctionStauteMapper.getStateBuyerContractQualityInspection();
 	}
