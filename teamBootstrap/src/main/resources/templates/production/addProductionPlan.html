@@ -90,14 +90,11 @@ layout:decorate="@{layout/default_production}">
 			        </div>
 			      </form>
                 </div>
-                
-	<!-- 양복 카테고리 가져오기 -->
-	<script type="text/javascript" th:src="@{/productionJs/ProductionCate.js}"></script>
-	<!-- 양복 카테고리 가져오기 -->
-	
+             
 </th:block>
-<th:block layout:fragment="customJs">
 
+<th:block layout:fragment="customJs">
+	
 	<script type="text/javascript">
 		$(function(){
 			
@@ -141,11 +138,9 @@ layout:decorate="@{layout/default_production}">
 			});
 			
 		});
-		
-		
-		
+			
 	</script>
-
+	<script type="text/javascript" th:src="@{/productionJs/ProductionCate.js}"></script>
 </th:block>
 
 

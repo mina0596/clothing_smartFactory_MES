@@ -22,13 +22,13 @@ import ksmart39.springboot.service.SupplierService;
 
 @Controller
 @RequestMapping("/contract")
-public class ContractController {
+public class ContractController_KDM {
 	@Autowired
 	private final SupplierService supplierService;
 	private final RequestedProductService requestedProductService;
 	
 	
-	 @Autowired public ContractController(SupplierService supplierService, RequestedProductService requestedProductService) {
+	 @Autowired public ContractController_KDM(SupplierService supplierService, RequestedProductService requestedProductService) {
 	 this.supplierService = supplierService;
 	 this.requestedProductService = requestedProductService;
 	 }
@@ -36,14 +36,22 @@ public class ContractController {
 
 	
 	private static final Logger log = LoggerFactory.getLogger(SystemController.class);
-	
+		
 	
 
-	//수/발주 메인화면
-	@GetMapping("/contract")
-	public String getContractmangement() {
-		
-		return "contract/contract";
+	// [다미] 전표 목록
+	@GetMapping("/paymentInvoiceList")
+	public String paymentInvoiceList(Model model) {
+		return "contract/paymentInvoiceList";
 	}
+
+	// [다미] 전표 등록 화면
+	@GetMapping("/addPaymentInvoice")
+	public String addPaymentInvoice(Model model) {
+		return "contract//addPaymentInvoice";
+	}
+	
+
+
 
 }

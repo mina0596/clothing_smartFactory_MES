@@ -31,31 +31,59 @@ import ksmart39.springboot.service.WorkOrderService;
 
 @Controller
 @RequestMapping("/production")
-public class ProductionController {
+public class ProductionController_HBR {
 
 	
-	private static final Logger log = LoggerFactory.getLogger(ProductionController.class);
+	private static final Logger log = LoggerFactory.getLogger(ProductionController_HBR.class);
 	
 	private final WorkOrderService workOrderService;
 	private final ProductionPlanService productionPlanService;
 	private final ProductionStatusService productionStatusService;
 	
-	public ProductionController(ProductionPlanService productionPlanService, WorkOrderService workOrderService,ProductionStatusService productionStatusService) {
+	public ProductionController_HBR(ProductionPlanService productionPlanService, WorkOrderService workOrderService,ProductionStatusService productionStatusService) {
 		this.productionPlanService = productionPlanService;
 		this.workOrderService = workOrderService;
 		this.productionStatusService = productionStatusService;
 	}
 	
 
+	
+	//=====================================================================
+	
+	
+	//[보람]작업지시삭제
+	@PostMapping("/deleteWorkOrder")
+	public String deleteWorkOrder() {
+		
+		return "redirect:/workOrderList";
+	}
+	//[보람]작업지시수정
+	@GetMapping("/modifyWorkOrder")
+	public String modifyWorkOrder() {
+		
+		return "redirect:/workOrderList";
+	}
+	//[보람]작업지시수정
+	@GetMapping("/modifyWorkOrder")
+	public String modifyWorkOrder(Model model) {
+		
+		return "production/workOrderList";
+	}
+	
+	//[보람]작업지시정보
+	@GetMapping("/workOrderInfo")
+	public String workOrderInfo() {
+		return "production/workOrderInfo";
+	}
+	
+	
+	//[보람]작업지시등록
+	@GetMapping("/addWorkOrder")
+	public String addWorkerOrder(Model model) {
+		model.addAttribute("title", "작업지시관리: 작업지시등록");
+		return "production/addWorkOrder";
+	}
 
 	
-	
-	
-	//생산관리 메인화면
-	@GetMapping("/production")
-	public String getProdcutioncontrol () {
-		
-		return "production/production";
-		
-	}
+
 }
