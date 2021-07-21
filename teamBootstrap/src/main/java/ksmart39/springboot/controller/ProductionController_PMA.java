@@ -177,11 +177,12 @@ public class ProductionController_PMA {
 	
 	// ================================================================
 
-	// [민아+한빛]의뢰품목별 생산 현황 조회 - 삭제할 예정
-	@GetMapping("/stateByProduct")
-	public String getStateByProduct() {
-		return "production/stateByProduct";
-	}
+	/*
+	 * // [민아+한빛]의뢰품목별 생산 현황 조회 - 삭제할 예정
+	 * 
+	 * @GetMapping("/stateByProduct") public String getStateByProduct() { return
+	 * "production/stateByProduct"; }
+	 */
 
 	// [민아+한빛]생산계획별 생산 현황 조회
 	@GetMapping("/stateByProductionPlan")

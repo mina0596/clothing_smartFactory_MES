@@ -16,7 +16,7 @@ public class ProductStateService {
 	@Autowired
 	private ProductStateMapper productStateMapper;
 	
-	public List<ProductProductionProcessStatus> getProductState(){
+	public List<Map<String,Object>> getProductState(){
 		return productStateMapper.getProductState();
 	}
 }

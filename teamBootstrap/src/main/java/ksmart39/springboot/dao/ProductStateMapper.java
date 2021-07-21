@@ -12,6 +12,6 @@ import ksmart39.springboot.domain.ProductProductionProcessStatus;
 @Mapper
 public interface ProductStateMapper {
 	
-	//
-	public List<ProductProductionProcessStatus> getProductState();
+	//[한빛] 뿌려주기
+	public List<Map<String,Object>> getProductState();
 }
