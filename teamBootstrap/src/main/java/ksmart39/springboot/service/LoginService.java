@@ -1,5 +1,7 @@
 package ksmart39.springboot.service;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -18,14 +20,31 @@ public class LoginService {
 		this.systemMapper = systemMapper;
 	}
 	
-	//회원정보 조회
-	public HumanResources loginEmployee(HumanResources loginInfo) {
+	//[민아]로그인정보 확인
+	public Map<String,Object> loginEmployee(HumanResources loginInfo) {
+		Map<String,Object> loginInfoMap = new HashMap<String,Object>();
 		boolean loginCheck = false;
+		
+		
 		HumanResources loginEmployeeInfo = systemMapper.getEmployeeInfoById(loginInfo.getEmployeeId());
-		if(loginEmployeeInfo.getEmployeePw().equals(loginInfo.getEmployeePw()) && loginEmployeeInfo.getLevelNum().equals(loginInfo.getLevelNum())) {
+		
+		
+		log.info("=============================================");
+		log.info("service단에서 input 확인 loginEmployeeInfo : {}", loginEmployeeInfo);
+		log.info("=============================================");
+		
+		if(loginEmployeeInfo != null && loginEmployeeInfo.getEmployeePw().equals(loginInfo.getEmployeePw()) && loginEmployeeInfo.getLevelNum().equals(loginInfo.getLevelNum()) && loginEmployeeInfo.getEmployeeId().equals(loginInfo.getEmployeeId())) {
 			loginCheck = true;
-			return loginEmployeeInfo;
+			loginInfoMap.put("loginCheck", loginCheck);
+			loginInfoMap.put("loginEmployeeInfo", loginEmployeeInfo);
+			return loginInfoMap;
 		}
-		return null;
+		log.info("=============================================");
+		log.info("service단에서 method출력값 확인 loginInfoMap : {}", loginInfoMap);
+		log.info("=============================================");
+		loginInfoMap.put("loginCheck", loginCheck);
+		loginInfoMap.put("loginEmployeeInfo", loginEmployeeInfo);
+		
+		return loginInfoMap;
 	}
 }

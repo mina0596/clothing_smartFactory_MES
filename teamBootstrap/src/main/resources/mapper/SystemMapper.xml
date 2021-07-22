@@ -107,7 +107,8 @@
 			,employee_address		
 			,employee_email			
 			,employee_department		
-			,employee_position		
+			,employee_position	
+			,level_num	
 		FROM 
 			employee_info
 		WHERE 

@@ -1,14 +1,17 @@
 package ksmart39.springboot.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.ws.Response;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import jdk.internal.org.jline.utils.Log;
 import ksmart39.springboot.domain.HumanResources;
 import ksmart39.springboot.service.LoginService;
 
@@ -46,6 +48,7 @@ public class LoginController {
 						,@RequestParam(name = "factoryId", required = false)String factoryId
 						,@RequestParam(name = "factoryPw", required = false)String factoryPw
 						,HttpSession session
+						,HttpServletResponse response
 						,RedirectAttributes reAttr) {
 		
 		
@@ -65,21 +68,27 @@ public class LoginController {
 		}
 		log.info("loginInfo :{}", loginInfo);
 		
-		HumanResources loginResult = loginService.loginEmployee(loginInfo);
-		/*
-		 * if(loginResult) { session.setAttribute("SID", loginInfo.getEmployeeId());
-		 * session.setAttribute("SCODE", loginInfo.); }
-		 */
-		
-		return "/main";
-		
+		Map<String,Object> loginInfoMap = loginService.loginEmployee(loginInfo);
+		HumanResources loginEmployeeInfo = (HumanResources) loginInfoMap.get("loginEmployeeInfo");
+		if((boolean) loginInfoMap.get("loginCheck")) {
+			session.setAttribute("SID", loginEmployeeInfo.getEmployeeId());
+			session.setAttribute("SCODE", loginEmployeeInfo.getEmployeeCode());
+			session.setAttribute("SCODE", loginEmployeeInfo.getLevelNum());
+			return "/main";
+		}else {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out;
+			try {
+				out = response.getWriter();
+				out.println("<script>alert('아이디와 비밀번호를 다시 확인해주세요'); location.href='/';</script>");
+				out.flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			return "/main";
+		}
 	}
 	
-	//@PostMapping("/login")
-	public String login1(@ModelAttribute Map<String,Object> loginInfo) {
-		log.info("loginInfo: {}", loginInfo);
-		return "/main";
-		
-	}
 
 }
