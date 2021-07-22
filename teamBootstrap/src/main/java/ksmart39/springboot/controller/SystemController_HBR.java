@@ -39,16 +39,36 @@ public class SystemController_HBR {
 	}
 
 	private static final Logger log = LoggerFactory.getLogger(SystemController_HBR.class);
-
+	//[보람]품질검사 항목 검색
+	@RequestMapping(value = "/searchInspectionList",method = RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String,Object>> searchInspectionList(@RequestParam(value ="highClassCateName",required = false )String highClassCateName,
+														@RequestParam(value = "middleClassCateName",required = false)String middleClassCateName,
+														@RequestParam(value = "lowClassCateName",required = false)String lowClassCateName
+														){
+		//ReqeusetParam의 값을 map을 담기
+		HashMap<String, Object> map =new HashMap<String,Object>();
+		map.put("highClassCateName", highClassCateName);
+		map.put("middleClassCateName", middleClassCateName);
+		map.put("lowClassCateName", lowClassCateName);
+		List<Map<String,Object>> searchListMap= systemService.searchInspectionList(map);
+		
+		return searchListMap;
+	}
 
 	//[보람]품질검사 삭제
 	@RequestMapping(value = "/deleteInspection")
 	@ResponseBody
-	public String deleteQualityInspection(HttpServletRequest request) {
-		//보내는것을 Requestparam으로 보내는지 아니면 서블렛request로 하는지 좀더 고민
-		//checkArray에 담았으니 생각해보기
+	public int deleteQualityInspection(@RequestParam(value = "checkArray[]")String[] checkArray) {
+		int result =1;
+		for(int i =0; i<checkArray.length; i++) {
+			result = systemService.deleteQualityInspection(checkArray[i]);
+		}
+		log.info("========================================");
+		log.info("result {}",result);
+		log.info("========================================");
 		//https://won-percent.tistory.com/48 참고한것 
-		return "redirect:/system/qualityInspectionList";
+		return result;
 	}
 	
 	// [보람]품질검사 대분류 ajax 처리
