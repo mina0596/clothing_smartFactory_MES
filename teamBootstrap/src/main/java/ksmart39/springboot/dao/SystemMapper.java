@@ -65,6 +65,9 @@ public interface SystemMapper {
 	
 	
 	/****************************************************************************/
+	//[보람] 품질검사등록
+	public int addQualityInspection(Map<String, Object> qualityMap);
+	
 	//[보람 ]품질검사 수정 
 	public int modifyQualityInspection(SubClassInspection subClassInspection);
 	

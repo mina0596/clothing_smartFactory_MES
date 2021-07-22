@@ -3,11 +3,13 @@
 
 <th:block th:fragment="modal_SearchInspectionCode">
  <!-- 모달시작 -->
-          <div class="modal fade modal-xl" style=" height: 700px;" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ 
+ 
+        <div class="modal fade" id="SearchInspectionCode" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		  <div class="modal-dialog" style="width:auto; display:table;" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <h4 class="modal-title" id="exampleModalLabel">품질검사요청코드 목록</h4>
+		        <h4 class="modal-title">계약번호</h4>
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		          <span aria-hidden="true">&times;</span>
 		        </button>
@@ -16,57 +18,35 @@
 		   
 		   <div class="modal-body">
 		   
+		   <div id="searchInsCodeForm" class="form-inline">
+				 <select class="form-control" name="highClassificationName" id="highClassCateName" >
+	              <option value="">::대분류검사명::</option>
+	              </select>
+			     <select class="form-control" name="mediumClassificationName" id="middleClassCateName">
+	             	<option  value="">::중분류검사명::</option>
+	              </select>
+			  	 <select class="form-control" name="lowClassificationName" id="lowClassCateName">
+	               		<option  value="">::소분류검사명::</option>
+		         </select>
+	   			<button id="searchInsCodeModal" type="button" class="btn btn-theme">검색</button>
+	   			
+		   </div>
+		<br>
 		   <table  class="table table-striped table-advance table-hover">
          	<tbody>       		
-       			<thead>
-        			<tr>
-	         			<th colspan="3"	class="form-inline">
-	         			 	<label class="control-label">계약번호</label>
-		                	<input type="text" class="form-control" placeholder="검색어를 입력하세요.">
-	         			</th>
-	         			<th colspan="3" class="form-inline">
-	         				<label class="control-label">품목별 의뢰 코드</label>
-		                	<input type="text" class="form-control" placeholder="검색어를 입력하세요.">
-	         			</th>
-	         			<th colspan="4" class="form-inline">
-	         				<label class="control-label">요청날짜</label>
-		                	<input type="date" class="form-control" placeholder="검색어를 입력하세요.">&nbsp ~
-		                	<input type="date" class="form-control" placeholder="검색어를 입력하세요.">
-	         			</th>  
-	         			</tr>
-	         			<tr>
-	         			<th colspan="3" class="form-inline">
-	         				<label class="control-label">품질검사 명</label>
-		                	<input type="text" class="form-control" placeholder="검색어를 입력하세요.">
-	         			</th>  
-	         			<th colspan="3" class="form-inline" style="padding-left: 50px;">
-	         				<label class="control-label">원부자재명</label>
-		                	<input type="text" class="form-control" placeholder="검색어를 입력하세요.">
-	         			</th>  
-	         			<th colspan="4" class="form-inline">
-		         				<label class="control-label">거래처명</label>
-			                	<input type="text" class="form-control" placeholder="검색어를 입력하세요.">
-	         				 <button type="submit" class="btn btn-theme" style="width: 17%; margin-left: 10px;">검색</button>
-	         				 <button type="submit" class="btn btn-primary" style="width: 17%;">Save</button>
-	         			</th>
-	         			
-        			</tr>     			
-       			</thead>
-       			<tbody id="mainTbody" style="text-align: center;">
+       			<thead>      			
        				<tr>
-       					<td><input type="checkbox"></td>
-       					<td>no.</td>
-       					<td>계약번호</td>
-       					<td>품목별 의뢰 코드</td>
-       					<td>품질검사대분류</td>
-       					<td>품질검사중분류</td>
-       					<td>품질검사소분류</td>
-       					<td>거래처명</td>
-       					<td>원부자재명</td>
-       					<td>요청날짜</td>
+       					<th><input type="radio" name="check"></th>
+       					<th>no.</th>
+       					<th>대분류 검사명</th>
+       					<th>중분류 검사명</th>
+       					<th>소분류 검사명</th>
+       					<th>소분류 상세 검사명</th>
        				</tr>
-       				<tr class="removeTr">
-       					<td colspan="13">검색 버튼을 눌러주세요.</td>
+       			</thead>
+       			<tbody id="mainTbodyInsCode">
+       				<tr class="removeTrIns">
+       					<td colspan="6" style="text-align:center;">검색 버튼을 눌러주세요.</td>
        				</tr>
      			</tbody> 
          </table> 
