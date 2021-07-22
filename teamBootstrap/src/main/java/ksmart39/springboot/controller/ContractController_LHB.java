@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.thymeleaf.util.MapUtils;
 
 import ksmart39.springboot.domain.SupplierRequest;
+import ksmart39.springboot.service.OrderService;
 import ksmart39.springboot.service.RequestedProductService;
 import ksmart39.springboot.service.SupplierService;
 
@@ -24,13 +25,13 @@ import ksmart39.springboot.service.SupplierService;
 @RequestMapping("/contract")
 public class ContractController_LHB {
 	@Autowired
-	private final SupplierService supplierService;
 	private final RequestedProductService requestedProductService;
+	private final OrderService orderService;
 	
 	
-	 @Autowired public ContractController_LHB(SupplierService supplierService, RequestedProductService requestedProductService) {
-	 this.supplierService = supplierService;
+	 @Autowired public ContractController_LHB(RequestedProductService requestedProductService, OrderService orderService) {
 	 this.requestedProductService = requestedProductService;
+	 this.orderService = orderService;
 	 }
 	 
 
@@ -54,9 +55,9 @@ public class ContractController_LHB {
 	//[한빛]주문서 조회
 	@GetMapping("/buyerOrderList")
 	public String getBuyerOrderList(Model model) {
-		List<Map<String,Object>> resultMap = requestedProductService.getRequestedProduct();
+		List<Map<String,Object>> resultMap = orderService.getOrderList();
 		model.addAttribute("title", "수주관리");
-		model.addAttribute("",resultMap);
+		model.addAttribute("orderList",resultMap);
 		return "contract/buyerOrderList";
 	}		
 

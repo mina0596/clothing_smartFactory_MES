@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart39.springboot.dao.ContractMapper">
+	<resultMap type="RequestedProduct" id = "getRequestedProductList">
+		<result property="productCode" 									column="product_code"/>
+		<result property="chargeEmployeeCode" 						column="charge_employee_code"/>
+		<result property="clientCode" 										column="client_code"/>
+		<result property="contractCode" 									column="contract_code"/>
+		<result property="productRequestCode"			   	 		column="product_request_code"/>
+		<result property="designDrawingAttachment" 				column="design_drawing_attachment"/>
+		<result property="requestedDueDate" 							column="requested_due_date"/>
+		<result property="requestedDeliveryAddress" 				column="requested_delivery_address"/>
+		<result property="requestedDeliveryTel" 						column="requested_delivery_tel"/>
+		<result property="requestedSpecialNote" 					column="requested_special_note"/>
+		<result property="approvalStatus" 								column="approval_status"/>
+		<result property="requestedProductDetailRegDate"  	column="requested_product_detail_reg_date"/>
+		<result property="requestedProductDetailUpdateDate" column="requested_product_detail_update_date"/>
+		<association property="client" javaType="Client">
+			<id property="clientCode" column="client_code"></id>
+			<result property="clientName" column="client_name"></result>
+		</association>
+	</resultMap>
+	
+	<select id = "getOrderList" resultType="map" fetchSize="1000">
+		SELECT
+			rpd.product_request_code					AS prCode
+			,ci.client_name								AS cName
+			,rpd.requested_delivery_tel				AS rdTel
+			,rpd.requested_delivery_address			AS rdAdd
+			,rpd.requested_due_date						AS rdDate
+			,rpd.approval_status							AS aStatus
+			,rpd.requested_product_detail_reg_date	AS rpdRegDate
+		FROM 
+			requested_product_detail AS rpd 
+		INNER JOIN
+			client_info AS ci
+		ON 
+			rpd.client_code = ci.client_code
+		GROUP BY rpd.product_request_code;		
+	</select>
+</mapper>
