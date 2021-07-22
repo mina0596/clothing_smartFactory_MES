@@ -325,6 +325,9 @@ $(function(){
 		
 	});
 	
+	var completeRate = $('#completeRate');
+	var progressRate = $('#progressRate').text();
+	
 	console.log('###############test:', completeRate)
 	//그래프
 	var ctx = document.getElementById('myChart0').getContext('2d');
