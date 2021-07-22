@@ -19,22 +19,22 @@ layout:decorate="@{layout/default_qualityControl}">
 	* 거래처명 or 수주계약 필수 기입 사항!
 	<form th:action="@{/quality/qualityInspectionStatusNow}" method="post">
 		<table class="table table-striped table-advance table-hover">
-	         	<thead>
+	         	<thead id="statusElement">
 	        			<tr>
 		         			<th class="form-inline">
 		         			 	<label class="control-label">계약번호</label>
-			                	<input type="text" class="form-control" id="contractNum" placeholder="검색어를 입력하세요.">
+			                	<input type="text" class="form-control" name="contractNum" id="contractNum" placeholder="검색어를 입력하세요.">
 			                	<button id="bycontractNum" data-toggle="modal" data-target="#SearchContractNum" type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
 		         			</th>
 		         			<th class="form-inline">
 		         				<label class="control-label">거래처명</label>
-			                	<input type="text" class="form-control" id="buyer" placeholder="검색어를 입력하세요.">
-			                	<button id="byBuyer" data-toggle="modal" data-target="#SearchBuyer" type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
+			                	<input type="text" class="form-control" name="clientName" id="clientName" placeholder="검색어를 입력하세요.">
+			                	<button id="byClient" data-toggle="modal" data-target="#SearchBuyer" type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
 		         			</th>
 		         			<th class="form-inline">
 		         				<label class="control-label">검사요청일</label>
-			                	<input type="date" class="form-control" id="requestStartDate" placeholder="검색어를 입력하세요.">&nbsp; ~
-			                	<input type="date" class="form-control" id="requestEndDate" placeholder="검색어를 입력하세요.">
+			                	<input type="date" class="form-control" name="requestStartDate" id="requestStartDate" placeholder="검색어를 입력하세요.">&nbsp; ~
+			                	<input type="date" class="form-control" name="requestEndDate" id="requestEndDate" placeholder="검색어를 입력하세요.">
 		         			</th> 
 		         			<th rowspan="2">
 		         				<button type="button" id="searchBtn" class="btn btn-theme" style="width: 100%; height: 85px;">조회</button>
@@ -43,7 +43,7 @@ layout:decorate="@{layout/default_qualityControl}">
 		         			<tr>
 		         			<th class="form-inline">
 		         				<label class="control-label">제작품목</label>
-			         				<select id="genderCate" class="form-control" style="width: 125px;">
+			         				<select name="genderCate" id="genderCate" class="form-control" style="width: 125px;">
 				                		<option value="">All</option>
 				                	</select>
 				                	<select name="productCode" id="detailCate" class="form-control" style="width: 125px;">
@@ -52,13 +52,13 @@ layout:decorate="@{layout/default_qualityControl}">
 		         			</th>  
 		         			<th class="form-inline">
 		         				<label class="control-label">품질검사코드</label>
-			                	<input type="text" class="form-control" id="inspectionCode" placeholder="검색어를 입력하세요.">
+			                	<input type="text" class="form-control" name="inspectionCode" id="inspectionCode" placeholder="검색어를 입력하세요.">
 			                	<button id="byInspectionCode" data-toggle="modal" data-target="#SearchInspectionCode" type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
 		         			</th>  
 		         			<th class="form-inline">
 		         				<label class="control-label">검사실시일</label>
-			                	<input type="date" class="form-control" id="startDate" placeholder="검색어를 입력하세요.">&nbsp; ~
-			                	<input type="date" class="form-control" id="endDate" placeholder="검색어를 입력하세요.">		         				
+			                	<input type="date" class="form-control" name="startDate" id="startDate" placeholder="검색어를 입력하세요.">&nbsp; ~
+			                	<input type="date" class="form-control" name="endDate" id="endDate" placeholder="검색어를 입력하세요.">		         				
 		         			</th>
 		         			
 	        			</tr>     			

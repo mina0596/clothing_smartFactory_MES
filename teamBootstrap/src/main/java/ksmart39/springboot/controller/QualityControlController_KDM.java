@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import ksmart39.springboot.domain.QualityInspection;
 import ksmart39.springboot.domain.QualityInspectionResult;
 import ksmart39.springboot.domain.QualityInspectionStandard;
 import ksmart39.springboot.service.QualityInsMeasurementValueService;
@@ -45,20 +46,22 @@ public class QualityControlController_KDM {
 	
 	//=============================================================================
 	
-//	//[다미] 실시간 검사 현황
-//	@PostMapping("/qualityInspectionStatusNow")
-//	@ResponseBody
-//	public List<Map<String, Object>> qualityInspectionStatusNow() {
-//		log.info("###############test : {}", qualityInsMeasurementValueService.getQualityInspectionStatusNow());
-//		List<Map<String, Object>> map = qualityInsMeasurementValueService.getQualityInspectionStatusNow();
-//		return map;
-//	}
+	
+	//[다미] 품질검사 코드 
+	@PostMapping("/searchInspectionCode")
+	@ResponseBody 
+	public List<QualityInspection> searchInspectionCode(@RequestBody QualityInspection qualityInspection){
+		log.info("화면에서 받아온 값: {}", qualityInspection);
+		List<QualityInspection> inspectionCode = qualityInsMeasurementValueService.searchInspectionCode(qualityInspection);
+		return inspectionCode;
+	}
 	
 	//[다미] 거래처이름 검색
 	@PostMapping("/searchByClientName")
-	@ResponseBody List<Map<String, Object>> searchByClientName(@RequestParam(value = "clientName", required = false)String clientName){
-		List<Map<String, Object>> clientNameMap = null;
+	@ResponseBody 
+	public List<Map<String, Object>> searchByClientName(@RequestParam(value = "clientName", required = false)String clientName){
 		log.info("화면에서 받아온 값: {}", clientName);
+		List<Map<String, Object>> clientNameMap = qualityInsMeasurementValueService.searchByClientName(clientName);
 		return clientNameMap;
 	}
 	
@@ -74,9 +77,10 @@ public class QualityControlController_KDM {
 	//[다미] 실시간 검사 현황
 	@PostMapping("/qualityInspectionStatusNow")
 	@ResponseBody
-	public List<Map<String, Object>> qualityInspectionStatusNow() {
+	public List<Map<String, Object>> qualityInspectionStatusNow(@RequestBody Map<String, Object> searchMap) {
 		
-		List<Map<String, Object>> map = qualityInsMeasurementValueService.getQualityInspectionStatusNow();
+		log.info("화면에서 받아온 값: {}", searchMap);
+		List<Map<String, Object>> map = qualityInsMeasurementValueService.getQualityInspectionStatusNow(searchMap);
 		
 		return map;
 	}

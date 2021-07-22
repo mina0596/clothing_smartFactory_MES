@@ -21,7 +21,7 @@
 		   <div class="form-inline">
 				
 			   	<label class="control-label">거래처명</label>
-			    <input type="text" id="clientName" name="clientName" class="form-control" placeholder="검색어를 입력하세요.">
+			    <input type="text" id="searchClientName" name="clientName" class="form-control" placeholder="검색어를 입력하세요.">
 			    
 	   			<button id="searchClientBtn" type="button" class="btn btn-theme">검색</button>
 		   </div>
@@ -35,7 +35,10 @@
        					<th>거래처명</th>
        				</tr>
        			</thead>
-       			<tbody id="mainTbody" style="text-align: center;">
+       			<tbody id="mainTbodyClient">
+       				<tr class="removeTrCL">
+       					<td colspan="3" style="text-align:center;">검색 버튼을 눌러주세요.</td>
+       				</tr>
      			</tbody> 
          </table> 
 		 </div>

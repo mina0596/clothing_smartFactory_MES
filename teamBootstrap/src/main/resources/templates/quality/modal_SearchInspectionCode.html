@@ -18,17 +18,17 @@
 		   
 		   <div class="modal-body">
 		   
-		   <div class="form-inline">
+		   <div id="searchInsCodeForm" class="form-inline">
 				 <select class="form-control" name="highClassificationName" id="highClassCateName" >
 	              <option value="">::대분류검사명::</option>
 	              </select>
 			     <select class="form-control" name="mediumClassificationName" id="middleClassCateName">
 	             	<option  value="">::중분류검사명::</option>
 	              </select>
-			  	 <select class="form-control" name="mediumClassificationName" id="lowClassCateName">
+			  	 <select class="form-control" name="lowClassificationName" id="lowClassCateName">
 	               		<option  value="">::소분류검사명::</option>
 		         </select>
-	   			<button type="button" class="btn btn-theme">검색</button>
+	   			<button id="searchInsCodeModal" type="button" class="btn btn-theme">검색</button>
 	   			
 		   </div>
 		<br>
@@ -44,7 +44,10 @@
        					<th>소분류 상세 검사명</th>
        				</tr>
        			</thead>
-       			<tbody id="mainTbody" style="text-align: center;">
+       			<tbody id="mainTbodyInsCode">
+       				<tr class="removeTrIns">
+       					<td colspan="6" style="text-align:center;">검색 버튼을 눌러주세요.</td>
+       				</tr>
      			</tbody> 
          </table> 
 		 </div>
