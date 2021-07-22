@@ -17,7 +17,7 @@ layout:decorate="@{layout/default_system}">
 	<div class="form-panel">
 	 <h4 class="mb"><i class="fa fa-angle-right"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">사원수정</font></font></h4>
               <div class="form">
-                <form class="cmxform form-horizontal style-form" id="signupForm" method="post"  th:action="@{/modifyHumanResources}">
+                <form class="cmxform form-horizontal style-form" id="signupForm" method="post"  th:action="@{/system/modifyHumanResources}">
                 
                 
                   <div class="form-group ">
@@ -61,9 +61,9 @@ layout:decorate="@{layout/default_system}">
                   <div class="col-sm-2">
                       <select class="form-control" name = "levelNum" >
 						<option>::선택::</option>
-						<option value="1">관리자</option>					
-						<option value="2">본사직원</option>
-						<option value="3">공장직원</option>
+						<option value="1" th:selected="${humanResources.levelNum = 1}" >관리자</option>					
+						<option value="2" th:selected="${humanResources.levelNum = 2}">본사직원</option>
+						<option value="3" th:selected="${humanResources.levelNum = 3}">공장직원</option>
 		               </select>
                   </div>
                 </div>

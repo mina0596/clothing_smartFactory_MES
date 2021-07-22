@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,9 +42,13 @@ public class SystemController_HBR {
 
 
 	//[보람]품질검사 삭제
-	@PostMapping("deleteQualityInspection")
-	public String deleteQualityInspection() {
-		return "redirect:/qualityInspectionList";
+	@RequestMapping(value = "/deleteInspection")
+	@ResponseBody
+	public String deleteQualityInspection(HttpServletRequest request) {
+		//보내는것을 Requestparam으로 보내는지 아니면 서블렛request로 하는지 좀더 고민
+		//checkArray에 담았으니 생각해보기
+		//https://won-percent.tistory.com/48 참고한것 
+		return "redirect:/system/qualityInspectionList";
 	}
 	
 	// [보람]품질검사 대분류 ajax 처리
@@ -127,9 +133,19 @@ public class SystemController_HBR {
 	  }
 	  //[보람]품질검사 등록 메서드
 	  @PostMapping("/addQualityInspection")
-	  public String addQualityInspection() {
-		  
-		  return "redirect:/qualityInspectionList";
+	  public String addQualityInspection(@RequestParam(name = "highClassCode",required = false)String highClassCode,
+			  							@RequestParam(name = "highMedClassCode",required = false)String highMedClassCode,
+			  							@RequestParam(name = "highMedLowClassCode",required = false)String highMedLowClassCode,
+			  							@RequestParam(name = "subClassName",required = false)String subClassName) {
+		  log.info("========================================");
+		  log.info("highClassCode {}:",highClassCode);
+		  log.info("highMedClassCode {}:",highMedClassCode);
+		  log.info("highMedLowClassCode {}:",highMedLowClassCode);
+		  log.info("subClassName {}:",subClassName);
+		  log.info("========================================");
+		  systemService.addQualityInspection(highClassCode, highMedClassCode, highMedLowClassCode, subClassName);
+		 
+		  return "redirect:/system/qualityInspectionList";
 	  }
 	  
 	  

@@ -1,12 +1,16 @@
 package ksmart39.springboot.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import ksmart39.springboot.controller.ProductionController_PMA;
 import ksmart39.springboot.dao.SystemMapper;
 import ksmart39.springboot.domain.AccountingCategory;
 import ksmart39.springboot.domain.Client;
@@ -19,6 +23,7 @@ import ksmart39.springboot.domain.SubClassInspection;
 @Service
 public class SystemService {
 	
+	private static final Logger log = LoggerFactory.getLogger(SystemService.class);
 	@Autowired
 	private SystemMapper systemMapper;
 
@@ -106,6 +111,20 @@ public class SystemService {
 	}
 	
 	//=============================================================
+	//[보람]품질검사 등록 
+	public int addQualityInspection(String highClassCode,String highMedClassCode,String highMedLowClassCode,String subClassName) {
+		
+		Map<String, Object> qualityMap = new HashMap<String,Object>();
+		qualityMap.put("highClassCode", highClassCode);
+		qualityMap.put("highMedClassCode", highMedClassCode);
+		qualityMap.put("highMedLowClassCode", highMedLowClassCode);
+		qualityMap.put("subClassName", subClassName);
+		
+		log.info("qualityMap  : {}", qualityMap);
+		
+		
+		return systemMapper.addQualityInspection(qualityMap);
+	}
 	//[보람]품질검사 등록 대분류 
 	public List<Map<String,Object>> getHighClassCate(){
 		return systemMapper.getHighClassCate();

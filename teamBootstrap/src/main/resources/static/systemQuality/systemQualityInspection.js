@@ -5,7 +5,7 @@ $(function(){
 	var highClassCateName = $('#highClassCateName');
 	var middleClassCateName = $('#middleClassCateName');
 	var lowClassCateName = $('#lowClassCateName');
-
+	var inspectionCode=[]
 //검사대분류명가지고오기
 	var request = $.ajax({
 		url: "/system/highClassCate",
@@ -24,7 +24,8 @@ $(function(){
 				html +="</option>";					
 			}
 			highClassCateName.append(html);
-		}
+			 }
+		
 	});
 	request.fail(function( jqXHR, textStatus ) {
 		alert( "Request failed: " + textStatus );
@@ -34,6 +35,8 @@ $(function(){
 	//대분류명 검사를 선택하게되면  data 화면에서 선택된 키와 값으로 data를 전송
 	$('#highClassCateName').change(function(){
 		var highClassCateName =$('#highClassCateName option:selected').val();
+			inspectionCode.push(highClassCateName);
+			console.log(inspectionCode);
 		var request = $.ajax({
 			url: "/system/mediumClassCate",
 			method: "get",
@@ -63,6 +66,8 @@ $(function(){
 	//중분류 검사를 선택하게되면  data 화면에서 선택된 키와 값으로 data를 전송
 	$('#middleClassCateName').change(function(){
 		var middleClassCateName = $('#middleClassCateName option:selected').val();
+		inspectionCode.push(middleClassCateName);
+		console.log(inspectionCode);
 		var request = $.ajax({
 			url: "/system/lowClassCate",
 			method: "get",
@@ -89,4 +94,11 @@ $(function(){
 			alert( "Request failed: " + textStatus );
 		});	
 	})
+	$('#lowClassCateName').change(function(){
+		var lowClassCateName = $('#lowClassCateName option:selected').val();
+		$('#qualityinsertForm input').prop('disabled', false);
+		inspectionCode.push(lowClassCateName);
+		console.log(inspectionCode);
+	});
+	
 })
