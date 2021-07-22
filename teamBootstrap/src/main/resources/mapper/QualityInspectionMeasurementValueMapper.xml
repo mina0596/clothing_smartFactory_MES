@@ -46,6 +46,87 @@
 		<result property="rawMaterialCode" 						column="raw_material_code"/>
 	</resultMap>
 	
+	<!-- 품질검사 코드 검색 -->
+	<select id="searchInspectionCode" resultType="QualityInspection" parameterType="QualityInspection">
+		SELECT
+			quality_inspection_code as qualityInspectionCode
+			,high.high_class_name as highClassificationName
+			,med.med_class_name as mediumClassificationName
+			,low.low_class_name as lowClassificationName
+			,sub.sub_class_name as subClassificationName
+		from
+				sub_class_inspection_list AS sub
+		INNER JOIN
+				low_class_inspection_list AS low ON sub.high_med_low_class_code = low.high_med_low_class_code
+		INNER JOIN
+				medium_class_inspection_list AS med ON low.high_med_class_code = med.high_med_class_code
+		INNER JOIN
+				high_class_inspection_list AS high ON med.high_class_code = high.high_class_code
+		<trim prefix="WHERE" prefixOverrides="AND">
+			<if test="highClassificationName != null and highClassificationName != ''.toString()">
+				high.high_class_code=#{highClassificationName}
+			</if>
+			<if test="mediumClassificationName != null and mediumClassificationName != ''.toString()">
+				AND med.high_med_class_code=#{mediumClassificationName}
+			</if>
+			<if test="lowClassificationName != null and lowClassificationName != ''.toString()">
+				AND low.high_med_low_class_code=#{lowClassificationName};
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 품질검사 현황 거래처 검색 -->
+	<select id="searchByClientName" resultType="Map" parameterType="String">
+		SELECT 
+			ci.client_name AS clientName
+		FROM 
+			client_info AS ci
+		INNER JOIN
+			requested_product_detail AS r ON ci.client_code = r.client_code
+		INNER JOIN
+			contract_info AS co ON co.contract_code = r.contract_code
+		<trim prefix="WHERE">
+			<if test="clientName != null and clientName != ''.toString()">
+				ci.client_name LIKE CONCAT ('%', #{clientName}, '%')
+			</if>
+		</trim>
+		GROUP BY 
+			ci.client_name;
+	</select>
+	
+	<!-- 품질검사 현황 계약번호 검색 -->
+	<select id="searchByContractNum" resultType="Map" parameterType="Map">
+		SELECT 
+			co.contract_code AS contractCode
+			,ci.client_name AS clientName
+			,co.contracted_amount AS contractedAmount
+			,co.contracted_date	AS contractedDate
+		FROM 
+			client_info AS ci
+		INNER JOIN
+			requested_product_detail AS r ON ci.client_code = r.client_code
+		INNER JOIN
+			contract_info AS co ON co.contract_code = r.contract_code
+		<trim prefix="WHERE" prefixOverrides="AND">
+			<if test="contractCode != null and contractCode != ''.toString()">
+				 co.contract_code LIKE CONCAT ('%', #{contractCode}, '%')
+			</if>
+			<if test="clientName != null and clientName != ''.toString()">
+				AND ci.client_name LIKE CONCAT ('%', #{clientName}, '%')
+			</if>
+			<if test="contractedStrartDate != null and contractedStrartDate != ''.toString()">
+				AND co.contracted_date &gt;= DATE#{contractedStrartDate}
+			</if>
+			<if test="contractedEndDate != null and contractedEndDate != ''.toString()">
+				AND co.contracted_date &lt;= DATE#{contractedEndDate}
+			</if>
+		</trim>
+		GROUP BY 
+			co.contract_code
+		<trim prefix="ORDER BY" suffixOverrides="WHERE">
+				co.contracted_date ${range};
+		</trim>
+	</select>
 	
 	<!-- 품질검사 현황 -->
 	<select id="getQualityInspectionStatusNow" resultType="Map" parameterType="Map">
@@ -92,8 +173,7 @@
 			,ifnull(group_concat(if(re.inspection_measurement_num='1회차', re.inspection_start_date, NULL)),'시작전') AS insStart
 			,ifnull(group_concat(if(re.inspection_measurement_num='3회차', re.inspection_end_date, NULL)),'종료전') AS insEnd
 			,IFNULL(ref.low_cate_final_pass_check,'종료전') AS finalPassCheck
-			,p.contract_code AS contractCode
-		
+			,p.contract_code AS contractCode		
 		FROM
 			requested_product_detail AS p
 		INNER JOIN
@@ -116,8 +196,35 @@
 			product_code_detail AS pc ON p.product_code = pc.product_code
 		INNER JOIN
 			client_info AS c ON p.client_code = c.client_code
-		WHERE 
-			p.contract_code = 'buyerContract002'
+		<trim prefix="WHERE" prefixOverrides="AND">
+			<if test="contractNum != null and contractNum != ''.toString()">
+				p.contract_code = #{contractNum}
+			</if>
+			<if test="clientName != null and clientName != ''.toString()">
+				AND c.client_name LIKE CONCAT ('%', #{clientName} ,'%')
+			</if>		
+			<if test="requestStartDate != null and requestStartDate != ''.toString()">
+				AND q.inspection_request_date &gt;= DATE(#{requestStartDate})
+			</if>
+			<if test="requestEndDate != null and requestEndDate != ''.toString()">
+				AND q.inspection_request_date &lt;= DATE(#{requestEndDate})
+			</if>
+			<if test="genderCate != null and genderCate != ''.toString()">
+				AND pc.gender_categorized_name LIKE CONCAT ('%', #{genderCate} ,'%')
+			</if>		
+			<if test="productCode != null and productCode != ''.toString()">
+				AND pc.detailed_categorized_code LIKE CONCAT ('%', #{productCode} ,'%')
+			</if>		
+			<if test="inspectionCode != null and inspectionCode != ''.toString()">
+				AND sub.quality_inspection_code LIKE CONCAT ('%', #{inspectionCode} ,'%')
+			</if>		
+			<if test="startDate != null and startDate != ''.toString()">
+				AND re.inspection_start_date &gt;= DATE(#{startDate})
+			</if>
+			<if test="endDate != null and endDate != ''.toString()">
+				AND re.inspection_start_date &lt;= DATE(#{endDate})
+			</if>			
+		</trim>		 		
 		GROUP BY q.quality_inspection_request_code;
 	</select>
 	
