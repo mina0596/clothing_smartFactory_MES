@@ -16,7 +16,13 @@ public class ProductStateService {
 	@Autowired
 	private ProductStateMapper productStateMapper;
 	
-	public List<ProductProductionProcessStatus> getProductState(){
+	//[한빛] 목록 뿌려주기
+	public List<Map<String,Object>> getProductState(){
 		return productStateMapper.getProductState();
+	}
+	
+	//[한빛] 검색목록 뿌려주기
+	public List<Map<String,Object>> searchProductState(){
+		return productStateMapper.searchProductState();
 	}
 }
