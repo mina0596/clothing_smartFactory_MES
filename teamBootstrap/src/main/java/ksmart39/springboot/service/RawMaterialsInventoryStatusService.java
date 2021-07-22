@@ -30,6 +30,14 @@ public class RawMaterialsInventoryStatusService {
 		this.systemMapper = systemMapper;
 	}
 	
+	
+	
+	//[한빛] 출고 현황
+	public List<Map<String,Object>> getExwarehousing(){
+		List<Map<String,Object>> exHousingList = materialsInventoryStatusMapper.getExwarehousing();
+		return exHousingList;
+	}
+	
 	//[민아]자재 입출고 현황
 	public List<RawMaterialsInventory> getRawMaterialsInventory(){
 		List<RawMaterialsInventory> materialsInventoryList = materialsInventoryStatusMapper.getMaterialsTransactionList();

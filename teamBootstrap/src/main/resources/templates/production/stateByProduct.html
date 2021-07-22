@@ -4,8 +4,6 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
 layout:decorate="@{layout/default_production}">
 
 <th:block layout:fragment="container">
-	<div class="row mt">
-     <div class="col-md-12">
           <h4><i class="fa fa-angle-right"></i> 의뢰품목별 현황 조회</h4>
           <hr>  
 
@@ -93,7 +91,7 @@ layout:decorate="@{layout/default_production}">
 		                  </tr>
 		                </thead>
 		                <tbody>
-	                  	  <tr th:each = "s : ${searchByProductList}">
+	                  	  <tr th:if = "${#lists.size(searchByProductList)>0}" th:each = "s : ${searchByProductList}">
 		                  	<td th:text = "${s.orderNum}"></td>
 		                    <td th:text = "${s.rpCode}"></td>
 		                    <td th:text = "${s.phighClassification}"></td>
@@ -106,7 +104,7 @@ layout:decorate="@{layout/default_production}">
 		              </table>
        				</form>
                	  </div>
-
+				</div>
                   <!-- /tab-pane -->
                 </div>
                 <!-- /tab-content -->
@@ -151,7 +149,7 @@ layout:decorate="@{layout/default_production}">
             
        		</form>
        		
-          </div>
+          
           <!-- /col-md-12 -->
         </div>
         <!-- /row -->

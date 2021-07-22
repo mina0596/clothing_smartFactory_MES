@@ -66,9 +66,11 @@ public class RawMaterialsController_LHB {
 		return "rawMaterials/addExWarehousing";
 	}
 	
-	//[한빛]출고현황
+	//[한빛] 출고현황
 	@GetMapping("/exWarehousingList")
-	public String getExWarehousingList() {
+	public String getExWarehousingList(Model model) {
+		List<Map<String,Object>> exHousingList = materialsInventoryStatusService.getExwarehousing();
+		model.addAttribute("exHousingList",exHousingList);
 		return "rawMaterials/exWarehousingList";
 	}
 
