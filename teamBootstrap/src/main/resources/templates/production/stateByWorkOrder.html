@@ -146,42 +146,40 @@ layout:decorate="@{layout/default_production}">
 	      
             <h4><i class="fa fa-angle-right"></i> 작업지시별 현황 목록</h4>         
 	        <form class="form-horizontal style-form">
-              <table class="table table-striped table-advance table-hover" id="list">
+              <table class="table table-striped table-advance table-hover" id="workerOrderList">
                 <thead>
                   <tr>
-                 	<th><i class="fa fa-check-circle-o"></i> 선택</th>
-             		<th><i class="fa fa-bullhorn"></i> 번호</th>
-             		<!-- 지시코드를 누르면 상세정보로 생산 시작 예정일, 마감 예정일, 보여주기 -->
-                    <th><i class="fa fa-barcode"></i> 작업지시코드</th>
-                    <!-- 계약정보로 이동하게 하거나, 상세정보로 불러와서 보이게하기 -->
-                    <th><i class="fa fa-barcode"></i> 품목별의뢰코드</th>
-                    <th><i class="fa fa-bookmark"></i> 거래처명</th>
-                    <th><i class="fa fa-calendar"> </i>작업시작일자<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
-                    <th><i class="fa fa-bookmark"></i> 작업상태<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
-                    <th><i class="fa fa-clock-o"></i> 가동시간<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
-                    <th><i class="fa fa-calendar"></i> 작업완료일자<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
-                    <th><i class="fa fa-clock-o"></i> 납기일<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><input type="checkbox" class="check" id="checkAll"></th>
+                    <th><i class="fa fa-bullhorn"></i>순번</th>
+                    <th><i class="fa fa-barcode"></i>작업지시코드</th>
+                    <th><i class="fa fa-barcode"></i>의뢰품목코드</th>
+                    <th><i class="fa fa-bookmark"></i>거래처명</th>
+                    <th><i class=" fa fa-calendar"></i>납기일</th>
+                    <th><i class=" fa fa-calendar"></i>생산시작예정일</th>
+                    <th><i class=" fa fa-calendar"></i>생산종료예정일</th>
+                    <th><i class=" fa fa-calendar"></i>가동시간</th>
+                    <th><i class=" fa fa-bookmark"></i>생산현황</th>
+                    
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr th:each="p, n :${productProductionProcessStatus}">
-	                <td><input type="checkbox" class="check"></td>
-	            	<td th:text = "${n.index+1}"></td>
-                    <td th:text = "${p.work_order_code}"></td>
-                    <td th:text = "${p.requested_product_code}"><a th:href="@{/stateByProduct}"></a></td>
-                    <td>파크랜드</td>
-                    <td>2021-06-06</td>
-                    <td th:text = "${p.process_status}"><span class="badge" style="padding-top: 5px;">완료</span></td>
-                    <td>1시간50분</td>
-                    <td>2021-06-16</td>
-                    <td th:text = "${p.requested_due_date}"></td>
+                  <tr th:each="l,n : ${workOrderList}">
+                  	<td><input type="checkbox" class="check"></td>
+                    <td th:text="${n.index+1}"></td>
+                    <td th:text="${l.workOrderCode}"></td>                   
+                    <td th:text="${l.pCode}"></td>
+                    <td th:text="${l.cName}"></td>
+                    <td th:text="${l.dueDate}"></td>
+                    <td th:text="${l.expectedStartDate}"></td>
+                    <td th:text="${l.expectedStartDate}"></td>
+                    <td>1시간 40분</td>
+                    <td th:if="${l.status eq '진행중'}"><span class="badge bg-important" style="padding-top: 5px;">진행중</span></td>
+                    <td th:if="${l.status eq '대기중'}"><span class="badge bg-success" style="padding-top: 5px;">대기중</span></td>
                   </tr>
-                  
-                             
-                  
-                 
                 </tbody>
               </table>
+
             
        		</form>
        		

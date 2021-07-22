@@ -39,32 +39,54 @@ public class ProductionController_LHB {
 	
 	private final ProductionStatusService productionStatusService;
 	private final ProductStateService productStateService;
+	private final WorkOrderService workOrderService;
 	
-	public ProductionController_LHB(ProductionStatusService productionStatusService, ProductStateService productStateService) {
+	public ProductionController_LHB(ProductionStatusService productionStatusService, ProductStateService productStateService,WorkOrderService workOrderService ) {
 		this.productionStatusService = productionStatusService;
 		this.productStateService = productStateService;
+		this.workOrderService = workOrderService;
 	}
 	
 	
 	//[민아+한빛]작업지시별 생산 현황 조회
 	@GetMapping("/stateByWorkOrder")
 	public String getStateByWorkOrder(Model model) {
-		List<Map<String, Object>> resultMap = productionStatusService.getProductionStatus();
+		List<Map<String, Object>> workOrderList = workOrderService.getWorkOrderList();
 		model.addAttribute("title","생산현황");
-		model.addAttribute("productProductionProcessStatus",resultMap);
-		log.info("resultMap :{}", resultMap);
+		model.addAttribute("workOrderList", workOrderList);
 		return "production/stateByWorkOrder";
 	}
 
 	//===================================================================
 
-	@GetMapping("/detailedStateByProduct")
-	public String getProductState(Model model) {
-		List<ProductProductionProcessStatus> resultMap = productStateService.getProductState();
-		model.addAttribute("title", "생산현황");
-		model.addAttribute("productState", resultMap);
-		log.info("resultMap:{}", resultMap);
-		return "production/detailedStateByProduct";
+	// [한빛]의뢰품목별 생산 현황 조회 
+	@GetMapping("/stateByProduct")
+	public String getStateByProduct(Model model) {
+		List<Map<String,Object>> stateByProductList = productStateService.getProductState();
+		model.addAttribute("stateByProductList",stateByProductList);
+		log.info("stateByProductList:{}",stateByProductList);
+		return "production/stateByProduct";
+	}
+
+	
+	// [한빛]의뢰품목별 검색 목록 조회
+	@GetMapping("/searchByProduct")
+	public String searchProductState(Model model
+								,@RequestParam(name="searchKey",required = false) String searchKey
+								,@RequestParam(name="searchValue",required=false) String searchValue) {
+		log.info("========================================");
+		log.info("화면에서 입력받은 값(회원목록) searchKey: {}", searchKey);
+		log.info("화면에서 입력받은 값(회원목록) searchValue: {}", searchValue);
+		log.info("========================================");
+		
+		Map<String,Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("searchKey", searchKey);
+		paramMap.put("searchValue", searchValue);
+		
+		List<Map<String,Object>> searchByProductList = productStateService.searchProductState();
+		model.addAttribute("searchByProductList",searchByProductList);
+		log.info("searchByProductList:{}",searchByProductList);
+		return "production/stateByProduct";
 	}
 	
 	

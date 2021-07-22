@@ -1,5 +1,6 @@
 package ksmart39.springboot.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -27,14 +28,25 @@ public class QualityControlController_PMA {
 
 	
 	//=============================================================================
-
+	
+	
+	//[민아]품질검사 기준표 등록
 	@GetMapping("/addStandardTable")
 	public String addStandardTable() {
 		return "quality/addStandardTable";
 	}
 	//[민아]품질검사 기준표 목록
 	@GetMapping("/standardTableList")
-	public String getStandardTableList() {
+	public String getStandardTableList(Model model) {
+		String levelCate = "등급";
+		String numCate = "수치";
+		String passCate = "합격/불합격";
+		List<Map<String,Object>> levelStandardList = qualityControlService.getInspectionStandard(levelCate);
+		List<Map<String,Object>> numStandardList = qualityControlService.getInspectionStandard(numCate);
+		List<Map<String,Object>> passStandardList = qualityControlService.getInspectionStandard(passCate);
+		model.addAttribute("levelStandardList", levelStandardList);
+		model.addAttribute("numStandardList", numStandardList);
+		model.addAttribute("passStandardList", passStandardList);
 		return "quality/standardTableList";
 	}
 	
@@ -52,4 +64,7 @@ public class QualityControlController_PMA {
 		model.addAttribute("title", "검사현황관리:불량현황");
 		return"quality/defectiveRateStatus";
 	}
+	
+	
+	
 }

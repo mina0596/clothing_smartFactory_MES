@@ -19,18 +19,23 @@
 		<id property="requestedProductCode"  column="requested_product_code"/>	 <!-- join 공통 -->
 		<result property="workOrderCode" column="work_order_code"/>
 	</association>
+	<association property="client"  javaType="Client">
+		<id property="clientCode"  column="client_code"/>	 <!-- join 공통 -->
+		<result property="clientName" column="client_name"/>
+	</association>
 </resultMap>
 
 
 		<select id="getProductionStatus" resultType="map" fetchSize="1000">
 		SELECT
-			p.requested_product_code
-			,p.production_process_status_reg_date
-			,p.process_status
-			,p.completed_product_update_date
-			,r.contract_code
-			,r.requested_due_date
-			,w.work_order_code
+			p.requested_product_code						AS productCode
+			,p.process_start_date							AS pStartDate
+			,p.process_status									AS processStatus
+			,p.completed_product_update_date				AS pEndDate
+			,r.contract_code									AS contractCode
+			,r.requested_due_date							AS dueDate
+			,w.work_order_code								AS workOrderCode
+			,c.client_name										AS cName
 		FROM
 			product_production_process_status as p
 			JOIN
@@ -40,7 +45,12 @@
 			JOIN
 			work_order AS w
 			on
-			p.requested_product_code = w.requested_product_code;
+			p.requested_product_code = w.requested_product_code
+			JOIN 
+			client_info AS c
+			on
+			r.client_code = c.client_code
+		GROUP BY r.requested_product_code;
 	</select>
 	
 </mapper>
