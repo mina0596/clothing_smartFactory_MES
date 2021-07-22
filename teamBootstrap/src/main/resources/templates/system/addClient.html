@@ -88,6 +88,7 @@ layout:decorate="@{layout/default_system}">
 
 
 <th:block layout:fragment="customJs">
+	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 	<script type="text/javascript">
 		$(function(){
 			$('#addBtn').click(function(){
@@ -134,7 +135,7 @@ layout:decorate="@{layout/default_system}">
 				
 				if(submitFlag) addClient.submit();
 			});			
-		
+		});
 		
 	    function execDaumPostcode() {
 	        new daum.Postcode({
@@ -173,6 +174,7 @@ layout:decorate="@{layout/default_system}">
 	    }
 	    
 	</script>
+	
 </th:block>
 
 </html>

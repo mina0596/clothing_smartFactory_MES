@@ -1,18 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ksmart39.springboot.dao.ProductStateMapper">
-<!-- 	<resultMap type="ProductionProcessList" id="getProductStateInfo">
-		<result property="productionProcessCode" column="production_process_code"/>
-		<result property="processStartDate" column="process_start_date"/>
-		<result property="completedProductUpdateDate" column="completed_product_update_date"/>
-		<result property="processStatus" column="process_status"/>
-			<association property="productProductionProcessStatus"  javaType="ProductProductionProcessStatus">
-				<id property="requestedProductCode"  column="requested_product_code"/>	 join 공통
-				<result property="processOrderNum" column="process_order_num"/>
-			</association>		
-	</resultMap> -->
-	
-	<resultMap type="ProductProductionProcessStatus"  id="testGetSomething">
+
+	<resultMap type="ProductProductionProcessStatus"  id="getProductStateList">
 		<result property="requestedProductCode" column="requested_product_code"/>
 		<result property="processStatus" column="process_status"/>
 		<result property="processStartDate" column="process_start_date"/>
@@ -21,6 +11,7 @@
 		<association property="productionProcessList"  javaType="ProductionProcessList">
 			<id property="productionProcessCode" column="production_process_code"/>
 			<result property="processOrderNum" column="process_order_num"/>
+			<result property="productionProcessHighClassification" column="production_process_high_classification"/>
 			<result property="productionProcessLowClassification" column="production_process_low_classification"/>
 		</association>
 		<association property="requestedProduct"  javaType="RequestedProduct">
@@ -31,12 +22,12 @@
 	
 	<select id = "getProductState" resultType="map" fetchSize="1000">
 		SELECT
-				 ps.requested_product_code  							AS productCode
+				 ps.requested_product_code  								AS productCode
 				,MAX(pl.process_order_num)  							AS orderNum
-				,MAX(ps.process_status)     							AS pStatus
+				,MAX(ps.process_status)     								AS pStatus
 				,MIN(ps.process_start_date) 							AS pStartDate
-				,MAX(ps.completed_product_update_date)				AS pEndDate
-				,rp.requested_due_date									AS dueDate
+				,MAX(ps.completed_product_update_date)		AS pEndDate
+				,rp.requested_due_date										AS dueDate
 				,( SELECT 
 						ppl.production_process_low_classification 
 				   FROM
@@ -54,5 +45,31 @@
 			on
 			ps.requested_product_code = rp.requested_product_code
 		GROUP BY ps.requested_product_code;
+	</select>
+	
+	<select id = "searchProductState" resultType="map" fetchSize="1000">
+		SELECT
+			 ps.requested_product_code							AS rpCode
+			,pl.process_order_num								AS orderNum
+			,ps.process_status									AS pStatus
+			,ps.process_start_date								AS pStartDate
+			,ps.completed_product_update_date				AS pEndDate
+			,pl.production_process_high_classification   AS phighClassification
+			,pl.production_process_low_classification		AS plowClassification
+
+		FROM
+			product_production_process_status AS ps
+			INNER JOIN 
+			production_process_list AS pl
+			ON 
+			ps.production_process_code = pl.production_process_code
+			WHERE ps.requested_product_code = #{requestedProductCode};
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="searchKey != null and searchKey != ''.toString()">
+				${searchKey} LIKE CONCAT('%', #{searchValue} ,'%');
+			</if>
+		</trim>
+		
+		
 	</select>
 </mapper>

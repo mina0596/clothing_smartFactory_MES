@@ -105,7 +105,7 @@ public class SystemController_LHB {
 	@PostMapping("modifyHumanResources")
 	public String modifyHumanResources(HumanResources humanResources) {
 		systemService.modifyHumanResources(humanResources);
-		return "redirect:/humanResourcesList";
+		return "redirect:humanResourcesList";
 	}
 	
 	//[한빛]사용자 삭제

@@ -128,51 +128,27 @@ layout:decorate="@{layout/default_production}">
                   <tr>
              		<th><i class="fa fa-bullhorn"></i> 번호</th>
                     <th><i class="fa fa-barcode"></i> 의뢰품목코드</th>
-                    <th><i class="fa fa-calendar"></i> 제조시작일시<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
-                    <th><i class="fa fa-bookmark"></i> 진행중인 공정</th>
                     <th><i class="fa fa-bookmark"></i> 공정순번</th>
+                    <th><i class="fa fa-bookmark"></i> 진행중인 공정</th>
+                    <th><i class="fa fa-calendar"></i> 제조시작일시<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
                     <th><i class="fa fa-calendar"></i> 제조완료일시<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
+                    <th><i class="fa fa-bookmark"></i> 상태</th>
                     <th><i class="fa fa-calendar"></i> 납기일<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-	                <td>1</td>
-                    <td>req03_WS_pants</td>
-                    <td>2021-02-01</td>
-                    <td><span class="badge bg" style="padding-top: 5px;">봉제 본봉공정</span></td>
-                    <td>4</td>
-                    <td></td>
-                    <td>2021-03-01</td>
+                  <tr th:each = "p,n : ${stateByProductList}">
+	                <td th:text ="${n.index+1}"></td>
+                    <td th:text ="${p.productCode}"></td>
+                    <td th:text ="${p.orderNum}"></td>
+                    <td th:text ="${p.lowClass}" ><span class="badge bg" style="padding-top: 5px;"></span></td>
+                    <td th:text ="${p.pStartDate}"></td>
+                    <td th:text ="${p.pEndDate}"></td>
+                    <td th:if="${p.pStatus eq '완료'}" ><span class="badge bg-important" style="padding-top: 5px;">완료</span></td>
+                    <td th:if="${p.pStatus eq '진행중'}" ><span class="badge bg-success" style="padding-top: 5px;">진행중</span></td>
+                    <td th:text ="${p.dueDate}"></td>
                   </tr>
                   
-                  <tr>
-	            	<td>2</td>
-                    <td>req11_WS_jacket</td>
-                    <td>2021-03-21</td>
-                    <td><span class="badge bg" style="padding-top: 5px;">완성가공</span></td>
-                    <td>6</td>
-                    <td>2021-03-27</td>
-                    <td>2021-03-01</td>
-                  </tr>   
-                  <tr>
-                  	<td>3</td>
-                    <td>req13_WS_jacket</td>
-                    <td>2021-03-21</td>
-                    <td><span class="badge bg" style="padding-top: 5px;">봉제 특수 공정</span></td>
-                    <td>6</td>
-                    <td>2021-03-27</td>
-                    <td>2021-03-01</td>
-                  </tr>
-                 <tr>
-	            	<td>4</td>
-                    <td>req19_WS_skirt</td>
-                    <td>2021-03-21</td>
-                    <td><span class="badge bg" style="padding-top: 5px;">재단 후공정</span></td>
-                    <td>6</td>
-                    <td></td>
-                    <td>2021-03-01</td>
-                 </tr>
                 </tbody>
               </table>
             
