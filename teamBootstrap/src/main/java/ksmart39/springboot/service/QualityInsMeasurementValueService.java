@@ -8,8 +8,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ksmart39.springboot.dao.QualityControlMapper;
 import ksmart39.springboot.dao.QualityInsMeasurementValueMapper;
 import ksmart39.springboot.domain.QualityBiochemFabricLevelStandard;
+import ksmart39.springboot.domain.QualityInspection;
 import ksmart39.springboot.domain.QualityInspectionResult;
 import ksmart39.springboot.domain.QualityInspectionStandard;
 
@@ -23,9 +25,24 @@ public class QualityInsMeasurementValueService {
 	@Autowired
 	private QualityInsMeasurementValueMapper qualityInsMeasurementValueMapper;
 	
+	//품질검사 검색
+	public List<QualityInspection> searchInspectionCode(QualityInspection qualityInspection){
+		return qualityInsMeasurementValueMapper.searchInspectionCode(qualityInspection);
+	};
+	
+	//거래처 검색
+	public List<Map<String, Object>> searchByClientName(String clientName){
+		return qualityInsMeasurementValueMapper.searchByClientName(clientName);
+	}
+	
+	//계약번호 검색
+	public List<Map<String, Object>> searchByContractNum(Map<String, Object> searchByContractNum){
+		return qualityInsMeasurementValueMapper.searchByContractNum(searchByContractNum);
+	};
+
 	//품질검사 측정값 현황
-	public List<Map<String, Object>> getQualityInspectionStatusNow(){
-		return qualityInsMeasurementValueMapper.getQualityInspectionStatusNow();
+	public List<Map<String, Object>> getQualityInspectionStatusNow(Map<String, Object> searchMap){
+		return qualityInsMeasurementValueMapper.getQualityInspectionStatusNow(searchMap);
 	}
 	
 	//품질검사 측정값 목록
