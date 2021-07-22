@@ -375,6 +375,28 @@
 		<result column="low_class_name" property="lowClassName"/>
 		</association>	
 </resultMap>
+<!--품질검사 등록  -->
+<insert id="addQualityInspection" parameterType="map">
+	INSERT INTO sub_class_inspection_list
+		(quality_inspection_code, 
+		 high_med_low_class_code,
+		 high_med_class_code,
+		 high_class_code, 
+		 sub_class_code, 
+		 sub_class_name, 
+		 sub_class_reg_date, 
+		 sub_class_update_date)
+	VALUES (sf_QualityInspectionCode(#{highMedLowClassCode}), 
+			#{highMedLowClassCode},
+			#{highMedClassCode}, 
+			#{highClassCode},
+			sf_subInspectionCode(), 
+			 #{subClassName},
+			 CURDATE(), 
+			 CURDATE())
+
+</insert>
+
 <!-- 대분류카테고리 -->
 <select id="getHighClassCate" resultType="map">
 	SELECT
@@ -470,7 +492,7 @@ UPDATE sub_class_inspection_list AS s
 		s.quality_inspection_code=#{qualityInspectionCode};
 </update>
 
-	<select id="getQualityInspectionList"  resultType="Map">
+	<select id="getQualityInspectionList"  resultType="map">
 		SELECT
 			s.quality_inspection_code,
 			h.high_class_name,
@@ -488,7 +510,8 @@ UPDATE sub_class_inspection_list AS s
 					ON s.high_med_class_code =m.high_med_class_code
 			INNER JOIN
 				high_class_inspection_list AS h
-				ON s.high_class_code = h.high_class_code;
+				ON s.high_class_code = h.high_class_code
+			ORDER BY sub_class_reg_date;	
 	</select>
 	<select id="getQualityInspectionCode" parameterType="String" resultMap="subClassInspectionMap">
 		SELECT
