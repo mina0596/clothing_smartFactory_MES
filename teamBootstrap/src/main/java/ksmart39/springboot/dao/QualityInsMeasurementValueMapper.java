@@ -12,7 +12,10 @@ import ksmart39.springboot.domain.QualityInspectionStandard;
 @Mapper
 public interface QualityInsMeasurementValueMapper {
 
-	//거래처별 검색
+	//거래처 검색
+	public List<Map<String, Object>> searchByContractNum(String clientName);
+	
+	//계약번호 검색
 	public List<Map<String, Object>> searchByContractNum(Map<String, Object> searchByContractNum);
 	
 	//품질검사 현황

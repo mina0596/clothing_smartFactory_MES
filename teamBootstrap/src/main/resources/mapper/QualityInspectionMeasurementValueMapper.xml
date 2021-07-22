@@ -46,7 +46,26 @@
 		<result property="rawMaterialCode" 						column="raw_material_code"/>
 	</resultMap>
 	
-	<!-- 품질검사 현황 계약번호 불러오기 -->
+	<!-- 품질검사 현황 거래처 검색 -->
+	<select id="searchByContractNum" resultType="Map" parameterType="String">
+		SELECT 
+			ci.client_name AS clientName
+		FROM 
+			client_info AS ci
+		INNER JOIN
+			requested_product_detail AS r ON ci.client_code = r.client_code
+		INNER JOIN
+			contract_info AS co ON co.contract_code = r.contract_code
+		<trim prefix="WHERE">
+			<if test="clientName != null and clientName != ''.toString()">
+				ci.client_name LIKE CONCAT ('%', #{clientName}, '%')
+			</if>
+		</trim>
+		GROUP BY 
+			ci.client_name;
+	</select>
+	
+	<!-- 품질검사 현황 계약번호 검색 -->
 	<select id="searchByContractNum" resultType="Map" parameterType="Map">
 		SELECT 
 			co.contract_code AS contractCode

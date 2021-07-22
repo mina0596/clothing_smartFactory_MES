@@ -74,18 +74,19 @@ $(function(){
 	//거래처 검색 모달
 	$('#byBuyer').click(function(){
 		
-		$('#searchClientModal').click(function(){
+		$('#searchClientBtn').click(function(){
 			$('.removeTr').remove();
 			html = '';
 			searchKey = '';
 			searchValue = '';
 			searchObj = {};
-			var clientName = $('input[name=clientName]').val();
+			
+			var clientName = $('#clientName').val();
 			
 			var request = $.ajax({
 				url: "/quality/searchByClientName",
 				method: "POST",
-				data: clientName,
+				data: {"clientName":clientName},
 				dataType: "json"
 			});
 			
