@@ -184,13 +184,18 @@ public class ProductionController_PMA {
 	 * "production/stateByProduct"; }
 	 */
 
-	// [민아+한빛]생산계획별 생산 현황 조회
+	
+	
+	// [민아]생산계획별 생산 현황 조회
 	@GetMapping("/stateByProductionPlan")
 	public String getStateByProductionPlan(Model model) {
 		
 		List<Map<String,Object>> achievePercentageByPlanList = productionStatusByProductionPlanService.getAchievePercentageByPlan();
+		List<Map<String,Object>> finishedProductionPlanList = productionStatusByProductionPlanService.getFinishedProductionPlanInfo();
 		model.addAttribute("achievePercentageByPlanList", achievePercentageByPlanList);
+		model.addAttribute("finishedProductionPlanList", finishedProductionPlanList);
 		log.info("achievePercentageByPlanList : {}", achievePercentageByPlanList);
+		
 		return "production/stateByProductionPlan";
 	}
 
