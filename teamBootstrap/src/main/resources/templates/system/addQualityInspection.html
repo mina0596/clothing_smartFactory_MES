@@ -14,10 +14,40 @@ layout:decorate="@{layout/default_system}">
 		$('#cancleBtn').click(function(){
 			window.history.back();
 		});
+		//품질검사 유효성 체크
+		$('#qualityInsertBtn').click(function(){
+			var inspectionName= /^[가-힣]{2,6}$/;
+			var submitFlag =true;
+			var qaulityInspecitonForm = $('#qualityinsertForm');
+		 	var highClassCateName = $('#highClassCateName');
+		 	var middleClassCateName =$('#middleClassCateName');
+		 	var lowClassCateName =$('#lowClassCateName');
+		 	var subClassName =$('#subClassName');
+			var inputOb = qaulityInspecitonForm.find('input');
+			
+			if(highClassCateName.val()==''||highClassCateName.val()== null||highClassCateName.val()==undefined ){
+				alert('품질검사대분류명을선택하세요');
+				highClassCateName.focus();
+			}else if(middleClassCateName.val()==''||middleClassCateName.val()== null||middleClassCateName.val()==undefined ){
+				alert('품질검사중분류명을선택하세요');
+				middleClassCateName.focus();
+			
+			}else if(lowClassCateName.val()==''||lowClassCateName.val()== null||lowClassCateName.val()==undefined ){
+				alert('품질검사소분류명을선택하세요');
+				lowClassCateName.focus();
+			
+			}else if(subClassName.val()==''||subClassName.val()== null||subClassName.val()==undefined ){
+				alert('품질검사소분류 상세명을입력해주세요');
+				subClassName.focus();
+			}else if(!inspectionName.test(inputOb.val())){
+				alert('품질검사소분류상세명을 한글6자리이내로 입력해주세요');
+				subClassName.focus();
+			}else{
+				$('#qualityinsertForm').submit();
+			}
+		});
 		
-		
-		
-	});
+});
 	
 	</script>
 	</th:block>	 
@@ -33,11 +63,11 @@ layout:decorate="@{layout/default_system}">
       <hr>
       <br>
       
-      <form class="form-horizontal style-form" method="post">
+      <form id="qualityinsertForm" class="form-horizontal style-form" th:action="@{/system/addQualityInspection}" method="post">
 		<div class="form-group">
 	   	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사 대분류명</label>
 	   	  		<div class="col-sm-5">
-	         	 <select class="form-control" name="highClassificationName" id="highClassCateName" >
+	         	 <select class="form-control" name="highClassCode" id="highClassCateName" >
 	              <option value="">::대분류검사명::</option>
 	              </select>
 	       	  	</div>
@@ -45,7 +75,7 @@ layout:decorate="@{layout/default_system}">
 	        <div class="form-group">
 	       	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사 중분류명</label>
 	       	  	<div class="col-sm-5">
-	           	 <select class="form-control" name="mediumClassificationName" id="middleClassCateName">
+	           	 <select class="form-control" name="highMedClassCode" id="middleClassCateName">
 	             	<option  value="">::중분류검사명::</option>
 	              </select>
 	         	 </div>
@@ -53,20 +83,21 @@ layout:decorate="@{layout/default_system}">
 	       <div class="form-group">
 	       	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사 소분류명</label>
 	       	  		<div class="col-sm-5">
-	          		<select class="form-control" name="mediumClassificationName" id="lowClassCateName">
+	          		<select class="form-control" name="highMedLowClassCode" id="lowClassCateName">
 	               		<option  value="">::소분류검사명::</option>
 		             </select>
 	          		</div>
 	        	 </div>
 	       <div class="form-group" >
 	       	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품질검사 소분류상세명</label>
+	     	  	  	
 	     	  	  	<div class="col-sm-5">
-	      			<input class="form-control" name="" type="text" >
+	      			<input class="form-control" name="subClassName" id="subClassName" type="text" disabled="disabled" >
 	         	 </div>
 	          </div> 	 
 	     <div class="form-group text-right" >
 	           <div class="col-lg-offset-2 col-lg-10">
-	             <button class="btn btn-theme" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">품질검사등록</font></font></button>
+	             <button class="btn btn-theme" id="qualityInsertBtn" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">품질검사등록</font></font></button>
 	             <button class="btn btn-theme04" type="button" id="cancleBtn"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">품질검사등록취소</font></font></button>
 	           </div>
 	          </div>
