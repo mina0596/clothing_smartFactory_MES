@@ -22,7 +22,7 @@ public class ProductStateService {
 	}
 	
 	//[한빛] 검색목록 뿌려주기
-	public List<Map<String,Object>> searchProductState(){
-		return productStateMapper.searchProductState();
+	public List<Map<String,Object>> searchProductState(String productCode){
+		return productStateMapper.searchProductState(productCode);
 	}
 }
