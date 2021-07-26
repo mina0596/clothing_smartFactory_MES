@@ -114,7 +114,6 @@ layout:decorate="@{layout/default_qualityControl}">
          <thead>
         	<tr> 
 			<th rowspan="2">no.</th> 
-			<th rowspan="2"><input type="checkbox"></th> 
 			<th rowspan="2">수주계약번호</th> 
 			<th rowspan="2">공정</th> 
 			<th rowspan="2">공정소분</th> 
@@ -144,7 +143,6 @@ layout:decorate="@{layout/default_qualityControl}">
        <tbody>
 		<tr th:if="${#lists.size(inspectionStateList) > 0}" th:each="q,i:${inspectionStateList}"> 
 			<th th:text="${i.index+1}"  scope="row" id="mandatory"></th> 
-			<td><input type="checkbox"></td> 
 			<td th:text="${q.contractCode}"></td> 
 			<td th:text="${q.highClassName}"></td> 
 			<td th:text="${q.lowClassName}"></td> 
@@ -157,6 +155,8 @@ layout:decorate="@{layout/default_qualityControl}">
 			<td th:text="${q.minTolerance}"></td>
 			<td th:text="${q.maxTolerance}"></td>
 			<td th:text="${q.insFirst}"></td>
+			<!-- <td th:if="${q.inspectionCategory().toString().equals('합격/불합격')}" th:text="${q.insFirstCheck}"></td> -->
+			<!-- <td th:if="${q.inspectionCategory().toString().equals('등급')}" th:text="${q.insFirst}"></td> -->
 			<td th:text="${q.insSecond}"></td>
 			<td th:text="${q.insThird}"></td>
 			<td th:text="${q.insStart}"></td>

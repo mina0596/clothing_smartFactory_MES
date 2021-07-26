@@ -85,15 +85,17 @@
 			,q.inspection_request_date AS inspectionRequestDate
 			,res.category AS inspectionCategory
 			,IFNULL(res.standard_tolerance,'합격/불합격') AS standardTolerance
-			,re.min_tolerance AS minTolerance
-			,re.max_tolerance AS maxTolerance
-			,IFNULL(group_concat(if(re.inspection_measurement_num='1회차', re.inspection_pass_check, NULL)),'검사시작전') AS insFirst
-			,IFNULL(group_concat(if(re.inspection_measurement_num='2회차', re.inspection_pass_check, NULL)),'검사시작전') AS insSecond
-			,IFNULL(group_concat(if(re.inspection_measurement_num='3회차', re.inspection_pass_check, NULL)),'검사시작전') AS insThird	
+			,IFNULL(res.min_value,'0') AS minTolerance
+			,IFNULL(res.max_value,'0') AS maxTolerance
+			,IFNULL(group_concat(if(re.inspection_measurement_num='1회차', re.inspection_measurement_value, NULL)),'비교') AS insFirst
+			,IFNULL(group_concat(if(re.inspection_measurement_num='2회차', re.inspection_measurement_value, NULL)),'비교') AS insSecond
+			,IFNULL(group_concat(if(re.inspection_measurement_num='3회차', re.inspection_measurement_value, NULL)),'비교') AS insThird	
+			,IFNULL(group_concat(if(re.inspection_measurement_num='1회차', re.inspection_pass_check, NULL)),'검사시작전') AS insFirstCheck
+			,IFNULL(group_concat(if(re.inspection_measurement_num='2회차', re.inspection_pass_check, NULL)),'검사시작전') AS insSecondCheck
+			,IFNULL(group_concat(if(re.inspection_measurement_num='3회차', re.inspection_pass_check, NULL)),'검사시작전') AS insThirdCheck
 			,IFNULL(group_concat(if(re.inspection_measurement_num='1회차', re.inspection_start_date, NULL)),'검사시작전') AS insStart
 			,IFNULL(group_concat(if(re.inspection_measurement_num='3회차', re.inspection_end_date, NULL)),'검사시작전') AS insEnd
 			,IFNULL(ref.low_cate_final_pass_check,'심사중') AS finalPassCheck
-				
 		FROM
 			requested_product_detail AS p
 		INNER JOIN
