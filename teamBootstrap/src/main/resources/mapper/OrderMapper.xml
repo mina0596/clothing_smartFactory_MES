@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ksmart39.springboot.dao.ContractMapper">
+<mapper namespace="ksmart39.springboot.dao.OrderMapper">
 	<resultMap type="RequestedProduct" id = "getRequestedProductList">
 		<result property="productCode" 									column="product_code"/>
 		<result property="chargeEmployeeCode" 						column="charge_employee_code"/>
@@ -21,7 +21,7 @@
 		</association>
 	</resultMap>
 	
-	<select id = "getOrderList" resultType="map" fetchSize="1000">
+	<select id="getOrderList"  resultType="map" fetchSize="1000"  >
 		SELECT
 			rpd.product_request_code					AS prCode
 			,ci.client_name								AS cName

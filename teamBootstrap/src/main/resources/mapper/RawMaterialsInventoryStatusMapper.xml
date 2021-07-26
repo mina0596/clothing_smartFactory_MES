@@ -45,7 +45,7 @@
 		INNER JOIN 
 			raw_material_info AS rmif
 		ON 
-			rmit.raw_material_code = rmit.raw_material_code
+			rmit.raw_material_code = rmif.raw_material_code
 		WHERE
 			rmit.transaction_category = '출고'
 		GROUP BY rmit.raw_material_transaction_code;

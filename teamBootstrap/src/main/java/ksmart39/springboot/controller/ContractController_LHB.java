@@ -25,12 +25,10 @@ import ksmart39.springboot.service.SupplierService;
 @RequestMapping("/contract")
 public class ContractController_LHB {
 	@Autowired
-	private final RequestedProductService requestedProductService;
 	private final OrderService orderService;
 	
 	
-	 @Autowired public ContractController_LHB(RequestedProductService requestedProductService, OrderService orderService) {
-	 this.requestedProductService = requestedProductService;
+	 @Autowired public ContractController_LHB(OrderService orderService) {
 	 this.orderService = orderService;
 	 }
 	 
@@ -54,10 +52,10 @@ public class ContractController_LHB {
 
 	//[한빛]주문서 조회
 	@GetMapping("/buyerOrderList")
-	public String getBuyerOrderList(Model model) {
-		List<Map<String,Object>> resultMap = orderService.getOrderList();
+	public String getOrderList(Model model) {
+		List<Map<String,Object>> orderList = orderService.getOrderList();
 		model.addAttribute("title", "수주관리");
-		model.addAttribute("orderList",resultMap);
+		model.addAttribute("orderList",orderList);
 		return "contract/buyerOrderList";
 	}		
 
@@ -65,7 +63,7 @@ public class ContractController_LHB {
 	@GetMapping("/modifyBuyerOrder")
 	public String modifyBuyerOrder(Model model) {
 		model.addAttribute("title", "수주관리");
-		return "contract/buyerOrderList";
+		return "contract/buyerOrderList"; //잘못됨
 	}	
 	
 	//[한빛]수주 주문서 승인완료 목록

@@ -12,5 +12,5 @@ public interface ProductStateMapper {
 	public List<Map<String,Object>> getProductState();
 	
 	//[한빛] 검색목록 뿌려주기
-	public List<Map<String,Object>> searchProductState();
+	public List<Map<String,Object>> searchProductState(String productCode);
 }
