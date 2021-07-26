@@ -8,10 +8,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-<<<<<<< HEAD
-=======
-import javax.xml.ws.Response;
->>>>>>> branch 'develop' of https://github.com/mina0596/teamOneYES.git
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
