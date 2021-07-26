@@ -29,6 +29,29 @@
 		
 	</resultMap>
 	
+	<insert id="addExwarehousing" parameterType="RawMaterialsInventory">
+			INSERT INTO raw_material_inventory_transaction
+			( raw_material_transaction_code
+			,raw_material_code
+			,raw_material_order_code
+			,charge_employee_code
+			,transaction_category
+			,raw_material_transaction_amount
+			,raw_material_transaction_date
+			,raw_material_transaction_reg_date
+			,raw_material_transaction_update_date
+		)VALUES(
+  			sf_transcationCode()
+			 ,#{materialCode}
+			 ,#{materialOrderCode}
+			 ,#{chargeEmployeeCode}
+			 ,'출고'
+			 ,#{transactionAmount}
+			 ,#{transactionDate}
+			 ,CURDATE()
+			 ,null);
+	</insert>
+	
 	<!-- [한빛] 출고 현황 목록 -->
 	<select id = "getExwarehousing" resultType ="Map" fetchSize="1000">
 		SELECT

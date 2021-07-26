@@ -45,12 +45,14 @@ public class RawMaterialsController_LHB {
 	//[한빛]출고등록
 	@GetMapping("/addExWarehousing")
 	public String addExWarehousing(Model model) {
+		model.addAttribute("title","출고관리");
 		return "rawMaterials/addExWarehousing";
 	}
 	
 	//[한빛]출고 등록 -> 조회
 	@PostMapping("/addExWarehousing")
-	public String addExWarehousing() {
+	public String addExWarehousing(RawMaterialsInventory rawMaterialsInventory) {
+		materialsInventoryStatusService.addExwarehousing(rawMaterialsInventory);
 		return "redirect:exWarehousingList";
 	}
 	

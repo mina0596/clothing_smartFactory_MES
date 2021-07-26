@@ -18,7 +18,7 @@ layout:decorate="@{layout/default_rawMaterials}">
                
                <div class="form-group">
 		          <label class="col-sm-2 col-sm-2 control-label">발주 코드 검색</label>
-		          <div class="col-md-4">
+		          <div class="col-md-6">
 		            <div  class="input-group ">
 		              <input type="text" id="raw_material_order_code" class="form-control"  size="16">
 		              <div class="input-group-btn">
@@ -30,69 +30,51 @@ layout:decorate="@{layout/default_rawMaterials}">
 		        
 		        <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">원부자재 코드</label>
-                  <div class="col-sm-4">
+                  <div class="col-sm-6">
                     <input type="text" id="raw_material_code" name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
                   </div>
                 </div>
 		        <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">재료명</label>
-                  <div class="col-sm-4">
+                  <div class="col-sm-6">
                     <input type="text" id="raw_material_name" name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
                   </div>
                 </div>
 		        <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">색상</label>
-                  <div class="col-sm-4">
+                  <div class="col-sm-6">
                     <input type="text" id="raw_material_color_name" name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
                   </div>
                 </div>
 		        <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">특징</label>
-                  <div class="col-sm-4">
+                  <div class="col-sm-6">
                     <input type="text" id="raw_material_feature" name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
                   </div>
                 </div>
 		        <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">발주 담당자 코드</label>
-                  <div class="col-sm-4">
+                  <div class="col-sm-6">
                     <input type="number"  name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
                   </div>
                 </div>
-		        <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">발주 담당자명</label>
-                  <div class="col-sm-4">
-                    <input type="number" name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
-                  </div>
-                </div>
-                
                 
 		        <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">갯수</label>
-                  <div class="col-sm-4"><!-- 값 들어오고 disabled 풀어주기 -->
-                    <input type="text" id="raw_material_order_amount" name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
+                  <label class="col-sm-2 col-sm-2 control-label">수량</label>
+                  <div class="col-sm-6"><!-- 값 들어오고 disabled 풀어주기 -->
+                    <input type="number" id="raw_material_order_amount" name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
                   </div>
                 </div>
-                
-		        <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">금액</label>
-                  <div class="col-sm-4"><!-- 값 들어오고 disabled 풀어주기 -->
-                    <input type="number" id="raw_material_order_amount" name="raw_material_transaction_amount" class="form-control">
-                  </div>
-                </div>
-		        	        
-               
-               <div class="form-group">
-		          <label class="col-sm-2 col-sm-2 control-label">입고일시</label>
-		          <div class="col-md-4">
-		            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
-		              <input type="text" class="form-control" readonly="readonly" size="16">
-		              <div class="input-group-btn">
-		                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
-		                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
-		              </div>
-		            </div>
+
+      		  
+				<div class="form-group">
+			          <label class="col-sm-2 col-sm-2 control-label">출고일시</label>
+		          <div class="col-md-6">
+					<input name="expectedProductionEndDate" id="endDate" type="date" class="form-control">
 		          </div>
-      		  </div>
+		        </div>
+      		  
+      		  
 		        <div class="form-group text-right">
 		          <div class="col-lg-offset-2 col-lg-10">
 		            <button class="btn btn-theme" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">등록</font></font></button>
@@ -109,7 +91,7 @@ layout:decorate="@{layout/default_rawMaterials}">
 		  <div class="modal-dialog" style="width:auto;display:table" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <h4 class="modal-title" id="exampleModalLabel">발주 목록 검색</h4>
+		        <h4 class="modal-title" id="exampleModalLabel">입고 목록 검색</h4>
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		          <span aria-hidden="true">&times;</span>
 		        </button>
@@ -164,6 +146,7 @@ layout:decorate="@{layout/default_rawMaterials}">
        					<td>입고예정일</td>
        					<td>발주일자</td>
        				</tr>
+       				
      				<tr>
      					<td><input type="radio" name="bySupplierModal"></td>
      					<td>1</td>

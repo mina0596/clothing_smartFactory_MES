@@ -12,8 +12,13 @@ import ksmart39.springboot.domain.RawMaterialsInventory;
 public interface RawMaterialsInventoryStatusMapper {
 	
 	
+	//[한빛] 출고 등록
+	public int addExwarehousing(RawMaterialsInventory rawMaterialsInventory);
+	
 	//[한빛] 출고현황 리스트
 	public List<Map<String,Object>> getExwarehousing();
+	
+	//========================================
 	
 	//[민아]자재 입출고 현황 리스트
 	public List<RawMaterialsInventory> getMaterialsTransactionList();

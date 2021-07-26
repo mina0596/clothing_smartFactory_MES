@@ -31,12 +31,20 @@ public class RawMaterialsInventoryStatusService {
 	}
 	
 	
+	//[한빛] 출고 등록
+	public int addExwarehousing(RawMaterialsInventory rawMaterialsInventory) {
+		int result = materialsInventoryStatusMapper.addExwarehousing(rawMaterialsInventory);
+		return result;
+	}
 	
 	//[한빛] 출고 현황
 	public List<Map<String,Object>> getExwarehousing(){
 		List<Map<String,Object>> exHousingList = materialsInventoryStatusMapper.getExwarehousing();
 		return exHousingList;
 	}
+	
+	
+	//==========================================
 	
 	//[민아]자재 입출고 현황
 	public List<RawMaterialsInventory> getRawMaterialsInventory(){
