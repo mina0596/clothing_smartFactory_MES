@@ -173,7 +173,7 @@
 								
 								//카테고리에 따른 측정값 폼 변경
 								if(data == '합격/불합격'){
-									cate = '<input type="checkbox" name="inspectionPassCheck" value="합격">합 <input type="checkbox" name="inspectionPassCheck" value="불합격">불';
+									cate = '<input type="checkbox" name="inspectionPassCheck" value="합격">합<input type="checkbox" name="inspectionPassCheck" value="불합격">불';
 									rawMaterialName = '해당없음';
 									rawMaterialCode = '해당없음';
 									
@@ -312,7 +312,7 @@
 						console.log("key: ", insKey);
 						console.log("value: ", insValue);
 						
-						if(insKey != null || insKey != undefined || insKey != ''){
+						if(insKey != null || insKey != undefined || insKey != '' || insValue != '해당없음'){
 							insInfo[insKey] = insValue;
 							validationCheck = true;
 						}	
@@ -392,7 +392,7 @@
 					//측정종료시간
 					innerHtml += '<td><input type="text" name="inspectionEndDate" class="form-control" placeholder="yyyy-MM-dd hh:mm:ss""></td>';
 					//등록버튼
-					innerHtml += '<td><button type="button" id="addInsValue">등록</button></td>';
+					innerHtml += '<td><button type="button" id="addInsValueSBtn">등록</button></td>';
 					
 					if(i == (count - 1)){
 						innerHtml += '<td><button type="button" class="removeButton">삭제</button></td>';

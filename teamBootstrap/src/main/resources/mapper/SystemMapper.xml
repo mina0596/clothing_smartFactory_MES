@@ -376,6 +376,54 @@
 		<result column="low_class_name" property="lowClassName"/>
 		</association>	
 </resultMap>
+<!--품질검사 조회  -->
+<select id="searchInspectionList" parameterType="hashmap" resultType="map">
+		SELECT
+			s.quality_inspection_code,
+			h.high_class_code,
+			h.high_class_name,
+			m.high_med_class_code,
+			m.med_class_code,
+			m.med_class_name,
+			l.high_med_low_class_code,
+			l.low_class_code,
+			l.low_class_name,
+			s.sub_class_code,
+			s.sub_class_name,
+			DATE_FORMAT(s.sub_class_reg_date,'%Y-%m-%d %T') AS inspection_reg_date
+		FROM sub_class_inspection_list AS s
+			INNER JOIN
+				low_class_inspection_list AS l
+					ON s.high_med_low_class_code = l.high_med_low_class_code
+			INNER JOIN
+				medium_class_inspection_list AS m
+					ON s.high_med_class_code =m.high_med_class_code
+			INNER JOIN
+				high_class_inspection_list AS h
+				ON s.high_class_code = h.high_class_code
+			<trim prefix="WHERE" prefixOverrides="AND">
+			<if test="highClassCateName != null and highClassCateName != ''.toString()">	
+				AND h.high_class_code=#{highClassCateName}
+			</if>
+			<if test="middleClassCateName != null and middleClassCateName != ''.toString()">	
+				AND m.high_med_class_code=#{middleClassCateName}
+			</if>	
+			<if test="lowClassCateName != null and lowClassCateName != ''.toString()">
+				AND l.high_med_low_class_code=#{lowClassCateName}
+			</if>	
+			</trim>
+		ORDER BY sub_class_reg_date;	
+</select>
+
+<!--품질검사 삭제  -->
+<delete id="deleteQualityInspection" parameterType="String">
+DELETE
+FROM
+sub_class_inspection_list
+WHERE quality_inspection_code =#{checkArray};
+
+</delete>
+
 <!--품질검사 등록  -->
 <insert id="addQualityInspection" parameterType="map">
 	INSERT INTO sub_class_inspection_list

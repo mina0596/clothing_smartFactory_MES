@@ -7,6 +7,8 @@ layout:decorate="@{layout/default_system}">
 	   <div class="border-head"> 
 	    <h3 ></h3>
 	    </div>
+	<script type="text/javascript" th:src="@{/systemQuality/systemQualityInspection.js}"></script>	  	    
+<script type="text/javascript" th:src="@{/systemQuality/systemQualityInspectionList.js}"></script>	  	    	    
 <th:block layout:fragment="customJs">
 	<script>
 	$(function(){
@@ -18,66 +20,7 @@ layout:decorate="@{layout/default_system}">
 							$('.check').prop('checked',false);
 						}
 					});
-
-			//삭제하기
-			var tableAttr = $('#inspectionList').children();
-			var tdList = tableAttr.find('.check');
-			
-			
-			$('#delBtn').click(function(){
-				var checkArray = new Array();
-				var checkList =$('input[name= "check"]');
-				//체크박스에  체크 된 체크박스의 값을 반복을 돌린다 
-				//체크된체크박스의값을 checkArray에 담아준다.
-				for(var i =0; i < checkList.length; i++){
-					if(checkList[i].checked){
-						checkArray.push(checkList[i].value);
-					}
-					console.log(checkArray);
-				}//체크된 체크박스의 길이가 0이면 품질검사항목이없다.
-				if(checkArray.length == 0){
-					alert("선택된 품질검사항목이 없습니다.");
-				}else{
-					var chk= confirm("정말로삭제하시겠습니까?");
-					var request = $.ajax({
-						typ:"POST",
-						url:"/system/deleteInspection",
-						data:{checkArray:checkArray}
-					});
-					request.done(function( data ) {
-						if(data = 1){
-							alert("품질검사 항목이 삭제되었습니다.");
-							location.replace("qualityInspectionList")
-						}else{
-							alret("품질검사항목 삭제 실패되었습니다.");
-						}
-						
-					});
-					request.fail(function( jqXHR, textStatus ) {
-						alert( "Request failed: " + textStatus );
-					});	
-				}
-				
-				
-			});
-			
-		/* 	$('#delBtn').click(function(){
-				tdList = tableAttr.find('.check');
-				var parent = tdList.parent();
-				parent.each(function(){
-					console.log($(this).parent());	
-					var removeRow = $(this).parent();			
-					if($(this).find('.check').is(':checked')){		
-						removeRow.remove();
-					}
-				});
-
-			}); */
-			
-			
-			
-			
-				});
+});
 
 
 	</script>
@@ -110,29 +53,30 @@ layout:decorate="@{layout/default_system}">
          		<tr>
          			<td style="padding-right: 20px;">
          				<div class="form-group">
-		                	<select class="form-control" style="width: 125px;" name="highClassificationName" id="highClassificationName" onchange="getSelectBox(this)">
+		                	<select class="form-control" style="width: 125px;" name="highClassificationName" id="highClassCateName" >
 		                		<option value="">대분류 검사명</option>
-		                		
 		                	</select>
 	               		</div>
          			</td>
          			<td style="padding-right: 20px;">
          				<div class="form-group">
-		                	<select class="form-control" style="width: 125px;" name="mediumClassificationName" id="mediumClassificationName" onchange="getSelectBox(this)" >
+		                	<select class="form-control" style="width: 125px;" name="mediumClassificationName" id="middleClassCateName"  >
 		                		<option value="">중분류검사명</option>
-		                		
-		                	
 		                	</select>
 	               		</div>
          			</td>
          			<td style="padding-right: 20px;">
          				<div class="form-group">
-		                	<input type=text class="form-control"  placeholder="소분류검사명입력하세요">
+		                	<select class="form-control" style="width: 125px;"  id="lowClassCateName"  >
+		                		<option value="">소분류검사명</option>
+		                	</select>
 	               		</div>
          			</td>
 	         	
+         			
+	         	
          			<td>
-         				  <button type="submit" class="btn btn-theme">검색</button>
+         				  <button type="button" id="inspectionSearchBtn" class="btn btn-theme">검색</button>
          			</td>        			
          		</tr>
          	</tbody>
@@ -159,10 +103,10 @@ layout:decorate="@{layout/default_system}">
                     <th></th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="inspectionTbody">
                   <tr th:if="${#lists.size(qualityInspectionList) > 0}" th:each="l,i: ${qualityInspectionList}" >
-                   <td class="hidden-phone">
-                      <input type="checkbox" class="check" name="check" value="${i.index+1}">
+                   <td>
+                      <input type="checkbox" class="check" name="check" th:value="${l.quality_inspection_code}">
                     </td>
                     <td th:text="${i.index+1}"><a id="infoBtn"></a></td>
                     <td th:text="${l.quality_inspection_code}"></td>
@@ -174,7 +118,7 @@ layout:decorate="@{layout/default_system}">
                     <td th:text="${l.sub_class_reg_date}" >
                      	
                     </td>
-                   <td>  <button class="btn btn-warning btn-xs" type="button" onclick="location.href='/addStandardTable'"><i class="fa fa-pencil"></i>기준표등록</button></td>
+                   <td> <a th:href="@{/quality/addStandardTable}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i>기준표등록</a> </td>
                    <td>  <a th:href="@{/system/modifyQualityInspection(qualityInspectionCode=${l.quality_inspection_code})}" class="btn btn-primary btn-xs"> <i class="fa fa-pencil"></i>수정</a></td>
                    
                   </tr>
