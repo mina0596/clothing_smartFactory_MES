@@ -32,9 +32,34 @@ $(function(){
 				}
 			});
 
-		});
-			});
+		});	
+});
 
+/* 페이지 이동 ( 페이징 처리 callback 함수 ) */
+fncGoLink = function(currPage, pageSize, section){
+  $("input[name='currPage']").val(currPage);
+  $("input[name='pageSize']").val(pageSize);
+  if(section === 'PC') $("#dev_nodeList").empty();
+  fncListSearch();	// 목록 조회 함수 호출
+};
+
+/* 목록 조회 함수 */
+fncListSearch = function(){
+  $.ajax({
+    type   : 'POST',
+    url    : 'searchUrl 세팅',
+    data   : $('form').serialize(),
+    success: function(data){
+      // 페이징 처리 ( parameter : target, 리스트 전체 개수, 리스트 전체, 현재 페이지, callback 함수명 )
+      customPaging('.paginate', data.totCnt, data.list, $("input[name='currPage']").val(), 'fncSearchLinkList');
+      
+      // 리스트 그리기 ...
+      // .....
+      $('.listBody').append('리스트 html');
+    }
+  });
+};
+//https://dev-gabriel.tistory.com/31
 
 </script>
 </th:block>
@@ -94,6 +119,10 @@ $(function(){
 			<h4><i class="fa fa-folder"></i> 작업지시 목록</h4>
 			          <hr>
 	         <div class="content-panel">
+	         <form>
+	         	<input type="hidden" name="currPage"/>
+	         	<input type="hidden" name="pageSize"/>
+	         </form>
               <table class="table table-striped table-advance table-hover" id="workerOrderList">
                 <thead>
                   <tr>
@@ -140,6 +169,7 @@ $(function(){
           <!-- /col-md-12 -->
         </div>
         <!-- /row -->
+
 </th:block>
 
 </html>
