@@ -30,12 +30,11 @@ $(function(){
 
 		}); 
 		request.done(function( data ) {
-			var contractCode = data[0].contractCode;
 			$('.searchInspectionResult').show();
 			$('.stateContractInspectionList').hide();
 			$('#searchContractInspectionList' ).empty();
-			 if(data.length > 0){
-				 
+			 if(data.length > 0){				 
+				 var contractCode = data[0].contractCode;
 			        for(i=0; i<data.length; i++){
 			        	html +="<tr>";
 			        	html += "<th scope='row' id='mandatory'>"+[i + 1]+"</th>";
