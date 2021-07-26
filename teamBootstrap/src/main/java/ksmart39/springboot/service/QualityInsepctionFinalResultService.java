@@ -67,4 +67,7 @@ public class QualityInsepctionFinalResultService {
 			
 			return qualityInsepctionFinalResultMapper.getInsepectionFinalResult();
 		}
+		
+		//[민아]품질검사 최종결과 결과 처리
+		
 }

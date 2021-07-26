@@ -208,5 +208,23 @@
 		ON r.client_code = c.client_code
 
 </select>
+	<select id="hello">
+		SELECT 
+				if((SELECT 
+							COUNT(ir.inspection_pass_check)
+						 FROM 
+							inspection_result AS ir
+						 WHERE 
+							ir.quality_inspection_request_code = i.quality_inspection_request_code
+							AND 
+							ir.inspection_pass_check = '합격') > 1, '합격','불합격') AS inspectionPassCheck
+				FROM 
+					inspection_result AS i
+				WHERE 
+					i.quality_inspection_request_code = 'QC_REQUEST_0019'
+				GROUP BY i.quality_inspection_request_code;
+	</select>
+
+	
 
 </mapper>
