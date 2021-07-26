@@ -100,6 +100,8 @@ layout:decorate="@{layout/default_qualityControl}">
                     <th><i class=" fa fa-bookmark"></i>품질검사코드</th>
                     <th><i class=" fa fa-bookmark"></i>불량원인</th>
                     <th><i class=" fa fa-bookmark"></i>처리방법</th>
+                    <th><i class=" fa fa-bookmark"></i>비고</th>
+                    <th><i class=" fa fa-bookmark"></i>품질검사결과코드</th>
                     <th><i class=" fa fa-bookmark"></i>등록일자</th>
                     <th><i class=" fa fa-bookmark"></i>수정</th>
                   </tr>
@@ -110,12 +112,14 @@ layout:decorate="@{layout/default_qualityControl}">
                   <tr th:each=" d,n : ${defectiveProduct}">
                   	<td><input type="checkbox" class="checked"></td>
                   	<td th:text="${n.index+1}"></td>
-                    <td th:text="${d.defectiveProductCode}"></td>
-                    <td th:text="${d.qualityInspectionRequestCode}"></td>
-                    <td th:text="${d.qualityInspectionCode}"></td>
-                    <td th:text="${d.defectCause}"></td>
-                    <td th:text="${d.defectiveProductMeasure}"></td>
-                    <td th:text="${d.defectiveProductRegDate}"></td>
+                    <td th:text="${d.dpCode}"></td>
+                    <td th:text="${d.qirCode}"></td>
+                    <td th:text="${d.qiCode}"></td>
+                    <td th:text="${d.dCause}"></td>
+                    <td th:text="${d.dpMeasure}"></td>
+                    <td th:text="${d.mNote}"></td>
+                    <td th:text="${d.irCode}"></td>
+                    <td th:text="${d.dpRegDate}"></td>
                     <td>  <button class="btn btn-primary btn-xs" type="button" onclick="location.href='/modifyDefectiveProduct'"><i class="fa fa-pencil"></i>수정</button></td>
                   </tr>
                   

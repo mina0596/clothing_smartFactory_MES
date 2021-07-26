@@ -63,7 +63,7 @@ layout:decorate="@{layout/default_system}">
                 <tbody>
                   <tr th:each=" c,n : ${client}">
                   	<td><input type="checkbox"  class="checked"  th:value="${c.clientCode}"></td>
-                    <td th:text = ${n.index+1}></td>
+                    <td th:text = "${n.index+1}"></td>
                     <td th:if="${c.clientCategory eq '수주'}"><span class="badge bg-important" style="padding-top: 5px;">수주</span></td>
                     <td th:if="${c.clientCategory eq '발주'}"><span class="badge bg-info" style="padding-top: 5px;">발주</span></td>
                     <td th:if="${c.clientCategory eq '운송'}"><span class="badge bg-primary" style="padding-top: 5px;">운송</span></td>   

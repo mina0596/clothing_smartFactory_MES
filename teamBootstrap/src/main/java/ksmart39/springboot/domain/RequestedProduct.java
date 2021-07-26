@@ -18,6 +18,12 @@ public class RequestedProduct {
 	
 	private Client client;
 	
+	public Client getClient() {
+		return client;
+	}
+	public void setClient(Client client) {
+		this.client = client;
+	}
 	public String getRequestedProductCode() {
 		return requestedProductCode;
 	}
@@ -102,7 +108,6 @@ public class RequestedProduct {
 	public void setRequestedProductDetailUpdateDate(String requestedProductDetailUpdateDate) {
 		this.requestedProductDetailUpdateDate = requestedProductDetailUpdateDate;
 	}
-	
 	@Override
 	public String toString() {
 		return "RequestedProduct [requestedProductCode=" + requestedProductCode + ", productCode=" + productCode
@@ -112,7 +117,9 @@ public class RequestedProduct {
 				+ requestedDeliveryAddress + ", requestedDeliveryTel=" + requestedDeliveryTel
 				+ ", requestedSpecialNote=" + requestedSpecialNote + ", approvalStatus=" + approvalStatus
 				+ ", requestedProductDetailRegDate=" + requestedProductDetailRegDate
-				+ ", requestedProductDetailUpdateDate=" + requestedProductDetailUpdateDate + "]";
+				+ ", requestedProductDetailUpdateDate=" + requestedProductDetailUpdateDate + ", client=" + client + "]";
 	}
+	
+
 	
 }

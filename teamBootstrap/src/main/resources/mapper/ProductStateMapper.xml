@@ -63,13 +63,7 @@
 			production_process_list AS pl
 			ON 
 			ps.production_process_code = pl.production_process_code
-			WHERE ps.requested_product_code = #{requestedProductCode};
-		<trim prefix="WHERE" prefixOverrides="AND |OR ">
-			<if test="searchKey != null and searchKey != ''.toString()">
-				${searchKey} LIKE CONCAT('%', #{searchValue} ,'%');
-			</if>
-		</trim>
-		
+			WHERE ps.requested_product_code = #{productCode};
 		
 	</select>
 </mapper>

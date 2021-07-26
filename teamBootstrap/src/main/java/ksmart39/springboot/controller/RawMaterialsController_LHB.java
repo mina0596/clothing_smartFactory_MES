@@ -40,35 +40,27 @@ public class RawMaterialsController_LHB {
 	}
 	
 	
-	//===================================================================
-	//[한빛]소요별 자재등록
-	@GetMapping("/addMaterialsUse")
-	public String addMaterialsUse() {
-		return "rawMaterials/addMaterialsUse";
-	}
 	
-	//[한빛]소요별 자재 등록 -> 조회
-	@PostMapping("/addMaterialsUse")
-	public String addExWarehousing(@RequestParam(value = "raw_material_name", required = false )String raw_material_name) {	
-		return "redirect:/materialsUseList";
-	}
-	
-	//[한빛]소요별 자재조회/목록
-	@GetMapping("/materialsUseList")
-	public String getMaterialsUseList() {
-		return "rawMaterials/materialsUseList";
-	}
-
 	//===================================================================
 	//[한빛]출고등록
 	@GetMapping("/addExWarehousing")
-	public String addExWarehousing() {
+	public String addExWarehousing(Model model) {
+		model.addAttribute("title","출고관리");
 		return "rawMaterials/addExWarehousing";
+	}
+	
+	//[한빛]출고 등록 -> 조회
+	@PostMapping("/addExWarehousing")
+	public String addExWarehousing(RawMaterialsInventory rawMaterialsInventory) {
+		materialsInventoryStatusService.addExwarehousing(rawMaterialsInventory);
+		return "redirect:exWarehousingList";
 	}
 	
 	//[한빛]출고현황
 	@GetMapping("/exWarehousingList")
-	public String getExWarehousingList() {
+	public String getExWarehousingList(Model model) {
+		List<Map<String,Object>> exHousingList = materialsInventoryStatusService.getExwarehousing();
+		model.addAttribute("exHousingList",exHousingList);
 		return "rawMaterials/exWarehousingList";
 	}
 
