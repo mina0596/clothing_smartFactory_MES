@@ -111,6 +111,18 @@ public class SystemService {
 	}
 	
 	//=============================================================
+	//[보람]품질검사 조회목록
+	public List<Map<String,Object>>searchInspectionList(HashMap map){
+		return systemMapper.searchInspectionList(map);
+		
+	}
+	
+	
+	//[보람]품질검사 목록 삭제 
+	public int deleteQualityInspection(String checkArray) {
+	 return systemMapper.deleteQualityInspection(checkArray);
+	}
+	
 	//[보람]품질검사 등록 
 	public int addQualityInspection(String highClassCode,String highMedClassCode,String highMedLowClassCode,String subClassName) {
 		

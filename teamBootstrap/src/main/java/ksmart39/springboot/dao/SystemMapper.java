@@ -1,5 +1,6 @@
 package ksmart39.springboot.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -65,6 +66,13 @@ public interface SystemMapper {
 	
 	
 	/****************************************************************************/
+
+	
+	//[보람]품질검사 조회목록
+	public List<Map<String,Object>>searchInspectionList(HashMap map);
+	
+	//[보람]품질검사 목록 삭제 
+	public int deleteQualityInspection(String checkArray);
 	//[보람] 품질검사등록
 	public int addQualityInspection(Map<String, Object> qualityMap);
 	
@@ -76,9 +84,8 @@ public interface SystemMapper {
 	
 	
 	
-	//[보람 ]품질검사 리스트 조회메서드
-	
-	 public List<Map<String, Object>> getQualityInspectionList();
+	//[보람 ]품질검사 리스트 
+	public List<Map<String, Object>> getQualityInspectionList();
 	
 	/** 카테고리 4번 ajax로해야고  그것을 dto로 해서 map으로 해서 등록하면 된다고하심 
 	 * 일단 ajax부터 성공하고나서 dto로 map 해서 해보기 안되면 물어보기***/
