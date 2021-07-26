@@ -22,7 +22,7 @@ layout:decorate="@{layout/default_rawMaterials}">
 		            <div  class="input-group ">
 		              <input type="text" id="raw_material_order_code" class="form-control"  size="16">
 		              <div class="input-group-btn">
-		                <button type="button" id="search" class=" btn btn-theme03 btn btn-default"><i class="fa"></i>검색하여 가져오기</button>
+		                <button type="button" id="search" class=" btn btn-theme03 btn btn-default"  th:href="@{/rawMaterials/getSupplierRequest}"><i class="fa"></i>검색하여 가져오기</button>
 		              </div>
 		            </div>
 		          </div>
@@ -34,28 +34,11 @@ layout:decorate="@{layout/default_rawMaterials}">
                     <input type="text" id="raw_material_code" name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
                   </div>
                 </div>
-		        <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">재료명</label>
-                  <div class="col-sm-6">
-                    <input type="text" id="raw_material_name" name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
-                  </div>
-                </div>
-		        <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">색상</label>
-                  <div class="col-sm-6">
-                    <input type="text" id="raw_material_color_name" name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
-                  </div>
-                </div>
-		        <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">특징</label>
-                  <div class="col-sm-6">
-                    <input type="text" id="raw_material_feature" name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
-                  </div>
-                </div>
+
 		        <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">발주 담당자 코드</label>
                   <div class="col-sm-6">
-                    <input type="number"  name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
+                    <input type="text"  name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
                   </div>
                 </div>
                 
@@ -135,7 +118,6 @@ layout:decorate="@{layout/default_rawMaterials}">
        			<tbody style="text-align: center;">
        				<tr>
        					<td><i class="fa fa-check"></i></td>
-       					<td>no.</td>
        					<td>발주코드</td>
        					<td>원부자재 코드</td>
        					<td>거래처명</td>
@@ -149,61 +131,16 @@ layout:decorate="@{layout/default_rawMaterials}">
        				
      				<tr>
      					<td><input type="radio" name="bySupplierModal"></td>
-     					<td>1</td>
-       					<td class="raw_material_order_code">123456</td>
-       					<td class="raw_material_code">원부자재 코드</td>
-       					<td>나는 단추</td>
-       					<td class="raw_material_name">단추</td>
-       					<td class="raw_material_color_name">뻘건색</td>
-       					<td class="raw_material_feature">특징1</td>
-       					<td class="raw_material_order_amount">100</td>
-       					<td>2021-02-22</td>
-       					<td>2021-02-10</td>
+       					<td class="raw_material_order_code"></td>
+       					<td class="raw_material_code"></td>
+       					<td></td>
+       					<td class="raw_material_name"></td>
+       					<td class="raw_material_color_name"></td>
+       					<td class="raw_material_feature"></td>
+       					<td class="raw_material_order_amount"></td>
+       					<td></td>
+       					<td></td>
      				</tr>
-     				<tr>
-     					<td><input type="radio" name="bySupplierModal"></td>
-     					<td>1</td>
-       					<td class="raw_material_order_code">123</td>
-       					<td class="raw_material_code">원부자재 코드1</td>
-       					<td>나는 단추1</td>
-       					<td class="raw_material_name">단추1</td>
-       					<td class="raw_material_color_name">뻘건색1</td>
-       					<td class="raw_material_feature">특징1</td>
-       					<td class="raw_material_order_amount">1001</td>
-       					<td>2021-02-22</td>
-       					<td>2021-02-10</td>
-     				</tr>
-     				<tr>
-     					<td><input type="radio" name="bySupplierModal"></td>
-     					<td>1</td>
-       					<td class="raw_material_order_code">1233</td>
-       					<td class="raw_material_code">원부자재 코드2</td>
-       					<td>나는 단추2</td>
-       					<td class="raw_material_name">단추2</td>
-       					<td class="raw_material_color_name">뻘건색2</td>
-       					<td class="raw_material_feature">특징2</td>
-       					<td class="raw_material_order_amount">1002</td>
-       					<td>2021-02-22</td>
-       					<td>2021-02-10</td>
-     				</tr>
-     				<tr>
-     					<td><input type="radio" name="bySupplierModal"></td>
-     					<td>1</td>
-       					<td class="raw_material_order_code">3333</td>
-       					<td class="raw_material_code">원부자재 코드3</td>
-       					<td>나는 단추3</td>
-       					<td class="raw_material_name">단추3</td>
-       					<td class="raw_material_color_name">뻘건색3</td>
-       					<td class="raw_material_feature">특징3</td>
-       					<td class="raw_material_order_amount">1003</td>
-       					<td>2021-02-22</td>
-       					<td>2021-02-10</td>
-     				</tr>
-     				
-     				
-     				
-     				
-     				
        			</tbody>        		
          	</tbody>
          </table> 
@@ -218,18 +155,31 @@ layout:decorate="@{layout/default_rawMaterials}">
 		</div>
      
       <script type="text/javascript">
-			$(function(){
-				
 				$('#search').click(function(){
 					$('#bySupplierModal').modal("show");
+					
+					var approval = '승인';
+					console.log(approval);
+					$.ajax({
+						url: "getSupplierRequest",
+						method : 'get',
+						async: true,
+						dataType : "json",
+						data : {'approval' : approval},
+						success: function(data){
+							if(data != null && data != '' && data != undefined){
+								for(var i=0; i<data.length; i++){
+									console.log(data[i]);
+								}
+							}
+						}	
+					});
 					
 				 	$('#saveSupplier').click(function(){
 						var check = $('input[name=bySupplierModal]:checked');
 						var checkTr = check.parent().parent();
 						var raw_material_order_code = checkTr.find('.raw_material_order_code').text();
 						var raw_material_code = checkTr.find('.raw_material_code').text();
-						var raw_material_name = checkTr.find('.raw_material_name').text();
-						var raw_material_color_name = checkTr.find('.raw_material_color_name').text();
 						var raw_material_feature = checkTr.find('.raw_material_feature').text();
 						var raw_material_order_amount = checkTr.find('.raw_material_order_amount').text();
 						$('#raw_material_order_code').attr('value',raw_material_order_code);
@@ -241,7 +191,6 @@ layout:decorate="@{layout/default_rawMaterials}">
 						$('#raw_material_order_amount').attr('disabled',false);
 					}); 
 				});	
-			});
 				
      </script>
      </th:block>

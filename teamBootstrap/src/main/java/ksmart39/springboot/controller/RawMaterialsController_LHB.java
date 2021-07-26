@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ksmart39.springboot.domain.HumanResources;
 import ksmart39.springboot.domain.RawMaterials;
 import ksmart39.springboot.domain.RawMaterialsInventory;
+import ksmart39.springboot.domain.SupplierRequest;
 import ksmart39.springboot.service.RawMaterialsInventoryStatusService;
 import ksmart39.springboot.service.RawMaterialsService;
 
@@ -63,5 +64,12 @@ public class RawMaterialsController_LHB {
 		model.addAttribute("exHousingList",exHousingList);
 		return "rawMaterials/exWarehousingList";
 	}
-
+	
+	
+	@GetMapping("/getSupplierRequest")
+	@ResponseBody
+	public List<SupplierRequest> getSupplierRequest(@RequestParam(name = "approval", required = false )String approval) {
+		List<SupplierRequest> supplierRequest = materialsInventoryStatusService.getSupplierRequest(approval); 
+		return supplierRequest;
+	}
 }

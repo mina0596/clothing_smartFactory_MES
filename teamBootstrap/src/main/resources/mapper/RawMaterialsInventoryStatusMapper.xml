@@ -29,6 +29,15 @@
 		
 	</resultMap>
 	
+	<resultMap type="SupplierRequest"  id="supplierRequestResultMap">
+			<result property="rawMeterialOrderCode" column="raw_material_order_code"/>
+			<result property="rawMeterialCode" column="raw_material_code"/>
+			<result property="clientCode" column="client_code"/>
+			<result property="chargeEmployeeCode" column="charge_employee_code"/>
+			<result property="supplierContractCode" column="contract_code"/>
+			<result property="rawMeterialOrderAmount" column="raw_material_order_amount"/>
+	</resultMap>
+	
 	<insert id="addExwarehousing" parameterType="RawMaterialsInventory">
 			INSERT INTO raw_material_inventory_transaction
 			( raw_material_transaction_code
@@ -183,6 +192,20 @@
 			join
 			(SELECT @total :=0) AS initial) AS subSubSelect
 		ORDER BY subSubSelect.finalTransDate DESC LIMIT 1;
+	</select>
+	
+	<select id="getSupplierRequest"  resultMap="supplierRequestResultMap"  resultType="SupplierRequest"  fetchSize="1000">
+		SELECT 
+			raw_material_order_code
+			, raw_material_code
+			, client_code
+			, charge_employee_code
+			, contract_code
+			, raw_material_order_amount
+		FROM 
+			raw_material_order
+		WHERE 	
+			raw_material_order_approval = #{approval};
 	</select>
 </mapper>
 
