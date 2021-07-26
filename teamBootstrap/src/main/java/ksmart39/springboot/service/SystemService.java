@@ -28,11 +28,6 @@ public class SystemService {
 	private SystemMapper systemMapper;
 
 
-	//[민아]원부자재 전체 리스트 조회
-	public List<RawMaterials> getMaterialsList(){
-		List<RawMaterials> rawMaterialsList = systemMapper.getMaterialsList();
-		return rawMaterialsList;
-	};
 	
 	//============================================================
 	//[한빛]회원전체조회(levelName포함)
@@ -40,24 +35,24 @@ public class SystemService {
 		List<HumanResources> humanResources = systemMapper.getHumanResources(paramMap);
 		return humanResources;
 	}
-	//회원정보 등록
+	//[한빛] 회원정보 등록
 	public int addHumanResources (HumanResources humanResources) {
 		int result = systemMapper.addHumanResources(humanResources);
 		return result;
 	}	
-	//회원정보 조회
+	//[한빛] 회원정보 조회
 	public HumanResources getEmployeeInfoById(String employeeId) {
 		return systemMapper.getEmployeeInfoById(employeeId);
 	}
-	//회원정보 조회
+	//[한빛] 회원정보수정 뿌려주기
 	public HumanResources getEmployeeInfoByCode(String employeeCode) {
 		return systemMapper.getEmployeeInfoByCode(employeeCode);
 	}
-	//회원정보 수정
+	//[한빛]회원정보 수정
 	public int modifyHumanResources (HumanResources humanResources) {
 		return systemMapper.modifyHumanResources(humanResources);
 	}
-	//회원정보 삭제
+	//[한빛]회원정보 삭제
 	public int deleteHumanResources(List<String> delArr) {
 		return systemMapper.deleteHumanResources(delArr);
 	};	
@@ -167,5 +162,12 @@ public class SystemService {
 	 { return	
 			  systemMapper.getQualityInspectionList();
 	 }
+	 
+
+		//[민아]원부자재 전체 리스트 조회
+		public List<RawMaterials> getMaterialsList(){
+			List<RawMaterials> rawMaterialsList = systemMapper.getMaterialsList();
+			return rawMaterialsList;
+		};
 	 
 }
