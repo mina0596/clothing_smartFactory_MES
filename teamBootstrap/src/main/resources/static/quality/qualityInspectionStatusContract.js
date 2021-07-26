@@ -30,10 +30,12 @@ $(function(){
 
 		}); 
 		request.done(function( data ) {
+			var contractCode = data[0].contractCode;
 			$('.searchInspectionResult').show();
 			$('.stateContractInspectionList').hide();
 			$('#searchContractInspectionList' ).empty();
 			 if(data.length > 0){
+				 
 			        for(i=0; i<data.length; i++){
 			        	html +="<tr>";
 			        	html += "<th scope='row' id='mandatory'>"+[i + 1]+"</th>";
@@ -59,6 +61,7 @@ $(function(){
 			        html += "<tr><td colspan='17' style='text-align: center;'> 검색된 결과가 없습니다. </td></tr>";
 			        }
 			       $('#searchContractInspectionList').append(html);
+			       $('#contractNum').text(contractCode);
 		});
 		request.fail(function( jqXHR, textStatus ) {
 			alert( "Request failed: " + textStatus );

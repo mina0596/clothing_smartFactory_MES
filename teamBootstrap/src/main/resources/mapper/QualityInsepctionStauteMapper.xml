@@ -13,7 +13,7 @@
 			,sub.sub_class_name AS subClassName
 			,p.requested_product_code AS requestProductCode
 			,pc.detailed_categorized_name AS detailedCateName
-			,q.inspection_request_date AS inspectionRequestDate
+			,DATE_FORMAT(q.inspection_request_date,'%Y-%m-%d %T') AS inspectionRequestDate
 			,res.category AS inspectionCategory
 			,IFNULL(res.standard_tolerance,'합격/불합격') AS standardTolerance
 			,re.min_tolerance AS minTolerance

@@ -63,14 +63,15 @@ layout:decorate="@{layout/default_qualityControl}">
 		<br>
 		<div id="print" class="searchInspectionResult">
 		 <h4><i class="fa fa-angle-right"></i> 수주계약번호별 현황 검색 결과</h4> 
-          	 <table>
-          	 <thead><tr> 수주계약번호<th th:text="${clientName}"></th> 로 검색한 결과 입니다.<tr></thead><button id="printS" class="btn btn-primary btn-xs" onClick="content_print()"><i class="fa fa-print"></i></button><br><br></table>   
+          	 <div> 수주계약번호 <div id="contractNum" style="display: inline; font-weight: bold;"></div> 로 검색한 결과 입니다.
+          	  <button id="printS" class="btn btn-primary btn-xs" onClick="content_print()"><i class="fa fa-print"></i></button></div>
+          	 
+          	  
 		
 			<table style="border-color: #8c8c8c;" class="table table-bordered table-striped table-condensed " id="searchList">
 	         <thead>
 	        	<tr> 
 				<th rowspan="2">no.</th> 
-				
 				<th rowspan="2">공정</th> 
 				<th rowspan="2">공정소분</th> 
 				<th rowspan="2">공정세분</th> 
@@ -82,7 +83,6 @@ layout:decorate="@{layout/default_qualityControl}">
 				<th colspan="3" scope="colgroup" id="second">측정값</th> 
 				<th colspan="2" scope="colgroup" id="second">처리정보</th> 
 				<th rowspan="2">최종합격여부</th> 
-				
 			</tr> 
 			<tr> 
 				<th scope="col" id="hong">기준값</th> 

@@ -39,7 +39,7 @@ public class QualityControlController_HBR {
 	//[다미&보람] 수주계약별 검색 
 	@RequestMapping(value = "searchQualityInspection",method = RequestMethod.GET)
 	@ResponseBody
-	public List<Map<String,Object>> getSearchQualityInspectionState(@RequestParam(value ="bySupplierValue",required = false)String bySupplierValue,
+	public List<Map<String,Object>> getSearchQualityInspectionState(Model model,@RequestParam(value ="bySupplierValue",required = false)String bySupplierValue,
 																	@RequestParam(value = "clientName",required = false)String clientName,
 																	@RequestParam(value = "requestProductName", required = false)String requestProductName,
 																	@RequestParam(value = "inspectionStartDate", required = false)String inspectionStartDate,
@@ -55,7 +55,7 @@ public class QualityControlController_HBR {
 		map.put("inspectionStartDate", inspectionStartDate);
 		map.put("inspectionEndDate", inspectionEndDate);
 		List<Map<String, Object>> stateMap = qualityInsepctionStauteService.getSearchQualityInspectionState(map);
-		 
+		model.addAttribute("stateMap", stateMap);
 		return stateMap;
 	}
 	
