@@ -131,9 +131,10 @@ layout:decorate="@{layout/default_system}">
              
                     <div class=" col-xs-12 text-right">
                    
-                      <button class="btn btn-success btn-xs" type="button"  onclick="location.href='/addQualityInspection'"><i class="fa fa-check"></i>검사등록</button>
-                      <button class="btn btn-info btn-xs" type="button" onclick="location.href='/qualityInspectionRequest'" ><i class="fa fa-pencil"></i>검사요청</button>
-                      <button class="btn btn-danger btn-xs" type="button" id="delBtn" ><i class="fa fa-trash-o "></i>검사삭제</button>
+                      <a class="btn btn-success btn-xs" th:href="@{/system/addQualityInspection}"><i class="fa fa-check"></i>검사등록</a>
+                      <a class="btn btn-info btn-xs" th:href="@{/quality/qualityInspectionRequest}" ><i class="fa fa-pencil"></i>검사요청</a>
+                      <a class="btn btn-danger btn-xs" id="delBtn"> <i class="fa fa-trash-o "></i>검사삭제</a>
+                     
                     </div>
                  
             </div>
