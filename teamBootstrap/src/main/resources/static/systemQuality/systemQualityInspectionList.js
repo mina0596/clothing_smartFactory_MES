@@ -61,16 +61,28 @@ $('#inspectionSearchBtn').click(function(){
 			 
 			request.done(function( data ) {
 				console.log(data);
-		        $( '#list > tbody').empty();
+		        $( '#inspectionList > tbody').empty();
+		        //검색성공시 검사목록리시트를 tbody아래는 비우고 반복을돌려서 검색된 결과값을가지고오기
 
 		        if(data.length > 0){
 			        for(i=0; i<data.length; i++){
+			        	html +="<tr>";
+			        	html +="<td> <input type='checkbox' class='check' name='check' value="+ data[i].quality_inspection_code +"></td>";
+			        	html +="<td>"+[i + 1]+"</td>";
+			        	html +="<td>"+ data[i].quality_inspection_code+"</td>";
+			        	html +="<td>"+ data[i].high_class_name+"</td>";
+			        	html +="<td>"+ data[i].med_class_name+"</td>";
+			        	html +="<td>"+ data[i].low_class_name+"</td>";
+			        	html +="<td>"+ data[i].sub_class_name+"</td>";
+			        	html +="<td>"+ data[i].inspection_reg_date+"</td>";
+			           	html +="<td><a href='/quality/addStandardTable' class='btn btn-warning btn-xs'><i class='fa fa-pencil'></i>기준표등록</a></td>";
+			        	html +="<td><a href='/system/modifyQualityInspection?qualityInspectionCode="+data[i].quality_inspection_code+"' class='btn btn-primary btn-xs'><i class='fa fa-pencil'></i>수정</a></td>";
 				       						
 					}
 		        }else{
 						html += "<tr><td colspan='11' style='text-align: center;'> 검색된 결과가 없습니다. </td></tr>";
 					}
-		        $('#mainTbody').append(html);
+		        $('#inspectionTbody').append(html);
 			});
 			 
 			request.fail(function( jqXHR, textStatus ) {

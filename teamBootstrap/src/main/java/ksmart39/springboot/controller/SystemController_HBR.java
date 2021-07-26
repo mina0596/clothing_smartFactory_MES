@@ -118,7 +118,7 @@ public class SystemController_HBR {
 		log.info("========================================");
 		
 		systemService.modifyQualityInspection(subClassInspection);
-		return "redirect:/qualityInspectionList";
+		return "redirect:/system/qualityInspectionList";
 	}
 
 	// [보람] 검사 수정 경로

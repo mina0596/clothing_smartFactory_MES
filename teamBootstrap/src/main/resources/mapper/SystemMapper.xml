@@ -390,7 +390,7 @@
 			l.low_class_name,
 			s.sub_class_code,
 			s.sub_class_name,
-			s.sub_class_reg_date
+			DATE_FORMAT(s.sub_class_reg_date,'%Y-%m-%d %T') AS inspection_reg_date
 		FROM sub_class_inspection_list AS s
 			INNER JOIN
 				low_class_inspection_list AS l

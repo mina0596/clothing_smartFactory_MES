@@ -103,9 +103,9 @@ layout:decorate="@{layout/default_system}">
                     <th></th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="inspectionTbody">
                   <tr th:if="${#lists.size(qualityInspectionList) > 0}" th:each="l,i: ${qualityInspectionList}" >
-                   <td class="hidden-phone">
+                   <td>
                       <input type="checkbox" class="check" name="check" th:value="${l.quality_inspection_code}">
                     </td>
                     <td th:text="${i.index+1}"><a id="infoBtn"></a></td>
@@ -118,7 +118,7 @@ layout:decorate="@{layout/default_system}">
                     <td th:text="${l.sub_class_reg_date}" >
                      	
                     </td>
-                   <td>  <button class="btn btn-warning btn-xs" type="button" onclick="location.href='/addStandardTable'"><i class="fa fa-pencil"></i>기준표등록</button></td>
+                   <td> <a th:href="@{/quality/addStandardTable}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i>기준표등록</a> </td>
                    <td>  <a th:href="@{/system/modifyQualityInspection(qualityInspectionCode=${l.quality_inspection_code})}" class="btn btn-primary btn-xs"> <i class="fa fa-pencil"></i>수정</a></td>
                    
                   </tr>
