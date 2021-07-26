@@ -107,7 +107,7 @@ layout:decorate="@{layout/default_qualityControl}">
                     <h5>현황</h5>
                   </div>
 	            <div style="width:180px; display: inline-block;">
-				    <canvas id="myChart0"></canvas>
+				    <canvas id="satateChart"></canvas>
 				</div>
          	 </div>
          </div>
@@ -117,7 +117,7 @@ layout:decorate="@{layout/default_qualityControl}">
                     <h5>최종 합격/불합격</h5>
                   </div>
 	            <div style="width:180px; display: inline-block;">
-				    <canvas id="myChart"></canvas>
+				    <canvas id="finalPassChart"></canvas>
 				</div>
          	 </div>
          </div>
@@ -128,7 +128,7 @@ layout:decorate="@{layout/default_qualityControl}">
                     <h5>검사별 불합격 비율</h5>
                   </div>
 	            <div style="width:190px; display: inline-block;">
-				    <canvas id="myChart2"></canvas>
+				    <canvas id="inspectionPass"></canvas>
 				</div>
          	 </div>
          </div>
@@ -160,7 +160,7 @@ layout:decorate="@{layout/default_qualityControl}">
 			</tr>
 		</thead>
 		<tbody id="mainTbody">
-				<tr id="removeTr">
+				<tr class="removeTr">
 					<td colspan="15" style="text-align: center;">조회 버튼을 눌러주세요.</td>
 				</tr>
 	       </tbody>
