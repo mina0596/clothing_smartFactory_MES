@@ -240,7 +240,7 @@
 			ir.quality_inspection_request_code = #{inspectionRequestCode};
 	</select>
 	
-	<insert>
+	<insert id="getFinalResult">
 		
 	INSERT INTO inspection_final_result
 		(final_result_code, quality_inspection_request_code, charge_employee_code, quality_inspection_code, low_cate_final_pass_check, inspection_start_date, inspection_duration, inspection_end_date, final_result_reg_date, final_result_update_date)
