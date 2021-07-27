@@ -28,113 +28,51 @@ layout:decorate="@{layout/default_qualityControl}">
     	<option>완재품검사</option>
     </select> 
     <button type="button">조회</button>
-    	<table class="table">
-    		<thead>
-    			<tr>
-    				<th>구분</th>
-    				<th>제품별 생산량</th>
-    				<th>제품별 불량</th>
-    				<th>너치위치</th>
-    				<th>너치깊이</th>
-    				<th>겉감과 심지 편차</th>
-    				<th>좌우라펠폭</th>
-    				<th>겉칼라의외곽선길이</th>
-    				<th>자켓의몸판총길이</th>
-    				<th>자켓의가슴둘레</th>
-    				<th>자켓의허리둘레</th>
-    			</tr>
-    		</thead>
-    		<tbody>
-    			<tr>
-    				<td></td>
-    				<td></td>
-    			</tr>
-    			<tr>
-    				<td>자켓</td>
-    				<td>322</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    			</tr>
-    			
-    			<tr>
-    				<td>블라우스</td>
-    				<td>124</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    			</tr>
-    			
-    			<tr>
-    				<td>바지</td>
-    				<td>100</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    			</tr>
-    			
-    			<tr>
-    				<td>치마</td>
-    				<td>12</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    			</tr>
-    			
-    			<tr>
-    				<td>여성자켓</td>
-    				<td>120</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    			</tr>
-    			
-    			<tr>
-    				<td>숙녀블라우스</td>
-    				<td>100</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    				<td>1</td>
-    			</tr>
-    			
-    		</tbody>
-    	</table>
+    	
+    	
+    	<!--CUSTOM CHART START -->
+            <div class="border-head">
+              <h3>불량률이 많은 순위</h3>
+            </div>
+            <div class="custom-bar-chart">
+              <ul class="y-axis">
+                <li><span>10.000</span></li>
+                <li><span>8.000</span></li>
+                <li><span>6.000</span></li>
+                <li><span>4.000</span></li>
+                <li><span>2.000</span></li>
+                <li><span>0</span></li>
+              </ul>
+              <div class="bar">
+                <div class="title">JAN</div>
+                <div class="value tooltips" data-original-title="8.500" data-toggle="tooltip" data-placement="top" style="height: 85%;">85%</div>
+              </div>
+              <div class="bar ">
+                <div class="title">FEB</div>
+                <div class="value tooltips" data-original-title="5.000" data-toggle="tooltip" data-placement="top">50%</div>
+              </div>
+              <div class="bar ">
+                <div class="title">MAR</div>
+                <div class="value tooltips" data-original-title="6.000" data-toggle="tooltip" data-placement="top">60%</div>
+              </div>
+              <div class="bar ">
+                <div class="title">APR</div>
+                <div class="value tooltips" data-original-title="4.500" data-toggle="tooltip" data-placement="top">45%</div>
+              </div>
+              <div class="bar">
+                <div class="title">MAY</div>
+                <div class="value tooltips" data-original-title="3.200" data-toggle="tooltip" data-placement="top">32%</div>
+              </div>
+              <div class="bar ">
+                <div class="title">JUN</div>
+                <div class="value tooltips" data-original-title="6.200" data-toggle="tooltip" data-placement="top">62%</div>
+              </div>
+              <div class="bar">
+                <div class="title">JUL</div>
+                <div class="value tooltips" data-original-title="7.500" data-toggle="tooltip" data-placement="top">75%</div>
+              </div>
+            </div>
+            <!--custom chart end-->
     
     </div>
          

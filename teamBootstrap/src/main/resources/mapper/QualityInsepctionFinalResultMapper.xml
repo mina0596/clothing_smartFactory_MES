@@ -166,63 +166,67 @@
 </select>
 
 
-<select id="searchRequesetInspection" resultType="map">
-	SELECT 
-		r.contract_code,
-		c.client_name,
-		r.product_request_code,
-		i.inspection_result_code,
-		i.quality_inspection_request_code,
-		i. quality_inspection_code, 
-		h.high_class_name,
-		m.med_class_name,
-		l.low_class_name,
-		s.sub_class_name,
-		i.inspection_measurement_num,   
-		i.inspection_pass_check, 
-		DATE_FORMAT(i.inspection_start_date, '%Y-%m-%d %T') AS start_Date,
-		i.inspection_duration, 
-		Date_format(i.inspection_end_date,'%Y-%m-%d %T') AS end_Date,
-		Date_format(i.inspection_result_reg_date,'%Y-%m-%d %T') AS reg_Date
-	FROM inspection_result AS i
-		INNER JOIN 
-		sub_class_inspection_list AS s
-		ON i.quality_inspection_code= s.quality_inspection_code
-		INNER join
-		low_class_inspection_list AS l
-		ON s.high_med_low_class_code=l.high_med_low_class_code
-		INNER join
-		medium_class_inspection_list AS m
-		ON l.high_med_class_code= m.high_med_class_code
-		INNER join
-		high_class_inspection_list AS h
-		ON m.high_class_code= h.high_class_code
-		INNER join
-		quality_inspection_request AS q
-		ON i.quality_inspection_request_code= q.quality_inspection_request_code
-		INNER join
-		requested_product_detail AS r
-		on q.requested_product_code = r.requested_product_code
-		INNER JOIN 
-		client_info AS c
-		ON r.client_code = c.client_code
-
-</select>
-	<select id="hello">
+	<select id="searchRequesetInspection" resultType="map">
 		SELECT 
-				if((SELECT 
-							COUNT(ir.inspection_pass_check)
-						 FROM 
-							inspection_result AS ir
-						 WHERE 
-							ir.quality_inspection_request_code = i.quality_inspection_request_code
-							AND 
-							ir.inspection_pass_check = '합격') > 1, '합격','불합격') AS inspectionPassCheck
-				FROM 
-					inspection_result AS i
-				WHERE 
-					i.quality_inspection_request_code = 'QC_REQUEST_0019'
-				GROUP BY i.quality_inspection_request_code;
+			r.contract_code,
+			c.client_name,
+			r.product_request_code,
+			i.inspection_result_code,
+			i.quality_inspection_request_code,
+			i. quality_inspection_code, 
+			h.high_class_name,
+			m.med_class_name,
+			l.low_class_name,
+			s.sub_class_name,
+			i.inspection_measurement_num,   
+			i.inspection_pass_check, 
+			DATE_FORMAT(i.inspection_start_date, '%Y-%m-%d %T') AS start_Date,
+			i.inspection_duration, 
+			Date_format(i.inspection_end_date,'%Y-%m-%d %T') AS end_Date,
+			Date_format(i.inspection_result_reg_date,'%Y-%m-%d %T') AS reg_Date
+		FROM inspection_result AS i
+			INNER JOIN 
+			sub_class_inspection_list AS s
+			ON i.quality_inspection_code= s.quality_inspection_code
+			INNER join
+			low_class_inspection_list AS l
+			ON s.high_med_low_class_code=l.high_med_low_class_code
+			INNER join
+			medium_class_inspection_list AS m
+			ON l.high_med_class_code= m.high_med_class_code
+			INNER join
+			high_class_inspection_list AS h
+			ON m.high_class_code= h.high_class_code
+			INNER join
+			quality_inspection_request AS q
+			ON i.quality_inspection_request_code= q.quality_inspection_request_code
+			INNER join
+			requested_product_detail AS r
+			on q.requested_product_code = r.requested_product_code
+			INNER JOIN 
+			client_info AS c
+			ON r.client_code = c.client_code
+	
+	</select>
+	
+	<!-- ==========================[민아]품질검사 최종결과 자동으로 입력======================  -->
+	<select id="getFinalInspectionResult" parameterType="String" resultType="String">
+		SELECT 
+			if((SELECT 
+						COUNT(ir.inspection_pass_check)
+					 FROM 
+						inspection_result AS ir
+					 WHERE 
+						ir.quality_inspection_request_code = i.quality_inspection_request_code
+						AND 
+						<![CDATA[
+						ir.inspection_pass_check = '합격') > 1, '합격','불합격') AS inspectionPassCheck
+						]]>
+			FROM 
+				inspection_result AS i
+			WHERE 
+				i.quality_inspection_request_code = #{inspectionRequestCode}
+			GROUP BY i.quality_inspection_request_code;
 	</select>
 
 	

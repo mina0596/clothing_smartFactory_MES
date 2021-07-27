@@ -30,5 +30,8 @@ public interface QualityInsepctionFinalResultMapper {
 
 	//[보람 ]품질검사 최종 리스트 화면
 	public  List<Map<String,Object>> getInsepectionFinalResult();
+	
+	//[민아]품질검사 최종결과값 가져오기
+	public String getFinalInspectionResult(String finalResult);
 
 }
