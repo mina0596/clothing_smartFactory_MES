@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import ksmart39.springboot.dao.QualityControlMapper;
 import ksmart39.springboot.dao.QualityInsMeasurementValueMapper;
+import ksmart39.springboot.dao.QualityInsepctionFinalResultMapper;
 import ksmart39.springboot.domain.QualityBiochemFabricLevelStandard;
 import ksmart39.springboot.domain.QualityInspection;
 import ksmart39.springboot.domain.QualityInspectionResult;
@@ -24,6 +25,7 @@ public class QualityInsMeasurementValueService {
 	
 	@Autowired
 	private QualityInsMeasurementValueMapper qualityInsMeasurementValueMapper;
+	private QualityInsepctionFinalResultMapper finalResultMapper;
 	
 	//품질검사 검색
 	public List<QualityInspection> searchInspectionCode(QualityInspection qualityInspection){
@@ -62,6 +64,8 @@ public class QualityInsMeasurementValueService {
 			int measuredLevel = 0; //등급값
 			int passCheckValue = 0; //판정 기준 최소값
 			int resultValue = 0; //측정값
+			
+			
 			
 			String qualityInspectionCode = qualityInspectionResult.get(i).getQualityInspectionCode();
 			
@@ -137,6 +141,21 @@ public class QualityInsMeasurementValueService {
 			
 			result = 1;			
 		}
+		for(int i=0; i < qualityInspectionResult.size(); i++) {
+			String inspectionCode = qualityInspectionResult.get(i).getQualityInspectionCode();
+			Map<String,Object> maxNumMap = finalResultMapper.getMaxMeasurementNum(inspectionCode);
+			String maxNum = (String) maxNumMap.get("maxNum");
+			if(maxNum.equals("3회차")) {
+				
+			}
+			
+		}
+		
+		/*
+		 * 배열.i.inspectionCode 찾아 mapper에서 max measurementNum =='3회차' 최종결과값 넣는 mapper에서
+		 * 가져오는 쿼리 실행
+		 */
+		
 		return result;	
 	}
 	
