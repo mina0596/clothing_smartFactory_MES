@@ -130,8 +130,6 @@ public class ProductionController_PMA {
 		List<Map<String,Object>> searchClientNameResult = productionService.searchClientName(paramMap);
 		log.info("DB에서 결과 받아오는 clinetName List : {}", searchClientNameResult);
 
-		log.info("어디모델이지? :{}", model.toString());
-		
 		return searchClientNameResult;
 	}
 	  
@@ -225,4 +223,23 @@ public class ProductionController_PMA {
 
 		return "production/workOrderList";
 	}
+	
+	
+	//[보람]작업지시 등록화면 + [민아]처리과정
+	@GetMapping("/addWorkOrder")
+	public String addWorkOrder() {
+		
+		return "production/addWorkOrder";
+	}
+	
+	
+	//[민아]작업지시등록화면에서 계약번호 검색 모달
+	@PostMapping("/searchContractCode")
+	@ResponseBody
+	public List<Map<String,Object>> getContractCode(@RequestBody Map<String,Object> paramMap){
+		List<Map<String,Object>> searchContractCodeResult = productionService.searchClientName(paramMap);
+		return searchContractCodeResult;
+	}
+	
+	
 }
