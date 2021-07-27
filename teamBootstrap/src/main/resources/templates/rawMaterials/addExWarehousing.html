@@ -20,7 +20,7 @@ layout:decorate="@{layout/default_rawMaterials}">
 		          <label class="col-sm-2 col-sm-2 control-label">발주 코드 검색</label>
 		          <div class="col-md-6">
 		            <div  class="input-group ">
-		              <input type="text" id="raw_material_order_code" class="form-control"  size="16">
+		              <input type="text" id="raw_material_order_code" class="form-control"  size="16" name="materialOrderCode">
 		              <div class="input-group-btn">
 		                <button type="button" id="search" class=" btn btn-theme03 btn btn-default"  th:href="@{/rawMaterials/getSupplierRequest}"><i class="fa"></i>검색하여 가져오기</button>
 		              </div>
@@ -31,21 +31,21 @@ layout:decorate="@{layout/default_rawMaterials}">
 		        <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">원부자재 코드</label>
                   <div class="col-sm-6">
-                    <input type="text" id="raw_material_code" name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
+                    <input type="text" id="raw_material_code" name="materialCode" class="form-control" readonly="readonly" >
                   </div>
                 </div>
 
 		        <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">발주 담당자 코드</label>
                   <div class="col-sm-6">
-                    <input type="text"  name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
+                    <input type="text"  id="raw_material_admin" class="form-control" name="chargeEmployeeCode" readonly="readonly">
                   </div>
                 </div>
                 
 		        <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">수량</label>
                   <div class="col-sm-6"><!-- 값 들어오고 disabled 풀어주기 -->
-                    <input type="number" id="raw_material_order_amount" name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
+                    <input type="number" id="raw_material_order_amount" name="transactionAmount" class="form-control" >
                   </div>
                 </div>
 
@@ -53,7 +53,7 @@ layout:decorate="@{layout/default_rawMaterials}">
 				<div class="form-group">
 			          <label class="col-sm-2 col-sm-2 control-label">출고일시</label>
 		          <div class="col-md-6">
-					<input name="expectedProductionEndDate" id="endDate" type="date" class="form-control">
+					<input name="transactionDate" id="endDate" type="date" class="form-control">
 		          </div>
 		        </div>
       		  
@@ -87,60 +87,14 @@ layout:decorate="@{layout/default_rawMaterials}">
          	<tbody>       		
        			<thead>
         			<tr>
-	         			<th colspan="3" style="padding-right: 20px;">
-		         			 <div class="form-inline" style="margin-bottom: 0px;">
-		         			 	<label class="control-label">발주 코드</label>&nbsp
-			                	<input type="text" class="form-control" id="bySupplierValue" placeholder="검색어를 입력하세요.">
-			                </div>
-	         			</th>
-	         			<th colspan="2" style="padding-right: 20px;">
-	         				<div class="form-inline" style="margin-bottom: 0px;">
-		         				<label class="control-label">거래처명</label>&nbsp
-			                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
-		              		</div>
-	         			</th>  
-	         			<th colspan="2" style="padding-right: 20px;">
-	         				<div class="form-inline" style="margin-bottom: 0px;">
-		         				<label class="control-label">품목명</label>&nbsp
-			                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
-		              		</div>
-	         			</th>  
-	         			<th colspan="5" style="padding-right: 20px;">
-	         				<div class="form-inline" style="margin-bottom: 0px;">
-		         				<label class="control-label">발주 날짜</label>&nbsp
-			                	<input type="date" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">&nbsp ~
-			                	<input type="date" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
-	         				 &nbsp&nbsp&nbsp <button type="submit" class="btn btn-theme">검색</button>
-		              		</div>
-	         			</th>  
+	         			<th><i class="fa fa-check"></th>
+	         			<th>발주코드</th>
+	         			<th>원부자재 코드</th>
+	         			<th>발주 담당자 코드</th>
         			</tr>     			
        			</thead>
-       			<tbody style="text-align: center;">
-       				<tr>
-       					<td><i class="fa fa-check"></i></td>
-       					<td>발주코드</td>
-       					<td>원부자재 코드</td>
-       					<td>거래처명</td>
-       					<td>품목명</td>
-       					<td>색상명</td>
-       					<td>특징</td>
-       					<td>수량</td>
-       					<td>입고예정일</td>
-       					<td>발주일자</td>
-       				</tr>
-       				
-     				<tr>
-     					<td><input type="radio" name="bySupplierModal"></td>
-       					<td class="raw_material_order_code"></td>
-       					<td class="raw_material_code"></td>
-       					<td></td>
-       					<td class="raw_material_name"></td>
-       					<td class="raw_material_color_name"></td>
-       					<td class="raw_material_feature"></td>
-       					<td class="raw_material_order_amount"></td>
-       					<td></td>
-       					<td></td>
-     				</tr>
+       			<tbody style="text-align: center;" id="materialData">
+     			
        			</tbody>        		
          	</tbody>
          </table> 
@@ -159,7 +113,6 @@ layout:decorate="@{layout/default_rawMaterials}">
 					$('#bySupplierModal').modal("show");
 					
 					var approval = '승인';
-					console.log(approval);
 					$.ajax({
 						url: "getSupplierRequest",
 						method : 'get',
@@ -169,8 +122,27 @@ layout:decorate="@{layout/default_rawMaterials}">
 						success: function(data){
 							if(data != null && data != '' && data != undefined){
 								for(var i=0; i<data.length; i++){
-									console.log(data[i]);
+									var requestData =
+										'<tr>' +
+										'<td><input type="radio" name="bySupplierModal"></td>' +
+										'<td name="rawMaterialOrderCode">' + data[i].rawMeterialOrderCode + '</td>' +
+										'<td name="raw_material_code">' + data[i].rawMeterialCode + '</td>' +
+										'<td name="raw_material_transaction_amount">' + data[i].chargeEmployeeCode + '</td>' +
+										'</tr>' ;
+									$('#materialData').append(requestData);
 								}
+								$('#bySupplierModal').on('hidden.bs.modal', function() {
+									$('#materialData').children('tr').remove();
+								})
+							}else{
+								var requestData =
+									'<tr>' +
+									'<td colspan="4" style="text-align: center;">' + '데이터가 없습니다.' + '</td>' +
+									'</tr>';
+								$('#materialData').append(requestData);	
+								$('#bySupplierModal').on('hidden.bs.modal', function() {
+									$('#materialData').children('tr').remove();
+								})
 							}
 						}	
 					});
@@ -178,17 +150,12 @@ layout:decorate="@{layout/default_rawMaterials}">
 				 	$('#saveSupplier').click(function(){
 						var check = $('input[name=bySupplierModal]:checked');
 						var checkTr = check.parent().parent();
-						var raw_material_order_code = checkTr.find('.raw_material_order_code').text();
-						var raw_material_code = checkTr.find('.raw_material_code').text();
-						var raw_material_feature = checkTr.find('.raw_material_feature').text();
-						var raw_material_order_amount = checkTr.find('.raw_material_order_amount').text();
-						$('#raw_material_order_code').attr('value',raw_material_order_code);
-						$('#raw_material_code').attr('value',raw_material_code);
-						$('#raw_material_name').attr('value',raw_material_name);
-						$('#raw_material_color_name').attr('value',raw_material_color_name);
-						$('#raw_material_feature').attr('value',raw_material_feature);
-						$('#raw_material_order_amount').attr('value',raw_material_order_amount);
-						$('#raw_material_order_amount').attr('disabled',false);
+						var rawMaterialOrderCode = checkTr.find('td').eq(1).text();
+						var rawMaterialCode = checkTr.find('td').eq(2).text();
+						var rawMaterialAdmin = checkTr.find('td').eq(3).text();
+						$('#raw_material_order_code').attr('value',rawMaterialOrderCode);
+						$('#raw_material_code').attr('value',rawMaterialCode);
+						$('#raw_material_admin').attr('value',rawMaterialAdmin);
 					}); 
 				});	
 				

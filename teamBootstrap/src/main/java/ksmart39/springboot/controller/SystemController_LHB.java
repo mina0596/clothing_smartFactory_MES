@@ -181,6 +181,11 @@ public class SystemController_LHB {
 		return result;
 	}
 	
+	//[한빛] 마이페이지
+	@GetMapping("/profile")
+	public String profile() {
+		return "system/profile";
+	}
 }	
 	
 	

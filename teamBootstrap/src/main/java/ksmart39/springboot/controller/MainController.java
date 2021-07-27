@@ -2,6 +2,7 @@ package ksmart39.springboot.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,5 +21,10 @@ public class MainController {
 		if(loginResult != null) model.addAttribute("loginResult", loginResult);
 		
 		return "login/index";
+	}
+	
+	@GetMapping("/mesmain")
+	public String mesmain(Model model) {
+		return "/mesmain";
 	}
 }
