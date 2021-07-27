@@ -33,5 +33,8 @@ public interface QualityInsepctionFinalResultMapper {
 	
 	//[민아]품질검사 최종결과값 가져오기
 	public String getFinalInspectionResult(String finalResult);
+	
+	//[민아]품질검사 최종회차 가져오기
+	public Map<String,Object> getMaxMeasurementNum(String requestInspectionCode);
 
 }
