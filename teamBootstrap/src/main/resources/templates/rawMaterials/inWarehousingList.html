@@ -108,17 +108,17 @@ layout:decorate="@{layout/default_rawMaterials}">
  
                 <tbody>
                 <!--db에서 데이터 넣어야하는 부분 -->
-                  <tr>
+                  <tr th:if="${#lists.size(list) > 0}" th:each="l, i : ${list}">
                   	<td><input type="checkbox" class="checked"></td>
-                  	<td>1</td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}" data-popup-open="inWarehousingInfo" >silk01_sandyBrown</a></td>
-                    <td class="hidden-phone">order_Thread01_red</td>
-                    <td>원자재</td>
-                    <td>명주실</td>
-                    <td>2</td>
-                    <td>박스</td>
-                    <td>2021-05-12 15:15:00</td>
+                  	<td th:text="${i.index+1}"></td>
+                    <td>
+                    <a th:href="@{#}" data-popup-open="inWarehousingInfo" >[[${l.materialCode}]]</a></td>
+                    <td th:text="${l.materialOrderCode}"></td>
+                    <td th:text="${l.materialsInfo.highClass}"></td>
+                    <td th:text="${l.materialsInfo.rawMaterialName}"></td>
+                    <td th:text="${l.transactionAmount}"></td>
+                    <td th:text="${l.materialsInfo.unit}"></td>
+                    <td th:text="${l.transactionDate}"></td>
                   	<td>  
                   		<a th:href="@{/rawMaterials/modifyInWarehousing}" class="btn btn-primary btn-xs">
                   			<i class="fa fa-pencil"></i>
@@ -133,7 +133,7 @@ layout:decorate="@{layout/default_rawMaterials}">
             </div>
             <div class="form-group text-right">
 		          <div class="col-lg-offset-2 col-lg-10">
-		           <a th:href="@{/addInWarehousing}" class="btn btn-success btn-xs"><i class="fa fa-check"></i>입고 등록</a>
+		           <a th:href="@{/rawMaterials/addInWarehousing}" class="btn btn-success btn-xs"><i class="fa fa-check"></i>입고 등록</a>
 		           <a id="deleteBtn" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>삭제</a>
 		          </div>
 		        </div> 
@@ -145,7 +145,8 @@ layout:decorate="@{layout/default_rawMaterials}">
 		    <div class="popup-inner" style="width:auto; display:table;">
 				<div class="popup-contents">
 		   		  <a class="popup-close" data-popup-close="inWarehousingInfo" href="#"><h3><i class="fa fa-times-circle"></i></h3></a> 
-					<div class="inWarehousingInfoPopUp-image" style="background-color: blue;">
+					<div>
+						<img class="inWarehousingInfoPopUp-image" src="/image/fabricSAMPLE.jpg">
 					</div>
 		      </div>
 		      <div class="inWarehousingInfoPopUp-skin">
