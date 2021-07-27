@@ -46,6 +46,8 @@ public class SystemController_LHB {
 		return"system/addHumanResources";	
 	}
 	
+	
+	//[한빛] 아이디 중복체크
 	@PostMapping("/memberIdCheck")
 	@ResponseBody
 	public boolean memberIdCheck(@RequestParam(value = "employeeId") String employeeId) {
@@ -70,9 +72,9 @@ public class SystemController_LHB {
 	
 	//[한빛]사원목록
 	@GetMapping("/humanResourcesList")
-	public String getHumanResourcesList(Model model
-									,@RequestParam(name="searchKey",required = false) String searchKey
-									,@RequestParam(name="searchValue",required=false) String searchValue) {
+	public String getHumanResourcesList(@RequestParam(name = "searchKey", required = false) String searchKey,
+					 											   @RequestParam(name = "searchValue", required = false) String searchValue,
+					                                               Model model) {
 		
 		log.info("========================================");
 		log.info("화면에서 입력받은 값(회원목록) searchKey: {}", searchKey);
@@ -160,7 +162,7 @@ public class SystemController_LHB {
 		return "system/modifyClient";
 	}
 	
-	// 거래처수정화면 ->목록
+	//[한빛] 거래처수정화면 ->목록
 	@PostMapping("modifyClient")
 	public String modifyClient(Client client) {
 		systemService.modifyClient(client);

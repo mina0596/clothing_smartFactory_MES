@@ -121,7 +121,7 @@ layout:decorate="@{layout/default_contract}">
                   <tr th:each = "o,n : ${orderList}">
                   	<td><input type="checkbox" class="checked"></td>
                   	<td th:text = "${n.index+1}"></td>
-                  	<td><a onclick="location.href='buyerOrderInfo'" id="add-regular"  class="btn btn-default btn-sm" style="padding-top: 5px ;" >[주문서]</a></td>                 	
+                  	<td><a th:href="@{/contract/buyerOrderInfo(prCode=${o.prCode})}"  id="add-regular"  class="btn btn-default btn-sm" style="padding-top: 5px ;" >[주문서]</a></td>                 	
                     <td th:text="${o.prCode}"></td>
                     <td th:text="${o.cName}"></td>
                     <td th:text="${o.rdTel}"></td>

@@ -44,7 +44,7 @@
 			erp_access_level as l
 			on
 			e.level_num = l.level_num;
-		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test="searchKey != null and searchKey != ''.toString()">
 				${searchKey} LIKE CONCAT('%', #{searchValue} ,'%');
 			</if>
