@@ -11,7 +11,7 @@
               <span>기준표 ![민아]</span>
               </a>
             <ul class="sub">
-              <li><a th:href="@{/quality/addStandardTable}">기준표 등록 ![민아]</a></li>
+              <li><a th:if="${session.SLEVEL eq '3' or session.SLEVEL eq '1'}" th:href="@{/quality/addStandardTable}">기준표 등록 ![민아]</a></li>
               <li><a th:href="@{/quality/standardTableList}">기준표 조회/목록 ![민아]</a></li>
             </ul>
           </li>
@@ -23,7 +23,7 @@
               <span>검사요청 ![다미]</span>
               </a>
              <ul class="sub">
-              <li><a th:href="@{/quality/qualityInspectionRequest}">품질 검사 요청 ![다미]</a></li>
+              <li><a th:unless="${session.SLEVEL == '3'}" th:href="@{/quality/qualityInspectionRequest}">품질 검사 요청 ![다미]</a></li>
               <li><a th:href="@{/quality/qualityInspectionRequestList}">요청목록 ![다미]</a></li>
             </ul>
           </li>
@@ -35,9 +35,9 @@
               <span>검사측정값 ![다미&보람]</span>
               </a>
             <ul class="sub">
-              <li><a th:href="@{/quality/addInspectionMeasurementValue}">품질검사 측정값 등록![다미]</a></li>
+              <li><a th:unless="${session.SLEVEL == '3'}" th:href="@{/quality/addInspectionMeasurementValue}">품질검사 측정값 등록![다미]</a></li>
               <li><a th:href="@{/quality/inspectionMeasurementValueList}">검사 측정값 목록 ![다미]</a></li>
-              <li><a th:href="@{/quality/addFinalnspectionMeasurementValue}">최종검사결과등록 ![보람]</a></li>
+              <li><a th:unless="${session.SLEVEL == '3'}" th:href="@{/quality/addFinalnspectionMeasurementValue}">최종검사결과등록 ![보람]</a></li>
               <li><a th:href="@{/quality/qualityInspectionReport}">성적서 조회/목록 ![보람]</a></li>
             </ul>
           </li>
@@ -53,10 +53,10 @@
 	            <li><a th:href="@{/quality/qualityInspectionStatusContract}">계약별 검사현황 ![다미]</a></li>
 	            <li><a th:href="@{/quality/defectiveRateStatus}">불량률현황 ![다미&민아]</a></li>
 	            <li><a th:href="@{/quality/stateBuyerContractQualityInspection}">수주계약별검사현황 ![보람]</a></li>
-	            <li><a th:href="@{/quality/inspectionPerformance}">실적 ![다미]</a></li>
+	            <li><a th:if="${session.SID eq null}" th:href="@{/quality/inspectionPerformance}">실적 ![다미]</a></li>
 				<li><a th:href="@{/quality/searchByPeriodContractQualityInspection}">수주계약검사현황기간별조회 #[보람]</a></li>
-				<li><a th:href="@{/quality/stateByProductQualityInspection}">의뢰품목별검사현황 #[보람]</a></li>
-				<li><a th:href="@{/quality/searchByPeriodByProductQualityInspection}">의뢰품목별검사현황기간별조회 #[보람]</a></li>
+				<li><a th:if="${session.SID eq null}" th:href="@{/quality/stateByProductQualityInspection}">의뢰품목별검사현황 #[보람]</a></li>
+				<li><a th:if="${session.SID eq null}" th:href="@{/quality/searchByPeriodByProductQualityInspection}">의뢰품목별검사현황기간별조회 #[보람]</a></li>
             </ul>
           </li>
           
@@ -67,7 +67,7 @@
               <span>불량품 ![한빛]</span>
               </a>
             <ul class="sub">
-              <li><a th:href="@{/quality/addDefectiveProduct}"> 불량품 등록 ![한빛]</a></li>
+              <li><a th:unless="${session.SLEVEL == '3'}" th:href="@{/quality/addDefectiveProduct}"> 불량품 등록 ![한빛]</a></li>
               <li><a th:href="@{/quality/defectiveProductList}">불량품 조회/목록 ![한빛]</a></li>
             </ul>
           </li>

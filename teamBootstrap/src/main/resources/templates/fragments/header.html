@@ -31,8 +31,10 @@
 		<a th:href="@{#}">
         	<span class="menu">🕐배포일시:21-07-19 16:10:00🕐</span>
         </a>
-
-        <a th:href="@{/}">
+		<a th:if="${session.SID != null}" th:href="@{#}">
+			<span style="font-style: italic; color: white;"> [[${session.SLEVELNAME}]]  [[${session.SPOSTION}]] [[${session.SNAME}]]님이 로그인 하셨습니다. </span>
+		</a>
+        <a th:href="@{/logout}">
         	<span class="menu" style="float: right;" >Logout</span>
         </a>
 

@@ -3,21 +3,38 @@
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
 layout:decorate="@{layout/default_production}">
 
-<th:block layout:fragment="pageTitle">
-	   <div class="border-head"> 
-	    <h3></h3>
-	    </div>
-	<th:block layout:fragment="customJs">
-		    <script>
-	$(function(){
-		$('#cancleBtn').click(function(){
-			location.href="/workOrderList"
+
+<th:block layout:fragment="customJs">
+	<script>
+		$(function(){
+			$('#cancleBtn').click(function(){
+				location.href="/workOrderList"
+			});
+			
+			$('.searchContractCode').click(function(){
+				console.log('찍히니?');
+				$('#contractCodeModal').modal("show");
+			});
+			$('[data-popup-open]').on('click', function(e)  {
+		        var targeted_popup_class = jQuery(this).attr('data-popup-open');
+		        $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+
+		        e.preventDefault();
+		    });
+
+		    //----- CLOSE
+		    $('[data-popup-close]').on('click', function(e)  {
+		        var targeted_popup_class = jQuery(this).attr('data-popup-close');
+		        $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+
+		        e.preventDefault();
+		    });
+			
 		});
-	});
 	
 	</script>
-	</th:block>	   
-</th:block>
+</th:block>	   
+
 
 
 <th:block layout:fragment="container">
@@ -28,7 +45,7 @@ layout:decorate="@{layout/default_production}">
       <hr>
       <br>
       
-      <form class="form-horizontal style-form" method="post">
+      <form class="form-horizontal style-form" th:action="@{/production/addWorkOrder}" method="post">
 
        
         
@@ -36,9 +53,9 @@ layout:decorate="@{layout/default_production}">
           <label class="col-sm-2 col-sm-2 control-label"style="font-weight: 600;"> 계약번호</label>
           <div class="col-md-5">
             <div  class="input-group ">
-              <input type="search" class="form-control"  size="16">
+              <input type="text" class="form-control" id="searchedContractCode" size="16">
               <div class="input-group-btn">
-                <button type="button" class=" btn btn-theme03 btn btn-default"><i class="fa"></i>검색하여 가져오기</button>
+                <button type="button" class="searchContractCode btn btn-theme03 btn-default">검색하여 가져오기</button>
               </div>
             </div>
           </div>
@@ -156,29 +173,8 @@ layout:decorate="@{layout/default_production}">
     
 
 
+<th:block th:replace="/production/modal/modal_searchContractCode::modal_searchContractCode"></th:block>
 
-
-                        <!-- js placed at the end of the document so the pages load faster -->
-
-  <!--script for this page-->
-  <script th:src="@{Dashio/lib/jquery-ui-1.9.2.custom.min.js}"></script>
-  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-fileupload/bootstrap-fileupload.js}"></script>
-  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
-  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-daterangepicker/date.js}"></script>
-  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-daterangepicker/daterangepicker.js}"></script>
-  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js}"></script>
-  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-daterangepicker/moment.min.js}"></script>
-  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-timepicker/js/bootstrap-timepicker.js}"></script>
-  <script th:src="@{Dashio/lib/advanced-form-components.js}"></script>
-  <script src="lib/jquery/jquery.min.js"></script>
-
-  <script src="lib/bootstrap/js/bootstrap.min.js"></script>
-  <script class="include" type="text/javascript" src="lib/jquery.dcjqaccordion.2.7.js"></script>
-  <script src="lib/jquery.scrollTo.min.js"></script>
-  <script src="lib/jquery.nicescroll.js" type="text/javascript"></script>
-  <!--common script for all pages-->
-  <script src="lib/common-scripts.js"></script>
-  <!--script for this page-->
 
 </th:block>
 
