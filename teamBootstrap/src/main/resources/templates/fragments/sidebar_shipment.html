@@ -12,7 +12,7 @@
               <span>출하지시 ![보람]</span>
               </a>
             <ul class="sub">
-              <li><a th:href="@{/shipment/addShipmentOrder}">출하지시 등록 ![보람]</a></li>
+              <li><a th:unless="${session.SLEVEL == '2'}" th:href="@{/shipment/addShipmentOrder}">출하지시 등록 ![보람]</a></li>
               <li><a th:href="@{/shipment/shipmentOrderList}">출하지시 조회/목록 ![보람]</a></li>
             </ul>
           </li>
@@ -24,7 +24,7 @@
               <span>송장관리 ![보람]</span>
               </a>
             <ul class="sub">
-              <li><a th:href="@{/shipment/addShipmentInvoice}">송장 등록 ![보람] </a></li>
+              <li><a th:unless="${session.SLEVEL == '2'}" th:href="@{/shipment/addShipmentInvoice}">송장 등록 ![보람] </a></li>
               <li><a th:href="@{/shipment/shipmentInvoiceList}">송장 조회/목록 ![보람]</a></li>
             </ul>
           </li>
@@ -36,7 +36,7 @@
               <span>출고관리 ![민아]</span>
               </a>
             <ul class="sub">
-              <li><a th:href="@{/shipment/addShipment}">출고 등록 ![민아]</a></li>
+              <li><a th:unless="${session.SLEVEL == '2'}" th:href="@{/shipment/addShipment}">출고 등록 ![민아]</a></li>
               <li><a th:href="@{/shipment/shipmentList}">출고 조회 ![민아]</a></li>
             </ul>
           </li>

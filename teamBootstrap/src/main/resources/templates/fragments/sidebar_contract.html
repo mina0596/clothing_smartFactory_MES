@@ -14,8 +14,8 @@
               </a>
             <ul class="sub">
 
-              <li><a th:href="@{/contract/addBuyerOrder}">주문서 등록 ![한빛]</a></li>
-              <li><a th:href="@{/contract/addBuyerOrder_Minah}">주문서 등록 ![민아버전]</a></li>
+              <li><a th:unless="${session.SLEVEL == '2'}" th:href="@{/contract/addBuyerOrder}">주문서 등록 ![한빛]</a></li>
+              <li><a th:unless="${session.SLEVEL == '2'}" th:href="@{/contract/addBuyerOrder_Minah}">주문서 등록 ![민아버전]</a></li>
               <li><a th:href="@{/contract/buyerOrderList}">주문서 조회/목록 ![한빛]</a></li>
               <li><a th:href="@{/contract/addBuyerContract}">수주 계약 등록 ![한빛]</a></li>
               <li><a th:href="@{/contract/buyerContractList}">계약 조회/목록 ![한빛]</a></li>
@@ -29,14 +29,14 @@
               </a>
             <ul class="sub">
 
-              <li><a th:href="@{/contract/addSupplierRequest}">발주 등록 ![보람]</a></li>
+              <li><a th:if="${session.SLEVEL == '3' or session.SLEVEL == '1'}" th:href="@{/contract/addSupplierRequest}">발주 등록 ![보람]</a></li>
               <li><a th:href="@{/contract/supplierRequestList}">발주 조회/목록 ![보람]</a></li>
               <li><a th:href="@{/contract/addSupplierContract}">발주 계약 등록 ![보람]</a></li>
               <li><a th:href="@{/contract/supplierContractList}">발주계약조회/목록 ![보람]</a></li>
             </ul>
           </li>
  
-          <li class="sub-menu">
+          <li class="sub-menu" th:if="${session.SID eq null}">
             <a href="javascript:;">
               <i class="fa fa-book"></i>
               <span>회계관리</span>

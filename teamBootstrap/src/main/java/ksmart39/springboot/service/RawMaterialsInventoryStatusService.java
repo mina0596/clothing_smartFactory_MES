@@ -16,6 +16,7 @@ import ksmart39.springboot.dao.RawMaterialsInventoryStatusMapper;
 import ksmart39.springboot.dao.SystemMapper;
 import ksmart39.springboot.domain.RawMaterials;
 import ksmart39.springboot.domain.RawMaterialsInventory;
+import ksmart39.springboot.domain.SupplierRequest;
 
 @Service
 public class RawMaterialsInventoryStatusService {
@@ -93,4 +94,8 @@ public class RawMaterialsInventoryStatusService {
 		return getInventoryStatusResult;
 	}
 	
+	public List<SupplierRequest> getSupplierRequest(String approval){
+		List<SupplierRequest> supplierRequest = materialsInventoryStatusMapper.getSupplierRequest(approval);
+		return supplierRequest;
+	}
 }

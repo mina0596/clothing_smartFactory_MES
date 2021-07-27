@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import ksmart39.springboot.dao.LoginMapper;
 import ksmart39.springboot.dao.SystemMapper;
 import ksmart39.springboot.domain.HumanResources;
 
@@ -16,8 +17,10 @@ public class LoginService {
 	private static final Logger log = LoggerFactory.getLogger(LoginService.class);
 	
 	private final SystemMapper systemMapper;
-	public LoginService(SystemMapper systemMapper) {
+	private final LoginMapper loginMapper;
+	public LoginService(SystemMapper systemMapper, LoginMapper loginMapper) {
 		this.systemMapper = systemMapper;
+		this.loginMapper = loginMapper;
 	}
 	
 	//[민아]로그인정보 확인
@@ -26,7 +29,7 @@ public class LoginService {
 		boolean loginCheck = false;
 		
 		
-		HumanResources loginEmployeeInfo = systemMapper.getEmployeeInfoById(loginInfo.getEmployeeId());
+		HumanResources loginEmployeeInfo = loginMapper.getEmployeeInfoById(loginInfo.getEmployeeId());
 		
 		
 		log.info("=============================================");

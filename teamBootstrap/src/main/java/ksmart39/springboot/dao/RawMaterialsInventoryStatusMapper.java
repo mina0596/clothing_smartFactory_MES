@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import ksmart39.springboot.domain.RawMaterialsInventory;
+import ksmart39.springboot.domain.SupplierRequest;
 
 @Mapper
 public interface RawMaterialsInventoryStatusMapper {
@@ -31,4 +32,6 @@ public interface RawMaterialsInventoryStatusMapper {
 	
 	//[민아]자재 현재고 리스트
 	public Map<String,Object> getInventoryStatusByMCode(String materialCode);
+	
+	public List<SupplierRequest> getSupplierRequest(String approval);
 }

@@ -75,7 +75,7 @@ public class ContractController_LHB {
 	
 	//[한빛]수주 주문서 상세로!
 	@GetMapping("/buyerOrderInfo")
-	public String getBuyerOrderInfo(Model model) {
+	public String getBuyerOrderInfo(@RequestParam(name = "prCode", required = false) String prCode, Model model) {
 		model.addAttribute("title", "수주관리");
 		return "contract/buyerOrderInfo";
 	}	
@@ -108,5 +108,5 @@ public class ContractController_LHB {
 	public String modifyBuyerContract() {
 		return"contract/modifyBuyerContract";
 	}
-
+	
 }
