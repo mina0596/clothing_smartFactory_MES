@@ -1,18 +1,25 @@
 package ksmart39.springboot.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import ksmart39.springboot.service.ShipmentService;
+
 @Controller
 @RequestMapping("shipment")
 public class ShipmentController_HBR {
 	private static final Logger log = LoggerFactory.getLogger(ShipmentController_HBR.class);
-	
+	@Autowired
+	private ShipmentService shipmentService;
 	
 	//==========================================================
 	//[보람]송장삭제
@@ -34,7 +41,9 @@ public class ShipmentController_HBR {
 	//송장관리의 송장 목록및 조회
 	@GetMapping("/shipmentInvoiceList")
 	public String getShipmentInvoiceList(Model model) {
+		List<Map<String,Object>> invoiceList = shipmentService.getShipmentInvoiceList();
 		model.addAttribute("title","송장관리: 운송장 조회 및 조회");
+		model.addAttribute("invoiceList",invoiceList);
 		return"shipment/shipmentInvoiceList";
 	}
 	
@@ -76,7 +85,10 @@ public class ShipmentController_HBR {
 	//출하지시조회및리스트
 	@GetMapping("/shipmentOrderList")
 	public String getShipmentOrderList(Model model) {
+		List<Map<String, Object>> shimpmentOrder =shipmentService.getShipmentOrderList();
 		model.addAttribute("title", "출하지시리스트 및 조회");
+		model.addAttribute("shimpmentOrder", shimpmentOrder);
+	 
 		
 		return"shipment/shipmentOrderList";
 	}

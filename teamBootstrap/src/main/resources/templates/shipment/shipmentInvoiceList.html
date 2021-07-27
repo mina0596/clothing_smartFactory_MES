@@ -124,84 +124,25 @@ $(function(){
                
                
                 <tbody>
-                <!--db에서 데이터 넣어야하는 부분 -->
-                  <tr>
-                  <td class="hidden-phone">
+                 <tr th:if="${#lists.size(invoiceList) > 0}" th:each="s,i: ${invoiceList}" >
+                  <td>
                       <input type="checkbox" class="check">
-                    </td>
-                    <td class="hidden-phone">1</td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">801265471254</a></td>
-                    <td class="hidden-phone">출하그룹코드_1</td>
-                    <td>req01</td>
-                    <td>전주시 덕진구 금암동</td>
-                    <td>CJ대한통운</td>
-                    <td>2021-05-12 15:15:00</td>
-                  	<td>  
-                  		<button type="button"  class="btn btn-primary btn-xs" onclick="location.href='/modifyShipmentInvoice'">
+                   </td>
+                    <td th:text="${i.index+1}"></td>
+                    <td th:text="${s.invoiceCode}" ></td>
+                    <td th:text="${s.shipmentOrderGroup}" ></td>
+                    <td th:text="${s.requestCode}" ></td>
+                    <td th:text="${s.reqeustAddress}" ></td>
+                    <td th:text="${s.invoiceClientName}" ></td>
+                    <td th:text="${s.invoiceRegDate}" ></td>
+                    
+                  	<td>  <a class="btn btn-primary btn-xs" th:href="@{/shipment/modifyShipmentInvoice(invoiceCode=${s.invoiceCode})}">
                   			<i class="fa fa-pencil"></i>
                   				수정
-                  		</button>
+                  		</a>
                   	</td>
                   </tr>
-                  <tr>
-                   <td class="hidden-phone">
-                      <input type="checkbox" class="check">
-                    </td>
-                    <td class="hidden-phone">2</td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">812414526578</a></td>
-                    <td class="hidden-phone">출하그룹코드_2</td>
-                    <td>req02</td>
-                    <td>전주시 덕진구 여의동</td>
-                    <td>CJ대한통운</td>
-                    <td>2021-05-13 15:15:00</td>
-                  	<td>  
-                  		<button class="btn btn-primary btn-xs" type="button" onclick="location.href='/modifyShipmentInvoice'">
-                  			<i class="fa fa-pencil"></i>
-                  				수정
-                  		</button>
-                  	</td>
-                  </tr>
-                  <tr>
-                   <td class="hidden-phone">
-                      <input type="checkbox" class="check">
-                    </td>
-                    <td class="hidden-phone">3</td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">812414526515</a></td>
-                    <td class="hidden-phone">출하그룹코드_3</td>
-                    <td>req03</td>
-                    <td>김제시 신풍동</td>
-                    <td>CJ대한통운</td>
-                    <td>2021-05-13 15:15:00</td>
-                  	<td>  
-                  		<button type="button"  class="btn btn-primary btn-xs" onclick="location.href='/modifyShipmentInvoice'">
-                  			<i class="fa fa-pencil"></i>
-                  				수정
-                  		</button>
-                  	</td>
-                  </tr>
-                  <tr>
-                   <td class="hidden-phone">
-                      <input type="checkbox" class="check">
-                    </td>
-                    <td class="hidden-phone">4</td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">812414526517</a></td>
-                    <td class="hidden-phone">출하그룹코드_4</td>
-                    <td>req04</td>
-                    <td>김포시 장기동</td>
-                    <td>CJ대한통운</td>
-                    <td>2021-05-13 15:15:00</td>
-                  	<td>  
-                  		<button type="button"  class="btn btn-primary btn-xs" onclick="location.href='/modifyShipmentInvoice'">
-                  			<i class="fa fa-pencil"></i>
-                  				수정
-                  		</button>
-                  	</td>
-                  </tr>
-                  
+                 
                  <!-- ----------- -->
            		 </tbody>
               </table>
