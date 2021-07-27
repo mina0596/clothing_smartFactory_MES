@@ -23,15 +23,20 @@ public class QualityInsepctionStauteService {
 	@Autowired
 	private QualityInsepctionStauteMapper qualityInsepctionStauteMapper;
 	
+	
+	//[보람] 수주계약별 검사 조회
+		public List<Map<String,Object>> getSearchQualityInspectionState(HashMap map){
+			//HashMAp map 에다가 RequestParam값을 담았기 때문에 인자값으로 넣어준다.	
+		return qualityInsepctionStauteMapper.getSearchQualityInspectionState(map);
+		}
+	
 	//[다미&보람]수주계약별 검사현황 리스트
 	public List<Map<String, Object>> getStateBuyerContractQualityInspection() {
-		
 		
 		
 		return qualityInsepctionStauteMapper.getStateBuyerContractQualityInspection();
 	}
 	
+}	
 	
 	
-	
-}
