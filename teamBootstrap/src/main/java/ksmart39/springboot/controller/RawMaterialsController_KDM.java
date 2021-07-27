@@ -41,8 +41,8 @@ public class RawMaterialsController_KDM {
 	//[다미]자재입고 리스트
 	@GetMapping("/inWarehousingList")
 	public String InWarehousingList(Model model) {
-		
-		List<RawMaterialsInventory> list = rawMaterialInwarehousingService.getRawMaterialInwarehousingList();
+		String str= null;
+		List<RawMaterialsInventory> list = rawMaterialInwarehousingService.getRawMaterialInwarehousingList(str);
 		
 		log.info("getRawMaterialInwarehousingList 받아온값 {}", list);
 		model.addAttribute("list", list);
