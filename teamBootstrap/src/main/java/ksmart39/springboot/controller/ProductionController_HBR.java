@@ -72,13 +72,13 @@ public class ProductionController_HBR {
 	}
 	
 	
-	//[보람]작업지시등록
-	@GetMapping("/addWorkOrder")
-	public String addWorkerOrder(Model model) {
-		model.addAttribute("title", "작업지시관리: 작업지시등록");
-		return "production/addWorkOrder";
-	}
-
+	/*
+	 * //[보람]작업지시등록
+	 * 
+	 * @GetMapping("/addWorkOrder") public String addWorkerOrder(Model model) {
+	 * model.addAttribute("title", "작업지시관리: 작업지시등록"); return
+	 * "production/addWorkOrder"; }
+	 */
 	
 
 }
