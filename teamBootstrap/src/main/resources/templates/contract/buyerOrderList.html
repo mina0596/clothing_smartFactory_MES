@@ -128,10 +128,9 @@ layout:decorate="@{layout/default_contract}">
                     <td th:text="${o.rdAdd}"></td>
                     <td th:text="${o.rdDate}"></td>
                     <td th:text="${o.rpdRegDate}"></td>
-                    <td th:if="${o.aStatus eq '미승인'}" ><span class="badge bg-important" style="padding-top: 5px;">미승인</span></td>
+                    <td th:if="${o.aStatus eq '미승인'}" ><button class="badge bg-important" style="padding-top: 5px;">미승인</button></td>
                     <td th:if="${o.aStatus eq '승인'}" ><span class="badge bg-success" style="padding-top: 5px;">승인완료</span></td>
                     <td>  <button class="btn btn-primary btn-xs" type="button" onclick="location.href='/modifyBuyerOrder'"><i class="fa fa-pencil"></i>수정</button></td>
-
                   </tr>
                   
            		 </tbody>
