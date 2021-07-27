@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ksmart39.springboot.domain.HumanResources;
 import ksmart39.springboot.domain.RawMaterials;
 import ksmart39.springboot.domain.RawMaterialsInventory;
+import ksmart39.springboot.service.RawMaterialInwarehousingService;
 import ksmart39.springboot.service.RawMaterialsInventoryStatusService;
 import ksmart39.springboot.service.RawMaterialsService;
 
@@ -32,18 +33,20 @@ public class RawMaterialsController_KDM {
 	
 	/**************************************************************************************************/
 	
-	private final RawMaterialsInventoryStatusService materialsInventoryStatusService;
-	
 	@Autowired
-	public RawMaterialsController_KDM(RawMaterialsInventoryStatusService materialsInventoryStatusService) {
-		this.materialsInventoryStatusService = materialsInventoryStatusService;
-	}
-
+	private RawMaterialInwarehousingService rawMaterialInwarehousingService;
+	
 
 
 	//[다미]자재입고 리스트
 	@GetMapping("/inWarehousingList")
-	public String InWarehousingList() {
+	public String InWarehousingList(Model model) {
+		String str= null;
+		List<RawMaterialsInventory> list = rawMaterialInwarehousingService.getRawMaterialInwarehousingList(str);
+		
+		log.info("getRawMaterialInwarehousingList 받아온값 {}", list);
+		model.addAttribute("list", list);
+		
 		return "rawMaterials/inWarehousingList";
 	}
 	
