@@ -242,7 +242,9 @@
 
 	<select id="getMaxMeasurementNum" parameterType="String" resultType="map">
 		SELECT 
-			MAX(ir.inspection_measurement_num) AS maxNum
+			MAX(ir.inspection_measurement_num) AS maxNum,
+			MIN(DATE_format(ir.inspection_start_date, '%Y-%m-%d %T')) AS startDate,
+			MAX(DATE_format(ir.inspection_end_date, '%Y-%m-%d %T')) AS finishDate
 		FROM 
 			inspection_result ir
 			WHERE 
@@ -253,9 +255,9 @@
 		
 		INSERT INTO 
 			inspection_final_result
-		(final_result_code, quality_inspection_request_code, charge_employee_code, quality_inspection_code, low_cate_final_pass_check, inspection_start_date, inspection_duration, inspection_end_date, final_result_reg_date, final_result_update_date)
+		(final_result_code, quality_inspection_request_code, quality_inspection_code, low_cate_final_pass_check, inspection_start_date, inspection_duration, inspection_end_date, final_result_reg_date, final_result_update_date)
 		VALUES 
-		(sf_inspectionFinalResultCode(#{qualityInspectionResquestCode}), #{qualityInspectionResquestCode}, '', '', '', NOW(), 0, NOW(), NOW(), NOW())
+		(sf_inspectionFinalResultCode(#{qualityInspectionResquestCode}), #{qualityInspectionResquestCode}, sf_inspectionFinalResult(#{qualityInspectionResquestCode}), '', '', NOW(), 0, NOW(), NOW(), NOW())
 	</insert>
 
 </mapper>

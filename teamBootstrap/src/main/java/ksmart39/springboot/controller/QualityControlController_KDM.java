@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -119,9 +121,10 @@ public class QualityControlController_KDM {
 	//[다미] 품질검사 측정값 등록
 	@PostMapping("/addInspectionMeasurementValue")
 	@ResponseBody
-	public boolean addInspectionMeasurementValue(@RequestBody List<QualityInspectionResult> qualityInspectionResult) {
-		
-		int value = qualityInsMeasurementValueService.addQualityInspectionResult(qualityInspectionResult);
+	public boolean addInspectionMeasurementValue(@RequestBody List<QualityInspectionResult> qualityInspectionResult, HttpSession session) {
+		String sCode = (String) session.getAttribute("SCODE");
+		log.info("session에서 가져오는 employeeCode확인 :{}", sCode);
+		int value = qualityInsMeasurementValueService.addQualityInspectionResult(qualityInspectionResult, session);
 		boolean result = false;			
 		
 		//insert 완료

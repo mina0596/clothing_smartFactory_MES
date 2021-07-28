@@ -3,6 +3,8 @@ package ksmart39.springboot.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +55,7 @@ public class QualityInsMeasurementValueService {
 	}
 	
 	//품질검사 측정값 등록
-	public int addQualityInspectionResult(List<QualityInspectionResult> qualityInspectionResult) {
+	public int addQualityInspectionResult(List<QualityInspectionResult> qualityInspectionResult, HttpSession session) {
 		int result = 0;	
 				
 		log.info("##처음 들어오는 배열## :  {}", qualityInspectionResult);
@@ -133,7 +135,8 @@ public class QualityInsMeasurementValueService {
 			qualityInspectionResult.get(i).setInspectionMeasurementLevelResult(measuredLevel);
 			qualityInspectionResult.get(i).setMinTolerance(passCheckValue);
 			//SESSION 완료 되면 바꿔야함
-			qualityInspectionResult.get(i).setChargeEmployeeCode("E0014");
+			String employeeCode = (String) session.getAttribute("SCODE");
+			qualityInspectionResult.get(i).setChargeEmployeeCode(employeeCode);
 			log.info("06. 최종 결과값 set  :  {}", qualityInspectionResult.get(i));
 			
 			//06. Insert 실행
@@ -141,15 +144,17 @@ public class QualityInsMeasurementValueService {
 			
 			result = 1;			
 		}
-		for(int i=0; i < qualityInspectionResult.size(); i++) {
+		
+		for(int i=0; i < qualityInspectionResult.size(); i++) { 
 			String inspectionCode = qualityInspectionResult.get(i).getQualityInspectionCode();
-			Map<String,Object> maxNumMap = finalResultMapper.getMaxMeasurementNum(inspectionCode);
-			String maxNum = (String) maxNumMap.get("maxNum");
+			Map<String,Object> finalReusltMap = finalResultMapper.getMaxMeasurementNum(inspectionCode); 
+			String maxNum = (String) finalReusltMap.get("maxNum"); 
 			if(maxNum.equals("3회차")) {
-				
+				//finalReusltMap.get(maxNum)
 			}
-			
-		}
+		  
+		  }
+		 
 		
 		/*
 		 * 배열.i.inspectionCode 찾아 mapper에서 max measurementNum =='3회차' 최종결과값 넣는 mapper에서
