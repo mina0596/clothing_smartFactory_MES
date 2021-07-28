@@ -67,7 +67,7 @@ public class ContractController_HBR {
 	}
 	//[보람]원부자재 발주계약리스트
 	@GetMapping("/supplierContractList")
-	public String supplierContractList(Model model,@RequestParam(name = "supplierOrderSearchKey",required = false)String supplierOrderSearchKey
+	public String getSupplierContractList(Model model,@RequestParam(name = "supplierOrderSearchKey",required = false)String supplierOrderSearchKey
 			,@RequestParam(name ="supplierOrderSearchValue",required = false )String supplierOrderSearchValue) {
 		List<Map<String,Object>> resultContract = supplierService.getSupplierContractList();
 		log.info("========================================");

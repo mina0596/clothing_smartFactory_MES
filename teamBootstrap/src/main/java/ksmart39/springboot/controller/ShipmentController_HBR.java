@@ -1,5 +1,6 @@
 package ksmart39.springboot.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import ksmart39.springboot.service.ShipmentService;
 
@@ -38,6 +42,54 @@ public class ShipmentController_HBR {
 	public String modifyShipmentInvoice(Model model){
 		return"shipment/modifyShipmentInvoice";
 	}
+	//[보람]송장등록일조회
+	@RequestMapping(value = "searchInvoiceRegDate",method = RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String,Object>>searchInvoiceRegDate(@RequestParam(value = "invoiceRegDate",required = false) String invoiceRegDate){
+		
+		
+		List<Map<String,Object>> invoiceRegDateList= shipmentService.searchInvoiceRegDate(invoiceRegDate);
+		log.info("=========================");
+		log.info("invoiceRegDateList{}",invoiceRegDateList);
+		log.info("=========================");
+		return invoiceRegDateList;
+	}
+	//[보람]택배사명으로찾기
+	@RequestMapping(value = "searchInvoiceClient",method = RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String,Object>>searchInvoiceClient(@RequestParam(value = "invoiceClient",required = false) String invoiceClient){
+		
+		
+		List<Map<String,Object>> invoiceClientList =shipmentService.searchInvoiceClient(invoiceClient);
+		log.info("=========================");
+		log.info("invoiceList{}",invoiceClientList);
+		log.info("=========================");
+		return invoiceClientList;
+	}
+	//[보람]거래처조회
+	@RequestMapping(value = "searchClientCate",method = RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String,Object>>searchClientCate(@RequestParam(value = "client",required = false) String client){
+		
+		
+		List<Map<String,Object>> clientList = shipmentService.searchClientCate(client);
+		log.info("=========================");
+		log.info("invoiceList{}",clientList);
+		log.info("=========================");
+		return clientList;
+	}
+	//[보람]송장번호 조회
+	@RequestMapping(value = "searchInvoiceCode",method = RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String,Object>>searchInvoiceCode(@RequestParam(value = "shipmentInvoice",required = false) String shipmentInvoice){
+		
+		System.out.println("ShipmentController shipmentInvoiceCode : " + shipmentInvoice );
+		List<Map<String,Object>> invoiceList = shipmentService.searchInvoiceCode(shipmentInvoice);
+		log.info("=========================");
+		log.info("invoiceList{}",invoiceList);
+		log.info("=========================");
+		return invoiceList;
+	}
 	//송장관리의 송장 목록및 조회
 	@GetMapping("/shipmentInvoiceList")
 	public String getShipmentInvoiceList(Model model) {
@@ -55,6 +107,26 @@ public class ShipmentController_HBR {
 		return"shipment/addShipmentInvoice";
 	}
 	
+	
+	//[보람]출하지시조회
+	@RequestMapping(value = "searchShipmentOrder",method = RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String,Object>> getsearchShipmentOrder(@RequestParam(value = "shipmentOrderCode", required = false)String shipmentOrderCode,
+														@RequestParam(value = "productName",required = false)String productName,
+														@RequestParam(value = "clientName",required = false)String clientName,
+														@RequestParam(value = "shipmentOrderDate",required = false)String shipmentOrderDate){
+		
+	HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("shipmentOrderCode", shipmentOrderCode);
+		map.put("productName", productName);
+		map.put("clientName", clientName);
+		map.put("shipmentOrderDate", shipmentOrderDate);
+		List<Map<String,Object>> shipmentOrderList = shipmentService.getsearchShipmentOrder(map);
+		log.info("=========================");
+		log.info("shipmentOrderList{}",shipmentOrderList);
+		log.info("=========================");
+		return shipmentOrderList;
+	}
 	
 	//[보람]출하지시 삭제
 	@PostMapping("/deleteShipmentOrder")

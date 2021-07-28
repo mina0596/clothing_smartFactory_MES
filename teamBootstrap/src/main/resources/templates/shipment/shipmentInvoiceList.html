@@ -8,7 +8,8 @@ layout:decorate="@{layout/default_shipment}">
 	   <div class="border-head"> 
 	    <h3></h3>
 	   </div>
-	      <th:block layout:fragment="customJs">
+	   <script type="text/javascript" th:src="@{/shipmentJs/shipmentInvoiceList.js}"></script>	    
+<th:block layout:fragment="customJs">
 <script>
 $(function(){
 	//#checkAll 버튼 클릭 시 전체 checked
@@ -59,44 +60,42 @@ $(function(){
          		<tr>
          			<th>송장번호</th>
          			<th>거래처별</th>
-         			<th>출고일</th>
-         			<th>납기일</th>
+         			<th>택배사명</th>
+         			<th>등록일</th>
+         			
          			
          		</tr>
          	</thead>
          	<tbody>
          		<tr>
          			<td style="padding-right: 20px;">
-	         			 <div class="form-group"><!-- 출하지시번호 -->
-		               		<button id="bySupplier" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
-		                	<input type="text" class="form-control" id="bySupplierValue" placeholder="직접 입력 또는 검색">
+	         			 <div class="form-group"><!-- 송장번호 -->
+		                	<input type="text" class="shipmentInvoice form-control"  placeholder="송장번호입력">
+		               		<button id="invoiceCodeBtn" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
 		                </div>
          			</td>
-         			<td style="padding-right: 20px;">
-         				<div class="form-group"><!-- 품목별 -->
-		               		<button id="byMaterialName" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
-		                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="직접 입력 또는 검색">
-	              		</div>
-         			</td>
+         			
          			<td style="padding-right: 20px;">
          				<div class="form-group"><!-- 거래처별 -->
-		               		<button id="byMaterialName" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
-		                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="직접 입력 또는 검색">
+		                	<input type="text" class="client form-control"  placeholder="직접 입력 또는 검색">
+		               		<button id="clientCateBtn" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
 	              		</div>
-         			</td><td style="padding-right: 20px;"><!-- 납기일 -->
+	              	</td>
+         			<td style="padding-right: 20px;">
+         				<div class="form-group"><!-- 운송회사-->
+		                	<input type="text" class="invoiceClient form-control" placeholder="직접 입력 또는 검색">
+		               		<button id="invoiceClientBtn" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
+	              		</div>
+	              	</td>
+         			<td style="padding-right: 20px;">
          				<div class="form-group">
-		                	<input type=date class="form-control" id="exampleInputPassword2" placeholder="입고일별">
-	               		</div>
-         			</td>
-         			<td style="padding-right: 20px;"><!-- 납기일 -->
-         				<div class="form-group">
-		                	<input type=date class="form-control" id="exampleInputPassword2" placeholder="입고일별">
+		                	<input type=date class="invoiceRegDate form-control"  placeholder="입고일별">
+		                	<button id="invoiceRegDateBtn" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
 	               		</div>
          			</td>
          			
-         			<td>
-         				  <button type="submit" class="btn btn-theme">검색</button>
-         			</td>        			
+         			
+         			
          		</tr>
          	</tbody>
          </table>  
@@ -142,14 +141,13 @@ $(function(){
                   		</a>
                   	</td>
                   </tr>
-                 
-                 <!-- ----------- -->
+            
            		 </tbody>
               </table>
             </div>
              <div class="form-group">
                     <div class="col-lg-offset-1 col-lg-11 text-right">
-                      <button class="btn btn-success btn-xs" type="button" onclick="location.href='/addShipmentInvoice'"><i class="fa fa-check"></i>송장등록</button>
+                      <button class="btn btn-success btn-xs" type="button" onclick="location.href='/shipment/addShipmentInvoice'"><i class="fa fa-check"></i>송장등록</button>
                       <button class="btn btn-danger btn-xs" type="button" id="deleteBtn"><i class="fa fa-trash-o "></i>송장삭제</button>
                     </div>
                     </div>
