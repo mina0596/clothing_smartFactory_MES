@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import ksmart39.springboot.dao.QualityControlMapper;
 import ksmart39.springboot.dao.QualityInsMeasurementValueMapper;
-import ksmart39.springboot.dao.QualityInsepctionFinalResultMapper;
+import ksmart39.springboot.dao.QualityInspectionFinalResultMapper;
 import ksmart39.springboot.domain.QualityBiochemFabricLevelStandard;
 import ksmart39.springboot.domain.QualityInspection;
 import ksmart39.springboot.domain.QualityInspectionResult;
@@ -25,7 +25,7 @@ public class QualityInsMeasurementValueService {
 	
 	@Autowired
 	private QualityInsMeasurementValueMapper qualityInsMeasurementValueMapper;
-	private QualityInsepctionFinalResultMapper finalResultMapper;
+	private QualityInspectionFinalResultMapper finalResultMapper;
 	
 	//품질검사 검색
 	public List<QualityInspection> searchInspectionCode(QualityInspection qualityInspection){

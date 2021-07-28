@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ksmart39.springboot.dao.QualityInsepctionFinalResultMapper">
-	<resultMap id="qualityInspectionFinalResultMap" type="QualityInspectionFinalResult">
-		<result property="finalResultCode" />
+<mapper namespace="ksmart39.springboot.dao.QualityInspectionFinalResultMapper">
+	<resultMap id="qualityInspectionFinalResultMap" 		type="QualityInspectionFinalResult">
+		<result property="finalResultCode" 					column="final_result_code"/>
+		<result property="qualityInspectionResquestCode" 	column="quality_inspection_request_code"/>
+		<result property="chargeEmployeeCode" 				column="charge_employee_code"/>
+		<result property="qualityInspectionCode" 			column="quality_inspection_code"/>
+		<result property="lowCateFinalPassCheck" 			column="low_cate_final_pass_check"/>
+		<result property="inspectionStratDate" 				column="inspection_start_date"/>
+		<result property="inspectiondDuration" 				column="inspection_duration"/>
+		<result property="inspectionEnddate" 				column="inspection_end_date"/>
+		<result property="finalResutlRegDate" 				column="final_result_reg_date"/>
+		<result property="finalResultUpdateDate" 			column="final_result_update_date"/>
 	</resultMap>
 
 	<!-- 품질검사 최종결과 리스트 -->
@@ -242,9 +251,11 @@
 	
 	<insert id="getFinalResult">
 		
-	INSERT INTO inspection_final_result
+		INSERT INTO 
+			inspection_final_result
 		(final_result_code, quality_inspection_request_code, charge_employee_code, quality_inspection_code, low_cate_final_pass_check, inspection_start_date, inspection_duration, inspection_end_date, final_result_reg_date, final_result_update_date)
-		VALUES ('', '', '', '', '', NOW(), 0, NOW(), NOW(), NOW())
+		VALUES 
+		(sf_inspectionFinalResultCode(#{qualityInspectionResquestCode}), #{qualityInspectionResquestCode}, '', '', '', NOW(), 0, NOW(), NOW(), NOW())
 	</insert>
 
 </mapper>

@@ -23,7 +23,7 @@ import ksmart39.springboot.domain.DefectiveProduct;
 import ksmart39.springboot.service.DefectiveProductService;
 import ksmart39.springboot.service.QualityControlService;
 import ksmart39.springboot.service.QualityInsMeasurementValueService;
-import ksmart39.springboot.service.QualityInsepctionFinalResultService;
+import ksmart39.springboot.service.QualityInspectionFinalResultService;
 import ksmart39.springboot.service.QualityInsepctionStauteService;
 
 @Controller
@@ -31,7 +31,7 @@ import ksmart39.springboot.service.QualityInsepctionStauteService;
 public class QualityControlController_HBR {
 	private static final Logger log = LoggerFactory.getLogger(QualityControlController_HBR.class);
 	@Autowired
-	private QualityInsepctionFinalResultService qualityInsepctionFinalResultService;
+	private QualityInspectionFinalResultService qualityInsepctionFinalResultService;
 	@Autowired
 	private QualityInsepctionStauteService qualityInsepctionStauteService;
 	
