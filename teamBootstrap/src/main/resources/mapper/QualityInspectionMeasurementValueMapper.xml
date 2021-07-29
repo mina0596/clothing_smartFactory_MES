@@ -46,6 +46,7 @@
 		<result property="rawMaterialCode" 						column="raw_material_code"/>
 	</resultMap>
 	
+		
 	<!-- 품질검사 코드 검색 -->
 	<select id="searchInspectionCode" resultType="QualityInspection" parameterType="QualityInspection">
 		SELECT
@@ -295,6 +296,32 @@
 			);
 			
 	</insert>
+	
+	<!-- 품질검사 수치별 등록 기준값 가져오기 -->
+	<select id="getQualityInspectionStandardByNumber" parameterType="String" resultType="Map">
+		SELECT
+			s.quality_inspection_code
+			,s.measurement_part
+			,ps.measured_value
+		FROM
+			required_size_list AS s
+		INNER JOIN
+			requested_product_size AS ps ON s.required_size_code = ps.required_size_code
+		INNER JOIN
+			requested_product_detail AS p ON ps.requested_product_code = p.requested_product_code
+		WHERE
+			s.quality_inspection_code = #{qualityInspectionCode}
+		AND
+			ps.requested_product_code = (SELECT
+															r.requested_product_code
+														FROM
+															requested_product_detail AS r
+														INNER JOIN
+															quality_inspection_request AS q ON r.requested_product_code = q.requested_product_code
+														WHERE 
+															q.quality_inspection_request_code = #{qualityInspectionRequestCode})
+		GROUP BY s.quality_inspection_code;
+	</select>
 	
 	<!-- 품질검사 측정값 기준치 -->
 	<select id="getQualityInspectionStandard" parameterType="String" resultMap="QualityInspectionStandardResultMap" >
