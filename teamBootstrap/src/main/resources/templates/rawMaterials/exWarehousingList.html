@@ -8,19 +8,58 @@ layout:decorate="@{layout/default_rawMaterials}">
 	    <h3>자재 관리</h3>
 	   </div>
 
- <script type="text/javascript">
-		$(function(){
-			//#checkAll 버튼 클릭 시 전체 checked
-				$('#checkAll').click(function(){
-					if($('#checkAll').prop('checked')){
-						$('.checked').prop('checked',true);
-							}else{
-								$('.checked').prop('checked',false);
-							}
-						});									
-					});
+<th:block layout:fragment="customJs">
+	<script>
 
-	</script>  
+	$(function(){
+	//#checkAll 버튼 클릭 시 전체 checked
+		$('#checkAll').click(function(){
+			if($('#checkAll').prop('checked')){
+				$('.checked').prop('checked',true);
+					}else{
+						$('.checked').prop('checked',false);
+					}
+				});
+	
+		$('#deleteBtn').click(function(){
+			var delArr = new Array();
+			var list = $('.checked');
+			
+			for(var i = 0; i < list.length; i++){
+				if(list[i].checked){
+					delArr.push(list[i].value);
+				}
+			}
+			if(delArr.length == 0){
+				alert('삭제할 항목을 선택해주세요.');
+			}
+			else{
+				var delCheck = confirm('정말 삭제하시겠습니까?');
+				if(delCheck){
+					$.ajax({
+						url: "deleteExHousing",
+						method : 'post',
+						async: true,
+						dataType : "json",
+						data : {'delArr':delArr},
+						success: function(data){
+							console.log(data);
+							if(data > 0){
+								alert('삭제 되었습니다.');
+								location.replace("exWarehousingList");
+							}else{
+								alert('오류: 삭제 실패');
+							}
+						}
+					});
+				}else{
+					return false;
+				}
+			}
+			});
+		});
+</script>
+
 </th:block>
 
 <th:block layout:fragment="container">
@@ -270,7 +309,7 @@ layout:decorate="@{layout/default_rawMaterials}">
                 <tbody>
                 <!--db에서 데이터 넣어야하는 부분 -->
                   <tr th:each ="e,n : ${exHousingList}">
-                  	<td><input type="checkbox" class="checked"></td>
+                  	<td><input type="checkbox" class="checked"  th:value="${e.rmtCode}"></td>
                   	<td th:text = "${n.index+1}"></td>
                     <td th:text="${e.rmtCode}"></td>
                     <td th:text="${e.rmCode}"></td>
@@ -290,7 +329,7 @@ layout:decorate="@{layout/default_rawMaterials}">
             <div class="form-group text-right">
 		          <div class="col-lg-offset-2 col-lg-10">
 		           <a th:href="@{/addInWarehousing}" class="btn btn-success btn-xs"><i class="fa fa-plus"></i>출고등록</a>
-		           <a id="deleteBtn" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i>삭제</a>
+	                 <a class="btn btn-danger btn-xs" id="deleteBtn"><i class="fa fa-trash-o "></i>삭제</a>
 		          </div>
 		        </div> 
             </div>

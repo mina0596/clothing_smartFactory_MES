@@ -23,7 +23,7 @@
 </resultMap>
 	
 	
-	<select id="getHumanResources" resultMap="getHumanResourcesInfo"  resultType="HumanResources" fetchSize="1000">
+	<select id="getHumanResources" resultMap="getHumanResourcesInfo" parameterType = "map"  resultType="HumanResources" fetchSize="1000">
 		SELECT
 			e.employee_code
 			,e.level_num

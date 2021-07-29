@@ -14,6 +14,14 @@ public class ContractInfo {
 	private String contractInfoUpdateDate;
 	
 	private HumanResources humanResources;
+	private Client client;
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
 
 	public String getContractNum() {
 		return contractNum;
@@ -118,7 +126,8 @@ public class ContractInfo {
 				+ ", contractedPaymentTerm=" + contractedPaymentTerm + ", contractDate=" + contractDate
 				+ ", contractTotalPayment=" + contractTotalPayment + ", contractStartDate=" + contractStartDate
 				+ ", contractEndDate=" + contractEndDate + ", contractInfoRegDate=" + contractInfoRegDate
-				+ ", contractInfoUpdateDate=" + contractInfoUpdateDate + ", humanResources=" + humanResources + "]";
+				+ ", contractInfoUpdateDate=" + contractInfoUpdateDate + ", humanResources=" + humanResources
+				+ ", client=" + client + "]";
 	}
 
 

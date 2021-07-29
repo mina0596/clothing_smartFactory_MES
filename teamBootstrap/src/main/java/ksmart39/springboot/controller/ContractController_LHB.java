@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.thymeleaf.util.MapUtils;
 
 import ksmart39.springboot.domain.SupplierRequest;
+import ksmart39.springboot.paging.Pagination;
+import ksmart39.springboot.service.ContractService;
 import ksmart39.springboot.service.OrderService;
 import ksmart39.springboot.service.RequestedProductService;
 import ksmart39.springboot.service.SupplierService;
@@ -26,10 +28,11 @@ import ksmart39.springboot.service.SupplierService;
 public class ContractController_LHB {
 	@Autowired
 	private final OrderService orderService;
+	private final ContractService contractService;
 	
-	
-	 @Autowired public ContractController_LHB(OrderService orderService) {
+	 @Autowired public ContractController_LHB(OrderService orderService, ContractService contractService) {
 	 this.orderService = orderService;
+	 this.contractService = contractService;
 	 }
 	 
 
@@ -98,8 +101,14 @@ public class ContractController_LHB {
 	
 	//[한빛]수주계약 조회
 	@GetMapping("/buyerContractList")
-	public String getBuyerContractList(Model model) {
-		model.addAttribute("title", "수주관리");
+	public String getBuyerContractList(Model model, Pagination paging) {
+	    Map<String, Object> resultMap = contractService.getBuyerContract(paging);
+	    model.addAttribute("buyerContractList", 					resultMap.get("clientList"));
+	    model.addAttribute("currentPage", 							resultMap.get("currentPage"));
+		model.addAttribute("lastPage", 								resultMap.get("lastPage"));
+		model.addAttribute("pageStartNum", 						resultMap.get("pageStartNum"));
+		model.addAttribute("pageEndNum", 						resultMap.get("pageEndNum"));
+
 		return "contract/buyerContractList";
 	}
 	
