@@ -27,7 +27,7 @@ import ksmart39.springboot.domain.QualityInspection;
 import ksmart39.springboot.domain.QualityInspectionResult;
 import ksmart39.springboot.domain.QualityInspectionStandard;
 import ksmart39.springboot.service.QualityInsMeasurementValueService;
-import ksmart39.springboot.service.QualityInsepctionStauteService;
+import ksmart39.springboot.service.QualityInspectionStauteService;
 
 @Controller
 @RequestMapping("/quality")
@@ -38,10 +38,10 @@ public class QualityControlController_KDM {
 	@Autowired 
 	private QualityInsMeasurementValueService qualityInsMeasurementValueService;
 	@Autowired
-	private QualityInsepctionStauteService qualityInsepctionStauteService;
+	private QualityInspectionStauteService qualityInsepctionStauteService;
 	
 	@Autowired
-	public QualityControlController_KDM(QualityInsMeasurementValueService qualityInsMeasurementValueService,QualityInsepctionStauteService qualityInsepctionStauteService) {
+	public QualityControlController_KDM(QualityInsMeasurementValueService qualityInsMeasurementValueService,QualityInspectionStauteService qualityInsepctionStauteService) {
 		this.qualityInsepctionStauteService = qualityInsepctionStauteService;
 		this.qualityInsMeasurementValueService =qualityInsMeasurementValueService;
 	}

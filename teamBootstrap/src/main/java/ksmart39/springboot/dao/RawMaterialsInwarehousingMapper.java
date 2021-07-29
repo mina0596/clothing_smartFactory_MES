@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import ksmart39.springboot.domain.RawMaterialsInventory;
 
 @Mapper
-public interface RawMaterialInwarehousingMapper {
+public interface RawMaterialsInwarehousingMapper {
 	
 	//원부자재 입고리스트
 	public List<RawMaterialsInventory> getRawMaterialInwarehousingList();

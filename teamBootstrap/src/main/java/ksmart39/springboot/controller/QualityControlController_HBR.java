@@ -24,7 +24,7 @@ import ksmart39.springboot.service.DefectiveProductService;
 import ksmart39.springboot.service.QualityControlService;
 import ksmart39.springboot.service.QualityInsMeasurementValueService;
 import ksmart39.springboot.service.QualityInspectionFinalResultService;
-import ksmart39.springboot.service.QualityInsepctionStauteService;
+import ksmart39.springboot.service.QualityInspectionStauteService;
 
 @Controller
 @RequestMapping("/quality")
@@ -33,7 +33,7 @@ public class QualityControlController_HBR {
 	@Autowired
 	private QualityInspectionFinalResultService qualityInsepctionFinalResultService;
 	@Autowired
-	private QualityInsepctionStauteService qualityInsepctionStauteService;
+	private QualityInspectionStauteService qualityInsepctionStauteService;
 	
 	//================================================================
 	//[다미&보람] 수주계약별 검색 

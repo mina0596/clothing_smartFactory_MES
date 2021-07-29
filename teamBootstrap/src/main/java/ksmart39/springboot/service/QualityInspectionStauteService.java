@@ -17,8 +17,8 @@ import ksmart39.springboot.dao.QualityInspectionFinalResultMapper;
 import ksmart39.springboot.dao.QualityInsepctionStauteMapper;
 
 @Service
-public class QualityInsepctionStauteService {
-	private static final Logger log = LoggerFactory.getLogger(QualityInsepctionStauteService.class);
+public class QualityInspectionStauteService {
+	private static final Logger log = LoggerFactory.getLogger(QualityInspectionStauteService.class);
 	
 	@Autowired
 	private QualityInsepctionStauteMapper qualityInsepctionStauteMapper;

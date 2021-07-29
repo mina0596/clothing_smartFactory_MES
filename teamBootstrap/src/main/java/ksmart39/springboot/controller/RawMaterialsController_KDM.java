@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ksmart39.springboot.domain.HumanResources;
 import ksmart39.springboot.domain.RawMaterials;
 import ksmart39.springboot.domain.RawMaterialsInventory;
-import ksmart39.springboot.service.RawMaterialInwarehousingService;
+import ksmart39.springboot.service.RawMaterialsInwarehousingService;
 import ksmart39.springboot.service.RawMaterialsInventoryStatusService;
 import ksmart39.springboot.service.RawMaterialsService;
 
@@ -34,7 +34,7 @@ public class RawMaterialsController_KDM {
 	/**************************************************************************************************/
 	
 	@Autowired
-	private RawMaterialInwarehousingService rawMaterialInwarehousingService;
+	private RawMaterialsInwarehousingService rawMaterialInwarehousingService;
 	
 
 
