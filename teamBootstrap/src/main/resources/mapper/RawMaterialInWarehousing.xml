@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart39.springboot.dao.RawMaterialInwarehousingMapper">
+
+	<resultMap type="RawMaterialsInventory" 		id="materialsInventoryResultMap">
+		<result property="inventoryAmount" 			column="leftMaterialTotal"/>
+		<result property="transactionCode" 			column="raw_material_transaction_code"/>
+		<result property="materialCode" 			column="raw_material_code"/>
+		<result property="materialOrderCode" 		column="raw_material_order_code"/>
+		<result property="chargeEmployeeCode" 		column="charge_employee_code"/>
+		<result property="transactionCate" 			column="transaction_category"/>
+		<result property="transactionAmount" 		column="raw_material_transaction_amount"/>
+		<result property="transactionDate" 			column="raw_material_transaction_date"/>
+		<result property="transactionRegDate" 		column="raw_material_transaction_reg_date"/>
+		<result property="transactionUpdateDate" 	column="raw_material_transaction_update_date"/>
+		
+		<association property="materialsInfo" 		javaType="RawMaterials">
+			<id property="rawMaterialCode"			column="raw_material_code"/>
+			<result property="rawMaterialName" 		column="raw_material_name"/>
+			<result property="highClass" 			column="raw_material_high_classification"/>
+			<result property="colorCode" 			column="raw_material_color_code"/>
+			<result property="unit" 				column="raw_material_unit"/>
+			<result property="feature" 				column="raw_material_feature"/>
+			<association property="employeeInfo" 		javaType="HumanResources">
+				<id property="employeeCode" 			column="employee_code"/>
+				<result property="employeeName" 		column="employee_name"/>
+			</association>
+		</association>
+	</resultMap>
+	
+	<select id="getRawMaterialInwarehousingList" resultMap="materialsInventoryResultMap">
+		SELECT 
+			r.raw_material_code
+			,r.raw_material_order_code
+			,ri.raw_material_high_classification
+			,ri.raw_material_name
+			,r.raw_material_transaction_amount
+			,ri.raw_material_unit
+			,r.raw_material_transaction_date
+		FROM 
+			raw_material_inventory_transaction AS r
+		INNER JOIN
+			raw_material_info AS ri ON r.raw_material_code = ri.raw_material_code
+		WHERE 
+			r.transaction_category = '입고';
+	</select>
+</mapper>
