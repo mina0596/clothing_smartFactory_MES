@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import ksmart39.springboot.domain.QualityInspectionFinalResult;
+
 @Mapper
 public interface QualityInspectionFinalResultMapper {
 	
@@ -36,5 +38,8 @@ public interface QualityInspectionFinalResultMapper {
 	
 	//[민아]품질검사 최종회차 가져오기
 	public Map<String,Object> getMaxMeasurementNum(String requestInspectionCode);
+	
+	//[민아]품질검사 최종결과값 DB에 INSERT
+	public int insertFinalResult(QualityInspectionFinalResult finalResultMap);
 
 }

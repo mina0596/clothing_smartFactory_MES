@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import ksmart39.springboot.domain.ProductProductionProcessStatus;
+import ksmart39.springboot.domain.WorkOrder;
 import ksmart39.springboot.service.CompletedProductService;
 import ksmart39.springboot.service.ProductionService;
 import ksmart39.springboot.service.ProductionStatusByProductionPlanService;
@@ -232,14 +233,20 @@ public class ProductionController_PMA {
 		return "production/addWorkOrder";
 	}
 	
+	@PostMapping("/addWorkOrder")
+	public String addWorkOrder(WorkOrder workOrder) {
+		
+		return "redirect:/production/workOrderList";
+	}
+	
 	
 	//[민아]작업지시등록화면에서 계약번호 검색 모달
-	@PostMapping("/searchContractCode")
+	@PostMapping("/searchContractCodeModal")
 	@ResponseBody
 	public List<Map<String,Object>> getContractCode(@RequestBody Map<String,Object> paramMap){
 		List<Map<String,Object>> searchContractCodeResult = productionService.searchClientName(paramMap);
 		return searchContractCodeResult;
 	}
-	
+
 	
 }

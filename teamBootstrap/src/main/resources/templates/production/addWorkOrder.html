@@ -5,31 +5,13 @@ layout:decorate="@{layout/default_production}">
 
 
 <th:block layout:fragment="customJs">
-	<script>
+	<script type="text/javascript" th:src="@{/productionJs/searchContractCode.js}"></script>
+	<script type="text/javascript">
 		$(function(){
+			// =================취소버튼=============
 			$('#cancleBtn').click(function(){
 				location.href="/workOrderList"
 			});
-			
-			$('.searchContractCode').click(function(){
-				console.log('찍히니?');
-				$('#contractCodeModal').modal("show");
-			});
-			$('[data-popup-open]').on('click', function(e)  {
-		        var targeted_popup_class = jQuery(this).attr('data-popup-open');
-		        $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
-
-		        e.preventDefault();
-		    });
-
-		    //----- CLOSE
-		    $('[data-popup-close]').on('click', function(e)  {
-		        var targeted_popup_class = jQuery(this).attr('data-popup-close');
-		        $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
-
-		        e.preventDefault();
-		    });
-			
 		});
 	
 	</script>
@@ -50,7 +32,9 @@ layout:decorate="@{layout/default_production}">
        
         
         <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label"style="font-weight: 600;"> 계약번호</label>
+        <div class="col-md-3" style="padding-left: 50px;">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;" > 계약번호</label>
+          </div>
           <div class="col-md-5">
             <div  class="input-group ">
               <input type="text" class="form-control" id="searchedContractCode" size="16">
@@ -63,108 +47,55 @@ layout:decorate="@{layout/default_production}">
         
         
         <div class="form-group">
+        <div class="col-md-3" style="padding-left: 50px;">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">거래처명</label>
+          </div>
          <div class="col-md-5">
-            <input class="form-control" id="disabledInput" type="text"  >
+            <input class="form-control" type="text" id="searchedClientName">
           </div>
         </div>
         
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">의뢰코드</label>
-          <div class="col-md-5">
-          	<input class="form-control" id="disabledInput" type="tel"  >
-          </div>
-        </div>
-           	        
          <div class="form-group">
-       	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품목별의뢰번호</label>
+	         <div class="col-md-3" style="padding-left: 50px;">
+	       	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품목별의뢰번호</label>
+       	  	</div>
        		<div class="col-md-5">
-           	<input class="form-control" id="disabledInput" type="text" placeholder="원부자재 코드명 " >
-	           
-         	  	</div>
-         	 	</div>
-        
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">양복명</label>
-          <div class="col-md-5">
-            <input type="text" class="form-control" placeholder="" >
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품목명</label>
-          <div class="col-md-5">
-            <input type="text" class="form-control" >
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">디자인첨부</label>
-              <div class="fileupload fileupload-new col-xs-3" data-provides="fileupload">
-                  <input type="file" name="designDrawingAttachment" />
-                  <span class="fileupload-preview" style="margin-left:5px;"></span>
-        		</div>
-        </div>
-        
+           		<input class="form-control" type="text" name="requestedProductCode" id="searchedPCode">
+       	  	</div>
+   	 	</div>
+   	 	
       <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label"  style="font-weight: 600;">납기일</label>
-          <div class="col-md-4">
-            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
-              <input type="text" class="form-control" readonly="readonly" size="16">
-              <div class="input-group-btn">
-                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
-                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
-              </div>
-            </div>
-          </div>
-        </div>
-      <div class="form-group">
+      	<div class="col-md-3" style="padding-left: 50px;">
           <label class="col-sm-2 col-sm-2 control-label"  style="font-weight: 600;">생산시작예정일</label>
+          </div>
           <div class="col-md-4">
-            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
-              <input type="text" class="form-control" readonly="readonly" size="16">
-              <div class="input-group-btn">
-                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
-                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
-              </div>
+            <div>
+              <input type="date" class="form-control" id="expectedStartProductionDate"name="expectedProductionStartDate">
             </div>
           </div>
         </div>
       <div class="form-group">
+      <div class="col-md-3" style="padding-left: 50px;">
           <label class="col-sm-2 col-sm-2 control-label"  style="font-weight: 600;">생산마감예정일</label>
+          </div>
           <div class="col-md-4">
-            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
-              <input type="text" class="form-control" readonly="readonly" size="16">
-              <div class="input-group-btn">
-                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
-                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
-              </div>
+            <div>
+              <input type="date" class="form-control" id="expectedFinishProductionDate" name="expectedProductionEndDate">
             </div>
           </div>
         </div>
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">생산지시수량</label>
-          <div class="col-md-4">
-            <input type="text" class="form-control" >
-          </div>
-        </div>
-        <div class="form-group">
-           	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">생산단위</label>
-           	  	<div class="col-sm-4">
-             	 <select class="form-control">
-                  <option>단위</option>
-                  <option> 벌</option>
-                 </select>
-           	  	</div>
-           	 	</div>
     	<div class="form-group">
-          <label class="col-lg-2 col-sm-2 control-label" style="font-weight: 600;">작업지시자</label>
-          <div class="col-md-5">
-            <p class="form-control-static">한보람</p>
+    	<div class="col-md-3" style="padding-left: 50px;">
+          <label class="col-lg-2 col-sm-2 control-label" style="font-weight: 600;">작업지시 사원명</label>
+          </div>
+          <div class="col-md-1">
+            <input type="text" class="form-control" id="workOrderEmployeeName" size="16" th:value="${session.SNAME}" readonly="readonly">
           </div>
         </div>
        <div class="form-group text-right">
                     <div class="col-lg-offset-2 col-lg-10">
-                      <button class="btn btn-theme" type="button" onclick="location.href='/workOrderList'"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">작업지시등록</font></font></button>
-                      <button class="btn btn-theme04" type="button" id="cancleBtn"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">작업지시취소</font></font></button>
+                      <button class="btn btn-theme" type="submit">등록</button>
+                      <button class="btn btn-theme04" type="button" id="cancleBtn">취소</button>
                     </div>
                     </div>
        		</form>
@@ -173,7 +104,7 @@ layout:decorate="@{layout/default_production}">
     
 
 
-<th:block th:replace="/production/modal/modal_searchContractCode::modal_searchContractCode"></th:block>
+	<th:block th:replace="/production/modal/modal_searchContractCode::modal_searchContractCode"></th:block>
 
 
 </th:block>

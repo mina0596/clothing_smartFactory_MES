@@ -1,5 +1,7 @@
 package ksmart39.springboot.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +17,7 @@ import ksmart39.springboot.dao.QualityInsMeasurementValueMapper;
 import ksmart39.springboot.dao.QualityInspectionFinalResultMapper;
 import ksmart39.springboot.domain.QualityBiochemFabricLevelStandard;
 import ksmart39.springboot.domain.QualityInspection;
+import ksmart39.springboot.domain.QualityInspectionFinalResult;
 import ksmart39.springboot.domain.QualityInspectionResult;
 import ksmart39.springboot.domain.QualityInspectionStandard;
 
@@ -27,6 +30,7 @@ public class QualityInsMeasurementValueService {
 	
 	@Autowired
 	private QualityInsMeasurementValueMapper qualityInsMeasurementValueMapper;
+	@Autowired
 	private QualityInspectionFinalResultMapper finalResultMapper;
 	
 	//품질검사 검색
@@ -143,23 +147,38 @@ public class QualityInsMeasurementValueService {
 			qualityInsMeasurementValueMapper.addQualityRawMaterialInspectionResult(qualityInspectionResult.get(i));
 			
 			result = 1;			
-		}
+			//품질검사 3회차 결과값 입력시 실행되는
+			//품질검사 최종결과값 insert
+			
+			
+			QualityInspectionFinalResult finalResultMap = new QualityInspectionFinalResult();
 		
-		for(int i=0; i < qualityInspectionResult.size(); i++) { 
+
 			String inspectionCode = qualityInspectionResult.get(i).getQualityInspectionCode();
-			Map<String,Object> finalReusltMap = finalResultMapper.getMaxMeasurementNum(inspectionCode); 
-			String maxNum = (String) finalReusltMap.get("maxNum"); 
+			String inspectionRequestCode = qualityInspectionResult.get(i).getQualityInspectionRequestCode();
+			Map<String,Object> finalResultParams = finalResultMapper.getMaxMeasurementNum(inspectionRequestCode); 
+			log.info("회차와 검사에 대한 시간 정보 가져오는 메서드 실행값 : {}", finalResultParams);
+			String maxNum = (String) finalResultParams.get("maxNum"); 
+			log.info("회차와 검사에 대한 시간 정보 가져오는 회차 맥스값 : {}", maxNum);
+			
 			if(maxNum.equals("3회차")) {
-				//finalReusltMap.get(maxNum)
-			}
+				//최종결과값 가져오는 메서드 실행결과 담기
+				String finalResult = finalResultMapper.getFinalInspectionResult(inspectionRequestCode);
+				log.info("인터페이스에 존재하는 최종결과값 가져오는 메서드를 실행해서 받아오는 결과값 :{}", finalResult);
+				
+				//최종결과에 넣어주기 위한 데이터들 setter에 넣어주기
+				finalResultMap.setChargeEmployeeCode((String) session.getAttribute("SCODE"));
+				finalResultMap.setInspectionEndDate((String) finalResultParams.get("finishDate"));
+				//Integer.parseInt(String.valueOf(finalResultParams.get("duration")));
+				finalResultMap.setInspectionDuration(Integer.parseInt(String.valueOf(finalResultParams.get("duration"))));
+				finalResultMap.setInspectionStartDate((String) finalResultParams.get("startDate"));
+				finalResultMap.setQualityInspectionRequestCode(inspectionRequestCode);
+				finalResultMap.setQualityInspectionCode(inspectionCode);
+					
+					finalResultMapper.insertFinalResult(finalResultMap);
+			}	
 		  
 		  }
-		 
-		
-		/*
-		 * 배열.i.inspectionCode 찾아 mapper에서 max measurementNum =='3회차' 최종결과값 넣는 mapper에서
-		 * 가져오는 쿼리 실행
-		 */
 		
 		return result;	
 	}
