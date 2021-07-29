@@ -35,9 +35,10 @@ public interface SystemMapper {
 	public int deleteHumanResources(List<String> delArr);
 
 	/****************************************************************************/
-	
+	//거래처 테이블 행의 개수 조회(페이징 처리)
+	public int getClientCount();	
 	//[한빛] 거래처 전체조회
-	public List<Client> getClient(Map<String, Object> paramMap);
+	public List<Map<String,Client>> getClient(Map<String, Object> paramMap);
 	//거래처 등록
 	public int addClient (Client client);
 	//거래처 수정
@@ -46,7 +47,7 @@ public interface SystemMapper {
 	public Client getClientInfoByCode(String clientCode);
 	//거래처 삭제
 	public int deleteClient(List<String> delArr);
-	
+
 	/****************************************************************************/
 	
 
