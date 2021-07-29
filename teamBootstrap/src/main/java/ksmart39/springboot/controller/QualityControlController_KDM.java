@@ -124,6 +124,7 @@ public class QualityControlController_KDM {
 	public boolean addInspectionMeasurementValue(@RequestBody List<QualityInspectionResult> qualityInspectionResult, HttpSession session) {
 		String sCode = (String) session.getAttribute("SCODE");
 		log.info("session에서 가져오는 employeeCode확인 :{}", sCode);
+
 		int value = qualityInsMeasurementValueService.addQualityInspectionResult(qualityInspectionResult, session);
 		boolean result = false;			
 		
