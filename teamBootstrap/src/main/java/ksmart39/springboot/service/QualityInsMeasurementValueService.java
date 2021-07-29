@@ -55,7 +55,7 @@ public class QualityInsMeasurementValueService {
 	}
 	
 	//품질검사 측정값 등록
-	public int addQualityInspectionResult(List<QualityInspectionResult> qualityInspectionResult) {
+	public int addQualityInspectionResult(List<QualityInspectionResult> qualityInspectionResult, HttpSession session) {
 		int result = 0;	
 				
 		log.info("##처음 들어오는 배열## :  {}", qualityInspectionResult);
@@ -174,12 +174,14 @@ public class QualityInsMeasurementValueService {
 			}else {
 				result = 0;
 			}
+			String chargeEmployeeCode = (String) session.getAttribute("SCODE");
 		
 			//05. 해당 DTO에 담기
 			qualityInspectionResult.get(i).setInspectionMeasurementValue(resultValue);//측정값
 			qualityInspectionResult.get(i).setInspectionPassCheck(passValue);//최종 합/불
 			qualityInspectionResult.get(i).setInspectionMeasurementLevelResult(measuredLevel);//등급값
 			qualityInspectionResult.get(i).setMinTolerance(passCheckValue);//판정 기준 최소 등급값
+			qualityInspectionResult.get(i).setChargeEmployeeCode(chargeEmployeeCode);
 			log.info("06. 최종 결과값 set  :  {}", qualityInspectionResult.get(i));
 			
 			//06. Insert 실행
