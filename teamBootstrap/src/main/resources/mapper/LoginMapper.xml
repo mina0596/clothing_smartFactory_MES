@@ -44,4 +44,34 @@
 		WHERE 
 			employee_id = #{employeeId};
 	</select>
+	
+	<select id="selectEmployeeList" resultType="HumanResources">
+		select * from employee_info order by employee_id
+	</select>
+	
+	<select id="selectEmployeeInfoById" parameterType="String" resultType="map">
+		SELECT
+			e.employee_code
+			,e.level_num
+			,e.employee_id
+			,e.employee_pw
+			,e.employee_name
+			,e.employee_tel
+			,e.employee_address
+			,e.employee_email
+			,e.employee_department
+			,e.employee_position
+			,e.employee_info_reg_date
+			,e.employee_info_update_date
+			,l.level_name
+		FROM
+			employee_info as e
+			INNER JOIN
+			erp_access_level as l
+			on
+			e.level_num = l.level_num
+		WHERE 
+			employee_id = #{employeeId};
+	</select>
+	
 </mapper>

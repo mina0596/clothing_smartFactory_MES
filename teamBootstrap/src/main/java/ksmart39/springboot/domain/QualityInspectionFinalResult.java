@@ -2,14 +2,14 @@ package ksmart39.springboot.domain;
 
 public class QualityInspectionFinalResult {
 	private String finalResultCode;
-	private String qualityInspectionResquestCode;
+	private String qualityInspectionRequestCode;
 	private String chargeEmployeeCode;
 	private String qualityInspectionCode;
 	private String lowCateFinalPassCheck;
-	private String inspectionStratDate;
-	private int inspectiondDuration;
-	private String inspectionEnddate;
-	private String finalResutlRegDate;
+	private String inspectionStartDate;
+	private int inspectionDuration;
+	private String inspectionEndDate;
+	private String finalResultRegDate;
 	private String finalResultUpdateDate;
 	
 	
@@ -19,18 +19,17 @@ public class QualityInspectionFinalResult {
 	private LowClassInspection lowClassInspection;
 	private SubClassInspection subClassInspection;
 	private HumanResources humanResources;
-	
 	public String getFinalResultCode() {
 		return finalResultCode;
 	}
 	public void setFinalResultCode(String finalResultCode) {
 		this.finalResultCode = finalResultCode;
 	}
-	public String getQualityInspectionResquestCode() {
-		return qualityInspectionResquestCode;
+	public String getQualityInspectionRequestCode() {
+		return qualityInspectionRequestCode;
 	}
-	public void setQualityInspectionResquestCode(String qualityInspectionResquestCode) {
-		this.qualityInspectionResquestCode = qualityInspectionResquestCode;
+	public void setQualityInspectionRequestCode(String qualityInspectionRequestCode) {
+		this.qualityInspectionRequestCode = qualityInspectionRequestCode;
 	}
 	public String getChargeEmployeeCode() {
 		return chargeEmployeeCode;
@@ -50,29 +49,29 @@ public class QualityInspectionFinalResult {
 	public void setLowCateFinalPassCheck(String lowCateFinalPassCheck) {
 		this.lowCateFinalPassCheck = lowCateFinalPassCheck;
 	}
-	public String getInspectionStratDate() {
-		return inspectionStratDate;
+	public String getInspectionStartDate() {
+		return inspectionStartDate;
 	}
-	public void setInspectionStratDate(String inspectionStratDate) {
-		this.inspectionStratDate = inspectionStratDate;
+	public void setInspectionStartDate(String inspectionStartDate) {
+		this.inspectionStartDate = inspectionStartDate;
 	}
-	public int getInspectiondDuration() {
-		return inspectiondDuration;
+	public int getInspectionDuration() {
+		return inspectionDuration;
 	}
-	public void setInspectiondDuration(int inspectiondDuration) {
-		this.inspectiondDuration = inspectiondDuration;
+	public void setInspectionDuration(int inspectionDuration) {
+		this.inspectionDuration = inspectionDuration;
 	}
-	public String getInspectionEnddate() {
-		return inspectionEnddate;
+	public String getInspectionEndDate() {
+		return inspectionEndDate;
 	}
-	public void setInspectionEnddate(String inspectionEnddate) {
-		this.inspectionEnddate = inspectionEnddate;
+	public void setInspectionEndDate(String inspectionEndDate) {
+		this.inspectionEndDate = inspectionEndDate;
 	}
-	public String getFinalResutlRegDate() {
-		return finalResutlRegDate;
+	public String getFinalResultRegDate() {
+		return finalResultRegDate;
 	}
-	public void setFinalResutlRegDate(String finalResutlRegDate) {
-		this.finalResutlRegDate = finalResutlRegDate;
+	public void setFinalResultRegDate(String finalResultRegDate) {
+		this.finalResultRegDate = finalResultRegDate;
 	}
 	public String getFinalResultUpdateDate() {
 		return finalResultUpdateDate;
@@ -118,17 +117,16 @@ public class QualityInspectionFinalResult {
 	}
 	@Override
 	public String toString() {
-		return "InspectionFinalResult [finalResultCode=" + finalResultCode + ", qualityInspectionResquestCode="
-				+ qualityInspectionResquestCode + ", chargeEmployeeCode=" + chargeEmployeeCode
+		return "QualityInspectionFinalResult [finalResultCode=" + finalResultCode + ", qualityInspectionRequestCode="
+				+ qualityInspectionRequestCode + ", chargeEmployeeCode=" + chargeEmployeeCode
 				+ ", qualityInspectionCode=" + qualityInspectionCode + ", lowCateFinalPassCheck="
-				+ lowCateFinalPassCheck + ", inspectionStratDate=" + inspectionStratDate + ", inspectiondDuration="
-				+ inspectiondDuration + ", inspectionEnddate=" + inspectionEnddate + ", finalResutlRegDate="
-				+ finalResutlRegDate + ", finalResultUpdateDate=" + finalResultUpdateDate + ", requestedProduct="
+				+ lowCateFinalPassCheck + ", inspectionStartDate=" + inspectionStartDate + ", inspectionDuration="
+				+ inspectionDuration + ", inspectionEndDate=" + inspectionEndDate + ", finalResultRegDate="
+				+ finalResultRegDate + ", finalResultUpdateDate=" + finalResultUpdateDate + ", requestedProduct="
 				+ requestedProduct + ", qualityInspectionResult=" + qualityInspectionResult + ", mediumClassInspection="
 				+ mediumClassInspection + ", lowClassInspection=" + lowClassInspection + ", subClassInspection="
 				+ subClassInspection + ", humanResources=" + humanResources + "]";
 	}
-	
 	
 	
 
