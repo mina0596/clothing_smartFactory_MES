@@ -23,6 +23,7 @@ import ksmart39.springboot.domain.QualityInspection;
 
 import ksmart39.springboot.domain.RawMaterials;
 import ksmart39.springboot.domain.SubClassInspection;
+import ksmart39.springboot.paging.Pagination;
 import ksmart39.springboot.service.SystemService;
 
 @Controller
@@ -135,22 +136,27 @@ public class SystemController_LHB {
 		systemService.addClient(client);
 		return "redirect:clientList";
 	}
-	
 	//[한빛]거래처 조회
 	@GetMapping("/clientList")
 	public String getClientList(@RequestParam(name = "searchKey", required = false) String searchKey,
 													@RequestParam(name = "searchValue", required = false) String searchValue, 
-																					Model model) {
+																					Model model, Pagination paging) {
+		
 		Map<String, Object> paramMap = new HashMap<String,Object>();
 		paramMap.put("searchKey", searchKey);
 		paramMap.put("searchValue", searchValue);
 
-		List<Client> client = systemService.getClient(paramMap);
-		model.addAttribute("title", "거래처관리");
-		model.addAttribute("client", client);
+	    Map<String, Object> resultMap = systemService.getClient(paging);
+	    model.addAttribute("clientList", 					resultMap.get("clientList"));
+	    model.addAttribute("currentPage", 					resultMap.get("currentPage"));
+		model.addAttribute("lastPage", 						resultMap.get("lastPage"));
+		model.addAttribute("pageStartNum", 					resultMap.get("pageStartNum"));
+		model.addAttribute("pageEndNum", 					resultMap.get("pageEndNum"));
+		model.addAttribute("searchKey", 					paramMap.get("searchKey"));
+		model.addAttribute("searchValue", 					paramMap.get("searchValue"));
+
 		return "system/clientList";
 	}
-
 	//[한빛]거래처수정
 	@GetMapping("/modifyClient")
 	public String modifyClient(@RequestParam(name = "clientCode", required = false) String clientCode, Model model) {
@@ -161,7 +167,6 @@ public class SystemController_LHB {
 		model.addAttribute("client",client);
 		return "system/modifyClient";
 	}
-	
 	//[한빛] 거래처수정화면 ->목록
 	@PostMapping("modifyClient")
 	public String modifyClient(Client client) {
@@ -170,7 +175,6 @@ public class SystemController_LHB {
 		log.info("{}",client);
 		return "redirect:clientList";
 	}			
-
 	//[한빛]거래처 삭제
 	@PostMapping("/deleteClient")
 	@ResponseBody
@@ -180,16 +184,6 @@ public class SystemController_LHB {
 		result	= systemService.deleteClient(delArr);
 		return result;
 	}
-	
-	//[한빛] 마이페이지
-	@GetMapping("/profile")
-	public String profile() {
-		return "system/profile";
-	}
+
 }	
-	
-	
 
-	
-
-	

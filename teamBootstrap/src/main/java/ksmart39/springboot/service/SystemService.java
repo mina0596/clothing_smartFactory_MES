@@ -19,6 +19,8 @@ import ksmart39.springboot.domain.QualityInspection;
 
 import ksmart39.springboot.domain.RawMaterials;
 import ksmart39.springboot.domain.SubClassInspection;
+import ksmart39.springboot.paging.PageMaker;
+import ksmart39.springboot.paging.Pagination;
 
 @Service
 public class SystemService {
@@ -59,9 +61,27 @@ public class SystemService {
 	
 	//============================================================
 	//[한빛] 거래처 전체 조회
-	public List<Client> getClient(Map<String, Object> paramMap){
-		List<Client> client = systemMapper.getClient(paramMap);
-		return client;
+	public Map<String, Object> getClient(Pagination paging){
+		
+		PageMaker pageMaker = new PageMaker();
+		
+	    pageMaker.setPaging(paging);
+	    
+	    pageMaker.setTotalCount(systemMapper.getClientCount());
+
+	    Map<String, Object> paramMap = new HashMap<String, Object>();
+  		paramMap.put("rowStart", paging.getRowStart());
+  		paramMap.put("rowPerPage", paging.getRowPerPage());
+
+  		List<Map<String, Client>> clientList = systemMapper.getClient(paramMap);
+  		Map<String, Object> resultMap = new HashMap<String, Object>();
+  		resultMap.put("currentPage", paging.getCurrentPage());
+  		resultMap.put("clientList", clientList);
+  		resultMap.put("lastPage", pageMaker.getLastPage());
+  		resultMap.put("pageStartNum", pageMaker.getPageStartNum());
+  		resultMap.put("pageEndNum", pageMaker.getPageEndNum());
+
+		return resultMap;
 	}
 	//[한빛]거래처 등록
 	public int addClient (Client client) {
