@@ -21,6 +21,7 @@ import ksmart39.springboot.service.ShipmentService;
 @Controller
 @RequestMapping("shipment")
 public class ShipmentController_HBR {
+	
 	private static final Logger log = LoggerFactory.getLogger(ShipmentController_HBR.class);
 	@Autowired
 	private ShipmentService shipmentService;

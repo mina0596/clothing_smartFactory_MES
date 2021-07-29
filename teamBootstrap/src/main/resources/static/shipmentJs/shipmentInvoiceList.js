@@ -2,6 +2,7 @@
  * 
  */
 $(function(){
+	
 	//송장번호 검색하기 
 		$('#invoiceCodeBtn').click(function(){
 		var shipmentInvoice = $('.shipmentInvoice').val();

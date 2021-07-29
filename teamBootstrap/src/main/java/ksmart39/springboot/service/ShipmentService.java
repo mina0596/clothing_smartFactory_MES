@@ -11,6 +11,7 @@ import ksmart39.springboot.dao.ShipmentMapper;
 
 @Service
 public class ShipmentService {
+	
 	@Autowired
 	private ShipmentMapper shipmentMapper;
 	

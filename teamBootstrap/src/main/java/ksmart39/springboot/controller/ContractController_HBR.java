@@ -23,6 +23,7 @@ import ksmart39.springboot.service.SupplierService;
 @Controller
 @RequestMapping("/contract")
 public class ContractController_HBR {
+	
 	@Autowired
 	private final SupplierService supplierService;
 	private final RequestedProductService requestedProductService;
