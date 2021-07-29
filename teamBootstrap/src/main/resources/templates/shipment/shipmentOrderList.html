@@ -75,18 +75,18 @@ $(function(){
          			<td style="padding-right: 20px;">
          				<div class="form-group"><!-- 품목별 -->
 		               		<button id="byMaterialName" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
-		                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="직접 입력 또는 검색">
+		                	<input type="text" class="form-control"  placeholder="직접 입력 또는 검색">
 	              		</div>
          			</td>
          			<td style="padding-right: 20px;">
          				<div class="form-group"><!-- 거래처별 -->
 		               		<button id="byMaterialName" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
-		                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="직접 입력 또는 검색">
+		                	<input type="text" class="form-control"  placeholder="직접 입력 또는 검색">
 	              		</div>
          			</td>
          			<td style="padding-right: 20px;"><!-- 납기일 -->
          				<div class="form-group">
-		                	<input type=date class="form-control" id="exampleInputPassword2" placeholder="입고일별">
+		                	<input type=date class="form-control"  placeholder="입고일별">
 	               		</div>
          			</td>
          			
@@ -113,86 +113,19 @@ $(function(){
                    </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr th:if="${#lists.size(shimpmentOrder) > 0}" th:each="s,i: ${shimpmentOrder}" >
                    <td class="hidden-phone">
                       <input type="checkbox" class="check">
                     </td>
-                   <td class="hidden-phone"><a >1</a></td>
-                    <td class="shipmentOrder">shipment_01</td>
-                    <td class="shipmetSupplierName">파크랜드</td>
-                    <td class="shipmentProductName">남성바지</td>
-                    <td>
-                     	2021-03-15
-                    </td>
-                     <td>
-                     	2021-03-10 13:30
-                    </td>
-                   <td>  <button class="btn btn-primary btn-xs" type="button" onclick="location.href='/modifyShipmentOrder'"><i class="fa fa-pencil"></i>수정</button></td>
+                   <td th:text="${i.index+1}"><a ></a></td>
+                    <td th:text="${s.shipmentOrderCode}"></td>
+                    <td th:text="${s.clientName}" ></td>
+                    <td th:text="${s.productName}" ></td>
+                    <td th:text="${s.shipmentOrderDate}"> </td>
+                    <td th:text="${s.shipmentRegDate}"> </td>
+                 	<td> <a class="btn btn-primary btn-xs" th:href="@{/shipment/modifyShipmentOrder(shipmentOrderCode=${s.shipmentOrderCode})}">수정</a></td>
                   </tr>
-                  <tr>
-                   <td class="hidden-phone">
-                      <input type="checkbox" class="check">
-                    </td>
-                   <td class="hidden-phone"><a >2</a></td>
-                    <td class="hidden-phone">shipment_02</td>
-                    <td>파크랜드</td>
-                    <td>여성자켓</td>
-                    <td>
-                     	2021-03-16
-                    </td>
-                     <td>
-                     	2021-03-10 13:30
-                    </td>
-                     <td>  <button class="btn btn-primary btn-xs" type="button" onclick="location.href='/modifyShipmentOrder'" ><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  <tr>
-                   <td class="hidden-phone">
-                      <input type="checkbox" class="check">
-                    </td>
-                   <td class="hidden-phone"><a >3</a></td>
-                    <td class="hidden-phone">shipment_03</td>
-                    <td>파크랜드</td>
-                    <td>여성치마</td>
-                    <td>
-                     	2021-03-16
-                    </td>
-                     <td>
-                     	2021-03-11 13:30
-                    </td>
-                      <td>  <button class="btn btn-primary btn-xs" type="button" onclick="location.href='/modifyShipmentOrder'"><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  <tr>
-                   <td class="hidden-phone">
-                      <input type="checkbox" class="check">
-                    </td>
-                   <td class="hidden-phone"><a >4</a></td>
-                    <td class="hidden-phone">shipment_04</td>
-                    <td>파크랜드</td>
-                    <td>남성자켓</td>
-                    <td>
-                     	2021-03-17
-                    </td>
-                     <td>
-                     	2021-03-12 13:30
-                    </td>
-                     <td>  <button class="btn btn-primary btn-xs" type="button" onclick="location.href='/modifyShipmentOrder'" ><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  <tr>
-                   <td class="hidden-phone">
-                      <input type="checkbox" class="check">
-                    </td>
-                   <td class="hidden-phone"><a >5</a></td>
-                    <td class="hidden-phone">shipment_05</td>
-                    <td>파크랜드</td>
-                    <td>남성블라우스</td>
-                    <td>
-                     	2021-03-17
-                    </td>
-                     <td>
-                     	2021-03-13 13:30
-                    </td>
-                   <td>  <button class="btn btn-primary btn-xs" type="button" onclick="location.href='/modifyShipmentOrder'"><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
+                  
                   </tbody>
                   </table>
                   </div>
