@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.coyote.http11.Http11AprProtocol;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,6 @@ public class QualityInsMeasurementValueService {
 
 	
 	private static final Logger log = LoggerFactory.getLogger(QualityInsMeasurementValueService.class);
-
 	
 	@Autowired
 	private QualityInsMeasurementValueMapper qualityInsMeasurementValueMapper;
@@ -70,10 +70,13 @@ public class QualityInsMeasurementValueService {
 			int measuredLevel = 0; //등급값
 			int passCheckValue = 0; //판정 기준 최소값
 			int resultValue = 0; //측정값
+			int min = 0; //최소값
+			int max = 0; //최대값
 			
 			
-			
+			//품질검사 코드
 			String qualityInspectionCode = qualityInspectionResult.get(i).getQualityInspectionCode();
+			String qualityInspectionRequestCode = qualityInspectionResult.get(i).getQualityInspectionRequestCode();
 			
 			//01. 등급/수치/pass인지
 			List<QualityInspectionStandard> qi = qualityInsMeasurementValueMapper.getQualityInspectionStandard(qualityInspectionCode);			
@@ -83,14 +86,57 @@ public class QualityInsMeasurementValueService {
 			category = qi.get(0).getCategory();
 			log.info("1-1. 카테고리 :  {}", category);
 			
+			//======================================
 			//02.합.불 카테고리일때
+			//======================================
 			if(category.equals("합격/불합격")) {
+				//02-1. 바로 최종 합/불
 				passValue = qualityInspectionResult.get(i).getInspectionPassCheck();
 			
+			//======================================	
 			//03.수치별 카테고리일때
+			//======================================
 			}else if(category.equals("수치")) {
+				log.info("[수치]: 01. 처음 들어오는 배열 :  {}", qualityInspectionResult.get(i));
 				
+				//03-1. 측정값 변수 resultValue에 담기
+				resultValue = qualityInspectionResult.get(i).getInspectionMeasurementValue();
+				
+				//03-2. 기준값 만들기(사이즈 측정값 +- 기준값(오차범위))
+				List<Map<String, Object>> measureList 
+						= qualityInsMeasurementValueMapper.getQualityInspectionStandardByNumber(qualityInspectionCode, qualityInspectionRequestCode);
+				log.info("[수치]: 02. 의류 부위별 측정값 가져오기 :  {}", measureList);							
+				
+				//03-3. 의류 품목별 측정값이 아닐시에(ex. 너치깊이) 바로 기준값과 비교하기
+				if(!(measureList.size() > 0)) {
+					//03-3-1. 품질검사 측정값 기준치 최소값, 최대값
+					min = qi.get(0).getMinValue();
+					max = qi.get(0).getMaxValue();
+					log.info("[수치]: 03. 품질검사 측정값 기준치 최소값:  {}", min);							
+					log.info("[수치]: 03-1. 품질검사 측정값 기준치 최대값:  {}", max);							
+					
+				}else {
+					//03-4. 의류 부위별 품질검사의 기준이 되는 측정값
+					int measuredValue = (int) measureList.get(0).get("measured_value");
+					//03-4-1. 기준이 되는 측정값의 허용오차를 반영한 최소값, 최대값
+					min = qi.get(0).getMinValue() + measuredValue;
+					max = qi.get(0).getMaxValue() + measuredValue;
+					log.info("[수치]: 03. 최소 허용오차 :  {}", min);							
+					log.info("[수치]: 03-1. 최대 허용 오차 :  {}", max);						
+					
+				}
+				
+				//03-5  최소값, 최대값과 비교
+				if(max >= resultValue && resultValue >= min) {
+					passValue = "합격";
+				}else {
+					passValue = "불합격";
+				}
+				
+				
+			//======================================	
 			//04.등급별 카테고리일때
+			//======================================
 			}else if(category.equals("등급")) {
 				
 				//04-1.원부자재 기준치와 값 비교
@@ -134,17 +180,14 @@ public class QualityInsMeasurementValueService {
 			}
 		
 			//05. 해당 DTO에 담기
-			qualityInspectionResult.get(i).setInspectionMeasurementValue(resultValue);
-			qualityInspectionResult.get(i).setInspectionPassCheck(passValue);
-			qualityInspectionResult.get(i).setInspectionMeasurementLevelResult(measuredLevel);
-			qualityInspectionResult.get(i).setMinTolerance(passCheckValue);
-			//SESSION 완료 되면 바꿔야함
-			String employeeCode = (String) session.getAttribute("SCODE");
-			qualityInspectionResult.get(i).setChargeEmployeeCode(employeeCode);
+			qualityInspectionResult.get(i).setInspectionMeasurementValue(resultValue);//측정값
+			qualityInspectionResult.get(i).setInspectionPassCheck(passValue);//최종 합/불
+			qualityInspectionResult.get(i).setInspectionMeasurementLevelResult(measuredLevel);//등급값
+			qualityInspectionResult.get(i).setMinTolerance(passCheckValue);//판정 기준 최소 등급값
 			log.info("06. 최종 결과값 set  :  {}", qualityInspectionResult.get(i));
 			
 			//06. Insert 실행
-			qualityInsMeasurementValueMapper.addQualityRawMaterialInspectionResult(qualityInspectionResult.get(i));
+			//qualityInsMeasurementValueMapper.addQualityRawMaterialInspectionResult(qualityInspectionResult.get(i));
 			
 			result = 1;			
 			//품질검사 3회차 결과값 입력시 실행되는

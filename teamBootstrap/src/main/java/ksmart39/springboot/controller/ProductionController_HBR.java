@@ -70,7 +70,6 @@ public class ProductionController_HBR {
 	public String workOrderInfo() {
 		return "production/workOrderInfo";
 	}
-	
 
 	
 

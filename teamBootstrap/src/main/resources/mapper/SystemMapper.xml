@@ -51,6 +51,17 @@
 		</trim>
 	</select>
 	
+	<select id="getHumanResourcesCount" resultType="int">
+		SELECT 
+			COUNT(1)
+		FROM
+			employee_info as e
+			INNER JOIN
+			erp_access_level as l
+			on
+			e.level_num = l.level_num;	
+	</select>
+	
 	<insert id="addHumanResources" parameterType="HumanResources">
 		INSERT INTO employee_info
 		( employee_code
@@ -190,13 +201,22 @@
 			,c.client_info_update_date
 		FROM
 			client_info as c
+		LIMIT #{rowStart}, #{rowPerPage};			
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test="searchKey != null and searchKey != ''.toString()">
 				${searchKey} LIKE CONCAT('%', #{searchValue} ,'%');
 			</if>
 		</trim>
+
 	</select>
-			
+
+	<select id="getClientCount" resultType="int">
+		SELECT 
+			COUNT(1)
+		FROM
+			client_info as c
+	</select>			
+	
 	<!-- 추가	 -->	
 	<insert id="addClient" parameterType="Client">
 		INSERT INTO client_info
@@ -255,10 +275,10 @@
 	</trim>
 	WHERE 
 		client_code = #{clientCode};
-</update>
+	</update>
 	
 	<!-- 수정화면 뿌려주기 -->
-		<select id="getClientInfoByCode" parameterType="String" resultMap="getClientInfo">
+	<select id="getClientInfoByCode" parameterType="String" resultMap="getClientInfo">
 		SELECT 
 			 client_code
 			,client_category			
@@ -483,7 +503,7 @@ WHERE quality_inspection_code =#{checkArray};
 	INNER JOIN
 		sub_class_inspection_list AS s
 	ON l.high_med_low_class_code =s.high_med_low_class_code
-	WHERE h.high_class_code =#{highClassCateName}
+	WHERE h.high_class_code = #{highClassCateName}
 	GROUP BY m.high_med_class_code;
 </select>
 <select id="getLowClassCate" parameterType="String" resultType="map">

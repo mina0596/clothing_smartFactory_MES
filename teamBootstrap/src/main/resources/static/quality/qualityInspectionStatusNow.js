@@ -304,8 +304,8 @@ $(function(){
 					finalPassCount = data[0].finalPassCount;
 					//최종 완료 갯수
 					finalCompleteCount = data[0].finalCompleteCount;
-					//완료율
-					completeRate = requestCount/finalCompleteCount;
+					//완료율(반올림)
+					completeRate = Math.round((finalCompleteCount*100)/requestCount);
 					//진행건수
 					progressRate = data[0].progressRate;
 					//완료율바

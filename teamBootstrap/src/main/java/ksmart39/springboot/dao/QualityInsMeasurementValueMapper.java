@@ -31,6 +31,9 @@ public interface QualityInsMeasurementValueMapper {
 	//품질검사 측정표 등록
 	public int addQualityRawMaterialInspectionResult(QualityInspectionResult qualityInspectionResult);
 	
+	//품질검사 수치별 기준 가져오기
+	public List<Map<String, Object>> getQualityInspectionStandardByNumber(String qualityInspectionCode, String qualityInspectionRequestCode);
+	
 	//품질검사 기준표
 	public List<QualityInspectionStandard> getQualityInspectionStandard(String qualityInspectionCode);
 	
