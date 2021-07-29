@@ -6,8 +6,9 @@ layout:decorate="@{layout/default_shipment}">
 <th:block layout:fragment="pageTitle">
 	   <div class="border-head"> 
 	    <h3></h3>
-	    </div>
-	      <th:block layout:fragment="customJs">
+	   </div>
+<script type="text/javascript" th:src="@{/shipmentJs/shipmentOrderList.js}"></script>	    
+<th:block layout:fragment="customJs">
 <script>
 $(function(){
 	//#checkAll 버튼 클릭 시 전체 checked
@@ -55,48 +56,44 @@ $(function(){
 			 <form class="form-inline" role="form">
         
          <table class="table table-striped table-advance table-hover">
-         	<thead>
-         		<tr>
-         			<th>출하지시번호</th>
-         			<th>품목별</th>
-         			<th>거래처별</th>
-         			<th>납기일</th>
-         			
-         		</tr>
-         	</thead>
          	<tbody>
          		<tr>
          			<td style="padding-right: 20px;">
-	         			 <div class="form-group"><!-- 출하지시번호 -->
-		               		<button id="bySupplier" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
-		                	<input type="text" class="form-control" id="bySupplierValue" placeholder="직접 입력 또는 검색">
-		                </div>
+	         			 <div class="form-inline">
+		         			 	<label class="control-label">출하지시번호</label>
+			                	<input type="text" class="shipmentOrderCode form-control" id="bySupplierValue" placeholder="검색어를 입력하세요.">
+			                </div>
          			</td>
          			<td style="padding-right: 20px;">
-         				<div class="form-group"><!-- 품목별 -->
-		               		<button id="byMaterialName" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
-		                	<input type="text" class="form-control"  placeholder="직접 입력 또는 검색">
-	              		</div>
+         				<div class="form-inline">
+		         			 	<label class="control-label">품목별</label>
+			                	<input type="text" class="productName form-control" id="bySupplierValue" placeholder="검색어를 입력하세요.">
+			                </div>
          			</td>
          			<td style="padding-right: 20px;">
-         				<div class="form-group"><!-- 거래처별 -->
-		               		<button id="byMaterialName" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
-		                	<input type="text" class="form-control"  placeholder="직접 입력 또는 검색">
-	              		</div>
+         				<div class="form-inline">
+		         			 	<label class="control-label">거래처별</label>
+			                	<input type="text" class="clientName form-control" id="bySupplierValue" placeholder="검색어를 입력하세요.">
+			                </div>
          			</td>
+         			
          			<td style="padding-right: 20px;"><!-- 납기일 -->
          				<div class="form-group">
-		                	<input type=date class="form-control"  placeholder="입고일별">
+         				<label class="control-label">납기일</label>
+		                	<input type=date class="shipmentOrderDate form-control"  placeholder="납기일">
 	               		</div>
          			</td>
          			
          			<td>
-         				  <button type="submit" class="btn btn-theme">검색</button>
+         				  <button  id="searchShimentOrderBtn" type="button" class="btn btn-theme">검색</button>
          			</td>        			
          		</tr>
          	</tbody>
          </table>  
         </form> 
+   
+        
+       
               <h4><i class="fa fa-angle-right"></i>출하지시목록</h4> 
               <hr>   
               <table class="table table-striped table-advance table-hover" id="shipmentOrderList">
@@ -112,7 +109,7 @@ $(function(){
                     <th><i class=" fa fa-bookmark"></i>수정버튼</th>
                    </tr>
                 </thead>
-                <tbody>
+                <tbody id="shipmentList">
                   <tr th:if="${#lists.size(shimpmentOrder) > 0}" th:each="s,i: ${shimpmentOrder}" >
                    <td class="hidden-phone">
                       <input type="checkbox" class="check">
@@ -135,8 +132,9 @@ $(function(){
                       <button class="btn btn-danger btn-xs" type="button" id="deleteBtn"><i class="fa fa-trash-o "></i>출하지시삭제</button>
                     </div>
                     </div>
+                    </div>
                   </div>
-                  </div>
+                 
             
 </th:block>
 
