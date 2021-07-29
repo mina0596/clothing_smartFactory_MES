@@ -7,7 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface QualityInsepctionStauteMapper {
+public interface QualityInspectionStatusMapper {
 	
 	
 	//[보람] 수주계약별 검사 조회
