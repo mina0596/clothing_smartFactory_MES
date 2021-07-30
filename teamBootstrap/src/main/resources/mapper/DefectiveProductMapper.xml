@@ -2,30 +2,38 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ksmart39.springboot.dao.DefectiveProductMapper">
 	<resultMap type="DefectiveProduct" id="getDefectiveProductInfo">
-		<result property="defectiveProductCode" column="defective_product_code"/>
-		<result property="qualityInspectionRequestCode" column="quality_inspection_request_code"/>
-		<result property="chargeEmployeeCode" column="charge_employee_code"/>
-		<result property="qualityInspectionCode" column="quality_inspection_code"/>
-		<result property="inspectionResultCode" column="inspection_result_code"/>
-		<result property="defectCause" column="defect_cause"/>
-		<result property="defectiveProductMeasure" column="defective_product_measure"/>
-		<result property="managementNote" column="management_note"/>
-		<result property="defectiveProductRegDate" column="defective_product_reg_date "/>
-		<result property="defectiveProductUpdateDate" column="defective_product_update_date"/>
+		<result property="defectiveProductCode" 			column="defective_product_code"/>
+		<result property="qualityInspectionRequestCode" 	column="quality_inspection_request_code"/>
+		<result property="chargeEmployeeCode" 				column="charge_employee_code"/>
+		<result property="qualityInspectionCode" 			column="quality_inspection_code"/>
+		<result property="inspectionResultCode" 			column="inspection_result_code"/>
+		<result property="defectCause" 						column="defect_cause"/>
+		<result property="defectiveProductMeasure" 			column="defective_product_measure"/>
+		<result property="managementNote" 					column="management_note"/>
+		<result property="defectiveProductRegDate" 			column="defective_product_reg_date "/>
+		<result property="defectiveProductUpdateDate" 		column="defective_product_update_date"/>
 	</resultMap>
 
-	<select id="getDefectiveProduct" resultMap="getDefectiveProductInfo" resultType="DefectiveProduct" fetchSize="1000">
+	<resultMap type="QualityInspectionResult" id="QualityInspectionResultMap">
+		<result property="inspectionResultCode" 					column="inspection_result_code"/>
+		<result property="qualityInspectionRequestCode" 			column="quality_inspection_request_code"/>
+		<result property="qualityInspectionCode" 					column="quality_inspection_code"/>
+		<result property="inspectionPassCheck" 						column="inspection_pass_check"/>
+	</resultMap>
+	
+	
+	<select id="getDefectiveProduct" resultType="map" fetchSize="1000">
 		SELECT
-			defective_product_code
-			,quality_inspection_request_code
-			,charge_employee_code
-			,quality_inspection_code
-			,inspection_result_code
-			,defect_cause
-			,defective_product_measure
-			,management_note
-			,defective_product_reg_date
-			,defective_product_update_date
+			defective_product_code							AS dpCode
+			,quality_inspection_request_code			AS qirCode
+			,charge_employee_code							AS ceCode
+			,quality_inspection_code							AS qiCode
+			,inspection_result_code							AS irCode
+			,defect_cause											AS dCause
+			,defective_product_measure					AS dpMeasure
+			,management_note								AS mNote
+			,defective_product_reg_date					AS dpRegDate
+			,defective_product_update_date				AS dpUpdateDate
 		FROM
 			defective_product_management;
 	</select>
@@ -54,5 +62,74 @@
 			,NOW()
 			,null);
 	</insert>
+	
+	<select id = "getFinalResult" resultMap="QualityInspectionResultMap" resultType="QualityInspectionResult" fetchSize="1000">
+		SELECT
+			i.inspection_result_code
+			,i.quality_inspection_request_code
+			,i.quality_inspection_code
+			,i.inspection_pass_check
+		FROM
+			inspection_result AS i
+		WHERE i.inspection_pass_check = #{fail};
+	</select>
+	
+	<select id="getProductByCode" parameterType="String" resultMap="getDefectiveProductInfo">
+		SELECT 
+			d.defective_product_code
+			,d.quality_inspection_request_code
+			,d.charge_employee_code
+			,d.quality_inspection_code
+			,d.inspection_result_code
+			,d.defect_cause
+			,d.defective_product_measure
+			,d.management_note
+			,d.defective_product_reg_date
+			,d.defective_product_update_date
+		FROM
+			defective_product_management AS d
+		WHERE d.defective_product_code = #{defectiveProductCode};
+	</select>
+	
+	<update id="modifyDefectiveProduct" parameterType="DefectiveProduct">
+		UPDATE defective_product_management 
+		<trim prefix="SET" prefixOverrides=",">
+			<if test="qualityInspectionRequestCode != null and qualityInspectionRequestCode != ''.toString()">			
+				,quality_inspection_request_code = #{qualityInspectionRequestCode}
+			</if>
+			<if test="chargeEmployeeCode != null and chargeEmployeeCode != ''.toString()">			
+				,charge_employee_code = #{chargeEmployeeCode}
+			</if>
+			<if test="qualityInspectionCode != null and qualityInspectionCode != ''.toString()">			
+				,quality_inspection_code = #{qualityInspectionCode}
+			</if>
+			<if test="inspectionResultCode != null and inspectionResultCode != ''.toString()">			
+				,inspection_result_code = #{inspectionResultCode}
+			</if>
+			<if test="defectCause != null and defectCause != ''.toString()">			
+				,defect_cause = #{defectCause}
+			</if>		
+			<if test="defectiveProductMeasure != null and defectiveProductMeasure != ''.toString()">			
+				,defective_product_measure = #{defectiveProductMeasure}
+			</if>		
+			<if test="managementNote != null and managementNote != ''.toString()">			
+				,management_note = #{managementNote}
+			</if>		
+				,defective_product_update_date = NOW()	
+		</trim>
+		WHERE 
+			defective_product_code = #{defectiveProductCode};	
+	</update>
+	
+	<delete id="deleteDefectiveProduct" parameterType="java.util.List">
+		DELETE 
+			FROM 
+				defective_product_management 
+			WHERE 
+				defective_product_code in
+				<foreach collection="list" item="code" open="(" close=")" separator=",">
+					#{code}
+				</foreach>	
+	</delete>
 	
 </mapper>

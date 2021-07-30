@@ -1,9 +1,5 @@
 package ksmart39.springboot.controller;
 
-
-
-import java.sql.Array;
-import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +8,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import ksmart39.springboot.domain.ProductProductionProcessStatus;
 import ksmart39.springboot.domain.ProductionPlan;
-import ksmart39.springboot.domain.WorkOrder;
 import ksmart39.springboot.service.ProductionPlanService;
 import ksmart39.springboot.service.ProductionStatusService;
 import ksmart39.springboot.service.WorkOrderService;
@@ -36,14 +29,10 @@ public class ProductionController_KDM {
 	
 	private static final Logger log = LoggerFactory.getLogger(ProductionController_KDM.class);
 	
-	private final WorkOrderService workOrderService;
 	private final ProductionPlanService productionPlanService;
-	private final ProductionStatusService productionStatusService;
 	
 	public ProductionController_KDM(ProductionPlanService productionPlanService, WorkOrderService workOrderService,ProductionStatusService productionStatusService) {
 		this.productionPlanService = productionPlanService;
-		this.workOrderService = workOrderService;
-		this.productionStatusService = productionStatusService;
 	}
 	
 
@@ -182,7 +171,7 @@ public class ProductionController_KDM {
 			jsonArr.add(jsonObj);
 		}
 		
-		log.info("안되겠지..?아냐 될거야ㅜㅜ {}", jsonArr);
+		log.info("jsonArr{}", jsonArr);
 		
 		return jsonArr;
 	}

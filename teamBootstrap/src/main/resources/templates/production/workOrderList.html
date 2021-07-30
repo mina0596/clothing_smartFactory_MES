@@ -12,10 +12,10 @@ $(function(){
 		$('#checkAll').click(function(){
 			if($('#checkAll').prop('checked')){
 				$('.check').prop('checked',true);
-					}else{
-						$('.check').prop('checked',false);
-					}
-				});
+			}else{
+				$('.check').prop('checked',false);
+			}
+		});
 
 		//삭제하기
 		var tableAttr = $('#workerOrderList').children();
@@ -32,8 +32,43 @@ $(function(){
 				}
 			});
 
-		});
+		});	
+		
+		//수정하기
+			var modifyBtn = tableAttr.children().find('.modifyBtn');
+			modifyBtn.click(function(){
+				var tdElement = $(this).parent().parent();
+				var workOrderCode = tdElement.find('#workOrderCode').text();
+				console.log(workOrderCode);
+				
+				location.href='modifyWorkOrder?workOrderCode=' + workOrderCode;
 			});
+/* 페이지 이동 ( 페이징 처리 callback 함수 ) */
+fncGoLink = function(currPage, pageSize, section){
+  $("input[name='currPage']").val(currPage);
+  $("input[name='pageSize']").val(pageSize);
+  if(section === 'PC') $("#dev_nodeList").empty();
+  fncListSearch();	// 목록 조회 함수 호출
+};
+
+/* 목록 조회 함수 */
+fncListSearch = function(){
+  $.ajax({
+    type   : 'POST',
+    url    : 'searchUrl 세팅',
+    data   : $('form').serialize(),
+    success: function(data){
+      // 페이징 처리 ( parameter : target, 리스트 전체 개수, 리스트 전체, 현재 페이지, callback 함수명 )
+      customPaging('.paginate', data.totCnt, data.list, $("input[name='currPage']").val(), 'fncSearchLinkList');
+      
+      // 리스트 그리기 ...
+      // .....
+      $('.listBody').append('리스트 html');
+    }
+  });
+};
+//https://dev-gabriel.tistory.com/31
+});
 
 
 </script>
@@ -70,17 +105,17 @@ $(function(){
          			<td style="padding-right: 20px;">
          				<div class="form-group"><!-- 품목별 -->
 		               		<button id="byMaterialName" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
-		                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="직접 입력 또는 검색">
+		                	<input type="text" class="form-control" placeholder="직접 입력 또는 검색">
 	              		</div>
          			</td>
          			<td>
          				<div class="form-group">
-		                	<input type=date class="form-control" id="exampleInputPassword2" placeholder="입고일별">&nbsp&nbsp&nbsp ~ 
+		                	<input type=date class="form-control" placeholder="입고일별">&nbsp&nbsp&nbsp ~ 
 	               		</div>
          			</td>
          			<td style="padding-right: 20px;">
          				<div class="form-group">
-		                	<input type=date class="form-control" id="exampleInputPassword2" placeholder="입고일별">
+		                	<input type=date class="form-control" placeholder="입고일별">
 	               		</div>
          			</td>
          			
@@ -94,6 +129,10 @@ $(function(){
 			<h4><i class="fa fa-folder"></i> 작업지시 목록</h4>
 			          <hr>
 	         <div class="content-panel">
+	         <form>
+	         	<input type="hidden" name="currPage"/>
+	         	<input type="hidden" name="pageSize"/>
+	         </form>
               <table class="table table-striped table-advance table-hover" id="workerOrderList">
                 <thead>
                   <tr>
@@ -105,8 +144,7 @@ $(function(){
                     <th><i class=" fa fa-calendar"></i>납기일</th>
                     <th><i class=" fa fa-calendar"></i>생산시작예정일</th>
                     <th><i class=" fa fa-calendar"></i>생산종료예정일</th>
-                    <th><i class=" fa fa-bookmark"></i>생산현황</th>
-                    <th><i class=" fa fa-bookmark"></i>수정</th>
+                    <th><i class=" fa fa-pencil"></i>수정</th>
                     
                     <th></th>
                   </tr>
@@ -115,15 +153,13 @@ $(function(){
                   <tr th:each="l,n : ${workOrderList}">
                   	<td><input type="checkbox" class="check"></td>
                     <td th:text="${n.index+1}"></td>
-                    <td th:text="${l.workOrderCode}"></td>                   
+                    <td th:text="${l.workOrderCode}" id="workOrderCode"></td>                   
                     <td th:text="${l.pCode}"></td>
                     <td th:text="${l.cName}"></td>
                     <td th:text="${l.dueDate}"></td>
                     <td th:text="${l.expectedStartDate}"></td>
                     <td th:text="${l.expectedStartDate}"></td>
-                    <td th:if="${l.status eq '진행중'}"><span class="badge bg-important" style="padding-top: 5px;">진행중</span></td>
-                    <td th:if="${l.status eq '대기중'}"><span class="badge bg-success" style="padding-top: 5px;">대기중</span></td>
-                    <td><button class="btn btn-primary btn-xs" type="button" ><i class="fa fa-pencil"></i>수정</button></td>
+                    <td><button class="modifyBtn btn btn-primary btn-xs" type="button"><i class="fa fa-pencil"></i>수정</button></td>
                   </tr>
                 </tbody>
               </table>
@@ -140,6 +176,7 @@ $(function(){
           <!-- /col-md-12 -->
         </div>
         <!-- /row -->
+
 </th:block>
 
 </html>

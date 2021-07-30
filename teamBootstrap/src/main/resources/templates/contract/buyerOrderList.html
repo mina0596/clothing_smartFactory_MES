@@ -30,7 +30,7 @@ layout:decorate="@{layout/default_contract}">
        <div class="content">
        
 
-		<h4><i class="fa fa-angle-right"></i>수주조회</h4>
+		<h4><i class="fa fa-angle-right"></i>주문서 조회</h4>
          	 <hr>
 		<form class="form-inline" role="form">
         
@@ -85,7 +85,7 @@ layout:decorate="@{layout/default_contract}">
          	<tbody>
          		<tr>
          			<td>
-                       <a th:href="@{/buyerOrderApproval}" class="btn btn-theme04" style="float: right;"><i class="fa fa-heart"></i> 승인완료목록</a>	
+                       <a th:href="@{/contract/buyerOrderApproval}" class="btn btn-theme04" style="float: right;"><i class="fa fa-heart"></i> 승인완료목록</a>	
          			</td>        			
          		</tr>
          	</tbody>
@@ -96,7 +96,7 @@ layout:decorate="@{layout/default_contract}">
  
 		<div>
              <div>
-              <h4><i class="fa fa-angle-right"></i>수주목록</h4> 
+              <h4><i class="fa fa-angle-right"></i>주문서 목록</h4> 
               
              </div>
               <table id="list" class="table table-striped table-advance table-hover">
@@ -106,11 +106,11 @@ layout:decorate="@{layout/default_contract}">
                  	<th><i class="fa fa-bullhorn"></i>번호</th>
                     <th><i class=" fa fa-search"></i>주문서</th>
                     <th><i class="fa fa-bookmark"></i>의뢰코드</th>
-                    <th><i class="fa fa-bookmark"></i>품목코드</th>
                     <th><i class="fa fa-bookmark"></i>거래처명</th>
-                    <th><i class="fa fa-bookmark"></i>납품장소</th>
                     <th><i class="fa fa-bookmark"></i>납품연락처</th>
+                    <th><i class="fa fa-bookmark"></i>납품장소</th>
                     <th><i class=" fa fa-calendar"></i>수주일자</th>
+                    <th><i class=" fa fa-calendar"></i>등록일자</th>
                     <th><i class=" fa fa-check"></i>승인상태</th>
                     <th><i class=" fa fa-pencil"></i>수정</th>
                   </tr>
@@ -118,19 +118,19 @@ layout:decorate="@{layout/default_contract}">
  
                 <tbody>
                 <!--db에서 데이터 넣어야하는 부분 -->
-                  <tr>
+                  <tr th:each = "o,n : ${orderList}">
                   	<td><input type="checkbox" class="checked"></td>
-                  	<td>1</td>
-                  	<td><a onclick="location.href='buyerOrderInfo'" id="add-regular"  class="btn btn-default btn-sm" style="padding-top: 5px ;" >[주문서]</a></td>                 	
-                    <td>rep01</td>
-                    <td>MS_jacket</td>
-                    <td>파크랜드</td>
-                    <td>전주시 완산구 서신동</td>
-                    <td>010-7160-2222</td>
-                    <td>2021-05-12</td>
-                   <td> <button  type="button" class="btn btn-info btn-xs" id="addBtn" ><i class="fa fa-check"></i>승인완료</button></td>
+                  	<td th:text = "${n.index+1}"></td>
+                  	<td><a th:href="@{/contract/buyerOrderInfo(prCode=${o.prCode})}"  id="add-regular"  class="btn btn-default btn-sm" style="padding-top: 5px ;" >[주문서]</a></td>                 	
+                    <td th:text="${o.prCode}"></td>
+                    <td th:text="${o.cName}"></td>
+                    <td th:text="${o.rdTel}"></td>
+                    <td th:text="${o.rdAdd}"></td>
+                    <td th:text="${o.rdDate}"></td>
+                    <td th:text="${o.rpdRegDate}"></td>
+                    <td th:if="${o.aStatus eq '미승인'}" ><button class="badge bg-important" style="padding-top: 5px;">미승인</button></td>
+                    <td th:if="${o.aStatus eq '승인'}" ><span class="badge bg-success" style="padding-top: 5px;">승인완료</span></td>
                     <td>  <button class="btn btn-primary btn-xs" type="button" onclick="location.href='/modifyBuyerOrder'"><i class="fa fa-pencil"></i>수정</button></td>
-
                   </tr>
                   
            		 </tbody>

@@ -7,8 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
+
 import javax.servlet.http.HttpSession;
-import javax.xml.ws.Response;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,12 +34,13 @@ public class LoginController {
 	}
 	private static final Logger log = LoggerFactory.getLogger(LoginController.class);
 	
-	//사원등록
-	@GetMapping("/logout")
-	public String humanResourcesEnroll(Model model) {
-		 model.addAttribute("title", "인사관리-사원등록");
-		return"humanResources/humanResourcesEnroll";	
-	}
+	/*
+	 * //사원등록
+	 * 
+	 * @GetMapping("/logout") public String humanResourcesEnroll(Model model) {
+	 * model.addAttribute("title", "인사관리-사원등록");
+	 * return"humanResources/humanResourcesEnroll"; }
+	 */
 	
 	@PostMapping("/login")
 	public String login1(@RequestParam(name = "adminId", required = false)String adminId
@@ -73,7 +75,11 @@ public class LoginController {
 		if((boolean) loginInfoMap.get("loginCheck")) {
 			session.setAttribute("SID", loginEmployeeInfo.getEmployeeId());
 			session.setAttribute("SCODE", loginEmployeeInfo.getEmployeeCode());
-			session.setAttribute("SCODE", loginEmployeeInfo.getLevelNum());
+			session.setAttribute("SLEVEL", loginEmployeeInfo.getLevelNum());
+			session.setAttribute("SNAME", loginEmployeeInfo.getEmployeeName());
+			session.setAttribute("SLEVELNAME", loginEmployeeInfo.getHumanResourcesLevel().getLevelName());
+			session.setAttribute("SPOSTION", loginEmployeeInfo.getEmployeePosition());
+			log.info("session에 저장된 부서이름 :{}", session.getAttribute("SLEVELNAME"));
 			return "/main";
 		}else {
 			response.setContentType("text/html; charset=UTF-8");
@@ -88,6 +94,17 @@ public class LoginController {
 			
 			return "/main";
 		}
+	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
+	}
+	
+	@GetMapping("/login")
+	public String login(Model model) {
+		return "/";
 	}
 	
 

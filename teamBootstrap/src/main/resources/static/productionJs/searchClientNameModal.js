@@ -21,7 +21,6 @@ $(function(){
 
 		        e.preventDefault();
 		    });
-			var resultList = [];
 			var searchClientTable = $('#searchClientTable');
 			var searchByClientCode = searchClientTable.children().find('#clientCode').val();
 			var searchByContractCode = searchClientTable.children().find('#contractCode').val();

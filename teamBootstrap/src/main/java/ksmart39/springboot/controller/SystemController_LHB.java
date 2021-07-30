@@ -23,6 +23,7 @@ import ksmart39.springboot.domain.QualityInspection;
 
 import ksmart39.springboot.domain.RawMaterials;
 import ksmart39.springboot.domain.SubClassInspection;
+import ksmart39.springboot.paging.Pagination;
 import ksmart39.springboot.service.SystemService;
 
 @Controller
@@ -46,6 +47,8 @@ public class SystemController_LHB {
 		return"system/addHumanResources";	
 	}
 	
+	
+	//[한빛] 아이디 중복체크
 	@PostMapping("/memberIdCheck")
 	@ResponseBody
 	public boolean memberIdCheck(@RequestParam(value = "employeeId") String employeeId) {
@@ -70,9 +73,9 @@ public class SystemController_LHB {
 	
 	//[한빛]사원목록
 	@GetMapping("/humanResourcesList")
-	public String getHumanResourcesList(Model model
-									,@RequestParam(name="searchKey",required = false) String searchKey
-									,@RequestParam(name="searchValue",required=false) String searchValue) {
+	public String getHumanResourcesList(@RequestParam(name = "searchKey", required = false) String searchKey,
+					 											   @RequestParam(name = "searchValue", required = false) String searchValue,
+					                                               Model model, Pagination paging) {
 		
 		log.info("========================================");
 		log.info("화면에서 입력받은 값(회원목록) searchKey: {}", searchKey);
@@ -80,13 +83,19 @@ public class SystemController_LHB {
 		log.info("========================================");
 		
 		
-		Map<String,Object> paramMap = new HashMap<String, Object>();
+		Map<String, Object> paramMap = new HashMap<String,Object>();
 		paramMap.put("searchKey", searchKey);
 		paramMap.put("searchValue", searchValue);
 		
-		List<HumanResources> humanResources = systemService.getHumanResources(paramMap);
-		model.addAttribute("title", "인사관리");
-		model.addAttribute("humanResources", humanResources);
+		Map<String, Object> resultMap = systemService.getHumanResources(paging);		
+		model.addAttribute("humanResourcesList", 						resultMap.get("humanResourcesList"));
+	    model.addAttribute("currentPage", 								resultMap.get("currentPage"));
+		model.addAttribute("lastPage", 									resultMap.get("lastPage"));
+		model.addAttribute("pageStartNum", 								resultMap.get("pageStartNum"));
+		model.addAttribute("pageEndNum", 								resultMap.get("pageEndNum"));
+		model.addAttribute("searchKey", 								paramMap.get("searchKey"));
+		model.addAttribute("searchValue", 								paramMap.get("searchValue"));
+
 		return "system/humanResourcesList";
 	}
 
@@ -102,7 +111,7 @@ public class SystemController_LHB {
 	}
 	
 	//[한빛] 사용자 수정화면 ->목록
-	@PostMapping("modifyHumanResources")
+	@PostMapping("/modifyHumanResources")
 	public String modifyHumanResources(HumanResources humanResources) {
 		systemService.modifyHumanResources(humanResources);
 		return "redirect:humanResourcesList";
@@ -133,22 +142,27 @@ public class SystemController_LHB {
 		systemService.addClient(client);
 		return "redirect:clientList";
 	}
-	
 	//[한빛]거래처 조회
 	@GetMapping("/clientList")
 	public String getClientList(@RequestParam(name = "searchKey", required = false) String searchKey,
 													@RequestParam(name = "searchValue", required = false) String searchValue, 
-																					Model model) {
+																					Model model, Pagination paging) {
+		
 		Map<String, Object> paramMap = new HashMap<String,Object>();
 		paramMap.put("searchKey", searchKey);
 		paramMap.put("searchValue", searchValue);
 
-		List<Client> client = systemService.getClient(paramMap);
-		model.addAttribute("title", "거래처관리");
-		model.addAttribute("client", client);
+	    Map<String, Object> resultMap = systemService.getClient(paging);
+	    model.addAttribute("clientList", 					resultMap.get("clientList"));
+	    model.addAttribute("currentPage", 					resultMap.get("currentPage"));
+		model.addAttribute("lastPage", 						resultMap.get("lastPage"));
+		model.addAttribute("pageStartNum", 					resultMap.get("pageStartNum"));
+		model.addAttribute("pageEndNum", 					resultMap.get("pageEndNum"));
+		model.addAttribute("searchKey", 					paramMap.get("searchKey"));
+		model.addAttribute("searchValue", 					paramMap.get("searchValue"));
+
 		return "system/clientList";
 	}
-
 	//[한빛]거래처수정
 	@GetMapping("/modifyClient")
 	public String modifyClient(@RequestParam(name = "clientCode", required = false) String clientCode, Model model) {
@@ -159,8 +173,7 @@ public class SystemController_LHB {
 		model.addAttribute("client",client);
 		return "system/modifyClient";
 	}
-	
-	// 거래처수정화면 ->목록
+	//[한빛] 거래처수정화면 ->목록
 	@PostMapping("modifyClient")
 	public String modifyClient(Client client) {
 		systemService.modifyClient(client);
@@ -168,7 +181,6 @@ public class SystemController_LHB {
 		log.info("{}",client);
 		return "redirect:clientList";
 	}			
-
 	//[한빛]거래처 삭제
 	@PostMapping("/deleteClient")
 	@ResponseBody
@@ -178,11 +190,6 @@ public class SystemController_LHB {
 		result	= systemService.deleteClient(delArr);
 		return result;
 	}
-	
+
 }	
-	
-	
 
-	
-
-	

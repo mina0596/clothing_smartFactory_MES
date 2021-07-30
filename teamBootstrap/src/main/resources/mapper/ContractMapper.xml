@@ -2,4 +2,36 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ksmart39.springboot.dao.ContractMapper">
 
+
+	<select id = "getBuyerContract" resultType="map">
+		SELECT
+			c.contract_code							AS cc
+			,c.contracted_unit						AS cu
+			,c.contracted_amount					AS ca
+			,c.contracted_payment_terms		AS cpt
+			,c.contract_total_payment			AS ctp
+			,c.contract_start_date					AS csd
+			,c.contract_end_date					AS ced
+			,c.contracted_date						AS cd
+			,ci.client_name							AS cn
+		FROM
+			contract_info AS c
+		INNER JOIN 
+			requested_product_detail AS r
+		ON
+			c.contract_code = r.contract_code
+		INNER JOIN 
+			client_info AS ci
+		ON
+			r.client_code = ci.client_code
+		GROUP BY c.contract_code;
+	</select>
+	
+	<select id = "getContractCount" resultType="int">
+		SELECT 
+			COUNT(1)
+		FROM
+			contract_info AS c
+		WHERE c.contract_code LIKE '%buyerContract%';	
+	</select>
 </mapper>

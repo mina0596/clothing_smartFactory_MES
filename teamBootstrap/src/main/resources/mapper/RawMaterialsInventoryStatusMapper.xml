@@ -28,7 +28,73 @@
 		
 		
 	</resultMap>
+	
+	<resultMap type="SupplierRequest"  id="supplierRequestResultMap">
+			<result property="rawMeterialOrderCode" column="raw_material_order_code"/>
+			<result property="rawMeterialCode" column="raw_material_code"/>
+			<result property="clientCode" column="client_code"/>
+			<result property="chargeEmployeeCode" column="charge_employee_code"/>
+			<result property="supplierContractCode" column="contract_code"/>
+			<result property="rawMeterialOrderAmount" column="raw_material_order_amount"/>
+	</resultMap>
+	
+	<!-- [한빛]자재출고 등록 -->
+	<insert id="addExwarehousing" parameterType="RawMaterialsInventory">
+			INSERT INTO raw_material_inventory_transaction
+			( raw_material_transaction_code
+			,raw_material_code
+			,raw_material_order_code
+			,charge_employee_code
+			,transaction_category
+			,raw_material_transaction_amount
+			,raw_material_transaction_date
+			,raw_material_transaction_reg_date
+			,raw_material_transaction_update_date
+		)VALUES(
+  			sf_transcationCode()
+			 ,#{materialCode}
+			 ,#{materialOrderCode}
+			 ,#{chargeEmployeeCode}
+			 ,'출고'
+			 ,#{transactionAmount}
+			 ,#{transactionDate}
+			 ,now()
+			 ,null);
+	</insert>
+	
+	<!-- [한빛] 출고 현황 목록 -->
+	<select id = "getExwarehousing" resultType ="Map" fetchSize="1000">
+		SELECT
+			rmit.raw_material_transaction_code						AS rmtCode
+			,rmit.raw_material_code									AS rmCode
+			,rmif.raw_material_name									AS rmName
+			,rmif.raw_material_color_code							AS rmcCode
+			,rmit.raw_material_transaction_amount					AS rmtAmount
+			,rmif.raw_material_unit									AS rmUnit
+			,rmit.raw_material_transaction_date						AS rmtDate
+			,rmit.raw_material_transaction_reg_date					AS rmtRegDate
+		FROM 
+			raw_material_inventory_transaction AS rmit
+		INNER JOIN 
+			raw_material_info AS rmif
+		ON 
+			rmit.raw_material_code = rmif.raw_material_code
+		WHERE
+			rmit.transaction_category = '출고'
+		GROUP BY rmit.raw_material_transaction_code;
+	</select>
 
+	<delete id="deleteExHousing" parameterType="java.util.List">
+		DELETE 
+			FROM 
+				raw_material_inventory_transaction 
+			WHERE 
+				raw_material_transaction_code in
+				<foreach collection="list" item="code" open="(" close=")" separator=",">
+					#{code}
+				</foreach>
+	</delete>
+	
 	<!-- [민아]입출고 현황 목록 -->
 	<select id="getMaterialsTransactionList" resultMap="materialsInventoryResultMap">
 		SELECT 
@@ -138,6 +204,20 @@
 			join
 			(SELECT @total :=0) AS initial) AS subSubSelect
 		ORDER BY subSubSelect.finalTransDate DESC LIMIT 1;
+	</select>
+	
+	<select id="getSupplierRequest"  resultMap="supplierRequestResultMap"  resultType="SupplierRequest"  fetchSize="1000">
+		SELECT 
+			raw_material_order_code
+			, raw_material_code
+			, client_code
+			, charge_employee_code
+			, contract_code
+			, raw_material_order_amount
+		FROM 
+			raw_material_order
+		WHERE 	
+			raw_material_order_approval = #{approval};
 	</select>
 </mapper>
 

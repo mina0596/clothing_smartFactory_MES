@@ -1,9 +1,16 @@
 package ksmart39.springboot.controller;
 
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 
@@ -23,6 +30,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import ksmart39.springboot.domain.ProductProductionProcessStatus;
+import ksmart39.springboot.domain.WorkOrder;
 import ksmart39.springboot.service.CompletedProductService;
 import ksmart39.springboot.service.ProductionService;
 import ksmart39.springboot.service.ProductionStatusByProductionPlanService;
@@ -130,8 +138,6 @@ public class ProductionController_PMA {
 		List<Map<String,Object>> searchClientNameResult = productionService.searchClientName(paramMap);
 		log.info("DB에서 결과 받아오는 clinetName List : {}", searchClientNameResult);
 
-		log.info("어디모델이지? :{}", model.toString());
-		
 		return searchClientNameResult;
 	}
 	  
@@ -184,13 +190,18 @@ public class ProductionController_PMA {
 	 * "production/stateByProduct"; }
 	 */
 
-	// [민아+한빛]생산계획별 생산 현황 조회
+	
+	
+	// [민아]생산계획별 생산 현황 조회
 	@GetMapping("/stateByProductionPlan")
 	public String getStateByProductionPlan(Model model) {
 		
 		List<Map<String,Object>> achievePercentageByPlanList = productionStatusByProductionPlanService.getAchievePercentageByPlan();
+		List<Map<String,Object>> finishedProductionPlanList = productionStatusByProductionPlanService.getFinishedProductionPlanInfo();
 		model.addAttribute("achievePercentageByPlanList", achievePercentageByPlanList);
+		model.addAttribute("finishedProductionPlanList", finishedProductionPlanList);
 		log.info("achievePercentageByPlanList : {}", achievePercentageByPlanList);
+		
 		return "production/stateByProductionPlan";
 	}
 
@@ -220,4 +231,63 @@ public class ProductionController_PMA {
 
 		return "production/workOrderList";
 	}
+	
+	
+	//[보람]작업지시 등록화면 + [민아]처리과정
+	@GetMapping("/addWorkOrder")
+	public String addWorkOrder() {
+		
+		return "production/addWorkOrder";
+	}
+	
+	//[민아]작업지시 등록 처리
+	@PostMapping("/addWorkOrder")
+	public String addWorkOrder(WorkOrder workOrder) {
+		log.info("들어오는정보 :{}", workOrder);
+		workOrderService.addWorkOrder(workOrder);
+		return "redirect:/production/workOrderList";
+	}
+	
+	//[민아]작업지시 수정화면으로 이동
+	@GetMapping("/modifyWorkOrder")
+	public String modifyWorkOrder(@RequestParam(value = "workOrderCode") String workOrderCode, Model model) throws ParseException {
+		log.info("workOrderCode 화면에서 받아오는거 :{}", workOrderCode);
+		Map<String,Object> workOrderInfo = workOrderService.getWorkOrderInfoByWorkOrderCode(workOrderCode);
+		log.info("DB에서 workOrderCode로 가져오는 정보값 확인  :{}", workOrderInfo);
+		
+		//DB에서 가져오는 날짜 포맷 java에서 datetime-local로 변경시켜줌
+		Date startDate = (Date) workOrderInfo.get("startDate");
+		Date endDate = (Date) workOrderInfo.get("endDate");
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+		String newStartDate = dateFormat.format(startDate);
+		String newEndDate = dateFormat.format(endDate);
+		log.info("parsing한 startDate값 확인 :{}", newStartDate);
+		workOrderInfo.replace("startDate", newStartDate);
+		workOrderInfo.replace("endDate", newEndDate);
+		
+		
+		log.info("날짜 포맷 변경후 workOrderCode로 가져오는 정보값 확인  :{}", workOrderInfo);
+		model.addAttribute("workOrderInfo", workOrderInfo);
+		return "production/modifyWorkOrder";
+	}
+	
+	//[민아]작업지시 수정완료 후 리스트화면으로 이동
+	@PostMapping("/modifyWorkOrder")
+	public String modifyWorkOrder(WorkOrder workOrder) {
+		log.info("workOrder 수정된거 확인:{}", workOrder);
+		workOrderService.modifyWorkOrder(workOrder);
+		
+		return "redirect:/production/workOrderList";
+	}
+	
+	
+	//[민아]작업지시등록화면에서 계약번호 검색 모달
+	@PostMapping("/searchContractCodeModal")
+	@ResponseBody
+	public List<Map<String,Object>> getContractCode(@RequestBody Map<String,Object> paramMap){
+		List<Map<String,Object>> searchContractCodeResult = productionService.searchClientName(paramMap);
+		return searchContractCodeResult;
+	}
+
+	
 }

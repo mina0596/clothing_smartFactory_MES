@@ -6,8 +6,10 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import ksmart39.springboot.domain.QualityInspectionFinalResult;
+
 @Mapper
-public interface QualityInsepctionFinalResultMapper {
+public interface QualityInspectionFinalResultMapper {
 	
 	//[다미+보람]검사등록  검사결과 모달창 리스트
 	public List<Map<String,Object>> searchRequesetInspection();
@@ -30,5 +32,17 @@ public interface QualityInsepctionFinalResultMapper {
 
 	//[보람 ]품질검사 최종 리스트 화면
 	public  List<Map<String,Object>> getInsepectionFinalResult();
+	
+	//[민아]품질검사 최종결과값 가져오기
+	public String getFinalInspectionResult(String finalResult);
+	
+	//[민아]품질검사 최종회차 가져오기
+	public Map<String,Object> getMaxMeasurementNum(String requestInspectionCode);
+	
+	//[민아]품질검사 최종결과값 DB에 INSERT
+	public int insertFinalResult(QualityInspectionFinalResult finalResultMap);
+	
+	//[민아]품질검사 결과값이 처음인지 아닌지 확인
+	public String checkRequestExistanceInResult(String inspectionRequestCode);
 
 }

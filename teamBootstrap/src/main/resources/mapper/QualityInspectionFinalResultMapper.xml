@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart39.springboot.dao.QualityInspectionFinalResultMapper">
+	<resultMap id="qualityInspectionFinalResultMap" 		type="QualityInspectionFinalResult">
+		<result property="finalResultCode" 					column="final_result_code"/>
+		<result property="qualityInspectionRequestCode" 	column="quality_inspection_request_code"/>
+		<result property="chargeEmployeeCode" 				column="charge_employee_code"/>
+		<result property="qualityInspectionCode" 			column="quality_inspection_code"/>
+		<result property="lowCateFinalPassCheck" 			column="low_cate_final_pass_check"/>
+		<result property="inspectionStartDate" 				column="inspection_start_date"/>
+		<result property="inspectionDuration" 				column="inspection_duration"/>
+		<result property="inspectionEndDate" 				column="inspection_end_date"/>
+		<result property="finalResutlRegDate" 				column="final_result_reg_date"/>
+		<result property="finalResultUpdateDate" 			column="final_result_update_date"/>
+	</resultMap>
+
+	<!-- 품질검사 최종결과 리스트 -->
+	<select id="getInsepectionFinalResult" resultType="map">
+		SELECT 
+			r.product_request_code,
+			r.requested_product_code,
+			c.client_name,
+			p.gender_categorized_name,
+			p.detailed_categorized_name,
+			i.low_cate_final_pass_check,
+			i.final_result_reg_date
+		FROM inspection_final_result AS  i
+		INNER JOIN 
+			quality_inspection_request AS q
+			ON i.quality_inspection_request_code = q.quality_inspection_request_code
+		INNER JOIN 
+			requested_product_detail AS r
+			ON q.requested_product_code = r.requested_product_code
+		INNER join
+			product_code_detail AS p
+			ON r.product_code =p.product_code
+		INNER join
+			client_info AS c 
+			ON  r.client_code = c.client_code
+		GROUP BY q.requested_product_code;
+		
+	</select>
+
+	<select id="getClientName" resultType="map">
+		SELECT 
+	 		DISTINCT(c.client_name)
+		FROM inspection_final_result AS  i
+		INNER JOIN 
+			quality_inspection_request AS q
+			ON i.quality_inspection_request_code = q.quality_inspection_request_code
+		INNER JOIN 
+			requested_product_detail AS r
+			ON q.requested_product_code = r.requested_product_code
+		INNER join
+			product_code_detail AS p
+			ON r.product_code =p.product_code
+		INNER join
+			client_info AS c 
+			ON  r.client_code = c.client_code;
+	</select>
+
+	<select id="getRequestProductCode" parameterType="String" resultType="map">
+		SELECT 
+		    DISTINCT(r.product_request_code)
+		FROM inspection_final_result AS  i
+			INNER JOIN 
+				quality_inspection_request AS q
+				ON i.quality_inspection_request_code = q.quality_inspection_request_code
+			INNER JOIN 
+				requested_product_detail AS r
+				ON q.requested_product_code = r.requested_product_code
+			INNER join
+				product_code_detail AS p
+				ON r.product_code =p.product_code
+			INNER join
+				client_info AS c 
+				ON  r.client_code = c.client_code
+			WHERE c.client_name = #{client};			
+	
+	</select>
+	<select id="getProductName" parameterType="String" resultType="map">
+		SELECT 
+	   		 DISTINCT(p.detailed_categorized_name)
+	    FROM inspection_final_result AS  i
+		INNER JOIN 
+			quality_inspection_request AS q
+			ON i.quality_inspection_request_code = q.quality_inspection_request_code
+		INNER JOIN 
+			requested_product_detail AS r
+			ON q.requested_product_code = r.requested_product_code
+		INNER join
+			product_code_detail AS p
+			ON r.product_code =p.product_code
+		INNER join
+			client_info AS c 
+			ON  r.client_code = c.client_code
+		WHERE r.product_request_code =#{requestNum}
+	</select>
+	
+	<select id="getFinalResultReport" parameterType="String" resultType="map">
+		SELECT 
+			q.requested_product_code,
+			i.quality_inspection_request_code,
+			m.med_class_name,
+			l.low_class_name,
+			s.sub_class_name,
+			IFNULL(GROUP_CONCAT(if(inspection_measurement_num='1회차', inspection_pass_check, NULL)),'심사중') AS inspection_first,
+			IFNULL(GROUP_CONCAT(if(inspection_measurement_num='2회차', inspection_pass_check, NULL)),'심사중') AS inspection_second,
+			IFNULL(GROUP_CONCAT(if(inspection_measurement_num='3회차', inspection_pass_check, NULL)),'심사중') AS inspection_third,
+			f.low_cate_final_pass_check,
+			DATE_FORMAT(f.final_result_reg_date,'%Y-%m-%d %T') AS final_Date
+		FROM inspection_result AS i
+			INNER JOIN 
+				quality_inspection_request AS q
+			ON i.quality_inspection_request_code = q.quality_inspection_request_code
+			INNER JOIN
+				sub_class_inspection_list AS s
+			ON q.quality_inspection_code = s.quality_inspection_code
+			INNER JOIN
+				low_class_inspection_list AS l
+			on s.high_med_low_class_code = l.high_med_low_class_code
+			INNER JOIN
+				medium_class_inspection_list AS m
+			on l.high_med_class_code =m.high_med_class_code
+			INNER JOIN 
+				inspection_final_result AS f
+			ON q.quality_inspection_request_code=f.quality_inspection_request_code
+		WHERE q.requested_product_code = #{requestProductCode}
+			GROUP BY i.quality_inspection_request_code;
+	
+	
+	</select>
+	
+	<!--검색 버튼 눌러서 조회하기   -->
+	<select id="getQualityInspectionReport" parameterType="hashmap" resultType="map">
+		SELECT 
+			r.product_request_code,
+			r.requested_product_code,
+			c.client_name,
+			p.gender_categorized_name,
+			p.detailed_categorized_name,
+			i.low_cate_final_pass_check,
+			q.inspection_request_date,
+			i.inspection_end_date,
+			DATE_FORMAT(i.final_result_reg_date,'%Y-%m-%d %T') AS final_Date
+		FROM inspection_final_result AS  i
+		INNER JOIN 
+			quality_inspection_request AS q
+			ON i.quality_inspection_request_code = q.quality_inspection_request_code
+		INNER JOIN 
+			requested_product_detail AS r
+			ON q.requested_product_code = r.requested_product_code
+		INNER join
+			product_code_detail AS p
+			ON r.product_code =p.product_code
+		INNER join
+			client_info AS c 
+			ON  r.client_code = c.client_code
+			<trim prefix="WHERE" prefixOverrides="AND">
+				<if test="clientCate != null and clientCate !=''.toString()">
+				 AND c.client_name =#{clientCate}
+				</if>
+				<if test="requestCate != null and requestCate !=''.toString()">
+				AND r.product_request_code =#{requestCate}
+				</if>
+				<if test="productCate != null and productCate !=''.toString()">
+				AND p.detailed_categorized_name =#{productCate}
+				</if>
+				<if test="InspectionStartDate != null and InspectionStartDate !=''.toString()">
+				AND q.inspection_request_date &gt;= DATE(#{inspectionStartDate})
+				</if>
+				<if test="inspectionEndDate != null and inspectionEndDate !=''.toString()">
+				AND i.inspection_end_date &lt;= DATE(#{inspectionEndDate})
+				</if>
+			</trim>
+		GROUP BY q.requested_product_code;
+	</select>
+
+
+	<select id="searchRequesetInspection" resultType="map">
+		SELECT 
+			r.contract_code,
+			c.client_name,
+			r.product_request_code,
+			i.inspection_result_code,
+			i.quality_inspection_request_code,
+			i. quality_inspection_code, 
+			h.high_class_name,
+			m.med_class_name,
+			l.low_class_name,
+			s.sub_class_name,
+			i.inspection_measurement_num,   
+			i.inspection_pass_check, 
+			DATE_FORMAT(i.inspection_start_date, '%Y-%m-%d %T') AS start_Date,
+			i.inspection_duration, 
+			Date_format(i.inspection_end_date,'%Y-%m-%d %T') AS end_Date,
+			Date_format(i.inspection_result_reg_date,'%Y-%m-%d %T') AS reg_Date
+		FROM inspection_result AS i
+			INNER JOIN 
+			sub_class_inspection_list AS s
+			ON i.quality_inspection_code= s.quality_inspection_code
+			INNER join
+			low_class_inspection_list AS l
+			ON s.high_med_low_class_code=l.high_med_low_class_code
+			INNER join
+			medium_class_inspection_list AS m
+			ON l.high_med_class_code= m.high_med_class_code
+			INNER join
+			high_class_inspection_list AS h
+			ON m.high_class_code= h.high_class_code
+			INNER join
+			quality_inspection_request AS q
+			ON i.quality_inspection_request_code= q.quality_inspection_request_code
+			INNER join
+			requested_product_detail AS r
+			on q.requested_product_code = r.requested_product_code
+			INNER JOIN 
+			client_info AS c
+			ON r.client_code = c.client_code
+	
+	</select>
+	
+	<!-- ==========================[민아]품질검사 최종결과 자동으로 입력======================  -->
+	<!-- 품질검사 최종결과값 가져오는 쿼리지만, 함수로 대체함 -->
+	<select id="getFinalInspectionResult" parameterType="String" resultType="String">
+		SELECT 
+			if((SELECT 
+						COUNT(ir.inspection_pass_check)
+					 FROM 
+						inspection_result AS ir
+					 WHERE 
+						ir.quality_inspection_request_code = i.quality_inspection_request_code
+						AND 
+						<![CDATA[
+						ir.inspection_pass_check = '합격') > 1, '합격','불합격') AS inspectionPassCheck
+						]]>
+			FROM 
+				inspection_result AS i
+			WHERE 
+				i.quality_inspection_request_code = #{inspectionRequestCode}
+			GROUP BY i.quality_inspection_request_code;
+	</select>
+
+	<select id="getMaxMeasurementNum" parameterType="String" resultType="map">
+		select
+				MAX(ir.inspection_measurement_num) AS maxNum,
+				MIN(DATE_FORMAT(ir.inspection_start_date, '%Y-%m-%d %T')) AS startDate,
+				MAX(DATE_format(ir.inspection_end_date, '%Y-%m-%d %T')) AS finishDate,
+				SUM(ir.inspection_duration) AS duration 
+			from 
+				inspection_result ir
+			WHERE 
+				ir.quality_inspection_request_code = #{qualityInspectionRequestCode};
+	</select>
+	
+	<insert id="insertFinalResult" parameterType="QualityInspectionFinalResult">
+		INSERT INTO 
+			inspection_final_result
+			(final_result_code, quality_inspection_request_code, quality_inspection_code, low_cate_final_pass_check, inspection_start_date, inspection_duration, inspection_end_date, final_result_reg_date, final_result_update_date)
+		VALUES 
+			(sf_inspectionFinalResultCode(#{qualityInspectionRequestCode}), #{qualityInspectionRequestCode}, #{qualityInspectionCode}, sf_inspectionFinalResult(#{qualityInspectionRequestCode}), #{inspectionStartDate}, #{inspectionDuration}, #{inspectionEndDate}, NOW(), NOW())
+	</insert>
+	
+	<select id="checkRequestExistanceInResult" parameterType="String" resultType="String">
+	SELECT 
+		(case
+		when COUNT(1) = 0 then @exist := 'non-exist'
+		when COUNT(1) != 0 then @exist := 'exist'
+		END) AS existMeasure
+	FROM 
+		inspection_result AS ir
+		join
+		(SELECT @exist := null) AS r
+		where
+		ir.quality_inspection_request_code = #{qualityInspectionRequestCode};
+	</select>
+</mapper>

@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.thymeleaf.util.MapUtils;
 
 import ksmart39.springboot.domain.SupplierRequest;
+import ksmart39.springboot.paging.Pagination;
+import ksmart39.springboot.service.ContractService;
+import ksmart39.springboot.service.OrderService;
 import ksmart39.springboot.service.RequestedProductService;
 import ksmart39.springboot.service.SupplierService;
 
@@ -24,13 +27,12 @@ import ksmart39.springboot.service.SupplierService;
 @RequestMapping("/contract")
 public class ContractController_LHB {
 	@Autowired
-	private final SupplierService supplierService;
-	private final RequestedProductService requestedProductService;
+	private final OrderService orderService;
+	private final ContractService contractService;
 	
-	
-	 @Autowired public ContractController_LHB(SupplierService supplierService, RequestedProductService requestedProductService) {
-	 this.supplierService = supplierService;
-	 this.requestedProductService = requestedProductService;
+	 @Autowired public ContractController_LHB(OrderService orderService, ContractService contractService) {
+	 this.orderService = orderService;
+	 this.contractService = contractService;
 	 }
 	 
 
@@ -53,10 +55,10 @@ public class ContractController_LHB {
 
 	//[한빛]주문서 조회
 	@GetMapping("/buyerOrderList")
-	public String getBuyerOrderList(Model model) {
-		List<Map<String,Object>> resultMap = requestedProductService.getRequestedProduct();
+	public String getOrderList(Model model) {
+		List<Map<String,Object>> orderList = orderService.getOrderList();
 		model.addAttribute("title", "수주관리");
-		model.addAttribute("",resultMap);
+		model.addAttribute("orderList",orderList);
 		return "contract/buyerOrderList";
 	}		
 
@@ -64,7 +66,7 @@ public class ContractController_LHB {
 	@GetMapping("/modifyBuyerOrder")
 	public String modifyBuyerOrder(Model model) {
 		model.addAttribute("title", "수주관리");
-		return "contract/buyerOrderList";
+		return "contract/buyerOrderList"; //잘못됨
 	}	
 	
 	//[한빛]수주 주문서 승인완료 목록
@@ -76,7 +78,7 @@ public class ContractController_LHB {
 	
 	//[한빛]수주 주문서 상세로!
 	@GetMapping("/buyerOrderInfo")
-	public String getBuyerOrderInfo(Model model) {
+	public String getBuyerOrderInfo(@RequestParam(name = "prCode", required = false) String prCode, Model model) {
 		model.addAttribute("title", "수주관리");
 		return "contract/buyerOrderInfo";
 	}	
@@ -99,8 +101,14 @@ public class ContractController_LHB {
 	
 	//[한빛]수주계약 조회
 	@GetMapping("/buyerContractList")
-	public String getBuyerContractList(Model model) {
-		model.addAttribute("title", "수주관리");
+	public String getBuyerContractList(Model model, Pagination paging) {
+	    Map<String, Object> resultMap = contractService.getBuyerContract(paging);
+	    model.addAttribute("buyerContractList", 					resultMap.get("clientList"));
+	    model.addAttribute("currentPage", 							resultMap.get("currentPage"));
+		model.addAttribute("lastPage", 								resultMap.get("lastPage"));
+		model.addAttribute("pageStartNum", 						resultMap.get("pageStartNum"));
+		model.addAttribute("pageEndNum", 						resultMap.get("pageEndNum"));
+
 		return "contract/buyerContractList";
 	}
 	
@@ -109,5 +117,5 @@ public class ContractController_LHB {
 	public String modifyBuyerContract() {
 		return"contract/modifyBuyerContract";
 	}
-
+	
 }

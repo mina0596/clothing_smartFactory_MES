@@ -16,6 +16,7 @@ import ksmart39.springboot.dao.RawMaterialsInventoryStatusMapper;
 import ksmart39.springboot.dao.SystemMapper;
 import ksmart39.springboot.domain.RawMaterials;
 import ksmart39.springboot.domain.RawMaterialsInventory;
+import ksmart39.springboot.domain.SupplierRequest;
 
 @Service
 public class RawMaterialsInventoryStatusService {
@@ -29,6 +30,31 @@ public class RawMaterialsInventoryStatusService {
 		this.materialsInventoryStatusMapper = materialsInventoryStatusMapper;
 		this.systemMapper = systemMapper;
 	}
+	
+	
+	//[한빛] 출고 등록
+	public int addExwarehousing(RawMaterialsInventory rawMaterialsInventory) {
+		int result = materialsInventoryStatusMapper.addExwarehousing(rawMaterialsInventory);
+		return result;
+	}
+	
+	//[한빛] 출고 현황
+	public List<Map<String,Object>> getExwarehousing(){
+		List<Map<String,Object>> exHousingList = materialsInventoryStatusMapper.getExwarehousing();
+		return exHousingList;
+	}
+	
+	//[한빛] 출고 삭제
+	public int deleteExHousing(List<String> delArr) {
+		return materialsInventoryStatusMapper.deleteExHousing(delArr);
+	}
+	
+	//[한빛] 모달 뿌려주기
+	public List<SupplierRequest> getSupplierRequest(String approval){
+		List<SupplierRequest> supplierRequest = materialsInventoryStatusMapper.getSupplierRequest(approval);
+		return supplierRequest;
+	}
+	//==========================================
 	
 	//[민아]자재 입출고 현황
 	public List<RawMaterialsInventory> getRawMaterialsInventory(){
@@ -77,4 +103,5 @@ public class RawMaterialsInventoryStatusService {
 		return getInventoryStatusResult;
 	}
 	
+
 }

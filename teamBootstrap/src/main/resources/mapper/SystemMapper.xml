@@ -23,7 +23,7 @@
 </resultMap>
 	
 	
-	<select id="getHumanResources" resultMap="getHumanResourcesInfo"  resultType="HumanResources" fetchSize="1000">
+	<select id="getHumanResources" resultMap="getHumanResourcesInfo" parameterType = "map"  resultType="HumanResources" fetchSize="1000">
 		SELECT
 			e.employee_code
 			,e.level_num
@@ -44,11 +44,22 @@
 			erp_access_level as l
 			on
 			e.level_num = l.level_num;
-		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test="searchKey != null and searchKey != ''.toString()">
 				${searchKey} LIKE CONCAT('%', #{searchValue} ,'%');
 			</if>
 		</trim>
+	</select>
+	
+	<select id="getHumanResourcesCount" resultType="int">
+		SELECT 
+			COUNT(1)
+		FROM
+			employee_info as e
+			INNER JOIN
+			erp_access_level as l
+			on
+			e.level_num = l.level_num;	
 	</select>
 	
 	<insert id="addHumanResources" parameterType="HumanResources">
@@ -190,13 +201,22 @@
 			,c.client_info_update_date
 		FROM
 			client_info as c
+		LIMIT #{rowStart}, #{rowPerPage};			
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test="searchKey != null and searchKey != ''.toString()">
 				${searchKey} LIKE CONCAT('%', #{searchValue} ,'%');
 			</if>
 		</trim>
+
 	</select>
-			
+
+	<select id="getClientCount" resultType="int">
+		SELECT 
+			COUNT(1)
+		FROM
+			client_info as c
+	</select>			
+	
 	<!-- 추가	 -->	
 	<insert id="addClient" parameterType="Client">
 		INSERT INTO client_info
@@ -255,10 +275,10 @@
 	</trim>
 	WHERE 
 		client_code = #{clientCode};
-</update>
+	</update>
 	
 	<!-- 수정화면 뿌려주기 -->
-		<select id="getClientInfoByCode" parameterType="String" resultMap="getClientInfo">
+	<select id="getClientInfoByCode" parameterType="String" resultMap="getClientInfo">
 		SELECT 
 			 client_code
 			,client_category			
@@ -376,6 +396,54 @@
 		<result column="low_class_name" property="lowClassName"/>
 		</association>	
 </resultMap>
+<!--품질검사 조회  -->
+<select id="searchInspectionList" parameterType="hashmap" resultType="map">
+		SELECT
+			s.quality_inspection_code,
+			h.high_class_code,
+			h.high_class_name,
+			m.high_med_class_code,
+			m.med_class_code,
+			m.med_class_name,
+			l.high_med_low_class_code,
+			l.low_class_code,
+			l.low_class_name,
+			s.sub_class_code,
+			s.sub_class_name,
+			DATE_FORMAT(s.sub_class_reg_date,'%Y-%m-%d %T') AS inspection_reg_date
+		FROM sub_class_inspection_list AS s
+			INNER JOIN
+				low_class_inspection_list AS l
+					ON s.high_med_low_class_code = l.high_med_low_class_code
+			INNER JOIN
+				medium_class_inspection_list AS m
+					ON s.high_med_class_code =m.high_med_class_code
+			INNER JOIN
+				high_class_inspection_list AS h
+				ON s.high_class_code = h.high_class_code
+			<trim prefix="WHERE" prefixOverrides="AND">
+			<if test="highClassCateName != null and highClassCateName != ''.toString()">	
+				AND h.high_class_code=#{highClassCateName}
+			</if>
+			<if test="middleClassCateName != null and middleClassCateName != ''.toString()">	
+				AND m.high_med_class_code=#{middleClassCateName}
+			</if>	
+			<if test="lowClassCateName != null and lowClassCateName != ''.toString()">
+				AND l.high_med_low_class_code=#{lowClassCateName}
+			</if>	
+			</trim>
+		ORDER BY sub_class_reg_date;	
+</select>
+
+<!--품질검사 삭제  -->
+<delete id="deleteQualityInspection" parameterType="String">
+DELETE
+FROM
+sub_class_inspection_list
+WHERE quality_inspection_code =#{checkArray};
+
+</delete>
+
 <!--품질검사 등록  -->
 <insert id="addQualityInspection" parameterType="map">
 	INSERT INTO sub_class_inspection_list
@@ -435,7 +503,7 @@
 	INNER JOIN
 		sub_class_inspection_list AS s
 	ON l.high_med_low_class_code =s.high_med_low_class_code
-	WHERE h.high_class_code =#{highClassCateName}
+	WHERE h.high_class_code = #{highClassCateName}
 	GROUP BY m.high_med_class_code;
 </select>
 <select id="getLowClassCate" parameterType="String" resultType="map">

@@ -18,10 +18,18 @@ public class WebConfig implements WebMvcConfigurer{
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(loginInterceptor)
 				.addPathPatterns("/**")
-				/* .excludePathPatterns("/login/index") */
-				.excludePathPatterns("/css/**")
-				.excludePathPatterns("/js/**");
+				.excludePathPatterns("/")
+				.excludePathPatterns("/Dashio/css/**")
+				.excludePathPatterns("/login/**")
+				.excludePathPatterns("/favicon.ico");
+		/*
+		 * registry.addInterceptor(finalResultInterceptor)
+		 * .addPathPatterns("/quality/addInspectionMeasurementValue");
+		 */
 		
 		WebMvcConfigurer.super.addInterceptors(registry);
 	}
+	
+	
+	
 }

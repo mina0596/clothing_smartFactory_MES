@@ -39,7 +39,7 @@ $(function(){
 				});
 				
 				request.done(function( data ) {
-					console.log(data);
+					//console.log(data);
 					if(data.length >  0){
 						for(var i = 0; i<data.length; i++){						
 							html += "<tr class='removeTrCN'>";
@@ -92,7 +92,7 @@ $(function(){
 			});
 			
 			request.done(function( data ) {
-				console.log(data);
+				//console.log(data);
 				if(data.length > 0){
 					for(var i = 0; i<data.length; i++){
 						html += '<tr class="removeTrCL">';
@@ -135,8 +135,6 @@ $(function(){
 			$.each(bindElement, function(){
 				searchKey = $(this).attr('name');
 				searchValue = $(this).val();
-				console.log(searchKey);
-				console.log(searchValue);
 				
 				if(searchKey != null && searchKey != undefined && searchKey != ''){
 					searchObj[searchKey] = searchValue;
@@ -152,7 +150,7 @@ $(function(){
 			});
 			
 			request.done(function( data ) {
-				console.log(data);
+				//console.log(data);
 				if(data.length > 0){
 					for(var i = 0; i<data.length; i++){
 						html += '<tr class="removeTrIns">';
@@ -196,15 +194,67 @@ $(function(){
 	var completeRate = 0;
 	//진행건수
 	var progressRate = 0;
-	//완료율 바
-	var progressBar = '';
+	
+	//그래프
+	var ctx1 = document.getElementById('satateChart').getContext('2d');
+	var chart1 = new Chart(ctx1, {
+		type: 'doughnut',
+		data: {
+			labels: ['완료','진행율'],
+			datasets: [{
+				label: 'My First Dataset',
+				data: [50, 50],
+				backgroundColor: [
+					'rgb(54, 162, 235)',
+					'rgb(255, 205, 86)'
+					],
+					hoverOffset: 4
+				}]
+			},
+		});
+	
+	var ctx2 = document.getElementById('finalPassChart').getContext('2d');
+	var chart2 = new Chart(ctx2, {
+		type: 'doughnut',
+		data: {
+			labels: ['합격','불합격'],
+			datasets: [{
+				label: 'My First Dataset',
+				data: [50, 50],
+				backgroundColor: [
+					'rgb(54, 162, 235)',
+					'rgb(255, 205, 86)'
+					],
+					hoverOffset: 4
+				}]
+			},
+		});
+	
+	var ctx3 = document.getElementById('inspectionPass').getContext('2d');			
+	var chart3 = new Chart(ctx3, {
+		type: 'doughnut',
+		data: {
+			labels: ['수입검사','공정검사','완제품검사'
+				],
+			datasets: [{
+				label: 'My First Dataset',
+				data: [30, 30, 40],
+				backgroundColor: [
+					'rgb(54, 162, 235)',
+					'rgb(255, 205, 86)',
+					'rgb(120, 205, 86)'
+					],
+					hoverOffset: 4
+				}]
+			},
+		});
 	
 	
 	//품질검사 현황 조회
 	$(document).on('click','#searchBtn',function(){
 		
-//	})
-//	$('#searchBtn').click(function(){	
+		//완료율 바
+		var progressBar = '';
 		var statusElement = $('#statusElement').find('input, select');
 		html = '';
 		
@@ -218,18 +268,14 @@ $(function(){
 			$.each(statusElement,function(){
 				searchkey = $(this).attr('name');
 				searchValue = $(this).val();
-				console.log('searchkey: ',searchkey);
-				console.log('searchValue: ', searchValue);
 				
 				if(searchValue != null && searchValue != undefined && searchValue != ''){
 					searchObj[searchkey] = searchValue;
 				}
-				console.log(searchObj);
+				//console.log(searchObj);
 			});
 			
-			$('#removeTr').remove();
-			$('#originalProgressBar').remove();
-			
+
 			var request = $.ajax({
 				url: "/quality/qualityInspectionStatusNow",
 				data: JSON.stringify(searchObj),
@@ -239,7 +285,12 @@ $(function(){
 			});
 			
 			request.done(function( data ) {
-				console.log(data);
+				//console.log(data);
+				$('.removeTr').remove();
+				//원래 있던 progressBar 지우기
+				$('#originalProgressBar').remove();
+				//새로 생성된 progressBar 리셋
+				$('.progress-bar').remove();
 				
 				if(data.length > 0){
 					
@@ -253,13 +304,26 @@ $(function(){
 					finalPassCount = data[0].finalPassCount;
 					//최종 완료 갯수
 					finalCompleteCount = data[0].finalCompleteCount;
-					//완료율
-					completeRate = requestCount/finalCompleteCount;
+					//완료율(반올림)
+					completeRate = Math.round((finalCompleteCount*100)/requestCount);
 					//진행건수
 					progressRate = data[0].progressRate;
 					//완료율바
 					progressBar += '<div class="progress-bar" role="progressbar" aria-valuenow="' + completeRate +'" aria-valuemin="0"'; 
 					progressBar += 'aria-valuemax="100" style="width: ' + completeRate +'%"><span class="sr-only">' + completeRate +'% Complete</span>';
+					
+					//1번째 차트
+					chart1.data.datasets[0].data=[progressRate, completeRate];
+					chart1.update();
+					
+					//2번째 차트
+					chart2.data.datasets[0].data=[12, 15];
+					chart2.update();
+					
+					//3번째 차트
+					chart3.data.datasets[0].data=[11, 33, 22];
+					chart3.update();
+					
 					
 					$('#stateMain').val(contractCode);
 					$('#requestCount').val(requestCount);
@@ -294,7 +358,7 @@ $(function(){
 						date = formatDate(myDate);
 						
 						//List
-						html += '<tr>';
+						html += '<tr class="removeTr">';
 						html += '<th scope="row">'+ [i+1] + '</th>';
 						html += '<td>'+ data[i].highClassName + '</td>';
 						html += '<td>'+ data[i].lowClassName + '</td>';
@@ -311,9 +375,11 @@ $(function(){
 						html += '<td>'+ data[i].finalPassCheck + '</td>';
 						html += '<td>없음</td>';
 						html += '</tr>';
+
+						
 					}
 				}else{
-					html += '<tr><td colspan="15" style="text-align:center;">조회 결과가 없습니다.</td></tr>';
+					html += '<tr class="removeTr"><td colspan="15" style="text-align:center;">조회 결과가 없습니다.</td></tr>';
 				}
 				$('#mainTbody').append(html);
 			});
@@ -324,76 +390,12 @@ $(function(){
 		}
 		
 	});
+
 	
-	console.log('###############test:', completeRate)
-	//그래프
-	var ctx = document.getElementById('myChart0').getContext('2d');
-	var data  = {
-			type: 'doughnut',
-			data: {
-				labels: [
-					'완료',
-					'진행율'
-					],
-					datasets: [{
-						label: 'My First Dataset',
-						data: [completeRate, progressRate],
-						backgroundColor: [
-							'rgb(54, 162, 235)',
-							'rgb(255, 205, 86)'
-							],
-							hoverOffset: 4
-					}]
-			},
-	};
+
 	
-	var chart = new Chart(ctx, data);
+
 	
-	
-	var ctx = document.getElementById('myChart').getContext('2d');
-	var data  = {
-			type: 'doughnut',
-			data: {
-				labels: [
-					'합격',
-					'불합격'
-					],
-					datasets: [{
-						label: 'My First Dataset',
-						data: ['20', '1'],
-						backgroundColor: [
-							'rgb(54, 162, 235)',
-							'rgb(255, 205, 86)'
-							],
-							hoverOffset: 4
-					}]
-			},
-	};
-	
-	var chart = new Chart(ctx, data);
-	
-	var ctx2 = document.getElementById('myChart2').getContext('2d');
-	var data2  = {
-			type: 'doughnut',
-			data: {
-				labels: [
-					'수입검사',
-					'공정검사',
-					'완제품검사'
-					],
-					datasets: [{
-						label: 'My First Dataset',
-						data: [20, 30, 10],
-						backgroundColor: [
-							'rgb(54, 162, 235)',
-							'rgb(255, 205, 86)',
-							'rgb(120, 205, 86)'
-							],
-							hoverOffset: 4
-					}]
-			},
-	};
-	
-	var chart2 = new Chart(ctx2, data2);
+
 	
 });

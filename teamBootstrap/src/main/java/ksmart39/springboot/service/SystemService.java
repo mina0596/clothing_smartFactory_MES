@@ -19,6 +19,8 @@ import ksmart39.springboot.domain.QualityInspection;
 
 import ksmart39.springboot.domain.RawMaterials;
 import ksmart39.springboot.domain.SubClassInspection;
+import ksmart39.springboot.paging.PageMaker;
+import ksmart39.springboot.paging.Pagination;
 
 @Service
 public class SystemService {
@@ -28,45 +30,77 @@ public class SystemService {
 	private SystemMapper systemMapper;
 
 
-	//[민아]원부자재 전체 리스트 조회
-	public List<RawMaterials> getMaterialsList(){
-		List<RawMaterials> rawMaterialsList = systemMapper.getMaterialsList();
-		return rawMaterialsList;
-	};
 	
 	//============================================================
 	//[한빛]회원전체조회(levelName포함)
-	public List<HumanResources> getHumanResources(Map<String, Object> paramMap){
-		List<HumanResources> humanResources = systemMapper.getHumanResources(paramMap);
-		return humanResources;
+	public Map<String, Object> getHumanResources(Pagination paging){
+		
+		PageMaker pageMaker = new PageMaker();
+		
+	    pageMaker.setPaging(paging);
+	    
+	    pageMaker.setTotalCount(systemMapper.getHumanResourcesCount());
+	    
+	    Map<String, Object> paramMap = new HashMap<String, Object>();
+  		paramMap.put("rowStart", paging.getRowStart());
+  		paramMap.put("rowPerPage", paging.getRowPerPage());
+
+  		List<Map<String, HumanResources>> humanResourcesList = systemMapper.getHumanResources(paramMap);
+  		Map<String, Object> resultMap = new HashMap<String, Object>();
+  		resultMap.put("currentPage", paging.getCurrentPage());
+  		resultMap.put("humanResourcesList", humanResourcesList);
+  		resultMap.put("lastPage", pageMaker.getLastPage());
+  		resultMap.put("pageStartNum", pageMaker.getPageStartNum());
+  		resultMap.put("pageEndNum", pageMaker.getPageEndNum());
+
+	    return resultMap;
 	}
-	//회원정보 등록
+	//[한빛] 회원정보 등록
 	public int addHumanResources (HumanResources humanResources) {
 		int result = systemMapper.addHumanResources(humanResources);
 		return result;
 	}	
-	//회원정보 조회
+	//[한빛] 회원정보 조회
 	public HumanResources getEmployeeInfoById(String employeeId) {
 		return systemMapper.getEmployeeInfoById(employeeId);
 	}
-	//회원정보 조회
+	//[한빛] 회원정보수정 뿌려주기
 	public HumanResources getEmployeeInfoByCode(String employeeCode) {
 		return systemMapper.getEmployeeInfoByCode(employeeCode);
 	}
-	//회원정보 수정
+	//[한빛]회원정보 수정
 	public int modifyHumanResources (HumanResources humanResources) {
 		return systemMapper.modifyHumanResources(humanResources);
 	}
-	//회원정보 삭제
+	//[한빛]회원정보 삭제
 	public int deleteHumanResources(List<String> delArr) {
 		return systemMapper.deleteHumanResources(delArr);
 	};	
 	
 	//============================================================
 	//[한빛] 거래처 전체 조회
-	public List<Client> getClient(Map<String, Object> paramMap){
-		List<Client> client = systemMapper.getClient(paramMap);
-		return client;
+	public Map<String, Object> getClient(Pagination paging){
+		
+		PageMaker pageMaker = new PageMaker();
+		
+		paging.setRowPerPage(10);
+	    pageMaker.setPaging(paging);
+	    
+	    pageMaker.setTotalCount(systemMapper.getClientCount());
+
+	    Map<String, Object> paramMap = new HashMap<String, Object>();
+  		paramMap.put("rowStart", paging.getRowStart());
+  		paramMap.put("rowPerPage", paging.getRowPerPage());
+
+  		List<Map<String, Client>> clientList = systemMapper.getClient(paramMap);
+  		Map<String, Object> resultMap = new HashMap<String, Object>();
+  		resultMap.put("currentPage", paging.getCurrentPage());
+  		resultMap.put("clientList", clientList);
+  		resultMap.put("lastPage", pageMaker.getLastPage());
+  		resultMap.put("pageStartNum", pageMaker.getPageStartNum());
+  		resultMap.put("pageEndNum", pageMaker.getPageEndNum());
+
+		return resultMap;
 	}
 	//[한빛]거래처 등록
 	public int addClient (Client client) {
@@ -111,6 +145,18 @@ public class SystemService {
 	}
 	
 	//=============================================================
+	//[보람]품질검사 조회목록
+	public List<Map<String,Object>>searchInspectionList(HashMap map){
+		return systemMapper.searchInspectionList(map);
+		
+	}
+	
+	
+	//[보람]품질검사 목록 삭제 
+	public int deleteQualityInspection(String checkArray) {
+	 return systemMapper.deleteQualityInspection(checkArray);
+	}
+	
 	//[보람]품질검사 등록 
 	public int addQualityInspection(String highClassCode,String highMedClassCode,String highMedLowClassCode,String subClassName) {
 		
@@ -155,5 +201,12 @@ public class SystemService {
 	 { return	
 			  systemMapper.getQualityInspectionList();
 	 }
+	 
+
+		//[민아]원부자재 전체 리스트 조회
+		public List<RawMaterials> getMaterialsList(){
+			List<RawMaterials> rawMaterialsList = systemMapper.getMaterialsList();
+			return rawMaterialsList;
+		};
 	 
 }

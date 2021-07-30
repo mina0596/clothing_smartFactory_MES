@@ -13,7 +13,7 @@
               <span>생산 계획 ![다미]</span>
               </a>
             <ul class="sub">
-              <li><a th:href="@{/production/addProductionPlan}">생산계획 등록 ![다미]</a></li>
+              <li><a th:if="${session.SLEVEL == '3' or session.SLEVEL == '1'}" th:href="@{/production/addProductionPlan}">생산계획 등록 ![다미]</a></li>
               <li><a th:href="@{/production/productionPlanList}">생산계획 조회/목록 ![다미]</a></li>
               <li><a th:href="@{/production/productionWeeklyPlanList}">주간별 생산계획 조회 ![다미]</a></li>
               <li><a th:href="@{/production/productionMonthlyPlanList}">월별 생산계획 조회 ![다미]</a></li>
@@ -24,11 +24,11 @@
           <li class="sub-menu">
             <a href="javascript:;">
               <i class="fa fa-book"></i>
-              <span>작업 지시 ![보람]</span>
+              <span>작업 지시 ![보람+민아]</span>
               </a>
             <ul class="sub">
-              <li><a th:href="@{/production/addWorkOrder}">작업지시 등록 ![보람]</a></li>
-              <li><a th:href="@{/production/workOrderList}">작업지시 조회/목록 ![보람]</a></li>
+              <li><a th:if="${session.SLEVEL eq '3' or session.SLEVEL eq '1'}" th:href="@{/production/addWorkOrder}">작업지시 등록 ![보람+민아]</a></li>
+              <li><a th:href="@{/production/workOrderList}">작업지시 조회/목록 ![민아]</a></li>
             </ul>
           </li>
           

@@ -13,25 +13,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import ksmart39.springboot.dao.QualityInsepctionFinalResultMapper;
-import ksmart39.springboot.dao.QualityInsepctionStauteMapper;
+import ksmart39.springboot.dao.QualityInspectionFinalResultMapper;
+import ksmart39.springboot.dao.QualityInspectionStatusMapper;
 
 @Service
-public class QualityInsepctionStauteService {
-	private static final Logger log = LoggerFactory.getLogger(QualityInsepctionStauteService.class);
+public class QualityInspectionStauteService {
+	private static final Logger log = LoggerFactory.getLogger(QualityInspectionStauteService.class);
 	
 	@Autowired
-	private QualityInsepctionStauteMapper qualityInsepctionStauteMapper;
+	private QualityInspectionStatusMapper qualityInsepctionStauteMapper;
+	
+	
+	//[보람] 수주계약별 검사 조회
+		public List<Map<String,Object>> getSearchQualityInspectionState(HashMap map){
+			//HashMAp map 에다가 RequestParam값을 담았기 때문에 인자값으로 넣어준다.	
+		return qualityInsepctionStauteMapper.getSearchQualityInspectionState(map);
+		}
 	
 	//[다미&보람]수주계약별 검사현황 리스트
 	public List<Map<String, Object>> getStateBuyerContractQualityInspection() {
 		
 		
-		
 		return qualityInsepctionStauteMapper.getStateBuyerContractQualityInspection();
 	}
 	
+}	
 	
 	
-	
-}

@@ -173,7 +173,7 @@
 								
 								//카테고리에 따른 측정값 폼 변경
 								if(data == '합격/불합격'){
-									cate = '<input type="checkbox" name="inspectionPassCheck" value="합격">합 <input type="checkbox" name="inspectionPassCheck" value="불합격">불';
+									cate = '<input type="checkbox" name="inspectionPassCheck" value="합격">합<input type="checkbox" name="inspectionPassCheck" value="불합격">불';
 									rawMaterialName = '해당없음';
 									rawMaterialCode = '해당없음';
 									
@@ -274,31 +274,9 @@
 		
 		//다중 등록		
 		$(document).on('click', '#addInsValue', function(){
-			var insValueNum = $('input[name="inspectionMeasurementValue"]');
-			var insReqCode = $('input[name="qualityInspectionRequestCode"]');
-			var insValueCheck = $('input[name="inspectionPassCheck"]');
-			var insStart = $('input[name="inspectionStartDate"]');
-			var insEnd = $('input[name="inspectionEndDate"]');
+
+			var validationCheck = false;			
 			
-			var validationCheck = false;
-			
-			if(insReqCode.val() == null || insReqCode.val() == undefined || insReqCode.val() == '' ){
-				insReqCode.focus();
-				alert('품질검사 요청 코드를 입력해주세요');
-			}else if(insValueNum.val() == null || insValueNum.val() == undefined || insValueNum.val() == '' ){
-				insValueNum.focus();
-				alert('측정값을 입력해주세요');
-			}else if(insValueCheck.val() == null || insValueCheck.val() == undefined || insValueCheck.val() == '' ){
-				insStart.focus();
-				alert('측정값을 입력해주세요');
-			}else if(insStart.val() == null || insStart.val() == undefined || insStart.val() == '' ){
-				insStart.focus();
-				alert('시작시간을 입력해주세요');
-			}else if(insEnd.val() == null || insEnd.val() == undefined || insEnd.val() == '' ){
-				insEnd.focus();
-				alert('종료시간을 입력해주세요');
-			}else{
-				
 				var addIns = $('#tbody tr');
 				var insArray = [];
 				
@@ -309,10 +287,15 @@
 					$.each(bindElement, function(){
 						var insKey = $(this).attr('name');
 						var insValue = $(this).val();
-						console.log("key: ", insKey);
-						console.log("value: ", insValue);
 						
-						if(insKey != null || insKey != undefined || insKey != ''){
+						if(insValue == undefined || insValue == '' || insValue == null){
+							alert('값을 입력하여주세요.');
+							$(this).focus();
+							validationCheck = false;
+							return false;
+						}
+						
+						if(insKey != null && insKey != undefined && insKey != '' && insValue != '해당없음'){
 							insInfo[insKey] = insValue;
 							validationCheck = true;
 						}	
@@ -320,8 +303,7 @@
 					});
 					insArray.push(insInfo);
 				};
-				
-			}			
+		
 			console.log(JSON.stringify(insArray));
 			if(validationCheck) addInsValueAjax(insArray);
 			
@@ -392,7 +374,7 @@
 					//측정종료시간
 					innerHtml += '<td><input type="text" name="inspectionEndDate" class="form-control" placeholder="yyyy-MM-dd hh:mm:ss""></td>';
 					//등록버튼
-					innerHtml += '<td><button type="button" id="addInsValue">등록</button></td>';
+					innerHtml += '<td><button type="button" id="addInsValueSBtn">등록</button></td>';
 					
 					if(i == (count - 1)){
 						innerHtml += '<td><button type="button" class="removeButton">삭제</button></td>';

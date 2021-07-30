@@ -1,4 +1,201 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ksmart39.springboot.dao.ShipmentMapper">
+<!--  -->
+
+<!-- 출하지시 조회 -->
+<select id="getsearchShipmentOrder" parameterType="hashmap" resultType="map">
+	SELECT
+		s.shipment_order_code AS shipmentOrderCode,
+		c.client_name AS clientName,
+		p.gender_categorized_name AS productName,
+		s.shipment_order_date AS shipmentOrderDate,
+DATE_FORMAT(s.shipment_order_reg_date,'%Y-%m-%d %T') AS shipmentRegDate
+	FROM
+		shipment_order AS s
+	INNER JOIN 
+		requested_product_detail AS r
+	ON s.requested_product_code = r.requested_product_code
+	INNER JOIN
+		client_info AS c
+	ON r.client_code =c.client_code
+	INNER JOIN
+		product_code_detail AS p
+	ON r.product_code =p.product_code
+	<trim prefix="WHERE" prefixOverrides="AND">	
+	<if test="shipmentOrderCode != null and shipmentOrderCode != ''.toString()">	
+	AND	s.shipment_order_code LIKE CONCAT ('%', #{shipmentOrderCode},'%')
+	</if>
+	<if test="clientName != null and clientName != ''.toString()">	
+	AND c.client_name LIKE CONCAT ('%', #{clientName},'%')
+	</if>
+	<if test="productName != null and productName != ''.toString()">	
+	AND	p.gender_categorized_name  LIKE CONCAT ('%',#{productName},'%')
+	</if>
+	<if test="shipmentOrderDate != null and shipmentOrderDate != ''.toString()">	
+	AND s.shipment_order_date &lt; = DATE#{shipmentOrderDate}
+	</if>
+	</trim>
+
+</select>
+<!--출하지시목록  -->
+<select id="getShipmentOrderList" resultType="map">
+	SELECT
+		s.shipment_order_code AS shipmentOrderCode,
+		c.client_name AS clientName,
+		p.gender_categorized_name AS productName,
+		s.shipment_order_date AS shipmentOrderDate,
+		s.shipment_order_reg_date AS shipmentRegDate
+	FROM
+		shipment_order AS s
+	INNER JOIN 
+		requested_product_detail AS r
+	ON s.requested_product_code = r.requested_product_code
+	INNER JOIN
+		client_info AS c
+	ON r.client_code =c.client_code
+	INNER JOIN
+		product_code_detail AS p
+	ON r.product_code =p.product_code
+	</select>
+<!-- -->
+<!-- 송장목록  -->
+<select id="getShipmentInvoiceList" resultType="map">
+	SELECT
+		si.shipment_invoice_code AS invoiceCode,
+		si.shipment_order_group_code AS shipmentOrderGroup,
+		c.client_name AS clientName,
+		re.product_request_code AS requestCode,
+		si.courier_company_name AS invoiceClientName,
+		re.requested_delivery_address AS reqeustAddress,
+		DATE_FORMAT(si.shipment_invoice_reg_date,'%Y-%m-%d %T') AS invoiceRegDate
+	FROM
+		shipment_invoice AS si
+	INNER JOIN
+		shipment_order AS sh
+	ON si.shipment_order_group_code = sh.shipment_order_group_code
+	inner JOIN
+		requested_product_detail AS re
+	ON sh.requested_product_code= re.requested_product_code
+	INNER JOIN
+		client_info AS c
+	ON si.client_code =c.client_code 
+	GROUP by si.shipment_invoice_code;
+
+</select>
+<!-- 송장목록 송장번호조회  -->
+
+<select id="searchInvoiceCode" resultType="map">
+	SELECT
+			si.shipment_invoice_code AS invoiceCode,
+			si.shipment_order_group_code AS shipmentOrderGroup,
+			c.client_name AS clientName,
+			re.product_request_code AS requestCode,
+			si.courier_company_name AS invoiceClientName,
+			re.requested_delivery_address AS reqeustAddress,
+			DATE_FORMAT(si.shipment_invoice_reg_date,'%Y-%m-%d %T') AS invoiceRegDate
+		FROM
+			shipment_invoice AS si
+		INNER JOIN
+			shipment_order AS sh
+		ON si.shipment_order_group_code = sh.shipment_order_group_code
+		inner JOIN
+			requested_product_detail AS re
+		ON sh.requested_product_code= re.requested_product_code
+		INNER JOIN
+			client_info AS c
+		ON si.client_code =c.client_code 
+		WHERE
+			 si.shipment_invoice_code =#{shipmentInvoiceCode}
+		GROUP by si.shipment_invoice_code;
+</select>
+
+<!--송장 거래처조회 -->
+<select id="searchClientCate" resultType="map">
+    SELECT
+			si.shipment_invoice_code AS invoiceCode,
+			si.shipment_order_group_code AS shipmentOrderGroup,
+			c.client_name AS clientName,
+			re.product_request_code AS requestCode,
+			si.courier_company_name AS invoiceClientName,
+			re.requested_delivery_address AS reqeustAddress,
+			DATE_FORMAT(si.shipment_invoice_reg_date,'%Y-%m-%d %T') AS invoiceRegDate
+		FROM
+			shipment_invoice AS si
+		INNER JOIN
+			shipment_order AS sh
+		ON si.shipment_order_group_code = sh.shipment_order_group_code
+		inner JOIN
+			requested_product_detail AS re
+		ON sh.requested_product_code= re.requested_product_code
+		INNER JOIN
+			client_info AS c
+		ON si.client_code =c.client_code 
+	<trim prefix="WHERE" prefixOverrides="AND">	
+	<if test="client != null and client != ''.toString()">	
+			 	c.client_name LIKE CONCAT('%',#{client},'%')
+	 	</if>
+	 	</trim>
+		GROUP by si.shipment_invoice_code;
+</select>
+
+<!--송장택배사 조회 -->
+<select id="searchInvoiceClient" resultType="map">
+	SELECT
+			si.shipment_invoice_code AS invoiceCode,
+			si.shipment_order_group_code AS shipmentOrderGroup,
+			c.client_name AS clientName,
+			re.product_request_code AS requestCode,
+			si.courier_company_name AS invoiceClientName,
+			re.requested_delivery_address AS reqeustAddress,
+			DATE_FORMAT(si.shipment_invoice_reg_date,'%Y-%m-%d %T') AS invoiceRegDate
+		FROM
+			shipment_invoice AS si
+		INNER JOIN
+			shipment_order AS sh
+		ON si.shipment_order_group_code = sh.shipment_order_group_code
+		inner JOIN
+			requested_product_detail AS re
+		ON sh.requested_product_code= re.requested_product_code
+		INNER JOIN
+			client_info AS c
+		ON si.client_code =c.client_code 	
+	<trim prefix="WHERE">	
+		<if test="invoiceClient != null and invoiceClient != ''.toString()">	
+		 	si.courier_company_name LIKE CONCAT ('%',#{invoiceClient},'%')
+		 	</if>
+		</trim>
+		GROUP by si.shipment_invoice_code;
+		
+</select>
+<!-- 송장등록일 조회  -->
+<select id="searchInvoiceRegDate" resultType="map">
+
+	SELECT
+			si.shipment_invoice_code AS invoiceCode,
+			si.shipment_order_group_code AS shipmentOrderGroup,
+			c.client_name AS clientName,
+			re.product_request_code AS requestCode,
+			si.courier_company_name AS invoiceClientName,
+			re.requested_delivery_address AS reqeustAddress,
+			DATE_FORMAT(si.shipment_invoice_reg_date,'%Y-%m-%d %T') AS invoiceRegDate
+		FROM
+			shipment_invoice AS si
+		INNER JOIN
+			shipment_order AS sh
+		ON si.shipment_order_group_code = sh.shipment_order_group_code
+		inner JOIN
+			requested_product_detail AS re
+		ON sh.requested_product_code= re.requested_product_code
+		INNER JOIN
+			client_info AS c
+		ON si.client_code =c.client_code 
+		<trim prefix="WHERE">	
+		<if test="invoiceRegDate != null and invoiceRegDate != ''.toString()">
+		 		si.shipment_invoice_reg_date LIKE CONCAT ('%',#{invoiceRegDate},'%')
+	 		</if>
+	 		</trim>	 		
+		GROUP by si.shipment_invoice_code;
+		
+		</select>
 </mapper>

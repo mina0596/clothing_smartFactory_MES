@@ -15,29 +15,29 @@
             <ul class="sub">
 
               <li><i class="fa fa-book"></i>수주관리 ![한빛]</li>
-              <li><a th:href="@{/addBuyerOrder}">주문서 등록 ![한빛]</a></li>
-              <li><a th:href="@{/addBuyerOrder_Minah}">주문서 등록 ![민아버전]</a></li>
-              <li><a th:href="@{/buyerOrderList}">주문서 조회/목록 ![한빛]</a></li>
-              <li><a th:href="@{/addBuyerContract}">계약 등록 ![한빛]</a></li>
-              <li><a th:href="@{/buyerContractList}">계약 조회/목록 ![한빛]</a></li>
+              <li><a th:href="@{/contract/addBuyerOrder}">주문서 등록 ![한빛]</a></li>
+              <li><a th:href="@{/contract/addBuyerOrder_Minah}">주문서 등록 ![민아버전]</a></li>
+              <li><a th:href="@{/contract/buyerOrderList}">주문서 조회/목록 ![한빛]</a></li>
+              <li><a th:href="@{/contract/addBuyerContract}">계약 등록 ![한빛]</a></li>
+              <li><a th:href="@{/contract/buyerContractList}">계약 조회/목록 ![한빛]</a></li>
               <li>-----------------------</li>
              
              
               <li><i class="fa fa-book"></i>발주관리 ![보람]</li>
-              <li><a th:href="@{/addSupplierRequest}">발주등록 ![보람]</a></li>
-              <li><a th:href="@{/supplierRequestList}">발주 조회/목록 ![보람]</a></li>
-              <li><a th:href="@{/addSupplierContract}">발주계약등록 ![보람]</a></li>
-              <li><a th:href="@{/supplierContractList}">발주계약조회/목록 ![보람]</a></li>        
+              <li><a th:href="@{/contract/addSupplierRequest}">발주등록 ![보람]</a></li>
+              <li><a th:href="@{/contract/supplierRequestList}">발주 조회/목록 ![보람]</a></li>
+              <li><a th:href="@{/contract/addSupplierContract}">발주계약등록 ![보람]</a></li>
+              <li><a th:href="@{/contract/supplierContractList}">발주계약조회/목록 ![보람]</a></li>        
               <li>-----------------------</li>
        	   
-       	   
+       	   <!-- 
 			  <li> <i class="fa fa-book"></i>회계관리</li>
 			  <li><a th:href="@{/addInvoiceClaim}">수금/출금 청구 등록 ![민아]</a></li>
 			  <li><a th:href="@{/invoiceClaimList}">수금/출금 청구 목록 ![민아]</a></li>
 			  <li><a th:href="@{/addInvoiceApproval}">결제 요청 등록 ![민아]</a></li>
 			  <li><a th:href="@{/invoiceApprovalList}">결제 현황 조회 ![민아]</a></li>
               <li><a th:href="@{/addPaymentInvoice}">전표 등록 ![다미]</a></li>
-              <li><a th:href="@{/paymentInvoiceList}">전표 현황 조회 #[다미]</a></li>
+              <li><a th:href="@{/paymentInvoiceList}">전표 현황 조회 #[다미]</a></li> -->
 			
             </ul> 
 		   </li>
@@ -49,20 +49,18 @@
               </a>
             <ul class="sub">
             <li><i class="fa fa-sign-in"></i>자재입고![다미]</li>
-              <li><a th:href="@{/addInWarehousing}">입고등록 ![다미]</a></li>
-              <li><a th:href="@{/inWarehousingList}">입고현황 ![다미]</a></li>
+              <li><a th:href="@{/rawMaterials/addInWarehousing}">입고등록 ![다미]</a></li>
+              <li><a th:href="@{/rawMaterials/inWarehousingList}">입고현황 ![다미]</a></li>
               <li>-----------------------</li>
             
              <li><i class="fa fa-sign-out">자재출고  ![한빛]</i></li>
-             <li><a th:href="@{/addMaterialsUse}">의뢰별 소요자재 등록  #[한빛]</a></li>
-              <li><a th:href="@{/materialsUseList}">의뢰별 소요자재 조회  #[한빛]</a></li>
-              <li><a th:href="@{/addExWarehousing}">출고등록  #[한빛]</a></li>
-              <li><a th:href="@{/exWarehousingList}">출고현황  #[한빛]</a></li>
+              <li><a th:href="@{/rawMaterials/addExWarehousing}">출고등록  ![한빛]</a></li>
+              <li><a th:href="@{/rawMaterials/exWarehousingList}">출고현황  ![한빛]</a></li>
               <li>-----------------------</li>
             
              <li> <i class="fa fa-th"></i>자재현황 ![민아]</li>
-             <li><a th:href="@{/inventoryStatus}">원부자재 현재고 현황 ![민아]</a></li>
-		     <li><a th:href="@{/warehousingList}">입/출고 종합 조회 ![민아]</a></li>
+             <li><a th:href="@{/rawMaterials/inventoryStatus}">원부자재 현재고 현황 ![민아]</a></li>
+		     <li><a th:href="@{/rawMaterials/warehousingList}">입/출고 종합 조회 ![민아]</a></li>
             </ul>
           </li>
           
@@ -73,29 +71,32 @@
               </a>
             <ul class="sub">
               <li> <i class="fa fa-book"></i>생산 계획![다미]</li>
-              <li><a th:href="@{/addProductionPlan}">생산계획 등록 ![다미]</a></li>
-              <li><a th:href="@{/productionPlanList}">생산계획 조회/목록 ![다미]</a></li>
-              <li><a th:href="@{/productionWeeklyPlanList}">주간별 생산계획 조회 ![다미]</a></li>
-              <li><a th:href="@{/productionMonthlyPlanList}">월별 생산계획 조회 ![다미]</a></li>
+              <li><a th:href="@{/production/addProductionPlan}">생산계획 등록 ![다미]</a></li>
+              <li><a th:href="@{/production/productionPlanList}">생산계획 조회/목록 ![다미]</a></li>
+              <li><a th:href="@{/production/productionWeeklyPlanList}">주간별 생산계획 조회 ![다미]</a></li>
+              <li><a th:href="@{/production/productionMonthlyPlanList}">월별 생산계획 조회 ![다미]</a></li>
               <li>-----------------------</li>
             
-             <li><i class="fa fa-book"></i>작업 지시 ![보람]</li>
-              <li><a th:href="@{/addWorkOrder}">작업지시 등록 ![보람]</a></li>
-              <li><a th:href="@{/workOrderList}">작업지시 조회/목록 ![보람]</a></li>
+             <li><i class="fa fa-book"></i>작업 지시 ![민아]</li>
+              <li><a th:href="@{/production/addWorkOrder}">작업지시 등록 ![민아]</a></li>
+              <li><a th:href="@{/production/workOrderList}">작업지시 조회/목록 ![민아]</a></li>
               <li>-----------------------</li>
              
+             <li><i class="fa fa-dashboard"></i>생산지시 ![민아]</li>
+              <li><a th:href="@{/production/productionOrderList}">생산 대기중 의뢰품목 목록 ![민아]</a></li>
+              <li><a th:href="@{/production/orderProductionProcess}">의뢰품목 생산 지시 ![민아]</a></li>      
+              <li>-----------------------</li>
+              
              <li><i class="fa fa-dashboard"></i>생산현황 ![민아+한빛]</li>
-            <li><a th:href="@{/productProgressList}">의뢰품목별 생산공정현황 ![민아+한빛]</a></li>
-              <li><a th:href="@{/stateByWorkOrder}">작업지시별 생산현황 ![민아+한빛]</a></li>
-              <li><a th:href="@{/stateByProductionPlan}">생산계획별 생산현황 ![민아+한빛]</a></li>
-              <li><a th:href="@{/stateByProduct}">의뢰품목별 생산현황 ![민아+한빛]</a></li>
-              <li><a th:href="@{/detailedStateByProduct}">의뢰품목별 상세 생산공정현황 ![민아+한빛]</a></li>
-              <li><a th:href="@{/test}">생산현황</a></li>
+            
+              <li><a th:href="@{/production/stateByWorkOrder}">작업지시별 생산현황 ![한빛]</a></li>
+              <li><a th:href="@{/production/stateByProductionPlan}">생산계획별 생산현황 ![민아]</a></li>
+              <li><a th:href="@{/production/stateByProduct}">품목별 생산현황 ![한빛]</a></li>
+              <li><a th:href="@{/production/test}">생산현황</a></li>
               <li>-----------------------</li>
             
             <li><i class="fa fa-book"></i>완제품관리 ![민아]</li>
-            <li><a th:href="@{/addCompletedProduct}">완제품 등록 ![민아]</a></li>
-              <li><a th:href="@{/completedProductList}">완제품 조회/목록 ![민아]</a></li>   
+              <li><a th:href="@{/production/completedProductList}">완제품 조회/목록 ![민아]</a></li>   
             </ul>
 		</li>
 		
@@ -107,38 +108,31 @@
               </a>
             <ul class="sub">
               <li> <i class="fa fa-book"></i>기준표 ![민아]</li>
-              <li><a th:href="@{/addStandardTable}">기준표 등록 ![민아]</a></li>
-              <li><a th:href="@{/standardTableList}">기준표 조회/목록 ![민아]</a></li>
+              <li><a th:href="@{/quality/addStandardTable}">기준표 등록 ![민아]</a></li>
+              <li><a th:href="@{/quality/standardTableList}">기준표 조회/목록 ![민아]</a></li>
               <li>-----------------------</li>
           		
           		<li><i class="fa fa-book"></i>검사요청 ![다미]</li>
-          		<li><a th:href="@{/qualityInspectionRequest}">품질 검사 요청 ![다미]</a></li>
-              <li><a th:href="@{/qualityInspectionRequestList}">요청목록 ![다미]</a></li>
+          		<li><a th:href="@{/quality/qualityInspectionRequest}">품질 검사 요청 ![다미]</a></li>
+              <li><a th:href="@{/quality/qualityInspectionRequestList}">요청목록 ![다미]</a></li>
               <li>-----------------------</li>
            
            <li> <i class="fa fa-book"></i>검사측정값 ![다미&보람]</li>
-          <li><a th:href="@{/addInspectionMeasurementValue}">검사 측정값 등록 ![다미&보람]</a></li>
-              <li><a th:href="@{/inspectionMeasurementValueList}">검사 측정값 목록 ![다미&보람]</a></li>
-              <li><a th:href="@{/addFinalnspectionMeasurementValue}">최종검사결과등록 ![다미&보람]</a></li>
-              <li><a th:href="@{/qualityInspectionReport}">성적서 조회/목록 ![다미&보람]</a></li>
+          <li><a th:href="@{/quality/addInspectionMeasurementValue}">검사 측정값 등록 ![다미&보람]</a></li>
+              <li><a th:href="@{/quality/inspectionMeasurementValueList}">검사 측정값 목록 ![다미&보람]</a></li>
+              <li><a th:href="@{/quality/qualityInspectionReport}">성적서 조회/목록 ![다미&보람]</a></li>
               <li>-----------------------</li>
          
          <li><i class="fa fa-book"></i>검사현황 ![다미&보람]</li>
-           <li><a th:href="@{/qualityInspectionStatusNow}">실시간 검사현황 ![다미&보람]</a></li>
-             <li><a th:href="@{/qualityInspectionStatusContract}">계약별 검사현황 ![다미&보람]</a></li>
-             <li><a th:href="@{/addDefectInspectionResultStatus}">불량현황 ![다미&보람]</a></li>
-            <li><a th:href="@{/stateBuyerContractQualityInspection}">수주계약별검사현황 ![다미&보람]</a></li>
-              <li><a th:href="@{/addDefectInspectionResultStatus}">불량현황 ![다미&보람]</a></li>
-              <li><a th:href="@{/inspectionPerformance}">실적 ![다미&보람]</a></li>
-			<li><a th:href="@{/searchByPeriodContractQualityInspection}">수주계약검사현황기간별조회 #[다미&보람]</a></li>
-			<li><a th:href="@{/stateByProductQualityInspection}">의뢰품목별검사현황 #[다미&보람]</a></li>
-			<li><a th:href="@{/searchByPeriodByProductQualityInspection}">의뢰품목별검사현황기간별조회 #[다미&보람]</a></li>
+           <li><a th:href="@{/quality/qualityInspectionStatusNow}">실시간 검사현황 ![다미]</a></li>
+             <li><a th:href="@{/quality/qualityInspectionStatusContract}">계약별 검사현황 ![보람]</a></li>
+             <li><a th:href="@{/quality/defectiveRateStatus}">불량현황 ![민아]</a></li>
               <li>-----------------------</li>
             
             
             <li><i class="fa fa-book"></i>불량품 ![한빛]</li>
-            <li><a th:href="@{/addDefectiveProduct}"> 불량품 등록 ![한빛]</a></li>
-              <li><a th:href="@{/defectiveProductList}">불량품 조회/목록 ![한빛]</a></li>     
+            <li><a th:href="@{/quality/addDefectiveProduct}"> 불량품 등록 ![한빛]</a></li>
+              <li><a th:href="@{/quality/defectiveProductList}">불량품 조회/목록 ![한빛]</a></li>     
             </ul>
           </li>
           
@@ -149,56 +143,53 @@
               </a>
             <ul class="sub">
               <li><i class="fa fa-tasks"></i>출하지시 ![보람]</li>
-              <li><a th:href="@{/addShipmentOrder}">출하지시 등록 ![보람]</a></li>
-              <li><a th:href="@{/shipmentOrderList}">출하지시 조회/목록 ![보람]</a></li>
+              <li><a th:href="@{/shipment/addShipmentOrder}">출하지시 등록 ![보람]</a></li>
+              <li><a th:href="@{/shipment/shipmentOrderList}">출하지시 조회/목록 ![보람]</a></li>
               <li>-----------------------</li>
           	
           	 <li>  <i class="fa fa-book"></i>송장관리 ![보람]</li>
-          	 <li><a th:href="@{/addShipmentInvoice}">송장 등록 ![보람] </a></li>
-              <li><a th:href="@{/shipmentInvoiceList}">송장 조회/목록 ![보람]</a></li>
+          	 <li><a th:href="@{/shipment/addShipmentInvoice}">송장 등록 ![보람] </a></li>
+              <li><a th:href="@{/shipment/shipmentInvoiceList}">송장 조회/목록 ![보람]</a></li>
               <li>-----------------------</li>
               
                 <li> <i class="fa fa-truck"></i>출고관리 ![민아]</li>
-                <li><a th:href="@{/courierList}">운송정보 ![민아]</a></li>
-              <li><a th:href="@{/addShipment}">출고 등록 ![민아]</a></li>
-              <li><a th:href="@{/shipmentList}">출고 조회 ![민아]</a></li>    
+              <li><a th:href="@{/shipment/addShipment}">출고 등록 ![민아]</a></li>
+              <li><a th:href="@{/shipment/shipmentList}">출고 조회 ![민아]</a></li>    
             </ul>
           </li>
           
           <li class="sub-menu">
             <a href="javascript:;">
               <i class="fa fa-cogs"></i>
-              <span>6. 시스템관리</span>
+              <span>6. 기초정보관리</span>
               </a>
             <ul class="sub">
               <li><i class="fa fa-cogs"></i>사용자관리 ![한빛]</li>
-              <li><a th:href="@{/addHumanResources}">사용자등록 ![한빛]</a></li>
+              <li><a th:href="@{/system/addHumanResources}">사용자등록 ![한빛]</a></li>
               <li><a th:href="@{/humanResourcesList}">사용자조회 ![한빛]</a></li>
               <li>-----------------------</li>
             
             <li><i class="fa fa-cogs"></i>거래처관리 ![한빛]</li>
-            <li><a th:href="@{/addClient}">거래처등록 ![한빛]</a></li>
-              <li><a th:href="@{/clientList}">거래처조회 ![한빛]</a></li>
-              <li>-----------------------</li>
-            
-            <li><i class="fa fa-cogs"></i>회계기초관리 ![다미]</li>
-            <li><a th:href="@{/addAccountSubject}">계정과목등록 ![다미]</a></li>
-              <li><a th:href="@{/accountSubjectList}">계정과목조회 ![다미]</a></li>
+            <li><a th:href="@{/system/addClient}">거래처등록 ![한빛]</a></li>
+              <li><a th:href="@{/system/clientList}">거래처조회 ![한빛]</a></li>
               <li>-----------------------</li>
             
              <li> <i class="fa fa-cogs"></i>자재기초관리 ![민아]</li>
-             <li><a th:href="@{/addRawMaterials}">원부자재 등록 ![민아]</a></li>
-              <li><a th:href="@{/rawMaterialsList}">원부자재 조회 ![민아]</a></li>      
+             <li><a th:href="@{/system/addRawMaterials}">원부자재 등록 ![민아]</a></li>
+              <li><a th:href="@{/system/rawMaterialsList}">원부자재 조회 ![민아]</a></li>      
+              <li>-----------------------</li>
+              
+             <li> <i class="fa fa-cogs"></i>생산공정관리 ![민아]</li>
+             <li><a th:href="@{/system/addProductionProcess}">생산공정 등록 ![민아]</a></li>
+              <li><a th:href="@{/system/productionProcessList}">생산공정 조회 ![민아]</a></li>      
               <li>-----------------------</li>
        
 	         <li><i class="fa fa-cogs"></i>품질기초관리 ![보람]</li>
-	         <li><a th:href="@{/addQualityInspection}">검사종류 등록 ![보람]</a></li>
-              <li><a th:href="@{/qualityInspectionList}">검사종류 목록/조회 ![보람]</a></li>
+	         <li><a th:href="@{/system/addQualityInspection}">검사종류 등록 ![보람]</a></li>
+              <li><a th:href="@{/system/qualityInspectionList}">검사종류 목록/조회 ![보람]</a></li>
             
             </ul>
           </li>
-          
-          
           
         <!-- sidebar menu end-->
       </div>
