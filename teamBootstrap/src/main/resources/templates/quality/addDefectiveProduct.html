@@ -11,81 +11,172 @@ layout:decorate="@{layout/default_qualityControl}">
 
 
 <th:block layout:fragment="container">
-
 	<div class="form-panel">
-	 <h4 class="mb"><i class="fa fa-angle-right"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 불량품등록</font></font></h4>
-              <div class="form">
-                <form class="cmxform form-horizontal style-form" id="signupForm" method="post" th:action="@{/quality/addDefectiveProduct}">
-         
-        
-                  <div class="form-group ">
-                    <label for="password" class="control-label col-lg-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">품질검사요청코드</font></font></label>
-                    <div class="col-lg-6">
-                      <input class="form-control " id="qualityInspectionRequestCode" name="qualityInspectionRequestCode" type="text">
-                    </div>
-                  </div>
-                  
-                  <div class="form-group ">
-                    <label for="password" class="control-label col-lg-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">담당자코드</font></font></label>
-                    <div class="col-lg-6">
-                      <input class="form-control " id="chargeEmployeeCode" name="chargeEmployeeCode" type="text">
-                    </div>
-                  </div>
-                  
-                  <div class="form-group ">
-                    <label for="password" class="control-label col-lg-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">품질검사코드</font></font></label>
-                    <div class="col-lg-6">
-                      <input class="form-control " id="qualityInspectionCode" name="qualityInspectionCode" type="text">
-                    </div>
-                  </div>
-                  
-                    <div class="form-group ">
-                    <label for="confirm_password" class="control-label col-lg-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">품질검사결과코드</font></font></label>
-                    <div class="col-lg-6">
-                      <input class="form-control " id="inspectionResultCode" name="inspectionResultCode" type="text">
-                    </div>
-                  </div>
-                 
-                    <div class="form-group ">
-                    <label for="confirm_password" class="control-label col-lg-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">담당자 사원명</font></font></label>
-                    <div class="col-lg-6">
-                      <input class="form-control " id="defectCause" name="defectCause" type="text">
-                    </div>
-                  </div>
-                 
-                 
-                 
-                  <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">처리방법</label>
-                  <div class="col-sm-6">
-                      <select class="form-control" name ="defectiveProductMeasure">
-						<option>::선택::</option>
-						<option value = "폐기">폐기</option>
-						<option value = "품목대체">품목대체</option>
-						<option value = "정상사용">정상사용</option>
-						<option value = "기타">기타</option>
-		               </select>
-                  </div>
-                </div>
-                
-                  <div class="form-group ">
-                    <label for="email" class="control-label col-lg-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">비고</font></font></label>
-                    <div class="col-lg-6">
-                      <input class="form-control " id="managementNote" name="managementNote" type="text">
-                    </div>
-                  </div>
-                
- 		         <div class="form-group text-right">
-		         <div class="col-lg-offset-2 col-lg-10">
-		           <button id="addBtn" class="btn btn-theme" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">등록</font></font></button>
-		           <button class="btn btn-theme04" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소</font></font></button>
+		<h4 class="mb"><i class="fa fa-edit"></i>불량품등록</h4>
+		<form th:action="@{/quality/addDefectiveProduct}" class="form-horizontal style-form" method="post">
+			<div class="form-group">
+				<label class="col-sm-2 col-sm-2 control-label">품질검사결과코드</label>
+		        <div class="col-md-6">
+		           <div  class="input-group ">
+		             <input type="text" id="inspection_result_code" class="form-control"  size="16" name="inspectionResultCode">
+		             <div class="input-group-btn">
+		               <button type="button" id="search" class=" btn btn-theme03 btn btn-default"  th:href="@{/quality/getFinalResult}"><i class="fa"></i>검색하여 가져오기</button>
+		             </div>
+		           </div>
 		         </div>
-		       </div>
-		     </form>
-		   </div>
+		     </div>
+		        
+	        <div class="form-group">
+               <label class="col-sm-2 col-sm-2 control-label">품질검사요청코드</label>
+               <div class="col-sm-6">
+                  <input type="text" id="quality_inspection_request_code" name="qualityInspectionRequestCode" class="form-control" readonly="readonly" >
+               </div>
+            </div>
+            
+	        <div class="form-group">
+               <label class="col-sm-2 col-sm-2 control-label">품질검사코드</label>
+               <div class="col-sm-6">
+                  <input type="text" id="quality_inspection_code" name="qualityInspectionCode" class="form-control" readonly="readonly" >
+               </div>
+            </div>
+
+	        <div class="form-group">
+               <label class="col-sm-2 col-sm-2 control-label">담당자코드</label>
+               <div class="col-sm-6">
+                  <input type="text" th:value ="${employeeCode}" id="raw_material_admin" class="form-control" name="chargeEmployeeCode" readonly="readonly">
+               </div>
+            </div>
+            
+	        <div class="form-group">
+               <label class="col-sm-2 col-sm-2 control-label">불량원인</label>
+               <div class="col-sm-6"><!-- 값 들어오고 disabled 풀어주기 -->
+                  <input type="text" name="defectCause" class="form-control" >
+               </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-2 col-sm-2 control-label">처리방법</label>
+              <div class="col-sm-6">
+                <select class="form-control" name ="defectiveProductMeasure">
+					<option>::선택::</option>
+					<option value = "폐기">폐기</option>
+					<option value = "품목대체">품목대체</option>
+					<option value = "정상사용">정상사용</option>
+					<option value = "기타">기타</option>
+             	</select>
+              </div>
+            </div>   
+                         
+	        <div class="form-group">
+               <label class="col-sm-2 col-sm-2 control-label">비고</label>
+               <div class="col-sm-6">
+                  <input type="text" name="managementNote" class="form-control" >
+               </div>
+            </div>
+
+	        <div class="form-group text-right">
+	          <div class="col-lg-offset-2 col-lg-10">
+	            <button class="btn btn-theme" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">등록</font></font></button>
+	            <a href="javascript:history.back()" class="btn btn-theme04" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소</font></font></a>
+	          </div>
+	        </div>
+		</form>            
+	</div>
+
+
+			<!-- ========================================= -->
+ 			<!--- 검색창 모달 시작 ---->
+     	<div class="modal fade modal-xl"  id="byFinalResultModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" style="width:auto;display:table" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h4 class="modal-title" id="exampleModalLabel">품질검사결과 목록 검색</h4>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      
+		      <!-- 모달본문 -->
+				<div class="modal-body">
+				  <table  class="table table-striped table-advance table-hover">
+		         	<tbody>       		
+		       			<thead>
+		        			<tr>
+			         			<th><i class="fa fa-check"></i></th>
+			         			<th>품질검사결과코드</th>
+			         			<th>품질검사요청코드</th>
+			         			<th>품질검사코드</th>
+			         			<th>상태</th>
+		        			</tr>     			
+		       			</thead>
+		       			<tbody style="text-align: center;" id="finalResultData">
+		       			</tbody>        		
+		         	</tbody>
+		         </table> 
+			  </div>
+	  
+		    <div class="modal-footer">
+			      <button type="button" id="saveFinalResult" class="btn btn-primary" data-dismiss="modal">검색</button>
+			      <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+		      </div>
+		    </div>
+		  </div>
 		</div>
-
-
-</th:block>
+     
+      <script type="text/javascript">
+				$('#search').click(function(){
+					$('#byFinalResultModal').modal("show");
+					
+					var fail = '불합격';
+					$.ajax({
+						url: "getFinalResult",
+						method : 'get',
+						async: true,
+						dataType : "json",
+						data : {'fail' : fail},
+						success: function(data){
+							console.log(data);
+							if(data != null && data != '' && data != undefined){
+								for(var i=0; i<data.length; i++){
+									var requestData =
+										'<tr>' +
+										'<td><input type="radio" name="byFinalResultModal"></td>' +
+										'<td name="inspectionResultCode">' + data[i].inspectionResultCode + '</td>' +
+										'<td name="qualityInspectionRequestCode">' + data[i].qualityInspectionRequestCode + '</td>' +
+										'<td name="qualityInspectionCode">' + data[i].qualityInspectionCode + '</td>' +
+										'<td name="inspectionPassCheck">' + data[i].inspectionPassCheck + '</td>' +
+										'</tr>' ;
+									$('#finalResultData').append(requestData);
+								}
+								$('#byFinalResultModal').on('hidden.bs.modal', function() {
+									$('#finalResultData').children('tr').remove();
+								})
+							}else{
+								var requestData =
+									'<tr>' +
+									'<td colspan="4" style="text-align: center;">' + '데이터가 없습니다.' + '</td>' +
+									'</tr>';
+								$('#materialData').append(requestData);	
+								$('#byFinalResultModal').on('hidden.bs.modal', function() {
+									$('#finalResultData').children('tr').remove();
+								})
+							}
+						}	
+					});
+					
+				 	$('#saveFinalResult').click(function(){
+						var check = $('input[name=byFinalResultModal]:checked');
+						var checkTr = check.parent().parent();
+						var inspectionResultCode = checkTr.find('td').eq(1).text();
+						var qualityInspectionRequestCode = checkTr.find('td').eq(2).text();
+						var qualityInspectionCode = checkTr.find('td').eq(3).text();
+						$('#inspection_result_code').attr('value',inspectionResultCode);
+						$('#quality_inspection_request_code').attr('value',qualityInspectionRequestCode);
+						$('#quality_inspection_code').attr('value',qualityInspectionCode);
+					}); 
+				});	
+				
+     </script>
+     </th:block>
 
 </html>
