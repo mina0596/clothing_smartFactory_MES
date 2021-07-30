@@ -14,7 +14,31 @@ public class ShipmentService {
 	
 	@Autowired
 	private ShipmentMapper shipmentMapper;
+	//출하지시 등록시 의뢰품목코드 중복확인
+	public int checkProduct(String shipmentOrderProduectCode){
+	return shipmentMapper.checkProduct(shipmentOrderProduectCode);
+	}
+	//[보람 ]출하지시 등록
+	public int addShipmentOrder(String shipmentRequestCode,String shipmentOrderProduectCode,String shipmentOrderProductName,String contractState,String shipmentOrderDate) {
+		Map<String, Object> shipmentOrderMap = new HashMap<String,Object>();
+		shipmentOrderMap.put("shipmentRequestCode", shipmentRequestCode);
+		shipmentOrderMap.put("shipmentOrderProduectCode", shipmentOrderProduectCode);
+		shipmentOrderMap.put("shipmentOrderProductName", shipmentOrderProductName);
+		shipmentOrderMap.put("contractState", contractState);
+		shipmentOrderMap.put("shipmentOrderDate", shipmentOrderDate);
+		return shipmentMapper.addShipmentOrder(shipmentOrderMap);
+		
+	}
 	
+	
+	//[보람]출하지시 모달 거래처조회로 완성품 목록찾기
+	public List<Map<String,Object>> searchCompletClientName(String clientName){
+		return shipmentMapper.searchCompletClientName(clientName);
+	}
+	//[보람]출하지시 모달 계약조회로 완성품 목록찾기
+	public List<Map<String,Object>> searchCompletContract(String contractCode){
+		return shipmentMapper.searchCompletContract(contractCode);
+	}
 	
 	//[보람]출하지시조회
 	public List<Map<String,Object>> getsearchShipmentOrder(HashMap map){

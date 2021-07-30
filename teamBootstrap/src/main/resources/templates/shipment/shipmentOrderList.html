@@ -115,7 +115,7 @@ $(function(){
                       <input type="checkbox" class="check">
                     </td>
                    <td th:text="${i.index+1}"><a ></a></td>
-                    <td th:text="${s.shipmentOrderCode}"></td>
+                    <td ><a th:href="@{/shipment/shipmentOrderInfo(shipmentOrderCode=${s.shipmentOrderCode})}">[[${s.shipmentOrderCode}]]</a></td>
                     <td th:text="${s.clientName}" ></td>
                     <td th:text="${s.productName}" ></td>
                     <td th:text="${s.shipmentOrderDate}"> </td>
