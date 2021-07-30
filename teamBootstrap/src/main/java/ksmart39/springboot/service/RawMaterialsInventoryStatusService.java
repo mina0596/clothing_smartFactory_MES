@@ -54,6 +54,16 @@ public class RawMaterialsInventoryStatusService {
 		List<SupplierRequest> supplierRequest = materialsInventoryStatusMapper.getSupplierRequest(approval);
 		return supplierRequest;
 	}
+	
+	//[한빛] 출고 수정
+	public int modifyExHousing(RawMaterialsInventory rawMaterialsInventory) {
+		return materialsInventoryStatusMapper.modifyExHousing(rawMaterialsInventory);
+	}
+	
+	//[한빛] 출고 수정 목록
+	public RawMaterialsInventory getExhousingByCode(String transactionCode) {
+		return materialsInventoryStatusMapper.getExhousingByCode(transactionCode);
+	}
 	//==========================================
 	
 	//[민아]자재 입출고 현황

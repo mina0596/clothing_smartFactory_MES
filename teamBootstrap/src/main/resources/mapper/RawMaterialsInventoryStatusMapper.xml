@@ -83,7 +83,46 @@
 			rmit.transaction_category = '출고'
 		GROUP BY rmit.raw_material_transaction_code;
 	</select>
-
+	
+	<update id="modifyExHousing" parameterType="RawMaterialsInventory">
+		UPDATE raw_material_inventory_transaction 
+		<trim prefix="SET" prefixOverrides=",">
+			<if test="materialCode != null and materialCode != ''.toString()">			
+				,raw_material_code = #{materialCode}
+			</if>
+			<if test="materialOrderCode != null and materialOrderCode != ''.toString()">			
+				,raw_material_order_code = #{materialOrderCode}
+			</if>
+			<if test="chargeEmployeeCode != null and chargeEmployeeCode != ''.toString()">			
+				,chargeEmployeeCode = #{chargeEmployeeCode}
+			</if>
+			<if test="transactionAmount != null and transactionAmount != ''.toString()">			
+				,raw_material_transaction_amount = #{transactionAmount}
+			</if>
+			<if test="transactionDate != null and transactionDate != ''.toString()">			
+				,raw_material_transaction_date = #{transactionDate}
+			</if>		
+				,raw_material_transaction_update_date = NOW()	
+		</trim>
+		WHERE 
+			raw_material_transaction_code = #{transactionCode};	
+	</update>
+	
+	<select id="getExhousingByCode" parameterType="String" resultMap="materialsInventoryResultMap">
+		SELECT 
+			r.raw_material_transaction_code
+			,r.raw_material_code
+			,r.raw_material_order_code
+			,r.charge_employee_code
+			,r.transaction_category
+			,r.raw_material_transaction_amount
+			,r.raw_material_transaction_date
+		FROM 
+			raw_material_inventory_transaction AS r
+		WHERE r.raw_material_transaction_code = #{transactionCode};	
+	</select>
+	
+	<!-- [한빛] 출고 목록 삭제 -->
 	<delete id="deleteExHousing" parameterType="java.util.List">
 		DELETE 
 			FROM 
