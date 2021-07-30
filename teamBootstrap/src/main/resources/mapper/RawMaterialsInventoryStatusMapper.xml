@@ -38,6 +38,7 @@
 			<result property="rawMeterialOrderAmount" column="raw_material_order_amount"/>
 	</resultMap>
 	
+	<!-- [한빛]자재출고 등록 -->
 	<insert id="addExwarehousing" parameterType="RawMaterialsInventory">
 			INSERT INTO raw_material_inventory_transaction
 			( raw_material_transaction_code
@@ -83,6 +84,17 @@
 		GROUP BY rmit.raw_material_transaction_code;
 	</select>
 
+	<delete id="deleteExHousing" parameterType="java.util.List">
+		DELETE 
+			FROM 
+				raw_material_inventory_transaction 
+			WHERE 
+				raw_material_transaction_code in
+				<foreach collection="list" item="code" open="(" close=")" separator=",">
+					#{code}
+				</foreach>
+	</delete>
+	
 	<!-- [민아]입출고 현황 목록 -->
 	<select id="getMaterialsTransactionList" resultMap="materialsInventoryResultMap">
 		SELECT 

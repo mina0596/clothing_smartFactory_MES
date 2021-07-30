@@ -44,7 +44,10 @@ public class RawMaterialsInventoryStatusService {
 		return exHousingList;
 	}
 	
-	
+	//[한빛] 출고 삭제
+	public int deleteExHousing(List<String> delArr) {
+		return materialsInventoryStatusMapper.deleteExHousing(delArr);
+	}
 	//==========================================
 	
 	//[민아]자재 입출고 현황

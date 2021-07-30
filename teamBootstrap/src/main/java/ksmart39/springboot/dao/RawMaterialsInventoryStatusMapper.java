@@ -19,6 +19,9 @@ public interface RawMaterialsInventoryStatusMapper {
 	//[한빛] 출고현황 리스트
 	public List<Map<String,Object>> getExwarehousing();
 	
+	//[한빛]
+	public int deleteExHousing(List<String> delArr);
+	
 	//========================================
 	
 	//[민아]자재 입출고 현황 리스트

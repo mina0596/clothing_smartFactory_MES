@@ -75,7 +75,7 @@ public class SystemController_LHB {
 	@GetMapping("/humanResourcesList")
 	public String getHumanResourcesList(@RequestParam(name = "searchKey", required = false) String searchKey,
 					 											   @RequestParam(name = "searchValue", required = false) String searchValue,
-					                                               Model model) {
+					                                               Model model, Pagination paging) {
 		
 		log.info("========================================");
 		log.info("화면에서 입력받은 값(회원목록) searchKey: {}", searchKey);
@@ -83,13 +83,19 @@ public class SystemController_LHB {
 		log.info("========================================");
 		
 		
-		Map<String,Object> paramMap = new HashMap<String, Object>();
+		Map<String, Object> paramMap = new HashMap<String,Object>();
 		paramMap.put("searchKey", searchKey);
 		paramMap.put("searchValue", searchValue);
 		
-		List<HumanResources> humanResources = systemService.getHumanResources(paramMap);
-		model.addAttribute("title", "인사관리");
-		model.addAttribute("humanResources", humanResources);
+		Map<String, Object> resultMap = systemService.getHumanResources(paging);		
+		model.addAttribute("humanResourcesList", 					resultMap.get("humanResourcesList"));
+	    model.addAttribute("currentPage", 								resultMap.get("currentPage"));
+		model.addAttribute("lastPage", 									resultMap.get("lastPage"));
+		model.addAttribute("pageStartNum", 							resultMap.get("pageStartNum"));
+		model.addAttribute("pageEndNum", 							resultMap.get("pageEndNum"));
+		model.addAttribute("searchKey", 								paramMap.get("searchKey"));
+		model.addAttribute("searchValue", 								paramMap.get("searchValue"));
+
 		return "system/humanResourcesList";
 	}
 
