@@ -75,6 +75,7 @@ public class RawMaterialsController_LHB {
 		return result;
 	}
 	
+	//[한빛] 모달뿌려주기
 	@GetMapping("/getSupplierRequest")
 	@ResponseBody
 	public List<SupplierRequest> getSupplierRequest(@RequestParam(name = "approval", required = false )String approval) {

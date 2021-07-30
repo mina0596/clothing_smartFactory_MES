@@ -65,14 +65,14 @@
 	<!-- [한빛] 출고 현황 목록 -->
 	<select id = "getExwarehousing" resultType ="Map" fetchSize="1000">
 		SELECT
-			rmit.raw_material_transaction_code					AS rmtCode
-			,rmit.raw_material_code										AS rmCode
+			rmit.raw_material_transaction_code						AS rmtCode
+			,rmit.raw_material_code									AS rmCode
 			,rmif.raw_material_name									AS rmName
 			,rmif.raw_material_color_code							AS rmcCode
-			,rmit.raw_material_transaction_amount			AS rmtAmount
-			,rmif.raw_material_unit										AS rmUnit
-			,rmit.raw_material_transaction_date				AS rmtDate
-			,rmit.raw_material_transaction_reg_date			AS rmtRegDate
+			,rmit.raw_material_transaction_amount					AS rmtAmount
+			,rmif.raw_material_unit									AS rmUnit
+			,rmit.raw_material_transaction_date						AS rmtDate
+			,rmit.raw_material_transaction_reg_date					AS rmtRegDate
 		FROM 
 			raw_material_inventory_transaction AS rmit
 		INNER JOIN 

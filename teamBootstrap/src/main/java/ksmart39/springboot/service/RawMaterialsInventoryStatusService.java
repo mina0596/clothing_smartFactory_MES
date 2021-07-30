@@ -48,6 +48,12 @@ public class RawMaterialsInventoryStatusService {
 	public int deleteExHousing(List<String> delArr) {
 		return materialsInventoryStatusMapper.deleteExHousing(delArr);
 	}
+	
+	//[한빛] 모달 뿌려주기
+	public List<SupplierRequest> getSupplierRequest(String approval){
+		List<SupplierRequest> supplierRequest = materialsInventoryStatusMapper.getSupplierRequest(approval);
+		return supplierRequest;
+	}
 	//==========================================
 	
 	//[민아]자재 입출고 현황
@@ -97,8 +103,5 @@ public class RawMaterialsInventoryStatusService {
 		return getInventoryStatusResult;
 	}
 	
-	public List<SupplierRequest> getSupplierRequest(String approval){
-		List<SupplierRequest> supplierRequest = materialsInventoryStatusMapper.getSupplierRequest(approval);
-		return supplierRequest;
-	}
+
 }
