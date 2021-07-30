@@ -26,4 +26,12 @@
 			r.client_code = ci.client_code
 		GROUP BY c.contract_code;
 	</select>
+	
+	<select id = "getContractCount" resultType="int">
+		SELECT 
+			COUNT(1)
+		FROM
+			contract_info AS c
+		WHERE c.contract_code LIKE '%buyerContract%';	
+	</select>
 </mapper>
