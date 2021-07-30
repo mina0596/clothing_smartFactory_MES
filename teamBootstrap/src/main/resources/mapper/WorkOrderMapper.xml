@@ -29,15 +29,15 @@
 		SELECT 
 			wo.work_order_code AS workOrderCode, 
 			wo.requested_product_code AS pCode,
-			wo.expected_production_start_date AS expectedStartDate, 
-			wo.expected_production_end_date AS expectedStartDate, 
+			date_format(wo.expected_production_start_date, '%Y-%m-%d %T') AS expectedStartDate, 
+			date_format(wo.expected_production_end_date, '%Y-%m-%d %T') AS expectedStartDate,  
 			sub.*
 		FROM 
 			work_order AS wo
 			inner join
 			(SELECT 
 				de.requested_product_code AS pCode,
-				de.requested_due_date AS dueDate,
+				date_format(de.requested_due_date, '%Y-%m-%d %T') AS dueDate,
 				cli.client_code AS cCode,
 				cli.client_name AS cName
 			FROM 
@@ -57,6 +57,47 @@
 			product_production_process_status;
 	</select>
 	
-
+	<insert id="addWorkOrder" parameterType="WorkOrder">
+		INSERT INTO work_order
+			(work_order_code, requested_product_code, charge_employee_code, expected_production_start_date, expected_production_end_date, work_order_reg_date, work_order_update_date)
+		VALUES (sf_workOrder2(), #{requestedProductCode}, #{chargeEmployeeCode}, #{expectedProductionStartDate}, #{expectedProductionEndDate}, NOW(), NOW())
+	</insert>
+	
+	<update id="modifyWorkOrder" parameterType="WorkOrder">
+		UPDATE work_order
+			SET
+				expected_production_start_date=#{expectedProductionStartDate},
+				expected_production_end_date=#{expectedProductionEndDate},
+				work_order_update_date=NOW()
+			WHERE work_order_code=#{workOrderCode};
+	</update>
+	
+	<select id="getWorkOrderInfoByWorkOrderCode" parameterType="String" resultType="map">
+		SELECT 
+			rpd.contract_code AS contractCode,
+			ci.client_name AS clientName,
+			rpd.requested_product_code AS pCode,
+			wo.expected_production_start_date AS startDate,
+			wo.expected_production_end_date AS endDate,
+			ei.employee_name AS employeeName,
+			wo.work_order_code AS workOrderCode
+		FROM 
+			work_order AS wo
+			INNER join
+			requested_product_detail AS rpd
+			on
+			wo.requested_product_code = rpd.requested_product_code
+			INNER join
+			client_info AS ci
+			on
+			ci.client_code = rpd.client_code
+			INNER join
+			employee_info AS ei
+			on
+			ei.employee_code = wo.charge_employee_code
+		where
+			wo.work_order_code=#{workOrderCode};
+	
+	</select>
 	
 </mapper>
