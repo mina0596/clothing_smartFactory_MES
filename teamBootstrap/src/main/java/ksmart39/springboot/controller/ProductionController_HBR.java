@@ -51,19 +51,7 @@ public class ProductionController_HBR {
 	//=====================================================================
 	
 	
-	//[보람]작업지시삭제
-	@GetMapping("/deleteWorkOrder")
-	public String deleteWorkOrder() {
-		
-		return "redirect:/workOrderList";
-	}
 	
-	//[보람]작업지시수정
-	@GetMapping("/modifyWorkOrder")
-	public String modifyWorkOrder(Model model) {
-		
-		return "production/workOrderList";
-	}
 	
 	//[보람]작업지시정보
 	@GetMapping("/workOrderInfo")

@@ -41,5 +41,8 @@ public interface QualityInspectionFinalResultMapper {
 	
 	//[민아]품질검사 최종결과값 DB에 INSERT
 	public int insertFinalResult(QualityInspectionFinalResult finalResultMap);
+	
+	//[민아]품질검사 결과값이 처음인지 아닌지 확인
+	public String checkRequestExistanceInResult(String inspectionRequestCode);
 
 }
