@@ -109,6 +109,29 @@ public class ShipmentController_HBR {
 	}
 	
 	
+	
+	
+	
+	//[보람]출하지시모달창 거래처 조회 완성품목록
+	@RequestMapping(value = "searchCompletClientName",method = RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String,Object>> searchCompletClientName(@RequestParam(value = "clientName", required = false)String clientName){
+		List<Map<String,Object>> completeClientList = shipmentService.searchCompletClientName(clientName);
+		log.info("=========================");
+		log.info("completeClientList{}",completeClientList);
+		log.info("=========================");
+		return completeClientList;
+	}
+	//[보람]출하지시모달창 계약 조회 완성품목록
+	@RequestMapping(value = "searchCompletContract",method = RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String,Object>> searchCompletContract(@RequestParam(value = "contractCode", required = false)String contractCode){
+		List<Map<String,Object>> completeContarctList =shipmentService.searchCompletContract(contractCode);
+		log.info("=========================");
+		log.info("completeContarctList{}",completeContarctList);
+		log.info("=========================");
+		return completeContarctList;
+	}
 	//[보람]출하지시조회
 	@RequestMapping(value = "searchShipmentOrder",method = RequestMethod.GET)
 	@ResponseBody
@@ -165,7 +188,32 @@ public class ShipmentController_HBR {
 		
 		return"shipment/shipmentOrderList";
 	}
-	
+	//출하지시등록시 품목의뢰코드 중복체크
+	@RequestMapping("/checkProduct")
+	@ResponseBody
+	public Map<String,Object>checkProduct(@RequestParam(name = "shipmentOrderProduectCode",required = false)String shipmentOrderProduectCode){
+		int count =0;
+		Map<String,Object> map = new HashMap<String,Object>();
+		count =shipmentService.checkProduct(shipmentOrderProduectCode);
+		map.put("cnt", count);
+		return map;
+	}
+	//출하지시등록
+	@PostMapping("/addShipmentOrder")
+	public String addShipmentOrder(@RequestParam(name ="shipmentRequestCode", required = false)String shipmentRequestCode,
+									@RequestParam(name = "shipmentOrderProduectCode",required = false)String shipmentOrderProduectCode,
+									@RequestParam(name = "shipmentOrderProductName",required = false)String shipmentOrderProductName,
+									@RequestParam(name = "contractState",required = false)String contractState,
+									@RequestParam(name = "shipmentOrderDate",required = false)String shipmentOrderDate) {
+		 log.info("========================================");
+		  log.info("shipmentRequestCode {}:",shipmentRequestCode);
+		  log.info("shipmentOrderProduectCode {}:",shipmentOrderProduectCode);
+		  log.info("shipmentOrderProductName {}:",shipmentOrderProductName);
+		  log.info("========================================");
+		shipmentService.addShipmentOrder(shipmentRequestCode, shipmentOrderProduectCode, shipmentOrderProductName, contractState, shipmentOrderDate);
+		
+		return"redirect:/shipment/shipmentOrderList";
+	}
 	//출하지시등록
 	@GetMapping("/addShipmentOrder")
 	public String addShipmentOrder(Model model) {

@@ -8,6 +8,15 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface ShipmentMapper {
+	//출하지시 등록시 의뢰품목코드 중복체크
+	public int checkProduct(String shipmentOrderProduectCode);
+	//[보람] 출하지시
+		public int addShipmentOrder(Map<String, Object> shipmentOrderMap);
+	//[보람]출하지시 모달 거래처조회로 완성품 목록찾기
+		public List<Map<String,Object>> searchCompletClientName(String clientName);
+	
+	//[보람]출하지시 모달 계약조회로 완성품 목록찾기
+		public List<Map<String,Object>> searchCompletContract(String contractCode);
 	//[보람]출하지시조회
 	public List<Map<String,Object>> getsearchShipmentOrder(HashMap map);
 
