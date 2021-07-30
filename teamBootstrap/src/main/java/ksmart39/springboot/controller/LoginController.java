@@ -92,7 +92,7 @@ public class LoginController {
 				e.printStackTrace();
 			}
 			
-			return "/main";
+			return "/";
 		}
 	}
 	
