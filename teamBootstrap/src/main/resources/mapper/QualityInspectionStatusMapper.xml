@@ -69,9 +69,13 @@
 
 
 </select>
+<select id="getStateBuyerContractQualityInspectionPass" resultType="map">
 
 
-<!--계약별 품질검사 전체현황-->
+
+</select>
+
+<!--계약별 품질검사 등급 전체현황-->
 <select id="getStateBuyerContractQualityInspection" resultType="map">
 	SELECT
 			p.contract_code AS contractCode	
@@ -118,7 +122,8 @@
 			product_code_detail AS pc ON p.product_code = pc.product_code
 		INNER JOIN
 			client_info AS c ON p.client_code = c.client_code
-		 WHERE re.quality_inspection_request_code  LIKE 'QC%'
+		 WHERE re.quality_inspection_request_code  LIKE 'QC%' and
+		 res.category  LIKE'등급'
 	GROUP BY q.quality_inspection_request_code;
 </select>
 
