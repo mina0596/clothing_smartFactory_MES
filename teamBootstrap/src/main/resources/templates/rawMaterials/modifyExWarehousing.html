@@ -10,89 +10,66 @@ layout:decorate="@{layout/default_rawMaterials}">
 </th:block>
 
 
-
 <th:block layout:fragment="container">
             <div class="form-panel">
               <h4 class="mb"><i class="fa fa-edit"></i> 자재 출고 수정</h4>
-              <form th:action="@{/addInWarehousing}" class="form-horizontal style-form" method="post">
-               
-		        <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">발주 코드 검색</label>
-                  <div class="col-sm-4">
-                    <input type="text" name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
-                  </div>
-                </div>
-		        <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">원부자재 코드</label>
-                  <div class="col-sm-4">
-                    <input type="text" id="raw_material_code" name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
-                  </div>
-                </div>
-		        <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">재료명</label>
-                  <div class="col-sm-4">
-                    <input type="text" id="raw_material_name" name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
-                  </div>
-                </div>
-		        <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">색상</label>
-                  <div class="col-sm-4">
-                    <input type="text" id="raw_material_color_code" name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
-                  </div>
-                </div>
-		        <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">특징</label>
-                  <div class="col-sm-4">
-                    <input type="text" id="raw_material_feature" name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
-                  </div>
-                </div>
-		        <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">발주 담당자 코드</label>
-                  <div class="col-sm-4">
-                    <input type="number"  name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
-                  </div>
-                </div>
-		        <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">발주 담당자명</label>
-                  <div class="col-sm-4">
-                    <input type="number" name="raw_material_transaction_amount" class="form-control" disabled="disabled" >
-                  </div>
-                </div>
-                
-                
-		        <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">갯수</label>
-                  <div class="col-sm-4"><!-- 값 들어오고 disabled 풀어주기 -->
-                    <input type="text" id="raw_material_order_amount" name="raw_material_transaction_amount" class="form-control" >
-                  </div>
-                </div>
-		        	        
+              <form th:action="@{/rawMaterials/modifyExWarehousing}" class="form-horizontal style-form" method="post">
                
                <div class="form-group">
-		          <label class="col-sm-2 col-sm-2 control-label">출고일시</label>
-		          <div class="col-md-4">
-		            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
-		              <input type="text" class="form-control" readonly="readonly" size="16">
+		          <label class="col-sm-2 col-sm-2 control-label">발주 코드 검색</label>
+		          <div class="col-md-6">
+		            <div  class="input-group ">
+		              <input type="text" id="raw_material_order_code" class="form-control"  size="16" name="materialOrderCode">
 		              <div class="input-group-btn">
-		                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
-		                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
+		                <button type="button" id="search" class=" btn btn-theme03 btn btn-default"  th:href="@{/rawMaterials/getSupplierRequest}"><i class="fa"></i>검색하여 가져오기</button>
 		              </div>
 		            </div>
 		          </div>
-      		  </div>
+		        </div>
+		        
+		        <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">원부자재 코드</label>
+                  <div class="col-sm-6">
+                    <input type="text" id="raw_material_code" name="materialCode" class="form-control" readonly="readonly" >
+                  </div>
+                </div>
+
+		        <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">발주 담당자 코드</label>
+                  <div class="col-sm-6">
+                    <input type="text"  id="raw_material_admin" class="form-control" name="chargeEmployeeCode" readonly="readonly">
+                  </div>
+                </div>
+                
+		        <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">수량</label>
+                  <div class="col-sm-6"><!-- 값 들어오고 disabled 풀어주기 -->
+                    <input type="number" id="raw_material_order_amount" name="transactionAmount" class="form-control" >
+                  </div>
+                </div>
+
+      		  
+				<div class="form-group">
+			          <label class="col-sm-2 col-sm-2 control-label">출고일시</label>
+		          <div class="col-md-6">
+					<input name="transactionDate" id="endDate" type="date" class="form-control">
+		          </div>
+		        </div>
+      		  
+      		  
 		        <div class="form-group text-right">
 		          <div class="col-lg-offset-2 col-lg-10">
 		            <button class="btn btn-theme" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">등록</font></font></button>
 		            <a href="javascript:history.back()" class="btn btn-theme04" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소</font></font></a>
 		          </div>
 		        </div>
-    			</form>            
-                </div>
+    		</form>            
+           </div>
 
 
 			<!-- ========================================= -->
  			<!--- 검색창 모달 시작 ---->
-     		<div class="modal fade modal-xl"  id="bySupplierModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     	<div class="modal fade modal-xl"  id="bySupplierModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog" style="width:auto;display:table" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
@@ -103,116 +80,23 @@ layout:decorate="@{layout/default_rawMaterials}">
 		      </div>
 		      
 		      <!-- 모달본문 -->
-		   <div class="modal-body">
-		   
-		   <table  class="table table-striped table-advance table-hover">
-         	<tbody>       		
-       			<thead>
-        			<tr>
-	         			<th colspan="3" style="padding-right: 20px;">
-		         			 <div class="form-inline" style="margin-bottom: 0px;">
-		         			 	<label class="control-label">발주 코드</label>&nbsp
-			                	<input type="text" class="form-control" id="bySupplierValue" placeholder="검색어를 입력하세요.">
-			                </div>
-	         			</th>
-	         			<th colspan="2" style="padding-right: 20px;">
-	         				<div class="form-inline" style="margin-bottom: 0px;">
-		         				<label class="control-label">거래처명</label>&nbsp
-			                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
-		              		</div>
-	         			</th>  
-	         			<th colspan="2" style="padding-right: 20px;">
-	         				<div class="form-inline" style="margin-bottom: 0px;">
-		         				<label class="control-label">품목명</label>&nbsp
-			                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
-		              		</div>
-	         			</th>  
-	         			<th colspan="5" style="padding-right: 20px;">
-	         				<div class="form-inline" style="margin-bottom: 0px;">
-		         				<label class="control-label">발주 날짜</label>&nbsp
-			                	<input type="date" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">&nbsp ~
-			                	<input type="date" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
-	         				 &nbsp&nbsp&nbsp <button type="submit" class="btn btn-theme">검색</button>
-		              		</div>
-	         			</th>  
-        			</tr>     			
-       			</thead>
-       			<tbody style="text-align: center;">
-       				<tr>
-       					<td><i class="fa fa-check"></i></td>
-       					<td>no.</td>
-       					<td>발주코드</td>
-       					<td>원부자재 코드</td>
-       					<td>거래처명</td>
-       					<td>품목명</td>
-       					<td>색상명</td>
-       					<td>특징</td>
-       					<td>수량</td>
-       					<td>입고예정일</td>
-       					<td>발주일자</td>
-       				</tr>
-     				<tr>
-     					<td><input type="radio" name="bySupplierModal"></td>
-     					<td>1</td>
-       					<td class="raw_material_order_code">123456</td>
-       					<td class="raw_material_code">원부자재 코드</td>
-       					<td>나는 단추</td>
-       					<td class="raw_material_name">단추</td>
-       					<td class="raw_material_color_name">뻘건색</td>
-       					<td class="raw_material_feature">특징1</td>
-       					<td class="raw_material_order_amount">100</td>
-       					<td>2021-02-22</td>
-       					<td>2021-02-10</td>
-     				</tr>
-     				<tr>
-     					<td><input type="radio" name="bySupplierModal"></td>
-     					<td>1</td>
-       					<td class="raw_material_order_code">123</td>
-       					<td class="raw_material_code">원부자재 코드1</td>
-       					<td>나는 단추1</td>
-       					<td class="raw_material_name">단추1</td>
-       					<td class="raw_material_color_name">뻘건색1</td>
-       					<td class="raw_material_feature">특징1</td>
-       					<td class="raw_material_order_amount">1001</td>
-       					<td>2021-02-22</td>
-       					<td>2021-02-10</td>
-     				</tr>
-     				<tr>
-     					<td><input type="radio" name="bySupplierModal"></td>
-     					<td>1</td>
-       					<td class="raw_material_order_code">1233</td>
-       					<td class="raw_material_code">원부자재 코드2</td>
-       					<td>나는 단추2</td>
-       					<td class="raw_material_name">단추2</td>
-       					<td class="raw_material_color_name">뻘건색2</td>
-       					<td class="raw_material_feature">특징2</td>
-       					<td class="raw_material_order_amount">1002</td>
-       					<td>2021-02-22</td>
-       					<td>2021-02-10</td>
-     				</tr>
-     				<tr>
-     					<td><input type="radio" name="bySupplierModal"></td>
-     					<td>1</td>
-       					<td class="raw_material_order_code">3333</td>
-       					<td class="raw_material_code">원부자재 코드3</td>
-       					<td>나는 단추3</td>
-       					<td class="raw_material_name">단추3</td>
-       					<td class="raw_material_color_name">뻘건색3</td>
-       					<td class="raw_material_feature">특징3</td>
-       					<td class="raw_material_order_amount">1003</td>
-       					<td>2021-02-22</td>
-       					<td>2021-02-10</td>
-     				</tr>
-     				
-     				
-     				
-     				
-     				
-       			</tbody>        		
-         	</tbody>
-         </table> 
-         
-		 </div>
+				<div class="modal-body">
+				  <table  class="table table-striped table-advance table-hover">
+		         	<tbody>       		
+		       			<thead>
+		        			<tr>
+			         			<th><i class="fa fa-check"></th>
+			         			<th>발주코드</th>
+			         			<th>원부자재 코드</th>
+			         			<th>발주 담당자 코드</th>
+		        			</tr>     			
+		       			</thead>
+		       			<tbody style="text-align: center;" id="materialData">
+		       			</tbody>        		
+		         	</tbody>
+		         </table> 
+			  </div>
+	  
 		    <div class="modal-footer">
 			      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 			      <button type="button" id="saveSupplier" class="btn btn-primary" data-dismiss="modal">Save changes</button>
@@ -222,30 +106,55 @@ layout:decorate="@{layout/default_rawMaterials}">
 		</div>
      
       <script type="text/javascript">
-			$(function(){
-				
 				$('#search').click(function(){
 					$('#bySupplierModal').modal("show");
+					
+					var approval = '승인';
+					$.ajax({
+						url: "getSupplierRequest",
+						method : 'get',
+						async: true,
+						dataType : "json",
+						data : {'approval' : approval},
+						success: function(data){
+							if(data != null && data != '' && data != undefined){
+								for(var i=0; i<data.length; i++){
+									var requestData =
+										'<tr>' +
+										'<td><input type="radio" name="bySupplierModal"></td>' +
+										'<td name="rawMaterialOrderCode">' + data[i].rawMeterialOrderCode + '</td>' +
+										'<td name="raw_material_code">' + data[i].rawMeterialCode + '</td>' +
+										'<td name="raw_material_transaction_amount">' + data[i].chargeEmployeeCode + '</td>' +
+										'</tr>' ;
+									$('#materialData').append(requestData);
+								}
+								$('#bySupplierModal').on('hidden.bs.modal', function() {
+									$('#materialData').children('tr').remove();
+								})
+							}else{
+								var requestData =
+									'<tr>' +
+									'<td colspan="4" style="text-align: center;">' + '데이터가 없습니다.' + '</td>' +
+									'</tr>';
+								$('#materialData').append(requestData);	
+								$('#bySupplierModal').on('hidden.bs.modal', function() {
+									$('#materialData').children('tr').remove();
+								})
+							}
+						}	
+					});
 					
 				 	$('#saveSupplier').click(function(){
 						var check = $('input[name=bySupplierModal]:checked');
 						var checkTr = check.parent().parent();
-						var raw_material_order_code = checkTr.find('.raw_material_order_code').text();
-						var raw_material_code = checkTr.find('.raw_material_code').text();
-						var raw_material_name = checkTr.find('.raw_material_name').text();
-						var raw_material_color_name = checkTr.find('.raw_material_color_name').text();
-						var raw_material_feature = checkTr.find('.raw_material_feature').text();
-						var raw_material_order_amount = checkTr.find('.raw_material_order_amount').text();
-						$('#raw_material_order_code').attr('value',raw_material_order_code);
-						$('#raw_material_code').attr('value',raw_material_code);
-						$('#raw_material_name').attr('value',raw_material_name);
-						$('#raw_material_color_name').attr('value',raw_material_color_name);
-						$('#raw_material_feature').attr('value',raw_material_feature);
-						$('#raw_material_order_amount').attr('value',raw_material_order_amount);
-						$('#raw_material_order_amount').attr('disabled',false);
+						var rawMaterialOrderCode = checkTr.find('td').eq(1).text();
+						var rawMaterialCode = checkTr.find('td').eq(2).text();
+						var rawMaterialAdmin = checkTr.find('td').eq(3).text();
+						$('#raw_material_order_code').attr('value',rawMaterialOrderCode);
+						$('#raw_material_code').attr('value',rawMaterialCode);
+						$('#raw_material_admin').attr('value',rawMaterialAdmin);
 					}); 
 				});	
-			});
 				
      </script>
      </th:block>

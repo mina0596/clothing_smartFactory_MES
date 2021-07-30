@@ -92,26 +92,26 @@ layout:decorate="@{layout/default_contract}">
                   	<th><input type="checkbox" id="checkAll"></th>
                  	<th><i class="fa fa-bullhorn"></i>번호</th>
                     <th class="hidden-phone"><i class="fa fa-bookmark"></i>계약번호</th>
-                    <th><i class="fa fa-bookmark"></i>의뢰코드</th>
-                    <th><i class="fa fa-bookmark"></i>결제조건</th>
+                    <th class="hidden-phone"><i class="fa fa-bookmark"></i>거래처명</th>
+                    <th><i class="fa fa-bookmark"></i>수주일자</th>
+                    <th><i class="fa fa-bookmark"></i>단위</th>
+                    <th><i class="fa fa-bookmark"></i>수량</th>
                     <th><i class=" fa fa-bookmark"></i>총계약금</th>
-                    <th><i class=" fa fa-bookmark"></i>납품예정일자</th>
-                    <th><i class=" fa fa-bookmark"></i>계약상태</th>
-                    <th><i class=" fa fa-bookmark"></i>등록일자</th>
+                    <th><i class=" fa fa-bookmark"></i>계약시작일자</th>
+                    <th><i class=" fa fa-bookmark"></i>계약종료일자</th>
                     <th><i class=" fa fa-bookmark"></i>수정</th>
                   </tr>
                 </thead>
  
                 <tbody>
                 <!--db에서 데이터 넣어야하는 부분 -->
-                  <tr>
+                  <tr th:each = "c, n : ${buyerContractList}">
                   	<td><input type="checkbox" class="checked"></td>
-                  	<td>1</td>
-                    <td>rep01</td>
-                    <td><a th:href="@{#}" data-popup-open="requestInfo" >의뢰 상세</a></td>
-                    <td>파크랜드</td>
-                    <td>전주시 덕진구 서신동 123</td>
-                    <td>063-299-1234</td>
+                  	<td th:text = "${n.index+1}"></td>
+                    <td th:text="${c.cc}"></td>
+                    <td th:text="${c.cu}"></td>
+                    <td th:text="${c.clientCode}"></td>
+                    <td th:text="${c.clientCode}"></td>
                    <td> <button  type="button" class="btn btn-info btn-xs" id="addBtn" ><i class="fa fa-check"></i>승인완료</button></td>
                     <td>2021-05-12 15:15:00</td>
                     <td>  <button class="btn btn-primary btn-xs" type="button" onclick="location.href='/modifyBuyerContract'"><i class="fa fa-pencil"></i>수정</button></td>
@@ -120,6 +120,20 @@ layout:decorate="@{layout/default_contract}">
                   
            		 </tbody>
               </table>
+                            	<div class="dataTables_paginate paging_bootstrap pagination">
+					<ul>
+						<li class="prev"><a th:href="@{/system/clientList}"> << </a></li>
+						<li><a th:if="${currentPage > 1}" th:href="@{/system/clientList(currentPage=${currentPage - 1})}">이전</a></li>
+						<th:block th:each="num:${#numbers.sequence(pageStartNum, pageEndNum)}">
+						<li><a th:if="${num != currentPage}" th:href="@{/system/clientList(currentPage=${num})}">[[${num}]]</a></li>
+						<li><a th:unless="${num != currentPage}">[[${num}]]</a></li>
+						
+						</th:block>
+						<li class="prev"><a th:if="${currentPage < lastPage}" th:href="@{/system/clientList(currentPage=${currentPage + 1})}"> 다음 </a></li>
+						<li class="next"><a th:href="@{/system/clientList(currentPage=${lastPage})}"> >> </a></li>
+					</ul>
+				</div>
+              
            	 </div>
             </div>
             <div class="form-group text-right">

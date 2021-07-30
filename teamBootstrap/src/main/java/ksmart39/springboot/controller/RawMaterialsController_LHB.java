@@ -65,6 +65,15 @@ public class RawMaterialsController_LHB {
 		return "rawMaterials/exWarehousingList";
 	}
 	
+	//[한빛] 출고 삭제
+	@PostMapping("/deleteExHousing")
+	@ResponseBody
+	public int deleteExHousing(@RequestParam(value = "delArr[]")List<String> delArr) {
+		System.out.println(delArr);
+		int result = 0;
+		result = materialsInventoryStatusService.deleteExHousing(delArr);
+		return result;
+	}
 	
 	@GetMapping("/getSupplierRequest")
 	@ResponseBody
