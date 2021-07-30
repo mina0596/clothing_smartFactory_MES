@@ -221,6 +221,7 @@
 	</select>
 	
 	<!-- ==========================[민아]품질검사 최종결과 자동으로 입력======================  -->
+	<!-- 품질검사 최종결과값 가져오는 쿼리지만, 함수로 대체함 -->
 	<select id="getFinalInspectionResult" parameterType="String" resultType="String">
 		SELECT 
 			if((SELECT 
@@ -259,5 +260,18 @@
 		VALUES 
 			(sf_inspectionFinalResultCode(#{qualityInspectionRequestCode}), #{qualityInspectionRequestCode}, #{qualityInspectionCode}, sf_inspectionFinalResult(#{qualityInspectionRequestCode}), #{inspectionStartDate}, #{inspectionDuration}, #{inspectionEndDate}, NOW(), NOW())
 	</insert>
-
+	
+	<select id="checkRequestExistanceInResult" parameterType="String" resultType="String">
+	SELECT 
+		(case
+		when COUNT(1) = 0 then @exist := 'non-exist'
+		when COUNT(1) != 0 then @exist := 'exist'
+		END) AS existMeasure
+	FROM 
+		inspection_result AS ir
+		join
+		(SELECT @exist := null) AS r
+		where
+		ir.quality_inspection_request_code = #{qualityInspectionRequestCode};
+	</select>
 </mapper>

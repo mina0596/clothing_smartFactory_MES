@@ -60,6 +60,21 @@ public class WorkOrderService {
 		}
 		return workOrderList;
 	}
+	
+	//[민아]작업지시 등록
+	public int addWorkOrder(WorkOrder workOrder) {
+		return workOrderMapper.addWorkOrder(workOrder);
+	}
+	
+	//[민아]작업지시 수정
+	public int modifyWorkOrder(WorkOrder workOrder) {
+		return workOrderMapper.modifyWorkOrder(workOrder);
+	}
+	
+	//[민아]작업지시코드로 작업지시 정보 조회
+	public Map<String,Object> getWorkOrderInfoByWorkOrderCode(String workOrderCode) {
+		return workOrderMapper.getWorkOrderInfoByWorkOrderCode(workOrderCode);
+	}
 
 
 }

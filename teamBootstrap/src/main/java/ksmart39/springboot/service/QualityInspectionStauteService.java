@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ksmart39.springboot.dao.QualityInspectionFinalResultMapper;
-import ksmart39.springboot.dao.QualityInsepctionStauteMapper;
+import ksmart39.springboot.dao.QualityInspectionStatusMapper;
 
 @Service
 public class QualityInspectionStauteService {
 	private static final Logger log = LoggerFactory.getLogger(QualityInspectionStauteService.class);
 	
 	@Autowired
-	private QualityInsepctionStauteMapper qualityInsepctionStauteMapper;
+	private QualityInspectionStatusMapper qualityInsepctionStauteMapper;
 	
 	
 	//[보람] 수주계약별 검사 조회
