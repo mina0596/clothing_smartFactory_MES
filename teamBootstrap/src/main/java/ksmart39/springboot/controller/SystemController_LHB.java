@@ -88,11 +88,11 @@ public class SystemController_LHB {
 		paramMap.put("searchValue", searchValue);
 		
 		Map<String, Object> resultMap = systemService.getHumanResources(paging);		
-		model.addAttribute("humanResourcesList", 					resultMap.get("humanResourcesList"));
+		model.addAttribute("humanResourcesList", 						resultMap.get("humanResourcesList"));
 	    model.addAttribute("currentPage", 								resultMap.get("currentPage"));
 		model.addAttribute("lastPage", 									resultMap.get("lastPage"));
-		model.addAttribute("pageStartNum", 							resultMap.get("pageStartNum"));
-		model.addAttribute("pageEndNum", 							resultMap.get("pageEndNum"));
+		model.addAttribute("pageStartNum", 								resultMap.get("pageStartNum"));
+		model.addAttribute("pageEndNum", 								resultMap.get("pageEndNum"));
 		model.addAttribute("searchKey", 								paramMap.get("searchKey"));
 		model.addAttribute("searchValue", 								paramMap.get("searchValue"));
 
@@ -111,7 +111,7 @@ public class SystemController_LHB {
 	}
 	
 	//[한빛] 사용자 수정화면 ->목록
-	@PostMapping("modifyHumanResources")
+	@PostMapping("/modifyHumanResources")
 	public String modifyHumanResources(HumanResources humanResources) {
 		systemService.modifyHumanResources(humanResources);
 		return "redirect:humanResourcesList";
