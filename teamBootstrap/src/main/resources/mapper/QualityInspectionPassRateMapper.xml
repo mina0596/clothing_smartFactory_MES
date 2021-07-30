@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart39.springboot.dao.QualityInspectionPassRateMapper">
+
+	<!-- =================[민아]불량률 구하는 쿼리=============  -->
+	<select id="getInspectionFailedRank" resultType="map">
+		SELECT
+			failedNumSub.failedNum 										AS finalFailedNum,
+			runNumSub.runNum											AS finalRunNum,
+			<![CDATA[ROUND((failedNumSub.failedNum/runNumSub.runNum) * 100)]]> AS failRate,
+			<![CDATA[CONCAT(ROUND((failedNumSub.failedNum/runNumSub.runNum) * 100),'%')]]> AS failRatePercent,
+			runNumSub.inspectionCode 									AS finalInspectionCode,
+			subInspection.sub_class_name 								AS subName,
+			lowInspection.low_class_name 								AS lowName,
+			medInspection.med_class_name 								AS medName,
+			highInspection.high_class_name 								AS highName
+		from
+			(SELECT 
+				COUNT(*) AS failedNum,
+				sub.quality_inspection_code 
+			FROM 
+				(select
+					*
+				from
+					inspection_final_result AS aa
+				where
+					aa.low_cate_final_pass_check='불합격') AS sub
+				GROUP by
+				 sub.quality_inspection_code) AS failedNumSub
+				join
+				(SELECT 
+					COUNT(*) AS runNum,
+					ifr.quality_inspection_code AS inspectionCode
+				FROM 
+					inspection_final_result AS ifr
+					GROUP by
+					ifr.quality_inspection_code
+					)  AS runNumSub
+			INNER join
+			sub_class_inspection_list AS subInspection
+			on
+			subInspection.quality_inspection_code=runNumSub.inspectionCode
+			INNER join
+			low_class_inspection_list AS lowInspection
+			on
+			subInspection.high_med_low_class_code=lowInspection.high_med_low_class_code
+			join
+			medium_class_inspection_list AS medInspection
+			INNER join
+			high_class_inspection_list AS highInspection
+			on
+			medInspection.high_class_code=highInspection.high_class_code
+		GROUP by
+			inspectionCode
+		ORDER by
+			failRate DESC
+		LIMIT 10;
+		
+	</select>
+	
+</mapper>
