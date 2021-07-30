@@ -1,6 +1,7 @@
 package ksmart39.springboot.service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -49,23 +50,36 @@ public class QualityInsMeasurementValueService {
 	};
 
 	//품질검사 측정값 현황
-	public List<Map<String, Object>> getQualityInspectionStatusNow(Map<String, Object> searchMap){
-		
-		List<Map<String, Object>> resultMap = null;		
-		String contractNum = (String) searchMap.get("contractNum");
-		
-		resultMap = qualityInsMeasurementValueMapper.getQualityInspectionStatusNow(searchMap);
-
+	public List<Map<String, Object>> getQualityInspectionStatusNow(String contractNum){
+		List<Map<String, Object>> resultMap = new ArrayList<Map<String,Object>>();
 		
 		Map<String, Object> failCountMap = qualityInsMeasurementValueMapper.getFailCountByHighInspection(contractNum);
 		Map<String, Object> passCountMap = qualityInsMeasurementValueMapper.getPassOrFailCount(contractNum);
 		Map<String, Object> allCountMap = qualityInsMeasurementValueMapper.getAllCount(contractNum);
 		
+		log.info("================================================");
+		log.info("DB조회한 값failCountMap: {}", failCountMap);
+		log.info("================================================");
+		log.info("================================================");
+		log.info("DB조회한 값passCountMap: {}", passCountMap);
+		log.info("================================================");
+		log.info("================================================");
+		log.info("DB조회한 값allCountMap: {}", allCountMap);
+		log.info("================================================");
 		
 		resultMap.add(failCountMap);
 		resultMap.add(passCountMap);
+		resultMap.add(allCountMap);
+		log.info("================================================");
+		log.info("DB조회한 값allCountMap: {}", resultMap);
+		log.info("=============================================");
 		
 		return resultMap;
+	};
+	
+	//품질검사 측정값 현황 리스트
+	public List<Map<String, Object>> getQualityInspectionStatusNowList(Map<String, Object> searchMap){
+		return qualityInsMeasurementValueMapper.getQualityInspectionStatusNow(searchMap);
 	}
 	
 	//품질검사 측정값 목록

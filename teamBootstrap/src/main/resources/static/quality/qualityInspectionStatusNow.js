@@ -286,7 +286,7 @@ $(function(){
 			
 
 			var request = $.ajax({
-				url: "/quality/qualityInspectionStatusNow",
+				url: "/quality/qualityInspectionStatusNowList",
 				data: JSON.stringify(searchObj),
 				contentType: "application/json",
 				method: "POST",
@@ -298,14 +298,14 @@ $(function(){
 				
 				
 				var request = $.ajax({
-					  url: "script.php",
+					  url: "/quality/qualityInspectionStatusNow",
 					  method: "POST",
-					  data: { id : menuId },
-					  dataType: "html"
+					  data: { contractNum: $('input[name="contractNum"]').val()},
+					  dataType: "json"
 					});
 					 
 					request.done(function( msg ) {
-						
+						console.log(msg);
 					});
 					 
 					request.fail(function( jqXHR, textStatus ) {

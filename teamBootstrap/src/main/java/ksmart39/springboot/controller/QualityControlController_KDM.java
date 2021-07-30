@@ -76,15 +76,32 @@ public class QualityControlController_KDM {
 		return ContractNumMap;
 	}
 
-	//[]
-	
 	//[다미] 실시간 검사 현황
 	@PostMapping("/qualityInspectionStatusNow")
 	@ResponseBody
-	public List<Map<String, Object>> qualityInspectionStatusNow(@RequestBody Map<String, Object> searchMap) {
+	public List<Map<String, Object>> qualityInspectionStatusNow(@RequestParam(value = "contractNum")String contractNum){
+		List<Map<String, Object>> resultMap = null;
+		
+		log.info("================================================");
+		log.info("화면에서 받아온값: {}", contractNum);
+		log.info("================================================");
+		
+		resultMap = qualityInsMeasurementValueService.getQualityInspectionStatusNow(contractNum);
+
+		log.info("================================================");
+		log.info("DB조회한 값: {}", resultMap);
+		log.info("================================================");
+		
+		return resultMap;
+	}
+	
+	//[다미] 실시간 검사 현황 리스트
+	@PostMapping("/qualityInspectionStatusNowList")
+	@ResponseBody
+	public List<Map<String, Object>> qualityInspectionStatusNowList(@RequestBody Map<String, Object> searchMap) {
 		
 		log.info("화면에서 받아온 값: {}", searchMap);
-		List<Map<String, Object>> map = qualityInsMeasurementValueService.getQualityInspectionStatusNow(searchMap);
+		List<Map<String, Object>> map = qualityInsMeasurementValueService.getQualityInspectionStatusNowList(searchMap);
 		log.info("================================================");
 		log.info("실시간 검사 현황 DB조회된 값: {}", map);
 		log.info("================================================");
