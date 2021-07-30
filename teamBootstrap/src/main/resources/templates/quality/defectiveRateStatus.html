@@ -3,77 +3,67 @@
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
 layout:decorate="@{layout/default_qualityControl}">
 
-<th:block layout:fragment="pageTitle">
-	   <div class="border-head"> 
-	    <h3>품질 관리</h3>
-	    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-	    </div>
-
+<th:block layout:fragment="customJs">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var bars = $('.bar');
+			var values = $('.value');
+			console.log(bars);
+			console.log(values);
+	
+			values.each(function(){
+				var valueText = $(this).text();
+				console.log(valueText);
+				$(this).css('height', valueText);
+			});
+			
+			
+		
+		})
+	</script>
 </th:block>
 
-
 <th:block layout:fragment="container">
-	생산한 제품별 불량통계
-	<h4><i class="fa fa-angle-right"></i>불량 현황</h4>
+	<h3><i class="fa fa-angle-right"></i>불량 현황</h3>
+	<hr>
     <div>
-    <select>
-    	<option>All</option>
-    	<option>숙녀양복</option>
-    	<option>남성양복</option>
-    </select> 
-    <select>
-    	<option>All</option>
-    	<option>수입검사</option>
-    	<option>공정검사</option>
-    	<option>완재품검사</option>
-    </select> 
-    <button type="button">조회</button>
+
+   	<!--CUSTOM CHART START -->
+      <div class="border-head content-panel">
+        <h3 style="font-weight: bold; margin-left: 15px;"><i class="fa fa-bar-chart-o"></i>불량률 상세검사별 10위</h3>
+      
+	      <div class="custom-bar-chart" style="margin-left: 15px;">
+	        <ul class="y-axis">
+	          <li><span>100%</span></li>
+	          <li><span>80%</span></li>
+	          <li><span>60%</span></li>
+	          <li><span>40%</span></li>
+	          <li><span>20%</span></li>
+	          <li><span>0%</span></li>
+	        </ul>
+	        <div class="bar" th:each="fr : ${failedRank}" style="margin-left: 2%; margin-right: 2%;">
+	          <div class="title" th:text="${fr.subName}"></div>
+	          <div class="value tooltips" data-original-title="8.500" data-toggle="tooltip" data-placement="top" style="height: 0%;" th:text="${fr.failRatePercent}"></div>
+	        </div>
+	        
+	      </div>
+      </div>
+      
+      <!--custom chart end-->
     	
-    	
-    	<!--CUSTOM CHART START -->
-            <div class="border-head">
-              <h3>불량률이 많은 순위</h3>
+          <div class="content-panel">
+            <h4><i class="fa fa-angle-right"></i> Chart Example 4</h4>
+            <div class="panel-body">
+              <div id="hero-donut" class="graph"></div>
             </div>
-            <div class="custom-bar-chart">
-              <ul class="y-axis">
-                <li><span>10.000</span></li>
-                <li><span>8.000</span></li>
-                <li><span>6.000</span></li>
-                <li><span>4.000</span></li>
-                <li><span>2.000</span></li>
-                <li><span>0</span></li>
-              </ul>
-              <div class="bar">
-                <div class="title">JAN</div>
-                <div class="value tooltips" data-original-title="8.500" data-toggle="tooltip" data-placement="top" style="height: 85%;">85%</div>
-              </div>
-              <div class="bar ">
-                <div class="title">FEB</div>
-                <div class="value tooltips" data-original-title="5.000" data-toggle="tooltip" data-placement="top">50%</div>
-              </div>
-              <div class="bar ">
-                <div class="title">MAR</div>
-                <div class="value tooltips" data-original-title="6.000" data-toggle="tooltip" data-placement="top">60%</div>
-              </div>
-              <div class="bar ">
-                <div class="title">APR</div>
-                <div class="value tooltips" data-original-title="4.500" data-toggle="tooltip" data-placement="top">45%</div>
-              </div>
-              <div class="bar">
-                <div class="title">MAY</div>
-                <div class="value tooltips" data-original-title="3.200" data-toggle="tooltip" data-placement="top">32%</div>
-              </div>
-              <div class="bar ">
-                <div class="title">JUN</div>
-                <div class="value tooltips" data-original-title="6.200" data-toggle="tooltip" data-placement="top">62%</div>
-              </div>
-              <div class="bar">
-                <div class="title">JUL</div>
-                <div class="value tooltips" data-original-title="7.500" data-toggle="tooltip" data-placement="top">75%</div>
-              </div>
-            </div>
-            <!--custom chart end-->
+          </div>
+      
     
+    
+    
+    
+    	
     </div>
          
 </th:block>

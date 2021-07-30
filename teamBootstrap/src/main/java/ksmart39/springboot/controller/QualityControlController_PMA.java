@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ksmart39.springboot.service.QualityControlService;
+import ksmart39.springboot.service.QualityInspectionPassRateService;
 
 
 @Controller
@@ -24,7 +25,8 @@ public class QualityControlController_PMA {
 	
 	@Autowired
 	private QualityControlService qualityControlService;
-	
+	@Autowired
+	private QualityInspectionPassRateService passRateService;
 
 	
 	//=============================================================================
@@ -60,8 +62,9 @@ public class QualityControlController_PMA {
 	//[민아]품질검사별 불량률 현황
 	@GetMapping("/defectiveRateStatus")
 	public String getDefectiveRate(Model model) {
-		
-		model.addAttribute("title", "검사현황관리:불량현황");
+		List<Map<String,Object>> failedRank = passRateService.getInspectionFailedRank();
+		log.info("불합격률 DB에서 가져오는거 확인:{}", failedRank);
+		model.addAttribute("failedRank", failedRank);
 		return"quality/defectiveRateStatus";
 	}
 	
