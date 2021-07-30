@@ -285,7 +285,7 @@ $(function(){
 			});
 			
 			request.done(function( data ) {
-				//console.log(data);
+				console.log(data);
 				$('.removeTr').remove();
 				//원래 있던 progressBar 지우기
 				$('#originalProgressBar').remove();
@@ -312,6 +312,7 @@ $(function(){
 					progressBar += '<div class="progress-bar" role="progressbar" aria-valuenow="' + completeRate +'" aria-valuemin="0"'; 
 					progressBar += 'aria-valuemax="100" style="width: ' + completeRate +'%"><span class="sr-only">' + completeRate +'% Complete</span>';
 					
+					
 					//1번째 차트
 					chart1.data.datasets[0].data=[progressRate, completeRate];
 					chart1.update();
@@ -336,7 +337,6 @@ $(function(){
 					var html = '';
 					for(var i = 0; i<data.length; i++){
 						var requestDate = data[i].inspectionRequestDate;
-						
 						//date 포맷 변경 yyyy-MM-dd hh:mm:ss
 						function formatDate(requestDate) {
 							var d = new Date(requestDate),
@@ -373,7 +373,6 @@ $(function(){
 						html += '<td>'+ data[i].insStart + '</td>';
 						html += '<td>'+ data[i].insEnd + '</td>';
 						html += '<td>'+ data[i].finalPassCheck + '</td>';
-						html += '<td>없음</td>';
 						html += '</tr>';
 
 						

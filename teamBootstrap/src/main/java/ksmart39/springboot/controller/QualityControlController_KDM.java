@@ -83,6 +83,9 @@ public class QualityControlController_KDM {
 		
 		log.info("화면에서 받아온 값: {}", searchMap);
 		List<Map<String, Object>> map = qualityInsMeasurementValueService.getQualityInspectionStatusNow(searchMap);
+		log.info("================================================");
+		log.info("실시간 검사 현황 DB조회된 값: {}", map);
+		log.info("================================================");
 		
 		return map;
 	}

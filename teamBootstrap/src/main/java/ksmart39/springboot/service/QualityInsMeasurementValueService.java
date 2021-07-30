@@ -50,7 +50,12 @@ public class QualityInsMeasurementValueService {
 
 	//품질검사 측정값 현황
 	public List<Map<String, Object>> getQualityInspectionStatusNow(Map<String, Object> searchMap){
-		return qualityInsMeasurementValueMapper.getQualityInspectionStatusNow(searchMap);
+		
+		List<Map<String, Object>> resultMap = null;
+		
+		resultMap = qualityInsMeasurementValueMapper.getQualityInspectionStatusNow(searchMap);
+		
+		return resultMap;
 	}
 	
 	//품질검사 측정값 목록
@@ -189,7 +194,7 @@ public class QualityInsMeasurementValueService {
 			log.info("06. 최종 결과값 set  :  {}", qualityInspectionResult.get(i));
 			
 			//06. Insert 실행
-			//qualityInsMeasurementValueMapper.addQualityRawMaterialInspectionResult(qualityInspectionResult.get(i));
+			qualityInsMeasurementValueMapper.addQualityRawMaterialInspectionResult(qualityInspectionResult.get(i));
 			
 			result = 1;			
 			//품질검사 3회차 결과값 입력시 실행되는
