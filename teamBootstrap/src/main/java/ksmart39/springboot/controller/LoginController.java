@@ -80,7 +80,7 @@ public class LoginController {
 			session.setAttribute("SLEVELNAME", loginEmployeeInfo.getHumanResourcesLevel().getLevelName());
 			session.setAttribute("SPOSTION", loginEmployeeInfo.getEmployeePosition());
 			log.info("session에 저장된 부서이름 :{}", session.getAttribute("SLEVELNAME"));
-			return "/main";
+			return "main";
 		}else {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out;
