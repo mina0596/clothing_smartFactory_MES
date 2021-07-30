@@ -76,6 +76,8 @@ public class QualityControlController_KDM {
 		return ContractNumMap;
 	}
 
+	//[]
+	
 	//[다미] 실시간 검사 현황
 	@PostMapping("/qualityInspectionStatusNow")
 	@ResponseBody
@@ -89,7 +91,6 @@ public class QualityControlController_KDM {
 		
 		return map;
 	}
-
 	
 	//[다미] 실시간 검사 현황
 	@GetMapping("/qualityInspectionStatusNow")
