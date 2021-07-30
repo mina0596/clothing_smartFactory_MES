@@ -33,9 +33,27 @@ public class SystemService {
 	
 	//============================================================
 	//[한빛]회원전체조회(levelName포함)
-	public List<HumanResources> getHumanResources(Map<String, Object> paramMap){
-		List<HumanResources> humanResources = systemMapper.getHumanResources(paramMap);
-		return humanResources;
+	public Map<String, Object> getHumanResources(Pagination paging){
+		
+		PageMaker pageMaker = new PageMaker();
+		
+	    pageMaker.setPaging(paging);
+	    
+	    pageMaker.setTotalCount(systemMapper.getHumanResourcesCount());
+	    
+	    Map<String, Object> paramMap = new HashMap<String, Object>();
+  		paramMap.put("rowStart", paging.getRowStart());
+  		paramMap.put("rowPerPage", paging.getRowPerPage());
+
+  		List<Map<String, HumanResources>> humanResourcesList = systemMapper.getHumanResources(paramMap);
+  		Map<String, Object> resultMap = new HashMap<String, Object>();
+  		resultMap.put("currentPage", paging.getCurrentPage());
+  		resultMap.put("humanResourcesList", humanResourcesList);
+  		resultMap.put("lastPage", pageMaker.getLastPage());
+  		resultMap.put("pageStartNum", pageMaker.getPageStartNum());
+  		resultMap.put("pageEndNum", pageMaker.getPageEndNum());
+
+	    return resultMap;
 	}
 	//[한빛] 회원정보 등록
 	public int addHumanResources (HumanResources humanResources) {
@@ -65,6 +83,7 @@ public class SystemService {
 		
 		PageMaker pageMaker = new PageMaker();
 		
+		paging.setRowPerPage(10);
 	    pageMaker.setPaging(paging);
 	    
 	    pageMaker.setTotalCount(systemMapper.getClientCount());

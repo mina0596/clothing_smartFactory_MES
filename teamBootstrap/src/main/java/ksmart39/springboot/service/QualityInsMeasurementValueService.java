@@ -50,7 +50,22 @@ public class QualityInsMeasurementValueService {
 
 	//품질검사 측정값 현황
 	public List<Map<String, Object>> getQualityInspectionStatusNow(Map<String, Object> searchMap){
-		return qualityInsMeasurementValueMapper.getQualityInspectionStatusNow(searchMap);
+		
+		List<Map<String, Object>> resultMap = null;		
+		String contractNum = (String) searchMap.get("contractNum");
+		
+		resultMap = qualityInsMeasurementValueMapper.getQualityInspectionStatusNow(searchMap);
+
+		
+		Map<String, Object> failCountMap = qualityInsMeasurementValueMapper.getFailCountByHighInspection(contractNum);
+		Map<String, Object> passCountMap = qualityInsMeasurementValueMapper.getPassOrFailCount(contractNum);
+		Map<String, Object> allCountMap = qualityInsMeasurementValueMapper.getAllCount(contractNum);
+		
+		
+		resultMap.add(failCountMap);
+		resultMap.add(passCountMap);
+		
+		return resultMap;
 	}
 	
 	//품질검사 측정값 목록
@@ -189,7 +204,7 @@ public class QualityInsMeasurementValueService {
 			log.info("06. 최종 결과값 set  :  {}", qualityInspectionResult.get(i));
 			
 			//06. Insert 실행
-			//qualityInsMeasurementValueMapper.addQualityRawMaterialInspectionResult(qualityInspectionResult.get(i));
+			qualityInsMeasurementValueMapper.addQualityRawMaterialInspectionResult(qualityInspectionResult.get(i));
 			
 			result = 1;			
 			//품질검사 3회차 결과값 입력시 실행되는
@@ -201,28 +216,26 @@ public class QualityInsMeasurementValueService {
 
 			String inspectionCode = qualityInspectionResult.get(i).getQualityInspectionCode();
 			String inspectionRequestCode = qualityInspectionResult.get(i).getQualityInspectionRequestCode();
-			Map<String,Object> finalResultParams = finalResultMapper.getMaxMeasurementNum(inspectionRequestCode); 
-			log.info("회차와 검사에 대한 시간 정보 가져오는 메서드 실행값 : {}", finalResultParams);
-			String maxNum = (String) finalResultParams.get("maxNum"); 
-			log.info("회차와 검사에 대한 시간 정보 가져오는 회차 맥스값 : {}", maxNum);
-			
-			if(maxNum.equals("3회차")) {
-				//최종결과값 가져오는 메서드 실행결과 담기
-				String finalResult = finalResultMapper.getFinalInspectionResult(inspectionRequestCode);
-				log.info("인터페이스에 존재하는 최종결과값 가져오는 메서드를 실행해서 받아오는 결과값 :{}", finalResult);
+			String existance = finalResultMapper.checkRequestExistanceInResult(inspectionRequestCode);
+			if(existance.equals("exist")) {
+				Map<String,Object> finalResultParams = finalResultMapper.getMaxMeasurementNum(inspectionRequestCode); 
+				log.info("회차와 검사에 대한 시간 정보 가져오는 메서드 실행값 : {}", finalResultParams);
+				String maxNum = (String) finalResultParams.get("maxNum"); 
+				log.info("회차와 검사에 대한 시간 정보 가져오는 회차 맥스값 : {}", maxNum);
 				
-				//최종결과에 넣어주기 위한 데이터들 setter에 넣어주기
-				finalResultMap.setChargeEmployeeCode((String) session.getAttribute("SCODE"));
-				finalResultMap.setInspectionEndDate((String) finalResultParams.get("finishDate"));
-				//Integer.parseInt(String.valueOf(finalResultParams.get("duration")));
-				finalResultMap.setInspectionDuration(Integer.parseInt(String.valueOf(finalResultParams.get("duration"))));
-				finalResultMap.setInspectionStartDate((String) finalResultParams.get("startDate"));
-				finalResultMap.setQualityInspectionRequestCode(inspectionRequestCode);
-				finalResultMap.setQualityInspectionCode(inspectionCode);
-					
-					finalResultMapper.insertFinalResult(finalResultMap);
-			}	
-		  
+				if(maxNum.equals("3회차")) {
+					//최종결과에 넣어주기 위한 데이터들 setter에 넣어주기
+					finalResultMap.setChargeEmployeeCode((String) session.getAttribute("SCODE"));
+					finalResultMap.setInspectionEndDate((String) finalResultParams.get("finishDate"));
+					//Integer.parseInt(String.valueOf(finalResultParams.get("duration")));
+					finalResultMap.setInspectionDuration(Integer.parseInt(String.valueOf(finalResultParams.get("duration"))));
+					finalResultMap.setInspectionStartDate((String) finalResultParams.get("startDate"));
+					finalResultMap.setQualityInspectionRequestCode(inspectionRequestCode);
+					finalResultMap.setQualityInspectionCode(inspectionCode);
+						
+						finalResultMapper.insertFinalResult(finalResultMap);
+				}	
+			}
 		  }
 		
 		return result;	

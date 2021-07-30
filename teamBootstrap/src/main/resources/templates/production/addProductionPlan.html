@@ -61,14 +61,14 @@ layout:decorate="@{layout/default_production}">
 					<div class="form-group">
 						 <label class="col-lg-2 col-sm-2 control-label">담당 사원명</label>
 						    <div class="col-lg-2">
-						       <input name="chargeEmployeeName" class="form-control" value="김다미" readonly="readonly">
+						       <input name="chargeEmployeeName" class="form-control" th:value="${session.SNAME}" readonly="readonly">
 						    </div>
 					</div>
 						        
 					<div class="form-group">
 						<label class="col-lg-2 col-sm-2 control-label">담당자 사원 코드</label>
 						 <div class="col-lg-2">
-						       <input name="chargeEmployeeCode" class="form-control" value="E0011" readonly="readonly">
+						       <input name="chargeEmployeeCode" class="form-control" th:value="${session.SCODE}" readonly="readonly">
 						 </div>
 					</div>
            

@@ -15,8 +15,8 @@
 	<select id="getCompletedProductInfo" resultType="CompletedProduct">
 		SELECT
 			requested_product_code AS requestedProductCode,
-			MIN(process_start_date) AS productionStartDate,
-			MAX(completed_product_update_date) AS productionFinishDate
+			date_format(MIN(process_start_date), '%Y-%m-%d %T') AS productionStartDate,
+			date_format(MAX(completed_product_update_date), '%Y-%m-%d %T') AS productionFinishDate
 		FROM
 			product_production_process_status
 		where requested_product_code IN (SELECT
@@ -55,10 +55,10 @@
 	
 	<select id="getCompletedProductList" resultType="map">
 		SELECT 
-			pss.requested_product_code			AS productCode, 
-			pss.production_start_date			AS startDate, 
-			pss.production_finish_date			AS finishDate, 
-			rpd.requested_due_date				AS dueDate,
+			pss.requested_product_code								AS productCode, 
+			date_format(pss.production_start_date, '%Y-%m-%d %T')	AS startDate, 
+			date_format(pss.production_finish_date, '%Y-%m-%d %T')	AS finishDate, 
+			date_format(rpd.requested_due_date, '%Y-%m-%d %T')		AS dueDate,
 			pDetail.gender_categorized_name		AS suitType,
 			pDetail.detailed_categorized_name	AS productType,
 			rpd.contract_code					AS contractCode,

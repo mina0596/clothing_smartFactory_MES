@@ -129,37 +129,84 @@
 		</trim>
 	</select>
 	
+	<!--실시간 검사 현황 리스트 위에 넣을 데이터들 -->
+	<select id="getAllCount" resultType="Map" parameterType="String">
+		SELECT
+				DISTINCT 
+					(select
+		 				COUNT(*)
+					 from
+		 				inspection_result AS i
+		 			WHERE
+		 				i.inspection_measurement_num = '1회차') AS progressRate
+					,
+					(select
+						COUNT(*)
+						from
+							inspection_final_result AS i
+						WHERE 
+							i.low_cate_final_pass_check='합격') AS finalPassCount
+					,(select
+						COUNT(*)
+						from
+							inspection_final_result AS i
+						WHERE 
+							i.low_cate_final_pass_check='불합격') AS finalFailCount
+					,(SELECT
+						COUNT(*)
+						FROM
+						quality_inspection_request AS q) AS requestCount
+					,(SELECT
+						COUNT(*)
+						FROM
+						inspection_final_result AS f) AS finalCompleteCount
+		FROM
+			quality_inspection_request AS aa
+		WHERE
+			aa.requested_product_code IN (SELECT 
+												bb.requested_product_code 
+											FROM 
+												requested_product_detail AS bb 
+												WHERE bb.contract_code = #{contractNum})
+	</select>
+	
+	<!-- 전체 합/불별 건수 -->
+	<select id="getPassOrFailCount" resultType="Map" parameterType="String">
+		SELECT
+			COUNT(case when ref.low_cate_final_pass_check='합격' then 1 end) AS pass
+			,COUNT(case when ref.low_cate_final_pass_check='불합격' then 1 end) AS fail
+		FROM
+			requested_product_detail AS p
+		INNER JOIN
+			quality_inspection_request AS q ON p.requested_product_code = q.requested_product_code
+		LEFT JOIN
+			inspection_final_result AS ref ON q.quality_inspection_request_code = ref.quality_inspection_request_code
+		WHERE
+			p.contract_code = #{contractNum};
+	</select>
+	
+	<!-- 공정별 불량건수 -->
+	<select id="getFailCountByHighInspection" resultType="Map" parameterType="String">
+		SELECT
+			COUNT(case when SUBSTRING(ref.quality_inspection_code,1,3)='A01' then 1 end) AS A01
+			,COUNT(case when SUBSTRING(ref.quality_inspection_code,1,3)='A02' then 1 end) AS A02
+			,COUNT(case when SUBSTRING(ref.quality_inspection_code,1,3)='A03' then 1 end) AS A03
+		FROM
+			requested_product_detail AS p
+		INNER JOIN
+			quality_inspection_request AS q ON p.requested_product_code = q.requested_product_code
+		LEFT JOIN
+			inspection_final_result AS ref ON q.quality_inspection_request_code = ref.quality_inspection_request_code
+		WHERE
+			p.contract_code = #{contractNum}
+		AND
+			ref.low_cate_final_pass_check='불합격';	
+	</select>
+	
 	<!-- 품질검사 현황 -->
 	<select id="getQualityInspectionStatusNow" resultType="Map" parameterType="Map">
 		SELECT
-			(select
- 				COUNT(*)
-			 from
- 				inspection_result AS i
- 			WHERE
- 				i.inspection_measurement_num = '1회차') AS 'progressRate'
-			,
-			(select
-				COUNT(*)
-				from
-					inspection_final_result AS i
-				WHERE 
-					i.low_cate_final_pass_check='합격') AS finalPassCount
-			,(select
-				COUNT(*)
-				from
-					inspection_final_result AS i
-				WHERE 
-					i.low_cate_final_pass_check='불합격') AS finalFailCount
-			,(SELECT
-				COUNT(*)
-				FROM
-				quality_inspection_request AS q) AS requestCount
-			,(SELECT
-				COUNT(*)
-				FROM
-				inspection_final_result AS f) AS finalCompleteCount
-			,re.quality_inspection_request_code AS inspectionRequestCode
+			re.quality_inspection_request_code AS inspectionRequestCode
 			,high.high_class_name AS highClassName
 			,med.med_class_name AS medClassName
 			,low.low_class_name AS lowClassName

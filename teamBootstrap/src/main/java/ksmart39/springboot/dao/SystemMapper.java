@@ -20,32 +20,33 @@ import ksmart39.springboot.domain.SubClassInspection;
 public interface SystemMapper {
 
 	/****************************************************************************/
-	
-	//회원전체조회(levelName포함)
-	public List<HumanResources> getHumanResources(Map<String, Object> paramMap);
-	//회원가입
+	//[한빛] 테이블 행의 개수 조회
+	public int getHumanResourcesCount();
+	//[한빛]회원전체조회(levelName포함)
+	public List<Map<String,HumanResources>> getHumanResources(Map<String, Object> paramMap);
+	//[한빛]회원가입
 	public int addHumanResources(HumanResources humanResources);	
-	//회원정보 조회
+	//[한빛]회원정보 조회
 	public HumanResources getEmployeeInfoById(String employeeId);	
-	//회원정보 조회
+	//[한빛]회원정보 조회
 	public HumanResources getEmployeeInfoByCode(String employeeCode);	
-	//회원정보 수정
+	//[한빛]회원정보 수정
 	public int modifyHumanResources(HumanResources humanResources);
-	//회원정보 삭제
+	//[한빛]회원정보 삭제
 	public int deleteHumanResources(List<String> delArr);
 
 	/****************************************************************************/
-	//거래처 테이블 행의 개수 조회(페이징 처리)
+	//[한빛]거래처 테이블 행의 개수 조회(페이징 처리)
 	public int getClientCount();	
 	//[한빛] 거래처 전체조회
 	public List<Map<String,Client>> getClient(Map<String, Object> paramMap);
-	//거래처 등록
+	//[한빛]거래처 등록
 	public int addClient (Client client);
-	//거래처 수정
+	//[한빛]거래처 수정
 	public int modifyClient(Client client);
-	//거래처 정보 가져오기 (뿌려진 화면에서)
+	//[한빛]거래처 정보 가져오기 (뿌려진 화면에서)
 	public Client getClientInfoByCode(String clientCode);
-	//거래처 삭제
+	//[한빛]거래처 삭제
 	public int deleteClient(List<String> delArr);
 
 	/****************************************************************************/
