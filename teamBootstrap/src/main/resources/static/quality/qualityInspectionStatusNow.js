@@ -312,13 +312,15 @@ $(function(){
 					progressBar += '<div class="progress-bar" role="progressbar" aria-valuenow="' + completeRate +'" aria-valuemin="0"'; 
 					progressBar += 'aria-valuemax="100" style="width: ' + completeRate +'%"><span class="sr-only">' + completeRate +'% Complete</span>';
 					
-					
+					//1번째 차트
 					chart1.data.datasets[0].data=[progressRate, completeRate];
 					chart1.update();
 					
+					//2번째 차트
 					chart2.data.datasets[0].data=[12, 15];
 					chart2.update();
 					
+					//3번째 차트
 					chart3.data.datasets[0].data=[11, 33, 22];
 					chart3.update();
 					
