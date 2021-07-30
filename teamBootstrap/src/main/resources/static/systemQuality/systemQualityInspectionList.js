@@ -19,7 +19,7 @@ $(function(){
 		}else{
 			var chk= confirm("정말로삭제하시겠습니까?");
 			var request = $.ajax({
-				typ:"POST",
+				type:"POST",
 				url:"/system/deleteInspection",
 				data:{'checkArray':checkArray}
 			});

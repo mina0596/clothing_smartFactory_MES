@@ -2,6 +2,101 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ksmart39.springboot.dao.ShipmentMapper">
 <!--  -->
+<!-- 출하지시 등록시  의뢰품목코드 중복체크 -->
+<select id="checkProduct"  parameterType="String" resultType="Integer" >
+SELECT
+	 COUNT(*) 
+	FROM
+		shipment_order AS s
+	
+	WHERE 
+	s.requested_product_code =#{shipmentOrderProduectCode}
+</select>
+
+
+<!--출하지시등록  -->
+<insert id="addShipmentOrder" parameterType="map">
+INSERT INTO shipment_order
+	(shipment_order_code, requested_product_code,
+	 charge_employee_code,
+	 shipment_order_group_code,
+	 shipment_order_date,
+	 shipment_order_product_name,
+	  shipment_order_contract_state, 
+	  shipment_order_reg_date, 
+	  shipment_order_reg_update_date)
+	VALUES (sf_shipmentOrder2(),
+	 #{shipmentOrderProduectCode},
+	  'E0017',
+	  sf_shipmentOrderGroup(#{shipmentRequestCode}),
+	  #{shipmentOrderDate},
+	  #{shipmentOrderProductName} ,
+	   #{contractState},
+	  NOW(), 
+	NOW())
+
+
+</insert>
+
+
+<!--출하등록 완성품목록 거래처 조회 -->
+<select id="searchCompletClientName" resultType="map">
+	SELECT
+	r.product_request_code AS requestCode,
+	c.requested_product_code AS requestProductCode,
+	r.contract_code AS contractCode,
+	cl.client_name AS clientName,
+	p.detailed_categorized_name AS productName,
+	r.requested_delivery_address AS deliveryAddress,
+	r.requested_delivery_tel AS deliveryTel,
+	DATE_Format(c.completed_product_reg_date, '%Y-%m-%d %T') AS completeRegDate
+	FROM
+	completed_product_list AS c
+	INNER JOIN
+	requested_product_detail AS r
+	ON c.requested_product_code = r.requested_product_code
+	INNER JOIN
+	client_info AS cl
+	ON r.client_code = cl.client_code
+	INNER JOIN
+	product_code_detail AS p
+	ON r.product_code = p.product_code
+	<trim prefix="WHERE" >	
+	<if test="clientName != null and clientName != ''.toString()">	
+	cl.client_name LIKE CONCAT ('%',#{clientName},'%')
+	</if>
+	</trim>
+	ORDER BY r.product_request_code;
+</select>
+<!--출하등록 완성품목록 계약코드 조회 -->
+<select id="searchCompletContract" resultType="map">
+	SELECT
+	r.product_request_code AS requestCode,
+	c.requested_product_code AS requestProductCode,
+	r.contract_code AS contractCode,
+	cl.client_name AS clientName,
+	p.detailed_categorized_name AS productName,
+	r.requested_delivery_address AS deliveryAddress,
+	r.requested_delivery_tel AS deliveryTel,
+	DATE_Format(c.completed_product_reg_date, '%Y-%m-%d %T') AS completeRegDate
+	FROM
+	completed_product_list AS c
+	INNER JOIN
+	requested_product_detail AS r
+	ON c.requested_product_code = r.requested_product_code
+	INNER JOIN
+	client_info AS cl
+	ON r.client_code = cl.client_code
+	INNER JOIN
+	product_code_detail AS p
+	ON r.product_code = p.product_code
+	<trim prefix="WHERE" >	
+	<if test="contractCode != null and contractCode != ''.toString()">	
+	 r.contract_code LIKE CONCAT ('%',#{contractCode},'%')
+	</if>
+	</trim>
+	ORDER BY 	r.product_request_code
+</select>
 
 <!-- 출하지시 조회 -->
 <select id="getsearchShipmentOrder" parameterType="hashmap" resultType="map">

@@ -62,6 +62,7 @@ public class QualityControlController_HBR {
 	//[다미&보람]수주계약별 검색 품질검사 현황
 		@GetMapping("/qualityInspectionStatusContract")
 		public String qualityInspectionStatusContract(Model model) {
+			//등급별
 			List<Map<String, Object>> inspectionStateList = qualityInsepctionStauteService.getStateBuyerContractQualityInspection();
 			
 			model.addAttribute("inspectionStateList", inspectionStateList);

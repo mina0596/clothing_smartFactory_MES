@@ -22,6 +22,15 @@ public interface QualityInsMeasurementValueMapper {
 	//계약번호 검색
 	public List<Map<String, Object>> searchByContractNum(Map<String, Object> searchByContractNum);
 	
+	//실시간 검사 현황 리스트 위에 넣을 데이터들
+	public Map<String, Object> getAllCount(String contractNum);
+	
+	//전체 합/불별 건수
+	public Map<String, Object> getPassOrFailCount(String contractNum);
+	
+	//공정별 불량건수
+	public Map<String, Object> getFailCountByHighInspection(String contractNum);
+	
 	//품질검사 현황
 	public List<Map<String, Object>> getQualityInspectionStatusNow(Map<String, Object> searchMap);
 	
