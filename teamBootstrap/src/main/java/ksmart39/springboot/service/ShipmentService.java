@@ -6,25 +6,39 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ksmart39.springboot.dao.ShipmentMapper;
+import ksmart39.springboot.domain.ShipmentOrder;
 
 @Service
 public class ShipmentService {
 	
 	@Autowired
 	private ShipmentMapper shipmentMapper;
+	//[출하지시 수정]
+	public int modifyShipmentOrder(ShipmentOrder shipmentOrder) {
+		return shipmentMapper.modifyShipmentOrder(shipmentOrder);
+	}
+	
+	//[보람] 출하지시 정보  
+	public ShipmentOrder shipmentOrderInfo(String shipmentOrderCode){
+		return shipmentMapper.shipmentOrderInfo(shipmentOrderCode);
+	}
+	
+
 	//출하지시 등록시 의뢰품목코드 중복확인
 	public int checkProduct(String shipmentOrderProduectCode){
 	return shipmentMapper.checkProduct(shipmentOrderProduectCode);
 	}
 	//[보람 ]출하지시 등록
-	public int addShipmentOrder(String shipmentRequestCode,String shipmentOrderProduectCode,String shipmentOrderProductName,String contractState,String shipmentOrderDate) {
+	public int addShipmentOrder(String shipmentRequestCode,String shipmentOrderProduectCode,String shipmentOrderProductName,String contractState,String chargeEmployeeCode,String shipmentOrderDate) {
 		Map<String, Object> shipmentOrderMap = new HashMap<String,Object>();
 		shipmentOrderMap.put("shipmentRequestCode", shipmentRequestCode);
 		shipmentOrderMap.put("shipmentOrderProduectCode", shipmentOrderProduectCode);
 		shipmentOrderMap.put("shipmentOrderProductName", shipmentOrderProductName);
 		shipmentOrderMap.put("contractState", contractState);
+		shipmentOrderMap.put("chargeEmployeeCode", chargeEmployeeCode);
 		shipmentOrderMap.put("shipmentOrderDate", shipmentOrderDate);
 		return shipmentMapper.addShipmentOrder(shipmentOrderMap);
 		

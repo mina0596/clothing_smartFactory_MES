@@ -6,8 +6,14 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import ksmart39.springboot.domain.ShipmentOrder;
+
 @Mapper
 public interface ShipmentMapper {
+	//[출하지시 수정]
+	public int modifyShipmentOrder(ShipmentOrder shipmentOrder);
+	//[보람]출하지시 정보 
+	public ShipmentOrder shipmentOrderInfo(String shipmentOrderCode);
 	//출하지시 등록시 의뢰품목코드 중복체크
 	public int checkProduct(String shipmentOrderProduectCode);
 	//[보람] 출하지시
