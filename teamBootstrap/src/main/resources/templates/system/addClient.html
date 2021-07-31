@@ -21,7 +21,7 @@ layout:decorate="@{layout/default_system}">
 	                  <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">구분</label>
 	                  <div class="col-sm-2">
 	                      <select name = "clientCategory" class="form-control">
-							<option>::선택::</option>
+							<option value ="선택">::선택::</option>
 							<option value = "수주">수주</option>
 							<option value = "발주">발주</option>
 							<option value = "운송">운송</option>
@@ -92,16 +92,21 @@ layout:decorate="@{layout/default_system}">
 	<script type="text/javascript">
 		$(function(){
 			$('#addBtn').click(function(){
+				var clientCategory = $('input[name=clientCategory]').val();
 				var clientName = $('input[name=clientName]').val();
 				var clientTel = $('input[name=clientTel]').val();
 				var clientCeo = $('input[name=clientCeo]').val();
 				var clientEmployee = $('input[name=clientEmployee]').val();
 				var clientBusinessNum = $('input[name=clientBusinessNum]').val();
 				var clientAddress = $('input[name=clientAddress]').val();
-				var addAccountCate = $('#addAccountCate');
 				var submitFlag = true;
 			
-				if(clientName == null || clientName == undefined || clientName == ''){			
+				if($('select[name=clientCategory]').val() == '선택'){			
+					alert('구분을 선택해주세요.');
+					$('input[name=clientCategory]').focus();
+					submitFlag = false;
+					return submitFlag;
+				}else if(clientName == null || clientName == undefined || clientName == ''){			
 					alert('회사명을 입력해주세요.');
 					$('input[name=clientName]').focus();
 					submitFlag = false;

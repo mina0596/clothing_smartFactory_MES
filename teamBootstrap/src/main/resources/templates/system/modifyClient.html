@@ -75,7 +75,7 @@ layout:decorate="@{layout/default_system}">
                     <label class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">주소</font></font></label>
                     <div class="col-lg-6">
                        <input class="form-control "  type="text"  placeholder="지번"  id="zip">
-                      <input class="form-control " name="clientAddress" type="text"  placeholder="주소" id ="addr1">
+                      <input class="form-control " name="clientAddress" type="text"   th:value="${client.clientAddress}" placeholder="주소" id ="addr1">
                       <input class="form-control " name="clientAddress" type="text"  placeholder="상세주소" id ="addr2">
 					<a type="button"  class="btn btn-theme" onclick="execDaumPostcode()"> 주소 검색 </a>
                     </div>
@@ -99,6 +99,7 @@ layout:decorate="@{layout/default_system}">
 	<script type="text/javascript">
 		$(function(){
 			$('#addBtn').click(function(){
+				var clientCategory = $('input[name=clientCategory]').val();
 				var clientName = $('input[name=clientName]').val();
 				var clientTel = $('input[name=clientTel]').val();
 				var clientCeo = $('input[name=clientCeo]').val();
@@ -108,7 +109,12 @@ layout:decorate="@{layout/default_system}">
 				var addAccountCate = $('#addAccountCate');
 				var submitFlag = true;
 			
-				if(clientName == null || clientName == undefined || clientName == ''){			
+				if($('select[name=clientCategory]').val() == '선택'){			
+					alert('구분을 선택해주세요.');
+					$('input[name=clientCategory]').focus();
+					submitFlag = false;
+					return submitFlag;
+				}else if(clientName == null || clientName == undefined || clientName == ''){			
 					alert('회사명을 입력해주세요.');
 					$('input[name=clientName]').focus();
 					submitFlag = false;
@@ -181,6 +187,7 @@ layout:decorate="@{layout/default_system}">
 	    }
 	    
 	</script>
+	
 </th:block>
 
 </html>

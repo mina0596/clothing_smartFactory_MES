@@ -20,7 +20,7 @@ layout:decorate="@{layout/default_system}">
                     <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">권한</label>
                      <div class="col-sm-2">
                       <select class="form-control" name = "levelNum" >
-						<option>::선택::</option>
+						<option value = "선택">::선택::</option>
 						<option value="1">관리자</option>					
 						<option value="2">본사직원</option>
 						<option value="3">공장직원</option>
@@ -32,7 +32,7 @@ layout:decorate="@{layout/default_system}">
                   <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">소속</label>
                   <div class="col-sm-2">
                       <select class="form-control"  name = "employeeDepartment">
-						<option>::선택::</option>
+						<option value = "선택">::선택::</option>
 						<option value = "본사">본사</option>
 						<option value = "공장">공장</option>
 		               </select>
@@ -43,7 +43,7 @@ layout:decorate="@{layout/default_system}">
                   <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">직책</label>
                   <div class="col-sm-2">
                       <select class="form-control" name = "employeePosition">
-						<option>::선택::</option>
+						<option value = "선택">::선택::</option>
 						<option value = "사원">사원</option>
 						<option value = "주임">주임</option>
 						<option value = "대리">대리</option>
@@ -136,18 +136,40 @@ layout:decorate="@{layout/default_system}">
 	<script>
 	$(function(){
 		$('#addBtn').click(function(){
+			var levelNum = $('input[name=levelNum]').val();
+			var employeeDepartment = $('input[name=employeeDepartment]').val();
+			var employeePosition = $('input[name=employeePosition]').val();
 			var employeeId = $('input[name=employeeId]').val();
 			var employeePw = $('input[name=employeePw]').val();
 			var employeeName = $('input[name=employeeName]').val();
 			var employeeEmail = $('input[name=employeeEmail]').val();
 			var employeeTel = $('input[name=employeeTel]').val();
 			var employeeAddress = $('input[name=employeeAddress]').val();
-			var addAccountCate = $('#addAccountCate');
 			var submitFlag = true;
 		
-			if(employeeId == null || employeeId == undefined || employeeId == ''){			
+			if($('select[name=levelNum]').val() == '선택'){			
+				alert('권한을 입력해주세요.');
+				$('input[name=levelNum]').focus();
+				submitFlag = false;
+				return submitFlag;
+			}else if($('select[name=employeeDepartment]').val() == '선택'){
+				alert('부서를 입력해주세요.');
+				$('input[name=employeeDepartment]').focus();
+				submitFlag = false;
+				return submitFlag;
+			}else if($('select[name=employeePosition]').val() == '선택'){
+				alert('직위를 입력해주세요.');
+				$('input[name=employeePosition]').focus();
+				submitFlag = false;
+				return submitFlag;
+			}else if(employeeId == null || employeeId == undefined || employeeId == ''){
 				alert('아이디를 입력해주세요.');
 				$('input[name=employeeId]').focus();
+				submitFlag = false;
+				return submitFlag;
+			}else if(employeePw == null || employeePw == undefined || employeePw == ''){
+				alert('비밀번호를 입력해주세요.');
+				$('input[name=employeePw]').focus();
 				submitFlag = false;
 				return submitFlag;
 			}else if(employeePw == null || employeePw == undefined || employeePw == ''){

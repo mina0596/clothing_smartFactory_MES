@@ -101,14 +101,9 @@ public class ContractController_LHB {
 	
 	//[한빛]수주계약 조회
 	@GetMapping("/buyerContractList")
-	public String getBuyerContractList(Model model, Pagination paging) {
-	    Map<String, Object> resultMap = contractService.getBuyerContract(paging);
-	    model.addAttribute("buyerContractList", 					resultMap.get("clientList"));
-	    model.addAttribute("currentPage", 							resultMap.get("currentPage"));
-		model.addAttribute("lastPage", 								resultMap.get("lastPage"));
-		model.addAttribute("pageStartNum", 						resultMap.get("pageStartNum"));
-		model.addAttribute("pageEndNum", 						resultMap.get("pageEndNum"));
-
+	public String getBuyerContract(Model model) {
+		List<Map<String, Object>> buyerContractList = contractService.getBuyerContract();
+		model.addAttribute("buyerContractList", buyerContractList);
 		return "contract/buyerContractList";
 	}
 	
