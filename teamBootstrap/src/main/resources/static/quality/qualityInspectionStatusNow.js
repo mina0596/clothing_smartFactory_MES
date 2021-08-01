@@ -261,7 +261,7 @@ $(function(){
 	
 	//품질검사 현황 조회
 	$(document).on('click','#searchBtn',function(){
-		
+		searchObj = {};
 		//완료율 바
 		var progressBar = '';
 		var statusElement = $('#statusElement').find('input, select');
@@ -281,7 +281,7 @@ $(function(){
 				if(searchValue != null && searchValue != undefined && searchValue != ''){
 					searchObj[searchkey] = searchValue;
 				}
-				//console.log(searchObj);
+				console.log(searchObj);
 			});
 			
 
@@ -294,29 +294,84 @@ $(function(){
 			});
 			
 			request.done(function( data ) {
-				console.log(data);
-				
+				$('.removeTr').remove();
+				//console.log(data);
+				//수주계약번호		
+				contractCode = $('input[name="contractNum"]').val();
 				
 				var request = $.ajax({
 					  url: "/quality/qualityInspectionStatusNow",
 					  method: "POST",
-					  data: { contractNum: $('input[name="contractNum"]').val()},
+					  data: { contractNum: contractCode},
 					  dataType: "json"
 					});
 					 
 					request.done(function( msg ) {
-						console.log(msg);
+						//console.log(msg);			
+						//원래 있던 progressBar 지우기
+						$('#originalProgressBar').remove();
+						//새로 생성된 progressBar 리셋
+						$('.progress-bar').remove();
+						
+						if(msg.length>0){
+							
+							//공정별 불합격-수입검사
+							A01 = msg[0].A01;
+							//공정별 불합격-공정검사
+							A02 = msg[0].A02;
+							//공정별 불합격-완제품검사
+							A03 = msg[0].A03;
+							//최종 합격 건수
+							allPassCount = msg[1].pass;
+							//최종 불합격 건수
+							allFailCount = msg[1].fail;
+							//품질검사 요청 총갯수
+							requestCount = msg[2].requestCount;
+							//최종 불합격 총갯수
+							finalFailCount = msg[2].finalFailCount;
+							//최종 합격 총갯수
+							finalPassCount = msg[2].finalPassCount;
+							//최종 완료 갯수
+							finalCompleteCount = msg[2].finalCompleteCount;
+							//완료율(반올림)
+							completeRate = Math.round((finalCompleteCount*100)/requestCount);
+							//진행건수
+							progressRate = msg[2].progressRate;
+							//완료율바
+							progressBar += '<div class="progress-bar" role="progressbar" aria-valuenow="' + completeRate +'" aria-valuemin="0"'; 
+							progressBar += 'aria-valuemax="100" style="width: ' + completeRate +'%"><span class="sr-only">' + completeRate +'% Complete</span>';
+							
+							$('#stateMain').val(contractCode);
+							$('#requestCount').val(requestCount);
+							$('#finalCompleteCount').val(finalCompleteCount);
+							$('#completeRate').val(completeRate);
+							$('#progressRate').val(progressRate);
+							$('#progressBar').append(progressBar);
+							
+							//1번째 차트
+							chart1.data.datasets[0].data=[progressRate, completeRate];
+							chart1.data.labels=['완료 : '+progressRate,'진행율 : '+completeRate];
+							chart1.update();
+							
+							//2번째 차트
+							chart2.data.datasets[0].data=[allPassCount, allFailCount];
+							chart2.data.labels=['합격 : '+allPassCount,'불합격 : '+allFailCount];
+							chart2.update();
+							
+							//3번째 차트
+							chart3.data.datasets[0].data=[A01, A02, A03];
+							chart3.data.labels=['수입검사 : '+A01,'공정검사 : '+A02,'완제품검사 : '+A03];
+							chart3.update();
+						}else{
+							alert('검색조건을 확인해주세요.');
+						}
 					});
 					 
 					request.fail(function( jqXHR, textStatus ) {
 					  alert( "Request failed: " + textStatus );
 					});
 				
-				$('.removeTr').remove();
-				//원래 있던 progressBar 지우기
-				$('#originalProgressBar').remove();
-				//새로 생성된 progressBar 리셋
-				$('.progress-bar').remove();
+
 				
 				if(data.length > 0){
 					var html = '';
@@ -360,42 +415,16 @@ $(function(){
 						html += '<td>'+ data[i].insEnd + '</td>';
 						html += '<td>'+ data[i].finalPassCheck + '</td>';
 						html += '</tr>';
-
-						
 					}
 				}else{
 					html += '<tr class="removeTr"><td colspan="15" style="text-align:center;">조회 결과가 없습니다.</td></tr>';
 				}
-				$('#mainTbody').append(html);
-				
-				//1번째 차트
-				chart1.data.datasets[0].data=[progressRate, completeRate];
-				chart1.data.labels=['완료 : '+progressRate,'진행율 : '+completeRate];
-				chart1.update();
-				
-				//2번째 차트
-				chart2.data.datasets[0].data=[allPassCount, allFailCount];
-				chart2.data.labels=['합격 : '+allPassCount,'불합격 : '+allFailCount];
-				chart2.update();
-				
-				//3번째 차트
-				chart3.data.datasets[0].data=[A01, A02, A03];
-				chart3.data.labels=['수입검사 : '+A01,'공정검사 : '+A02,'완제품검사 : '+A03];
-				chart3.update();
+				$('#mainTbody').append(html);				
 			});
 			
 			request.fail(function( jqXHR, textStatus ) {
 				alert( "Request failed: " + textStatus );
 			});
-		}
-		
-	});
-
-	
-
-	
-
-	
-
-	
+		}		
+	});	
 });

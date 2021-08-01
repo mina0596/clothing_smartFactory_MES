@@ -261,7 +261,7 @@
 				AND pc.gender_categorized_name LIKE CONCAT ('%', #{genderCate} ,'%')
 			</if>		
 			<if test="productCode != null and productCode != ''.toString()">
-				AND pc.detailed_categorized_code LIKE CONCAT ('%', #{productCode} ,'%')
+				AND pc.product_code LIKE CONCAT ('%', #{productCode} ,'%')
 			</if>		
 			<if test="inspectionCode != null and inspectionCode != ''.toString()">
 				AND sub.quality_inspection_code LIKE CONCAT ('%', #{inspectionCode} ,'%')

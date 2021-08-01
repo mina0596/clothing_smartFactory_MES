@@ -53,19 +53,14 @@ public class QualityInsMeasurementValueService {
 	public List<Map<String, Object>> getQualityInspectionStatusNow(String contractNum){
 		List<Map<String, Object>> resultMap = new ArrayList<Map<String,Object>>();
 		
+		//공정별 불합격 갯수
 		Map<String, Object> failCountMap = qualityInsMeasurementValueMapper.getFailCountByHighInspection(contractNum);
-		Map<String, Object> passCountMap = qualityInsMeasurementValueMapper.getPassOrFailCount(contractNum);
-		Map<String, Object> allCountMap = qualityInsMeasurementValueMapper.getAllCount(contractNum);
 		
-		log.info("================================================");
-		log.info("DB조회한 값failCountMap: {}", failCountMap);
-		log.info("================================================");
-		log.info("================================================");
-		log.info("DB조회한 값passCountMap: {}", passCountMap);
-		log.info("================================================");
-		log.info("================================================");
-		log.info("DB조회한 값allCountMap: {}", allCountMap);
-		log.info("================================================");
+		//최종 합격,불합격
+		Map<String, Object> passCountMap = qualityInsMeasurementValueMapper.getPassOrFailCount(contractNum);
+		
+		//요청,진행,완료,완료율,현황
+		Map<String, Object> allCountMap = qualityInsMeasurementValueMapper.getAllCount(contractNum);
 		
 		resultMap.add(failCountMap);
 		resultMap.add(passCountMap);
