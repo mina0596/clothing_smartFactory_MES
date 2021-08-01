@@ -16,6 +16,12 @@ public class ShipmentService {
 	
 	@Autowired
 	private ShipmentMapper shipmentMapper;
+	
+	//[보람]출하지시 삭제
+	public int deleteShipmentOrder(String checkArray) {
+		return shipmentMapper.deleteShipmentOrder(checkArray);
+	}
+
 	//[출하지시 수정]
 	public int modifyShipmentOrder(ShipmentOrder shipmentOrder) {
 		return shipmentMapper.modifyShipmentOrder(shipmentOrder);

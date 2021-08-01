@@ -10,6 +10,8 @@ import ksmart39.springboot.domain.ShipmentOrder;
 
 @Mapper
 public interface ShipmentMapper {
+	//[보람]출하지시 삭제
+	public int deleteShipmentOrder(String checkArray);
 	//[출하지시 수정]
 	public int modifyShipmentOrder(ShipmentOrder shipmentOrder);
 	//[보람]출하지시 정보 

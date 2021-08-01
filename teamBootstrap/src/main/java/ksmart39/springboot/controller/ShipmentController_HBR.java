@@ -154,9 +154,13 @@ public class ShipmentController_HBR {
 	}
 	
 	//[보람]출하지시 삭제
-	@PostMapping("/deleteShipmentOrder")
-	public String deleteShipmentOrder() {
-		return "redirect:/shipmentOrderList";
+	@RequestMapping("/deleteShipmentOrder")
+	public int deleteShipmentOrder(@RequestParam(value = "checkArray[]")String[] checkArray) {
+		int result =1;
+		for(int i =0; i<checkArray.length; i++) {
+			result =shipmentService.deleteShipmentOrder(checkArray[i]);
+		}
+		return result;
 	}
 	//[보람 ]출하지시  수정화면 수정후
 	@PostMapping("/modifyShipmentOrder")
