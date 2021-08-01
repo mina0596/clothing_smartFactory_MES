@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_qualityControl}">
+<link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css">
+
+<th:block layout:fragment="customJs">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var bars = $('.bar');
+			var values = $('.value');
+			console.log(bars);
+			console.log(values);
+	
+			values.each(function(){
+				var valueText = $(this).text();
+				console.log(valueText);
+				$(this).css('height', valueText);
+			});
+			
+			
+		
+		})
+	</script>
+</th:block>
+
+<th:block layout:fragment="container">
+	<h3><i class="fa fa-angle-right"></i>불량 현황</h3>
+	<hr>
+    <div>
+
+   	<!--CUSTOM CHART START -->
+      <div class="border-head content-panel">
+        <h3 style="font-weight: bold; margin-left: 15px;"><i class="fa fa-bar-chart-o"></i>불량률 상세검사별 10위</h3>
+      
+	      <div class="custom-bar-chart" style="margin-left: 15px;">
+	        <ul class="y-axis">
+	          <li><span>100%</span></li>
+	          <li><span>80%</span></li>
+	          <li><span>60%</span></li>
+	          <li><span>40%</span></li>
+	          <li><span>20%</span></li>
+	          <li><span>0%</span></li>
+	        </ul>
+	        <div class="bar" th:each="fr : ${failedRank}" style="margin-left: 2%; margin-right: 2%;">
+	          <div class="title" th:text="${fr.subName}"></div>
+	          <div class="value tooltips" data-original-title="8.500" data-toggle="tooltip" data-placement="top" style="height: 0%;" th:text="${fr.failRatePercent}"></div>
+	        </div>
+	        
+	      </div>
+      </div>
+      
+      <!--custom chart end-->
+    	<div class="col-lg-6" style="margin-top: 10px;">
+              <div class="content-panel">
+                <h4><i class="fa fa-angle-right"></i> Chart Example 1</h4>
+                <div class="panel-body">
+                  <div id="hero-graph" class="graph"></div>
+                </div>
+              </div>
+            </div>
+      
+    
+    
+    
+    
+    	
+    </div>
+  	 <script th:src="@{/Dashio/lib/jquery.scrollTo.min.js}"></script>	  
+     <script th:src="@{/Dashio/lib/raphael/raphael.min.js}"></script>
+     <script th:src="@{/Dashio/lib/morris/morris.min.js}"></script>
+  	 <script th:src="@{/Dashio/lib/common-scripts.js}"></script>
+  	 <script th:src="@{/Dashio/lib/morris-conf.js}"></script>    
+</th:block>
+
+</html>

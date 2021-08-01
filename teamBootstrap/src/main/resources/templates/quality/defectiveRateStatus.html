@@ -5,67 +5,290 @@ layout:decorate="@{layout/default_qualityControl}">
 
 <th:block layout:fragment="customJs">
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-	<script type="text/javascript">
-		$(function(){
-			var bars = $('.bar');
-			var values = $('.value');
-			console.log(bars);
-			console.log(values);
-	
-			values.each(function(){
-				var valueText = $(this).text();
-				console.log(valueText);
-				$(this).css('height', valueText);
-			});
-			
-			
+	<!-- 변수담아주는 함수들 모음  -->
+	<script th:inline="javascript">
+		var failedPercent = null;
+		function myFunc(){
+			/* <![CDATA[ */
+		 	failedPercent = /*[[${failedRateByYear}]]*/;
+		 	console.log(failedPercent);
+		 	/*]]> */
+		}
 		
-		})
 	</script>
+	<script th:inline="javascript" th:src="@{/quality/qualityInspectionFailedRateReport.js}"></script>
+	
 </th:block>
 
 <th:block layout:fragment="container">
-	<h3><i class="fa fa-angle-right"></i>불량 현황</h3>
-	<hr>
-    <div>
+	<h4 style="font-weight: bold;"><i class="fa fa-bar-chart-o"></i> 품질검사별 불량 현황</h4>
 
-   	<!--CUSTOM CHART START -->
-      <div class="border-head content-panel">
-        <h3 style="font-weight: bold; margin-left: 15px;"><i class="fa fa-bar-chart-o"></i>불량률 상세검사별 10위</h3>
-      
-	      <div class="custom-bar-chart" style="margin-left: 15px;">
-	        <ul class="y-axis">
-	          <li><span>100%</span></li>
-	          <li><span>80%</span></li>
-	          <li><span>60%</span></li>
-	          <li><span>40%</span></li>
-	          <li><span>20%</span></li>
-	          <li><span>0%</span></li>
-	        </ul>
-	        <div class="bar" th:each="fr : ${failedRank}" style="margin-left: 2%; margin-right: 2%;">
-	          <div class="title" th:text="${fr.subName}"></div>
-	          <div class="value tooltips" data-original-title="8.500" data-toggle="tooltip" data-placement="top" style="height: 0%;" th:text="${fr.failRatePercent}"></div>
-	        </div>
-	        
-	      </div>
-      </div>
-      
-      <!--custom chart end-->
-    	
-          <div class="content-panel">
-            <h4><i class="fa fa-angle-right"></i> Chart Example 4</h4>
-            <div class="panel-body">
-              <div id="hero-donut" class="graph"></div>
-            </div>
-          </div>
-      
-    
-    
-    
-    
-    	
-    </div>
-         
+	<div class="col-lg-12 mt">
+            <div class="row content-panel">
+
+              <div class="panel-heading">
+                <ul class="nav nav-tabs nav-justified">
+                  <li class="active">
+                    <a data-toggle="tab" href="#byYear">연도별 불량률</a>
+                  </li>
+                  <li>
+                    <a data-toggle="tab" href="#byMonths">월별별 불량률</a>
+                  </li>
+                  <li>
+                    <a data-toggle="tab" href="#byInspectionType">품질검사별 불량률</a>
+                  </li>
+                  <li>
+                    <a data-toggle="tab" href="#byProductType">품목별 불량률</a>
+                  </li>
+                </ul>
+              </div>
+              <!-- /panel-heading -->
+              
+              
+              <div class="panel-body">
+                <div class="tab-content">
+                
+                <!-- 연도별 불량률 시작  -->
+                  <div id="byYear" class="tab-pane active">
+	                  <div class=".col-xs-6" style="height: 70%; width: 70%; align-content: center;">
+	                  	<canvas id="failedRateChartByYear"></canvas>
+	                  </div>
+               		<form class="form-horizontal style-form">
+		              <table class="table table-striped table-advance table-hover" id="list1">
+		                <thead>
+		                  <tr>
+		             		<th><i class="fa fa-bullhorn"></i> 순위</th>
+		                    <th><i class="fa fa-barcode"></i> 품질검사코드</th>
+		                    <th><i class="fa fa-bookmark"></i> 대분류명</th>
+		                    <th><i class="fa fa-bookmark"></i> 중분류명</th>
+		                    <th><i class="fa fa-bookmark"></i> 소분류명</th>
+		                    <th><i class="fa fa-bookmark"></i> 세부검사명</th>
+		                    <th><i class="fa fa-bookmark"></i> 총 검사요청수</th>
+		                    <th><i class="fa fa-bookmark"></i> 총 불합격수</th>
+		                    <th><i class="fa fa-calendar"></i> 불량률</th>
+		                  </tr>
+		                </thead>
+		                <tbody>
+		                  <tr><div class="label label-warning" style="font-size: medium; font-style: italic; font-family: "><i class="fa fa-calendar-o"></i> 2021</div></tr>
+	                  	  <tr th:each="curRate, a : ${yearlyFailRate}" th:if="${curRate.year == '2021'}" > 
+		                  	<td th:text="${a.index+1}"></td>
+		             		<td th:text="${curRate.inspectionCode}"></td>
+		             		<td th:text="${curRate.highName}"></td>
+		                    <td th:text="${curRate.medName}"></td>
+		                    <td th:text="${curRate.lowName}"></td>
+		                    <td th:text="${curRate.subName}"></td>
+		                    <td th:text="${curRate.totalRequestedNum}"></td>
+		                    <td th:text="${curRate.failedNum}"></td>
+		                    <td th:text="${curRate.failRate + '%'}"></td>
+		                  </tr>
+		                </tbody>
+		                </table>
+		                <table class="table table-striped table-advance table-hover" id="list2">
+		                <thead>
+		                  <tr>
+		             		<th><i class="fa fa-bullhorn"></i> 순위</th>
+		                    <th><i class="fa fa-barcode"></i> 품질검사코드</th>
+		                    <th><i class="fa fa-bookmark"></i> 대분류명</th>
+		                    <th><i class="fa fa-bookmark"></i> 중분류명</th>
+		                    <th><i class="fa fa-bookmark"></i> 소분류명</th>
+		                    <th><i class="fa fa-bookmark"></i> 세부검사명</th>
+		                    <th><i class="fa fa-bookmark"></i> 총 검사요청수</th>
+		                    <th><i class="fa fa-bookmark"></i> 총 불합격수</th>
+		                    <th><i class="fa fa-calendar"></i> 불량률</th>
+		                  </tr>
+		                </thead>
+		                <tbody>
+		                  <tr><div class="label label-warning" style="font-size: medium; font-style: italic; font-family: "><i class="fa fa-calendar-o"></i> 2020</div></tr>
+	                  	  <tr th:each="curRate, b : ${yearlyFailRate}" th:if="${curRate.year == '2020'}" > 
+		                  	<td th:text="${b.index+1}"></td>
+		             		<td th:text="${curRate.inspectionCode}"></td>
+		             		<td th:text="${curRate.highName}"></td>
+		                    <td th:text="${curRate.medName}"></td>
+		                    <td th:text="${curRate.lowName}"></td>
+		                    <td th:text="${curRate.subName}"></td>
+		                    <td th:text="${curRate.totalRequestedNum}"></td>
+		                    <td th:text="${curRate.failedNum}"></td>
+		                    <td th:text="${curRate.failRate + '%'}"></td>
+		                  </tr>
+		                </tbody>
+		                </table>
+		                <table class="table table-striped table-advance table-hover" id="list3">
+		                <thead>
+		                  <tr>
+		             		<th><i class="fa fa-bullhorn"></i> 순위</th>
+		                    <th><i class="fa fa-barcode"></i> 품질검사코드</th>
+		                    <th><i class="fa fa-bookmark"></i> 대분류명</th>
+		                    <th><i class="fa fa-bookmark"></i> 중분류명</th>
+		                    <th><i class="fa fa-bookmark"></i> 소분류명</th>
+		                    <th><i class="fa fa-bookmark"></i> 세부검사명</th>
+		                    <th><i class="fa fa-bookmark"></i> 총 검사요청수</th>
+		                    <th><i class="fa fa-bookmark"></i> 총 불합격수</th>
+		                    <th><i class="fa fa-calendar"></i> 불량률</th>
+		                  </tr>
+		                </thead>
+		                <tbody>
+		                  <tr><div class="label label-warning" style="font-size: medium; font-style: italic; font-family: "><i class="fa fa-calendar-o"></i> 2019</div></tr>
+	                  	  <tr th:each="curRate, c : ${yearlyFailRate}" th:if="${curRate.year == '2019'}" > 
+		                  	<td th:text="${c.index+1}"></td>
+		             		<td th:text="${curRate.inspectionCode}"></td>
+		             		<td th:text="${curRate.highName}"></td>
+		                    <td th:text="${curRate.medName}"></td>
+		                    <td th:text="${curRate.lowName}"></td>
+		                    <td th:text="${curRate.subName}"></td>
+		                    <td th:text="${curRate.totalRequestedNum}"></td>
+		                    <td th:text="${curRate.failedNum}"></td>
+		                    <td th:text="${curRate.failRate + '%'}"></td>
+		                  </tr>
+		                </tbody>
+		               </table>
+		                <table class="table table-striped table-advance table-hover" id="list4">
+		                <thead>
+		                  <tr>
+		             		<th><i class="fa fa-bullhorn"></i> 순위</th>
+		                    <th><i class="fa fa-barcode"></i> 품질검사코드</th>
+		                    <th><i class="fa fa-bookmark"></i> 대분류명</th>
+		                    <th><i class="fa fa-bookmark"></i> 중분류명</th>
+		                    <th><i class="fa fa-bookmark"></i> 소분류명</th>
+		                    <th><i class="fa fa-bookmark"></i> 세부검사명</th>
+		                    <th><i class="fa fa-bookmark"></i> 총 검사요청수</th>
+		                    <th><i class="fa fa-bookmark"></i> 총 불합격수</th>
+		                    <th><i class="fa fa-calendar"></i> 불량률</th>
+		                  </tr>
+		                </thead>
+		                <tbody>
+		                  <tr><div class="label label-warning" style="font-size: medium; font-style: italic; font-family: "><i class="fa fa-calendar-o"></i> 2018</div></tr>
+	                  	  <tr th:each="curRate, d : ${yearlyFailRate}" th:if="${curRate.year == '2018'}" > 
+		                  	<td th:text="${d.index+1}"></td>
+		             		<td th:text="${curRate.inspectionCode}"></td>
+		             		<td th:text="${curRate.highName}"></td>
+		                    <td th:text="${curRate.medName}"></td>
+		                    <td th:text="${curRate.lowName}"></td>
+		                    <td th:text="${curRate.subName}"></td>
+		                    <td th:text="${curRate.totalRequestedNum}"></td>
+		                    <td th:text="${curRate.failedNum}"></td>
+		                    <td th:text="${curRate.failRate + '%'}"></td>
+		                  </tr>
+		                </tbody>
+		              </table>
+       				</form>
+               	  </div>
+               	  
+                <!-- 월별 불량률 시작  -->
+                  <div id="byMonths" class="tab-pane">
+               		<form class="form-horizontal style-form">
+		              <table class="table table-striped table-advance table-hover" id="list">
+		                <thead>
+		                  <tr>
+		             		<th><i class="fa fa-bullhorn"></i> 번호</th>
+		             		<th><i class="fa fa-barcode"></i> 품질검사코드</th>
+		                    <th><i class="fa fa-bookmark"></i> 대분류명</th>
+		                    <th><i class="fa fa-bookmark"></i> 중분류명</th>
+		                    <th><i class="fa fa-bookmark"></i> 소분류명</th>
+		                    <th><i class="fa fa-bookmark"></i> 세부검사명</th>
+		                    <th><i class="fa fa-bookmark"></i> 검사 기준</th>
+		                    <th><i class="fa fa-bookmark"></i> 필수 요소 여부</th>
+		                    <th><i class="fa fa-calendar"></i> 등록일</th>
+		                  </tr>
+		                </thead>
+		                <tbody>
+	                  	  <tr>
+		                  	<td></td>
+		             		<td></td>
+		                    <td></td>
+		                    <td></td>
+		                    <td></td>
+		                    <td></td>
+		                    <td></td>
+		                    <td ></td>
+		                    <td></td>
+		                  </tr>
+		                </tbody>
+		              </table>
+       				</form>
+               	  </div>
+
+
+                <!-- 품질검사별 불량률 시작 -->
+                  <div id="byInspectionType" class="tab-pane">
+                  	<form class="form-horizontal style-form">
+		              <table class="table table-striped table-advance table-hover" id="list2">
+		                <thead>
+		                  <tr>
+		             		<th><i class="fa fa-bullhorn"></i> 번호</th>
+		             		<th><i class="fa fa-barcode"></i> 품질검사코드</th>
+		                    <th><i class="fa fa-bookmark"></i> 대분류명</th>
+		                    <th><i class="fa fa-bookmark"></i> 중분류명</th>
+		                    <th><i class="fa fa-bookmark"></i> 소분류명</th>
+		                    <th><i class="fa fa-bookmark"></i> 세부검사명</th>
+		                    <th><i class="fa fa-bookmark"></i> 검사 기준</th>
+		                    <th><i class="fa fa-bookmark"></i> 필수 요소 여부</th>
+		                    <th><i class="fa fa-calendar"></i> 등록일</th>
+		                  </tr>
+		                </thead>
+		                <tbody>
+	                  	  <tr>
+		                  	<td></td>
+		             		<td></td>
+		                    <td></td>
+		                    <td></td>
+		                    <td></td>
+		                    <td></td>
+		                    <td></td>
+		                    <td ></td>
+		                    <td></td>
+		                  </tr>
+		                </tbody>
+		              </table>
+       				</form>
+                  </div>
+                  
+                  
+                  <!-- 품목별 불량률 시작 -->
+                  <div id="byProductType" class="tab-pane">
+                  	<form class="form-horizontal style-form">
+		              <table class="table table-striped table-advance table-hover" id="list3" >
+		                <thead>
+		                  <tr>
+		             		<th><i class="fa fa-bullhorn"></i> 번호</th>
+		             		<th><i class="fa fa-barcode"></i> 품질검사코드</th>
+		                    <th><i class="fa fa-bookmark"></i> 대분류명</th>
+		                    <th><i class="fa fa-bookmark"></i> 중분류명</th>
+		                    <th><i class="fa fa-bookmark"></i> 소분류명</th>
+		                    <th><i class="fa fa-bookmark"></i> 세부검사명</th>
+		                    <th><i class="fa fa-bookmark"></i> 검사 기준</th>
+		                    <th><i class="fa fa-bookmark"></i> 필수 요소 여부</th>
+		                    <th><i class="fa fa-calendar"></i> 등록일</th>
+		                  </tr>
+		                </thead>
+		                <tbody>
+	                  	  <tr>
+		                  	<td></td>
+		             		<td></td>
+		                    <td></td>
+		                    <td></td>
+		                    <td></td>
+		                    <td></td>
+		                    <td></td>
+		                    <td ></td>
+		                    <td></td>
+		                  </tr>
+		                </tbody>
+		              </table>
+       				</form>
+                  </div>
+                  
+                  
+                  <!-- /tab-pane -->
+                </div>
+                <!-- /tab-content -->
+              </div>
+              <!-- /panel-body -->
+
+		</div>
+	
+       </div>
+	
+  
 </th:block>
 
 </html>
