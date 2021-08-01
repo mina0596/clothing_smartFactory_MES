@@ -59,7 +59,7 @@ layout:decorate="@{layout/default_system}">
 			          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">아이디</label>
 			          <div class="col-md-6">
 			            <div  class="input-group ">
-			              <input type="text" name = "employeeId" class="form-control"  size="16">
+			              <input type="text" name = "employeeId" id= "employeeId" class="form-control"  size="16">
 			              <div class="input-group-btn">
 			                <button type="button" id="idCheckBtn" class="btn btn-warning"><i class="fa"></i>중복체크</button>
 			              </div>
@@ -95,14 +95,14 @@ layout:decorate="@{layout/default_system}">
                   <div class="form-group ">
                     <label for="email" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이메일</font></font></label>
                     <div class="col-lg-6">
-                      <input class="form-control " name="employeeEmail" type="text">
+                      <input class="form-control " name="employeeEmail" id = "employeeEmail" type="text">
                     </div>
                   </div>
                   
                   <div class="form-group ">
                     <label for="email" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">전화번호</font></font></label>
                     <div class="col-lg-6">
-                      <input class="form-control " name="employeeTel" type="text" >
+                      <input class="form-control " name="employeeTel" onKeyup="inputTelNumber(this);" type="text" >
                     </div>
                   </div>
                   
@@ -203,6 +203,7 @@ layout:decorate="@{layout/default_system}">
 		});			
 	});
 	
+	/* 아이디 중복체크 */
 		$(function(){
 			$('#idCheckBtn').click(function(){
 				var employeeId = $('input[name="employeeId"]').val();
@@ -232,47 +233,9 @@ layout:decorate="@{layout/default_system}">
 			});
 			
 		});
+		  
 		
-			$('#addEmployeeBtn').click(function(){
-				
-				var regexPw = /^.*(?=^.{2,8}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
-				var regexEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-				var submitFlag = true;
-				var memberForm = $('#addEmployeeForm');
-				var inputObj = memberForm.find('input');
-				
-				$.each(inputObj, function(e){
-					var inputName = $(this).attr('name');
-					var inputValue = $(this).val();
-					var inputLabel = $(this).parent().parent().children().eq(0).text();
-					if(inputName == 'memberPw'){
-						if(!regexPw.test(inputValue)){
-							alert(inputLabel + ' 을 다시 입력해주세요.');
-							$(this).focus();
-							submitFlag = false;
-							return submitFlag;
-						}
-					}else if(inputName == 'memberEmail'){
-						if(!regexEmail.test(inputValue)){
-							alert(inputLabel + ' 을 다시 입력해주세요.');
-							$(this).focus();
-							submitFlag = false;
-							return submitFlag;
-						}
-					}else{
-						if(inputValue == '' || inputValue == undefined || inputValue == null){
-							alert(inputLabel + ' 을 입력해주세요.');
-							$(this).focus();
-							submitFlag = false;
-							return submitFlag;
-						}
-					}
-				});
-				
-				if(submitFlag) memberForm.submit();
-				
-			});
-		
+			/* 비밀번호 일치 */
 		  $(function(){
 		    	$("#alert-success").hide();
 		    	$("#alert-danger").hide();
@@ -295,6 +258,8 @@ layout:decorate="@{layout/default_system}">
 		    	});
 		    });
 		  
+		  
+		  /* 주소검색 */
 		    function execDaumPostcode() {
 		        new daum.Postcode({
 		            oncomplete: function(data) {
@@ -329,6 +294,60 @@ layout:decorate="@{layout/default_system}">
 		                document.getElementById('addr2').focus();
 		            }
 		        }).open();
+		    }
+		    
+			/* 휴대번호 자동 하이픈 */
+		    function inputTelNumber(obj) {
+
+		        var number = obj.value.replace(/[^0-9]/g, "");
+		        var tel = "";
+
+		        // 서울 지역번호(02)가 들어오는 경우
+		        if(number.substring(0, 2).indexOf('02') == 0) {
+		            if(number.length < 3) {
+		                return number;
+		            } else if(number.length < 6) {
+		                tel += number.substr(0, 2);
+		                tel += "-";
+		                tel += number.substr(2);
+		            } else if(number.length < 10) {
+		                tel += number.substr(0, 2);
+		                tel += "-";
+		                tel += number.substr(2, 3);
+		                tel += "-";
+		                tel += number.substr(5);
+		            } else {
+		                tel += number.substr(0, 2);
+		                tel += "-";
+		                tel += number.substr(2, 4);
+		                tel += "-";
+		                tel += number.substr(6);
+		            }
+		        
+		        // 서울 지역번호(02)가 아닌경우
+		        } else {
+		            if(number.length < 4) {
+		                return number;
+		            } else if(number.length < 7) {
+		                tel += number.substr(0, 3);
+		                tel += "-";
+		                tel += number.substr(3);
+		            } else if(number.length < 11) {
+		                tel += number.substr(0, 3);
+		                tel += "-";
+		                tel += number.substr(3, 3);
+		                tel += "-";
+		                tel += number.substr(6);
+		            } else {
+		                tel += number.substr(0, 3);
+		                tel += "-";
+		                tel += number.substr(3, 4);
+		                tel += "-";
+		                tel += number.substr(7);
+		            }
+		        }
+
+		        obj.value = tel;
 		    }
 	</script>
 </th:block>

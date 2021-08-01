@@ -48,7 +48,10 @@ public class RawMaterialsController_LHB {
 	//===================================================================
 	//[한빛]출고등록
 	@GetMapping("/addExWarehousing")
-	public String addExWarehousing(Model model) {
+	public String addExWarehousing(Model model, HttpSession session) {
+		String employeeCode = (String) session.getAttribute("SCODE");
+		log.info("employeeCode 세션에서 가져오는 값:{}", employeeCode);
+		model.addAttribute("employeeCode", employeeCode);
 		model.addAttribute("title","출고관리");
 		return "rawMaterials/addExWarehousing";
 	}
