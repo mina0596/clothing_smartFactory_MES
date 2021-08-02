@@ -147,25 +147,39 @@ layout:decorate="@{layout/default_qualityControl}">
  
                 <tbody>
                 <!--db에서 데이터 넣어야하는 부분 -->
-                  <tr th:each=" d,n : ${defectiveProduct}">
-                  	<td><input type="checkbox" class="checked"  th:value="${d.dpCode}"></td>
+                  <tr th:each=" d,n : ${defectiveProductList}">
+                  	<td><input type="checkbox" class="checked"  th:value="${d.defectiveProductCode}"></td>
                   	<td th:text="${n.index+1}"></td>
-                    <td th:text="${d.dpCode}"></td>
-                    <td th:text="${d.qirCode}"></td>
-                    <td th:text="${d.qiCode}"></td>
-                    <td th:text="${d.dCause}"></td>
-                    <td th:text="${d.dpMeasure}"></td>
-                    <td th:text="${d.mNote}"></td>
-                    <td th:text="${d.irCode}"></td>
-                    <td th:text="${d.dpRegDate}"></td>
+                    <td th:text="${d.defectiveProductCode}"></td>
+                    <td th:text="${d.qualityInspectionRequestCode}"></td>
+                    <td th:text="${d.qualityInspectionCode}"></td>
+                    <td th:text="${d.defectCause}"></td>
+                    <td th:text="${d.defectiveProductMeasure}"></td>
+                    <td th:text="${d.managementNote}"></td>
+                    <td th:text="${d.inspectionResultCode}"></td>
+                    <td th:text="${d.defectiveProductRegDate}"></td>
                     <td>  
-                    	<a th:href="@{/quality/modifyDefectiveProduct(defectiveProductCode=${d.dpCode})}"  class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</a>
+                    	<a th:href="@{/quality/modifyDefectiveProduct(defectiveProductCode=${d.defectiveProductCode})}"  class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</a>
                     </td>                  
                   </tr>
            		 </tbody>
               </table>
+              	<div class="dataTables_paginate paging_bootstrap pagination">
+					<ul>
+						<li class="prev"><a th:href="@{/quality/defectiveProductList}"> << </a></li>
+						<li><a th:if="${currentPage > 1}" th:href="@{/quality/defectiveProductList(currentPage=${currentPage - 1})}">이전</a></li>
+						<th:block th:each="num:${#numbers.sequence(pageStartNum, pageEndNum)}">
+						<li><a th:if="${num != currentPage}" th:href="@{/quality/defectiveProductList(currentPage=${num})}">[[${num}]]</a></li>
+						<li><a th:unless="${num != currentPage}">[[${num}]]</a></li>
+						
+						</th:block>
+						<li class="prev"><a th:if="${currentPage < lastPage}" th:href="@{/quality/defectiveProductList(currentPage=${currentPage + 1})}"> 다음 </a></li>
+						<li class="next"><a th:href="@{/quality/defectiveProductList(currentPage=${lastPage})}"> >> </a></li>
+					</ul>
+				</div>         
            	 </div>
             </div>
+            
             <div class="form-group text-right">
 		          <div class="col-lg-offset-2 col-lg-10">
 		           <a th:href="@{/quality/addDefectiveProduct}" class="btn btn-success btn-xs"><i class="fa fa-plus"></i> 불량품등록</a>

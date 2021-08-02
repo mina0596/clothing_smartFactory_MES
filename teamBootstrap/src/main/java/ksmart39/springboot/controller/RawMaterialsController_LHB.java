@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import ksmart39.springboot.domain.DefectiveProduct;
 import ksmart39.springboot.domain.HumanResources;
 import ksmart39.springboot.domain.RawMaterials;
 import ksmart39.springboot.domain.RawMaterialsInventory;
@@ -45,7 +48,10 @@ public class RawMaterialsController_LHB {
 	//===================================================================
 	//[한빛]출고등록
 	@GetMapping("/addExWarehousing")
-	public String addExWarehousing(Model model) {
+	public String addExWarehousing(Model model, HttpSession session) {
+		String employeeCode = (String) session.getAttribute("SCODE");
+		log.info("employeeCode 세션에서 가져오는 값:{}", employeeCode);
+		model.addAttribute("employeeCode", employeeCode);
 		model.addAttribute("title","출고관리");
 		return "rawMaterials/addExWarehousing";
 	}
@@ -63,6 +69,25 @@ public class RawMaterialsController_LHB {
 		List<Map<String,Object>> exHousingList = materialsInventoryStatusService.getExwarehousing();
 		model.addAttribute("exHousingList",exHousingList);
 		return "rawMaterials/exWarehousingList";
+	}
+	
+	//[한빛] 출고 수정
+	@GetMapping("/modifyExHousing")
+	public String modifyExHousing (@RequestParam(name = "transactionCode", required= false) String transactionCode, Model model, HttpSession session) {
+		String employeeCode = (String) session.getAttribute("SCODE");
+		log.info("employeeCode 세션에서 가져오는 값:{}", employeeCode);
+		RawMaterialsInventory rawMaterialsInventory = materialsInventoryStatusService.getExhousingByCode(transactionCode);
+		model.addAttribute("employeeCode", employeeCode);
+		model.addAttribute("rawMaterialsInventory",rawMaterialsInventory);
+		model.addAttribute("title", "불량품수정");
+		return "rawMaterials/modifyExWarehousing";
+	}
+	
+	//[한빛] 출고 수정
+	@PostMapping("/modifyExHousing")
+	public String modifyExHousing(RawMaterialsInventory rawMaterialsInventory) {
+		materialsInventoryStatusService.modifyExHousing(rawMaterialsInventory);
+		return "redirect:exWarehousingList";
 	}
 	
 	//[한빛] 출고 삭제

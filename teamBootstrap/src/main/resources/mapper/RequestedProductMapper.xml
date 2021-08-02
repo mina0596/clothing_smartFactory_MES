@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ksmart39.springboot.dao.ContractMapper">
+<mapper namespace="ksmart39.springboot.dao.RequestedProductMapper">
 	<resultMap type="RequestedProduct" id = "getRequestedProduct">
 		<result property="productCode" 									column="product_code"/>
 		<result property="chargeEmployeeCode" 						column="charge_employee_code"/>
@@ -36,4 +36,32 @@
 				client_info AS c
 				GROUP BY r.product_request_code;			
 	</select>
+	
+	<!-- 승인완료된 목록만 뿌리기 -->
+	<select id = "getRequestedProductApproval" parameterType="map" resultType="RequestedProduct" fetchSize="1000">
+		SELECT
+			r.product_request_code						AS rrc
+			,c.client_name								AS cn
+			,r.requested_due_date						AS rdd
+			,r.approval_status							AS ast
+			,r.requested_product_detail_reg_date		AS rpdrd	
+			,r.requested_delivery_address				AS rda
+			,r.requested_delivery_tel					AS rdt
+		FROM 
+				requested_product_detail AS r
+				INNER JOIn
+				client_info AS c
+				GROUP BY r.product_request_code
+				HAVING r.approval_status = '승인';		;			
+	</select>
+	
+	<!-- 미승인 누르면 승인완료로 업데이트 -->
+	<update id="completeRequest" parameterType="String">
+		UPDATE
+			requested_product_detail
+		SET
+			approval_status = '승인'
+		WHERE
+			product_request_code = #{productRequestCode};	
+	</update>
 </mapper>

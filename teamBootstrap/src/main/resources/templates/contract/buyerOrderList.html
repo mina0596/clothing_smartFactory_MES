@@ -22,6 +22,36 @@ layout:decorate="@{layout/default_contract}">
 						});									
 					});
 
+
+		$(document).on('click','.btn_status', function(){
+			if (confirm("승인하시겠습니까?") == true){    //확인
+				var productRequestObj = $(this).parent().parent().children().eq(3);
+				var productRequestCode = productRequestObj.text();
+			
+				$.ajax({
+					url: "/contract/completeRequest",
+					method : 'post',
+					async: true,
+					dataType : "text",
+					data : {'productRequestCode' : productRequestCode},
+					success: function(data){
+						if(data){
+							location.reload();
+						}else{
+							alert('승인이 실패했습니다.');
+						}
+					},
+					error: function(error){
+						console.log(error);
+					}
+				});
+			
+			}else{   //취소
+			    return;
+			}
+		});
+			
+		
 	</script>  
 </th:block>
 
@@ -91,9 +121,7 @@ layout:decorate="@{layout/default_contract}">
          	</tbody>
          </table>  
         </form>  
-         
-
- 
+        
 		<div>
              <div>
               <h4><i class="fa fa-angle-right"></i>주문서 목록</h4> 
@@ -128,11 +156,12 @@ layout:decorate="@{layout/default_contract}">
                     <td th:text="${o.rdAdd}"></td>
                     <td th:text="${o.rdDate}"></td>
                     <td th:text="${o.rpdRegDate}"></td>
-                    <td th:if="${o.aStatus eq '미승인'}" ><button class="badge bg-important" style="padding-top: 5px;">미승인</button></td>
-                    <td th:if="${o.aStatus eq '승인'}" ><span class="badge bg-success" style="padding-top: 5px;">승인완료</span></td>
-                    <td>  <button class="btn btn-primary btn-xs" type="button" onclick="location.href='/modifyBuyerOrder'"><i class="fa fa-pencil"></i>수정</button></td>
+                    <td>
+                    <span th:if="${o.aStatus eq '승인'}" class="btn btn-success btn-xs btn_status" >승인완료</span>
+					<button th:if="${o.aStatus eq '미승인'}" class="btn btn-danger btn-xs btn_status"  value="확인하기">미승인</button>
+					</td>
+                    <td><button class="btn btn-primary btn-xs" type="button" onclick="location.href='/modifyBuyerOrder'"><i class="fa fa-pencil"></i>수정</button></td>
                   </tr>
-                  
            		 </tbody>
               </table>
            	 </div>
@@ -161,7 +190,6 @@ layout:decorate="@{layout/default_contract}">
 		              <div>
 			              	<table class="table">
 				                <tbody>
-
 				                	<tr>
 				                		<td style="font-weight: 600;">양복명</td>
 				                		<td style="font-weight: 600;">품목명</td>
@@ -170,8 +198,6 @@ layout:decorate="@{layout/default_contract}">
 				                		<td>신사양복</td>
 				                		<td>조끼</td>
 				                	</tr>
-
-
 				                </tbody>
 			              </table>
 		              </div>
