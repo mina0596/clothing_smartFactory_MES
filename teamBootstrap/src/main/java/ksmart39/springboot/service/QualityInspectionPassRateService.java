@@ -1,6 +1,12 @@
 package ksmart39.springboot.service;
 
 
+import java.sql.Array;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +29,33 @@ public class QualityInspectionPassRateService {
 		return passRateMapper.getInspectionFailedRank();
 	}
 	
-}	
+	//[민아]연도별 불량률 조회
+	public Map<String,Object> getPastYearsFailedPercent(){
+		return passRateMapper.getPastYearsFailedPercent();
+	}
 	
+	//[민아]연도별 불량률 5위 상세정보
+	public List<Map<String,Object>> getYearlyFailRank(){
+		//일단 초기화
+		List<Map<String,Object>> yearlyFailRate = new ArrayList<Map<String,Object>>();
+		List<Map<String,Object>> result = new ArrayList<Map<String,Object>>();
+		Calendar cal = Calendar.getInstance();
+		
+		String year = "2021";
+		for(int i=0; i < 4; i++) {
+			int yearNum = cal.get(Calendar.YEAR)-i;
+			year = Integer.toString(yearNum);
+			yearlyFailRate = passRateMapper.getYearlyFailRank(year);
+			for(int j=0; j < yearlyFailRate.size(); j++) {
+				yearlyFailRate.get(j).put("year", year);
+				result.add(yearlyFailRate.get(j));
+			}
+			log.info("결과값 확인:{}", result);
+			
+		}
+		log.info("getYearlyFailRank 결과값확인 :{}", result);
+		return result;
+	}
+}	
+	 
 	

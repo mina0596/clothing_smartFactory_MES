@@ -16,7 +16,7 @@ public class RawMaterialsInwarehousingService {
 	@Autowired
 	private RawMaterialsInwarehousingMapper rawMaterialInwarehousingMapper;
 	
-	public List<RawMaterialsInventory> getRawMaterialInwarehousingList(String str){
+	public List<RawMaterialsInventory> getRawMaterialInwarehousingList(){
 		return rawMaterialInwarehousingMapper.getRawMaterialInwarehousingList();
 	}
 }
