@@ -194,55 +194,67 @@
 	 
 	 <select id="getYearlyFailRank" parameterType="String" resultType="map">
 	 	SELECT
-			sub1.inspectionCode,
-			subClass.sub_class_name AS subName,
-			lowClass.low_class_name AS lowName,
-			medClass.med_class_name AS medName,
-			highClass.high_class_name AS highName,
-			sub1.totalRequestedNum,
-			sub2.failedNum,
-			round(sub2.failedNum/sub1.totalRequestedNum*100) AS failRate
-		From
-			(SELECT
-				ir.quality_inspection_code AS inspectionCode,
-				COUNT(1) AS totalRequestedNum
-			FROM
-				inspection_result AS ir
-				WHERE
-					DATE_FORMAT(ir.inspection_end_date, '%Y') = #{inputYear}
-					GROUP BY ir.quality_inspection_code) AS sub1
-			INNER join
-			(SELECT
-				ir.quality_inspection_code AS inspectionCode,
-				COUNT(1) AS failedNum
-			FROM
-				inspection_result AS ir
-				where
-					ir.inspection_pass_check='불합격'
-					and
-					DATE_FORMAT(ir.inspection_end_date, '%Y') = #{inputYear}
-					GROUP BY ir.quality_inspection_code) AS sub2
-			on
-				sub1.inspectionCode = sub2.inspectionCode
-			INNER join
-				sub_class_inspection_list AS subClass
-			on
-				sub1.inspectionCode = subClass.quality_inspection_code
-			inner join
-				low_class_inspection_list AS lowClass
-			on
-				subClass.high_med_low_class_code = lowClass.high_med_low_class_code
-			INNER join
-				medium_class_inspection_list AS medClass
-			on
-				subClass.high_med_class_code = medClass.high_med_class_code
-			INNER join
-				high_class_inspection_list AS highClass
-			on
-				subClass.high_class_code = highClass.high_class_code
-			ORDER by
-				failRate DESC
-			LIMIT 5;
+			(case
+			 when @rate = subq.failRate then @row_num
+			 when @rate := subq.failRate then @row_num := @check_num + 1
+			 END) AS subRank,
+			CONCAT(@check_num := @check_num + 1, '위') AS realRank,
+			subq.*
+		from
+				(SELECT
+					sub1.inspectionCode,
+					subClass.sub_class_name AS subName,
+					lowClass.low_class_name AS lowName,
+					medClass.med_class_name AS medName,
+					highClass.high_class_name AS highName,
+					sub1.totalRequestedNum,
+					sub2.failedNum,
+					round(sub2.failedNum/sub1.totalRequestedNum*100) AS failRate
+					
+				From
+					(SELECT
+						ir.quality_inspection_code AS inspectionCode,
+						COUNT(1) AS totalRequestedNum
+					FROM
+						inspection_result AS ir
+						WHERE
+							DATE_FORMAT(ir.inspection_end_date, '%Y') = #{inputYear}
+							GROUP BY ir.quality_inspection_code) AS sub1
+					INNER join
+					(SELECT
+						ir.quality_inspection_code AS inspectionCode,
+						COUNT(1) AS failedNum
+					FROM
+						inspection_result AS ir
+						where
+							ir.inspection_pass_check='불합격'
+							and
+							DATE_FORMAT(ir.inspection_end_date, '%Y') = #{inputYear}
+							GROUP BY ir.quality_inspection_code) AS sub2
+					on
+						sub1.inspectionCode = sub2.inspectionCode
+					INNER join
+						sub_class_inspection_list AS subClass
+					on
+						sub1.inspectionCode = subClass.quality_inspection_code
+					inner join
+						low_class_inspection_list AS lowClass
+					on
+						subClass.high_med_low_class_code = lowClass.high_med_low_class_code
+					INNER join
+						medium_class_inspection_list AS medClass
+					on
+						subClass.high_med_class_code = medClass.high_med_class_code
+					INNER join
+						high_class_inspection_list AS highClass
+					on
+						subClass.high_class_code = highClass.high_class_code
+					ORDER by
+						failRate DESC
+					LIMIT 5) AS subq
+						join
+					(SELECT @row_num := 0, @rate := 0, @check_num :=0) AS r
+					;
 	 </select>
 	 
 	 

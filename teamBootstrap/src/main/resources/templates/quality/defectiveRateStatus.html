@@ -12,11 +12,13 @@ layout:decorate="@{layout/default_qualityControl}">
 			/* <![CDATA[ */
 		 	failedPercent = /*[[${failedRateByYear}]]*/;
 		 	console.log(failedPercent);
+		 	failRateDetail = /*[[${yearlyFailRate}]]*/;
+		 	console.log(failRateDetail);
 		 	/*]]> */
 		}
 		
 	</script>
-	<script th:inline="javascript" th:src="@{/quality/qualityInspectionFailedRateReport.js}"></script>
+	<script th:inline="javascript" th:src="@{/quality/qualityInspectionFailedRateReport2.js}"></script>
 	
 </th:block>
 
@@ -70,8 +72,8 @@ layout:decorate="@{layout/default_qualityControl}">
 		                </thead>
 		                <tbody>
 		                  <tr><div class="label label-warning" style="font-size: medium; font-style: italic; font-family: "><i class="fa fa-calendar-o"></i> 2021</div></tr>
-	                  	  <tr th:each="curRate, a : ${yearlyFailRate}" th:if="${curRate.year == '2021'}" > 
-		                  	<td th:text="${a.index+1}"></td>
+	                  	  <tr th:each="curRate : ${yearlyFailRate}" th:if="${curRate.year == '2021'}" > 
+		                  	<td th:text="${curRate.realRank}"></td>
 		             		<td th:text="${curRate.inspectionCode}"></td>
 		             		<td th:text="${curRate.highName}"></td>
 		                    <td th:text="${curRate.medName}"></td>
@@ -99,16 +101,16 @@ layout:decorate="@{layout/default_qualityControl}">
 		                </thead>
 		                <tbody>
 		                  <tr><div class="label label-warning" style="font-size: medium; font-style: italic; font-family: "><i class="fa fa-calendar-o"></i> 2020</div></tr>
-	                  	  <tr th:each="curRate, b : ${yearlyFailRate}" th:if="${curRate.year == '2020'}" > 
-		                  	<td th:text="${b.index+1}"></td>
-		             		<td th:text="${curRate.inspectionCode}"></td>
-		             		<td th:text="${curRate.highName}"></td>
-		                    <td th:text="${curRate.medName}"></td>
-		                    <td th:text="${curRate.lowName}"></td>
-		                    <td th:text="${curRate.subName}"></td>
-		                    <td th:text="${curRate.totalRequestedNum}"></td>
-		                    <td th:text="${curRate.failedNum}"></td>
-		                    <td th:text="${curRate.failRate + '%'}"></td>
+	                  	  <tr th:each="pastRate: ${yearlyFailRate}" th:if="${pastRate.year == '2020'}" > 
+		                  	<td th:text="${pastRate.realRank}"></td>
+		             		<td th:text="${pastRate.inspectionCode}"></td>
+		             		<td th:text="${pastRate.highName}"></td>
+		                    <td th:text="${pastRate.medName}"></td>
+		                    <td th:text="${pastRate.lowName}"></td>
+		                    <td th:text="${pastRate.subName}"></td>
+		                    <td th:text="${pastRate.totalRequestedNum}"></td>
+		                    <td th:text="${pastRate.failedNum}"></td>
+		                    <td th:text="${pastRate.failRate + '%'}"></td>
 		                  </tr>
 		                </tbody>
 		                </table>
@@ -128,16 +130,16 @@ layout:decorate="@{layout/default_qualityControl}">
 		                </thead>
 		                <tbody>
 		                  <tr><div class="label label-warning" style="font-size: medium; font-style: italic; font-family: "><i class="fa fa-calendar-o"></i> 2019</div></tr>
-	                  	  <tr th:each="curRate, c : ${yearlyFailRate}" th:if="${curRate.year == '2019'}" > 
-		                  	<td th:text="${c.index+1}"></td>
-		             		<td th:text="${curRate.inspectionCode}"></td>
-		             		<td th:text="${curRate.highName}"></td>
-		                    <td th:text="${curRate.medName}"></td>
-		                    <td th:text="${curRate.lowName}"></td>
-		                    <td th:text="${curRate.subName}"></td>
-		                    <td th:text="${curRate.totalRequestedNum}"></td>
-		                    <td th:text="${curRate.failedNum}"></td>
-		                    <td th:text="${curRate.failRate + '%'}"></td>
+	                  	  <tr th:each="twoPastRate : ${yearlyFailRate}" th:if="${twoPastRate.year == '2019'}" > 
+		                  	<td th:text="${twoPastRate.realRank}"></td>
+		             		<td th:text="${twoPastRate.inspectionCode}"></td>
+		             		<td th:text="${twoPastRate.highName}"></td>
+		                    <td th:text="${twoPastRate.medName}"></td>
+		                    <td th:text="${twoPastRate.lowName}"></td>
+		                    <td th:text="${twoPastRate.subName}"></td>
+		                    <td th:text="${twoPastRate.totalRequestedNum}"></td>
+		                    <td th:text="${twoPastRate.failedNum}"></td>
+		                    <td th:text="${twoPastRate.failRate + '%'}"></td>
 		                  </tr>
 		                </tbody>
 		               </table>
@@ -157,16 +159,16 @@ layout:decorate="@{layout/default_qualityControl}">
 		                </thead>
 		                <tbody>
 		                  <tr><div class="label label-warning" style="font-size: medium; font-style: italic; font-family: "><i class="fa fa-calendar-o"></i> 2018</div></tr>
-	                  	  <tr th:each="curRate, d : ${yearlyFailRate}" th:if="${curRate.year == '2018'}" > 
-		                  	<td th:text="${d.index+1}"></td>
-		             		<td th:text="${curRate.inspectionCode}"></td>
-		             		<td th:text="${curRate.highName}"></td>
-		                    <td th:text="${curRate.medName}"></td>
-		                    <td th:text="${curRate.lowName}"></td>
-		                    <td th:text="${curRate.subName}"></td>
-		                    <td th:text="${curRate.totalRequestedNum}"></td>
-		                    <td th:text="${curRate.failedNum}"></td>
-		                    <td th:text="${curRate.failRate + '%'}"></td>
+	                  	  <tr th:each="threePastRate: ${yearlyFailRate}" th:if="${threePastRate.year == '2018'}" > 
+		                  	<td th:text="${threePastRate.realRank}"></td>
+		             		<td th:text="${threePastRate.inspectionCode}"></td>
+		             		<td th:text="${threePastRate.highName}"></td>
+		                    <td th:text="${threePastRate.medName}"></td>
+		                    <td th:text="${threePastRate.lowName}"></td>
+		                    <td th:text="${threePastRate.subName}"></td>
+		                    <td th:text="${threePastRate.totalRequestedNum}"></td>
+		                    <td th:text="${threePastRate.failedNum}"></td>
+		                    <td th:text="${threePastRate.failRate + '%'}"></td>
 		                  </tr>
 		                </tbody>
 		              </table>
