@@ -58,7 +58,7 @@
 		
 	</select>
 	
-	
+	<!-- *********************잊지말자!!!!!!! 이건 지금 final이 아니라 그냥 inspection으로 되어있다!!! 나중에 final result값이 많아지면 바꾸자!! -->
 	<!-- ******************연도별로의 불량률 찾는 쿼리 옵션 두개 ******************* -->
 	<!-- ======option1은, 연도별로 쿼리가 실행되는거========== -->
 	<select id="getFailedPercent" parameterType="String" resultType="map">
@@ -138,8 +138,29 @@
 			FROM 
 				inspection_result AS ifr) AS sub
 	</select>
-	
-	
+	<!-- =============================선생님이 짜주신 간단하게 연도별로의 불량률 ============================= 
+	SELECT
+		result.monthNum
+		,result.totalRequestedNum
+		,result.fail
+		,((result.fail/result.totalRequestedNum)*100) AS 'rate' 
+	FROM
+	(
+		SELECT
+			DATE_FORMAT(ir.inspection_end_date, '%Y') AS monthNum,
+			COUNT(1) AS totalRequestedNum,
+			(SELECT 
+				COUNT(1)
+			 FROM 
+			 	inspection_result AS subIr
+			 where
+			 	DATE_FORMAT(subIr.inspection_end_date, '%Y') = DATE_FORMAT(ir.inspection_end_date, '%Y')
+			 	and
+			 	subIr.inspection_pass_check = '불합격') AS 'fail'
+		FROM
+			inspection_result AS ir
+		GROUP BY DATE_FORMAT(ir.inspection_end_date, '%Y') ) AS result
+	==================================================================================================== -->
 	<!-- 최종결과테이블에서 가져오는 쿼리문
 	SELECT
 			sub.curYear	AS currentYear,
