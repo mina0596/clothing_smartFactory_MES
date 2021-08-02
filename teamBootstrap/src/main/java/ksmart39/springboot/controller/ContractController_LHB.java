@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.thymeleaf.util.MapUtils;
 
+import ksmart39.springboot.domain.RequestedProduct;
 import ksmart39.springboot.domain.SupplierRequest;
 import ksmart39.springboot.paging.Pagination;
 import ksmart39.springboot.service.ContractService;
@@ -29,10 +31,12 @@ public class ContractController_LHB {
 	@Autowired
 	private final OrderService orderService;
 	private final ContractService contractService;
+	private final RequestedProductService requestedProductService;
 	
-	 @Autowired public ContractController_LHB(OrderService orderService, ContractService contractService) {
+	 @Autowired public ContractController_LHB(OrderService orderService, ContractService contractService, RequestedProductService requestedProductService) {
 	 this.orderService = orderService;
 	 this.contractService = contractService;
+	 this.requestedProductService = requestedProductService;
 	 }
 	 
 
@@ -69,12 +73,41 @@ public class ContractController_LHB {
 		return "contract/buyerOrderList"; //잘못됨
 	}	
 	
-	//[한빛]수주 주문서 승인완료 목록
+
 	@GetMapping("/buyerOrderApproval")
-	public String getBuyerOrderApproval(Model model) {
-		model.addAttribute("title", "수주관리");
+	public String getRequestedProductApproval(Model model
+							   ,@RequestParam(name="searchKey", required = false) String searchKey
+							   ,@RequestParam(name="searchValue", required = false) String searchValue) {
+		
+		log.info("========================================");
+		log.info("화면에서 입력받은 값(회원목록) searchKey: {}", searchKey);
+		log.info("화면에서 입력받은 값(회원목록) searchValue: {}", searchValue);
+		log.info("========================================");
+		
+		//System.out.println("=========================================");
+		//System.out.println("searchKey : " + searchKey);
+		//System.out.println("searchValue : " + searchValue);
+		//System.out.println("=========================================");
+		
+		//map을 활용해서 검색 키워드 정리
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("searchKey", searchKey);
+		paramMap.put("searchValue", searchValue);
+		
+		List<RequestedProduct> approvalList = requestedProductService.getRequestedProductApproval(paramMap);
+		
+		log.info("========================================");
+		log.info("approvalList: {}", approvalList);
+		log.info("========================================");
+		//System.out.println("=========================================");
+		//System.out.println("memberList : " + memberList);
+		//System.out.println("=========================================");
+		
+		model.addAttribute("title", "회원목록");
+		model.addAttribute("approvalList", approvalList);
+		
 		return "contract/buyerOrderApproval";
-	}	
+	}
 	
 	//[한빛]수주 주문서 상세로!
 	@GetMapping("/buyerOrderInfo")
@@ -83,6 +116,18 @@ public class ContractController_LHB {
 		return "contract/buyerOrderInfo";
 	}	
 	
+	//[한빛]미승인버튼 눌렀을 때
+	@PostMapping("/completeRequest")
+	@ResponseBody
+	public boolean completeRequest(@RequestParam(name = "productRequestCode", required = false) String productRequestCode) {
+		boolean approval = false;
+		
+		int result = requestedProductService.completeRequest(productRequestCode);
+		
+		if(result > 0) approval = true;
+		
+		return approval;
+	}
 
 	//---------------------------------------수주계약---------------------------------------------------------
 
@@ -101,14 +146,9 @@ public class ContractController_LHB {
 	
 	//[한빛]수주계약 조회
 	@GetMapping("/buyerContractList")
-	public String getBuyerContractList(Model model, Pagination paging) {
-	    Map<String, Object> resultMap = contractService.getBuyerContract(paging);
-	    model.addAttribute("buyerContractList", 					resultMap.get("clientList"));
-	    model.addAttribute("currentPage", 							resultMap.get("currentPage"));
-		model.addAttribute("lastPage", 								resultMap.get("lastPage"));
-		model.addAttribute("pageStartNum", 						resultMap.get("pageStartNum"));
-		model.addAttribute("pageEndNum", 						resultMap.get("pageEndNum"));
-
+	public String getBuyerContract(Model model) {
+		List<Map<String, Object>> buyerContractList = contractService.getBuyerContract();
+		model.addAttribute("buyerContractList", buyerContractList);
 		return "contract/buyerContractList";
 	}
 	
