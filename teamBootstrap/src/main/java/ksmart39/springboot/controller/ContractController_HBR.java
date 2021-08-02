@@ -12,7 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.thymeleaf.util.MapUtils;
 
 import ksmart39.springboot.domain.SupplierRequest;
@@ -126,19 +128,27 @@ public class ContractController_HBR {
 		supplierService.addSupplierRequest(supplierRequest);
 		return "redirect:/supplierRequestList";
 	}
+	//[보람]원부자재 발주요청 거래처 조회
+	@RequestMapping(value = "searchSupplierClientCate", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String,Object>> searchSupplierClientCate(@RequestParam(value = "clientName",required = false)String client){
+		List<Map<String,Object>> clientList = supplierService.searchSupplierClientCate(client);
+		return clientList;
+	}
+	
 	
 	//[보람]원부자재 발주요청메서드
 	@GetMapping("/addSupplierRequest")
 	public String addSupplierRequest(Model model) {
 		 List<Map<String,Object>> resultMap1 = supplierService.getRawInventoryState();
-		 List<Map<String,Object>> resultMap2 = supplierService.getClientInfo();
+		 
 		 List<Map<String,Object>> resultMap3 = supplierService.getRawInfo();
 		
 		 log.info("========================================");
 		 log.info("addSupplierRequeststate{}",resultMap1);
 		 log.info("========================================");
 		 model.addAttribute("rawInventoryList", resultMap1);
-		 model.addAttribute("clientList", resultMap2);
+		 
 		 model.addAttribute("rawMeterialList", resultMap3);
 		 
 		return "contract/addSupplierRequest";

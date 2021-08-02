@@ -20,95 +20,89 @@ layout:decorate="@{layout/default_shipment}">
       <br>
       
       <form class="form-horizontal style-form" method="post">
-
-       <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">출하지시그룹번호</label>
-          <div class="col-sm-10">
-            <span></span>
-            </div>
-            </div>
-       <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">출하지시번호</label>
-          <div class="col-sm-10">
-            <span></span>
-            </div>
-            </div>
-       <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">의뢰코드</label>
-          <div class="col-sm-10">
-            <span></span>
-            </div>
-            </div>
-       <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품목별의뢰코드</label>
-          <div class="col-sm-10">
-            <span></span>
-            </div>
-            </div>
-       <div class="form-group">
+		<div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">계약번호</label>
           <div class="col-sm-10">
-            <span></span>
+            <span th:text="${shipmentOrder.requestedProduct.contractCode}"></span>
             </div>
             </div>
        <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">거래처명</label>
           <div class="col-sm-10">
-            <span></span>
+            <span th:text="${shipmentOrder.client.clientName}"></span>
             </div>
             </div>
        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">제품명</label>
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">출하지시그룹번호</label>
           <div class="col-sm-10">
-            <span></span>
+            <span th:text="${shipmentOrder.shipmentOrderGroupCode}"></span>
             </div>
             </div>
        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">납품처주소</label>
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">출하지시번호</label>
           <div class="col-sm-10">
-            <span></span>
+            <span th:text="${shipmentOrder.shipmentOrderCode}"></span>
             </div>
             </div>
-        
+       <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">의뢰코드</label>
+          <div class="col-sm-10">
+            <span th:text="${shipmentOrder.requestedProduct.productRequestCode}"></span>
+            </div>
+            </div>
+       <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품목별의뢰코드</label>
+          <div class="col-sm-10">
+            <span th:text="${shipmentOrder.requestProductCode}"></span>
+            </div>
+            </div>
+       
+       <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">상품명</label>
+          <div class="col-sm-10">
+            <span th:text="${shipmentOrder.productCodeDetail.genderCategorizedName}"></span>
+            </div> 
+            </div>
+       <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품목명</label>
+          <div class="col-sm-10">
+            <span th:text="${shipmentOrder.productCodeDetail.detailedCategorizedName}"></span>
+            </div> 
+            </div>
+             
        <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">납기일</label>
           <div class="col-sm-10">
-            <span></span>
+            <span th:text="${shipmentOrder.shipmentOrderDate}"></span>
             </div>
             </div>
        <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">계약상태</label>
           <div class="col-sm-10">
-            <span></span>
+            <span th:text="${shipmentOrder.shipmentOrderContractState}"></span>
             </div>
             </div>
        <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">담당사원명</label>
           <div class="col-sm-10">
-            <span></span>
+            <span th:text="${shipmentOrder.humanResources.employeeName}"></span>
             </div>
             </div>
        <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">담당사원코드</label>
           <div class="col-sm-10">
-            <span></span>
+            <span th:text="${shipmentOrder.chargeEmployeeCode}"></span>
             </div>
             </div>
        <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">등록일자</label>
           <div class="col-sm-10">
-            <span></span>
-            </div>
-            </div>
-       <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">변경일자</label>
-          <div class="col-sm-10">
-            <span></span>
+            <span th:text="${shipmentOrder.shipmentOderRegDate}"></span>
             </div>
             </div>
         <div class="form-group text-right">
                     <div class="col-lg-offset-2 col-lg-10">
-                      <button class="btn btn-theme" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">출하지시정보확인</font></font></button>
+                      <button class="btn btn-theme" type="button" onclick="location.href='/shipment/shipmentOrderList'"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">출하지시정보확인</font></font></button>
                      
                     </div>
                     </div>

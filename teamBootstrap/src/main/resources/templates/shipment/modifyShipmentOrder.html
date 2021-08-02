@@ -13,10 +13,7 @@
 		$('#cancleBtn').click(function(){
 			window.history.back();
 		});
-		 var tableAttr = $('#list').children();
-			var tdList = tableAttr.find('.radioClass');
-			var radioSelected = tableAttr.find('.radioClass').is(':checked');
-			
+		
 			
 			
 	});
@@ -33,102 +30,78 @@
       <hr>
       <br>
       
-      <form class="form-horizontal style-form" method="post">
-      	<div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label">출하지시코드</label>
-          <div class="col-md-5">
-            <input class="form-control" id="" type="text" placeholder="" readonly="readonly">
-          </div>
-       	 </div>
-       <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label">품목별의뢰코드검색</label>
-          	<div class="col-md-5">
-          		<input type="text" class="form-control" id="productReqeust">
-        	</div>
-        </div>
-
-        
-        
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label">의뢰코드</label>
-          <div class="col-md-5">
-            <input class="form-control" id="disabledInput" type="text" placeholder="" disabled>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label">계약번호</label>
-          <div class="col-md-5">
-            <input class="form-control" id="disabledInput" type="text" placeholder="" disabled>
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label">거래처명</label>
-          <div class="col-md-5">
-            <input class="form-control" id="disabledInput" type="text" placeholder="파크랜드 전주점 (DB에서 가져온 값)" disabled>
-          </div>
-        </div>
-         <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label">제품명</label>
-       	 <div class="col-md-5">
-            <input type="text" class="form-control" placeholder="">
-          </div>
-        </div>
-         <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label">납품처 주소</label>
-          <div class="col-md-5">
-            <input type="text" class="form-control" placeholder="전주시 덕진구 금암동 (DB에서 가져올 수 있고, 수정할 수도 있다.)">
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label">납품처 연락처</label>
-          <div class="col-md-5">
-            <input type="text" class="form-control" placeholder="063-717-1008 (DB에서 가져올 수 있고, 수정할 수도 있다.)">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label">계약상태</label>
-          <div class="col-md-5">
-            <input type="text" class="form-control" placeholder="">
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label class="col-sm-2 col-sm-2 control-label">출고일자</label>
-          <div class="col-md-5">
-            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
-              <input type="text" class="form-control" readonly="readonly" size="16">
-              <div class="input-group-btn">
-                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
-                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
-              </div>
-            </div>
-          </div>
-        </div>
-     
-
-        <div class="form-group">
-          <label class="col-lg-2 col-sm-2 control-label">담당 사원명</label>
-          <div class="col-md-5">
-            <p class="form-control-static">추잔탁</p>
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label class="col-lg-2 col-sm-2 control-label">담당자 사원 코드</label>
-          <div class="col-md-5">
-            <p class="form-control-static">employee0293</p>
-          </div>
-        </div>
+      <form class="form-horizontal style-form" method="post" th:action="@{/shipment/modifyShipmentOrder}">
+	      <div class="form-group">
+	          <label class="col-sm-2 col-sm-2 control-label">계약번호</label>
+	          <div class="col-lg-4">	            
+	              <input type="text" th:value="${shipmentOrder.requestedProduct.contractCode}" class="form-control" name="requestedProduct.contractCode" size="16"  readonly="readonly" >
+	            </div>
+	        </div>
+	      <div class="form-group">
+	          <label class="col-sm-2 col-sm-2 control-label">거래처명</label>
+	          <div class="col-lg-4">	            
+	              <input type="text" th:value="${shipmentOrder.client.clientName}" class="form-control" name="client.clientName" size="16"  readonly="readonly" >
+	            </div>
+	        </div>
+	      <div class="form-group">
+	          <label class="col-sm-2 col-sm-2 control-label">출하지시그룹코드</label>
+	          <div class="col-lg-4">	            
+	              <input type="text" th:value="${shipmentOrder.shipmentOrderGroupCode}" class="form-control" name="shipmentOrderGroupCode" size="16"  readonly="readonly" >
+	            </div>
+	        </div>
+	      <div class="form-group">
+	          <label class="col-sm-2 col-sm-2 control-label">출하지시코드</label>
+	          <div class="col-lg-4">	            
+	              <input type="text" th:value="${shipmentOrder.shipmentOrderCode}" class="form-control" size="16"  readonly="readonly" name="shipmentOrderCode" >
+	            </div>
+	        </div>
+	      <div class="form-group">
+	          <label class="col-sm-2 col-sm-2 control-label"> 의뢰코드</label>
+	          <div class="col-lg-4">	            
+	              <input type="text" th:value="${shipmentOrder.requestedProduct.productRequestCode}"  class="form-control" id="shipmentOrderRequestCode" size="16" name="requestedProduct.productRequestCode" readonly="readonly" >
+	            </div>
+	        </div>
+	      <div class="form-group">
+	          <label class="col-sm-2 col-sm-2 control-label">출하지시품목별의뢰코드</label>
+	          <div class="col-lg-4">
+	  			 <input th:value="${shipmentOrder.requestProductCode}" class="shipmentRequestCode form-control" id="shipmentOrderProduectCode"  size="16" type="text" readonly="readonly" name="requestProductCode">
+	             </div>
+	          </div>
+	       
+	        <div class="form-group">
+	          <label class="col-sm-2 col-sm-2 control-label">상품명</label>
+	       	 <div class="col-lg-4">
+	            <input th:value="${shipmentOrder.productCodeDetail.genderCategorizedName}" type="text" id="shipmentOrderProductName"  class="form-control" readonly="readonly" name="productCodeDetail.genderCategorizedName">
+	          </div>
+	        </div>
+	        <div class="form-group">
+	          <label class="col-sm-2 col-sm-2 control-label">품목명</label>
+	       	 <div class="col-lg-4">
+	            <input th:value="${shipmentOrder.productCodeDetail.detailedCategorizedName}"type="text" id="shipmentOrderProductName"  class="form-control" readonly="readonly" name="productCodeDetail.detailedCategorizedName">
+	          </div>
+	        </div>
+	        
+	        <div class="form-group">
+	          <label class="col-sm-2 col-sm-2 control-label">계약상태</label>
+	          <div class="col-lg-4">
+	            <input type="text" th:value="${shipmentOrder.shipmentOrderContractState}" class="form-control" placeholder="" name="shipmentOrderContractState" id="contractState">
+	          </div>
+	        </div>
+	        <div class="form-group">
+			          <label class="col-sm-2 col-sm-2 control-label">출하지시날짜</label>
+		          <div class="col-lg-4">
+					<input th:value="${shipmentOrder.shipmentOrderDate}" id="shipmentOrderDate" type="date" class="form-control"name="shipmentOrderDate">
+		          </div>
+		        </div>
+	       
  		
         <div class="form-group text-right">
             <div class="col-lg-offset-2 col-lg-10">
-              <button class="btn btn-theme" type="button" onclick="location.href='/shipmentOrderList'"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">출하지시수정완료</font></font></button>
+              <button class="btn btn-theme" type="submit" ><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">출하지시수정완료</font></font></button>
               <button class="btn btn-theme04" type="button" id="cancleBtn"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">출하지시수정취소</font></font></button>
             </div>
             </div>
-        
+       
          
         
       </form>

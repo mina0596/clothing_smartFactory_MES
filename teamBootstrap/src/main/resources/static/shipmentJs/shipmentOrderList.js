@@ -53,4 +53,40 @@ $(function(){
 	});	
 	
 	});
+	
+	//삭제 하기
+
+	$('#deleteBtn').click(function(){
+		var checkArray = new Array();
+		var checkList =$('input[name= "check"]');
+		for(var i =0; i < checkList.length; i++){
+			if(checkList[i].checked){
+				checkArray.push(checkList[i].value);
+			}
+			console.log(checkArray);
+		}//체크된 체크박스의 길이가 0이면 품질검사항목이없다.
+		if(checkArray.length == 0){
+			alert("선택된 출하지시항목이 없습니다.");
+		}else{
+			var chk= confirm("정말로삭제하시겠습니까?");
+			var request = $.ajax({
+				type:"POST",
+				url:"/shipment/deleteShipmentOrder",
+				data:{'checkArray':checkArray}
+			});
+			request.done(function(data) {
+				if(data = 1){
+					alert("출하지시 항목이 삭제되었습니다.");
+					location.replace("shipmentOrderList")
+				}else{
+					alret("출하지시 삭제 실패되었습니다.");
+				}
+				
+			});
+			request.fail(function( jqXHR, textStatus ) {
+				alert( "Request failed: " + textStatus );
+			});	
+		}
+
+	});
 })
