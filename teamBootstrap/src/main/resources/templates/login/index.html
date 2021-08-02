@@ -24,7 +24,7 @@
            		   		<i class="fas fa-user"></i>
            		   </div>
            		   <div class="div">
-           		   		<input type="text" name="adminId" placeholder="id001">
+           		   		<input type="text" name="adminId" value="id001">
            		   </div>
            		</div>
            		<div class="input-div pass">
@@ -32,10 +32,9 @@
            		    	<i class="fas fa-lock"></i>
            		   </div>
            		   <div class="div">
-           		    	<input type="password" name="adminPw" placeholder="pw001">
+           		    	<input type="password" name="adminPw" value="pw001">
             	   </div>
             	</div>
-            	<a href="#">Forgot Password?</a>
             	<input type="submit" class="btn" value="LOGIN">
             </form>
         </div>
@@ -50,7 +49,7 @@
            		   		<i class="fas fa-user"></i>
            		   </div>
            		   <div class="div">
-           		   		<input type="text" name="headquarterId" placeholder="id016">
+           		   		<input type="text" name="headquarterId" value="id016">
            		   </div>
            		</div>
            		<div class="input-div pass">
@@ -58,11 +57,12 @@
            		    	<i class="fas fa-lock"></i>
            		   </div>
            		   <div class="div">
-           		    	<input type="password" name="headquarterPw" placeholder="pw016">
+           		    	<input type="password" name="headquarterPw" value="pw016">
             	   </div>
             	</div>
-            	<a href="#">Forgot Password?</a>
             	<input type="submit" class="btn" value="LOGIN">
+            	<a class="btn2" onMouseOver="this.innerHTML='CLICK❕❕'" onMouseOut="this.innerHTML='개발문서'" style="display: inline; background-color: yellow;" href="file/01팀_맞춤정장 스마트팩토리 QC기반 MES_개발문서.xlsx" download="01팀_맞춤정장 스마트팩토리 QC기반 MES_개발문서.xlsx">개발문서</a>
+              	<a class="btn2" onMouseOver="this.innerHTML='CLICK❕❕'" onMouseOut="this.innerHTML='완료보고서'" style="display: inline; background-color: lime;" href="file/01팀_맞춤정장 스마트팩토리 QC기반 MES_완료보고서.pdf" download="01팀_맞춤정장 스마트팩토리 QC기반 MES_완료보고서.pdf">완료보고서</a>
             </form>
         </div>
 		</div>
@@ -76,7 +76,7 @@
            		   		<i class="fas fa-user"></i>
            		   </div>
            		   <div class="div">
-           		   		<input type="text" name="factoryId"  placeholder="id004">
+           		   		<input type="text" name="factoryId"  value="id004">
            		   </div>
            		</div>
            		<div class="input-div pass">
@@ -84,17 +84,17 @@
            		    	<i class="fas fa-lock"></i>
            		   </div>
            		   <div class="div">
-           		    	<input type="password" name="factoryPw" placeholder="pw004">
+           		    	<input type="password" name="factoryPw" value="pw004">
             	   </div>
             	</div>
-            	<a href="#">Forgot Password?</a>
             	<input type="submit" class="btn" value="LOGIN">
             </form>
         </div>
 		</div>
-		
+
         
     </div>
     <script type="text/javascript" th:src="@{/login/js/main.js}"></script>
+
 </body>
 </html>

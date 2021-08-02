@@ -20,6 +20,7 @@ import ksmart39.springboot.dao.QualityInspectionFinalResultMapper;
 import ksmart39.springboot.domain.QualityBiochemFabricLevelStandard;
 import ksmart39.springboot.domain.QualityInspection;
 import ksmart39.springboot.domain.QualityInspectionFinalResult;
+import ksmart39.springboot.domain.QualityInspectionRequest;
 import ksmart39.springboot.domain.QualityInspectionResult;
 import ksmart39.springboot.domain.QualityInspectionStandard;
 
@@ -258,5 +259,25 @@ public class QualityInsMeasurementValueService {
 	//품질검사 요청 검색 모달
 	public List<Map<String, Object>> searchQualityInspectionRequest(Map<String,Object> map){			
 		return qualityInsMeasurementValueMapper.searchQualityInspectionRequest(map);
+	};
+	
+	//품질검사 요청 목록
+	public List<Map<String, Object>> getQualityInspectionRequestList(){
+		return qualityInsMeasurementValueMapper.getQualityInspectionRequestList();
+	};
+	
+	//품질검사 단일 요청
+	public int qualityInspectionRequest(QualityInspectionRequest qualityInspectionRequest) {
+		return qualityInsMeasurementValueMapper.qualityInspectionRequest(qualityInspectionRequest);
+	};
+	
+	//계약번호로 품목별 의뢰코드 검색
+	public List<Map<String, Object>> searchRequestProductCode(String contractCode){
+		return qualityInsMeasurementValueMapper.searchRequestProductCode(contractCode);
+	};
+	
+	//품질검사 세부 코드 검색
+	public List<Map<String, Object>> subClassCate(String lowClassCateName){
+		return qualityInsMeasurementValueMapper.subClassCate(lowClassCateName);
 	};
 }

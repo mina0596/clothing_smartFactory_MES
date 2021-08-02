@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ksmart39.springboot.domain.QualityInspection;
+import ksmart39.springboot.domain.QualityInspectionRequest;
 import ksmart39.springboot.domain.QualityInspectionResult;
 import ksmart39.springboot.domain.QualityInspectionStandard;
 import ksmart39.springboot.service.QualityInsMeasurementValueService;
@@ -179,9 +180,6 @@ public class QualityControlController_KDM {
 	}
 	
 	
-	
-	//====================================================================
-	
 	//[다미]품질검사 요청 목록 모달
 	@RequestMapping(value = "searchQualityInspectionRequest", method = RequestMethod.POST)
 	@ResponseBody
@@ -213,15 +211,27 @@ public class QualityControlController_KDM {
 	
 	//[다미]품질검사요청목록
 	@GetMapping("/qualityInspectionRequestList")
-	public String qualityControlRequestList() {
+	public String qualityControlRequestList(Model model) {
+		List<Map<String, Object>> resultMap = qualityInsMeasurementValueService.getQualityInspectionRequestList();
+		log.info("test3333{}",resultMap);
+		model.addAttribute("list", resultMap);
 		return "quality/qualityInspectionRequestList";
 		
 	}
+	
+	//[다미] 계약번호로 품목별 의뢰 코드 검색
+	@PostMapping("/searchRequestProductCode")
+	@ResponseBody
+	public List<Map<String, Object>> searchRequestProductCode(@RequestParam(name = "contractCode")String contractCode){
+		List<Map<String, Object>> resultMap = qualityInsMeasurementValueService.searchRequestProductCode(contractCode);
+		return resultMap;
+	}
 		
-	//[다미]품질검사요청 메서드
+	//[다미]품질검사 단일 요청
 	@PostMapping("/qualityInspectionRequest")
-	public String qualityInspectionRequest(@RequestParam(name = "qualityInspection", required = false)String qualityInspection) {
-		return "redirect:/qualityInspectionRequestList";
+	public String qualityInspectionRequest(QualityInspectionRequest qualityInspectionRequest) {
+		qualityInsMeasurementValueService.qualityInspectionRequest(qualityInspectionRequest);
+		return "redirect:qualityInspectionRequestList";
 	}
 	
 	//[다미]품질검사요청
@@ -230,5 +240,10 @@ public class QualityControlController_KDM {
 		return "quality/qualityInspectionRequest";
 	}
 	
-	
+	//[다미]품질검사 세부 코드 검색
+	@PostMapping("/subClassCate")
+	@ResponseBody
+	public List<Map<String, Object>> subClassCate(@RequestParam(name = "lowClassCateName") String lowClassCateName){
+		return qualityInsMeasurementValueService.subClassCate(lowClassCateName);
+	}
 }
