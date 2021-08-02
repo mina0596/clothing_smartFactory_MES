@@ -36,7 +36,7 @@ layout:decorate="@{layout/default_rawMaterials}">
 	        <div class="form-group">
                <label class="col-sm-2 col-sm-2 control-label">발주 담당자 코드</label>
                <div class="col-sm-6">
-                  <input type="text"  id="raw_material_admin" class="form-control" name="chargeEmployeeCode" readonly="readonly">
+                  <input type="text"  id="raw_material_admin" th:value ="${employeeCode}"class="form-control" name="chargeEmployeeCode" readonly="readonly">
                </div>
             </div>
                 
@@ -85,7 +85,6 @@ layout:decorate="@{layout/default_rawMaterials}">
 			         			<th><i class="fa fa-check"></i></th>
 			         			<th>발주코드</th>
 			         			<th>원부자재 코드</th>
-			         			<th>발주 담당자 코드</th>
 		        			</tr>     			
 		       			</thead>
 		       			<tbody style="text-align: center;" id="materialData">
@@ -121,7 +120,6 @@ layout:decorate="@{layout/default_rawMaterials}">
 										'<td><input type="radio" name="bySupplierModal"></td>' +
 										'<td name="rawMaterialOrderCode">' + data[i].rawMeterialOrderCode + '</td>' +
 										'<td name="raw_material_code">' + data[i].rawMeterialCode + '</td>' +
-										'<td name="raw_material_transaction_amount">' + data[i].chargeEmployeeCode + '</td>' +
 										'</tr>' ;
 									$('#materialData').append(requestData);
 								}
@@ -146,10 +144,8 @@ layout:decorate="@{layout/default_rawMaterials}">
 						var checkTr = check.parent().parent();
 						var rawMaterialOrderCode = checkTr.find('td').eq(1).text();
 						var rawMaterialCode = checkTr.find('td').eq(2).text();
-						var rawMaterialAdmin = checkTr.find('td').eq(3).text();
 						$('#raw_material_order_code').attr('value',rawMaterialOrderCode);
 						$('#raw_material_code').attr('value',rawMaterialCode);
-						$('#raw_material_admin').attr('value',rawMaterialAdmin);
 					}); 
 				});	
 				

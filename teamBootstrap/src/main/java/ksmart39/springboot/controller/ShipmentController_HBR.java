@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import ksmart39.springboot.domain.ShipmentOrder;
 import ksmart39.springboot.service.ShipmentService;
 
 @Controller
@@ -153,31 +154,42 @@ public class ShipmentController_HBR {
 	}
 	
 	//[보람]출하지시 삭제
-	@PostMapping("/deleteShipmentOrder")
-	public String deleteShipmentOrder() {
-		return "redirect:/shipmentOrderList";
+	@RequestMapping("/deleteShipmentOrder")
+	@ResponseBody
+	public int deleteShipmentOrder(@RequestParam(value = "checkArray[]")String[] checkArray) {
+		int result =1;
+		for(int i =0; i<checkArray.length; i++) {
+			result =shipmentService.deleteShipmentOrder(checkArray[i]);
+		}
+		return result;
 	}
 	//[보람 ]출하지시  수정화면 수정후
 	@PostMapping("/modifyShipmentOrder")
-	public String modifyShipmentOrder1() {
-		
-		//DAO 만들고나서 메서드 명 변경할거임
-		return "redirect:/shipmentOrderList";
+	public String modifyShipmentOrder(ShipmentOrder shipmentOrder) {
+		log.info("========================================");
+		log.info("화면에서 입력받은 값(수정화면폼)shipmentOrder:{}",shipmentOrder);
+		log.info("========================================");
+		shipmentService.modifyShipmentOrder(shipmentOrder);
+		return "redirect:/shipment/shipmentOrderList";
 	}
 	//[보람] 출하지시 리스트 수정화면 경로 메서드
 	@GetMapping("/modifyShipmentOrder")
-	public String modifyShipmentOrder() {
-		
+	public String modifyShipmentOrder(Model model,@RequestParam(name = "shipmentOrderCode",required = false)String shipmentOrderCode) {
+		ShipmentOrder shipmentOrder = shipmentService.shipmentOrderInfo(shipmentOrderCode);
+		model.addAttribute("shipmentOrder", shipmentOrder);
 		
 		return "shipment/modifyShipmentOrder";
 	}
 	
 	//[보람] 출하지시리스트 순번 클릭시 출하지시정보
-			@GetMapping("/shipmentOrderInfo")
-			public String shipmentOrderInfo() {
-				return"shipment/shipmentOrderInfo";
-			}
-	
+	@GetMapping("/shipmentOrderInfo")
+	public String shipmentOrderInfo(Model model,@RequestParam(name = "shipmentOrderCode",required = false)String shipmentOrderCode) {
+		ShipmentOrder shipmentOrder = shipmentService.shipmentOrderInfo(shipmentOrderCode);
+		model.addAttribute("shipmentOrder", shipmentOrder);
+		
+		return"shipment/shipmentOrderInfo";
+	}
+
 	//출하지시조회및리스트
 	@GetMapping("/shipmentOrderList")
 	public String getShipmentOrderList(Model model) {
@@ -204,13 +216,14 @@ public class ShipmentController_HBR {
 									@RequestParam(name = "shipmentOrderProduectCode",required = false)String shipmentOrderProduectCode,
 									@RequestParam(name = "shipmentOrderProductName",required = false)String shipmentOrderProductName,
 									@RequestParam(name = "contractState",required = false)String contractState,
+									@RequestParam(name = "chargeEmployeeCode",required = false)String chargeEmployeeCode,
 									@RequestParam(name = "shipmentOrderDate",required = false)String shipmentOrderDate) {
 		 log.info("========================================");
 		  log.info("shipmentRequestCode {}:",shipmentRequestCode);
 		  log.info("shipmentOrderProduectCode {}:",shipmentOrderProduectCode);
 		  log.info("shipmentOrderProductName {}:",shipmentOrderProductName);
 		  log.info("========================================");
-		shipmentService.addShipmentOrder(shipmentRequestCode, shipmentOrderProduectCode, shipmentOrderProductName, contractState, shipmentOrderDate);
+		shipmentService.addShipmentOrder(shipmentRequestCode, shipmentOrderProduectCode, shipmentOrderProductName, contractState,chargeEmployeeCode, shipmentOrderDate);
 		
 		return"redirect:/shipment/shipmentOrderList";
 	}

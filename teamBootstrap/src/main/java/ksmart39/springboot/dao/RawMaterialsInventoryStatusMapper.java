@@ -22,6 +22,12 @@ public interface RawMaterialsInventoryStatusMapper {
 	//[한빛] 출고현황 리스트
 	public List<Map<String,Object>> getExwarehousing();
 	
+	//[한빛] 출고 수정
+	public int modifyExHousing(RawMaterialsInventory rawMaterialsInventory);
+	
+	//[한빛] 출고 수정 목록
+	public RawMaterialsInventory getExhousingByCode(String transactionCode);
+	
 	//[한빛] 리스트 삭제
 	public int deleteExHousing(List<String> delArr);
 	

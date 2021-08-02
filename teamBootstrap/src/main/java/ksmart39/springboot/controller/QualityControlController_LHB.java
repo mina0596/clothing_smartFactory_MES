@@ -2,7 +2,9 @@ package ksmart39.springboot.controller;
 
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import ksmart39.springboot.domain.DefectiveProduct;
 import ksmart39.springboot.domain.QualityInspectionResult;
+import ksmart39.springboot.paging.Pagination;
 import ksmart39.springboot.service.DefectiveProductService;
 
 @Controller
@@ -59,11 +62,24 @@ public class QualityControlController_LHB {
 	
 	//[한빛]불량품 조회
 	@GetMapping("/defectiveProductList")
-	public String getDefectiveProductList(Model model) {
-		List<DefectiveProduct> defectiveProduct = defectiveProductService.getDefectiveProduct();
-		model.addAttribute("title", "품질관리");
-		model.addAttribute("defectiveProduct", defectiveProduct);
-		return"quality/defectiveProductList";
+	public String getDefectiveProductList(@RequestParam(name = "searchKey", required = false) String searchKey,
+													@RequestParam(name = "searchValue", required = false) String searchValue, 
+																					Model model, Pagination paging) {
+		
+		Map<String, Object> paramMap = new HashMap<String,Object>();
+		paramMap.put("searchKey", searchKey);
+		paramMap.put("searchValue", searchValue);
+
+	    Map<String, Object> resultMap = defectiveProductService.getDefectiveProduct(paging);
+	    model.addAttribute("defectiveProductList", 					resultMap.get("defectiveProductList"));
+	    model.addAttribute("currentPage", 					resultMap.get("currentPage"));
+		model.addAttribute("lastPage", 						resultMap.get("lastPage"));
+		model.addAttribute("pageStartNum", 					resultMap.get("pageStartNum"));
+		model.addAttribute("pageEndNum", 					resultMap.get("pageEndNum"));
+		model.addAttribute("searchKey", 					paramMap.get("searchKey"));
+		model.addAttribute("searchValue", 					paramMap.get("searchValue"));
+
+		return "quality/defectiveProductList";
 	}
 	
 	//[한빛]불량품 수정

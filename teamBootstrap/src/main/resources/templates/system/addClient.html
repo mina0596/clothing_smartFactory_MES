@@ -11,7 +11,6 @@ layout:decorate="@{layout/default_system}">
 
 
 <th:block layout:fragment="container">
-
 	<div class="form-panel">
 	 <h4 class="mb"><i class="fa fa-angle-right"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">거래처등록</font></font></h4>
               <div class="form">
@@ -21,7 +20,7 @@ layout:decorate="@{layout/default_system}">
 	                  <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">구분</label>
 	                  <div class="col-sm-2">
 	                      <select name = "clientCategory" class="form-control">
-							<option>::선택::</option>
+							<option value ="선택">::선택::</option>
 							<option value = "수주">수주</option>
 							<option value = "발주">발주</option>
 							<option value = "운송">운송</option>
@@ -32,35 +31,35 @@ layout:decorate="@{layout/default_system}">
                   <div class="form-group ">
                     <label for="firstname" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">회사명</font></font></label>
                     <div class="col-lg-6">
-                      <input class=" form-control" id="clientName" name="clientName" type="text">
+                      <input class=" form-control" id="clientName" name="clientName" placeholder="회사명을 입력하세요." type="text">
                     </div>
                   </div>
                   
                   <div class="form-group ">
                     <label for="lastname" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">전화번호</font></font></label>
                     <div class="col-lg-6">
-                      <input class=" form-control" name="clientTel"  type="text">
+                      <input class=" form-control" name="clientTel"  onKeyup="inputTelNumber(this);" placeholder="전화번호를 입력하세요."  type="text">
                     </div>
                   </div>
                   
                   <div class="form-group ">
                     <label for="email" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">대표자</font></font></label>
                     <div class="col-lg-6">
-                      <input class="form-control " name="clientCeo" type="text">
+                      <input class="form-control " name="clientCeo" placeholder="대표자명을 입력하세요." type="text">
                     </div>
                   </div>
                   
                   <div class="form-group ">
                     <label for="email" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">담당자</font></font></label>
                     <div class="col-lg-6">
-                      <input class="form-control " name="clientEmployee" type="text">
+                      <input class="form-control " name="clientEmployee" placeholder="담당자명을 입력하세요." type="text">
                     </div>
                   </div>
                   
                   <div class="form-group ">
                     <label for="email" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">사업자번호</font></font></label>
                     <div class="col-lg-6">
-                      <input class="form-control " name="clientBusinessNum" type="number">
+                      <input class="form-control " name="clientBusinessNum" onkeyup="setindustrial_num(this)" placeholder="10개의 숫자로 구성된 사업자번호를 입력하세요."  type="text">
                     </div>
                   </div>
                   
@@ -90,91 +89,161 @@ layout:decorate="@{layout/default_system}">
 <th:block layout:fragment="customJs">
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 	<script type="text/javascript">
-		$(function(){
-			$('#addBtn').click(function(){
-				var clientName = $('input[name=clientName]').val();
-				var clientTel = $('input[name=clientTel]').val();
-				var clientCeo = $('input[name=clientCeo]').val();
-				var clientEmployee = $('input[name=clientEmployee]').val();
-				var clientBusinessNum = $('input[name=clientBusinessNum]').val();
-				var clientAddress = $('input[name=clientAddress]').val();
-				var addAccountCate = $('#addAccountCate');
-				var submitFlag = true;
-			
-				if(clientName == null || clientName == undefined || clientName == ''){			
-					alert('회사명을 입력해주세요.');
-					$('input[name=clientName]').focus();
-					submitFlag = false;
-					return submitFlag;
-				}else if(clientTel == null || clientTel == undefined || clientTel == ''){
-					alert('연락처를 입력해주세요.');
-					$('input[name=clientTel]').focus();
-					submitFlag = false;
-					return submitFlag;
-				}else if(clientCeo == null || clientCeo == undefined || clientCeo == ''){
-					alert('대표자를 입력해주세요.');
-					$('input[name=clientCeo]').focus();
-					submitFlag = false;
-					return submitFlag;
-				}else if(clientEmployee == null || clientEmployee == undefined || clientEmployee == ''){
-					alert('담당자를 입력해주세요.');
-					$('input[name=clientEmployee]').focus();
-					submitFlag = false;
-					return submitFlag;
-				}else if(clientBusinessNum == null || clientBusinessNum == undefined || clientBusinessNum == ''){
-					alert('사업자번호를 입력해주세요.');
-					$('input[name=clientBusinessNum]').focus();
-					submitFlag = false;
-					return submitFlag;
-				}else if(clientAddress == null || clientAddress == undefined || clientAddress == ''){
-					alert('주소를 입력해주세요.');
-					$('input[name=clientAddress]').focus();
-					submitFlag = false;
-					return submitFlag;
-				}
-				
-				if(submitFlag) addClient.submit();
-			});			
-		});
+	//유효성검사
+	$(function(){
+		$('#addBtn').click(function(){
+			var clientCategory = $('input[name=clientCategory]').val();
+			var clientName = $('input[name=clientName]').val();
+			var clientTel = $('input[name=clientTel]').val();
+			var clientCeo = $('input[name=clientCeo]').val();
+			var clientEmployee = $('input[name=clientEmployee]').val();
+			var clientBusinessNum = $('input[name=clientBusinessNum]').val();
+			var clientAddress = $('input[name=clientAddress]').val();
+			var submitFlag = true;
 		
-	    function execDaumPostcode() {
-	        new daum.Postcode({
-	            oncomplete: function(data) {
-	                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-	 
-	                // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
-	                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-	                var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
-	                var extraRoadAddr = ''; // 도로명 조합형 주소 변수
-	 
-	                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-	                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-	                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-	                    extraRoadAddr += data.bname;
-	                }
-	                // 건물명이 있고, 공동주택일 경우 추가한다.
-	                if(data.buildingName !== '' && data.apartment === 'Y'){
-	                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-	                }
-	                // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-	                if(extraRoadAddr !== ''){
-	                    extraRoadAddr = ' (' + extraRoadAddr + ')';
-	                }
-	                // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
-	                if(fullRoadAddr !== ''){
-	                    fullRoadAddr += extraRoadAddr;
-	                }
-	 
-	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-	                document.getElementById('zip').value = data.zonecode; //5자리 새우편번호 사용
-	                document.getElementById('addr1').value = fullRoadAddr;
-	                document.getElementById('addr2').focus();
-	            }
-	        }).open();
-	    }
-	    
-	</script>
+			if($('select[name=clientCategory]').val() == '선택'){			
+				alert('구분을 선택해주세요.');
+				$('input[name=clientCategory]').focus();
+				submitFlag = false;
+				return submitFlag;
+			}else if(clientName == null || clientName == undefined || clientName == ''){			
+				alert('회사명을 입력해주세요.');
+				$('input[name=clientName]').focus();
+				submitFlag = false;
+				return submitFlag;
+			}else if(clientTel == null || clientTel == undefined || clientTel == ''){
+				alert('연락처를 입력해주세요.');
+				$('input[name=clientTel]').focus();
+				submitFlag = false;
+				return submitFlag;
+			}else if(clientCeo == null || clientCeo == undefined || clientCeo == ''){
+				alert('대표자를 입력해주세요.');
+				$('input[name=clientCeo]').focus();
+				submitFlag = false;
+				return submitFlag;
+			}else if(clientEmployee == null || clientEmployee == undefined || clientEmployee == ''){
+				alert('담당자를 입력해주세요.');
+				$('input[name=clientEmployee]').focus();
+				submitFlag = false;
+				return submitFlag;
+			}else if(clientBusinessNum == null || clientBusinessNum == undefined || clientBusinessNum == ''){
+				alert('사업자번호를 입력해주세요.');
+				$('input[name=clientBusinessNum]').focus();
+				submitFlag = false;
+				return submitFlag;
+			}else if(clientAddress == null || clientAddress == undefined || clientAddress == ''){
+				alert('주소를 입력해주세요.');
+				$('input[name=clientAddress]').focus();
+				submitFlag = false;
+				return submitFlag;
+			}
+			
+			if(submitFlag) addClient.submit();
+		});			
+	});
 	
+
+	//주소검색
+    function execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+ 
+                // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+                var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+ 
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraRoadAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if(extraRoadAddr !== ''){
+                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+                }
+                // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+                if(fullRoadAddr !== ''){
+                    fullRoadAddr += extraRoadAddr;
+                }
+ 
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('zip').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('addr1').value = fullRoadAddr;
+                document.getElementById('addr2').focus();
+            }
+        }).open();
+    }
+    
+	
+	//휴대번호 자동 하이픈
+    function inputTelNumber(obj) {
+
+        var number = obj.value.replace(/[^0-9]/g, "");
+        var tel = "";
+
+        // 서울 지역번호(02)가 들어오는 경우
+        if(number.substring(0, 2).indexOf('02') == 0) {
+            if(number.length < 3) {
+                return number;
+            } else if(number.length < 6) {
+                tel += number.substr(0, 2);
+                tel += "-";
+                tel += number.substr(2);
+            } else if(number.length < 10) {
+                tel += number.substr(0, 2);
+                tel += "-";
+                tel += number.substr(2, 3);
+                tel += "-";
+                tel += number.substr(5);
+            } else {
+                tel += number.substr(0, 2);
+                tel += "-";
+                tel += number.substr(2, 4);
+                tel += "-";
+                tel += number.substr(6);
+            }
+        
+        // 서울 지역번호(02)가 아닌경우
+        } else {
+            if(number.length < 4) {
+                return number;
+            } else if(number.length < 7) {
+                tel += number.substr(0, 3);
+                tel += "-";
+                tel += number.substr(3);
+            } else if(number.length < 11) {
+                tel += number.substr(0, 3);
+                tel += "-";
+                tel += number.substr(3, 3);
+                tel += "-";
+                tel += number.substr(6);
+            } else {
+                tel += number.substr(0, 3);
+                tel += "-";
+                tel += number.substr(3, 4);
+                tel += "-";
+                tel += number.substr(7);
+            }
+        }
+
+        obj.value = tel;
+    }
+	
+	//사업자번호 자동 하이픈
+    function setindustrial_num(obj) {
+    	obj.value = obj.value.replace(/[^0-9]/g, "");
+    	obj.value = obj.value.replace(/([0-9]{3})-?/, "$1-");
+    	obj.value = obj.value.replace(/([0-9]{3})-?([0-9]{2})-?/, "$1-$2-");
+    	}
+
+
+	</script>
 </th:block>
 
 </html>

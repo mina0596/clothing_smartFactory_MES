@@ -24,18 +24,6 @@ $(function(){
 		var tableAttr = $('#shipmentOrderList').children();
 		var tdList = tableAttr.find('.check');
 		
-		$('#deleteBtn').click(function(){
-			tdList = tableAttr.find('.check');
-			var parent = tdList.parent();
-			parent.each(function(){
-				console.log($(this).parent());	
-				var removeRow = $(this).parent();			
-				if($(this).find('.check').is(':checked')){		
-					removeRow.remove();
-				}
-			});
-
-		});
 			});
 
 
@@ -61,19 +49,19 @@ $(function(){
          			<td style="padding-right: 20px;">
 	         			 <div class="form-inline">
 		         			 	<label class="control-label">출하지시번호</label>
-			                	<input type="text" class="shipmentOrderCode form-control" id="bySupplierValue" placeholder="검색어를 입력하세요.">
+			                	<input type="text" class="shipmentOrderCode form-control"  placeholder="검색어를 입력하세요.">
 			                </div>
          			</td>
          			<td style="padding-right: 20px;">
          				<div class="form-inline">
 		         			 	<label class="control-label">품목별</label>
-			                	<input type="text" class="productName form-control" id="bySupplierValue" placeholder="검색어를 입력하세요.">
+			                	<input type="text" class="productName form-control"  placeholder="검색어를 입력하세요.">
 			                </div>
          			</td>
          			<td style="padding-right: 20px;">
          				<div class="form-inline">
 		         			 	<label class="control-label">거래처별</label>
-			                	<input type="text" class="clientName form-control" id="bySupplierValue" placeholder="검색어를 입력하세요.">
+			                	<input type="text" class="clientName form-control"  placeholder="검색어를 입력하세요.">
 			                </div>
          			</td>
          			
@@ -112,15 +100,15 @@ $(function(){
                 <tbody id="shipmentList">
                   <tr th:if="${#lists.size(shimpmentOrder) > 0}" th:each="s,i: ${shimpmentOrder}" >
                    <td class="hidden-phone">
-                      <input type="checkbox" class="check">
+                      <input type="checkbox" name="check" class="check" th:value="${s.shipment_order_code}">
                     </td>
                    <td th:text="${i.index+1}"><a ></a></td>
-                    <td ><a th:href="@{/shipment/shipmentOrderInfo(shipmentOrderCode=${s.shipmentOrderCode})}">[[${s.shipmentOrderCode}]]</a></td>
-                    <td th:text="${s.clientName}" ></td>
-                    <td th:text="${s.productName}" ></td>
-                    <td th:text="${s.shipmentOrderDate}"> </td>
-                    <td th:text="${s.shipmentRegDate}"> </td>
-                 	<td> <a class="btn btn-primary btn-xs" th:href="@{/shipment/modifyShipmentOrder(shipmentOrderCode=${s.shipmentOrderCode})}">수정</a></td>
+                    <td ><a th:href="@{/shipment/shipmentOrderInfo(shipmentOrderCode=${s.shipment_order_code})}">[[${s.shipment_order_code}]]</a></td>
+                    <td th:text="${s.client_name}" ></td>
+                    <td th:text="${s.gender_categorized_name}" ></td>
+                    <td th:text="${s.gender_categorized_name}"> </td>
+                    <td th:text="${s.shipment_order_reg_date}"> </td>
+                 	<td> <a class="btn btn-primary btn-xs" th:href="@{/shipment/modifyShipmentOrder(shipmentOrderCode=${s.shipment_order_code})}">수정</a></td>
                   </tr>
                   
                   </tbody>
@@ -128,7 +116,7 @@ $(function(){
                   </div>
                   <div class="form-group">
                     <div class="col-lg-offset-1 col-lg-11 text-right">
-                      <button class="btn btn-success btn-xs" type="button" onclick="location.href='/addShipmentOrder'"><i class="fa fa-check">출하지시등록</i></button>
+                      <button class="btn btn-success btn-xs" type="button" onclick="location.href='/shipment/addShipmentOrder'"><i class="fa fa-check">출하지시등록</i></button>
                       <button class="btn btn-danger btn-xs" type="button" id="deleteBtn"><i class="fa fa-trash-o "></i>출하지시삭제</button>
                     </div>
                     </div>
