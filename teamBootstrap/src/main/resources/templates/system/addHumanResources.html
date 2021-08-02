@@ -59,7 +59,7 @@ layout:decorate="@{layout/default_system}">
 			          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">아이디</label>
 			          <div class="col-md-6">
 			            <div  class="input-group ">
-			              <input type="text" name = "employeeId" id= "employeeId" class="form-control"  size="16">
+			              <input type="text" name = "employeeId" id= "employeeId" placeholder="아이디를 입력하세요." class="form-control"  size="16">
 			              <div class="input-group-btn">
 			                <button type="button" id="idCheckBtn" class="btn btn-warning"><i class="fa"></i>중복체크</button>
 			              </div>
@@ -70,14 +70,14 @@ layout:decorate="@{layout/default_system}">
                     <div class="form-group ">
                       <label for="password" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">패스워드</font></font></label>
                       <div class="col-lg-6">
-                        <input class="form-control " name="employeePw" id="employeePw" type="password">
+                        <input class="form-control " name="employeePw" id="employeePw" placeholder="패스워드를 입력하세요." type="password">
                       </div>
                     </div>
                   
                     <div class="form-group ">
                      <label for="confirm_password" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">패스워드 확인</font></font></label>
                       <div class="col-lg-6">
-                       <input class="form-control "  name="employeePwCheck" id = "employeePwCheck" type="password" >
+                       <input class="form-control "  name="employeePwCheck" id = "employeePwCheck" placeholder="패스워드를 다시 한번 입력하세요." type="password" >
                       </div>
                     </div>
                     
@@ -88,21 +88,21 @@ layout:decorate="@{layout/default_system}">
                   <div class="form-group ">
                     <label for="firstname" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">사원명</font></font></label>
                      <div class="col-lg-6">
-                      <input class=" form-control" name="employeeName" type="text" >
+                      <input class=" form-control" name="employeeName" placeholder="사원명을 입력하세요." type="text" >
                      </div>
                   </div>
                   
                   <div class="form-group ">
                     <label for="email" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이메일</font></font></label>
                     <div class="col-lg-6">
-                      <input class="form-control " name="employeeEmail" id = "employeeEmail" type="text">
+                      <input class="form-control " name="employeeEmail" id = "employeeEmail" placeholder="이메일을 입력하세요." type="text">
                     </div>
                   </div>
                   
                   <div class="form-group ">
                     <label for="email" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">전화번호</font></font></label>
                     <div class="col-lg-6">
-                      <input class="form-control " name="employeeTel" onKeyup="inputTelNumber(this);" type="text" >
+                      <input class="form-control " name="employeeTel" placeholder="전화번호를 입력하세요." onKeyup="inputTelNumber(this);" type="text" >
                     </div>
                   </div>
                   
