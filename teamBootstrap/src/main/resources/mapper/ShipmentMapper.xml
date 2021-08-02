@@ -28,7 +28,7 @@
 <!--출하지시 삭제-->
 <delete id="deleteShipmentOrder" parameterType="String">
 DELETE  FROM shipment_order
-WHERE shipment_order_code =#{checkArray};
+WHERE shipment_order_code =#{checkArray}
 </delete>
 
 
@@ -249,11 +249,11 @@ DATE_FORMAT(s.shipment_order_reg_date,'%Y-%m-%d %T') AS shipmentRegDate
 <!--출하지시목록  -->
 <select id="getShipmentOrderList" resultType="map">
 	SELECT
-		s.shipment_order_code AS shipmentOrderCode,
-		c.client_name AS clientName,
-		p.gender_categorized_name AS productName,
-		s.shipment_order_date AS shipmentOrderDate,
-		s.shipment_order_reg_date AS shipmentRegDate
+		s.shipment_order_code,
+		c.client_name,
+		p.gender_categorized_name,
+		s.shipment_order_date,
+		s.shipment_order_reg_date
 	FROM
 		shipment_order AS s
 	INNER JOIN 

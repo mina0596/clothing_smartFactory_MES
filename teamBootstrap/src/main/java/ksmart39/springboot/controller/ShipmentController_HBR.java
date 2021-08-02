@@ -155,6 +155,7 @@ public class ShipmentController_HBR {
 	
 	//[보람]출하지시 삭제
 	@RequestMapping("/deleteShipmentOrder")
+	@ResponseBody
 	public int deleteShipmentOrder(@RequestParam(value = "checkArray[]")String[] checkArray) {
 		int result =1;
 		for(int i =0; i<checkArray.length; i++) {

@@ -45,15 +45,25 @@
 	ON t.raw_material_code = r.raw_material_code;
 	</select>
 	<!-- 발주거래처 정보   -->
-	<select id="getClientInfo" resultType="map">
-	SELECT 
-		client_code,
-		client_name,
-		client_tel,
-		client_employee
-	FROM client_info
-		WHERE client_category='발주';
-	</select>
+<select id="searchSupplierClientCate"  resultType="map">
+	SELECT
+		c.client_code AS supplierCode,
+		c.client_name AS supplierClientName,
+		c.client_employee AS supplierClientEmployee,
+		c.client_tel AS supplierClientTel,
+		r.raw_material_high_classification AS supplierRawMaterialCate
+	FROM
+		client_info AS c
+		INNER JOIN
+		raw_material_order AS raw
+		ON c.client_code = raw.client_code
+		INNER JOIN
+		raw_material_info AS r
+		ON raw.raw_material_code =r.raw_material_code
+		WHERE c.client_name LIKE CONCAT('%',#{client},'%')
+	GROUP BY c.client_name
+	ORDER BY c.client_code
+</select>
 	<!--원부자재 정보-->
 	<select id="getRawInfo" resultType="map">
 	SELECT 

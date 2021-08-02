@@ -70,61 +70,161 @@
 
 </select>
 <select id="getStateBuyerContractQualityInspectionPass" resultType="map">
-
-
+	SELECT 
+			r.contract_code AS contractCode	,
+			high.high_class_name AS highClassName,
+			low.low_class_name AS lowClassName,
+			sub.sub_class_name AS subClassName,
+			r.requested_product_code AS requestProductCode,
+			p.detailed_categorized_name AS detailedCateName,
+			q.inspection_request_date  AS inspectionRequestDate,
+			i.category  AS inspectionCategory,
+			ifnull(i.standard_tolerance,'합격/불합격') AS standardTolerance,
+			IFNULL(i.min_value,'') AS minTolerance,
+			IFNULL(i.max_value,'') AS maxTolerance,
+			ifnull(GROUP_CONCAT(DISTINCT(if(re.inspection_measurement_num='1회차', re.inspection_measurement_value, NULL))),'측정중') AS insFirst,
+			IFNULL(GROUP_CONCAT(DISTINCT(if(re.inspection_measurement_num='2회차', re.inspection_measurement_value, NULL))),'측정중') AS insSecond,
+			IFNULL(group_concat(DISTINCT(if(re.inspection_measurement_num='3회차', re.inspection_measurement_value, NULL))),'측정중') AS insThird,
+			IFNULL(group_concat(DISTINCT(if(re.inspection_measurement_num='1회차', re.inspection_pass_check, NULL))),'검사시작전') AS insFirstCheck,
+			IFNULL(group_concat(DISTINCT(if(re.inspection_measurement_num='2회차', re.inspection_pass_check, NULL))),'검사시작전') AS insSecondCheck,
+			IFNULL(group_concat(DISTINCT(if(re.inspection_measurement_num='3회차', re.inspection_pass_check, NULL))),'검사시작전') AS insThirdCheck,
+			IFNULL(group_concat(DISTINCT(if(re.inspection_measurement_num='1회차', re.inspection_start_date, NULL))),'검사시작전') AS insStart,
+			IFNULL(group_concat(DISTINCT(if(re.inspection_measurement_num='3회차', re.inspection_end_date, NULL))),'검사시작전') AS insEnd,
+			IFNULL(ref.low_cate_final_pass_check,'심사중') AS finalPassCheck
+	FROM
+		requested_product_detail AS r
+		INNER JOIN
+		product_code_detail AS p
+		ON r.product_code =p.product_code
+		inner JOIN
+		quality_inspection_request AS q
+		ON r.requested_product_code = q.requested_product_code
+		INNER JOIN
+		sub_class_inspection_list AS sub ON q.quality_inspection_code = sub.quality_inspection_code
+		INNER JOIN
+		low_class_inspection_list AS low ON sub.high_med_low_class_code = low.high_med_low_class_code
+		INNER JOIN
+		medium_class_inspection_list AS med ON low.high_med_class_code = med.high_med_class_code
+		INNER JOIN
+		high_class_inspection_list AS high ON med.high_class_code = high.high_class_code
+		INNER JOIN
+		inspection_standard AS i
+		ON q.quality_inspection_code =i.quality_inspection_code
+		left JOIN
+		biochem_fabric_level_standard AS b
+		ON q.quality_inspection_code = b.quality_inspection_code
+		inner JOIN
+					inspection_result AS re ON q.quality_inspection_code = re.quality_inspection_code
+		left JOIN
+			inspection_final_result AS ref ON ref.quality_inspection_code=q.quality_inspection_code
+		WHERE i.category ='합격/불합격'
+	GROUP BY re.quality_inspection_request_code
+</select>
+<!--계약별 품질검사 수치 전체현황-->
+<select id="getStateBuyerContractQualityInspectionMeasurement" resultType="map">
+SELECT 
+	r.contract_code AS contractCode,
+	high.high_class_name AS highClassName,
+	low.low_class_name AS lowClassName,
+	sub.sub_class_name AS subClassName,
+	r.requested_product_code AS requestProductCode,
+	p.detailed_categorized_name AS detailedCateName,
+	q.inspection_request_date  AS inspectionRequestDate,
+	i.category  AS inspectionCategory,
+	IFNULL(i.standard_tolerance,'합격/불합격') AS standardTolerance,
+	IFNULL(i.min_value,'0') AS minTolerance,
+	IFNULL(i.max_value,'0') AS maxTolerance,
+	IFNULL(GROUP_CONCAT(DISTINCT(if(re.inspection_measurement_num='1회차', re.inspection_measurement_value, NULL))),'측정중') AS insFirst,
+	IFNULL(GROUP_CONCAT(DISTINCT(if(re.inspection_measurement_num='2회차', re.inspection_measurement_value, NULL))),'측정중') AS insSecond,
+	IFNULL(group_concat(DISTINCT(if(re.inspection_measurement_num='3회차', re.inspection_measurement_value, NULL))),'측정중') AS insThird,
+	IFNULL(group_concat(DISTINCT(if(re.inspection_measurement_num='1회차', re.inspection_pass_check, NULL))),'검사시작전') AS insFirstCheck,
+	IFNULL(group_concat(DISTINCT(if(re.inspection_measurement_num='2회차', re.inspection_pass_check, NULL))),'검사시작전') AS insSecondCheck,
+	IFNULL(group_concat(DISTINCT(if(re.inspection_measurement_num='3회차', re.inspection_pass_check, NULL))),'검사시작전') AS insThirdCheck,
+	IFNULL(group_concat(DISTINCT(if(re.inspection_measurement_num='1회차', re.inspection_start_date, NULL))),'검사시작전') AS insStart,
+	IFNULL(group_concat(DISTINCT(if(re.inspection_measurement_num='3회차', re.inspection_end_date, NULL))),'검사시작전') AS insEnd,
+	IFNULL(ref.low_cate_final_pass_check,'심사중') AS finalPassCheck
+FROM
+	requested_product_detail AS r
+	INNER JOIN
+	product_code_detail AS p
+	ON r.product_code =p.product_code
+	inner JOIN
+	quality_inspection_request AS q
+	ON r.requested_product_code = q.requested_product_code
+	INNER JOIN
+	sub_class_inspection_list AS sub ON q.quality_inspection_code = sub.quality_inspection_code
+	INNER JOIN
+	low_class_inspection_list AS low ON sub.high_med_low_class_code = low.high_med_low_class_code
+	INNER JOIN
+	medium_class_inspection_list AS med ON low.high_med_class_code = med.high_med_class_code
+	INNER JOIN
+	high_class_inspection_list AS high ON med.high_class_code = high.high_class_code
+	INNER JOIN
+	inspection_standard AS i
+	ON q.quality_inspection_code =i.quality_inspection_code
+	left JOIN
+	biochem_fabric_level_standard AS b
+	ON q.quality_inspection_code = b.quality_inspection_code
+	inner JOIN
+				inspection_result AS re ON q.quality_inspection_code = re.quality_inspection_code
+	left JOIN
+		inspection_final_result AS ref ON ref.quality_inspection_code=q.quality_inspection_code
+WHERE i.category ='수치'
+GROUP BY re.quality_inspection_request_code
 
 </select>
-
 <!--계약별 품질검사 등급 전체현황-->
 <select id="getStateBuyerContractQualityInspection" resultType="map">
-	SELECT
-			p.contract_code AS contractCode	
-			,re.quality_inspection_request_code as inspectionRequestCode
-			,high.high_class_name AS highClassName
-			,med.med_class_name AS medClassName
-			,low.low_class_name AS lowClassName
-			,sub.sub_class_name AS subClassName
-			,p.requested_product_code AS requestProductCode
-			,pc.detailed_categorized_name AS detailedCateName
-			,q.inspection_request_date AS inspectionRequestDate
-			,res.category AS inspectionCategory
-			,IFNULL(res.standard_tolerance,'합격/불합격') AS standardTolerance
-			,IFNULL(res.min_value,'0') AS minTolerance
-			,IFNULL(res.max_value,'0') AS maxTolerance
-			,IFNULL(group_concat(if(re.inspection_measurement_num='1회차', re.inspection_measurement_value, NULL)),'비교') AS insFirst
-			,IFNULL(group_concat(if(re.inspection_measurement_num='2회차', re.inspection_measurement_value, NULL)),'비교') AS insSecond
-			,IFNULL(group_concat(if(re.inspection_measurement_num='3회차', re.inspection_measurement_value, NULL)),'비교') AS insThird	
-			,IFNULL(group_concat(if(re.inspection_measurement_num='1회차', re.inspection_pass_check, NULL)),'검사시작전') AS insFirstCheck
-			,IFNULL(group_concat(if(re.inspection_measurement_num='2회차', re.inspection_pass_check, NULL)),'검사시작전') AS insSecondCheck
-			,IFNULL(group_concat(if(re.inspection_measurement_num='3회차', re.inspection_pass_check, NULL)),'검사시작전') AS insThirdCheck
-			,IFNULL(group_concat(if(re.inspection_measurement_num='1회차', re.inspection_start_date, NULL)),'검사시작전') AS insStart
-			,IFNULL(group_concat(if(re.inspection_measurement_num='3회차', re.inspection_end_date, NULL)),'검사시작전') AS insEnd
-			,IFNULL(ref.low_cate_final_pass_check,'심사중') AS finalPassCheck
-		FROM
-			requested_product_detail AS p
+	SELECT 
+		r.contract_code AS contractCode	,
+		high.high_class_name AS highClassName,
+		low.low_class_name AS lowClassName,
+		sub.sub_class_name AS subClassName,
+		r.requested_product_code AS requestProductCode,
+		p.detailed_categorized_name AS detailedCateName,
+		q.inspection_request_date  AS inspectionRequestDate,
+		i.category  AS inspectionCategory,
+		ifnull(i.standard_tolerance,'합격/불합격') AS standardTolerance,
+		if(SUBSTR(i.category,1,1)='등',b.min_value,'') AS bioMinvalue,
+		if(SUBSTR(i.category,1,1)='등',b.max_value,'') AS bioMaxvalue,
+		ifnull(GROUP_CONCAT(DISTINCT(if(re.inspection_measurement_num='1회차', re.inspection_measurement_value, NULL))),'측정중') AS insFirst,
+		IFNULL(GROUP_CONCAT(DISTINCT(if(re.inspection_measurement_num='2회차', re.inspection_measurement_value, NULL))),'측정중') AS insSecond,
+		IFNULL(group_concat(DISTINCT(if(re.inspection_measurement_num='3회차', re.inspection_measurement_value, NULL))),'측정중') AS insThird,
+		IFNULL(group_concat(DISTINCT(if(re.inspection_measurement_num='1회차', re.inspection_pass_check, NULL))),'검사시작전') AS insFirstCheck,
+		IFNULL(group_concat(DISTINCT(if(re.inspection_measurement_num='2회차', re.inspection_pass_check, NULL))),'검사시작전') AS insSecondCheck,
+		IFNULL(group_concat(DISTINCT(if(re.inspection_measurement_num='3회차', re.inspection_pass_check, NULL))),'검사시작전') AS insThirdCheck,
+		IFNULL(group_concat(DISTINCT(if(re.inspection_measurement_num='1회차', re.inspection_start_date, NULL))),'검사시작전') AS insStart,
+		IFNULL(group_concat(DISTINCT(if(re.inspection_measurement_num='3회차', re.inspection_end_date, NULL))),'검사시작전') AS insEnd,
+		IFNULL(ref.low_cate_final_pass_check,'심사중') AS finalPassCheck
+	FROM
+		requested_product_detail AS r
 		INNER JOIN
-			quality_inspection_request AS q ON p.requested_product_code = q.requested_product_code
-		LEFT JOIN
-			inspection_result AS re ON q.quality_inspection_request_code = re.quality_inspection_request_code
-		LEFT JOIN
-			inspection_final_result AS ref ON re.quality_inspection_request_code = ref.quality_inspection_request_code
+		product_code_detail AS p
+		ON r.product_code =p.product_code
+		inner JOIN
+		quality_inspection_request AS q
+		ON r.requested_product_code = q.requested_product_code
 		INNER JOIN
-			inspection_standard AS res ON q.quality_inspection_code = res.quality_inspection_code
+		sub_class_inspection_list AS sub ON q.quality_inspection_code = sub.quality_inspection_code
 		INNER JOIN
-			sub_class_inspection_list AS sub ON q.quality_inspection_code = sub.quality_inspection_code
+		low_class_inspection_list AS low ON sub.high_med_low_class_code = low.high_med_low_class_code
 		INNER JOIN
-			low_class_inspection_list AS low ON sub.high_med_low_class_code = low.high_med_low_class_code
+		medium_class_inspection_list AS med ON low.high_med_class_code = med.high_med_class_code
 		INNER JOIN
-			medium_class_inspection_list AS med ON low.high_med_class_code = med.high_med_class_code
+		high_class_inspection_list AS high ON med.high_class_code = high.high_class_code
 		INNER JOIN
-			high_class_inspection_list AS high ON med.high_class_code = high.high_class_code
-		INNER JOIN
-			product_code_detail AS pc ON p.product_code = pc.product_code
-		INNER JOIN
-			client_info AS c ON p.client_code = c.client_code
-		 WHERE re.quality_inspection_request_code  LIKE 'QC%' and
-		 res.category  LIKE'등급'
-	GROUP BY q.quality_inspection_request_code;
+		inspection_standard AS i
+		ON q.quality_inspection_code =i.quality_inspection_code
+		left JOIN
+		biochem_fabric_level_standard AS b
+		ON q.quality_inspection_code = b.quality_inspection_code
+		inner JOIN
+					inspection_result AS re ON q.quality_inspection_code = re.quality_inspection_code
+		left JOIN
+			inspection_final_result AS ref ON ref.quality_inspection_code=q.quality_inspection_code
+		WHERE i.category='등급'
+GROUP BY re.quality_inspection_request_code
+
 </select>
 
 

@@ -100,15 +100,15 @@ $(function(){
                 <tbody id="shipmentList">
                   <tr th:if="${#lists.size(shimpmentOrder) > 0}" th:each="s,i: ${shimpmentOrder}" >
                    <td class="hidden-phone">
-                      <input type="checkbox" name="check" class="check" th:value="${s.shipmentOrderCode}">
+                      <input type="checkbox" name="check" class="check" th:value="${s.shipment_order_code}">
                     </td>
                    <td th:text="${i.index+1}"><a ></a></td>
-                    <td ><a th:href="@{/shipment/shipmentOrderInfo(shipmentOrderCode=${s.shipmentOrderCode})}">[[${s.shipmentOrderCode}]]</a></td>
-                    <td th:text="${s.clientName}" ></td>
-                    <td th:text="${s.productName}" ></td>
-                    <td th:text="${s.shipmentOrderDate}"> </td>
-                    <td th:text="${s.shipmentRegDate}"> </td>
-                 	<td> <a class="btn btn-primary btn-xs" th:href="@{/shipment/modifyShipmentOrder(shipmentOrderCode=${s.shipmentOrderCode})}">수정</a></td>
+                    <td ><a th:href="@{/shipment/shipmentOrderInfo(shipmentOrderCode=${s.shipment_order_code})}">[[${s.shipment_order_code}]]</a></td>
+                    <td th:text="${s.client_name}" ></td>
+                    <td th:text="${s.gender_categorized_name}" ></td>
+                    <td th:text="${s.gender_categorized_name}"> </td>
+                    <td th:text="${s.shipment_order_reg_date}"> </td>
+                 	<td> <a class="btn btn-primary btn-xs" th:href="@{/shipment/modifyShipmentOrder(shipmentOrderCode=${s.shipment_order_code})}">수정</a></td>
                   </tr>
                   
                   </tbody>

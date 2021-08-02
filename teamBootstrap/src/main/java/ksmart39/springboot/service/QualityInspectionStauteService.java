@@ -30,6 +30,14 @@ public class QualityInspectionStauteService {
 		return qualityInsepctionStauteMapper.getSearchQualityInspectionState(map);
 		}
 	
+	//[다미&보람]수주계약별 검사현황 리스트합격/불합격
+	public List<Map<String, Object>> getStateBuyerContractQualityInspectionPass(){
+		return qualityInsepctionStauteMapper.getStateBuyerContractQualityInspectionPass();
+	}
+	//[다미&보람]수주계약별 검사현황 리스트	수치
+	public List<Map<String, Object>> getStateBuyerContractQualityInspectionMeasurement(){
+		return qualityInsepctionStauteMapper.getStateBuyerContractQualityInspectionMeasurement();
+	}
 	//[다미&보람]수주계약별 검사현황 리스트
 	public List<Map<String, Object>> getStateBuyerContractQualityInspection() {
 		
