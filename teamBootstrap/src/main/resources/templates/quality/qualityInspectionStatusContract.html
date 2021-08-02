@@ -27,13 +27,15 @@ layout:decorate="@{layout/default_qualityControl}">
         				<th>
 		         			 <div class="form-inline">
 		         			 	<label class="control-label">계약번호</label>
-			                	<input type="text" class="form-control" id="bySupplierValue" placeholder="검색어를 입력하세요.">
+			                	<input type="text" class="form-control"  placeholder="검색어를 입력하세요.">
+			                	<button id="searchBtn1" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
 			                </div>
 	         			</th>
 	         			<th>
 	         				<div class="form-inline">
 		         				<label class="control-label">거래처명</label>
 			                	<input type="text" class="form-control" id="clientName" placeholder="검색어를 입력하세요.">
+			                	<button id="searchBtn1" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
 		              		</div>
 	         			</th>
 	         			<th>
@@ -41,6 +43,7 @@ layout:decorate="@{layout/default_qualityControl}">
 	         				<div class="form-inline">
 		         				<label class="control-label">품목</label>
 			                	<input type="text" class="form-control" id="requestProductName" placeholder="검색어를 입력하세요.">
+			                	<button id="searchBtn1" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
 		              		</div>
 	         			</th> 
 	         			<th> 
@@ -48,13 +51,10 @@ layout:decorate="@{layout/default_qualityControl}">
 		         				<label class="control-label">검사일</label>
 			                	<input type="date" class="form-control" id="inspectionStartDate" placeholder="검색어를 입력하세요.">&nbsp; ~
 			                	<input type="date" class="form-control" id="inspectionEndDate" placeholder="검색어를 입력하세요.">
+			                	<button id="searchBtn1" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
 		              		</div>
 	         			</th>  	         		 
-	         			<th>
-	         				<div class="form-inline">
-		         			<button type="button" class="btn btn-theme"  id="searchBtn1" style="width: 70%; margin-left: 20px;">검색</button>
-		              		</div>
-	         			</th>
+	         			
 	         			
         			</tr>     			
        			</thead>      		    	
@@ -174,8 +174,8 @@ layout:decorate="@{layout/default_qualityControl}">
 							<td th:text="${q.inspectionRequestDate}"></td>
 							<td th:text="${q.inspectionCategory}"></td>
 							<td th:text="${q.standardTolerance}"></td>
-							<td th:text="${q.minTolerance}"></td>
-							<td th:text="${q.maxTolerance}"></td>
+							<td th:text="${q.bioMinvalue}"></td>
+							<td th:text="${q.bioMaxvalue}"></td>
 							<td th:text="${q.insFirst}"></td>
 					
 							<td th:text="${q.insSecond}"></td>
@@ -224,17 +224,26 @@ layout:decorate="@{layout/default_qualityControl}">
 						</tr>
 		                </thead>
 		                <tbody>
-	                  	  <tr th:if="${#lists.size(numStandardList) > 0}" th:each="nl,i : ${numStandardList}">
-		                  	<td th:text="${i.index+1}"></td>
-		                    <td th:text="${nl.inspectionCode}"></td>
-		                    <td th:text="${nl.highClassName}"></td>
-		                    <td th:text="${nl.medClassName}"></td>
-		                    <td th:text="${nl.lowClassName}"></td>
-		                    <td th:text="${nl.subClassName}"></td>
-		                    <td th:text="${nl.standardTol}"></td>
-		                    <td th:text="${nl.unit}"></td>
-		                    <td th:text="${nl.requiredCheck}"></td>
-		                    <td th:text="${nl.regDate}"></td>
+	                  	  <tr th:if="${#lists.size(inspectionStateMeasurement) > 0}" th:each="s,i: ${inspectionStateMeasurement}">
+		                  	<th th:text="${i.index+1}"  scope="row" id="mandatory"></th> 
+							<td th:text="${s.contractCode}"></td> 
+							<td th:text="${s.highClassName}"></td> 
+							<td th:text="${s.lowClassName}"></td> 
+							<td th:text="${s.subClassName}"></td> 
+							<td th:text="${s.requestProductCode}"></td>
+							<td th:text="${s.detailedCateName}"></td>
+							<td th:text="${s.inspectionRequestDate}"></td>
+							<td th:text="${s.inspectionCategory}"></td>
+							<td th:text="${s.standardTolerance}"></td>
+							<td th:text="${s.minTolerance}"></td>
+							<td th:text="${s.maxTolerance}"></td>
+							<td th:text="${s.insFirst}"></td>					
+							<td th:text="${s.insSecond}"></td>
+							<td th:text="${s.insThird}"></td>
+							<td th:text="${s.insStart}"></td>
+							<td th:text="${s.insEnd}"></td>
+							<td th:text="${s.finalPassCheck}"></td>
+							<td></td>
 		                  </tr>
 		                </tbody>
 		              </table>
@@ -275,16 +284,26 @@ layout:decorate="@{layout/default_qualityControl}">
 						</tr>
 		                </thead>
 		                <tbody>
-	                  	  <tr th:if="${#lists.size(passStandardList) > 0}" th:each="pl,a : ${passStandardList}">
-		                  	<td th:text="${a.index+1}"></td>
-		             		<td th:text="${pl.inspectionCode}"></td>
-		                    <td th:text="${pl.highClassName}"></td>
-		                    <td th:text="${pl.medClassName}"></td>
-		                    <td th:text="${pl.lowClassName}"></td>
-		                    <td th:text="${pl.subClassName}"></td>
-		                    <td th:text="${pl.inspectionCate}"></td>
-		                    <td th:text="${pl.requiredCheck}"></td>
-		                    <td th:text="${pl.regDate}"></td>
+	                  	 <tr th:if="${#lists.size(inspectionStatePassCheck) > 0}" th:each="c,i: ${inspectionStatePassCheck}">
+		                  	<th th:text="${i.index+1}"  scope="row" id="mandatory"></th> 
+							<td th:text="${c.contractCode}"></td> 
+							<td th:text="${c.highClassName}"></td> 
+							<td th:text="${c.lowClassName}"></td> 
+							<td th:text="${c.subClassName}"></td> 
+							<td th:text="${c.requestProductCode}"></td>
+							<td th:text="${c.detailedCateName}"></td>
+							<td th:text="${c.inspectionRequestDate}"></td>
+							<td th:text="${c.inspectionCategory}"></td>
+							<td th:text="${c.standardTolerance}"></td>
+							<td th:text="${c.minTolerance}"></td>
+							<td th:text="${c.maxTolerance}"></td>
+							<td th:text="${c.insFirst}"></td>					
+							<td th:text="${c.insSecond}"></td>
+							<td th:text="${c.insThird}"></td>
+							<td th:text="${c.insStart}"></td>
+							<td th:text="${c.insEnd}"></td>
+							<td th:text="${c.finalPassCheck}"></td>
+							<td></td>
 		                  </tr>
 		                </tbody>
 		              </table>

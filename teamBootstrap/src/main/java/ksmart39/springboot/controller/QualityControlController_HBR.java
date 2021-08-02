@@ -64,8 +64,14 @@ public class QualityControlController_HBR {
 		public String qualityInspectionStatusContract(Model model) {
 			//등급별
 			List<Map<String, Object>> inspectionStateList = qualityInsepctionStauteService.getStateBuyerContractQualityInspection();
-			
+			//수치별
+			List<Map<String, Object>> inspectionStateMeasurement =qualityInsepctionStauteService.getStateBuyerContractQualityInspectionMeasurement();
+			//합격/불합격
+			List<Map<String, Object>> inspectionStatePassCheck =qualityInsepctionStauteService.getStateBuyerContractQualityInspectionPass();
 			model.addAttribute("inspectionStateList", inspectionStateList);
+			model.addAttribute("inspectionStateMeasurement", inspectionStateMeasurement);
+			model.addAttribute("inspectionStatePassCheck", inspectionStatePassCheck);
+			log.info("inspectionStateMeasurement{}",inspectionStateMeasurement);
 			return "quality/qualityInspectionStatusContract";
 		}
 	

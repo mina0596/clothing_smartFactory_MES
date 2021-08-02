@@ -20,9 +20,9 @@ public class SupplierService {
 		
 	}
 	//[보람] 발주 요청 거래처 정보
-	public List<Map<String,Object>> getClientInfo(){
+	public List<Map<String,Object>> searchSupplierClientCate(String client){
 		
-		return supplierMapper.getClientInfo();
+		return supplierMapper.searchSupplierClientCate(client);
 	}
 	//[보람] 원부자재 정보 
 	public  List<Map<String,Object>> getRawInfo(){

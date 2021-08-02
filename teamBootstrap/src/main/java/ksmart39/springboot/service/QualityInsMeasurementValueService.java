@@ -1,6 +1,7 @@
 package ksmart39.springboot.service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,7 @@ import ksmart39.springboot.dao.QualityInspectionFinalResultMapper;
 import ksmart39.springboot.domain.QualityBiochemFabricLevelStandard;
 import ksmart39.springboot.domain.QualityInspection;
 import ksmart39.springboot.domain.QualityInspectionFinalResult;
+import ksmart39.springboot.domain.QualityInspectionRequest;
 import ksmart39.springboot.domain.QualityInspectionResult;
 import ksmart39.springboot.domain.QualityInspectionStandard;
 
@@ -49,23 +51,31 @@ public class QualityInsMeasurementValueService {
 	};
 
 	//품질검사 측정값 현황
-	public List<Map<String, Object>> getQualityInspectionStatusNow(Map<String, Object> searchMap){
+	public List<Map<String, Object>> getQualityInspectionStatusNow(String contractNum){
+		List<Map<String, Object>> resultMap = new ArrayList<Map<String,Object>>();
 		
-		List<Map<String, Object>> resultMap = null;		
-		String contractNum = (String) searchMap.get("contractNum");
-		
-		resultMap = qualityInsMeasurementValueMapper.getQualityInspectionStatusNow(searchMap);
-
-		
+		//공정별 불합격 갯수
 		Map<String, Object> failCountMap = qualityInsMeasurementValueMapper.getFailCountByHighInspection(contractNum);
-		Map<String, Object> passCountMap = qualityInsMeasurementValueMapper.getPassOrFailCount(contractNum);
-		Map<String, Object> allCountMap = qualityInsMeasurementValueMapper.getAllCount(contractNum);
 		
+		//최종 합격,불합격
+		Map<String, Object> passCountMap = qualityInsMeasurementValueMapper.getPassOrFailCount(contractNum);
+		
+		//요청,진행,완료,완료율,현황
+		Map<String, Object> allCountMap = qualityInsMeasurementValueMapper.getAllCount(contractNum);
 		
 		resultMap.add(failCountMap);
 		resultMap.add(passCountMap);
+		resultMap.add(allCountMap);
+		log.info("================================================");
+		log.info("DB조회한 값allCountMap: {}", resultMap);
+		log.info("=============================================");
 		
 		return resultMap;
+	};
+	
+	//품질검사 측정값 현황 리스트
+	public List<Map<String, Object>> getQualityInspectionStatusNowList(Map<String, Object> searchMap){
+		return qualityInsMeasurementValueMapper.getQualityInspectionStatusNow(searchMap);
 	}
 	
 	//품질검사 측정값 목록
@@ -249,5 +259,25 @@ public class QualityInsMeasurementValueService {
 	//품질검사 요청 검색 모달
 	public List<Map<String, Object>> searchQualityInspectionRequest(Map<String,Object> map){			
 		return qualityInsMeasurementValueMapper.searchQualityInspectionRequest(map);
+	};
+	
+	//품질검사 요청 목록
+	public List<Map<String, Object>> getQualityInspectionRequestList(){
+		return qualityInsMeasurementValueMapper.getQualityInspectionRequestList();
+	};
+	
+	//품질검사 단일 요청
+	public int qualityInspectionRequest(QualityInspectionRequest qualityInspectionRequest) {
+		return qualityInsMeasurementValueMapper.qualityInspectionRequest(qualityInspectionRequest);
+	};
+	
+	//계약번호로 품목별 의뢰코드 검색
+	public List<Map<String, Object>> searchRequestProductCode(String contractCode){
+		return qualityInsMeasurementValueMapper.searchRequestProductCode(contractCode);
+	};
+	
+	//품질검사 세부 코드 검색
+	public List<Map<String, Object>> subClassCate(String lowClassCateName){
+		return qualityInsMeasurementValueMapper.subClassCate(lowClassCateName);
 	};
 }

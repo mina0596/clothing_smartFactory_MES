@@ -7,6 +7,7 @@ layout:decorate="@{layout/default_contract}">
 	   <div class="border-head"> 
 	    <h3></h3>
 	    </div>
+<script type="text/javascript" th:src="@{/supplier/supplierRequest.js}"></script>	    
 <th:block layout:fragment="customJs">
 	<script type="text/javascript">
 	$(function(){
@@ -14,56 +15,7 @@ layout:decorate="@{layout/default_contract}">
 		$('#cancleBtn').click(function(){
 			location.href="/supplierRequestList";
 		});
-		$('#supplierRequstBtn').click(function(){
-			$('#supplierRequest').show();
-		});
-		
 	
-		//거래처명 검색 모달 
-		$('#searchSupplier').click(function(){
-			$('#bySupplierModal').modal("show");
-		$('#saveSupplier').click(function(){
-			var check = $('input[name=bySupplierModal]:checked');
-			var checkTr = check.parent().parent();
-			var supplierCode = checkTr.find('.supplierCode').text();
-			var supplierName = checkTr.find('.supplierName').text();
-			var supplierEmployee = checkTr.find('.searchSupplierEmployee').text();
-			var supplierTel=  checkTr.find('.searchSupplierTel').text();
-			$('#supplierContractCode').attr('value',supplierCode);
-			$('#supplierContractName').attr('value',supplierName);
-			$('#supplierEmployee').attr('value', supplierEmployee);
-			$('#supplierPhone').attr('value',supplierTel);
-		});
-		});
-		
-		$('#searchRamMeterial').click(function(){
-			$('#byRamMetrialModal').modal("show");
-		$('#saveRamMeterial').click(function(){
-			var check = $('input[name=byRamMetrialModal]:checked');
-			var checkTr = check.parent().parent();
-			var rawMaterialCode1 = checkTr.find('.rawMaterialCode1').text();
-			var rawMateiralName1 = checkTr.find('.rawMateiralName1').text();
-			var rawMaterialColor = checkTr.find('.rawMaterialColor').text();
-			$('#rawMaterialCode').attr('value',rawMaterialCode1);
-			$('#rawMaterialName').attr('value',rawMateiralName1);
-			$('#rawMaterialColor').attr('value',rawMaterialColor);
-			});
-		});
-		
-		$('[data-popup-open]').on('click', function(e)  {
-		       var targeted_popup_class = jQuery(this).attr('data-popup-open');
-		       $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
-
-		       e.preventDefault();
-		   });
-
-		    //----- CLOSE
-		    $('[data-popup-close]').on('click', function(e)  {
-		       var targeted_popup_class = jQuery(this).attr('data-popup-close');
-		       $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
-
-		       e.preventDefault();
-		    });
 	
 		});
 	
@@ -224,132 +176,10 @@ layout:decorate="@{layout/default_contract}">
     </div>
     	
     <!-- 거래처명 검색 모달 시작=============================================================================-->
-     <div class="modal fade modal-xl"  id="bySupplierModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog" style="width:auto;display:table" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h4 class="modal-title" id="exampleModalLabel">발주처 검색</h4>
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">&times;</span>
-		        </button>
-		      </div>
-		      
-		      <!-- 모달본문 -->
-		   <div class="modal-body">
-			   <table  class="table table-striped table-advance table-hover" id="seachrSupplierList">
-	         	<tbody>       		
-	       			<thead>
-	        			<tr>
-		         			<!-- <th style="padding-bottom: 12px;"><label class="control-label">발주처 명</label></th> -->
-		         			<th colspan="3" style="padding-right: 20px;">
-		         				<div class="form-inline" style="margin-bottom: 0px;">
-			         				<label class="control-label">발주거래처명</label>
-				                	<input type="text" class="form-control" id="searchSupplierName" placeholder="검색어를 입력하세요.">
-		         				 <button type="submit" class="btn btn-theme">검색</button>
-			              		</div>
-		         			</th>  
-	        			</tr>     			
-	       			</thead>
-	       			<tbody style="text-align: center;">
-	       				<tr>
-	       					<td><i class="fa fa-check"></i></td>
-	       					<td>no.</td>
-	       					<td>발주거래처코드</td>
-	       					<td>발주거래처명</td>
-	       					<td>발주거래처담당자</td>
-	       					<td>발주거래처연락처 </td>
-	       				</tr>
-	     				<tr th:if="${#lists.size(clientList) > 0}" th:each="c,i: ${clientList}">
-	     					<td><input type="radio" name="bySupplierModal"></td>
-	     					<td th:text="${i.index+1}"></td>
-	     					<td th:text="${c.client_code}" class="supplierCode"></td>
-	       					<td th:text="${c.client_name}" class="supplierName" ></td>
-	       					<td th:text="${c.client_employee}" class="searchSupplierEmployee"></td>
-	       					<td th:text="${c.client_tel}" class="searchSupplierTel"></td>
-	     				</tr>
-	     				
-	       			</tbody>        		
-	         	</tbody>
-	         </table> 
-      	</div> 
-	      <div class="modal-footer">
-				      <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-				      <button type="button" id="saveSupplier" class="btn btn-primary" data-dismiss="modal">확인</button>
-			      </div>
-			    </div>
-			  </div>
-			</div>
-		<!--원부자재 재료  검색 모달창 시작==============================================-->
-		<!-- 원부자재 재료명 -->
-     <div class="modal fade modal-xl"  id="byRamMetrialModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog" style="width:auto;display:table" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h4 class="modal-title" id="exampleModalLabel">원부자재검색</h4>
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">&times;</span>
-		        </button>
-		      </div>
-		      
-		      <!-- 모달본문 -->
-		   <div class="modal-body">
-		   
-		   <table  class="table table-striped table-advance table-hover" >
-         	<tbody>       		
-       			<thead>
-        			<tr>
-	         			<!-- <th style="padding-bottom: 12px;"><label class="control-label">발주처 명</label></th> -->
-	         			<th colspan="3" style="padding-right: 20px;">
-	         				<div class="form-inline" style="margin-bottom: 0px;">
-		         				<label class="control-label">원부자재검색</label>
-			                	<input type="text" class="form-control" id="" placeholder="검색어를 입력하세요.">
-	         				 <button type="submit" class="btn btn-theme">검색</button>
-		              		</div>
-	         			</th>  
-        			</tr>     			
-       			</thead>
-       			<tbody style="text-align: center;">
-       				<tr>
-       					<td><i class="fa fa-check"></i></td>
-       					<td>no.</td>
-       					<td>원부자재코드</td>
-       					<td>원부자재구분</td>
-       					
-       					<td>원부자재재료명</td>
-       					<td>원부자재 색상</td>
-      					<td>원부자재 단위</td>
-       				</tr>
-     				<tr th:if="${#lists.size(rawMeterialList) > 0}" th:each="m,i: ${rawMeterialList}">
-     					<td><input type="radio" name="byRamMetrialModal"></td>
-     					<td  th:text="${i.index+1}"></td>
-     					<td th:text="${m.raw_material_code}" class="rawMaterialCode1"></td>
-     					<td th:text="${m.raw_material_high_classification}" class="rawMaterialHighClass"></td>
-     					<td th:text="${m.raw_material_name}" class="rawMateiralName1"></td>
-     					<td th:text="${m.raw_material_color_code}" class="rawMaterialColor"></td>
-     					<!-- <td th:text="${m.?raw_material_feature}"></td> -->
-     					<td th:text="${m.raw_material_unit}"></td>
-       				</tr>
-     			</tbody>        		
-         	</tbody>
-         </table> 
-      </div> 
-      <div class="modal-footer">
-			      <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-			      <button type="button" id="saveRamMeterial" class="btn btn-primary" data-dismiss="modal">확인</button>
-		      </div>
-		    </div>
-		  </div>
-		</div>
+      <th:block th:replace="/contract/modal_addSupplierRequest::modal_addSupplierRequest"></th:block>
     
            
 
-  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
-  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-daterangepicker/date.js}"></script>
-  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-daterangepicker/daterangepicker.js}"></script>
-  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js}"></script>
-  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-daterangepicker/moment.min.js}"></script>
-  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-timepicker/js/bootstrap-timepicker.js}"></script>
-  <script th:src="@{Dashio/lib/advanced-form-components.js}"></script>
   
 
   
