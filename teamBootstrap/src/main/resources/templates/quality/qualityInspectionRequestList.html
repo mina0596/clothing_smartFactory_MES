@@ -99,126 +99,22 @@ layout:decorate="@{layout/default_qualityControl}">
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                 <tr th:if="${#lists.size(list) > 0}" th:each="l, i : ${list}">
                    <td><input type="checkbox" class="checked"></td>
-                   <td class="hidden-phone">
-                     1
-                    </td>
+                   	<td th:text="${i.index+1}"></td>
                     <td class="hidden-phone">
-                    <a th:href="@{#}">QC_REQUEST01</a></td>
-                    <td class="hidden-phone">1234</td>
-                    <td class="hidden-phone">req01_MS_pants</td>
-                    <td class="hidden-phone">AAee1</td>
-                    <td>원단 이화학검사(파괴검사)</td>
-                    <td>샘플링</td>
-                    <td><span class="label label-info label-mini">승인완료</span></td>
-                    <td>2021-06-18 18:15:11</td>
-                  	<td>  <a th:href="@{/addQualityInspectionStatus}" class="btn btn-warning btn-xs"><i class="fa fa-bar-chart-o"></i>현황</a></td>
-                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  <tr>
-                   <td><input type="checkbox" class="checked"></td>
-                   <td class="hidden-phone">
-                     2
-                    </td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">QC_REQUEST01</a></td>
-                    <td class="hidden-phone">1234</td>
-                    <td class="hidden-phone">req01_MS_pants</td>
-                    <td class="hidden-phone">AAee1</td>
-                    <td>원단 이화학검사(파괴검사)</td>
-                    <td>샘플링</td>
-                    <td><span class="label label-info label-mini">승인완료</span></td>
-                    <td>2021-06-18 18:15:11</td>
-                  	<td>  <a th:href="@{/addQualityInspectionStatus}" class="btn btn-warning btn-xs"><i class="fa fa-bar-chart-o"></i>현황</a></td>
-                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  <tr>
-                   <td><input type="checkbox" class="checked"></td>
-                   <td class="hidden-phone">
-                     3
-                    </td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">QC_REQUEST01</a></td>
-                    <td class="hidden-phone">1234</td>
-                    <td class="hidden-phone">req01_MS_pants</td>
-                    <td class="hidden-phone">AAee1</td>
-                    <td>원단 이화학검사(파괴검사)</td>
-                    <td>샘플링</td>
-                    <td><span class="label label-info label-mini">승인완료</span></td>
-                    <td>2021-06-18 18:15:11</td>
-                  	<td>  <a th:href="@{/addQualityInspectionStatus}" class="btn btn-warning btn-xs"><i class="fa fa-bar-chart-o"></i>현황</a></td>
-                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  <tr>
-                   <td><input type="checkbox" class="checked"></td>
-                   <td class="hidden-phone">
-                     4
-                    </td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">QC_REQUEST01</a></td>
-                    <td class="hidden-phone">1234</td>
-                    <td class="hidden-phone">req01_MS_pants</td>
-                    <td class="hidden-phone">AAee1</td>
-                    <td>원단 이화학검사(파괴검사)</td>
-                    <td>샘플링</td>
-                    <td><span class="label label-info label-mini">승인완료</span></td>
-                    <td>2021-06-18 18:15:11</td>
-                  	<td>  <a th:href="@{/addQualityInspectionStatus}" class="btn btn-warning btn-xs"><i class="fa fa-bar-chart-o"></i>현황</a></td>
-                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  <tr>
-                   <td><input type="checkbox" class="checked"></td>
-                   <td class="hidden-phone">
-                     5
-                    </td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">QC_REQUEST01</a></td>
-                    <td class="hidden-phone">1234</td>
-                    <td class="hidden-phone">req01_MS_pants</td>
-                    <td class="hidden-phone">AAee1</td>
-                    <td>원단 이화학검사(파괴검사)</td>
-                    <td>샘플링</td>
-                    <td><span class="label label-info label-mini">승인완료</span></td>
-                    <td>2021-06-18 18:15:11</td>
-                  	<td>  <a th:href="@{/addQualityInspectionStatus}" class="btn btn-warning btn-xs"><i class="fa fa-bar-chart-o"></i>현황</a></td>
-                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  <tr>
-                   <td><input type="checkbox" class="checked"></td>
-                   <td class="hidden-phone">
-                    6
-                    </td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">QC_REQUEST01</a></td>
-                    <td class="hidden-phone">1234</td>
-                    <td class="hidden-phone">req01_MS_pants</td>
-                    <td class="hidden-phone">AAee1</td>
-                    <td>원단 이화학검사(파괴검사)</td>
-                    <td>샘플링</td>
-                    <td><span class="label label-info label-mini">승인완료</span></td>
-                    <td>2021-06-18 18:15:11</td>
-                  	<td>  <a th:href="@{/addQualityInspectionStatus}" class="btn btn-warning btn-xs"><i class="fa fa-bar-chart-o"></i>현황</a></td>
-                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  <tr>
-                   <td><input type="checkbox" class="checked"></td>
-                   <td class="hidden-phone">
-                     7
-                    </td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">QC_REQUEST01</a></td>
-                    <td class="hidden-phone">1234</td>
-                    <td class="hidden-phone">req01_MS_pants</td>
-                    <td class="hidden-phone">AAee1</td>
-                    <td>원단 이화학검사(파괴검사)</td>
-                    <td>샘플링</td>
-                    <td><span class="label label-warning label-mini">승인요청중</span></td>
-                    <td>2021-06-18 18:15:11</td>
-                  	<td>  <a class="btn btn-warning btn-xs"><i class="fa fa-bar-chart-o"></i>현황</a></td>
-                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  
+                    <a th:href="@{#}">[[${l.quality_inspection_request_code}]]</a></td>
+                    <td th:text="${l.contract_code}"></td>
+                    <td th:text="${l.requested_product_code}"></td>
+                    <td th:text="${l.quality_inspection_code}"></td>
+                    <td th:text="${l.sub_class_name}"></td>
+                    <td th:text="${l.sampling_check}"></td>
+                    <td th:text="${#maps.containsKey(l, 'inspection_request_approval') ? l.inspection_request_approval: '승인전' }"></td>
+                    <!-- <td th:text="${l.inspection_request_approval}"></td> -->
+                    <td th:text="${l.inspection_request_date}"></td>
+                  	<td><a th:href="@{/addQualityInspectionStatus}" class="btn btn-warning btn-xs"><i class="fa fa-bar-chart-o"></i>현황</a></td>
+                  	<td><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
+                  </tr>                             
            		 </tbody>
               </table>
             </div>

@@ -167,8 +167,6 @@ layout:decorate="@{layout/default_qualityControl}">
 		</div>	
 	</div>
 </div>
-<!-- 품질검사 대중소 -->
-<script type="text/javascript" th:src="@{/systemQuality/systemQualityInspection.js}"></script>	
 <!-- 계약번호 검색 모달 -->
 <th:block th:replace="/quality/modal_SearchContractNum::modal_SearchContractNum"></th:block>
 <!-- 거래처명 검색 모달 -->
@@ -176,9 +174,12 @@ layout:decorate="@{layout/default_qualityControl}">
 <!-- 품질검사코드 검색 모달 --> 
 <th:block th:replace="/quality/modal_SearchInspectionCode::modal_SearchInspectionCode"></th:block>
 
+<!-- 품질검사 대중소 -->
+<script type="text/javascript" th:src="@{/systemQuality/systemQualityInspection.js}"></script>	
+<!-- 품질검사 현황 -->
 <script type="text/javascript" th:src="@{/quality/qualityInspectionStatusNow.js}"></script>
-<script type="text/javascript" th:src="@{/productionJs/ProductionCate.js}"></script>
 <!-- 품목 가져오는 js -->
+<script type="text/javascript" th:src="@{/productionJs/ProductionCate.js}"></script>
 
 
 </div>

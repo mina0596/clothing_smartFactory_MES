@@ -89,7 +89,7 @@ layout:decorate="@{layout/default_production}">
                   <tr th:if="${#lists.size(list)>0}" th:each="l, i: ${list}">
 	                  <td><input type="checkbox" class="checked" th:value="${l.production_plan_code}"></td>
 	                   <td th:text="${i.index+1}"></td> 
-	                    <td><a href="#">[[${l.production_plan_code}]]</a></td>
+	                    <td th:text="${l.production_plan_code}"></td>
 	                    <td th:text="${l.gender_categorized_name}"></td>
 	                    <td th:text="${l.detailed_categorized_name}"></td>
 	                    <td th:text="${l.employee_name}"></td>
