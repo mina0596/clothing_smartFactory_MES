@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ksmart39.springboot.domain.QualityInspection;
+import ksmart39.springboot.domain.QualityInspectionRequest;
 import ksmart39.springboot.domain.QualityInspectionResult;
 import ksmart39.springboot.domain.QualityInspectionStandard;
 import ksmart39.springboot.service.QualityInsMeasurementValueService;
@@ -76,15 +77,32 @@ public class QualityControlController_KDM {
 		return ContractNumMap;
 	}
 
-	//[]
-	
 	//[다미] 실시간 검사 현황
 	@PostMapping("/qualityInspectionStatusNow")
 	@ResponseBody
-	public List<Map<String, Object>> qualityInspectionStatusNow(@RequestBody Map<String, Object> searchMap) {
+	public List<Map<String, Object>> qualityInspectionStatusNow(@RequestParam(value = "contractNum")String contractNum){
+		List<Map<String, Object>> resultMap = null;
+		
+		log.info("================================================");
+		log.info("화면에서 받아온값: {}", contractNum);
+		log.info("================================================");
+		
+		resultMap = qualityInsMeasurementValueService.getQualityInspectionStatusNow(contractNum);
+
+		log.info("================================================");
+		log.info("DB조회한 값: {}", resultMap);
+		log.info("================================================");
+		
+		return resultMap;
+	}
+	
+	//[다미] 실시간 검사 현황 리스트
+	@PostMapping("/qualityInspectionStatusNowList")
+	@ResponseBody
+	public List<Map<String, Object>> qualityInspectionStatusNowList(@RequestBody Map<String, Object> searchMap) {
 		
 		log.info("화면에서 받아온 값: {}", searchMap);
-		List<Map<String, Object>> map = qualityInsMeasurementValueService.getQualityInspectionStatusNow(searchMap);
+		List<Map<String, Object>> map = qualityInsMeasurementValueService.getQualityInspectionStatusNowList(searchMap);
 		log.info("================================================");
 		log.info("실시간 검사 현황 DB조회된 값: {}", map);
 		log.info("================================================");
@@ -162,9 +180,6 @@ public class QualityControlController_KDM {
 	}
 	
 	
-	
-	//====================================================================
-	
 	//[다미]품질검사 요청 목록 모달
 	@RequestMapping(value = "searchQualityInspectionRequest", method = RequestMethod.POST)
 	@ResponseBody
@@ -196,15 +211,27 @@ public class QualityControlController_KDM {
 	
 	//[다미]품질검사요청목록
 	@GetMapping("/qualityInspectionRequestList")
-	public String qualityControlRequestList() {
+	public String qualityControlRequestList(Model model) {
+		List<Map<String, Object>> resultMap = qualityInsMeasurementValueService.getQualityInspectionRequestList();
+		log.info("test3333{}",resultMap);
+		model.addAttribute("list", resultMap);
 		return "quality/qualityInspectionRequestList";
 		
 	}
+	
+	//[다미] 계약번호로 품목별 의뢰 코드 검색
+	@PostMapping("/searchRequestProductCode")
+	@ResponseBody
+	public List<Map<String, Object>> searchRequestProductCode(@RequestParam(name = "contractCode")String contractCode){
+		List<Map<String, Object>> resultMap = qualityInsMeasurementValueService.searchRequestProductCode(contractCode);
+		return resultMap;
+	}
 		
-	//[다미]품질검사요청 메서드
+	//[다미]품질검사 단일 요청
 	@PostMapping("/qualityInspectionRequest")
-	public String qualityInspectionRequest(@RequestParam(name = "qualityInspection", required = false)String qualityInspection) {
-		return "redirect:/qualityInspectionRequestList";
+	public String qualityInspectionRequest(QualityInspectionRequest qualityInspectionRequest) {
+		qualityInsMeasurementValueService.qualityInspectionRequest(qualityInspectionRequest);
+		return "redirect:qualityInspectionRequestList";
 	}
 	
 	//[다미]품질검사요청
@@ -213,5 +240,10 @@ public class QualityControlController_KDM {
 		return "quality/qualityInspectionRequest";
 	}
 	
-	
+	//[다미]품질검사 세부 코드 검색
+	@PostMapping("/subClassCate")
+	@ResponseBody
+	public List<Map<String, Object>> subClassCate(@RequestParam(name = "lowClassCateName") String lowClassCateName){
+		return qualityInsMeasurementValueService.subClassCate(lowClassCateName);
+	}
 }
