@@ -43,12 +43,14 @@
 			INNER JOIN
 			erp_access_level as l
 			on
-			e.level_num = l.level_num;
+			e.level_num = l.level_num
+			LIMIT #{rowStart}, #{rowPerPage};
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test="searchKey != null and searchKey != ''.toString()">
 				${searchKey} LIKE CONCAT('%', #{searchValue} ,'%');
 			</if>
 		</trim>
+		
 	</select>
 	
 	<select id="getHumanResourcesCount" resultType="int">
