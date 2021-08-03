@@ -11,7 +11,7 @@ $(function(){
 	$('#searchBtn1').click(function(){
 		$('.searchInspectionResult').show();
 		$('.stateContractInspectionList').hide();
-		/*$('.searchState').submit();*/
+		$('.searchState').submit();
 			
 			
 		

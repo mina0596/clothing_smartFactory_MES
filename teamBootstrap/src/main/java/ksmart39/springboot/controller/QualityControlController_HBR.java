@@ -46,24 +46,28 @@ public class QualityControlController_HBR {
 				@RequestParam(name = "inspectionStartDate", required = false)String inspectionStartDate,
 				@RequestParam(name = "inspectionEndDate", required = false)String inspectionEndDate){
 
-			//등급별
-			List<Map<String, Object>> inspectionStateList = qualityInsepctionStauteService.getStateBuyerContractQualityInspection();
-			//수치별
-			List<Map<String, Object>> inspectionStateMeasurement =qualityInsepctionStauteService.getStateBuyerContractQualityInspectionMeasurement();
-			//합격/불합격
-			List<Map<String, Object>> inspectionStatePassCheck =qualityInsepctionStauteService.getStateBuyerContractQualityInspectionPass();
-			
-			//등급별 검색
 			HashMap<String,Object> map = new HashMap<String,Object>();
 			//객체화된map에.put 메서드로  RequestParam값 넣기
 			map.put("contactNumber", contactNumber);
 			map.put("clientName", clientName);			
 			map.put("inspectionStartDate", inspectionStartDate);
 			map.put("inspectionEndDate", inspectionEndDate);
-			log.info("map",map);
+			log.info("====================");
+			log.info("map:",map);
+			log.info("====================");
+			
+			//등급별 검색
 			List<Map<String, Object>> stateMap = qualityInsepctionStauteService.getSearchQualityInspectionState(map);
+			//등급별
+			List<Map<String, Object>> inspectionStateList = qualityInsepctionStauteService.getStateBuyerContractQualityInspection();
+			//수치별
+			List<Map<String, Object>> inspectionStateMeasurement =qualityInsepctionStauteService.getStateBuyerContractQualityInspectionMeasurement();
+			//합격/불합격
+			List<Map<String, Object>> inspectionStatePassCheck =qualityInsepctionStauteService.getStateBuyerContractQualityInspectionPass();
 			model.addAttribute("stateMap", stateMap);
+			log.info("====================");
 			log.info("stateMap:",stateMap);
+			log.info("====================");
 			model.addAttribute("inspectionStateList", inspectionStateList);
 			model.addAttribute("inspectionStateMeasurement", inspectionStateMeasurement);
 			model.addAttribute("inspectionStatePassCheck", inspectionStatePassCheck);
