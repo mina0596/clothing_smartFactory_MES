@@ -122,10 +122,10 @@ $(function(){
 		    borderWidth: 1
 		  }]
 		};
-		
+		failedRateChartByMonth.data = data1;
 		failedRateChartByMonth.update();
 		
-		console.log(failedRateChartByMonth.data);
+		console.log(failedRateChartByMonth);
 	})
 	
 	

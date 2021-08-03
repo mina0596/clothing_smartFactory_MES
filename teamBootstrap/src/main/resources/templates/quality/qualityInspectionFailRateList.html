@@ -51,8 +51,9 @@ layout:decorate="@{layout/default_qualityControl}">
               <div class="panel-body">
                 <div class="tab-content">
                 
-                
+                <!-- 연도별 불량률 조회 -->
 				<div th:replace="quality/qualityInspectionFailRateList/yearlyFailRateList :: yearlyFailRate"></div>
+                <!-- 월별별 불량률 조회 -->
 				<div th:replace="quality/qualityInspectionFailRateList/monthlyFailRateList :: monthlyFailRate"></div>
 
                 <!-- 품질검사별 불량률 시작 -->

@@ -54,21 +54,11 @@ SELECT
 					inspection_result AS re ON q.quality_inspection_code = re.quality_inspection_code
 		left JOIN
 			inspection_final_result AS ref ON ref.quality_inspection_code=q.quality_inspection_code	
-		<trim prefix="WHERE" prefixOverrides="AND">	
-	AND i.category='등급'
-	<if test="clientName != null and clientName != ''.toString()">			
-	 ANDc.client_name LIKE CONCAT('%',#{clientName},'%')
-	 </if>	 
-	<if test="contactNumber != null and contactNumber != ''.toString()">			
-	AND r.contract_code LIKE CONCAT('%',#{contactNumber},'%')
-	</if>
-	<if test="inspectionStartDate != null and inspectionStartDate != ''.toString()">			
-	AND re.inspection_start_date  LIKE CONCAT ('%',#{inspectionStartDate},'%')
-	</if>
-	<if test="inspectionEndDate != null and inspectionEndDate != ''.toString()">			
-	AND re.inspection_end_date LIKE CONCAT ('%',#{inspectionEndDate},'%')
-	</if>
-	</trim>
+	WHERE i.category LIKE('등급%')
+	 AND c.client_name LIKE CONCAT ('%',#{clientName},'%')
+	AND r.contract_code LIKE CONCAT ('%',#{contactNumber},'%')
+	AND re.inspection_start_date =DATE(#{inspectionStartDate})
+	AND re.inspection_end_date=DATE(#{inspectionEndDate})	
 GROUP BY re.quality_inspection_request_code
 ORDER BY r.contract_code
 </select>
