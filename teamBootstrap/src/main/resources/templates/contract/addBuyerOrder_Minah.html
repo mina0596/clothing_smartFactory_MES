@@ -4,146 +4,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
 layout:decorate="@{layout/default_contract}">
 
 <th:block layout:fragment="pageTitle">
-  <div class="border-head"> 
-   <h3 th:text="${title}"></h3>
-  </div>
-</th:block>
-<th:block layout:fragment="customJs">
-	<script>
-		$(function(){
-			var menTopItemList = $('#menTopItemList');
-			var womenTopItemList = $('#womenTopItemList');
-			var menBottomItemList = $('#menBottomItemList');
-			var womenBottomItemList = $('#womenBottomItemList');
-			var jacketSizeList = $('#jacketSizeList');
-			var vestSizeList = $('#vestSizeList');
-			var shirtSizeList = $('#shirtSizeList');
-			var skirtSizeList = $('#skirtSizeList');
-			var pantsSizeList = $('#pantsSizeList');
-			var selectedItem = menTopItemList.children().find('input');
-			var selectedItem2 = menBottomItemList.children().find('input');
-			menTopItemList.hide();
-			womenTopItemList.hide();
-			menBottomItemList.hide();
-			womenBottomItemList.hide();
-			jacketSizeList.hide();
-			vestSizeList.hide();
-			shirtSizeList.hide();
-			skirtSizeList.hide();
-			pantsSizeList.hide();
 
-
-			
-			//양복종류 선택했을때 이벤트
-			$('#selectedSuitType').change(function(){
-				var selectedSuitType = $(this).val();
-				
-				//신사양복을 선택했을때 이벤트
-				if(selectedSuitType =='suit01'){
-					menTopItemList.show();
-					menBottomItemList.show();
-					selectedItem.each(function(){
-					
-						//상의에서 체크박스 선택했을때의 이벤트
-						$(this).change(function(){
-								if($(this).is(':checked')){
-									if($(this).val() == '자켓'){
-										jacketSizeList.show();
-									}else if($(this).val() == '조끼'){
-										vestSizeList.show();
-									}else if($(this).val() == '셔츠'){
-										shirtSizeList.show();
-									}else{
-										shirtSizeList.hide();
-										vestSizeList.hide();
-										jacketSizeList.hide();
-									}
-								}else{
-									shirtSizeList.hide();
-									vestSizeList.hide();
-									jacketSizeList.hide();
-								}
-						});
-						
-					});
-					selectedItem2.each(function(){
-					
-						//하의에서 체크박스 선택했을때의 이벤트
-						$(this).change(function(){
-							console.log($(this).val());
-								if($(this).is(':checked')){
-									if($(this).val() == '바지'){
-										pantsSizeList.show();
-									}else{
-										pantsSizeList.hide();
-										skirtSizeList.hide();
-									}
-								}else{
-									pantsSizeList.hide();
-									skirtSizeList.hide();
-								}
-						});
-						
-					});
-					
-				//숙녀양복 선택했을때
-				}else{
-					womenTopItemList.show();
-					womenBottomItemList.show();
-					selectedItem = womenTopItemList.children().find('input');
-					selectedItem2 = womenBottomItemList.children().find('input');
-					selectedItem.each(function(){
-					
-						//상의에서 체크박스 선택했을때의 이벤트
-						$(this).change(function(){
-								if($(this).is(':checked')){
-									if($(this).val() == '자켓'){
-										jacketSizeList.show();
-									}else if($(this).val() == '조끼'){
-										vestSizeList.show();
-									}else if($(this).val() == '블라우스'){
-										shirtSizeList.show();
-									}else{
-										shirtSizeList.hide();
-										vestSizeList.hide();
-										jacketSizeList.hide();
-									}
-								}else{
-									shirtSizeList.hide();
-									vestSizeList.hide();
-									jacketSizeList.hide();
-								}
-						});
-						
-					});
-					selectedItem2.each(function(){
-					
-						//하의에서 체크박스 선택했을때의 이벤트
-						$(this).change(function(){
-							console.log($(this).val());
-								if($(this).is(':checked')){
-									if($(this).val() == '치마'){
-										skirtSizeList.show();
-									}else{
-										pantsSizeList.hide();
-										skirtSizeList.hide();
-									}
-								}else{
-									pantsSizeList.hide();
-									skirtSizeList.hide();
-								}
-						});
-						
-					});
-				}
-				
-			});
-	
-		});
-		
-		
-	</script>
-	
 </th:block>
 
 
@@ -151,264 +12,61 @@ layout:decorate="@{layout/default_contract}">
 		<div class="form-panel">
 	 		<h4 class="mb"><i class="fa fa-edit"></i> 수주 주문서 등록</h4>
 	        <div class="form">
-	          <form class="cmxform form-horizontal style-form" id="signupForm" method="post" th:action="@{/contract/addBuyerOrder}">
-	            <div class="form-group ">
-	              <label for="firstname" class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;" >거래처명</label>
-	              <div class="col-lg-6">
-	                <input class=" form-control" id="clientAccountName" name="clientAccountName" type="text">
-	              </div>
-	            </div>
+	          <form class="cmxform form-horizontal style-form" method="post" th:action="@{/contract/addBuyerOrder}">
+	            <div class="form-group">
+		          <label class="col-sm-2 col-sm-2 control-label">거래처명</label>
+		          <div class="col-md-4">
+		            <div  class="input-group ">
+		              <input type="text" id="clientAccountName" name="clientAccountName" class="form-control" readonly="readonly"  size="16">
+		              <input type="hidden" id="clientCode" name="clientCode" class="form-control" readonly="readonly"  size="16">
+		              <div class="input-group-btn">
+		                <button type="button" id="byClient" data-toggle="modal" data-target="#SearchBuyer" class=" btn btn-theme03 btn btn-default"><i class="fa"></i>검색하여 가져오기</button>
+		              </div>
+		            </div>
+		          </div>
+		        </div>	
+
 		        <div class="form-group">
 		       	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">성별에 따른 양복명</label>
 		       	  	<div class="col-sm-2">
-			       	 	<select class="form-control" name="highClasscificationInspection" id="selectedSuitType" onchange="selectHighClasscification">
+			       	 	<select class="form-control" name="highClasscificationInspection" id="selectedSuitType">
 			             <option value="">::선택::</option>
-			             <option value="suit01">신사양복</option>
-			             <option value="suit02">숙녀양복</option>
+			             <option value="신사양복">신사양복</option>
+			             <option value="숙녀양복">숙녀양복</option>
 			            </select>
 		       	  	</div>
 	       	  	</div>
 	       	  	
-	
-                        
-	       	  	<!-- 신사양복의 상의선택사항 -->
-	       	  	<div class="form-group" id="menTopItemList">
-   	  				<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;" > 신사양복 상의</label>
-   	  				<div class="col-sm-10" style="font-size: 13px; padding-right: 20px;">
-						<input type="checkbox" name="selectedItem" value="자켓"> 자켓
-						<input type="checkbox" name="selectedItem" value="셔츠"> 셔츠
-						<input type="checkbox" name="selectedItem" value="조끼"> 조끼
-					</div>
-	            </div>
-	            
-	            <!-- 숙녀양복의 상의선택사항 -->          
-	       	  	<div class="form-group" id="womenTopItemList">
-   	  				<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;" > 숙녀양복 상의</label>
-   	  				<div class="col-sm-10" style="font-size: 13px; padding-right: 20px;">
-						<input type="checkbox" name="selectedItem" value="자켓"> 자켓
-						<input type="checkbox" name="selectedItem" value="블라우스"> 블라우스
-						<input type="checkbox" name="selectedItem" value="조끼"> 조끼
-					</div>
-	            </div>          
-				<hr>
-				
-				<!-- 자켓사이즈리스트 -->
-				<table class="table" id="jacketSizeList">
-				<caption style="font-weight: 600; font-size: 15px;"><i class="fa fa-angle-right"></i> 자켓 사이즈 리스트</caption>
- 				<thead>
-					<tr>
-						<th>총기장</th>
-						<th>어깨너비</th>
-						<th>가슴둘레</th>
-						<th>허리둘레</th>
-						<th>소매기장</th>
-						<th>소매동</th>
-					</tr>
- 				</thead>
-                <tbody>
- 				 <tr>
-                    <td><input type="number" placeholder="총기장"></td>
-                    <td><input type="number" placeholder="어깨너비"></td>
-                    <td><input type="number" placeholder="가슴둘레"></td>
-                    <td><input type="number" placeholder="허리둘레"></td>
-                    <td><input type="number" placeholder="소매기장"></td>
-                    <td><input type="number" placeholder="소매동"></td>
-                  </tr>
-					<tr>
-						<th>소매부리</th>
-						<th>목너비</th>
-						<th>오른팔길이</th>
-						<th>왼팔길이</th>
-						<th>뒷목길이</th>
-						<th>암홀</th>
-					</tr>
-
-
-                  <tr>
-                    <td><input type="number" placeholder="소매부리"></td>
-                    <td><input type="number" placeholder="목너비"></td>
-                    <td><input type="number" placeholder="오른팔길이"></td>
-                    <td><input type="number" placeholder="왼팔길이"></td>
-                    <td><input type="number" placeholder="뒷목길이"></td>
-                    <td><input type="number" placeholder="암홀"></td>
-                  </tr>
-
-              </table>
-              
-				<!-- 조끼사이즈리스트 -->
-				<table class="table" id="vestSizeList">
-				<caption style="font-weight: 600; font-size: 15px;"><i class="fa fa-angle-right"></i> 조끼 사이즈 리스트</caption>
- 				<thead>
-					<tr>
-						<th>총기장</th>
-						<th>어깨너비</th>
-						<th>가슴둘레</th>
-						<th>허리둘레</th>
-						<th>소매기장</th>
-						<th>소매동</th>
-					</tr>
- 				</thead>
-                <tbody>
- 				 <tr>
-                    <td><input type="number" placeholder="총기장"></td>
-                    <td><input type="number" placeholder="어깨너비"></td>
-                    <td><input type="number" placeholder="가슴둘레"></td>
-                    <td><input type="number" placeholder="허리둘레"></td>
-                    <td><input type="number" placeholder="소매기장"></td>
-                    <td><input type="number" placeholder="소매동"></td>
-                  </tr>
-                </tbody>
- 				<thead>
-					<tr>
-						<th>소매부리</th>
-						<th>목너비</th>
-						<th>오른팔길이</th>
-						<th>왼팔길이</th>
-						<th>뒷목길이</th>
-						<th>암홀</th>
-					</tr>
- 				</thead>
-                <tbody>
-                  <tr>
-                    <td><input type="number" placeholder="소매부리"></td>
-                    <td><input type="number" placeholder="목너비"></td>
-                    <td><input type="number" placeholder="오른팔길이"></td>
-                    <td><input type="number" placeholder="왼팔길이"></td>
-                    <td><input type="number" placeholder="뒷목길이"></td>
-                    <td><input type="number" placeholder="암홀"></td>
-                  </tr>
-                </tbody>
-              </table>
-              
-				<!-- 셔츠사이즈리스트 -->
-				<table class="table" id="shirtSizeList">
-				<caption style="font-weight: 600; font-size: 15px;"><i class="fa fa-angle-right"></i> 셔츠 사이즈 리스트</caption>
- 				<thead>
-					<tr>
-						<th>총기장</th>
-						<th>어깨너비</th>
-						<th>가슴둘레</th>
-						<th>허리둘레</th>
-						<th>소매기장</th>
-						<th>소매동</th>
-					</tr>
- 				</thead>
-                <tbody>
- 				 <tr>
-                    <td><input type="number" placeholder="총기장"></td>
-                    <td><input type="number" placeholder="어깨너비"></td>
-                    <td><input type="number" placeholder="가슴둘레"></td>
-                    <td><input type="number" placeholder="허리둘레"></td>
-                    <td><input type="number" placeholder="소매기장"></td>
-                    <td><input type="number" placeholder="소매동"></td>
-                  </tr>
-                </tbody>
- 				<thead>
-					<tr>
-						<th>소매부리</th>
-						<th>목너비</th>
-						<th>오른팔길이</th>
-						<th>왼팔길이</th>
-						<th>뒷목길이</th>
-						<th>암홀</th>
-					</tr>
- 				</thead>
-                <tbody>
-                  <tr>
-                    <td><input type="number" placeholder="소매부리"></td>
-                    <td><input type="number" placeholder="목너비"></td>
-                    <td><input type="number" placeholder="오른팔길이"></td>
-                    <td><input type="number" placeholder="왼팔길이"></td>
-                    <td><input type="number" placeholder="뒷목길이"></td>
-                    <td><input type="number" placeholder="암홀"></td>
-                  </tr>
-                </tbody>
-              </table>
-
-          
-          
-          	<!-- 신사양복의 상의선택사항 -->
-       	  	<div class="form-group" id="menBottomItemList">
-  				<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;" > 신사양복 하의</label>
-  				<div class="col-sm-10" style="font-size: 13px; padding-right: 20px;">
-					<input type="checkbox" name="selectedItem" value="바지"> 바지
-				</div>
-            </div>          
-          	<!-- 숙녀양복의 상의선택사항 -->
-       	  	<div class="form-group" id="womenBottomItemList">
-  				<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;" > 숙녀양복 하의</label>
-  				<div class="col-sm-10" style="font-size: 13px; padding-right: 20px;">
-					<input type="checkbox" name="selectedItem" value="치마"> 치마
-				</div>
-            </div>          
-			<hr>
+	       	  	<div class="form-group">
+   	  				<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">품목</label>
+	   	  				<div id="detailedCategorizedName" class="col-sm-10" style="font-size: 13px; padding-right: 20px;">
+	   	  					<span>양복명을 선택해주세요</span>
+	   	  				</div>
+	           		</div>
+	       	  	<div class="form-group">
+   	  				<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">측정값</label>
+	   	  				<div id="measure" class="col-sm-10" style="font-size: 13px; padding-right: 20px;">
+	   	  					<span class="removeText">측정부위를 선택해주세요</span>
+	   	  					<table class="table" id="sizeList">
+				                <tbody id="measureName"></tbody>
+				            </table>
+	   	  				</div>
+	           		</div>
 			
-			<!-- 바지 사이즈 리스트 -->
-			<table class="table" id="pantsSizeList">
-			<caption style="font-weight: 600; font-size: 15px;"><i class="fa fa-angle-right"></i> 바지 사이즈 리스트</caption>
-                <thead>
-					<tr>
-						<th>허리둘레</th>
-						<th>엉덩이둘레</th>
-						<th>기장</th>
-						<th>밑단길이</th>
-						<th>밑위길이</th>
-						<th>허벅지둘레</th>
-					</tr>
- 				</thead>
-                <tbody>
- 				 <tr>
-                    <td><input type="number" placeholder="허리둘레"></td>
-                    <td><input type="number" placeholder="엉덩이둘레"></td>
-                    <td><input type="number" placeholder="기장"></td>
-                    <td><input type="number" placeholder="밑단길이"></td>
-                    <td><input type="number" placeholder="밑위길이"></td>
-                    <td><input type="number" placeholder="허벅지둘레"></td>
-                  </tr>
-                </tbody>
-              </table>
-              
-              
-              <!-- 치마 사이즈 리스트 -->
-              <table class="table" id="skirtSizeList">
- 				<caption style="font-weight: 600; font-size: 15px;"><i class="fa fa-angle-right"></i> 치마 사이즈 리스트</caption>
-                <thead>
-					<tr>
-						<th>허리둘레</th>
-						<th>엉덩이둘레</th>
-						<th>기장</th>
-						<th>밑단길이</th>
-						<th>밑위길이</th>
-						<th>허벅지둘레</th>
-					</tr>
- 				</thead>
-                <tbody>
- 				 <tr>
-                    <td><input type="number" placeholder="허리둘레"></td>
-                    <td><input type="number" placeholder="엉덩이둘레"></td>
-                    <td><input type="number" placeholder="기장"></td>
-                    <td><input type="number" placeholder="밑단길이"></td>
-                    <td><input type="number" placeholder="밑위길이"></td>
-                    <td><input type="number" placeholder="허벅지둘레"></td>
-                  </tr>
-                </tbody>
-              </table>
-          		
-          		
-          		
-          		<div class="form-group ">
-                 <label for="email" class="control-label col-lg-2" style="font-weight: 600;">수량</label>
-                 <div class="col-sm-2">
-                    <input type="number" class="form-control">
-                  </div>
-               </div>
+
+<!--           		<div class="form-group "> -->
+<!--                  <label for="email" class="control-label col-lg-2" style="font-weight: 600;">수량</label> -->
+<!--                  <div class="col-sm-2"> -->
+<!--                     <input type="number" class="form-control"> -->
+<!--                   </div> -->
+<!--                </div> -->
                
-               <div class="form-group ">
-                 <label for="email" class="control-label col-lg-2" style="font-weight: 600;">단위</label>
-                 <div class="col-lg-6">
-                   <input class="form-control " id="clientAccountAddr" name="clientAccountAddr" type="text">
-                 </div>
-               </div>
+<!--                <div class="form-group "> -->
+<!--                  <label for="email" class="control-label col-lg-2" style="font-weight: 600;">단위</label> -->
+<!--                  <div class="col-lg-6"> -->
+<!--                    <input class="form-control " id="clientAccountAddr1" name="clientAccountAddr" type="text"> -->
+<!--                  </div> -->
+<!--                </div> -->
                   
             
 
@@ -416,15 +74,15 @@ layout:decorate="@{layout/default_contract}">
             
                   <div class="form-group ">
                     <label for="email" class="control-label col-lg-2" style="font-weight: 600;">납부처연락처</label>
-                    <div class="col-lg-6">
-                      <input class="form-control " id="clientAccountAddr" name="clientAccountAddr" type="text">
+                    <div class="col-lg-2">
+                      <input class="form-control " id="requestedDeliveryTel" name="requestedDeliveryTel" type="text">
                     </div>
                   </div>
                   
                   <div class="form-group ">
-                    <label for="email" class="control-label col-lg-2" style="font-weight: 600;">납부처장소</label>
+                    <label for="email" class="control-label col-lg-2" style="font-weight: 600;">납부처 주소</label>
                     <div class="col-lg-6">
-                      <input class="form-control " id="clientAccountAddr" name="clientAccountAddr" type="text">
+                      <input class="form-control" id="requestedDeliveryAddress" name="requestedDeliveryAddress" type="text">
                     </div>
                   </div>
                   
@@ -432,11 +90,7 @@ layout:decorate="@{layout/default_contract}">
 		          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">납기요청일</label>
 		          <div class="col-md-4">
 		            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
-		              <input type="text" class="form-control" readonly="readonly" size="16">
-		              <div class="input-group-btn">
-		                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
-		                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
-		              </div>
+		              <input type="date" id="requestedDueDate" name="requestedDueDate" class="form-control" size="16">
 		            </div>
 		          </div>
 		        </div>
@@ -444,7 +98,7 @@ layout:decorate="@{layout/default_contract}">
 				<div class="form-group">
 		          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">특이사항</label>
 		          <div class="col-sm-6">
-		            <input class="form-control"type="text" placeholder="흰색체크">
+		            <input class="form-control" id="requestedSpecialNote" name="requestedSpecialNote" type="text" placeholder="흰색체크">
 		            <span class="help-block">특이사항을 적지 않아도 됩니다.</span>
 		          </div>
 		        </div>  
@@ -460,45 +114,40 @@ layout:decorate="@{layout/default_contract}">
  
  			        <div class="form-group">
 			          <label class="col-lg-2 col-sm-2 control-label" style="font-weight: 600;">담당 사원명</label>
-			          <div class="col-lg-6">
-			            <p class="form-control-static">이한빛</p>
+			          <div class="col-lg-2">
+			            <input type="text" class="form-control" readonly="readonly" th:value="${session.SNAME}">
 			          </div>
 			        </div>
 			        
 			        <div class="form-group">
 			          <label class="col-lg-2 col-sm-2 control-label" style="font-weight: 600;">담당자 사원 코드</label>
-			          <div class="col-lg-6">
-			            <p class="form-control-static">W01</p>
+			          <div class="col-lg-2">
+			            <input type="text" id="chargeEmployeeCode" name="chargeEmployeeCode" class="form-control" readonly="readonly" th:value="${session.SCODE}">
 			          </div>
 			     	</div>        
                    
-                <div class="form-group">
-		          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">수주주문일자</label>
-		          <div class="col-md-4">
-		            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
-		              <input type="text" class="form-control" readonly="readonly" size="16">
-		              <div class="input-group-btn">
-		                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
-		                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
-		              </div>
-		            </div>
-		          </div>
-		        </div>
+<!--                 <div class="form-group"> -->
+<!-- 		          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">수주주문일자</label> -->
+<!-- 		          <div class="col-md-4"> -->
+<!-- 		            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv"> -->
+<!-- 		              <input type="date" class="form-control" size="16"> -->
+<!-- 		            </div> -->
+<!-- 		          </div> -->
+<!-- 		        </div> -->
                   
                   <div class="form-group text-right">
 		         <div class="col-lg-offset-2 col-lg-10">
-		           <button class="btn btn-theme" type="submit">등록</button>
+		           <button id="addBuyerOrder" class="btn btn-theme" type="button">등록</button>
                    <button class="btn btn-theme04" type="button" onClick="history.back();">취소</button>
 		         </div>
 		       </div>
 	           </form>
           	</div>
         </div>
-   <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-daterangepicker/daterangepicker.js}"></script>
-  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js}"></script>
-  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-daterangepicker/moment.min.js}"></script>
-  <script type="text/javascript" th:src="@{Dashio/lib/bootstrap-timepicker/js/bootstrap-timepicker.js}"></script>
-  <script th:src="@{Dashio/lib/advanced-form-components.js}"></script>
+
+	<script type="text/javascript" th:src="@{/contract/addBuyerOrder.js}"></script>	
+	<!-- 거래처명 검색 모달 -->
+	<th:block th:replace="/quality/modal_SearchBuyerName::modal_SearchBuyerName"></th:block>
 </th:block>
 
 </html>

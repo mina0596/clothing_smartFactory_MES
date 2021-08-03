@@ -1,6 +1,5 @@
 package ksmart39.springboot.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,34 +10,57 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.thymeleaf.util.MapUtils;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import ksmart39.springboot.domain.SupplierRequest;
-import ksmart39.springboot.service.RequestedProductService;
-import ksmart39.springboot.service.SupplierService;
+import ksmart39.springboot.domain.ProductCodeDetail;
+import ksmart39.springboot.domain.RequestedProduct;
+import ksmart39.springboot.domain.RequiredSizeList;
+import ksmart39.springboot.service.ContractAddBuyerOrderService;
 
 
 @Controller
 @RequestMapping("/contract")
 public class ContractController_KDM {
+	
+	
+	private static final Logger log = LoggerFactory.getLogger(ContractController_KDM.class);
+
+	
 	@Autowired
-	private final SupplierService supplierService;
-	private final RequestedProductService requestedProductService;
+	private final ContractAddBuyerOrderService contractAddBuyerOrderService;
 	
 	
-	 @Autowired public ContractController_KDM(SupplierService supplierService, RequestedProductService requestedProductService) {
-	 this.supplierService = supplierService;
-	 this.requestedProductService = requestedProductService;
+	 @Autowired public ContractController_KDM(ContractAddBuyerOrderService contractAddBuyerOrderService) {
+	 this.contractAddBuyerOrderService = contractAddBuyerOrderService;
 	 }
-	 
-
-	
-	private static final Logger log = LoggerFactory.getLogger(SystemController.class);
 		
+	//[다미] 주문서 등록
+	@PostMapping("/addBuyerOrder")
+	@ResponseBody
+	public String addBuyerOrder(@RequestBody List<RequestedProduct> requestedProduct) {
+		log.info("화면에서 받아오는 값 : {}", requestedProduct);
+		//contractAddBuyerOrderService.addBuyerOrder(requestedProduct);
+		return "기운을 담아 야홋!!";
+	}
 	
-
+	//[다미] 품목에 따른 측정 부위 가져오기
+	@PostMapping("/getMeasurementPart")
+	@ResponseBody
+	public List<RequiredSizeList> getMeasurementPart(@RequestParam(value = "detailCate")String detailCate){		
+		return contractAddBuyerOrderService.getMeasurementPart(detailCate);
+	}	
+	
+	// [다미] 성별에 따른 품목들 가져오기
+	@PostMapping("/getDetailedCategorizedName")
+	@ResponseBody
+	public List<ProductCodeDetail> getDetailedCategorizedName(@RequestParam(value = "genderCategorizedCode")String genderCategorizedCode){
+		List<ProductCodeDetail> result = contractAddBuyerOrderService.getDetailedCategorizedName(genderCategorizedCode);
+		return result;
+	}
+	
 	// [다미] 전표 목록
 	@GetMapping("/paymentInvoiceList")
 	public String paymentInvoiceList(Model model) {
@@ -48,7 +70,7 @@ public class ContractController_KDM {
 	// [다미] 전표 등록 화면
 	@GetMapping("/addPaymentInvoice")
 	public String addPaymentInvoice(Model model) {
-		return "contract//addPaymentInvoice";
+		return "contract/addPaymentInvoice";
 	}
 	
 
