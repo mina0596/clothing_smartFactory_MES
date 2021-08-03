@@ -1,6 +1,7 @@
 package ksmart39.springboot.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import ksmart39.springboot.dao.ContractAddBuyerOrderMapper;
 import ksmart39.springboot.domain.ProductCodeDetail;
 import ksmart39.springboot.domain.RequestedProduct;
+import ksmart39.springboot.domain.RequestedProductSize;
 import ksmart39.springboot.domain.RequiredSizeList;
 
 @Service
@@ -21,6 +23,23 @@ public class ContractAddBuyerOrderService {
 
 	@Autowired
 	private ContractAddBuyerOrderMapper contractAddBuyerOrderMapper;
+	
+	//의뢰 사이즈 등록
+	public int addBuyerOrderSize(List<RequestedProductSize> requestedProductSize) {
+		for(int i = 0; i<requestedProductSize.size(); i++) {
+			
+			//품목별 의뢰 코드, 등록 직원 가져오기
+			Map<String, Object> codeMap = contractAddBuyerOrderMapper.getRequestProductCode(requestedProductSize.get(i).getRequestedProductCode());
+			
+			requestedProductSize.get(i).setChargedEmployeeCode((String) codeMap.get("charge_employee_code"));
+			requestedProductSize.get(i).setRequestedProductCode((String) codeMap.get("requested_product_code"));
+						
+		}
+		//의뢰 사이즈 등록
+		int result = contractAddBuyerOrderMapper.addBuyerOrderSize(requestedProductSize);
+
+		return result;
+	}
 	
 	//품목별 의뢰 등록
 	public int addBuyerOrder(List<RequestedProduct> requestedProduct) {
