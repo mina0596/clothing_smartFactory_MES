@@ -38,6 +38,50 @@
 	<result property="requestedProductDetailRegDate" 		column="requested_product_detail_reg_date"></result>
 	<result property="requestedProductDetailUpdateDate" 	column="requested_product_detail_update_date"></result>
 </resultMap>
+
+<resultMap type="RequestedProductSize" 			id="RequestedProductSizeResultMap">
+	<result property="requestedProductCode" 				column="requested_product_code"></result>
+	<result property="requiredSizeCode" 					column="required_size_code"></result>
+	<result property="chargedEmployeeCode" 					column="charged_employee_code"></result>
+	<result property="measuredValue" 						column="measured_value"></result>
+	<result property="requiredSizeRegDate" 					column="required_size_reg_date"></result>
+	<result property="requiredSizeUpdateDate" 				column="required_size_update_date"></result>
+</resultMap>
+	
+	<!-- 주문 의뢰 사이즈 등록 -->
+	<insert id="addBuyerOrderSize" parameterType="java.util.List">
+		INSERT INTO requested_product_size
+			(requested_product_code
+			,required_size_code
+			,charged_employee_code
+			,measured_value
+			,required_size_reg_date
+			,required_size_update_date)
+			VALUES 
+			<foreach collection="list" item="item" separator=",">
+			(#{item.requestedProductCode}
+			,#{item.requiredSizeCode}
+			,#{item.chargedEmployeeCode}
+			,#{item.measuredValue}
+			,NOW()
+			,NULL)
+			</foreach>
+	</insert>
+	
+	<!-- 주문 의뢰 코드 가져오기 -->
+	<select id="getRequestProductCode" parameterType="String" resultType="Map">
+		SELECT 
+			r.requested_product_code
+			,r.charge_employee_code
+			,r.requested_product_detail_reg_date
+		FROM 
+			requested_product_detail AS r
+		WHERE
+			r.product_code = #{productCode}
+		ORDER BY 
+			r.requested_product_code
+		DESC LIMIT 1
+	</select>
 	
 	<!-- 주문 의뢰 등록 -->
 	<insert id="addBuyerOrder" parameterType="java.util.List">
