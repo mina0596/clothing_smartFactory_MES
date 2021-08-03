@@ -266,6 +266,11 @@ public class QualityInsMeasurementValueService {
 		return qualityInsMeasurementValueMapper.getQualityInspectionRequestList();
 	};
 	
+	//품질검사 요청 승인
+	public int approvalInspectionRequest(String qualityInspectionRequestCode) {
+		return qualityInsMeasurementValueMapper.approvalInspectionRequest(qualityInspectionRequestCode);
+	}
+	
 	//품질검사 단일 요청
 	public int qualityInspectionRequest(QualityInspectionRequest qualityInspectionRequest) {
 		return qualityInsMeasurementValueMapper.qualityInspectionRequest(qualityInspectionRequest);

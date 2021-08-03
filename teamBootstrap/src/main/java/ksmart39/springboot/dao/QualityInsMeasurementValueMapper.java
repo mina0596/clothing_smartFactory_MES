@@ -56,6 +56,9 @@ public interface QualityInsMeasurementValueMapper {
 	//품질검사 요청 목록
 	public List<Map<String, Object>> getQualityInspectionRequestList();
 	
+	//품질검사 승인
+	public int approvalInspectionRequest(String qualityInspectionRequestCode);
+	
 	//품질검사 단일 요청
 	public int qualityInspectionRequest(QualityInspectionRequest qualityInspectionRequest);
 	

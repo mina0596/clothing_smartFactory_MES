@@ -208,16 +208,17 @@ public class QualityControlController_KDM {
 		
 		return map2;
 	}
-	
-	//[다미]품질검사요청목록
-	@GetMapping("/qualityInspectionRequestList")
-	public String qualityControlRequestList(Model model) {
-		List<Map<String, Object>> resultMap = qualityInsMeasurementValueService.getQualityInspectionRequestList();
-		log.info("test3333{}",resultMap);
-		model.addAttribute("list", resultMap);
-		return "quality/qualityInspectionRequestList";
-		
-	}
+	/*
+	 * //[다미]품질검사요청목록
+	 * 
+	 * @GetMapping("/qualityInspectionRequestList") public String
+	 * qualityControlRequestList(Model model) { List<Map<String, Object>> resultMap
+	 * = qualityInsMeasurementValueService.getQualityInspectionRequestList();
+	 * log.info("test3333{}",resultMap); model.addAttribute("list", resultMap);
+	 * return "quality/qualityInspectionRequestList";
+	 * 
+	 * }
+	 */
 	
 	//[다미] 계약번호로 품목별 의뢰 코드 검색
 	@PostMapping("/searchRequestProductCode")
