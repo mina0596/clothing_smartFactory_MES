@@ -17,7 +17,9 @@ public class RequestedProduct {
 	private String requestedProductDetailUpdateDate;
 	
 	private RequestedProductSize requestedProductSize;
+	
 	private Client client;
+	
 	public String getRequestedProductCode() {
 		return requestedProductCode;
 	}

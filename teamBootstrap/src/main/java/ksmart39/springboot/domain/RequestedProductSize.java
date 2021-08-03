@@ -7,6 +7,7 @@ public class RequestedProductSize {
 	private int measuredValue;
 	private String requiredSizeRegDate;
 	private String requiredSizeUpdateDate;
+	
 	public String getRequestedProductCode() {
 		return requestedProductCode;
 	}

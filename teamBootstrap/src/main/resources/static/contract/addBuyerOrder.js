@@ -112,7 +112,8 @@
 								  		html2 += '<tr class="' + msg[0].detailedCategorizedCode + '">';
 								  		for(var j = 0; j <msg.length; j++){
 								  			html2 += '<td><input type="number" name="measuredValue" class="form-control" placeholder="' + msg[j].measurementPart + '"></tb>';
-								  			html2 += '<input="hidden" value="' + msg[j].requiredSizeCode + '" name="requiredSizeCode">';
+								  			html2 += '<input type="hidden" value="' + msg[j].requiredSizeCode + '" name="requiredSizeCode">';
+								  			html2 += '<input type="hidden" name="productCodeVal" class="productCodeVal" value="' + genderCateCode + '_' + detailCate  + '">';
 								  		}
 								  		html2 += '</tr>';
 								  		$('#measureName').append(html2);
@@ -146,6 +147,7 @@
 			        url     : '/contract/addBuyerOrder',
 			        type    : 'POST',
 			        data    : JSON.stringify(array),
+			        traditional : true,
 			        contentType : 'application/json; charset=UTF-8',
 			        dataType: 'text',
 			        success : function(data) {
@@ -174,6 +176,7 @@
 				var clientCode = $('#clientCode');
 				
 				var orderInfoObj = {};
+				var orderSize = {};
 				for(var i = 0; i< productCode.length; i++){
 				orderInfoObj = {
 						clientCode : clientCode.val()
@@ -183,12 +186,42 @@
 						,requestedSpecialNote : requestedSpecialNote.val()
 						,chargeEmployeeCode : chargeEmployeeCode.val()
 						,productCode : productCode.eq(i).val()
-					}				
-					arr.push(orderInfoObj)			
-				}						
+					}
+					arr.push(orderInfoObj)	
+				}
+				
+				var productCodeVal = $('input[name="productCodeVal"]');
+				var measuredValue = $('input[name="measuredValue"]');
+				var requiredSizeCode = $('input[name="requiredSizeCode"]');
+				var sizeobj = {};
+				for(var i = 0; i < measuredValue.length; i++){
+					
+					sizeobj = {
+							measuredValue : measuredValue.eq(i).val()
+							,requiredSizeCode : requiredSizeCode.eq(i).val()
+							,productCodeVal : productCodeVal.eq(i).val()
+					}
+					arr.push(sizeobj);
+				}
 				console.log(arr);
 				addOrderAjax(arr);
 			});
+			
+//			$(document).on('click', '#requestedDeliveryTel', function(){
+//				
+//				var measuredValue = $('input[name="measuredValue"]');
+//				var requiredSizeCode = $('input[name="requiredSizeCode"]');
+//				var sizeobj = {};
+//				for(var i = 0; i < measuredValue.length; i++){
+//					
+//					sizeobj = {
+//							measuredValue : measuredValue.eq(i).val()
+//							,requiredSizeCode : requiredSizeCode.eq(i).val()
+//					}
+//					console.log(sizeobj);
+//					testarr.push(sizeobj);
+//				}
+//			});
 			
 		});
 		

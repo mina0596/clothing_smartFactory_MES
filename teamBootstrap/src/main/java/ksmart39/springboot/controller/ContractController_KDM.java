@@ -42,7 +42,7 @@ public class ContractController_KDM {
 	@ResponseBody
 	public String addBuyerOrder(@RequestBody List<RequestedProduct> requestedProduct) {
 		log.info("화면에서 받아오는 값 : {}", requestedProduct);
-		contractAddBuyerOrderService.addBuyerOrder(requestedProduct);
+		//contractAddBuyerOrderService.addBuyerOrder(requestedProduct);
 		return "기운을 담아 야홋!!";
 	}
 	
