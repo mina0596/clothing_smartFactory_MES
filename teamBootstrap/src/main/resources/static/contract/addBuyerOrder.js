@@ -141,6 +141,27 @@
 				});
 			});
 			
+			//사이즈 등록 ajax
+			var addSizeAjax = function(array){
+				$.ajax({
+					url     : '/contract/addBuyerOrderSize',
+					type    : 'POST',
+					data    : JSON.stringify(array),
+					traditional : true,
+					contentType : 'application/json; charset=UTF-8',
+					dataType: 'text',
+					success : function(data) {
+						console.log(data);
+						//리로드
+						if(data) location.reload(true);			        	
+					},
+					error : function(xhr,status,error) {
+						console.log('오류가 발생했습니다. 관리자에게 문의해주세요.');
+					}
+				});
+			}
+			
+			
 			//의뢰등록 ajax
 			var addOrderAjax = function(array){
 				$.ajax({
@@ -153,8 +174,25 @@
 			        success : function(data) {
 			        	console.log(data);
 			        	
-			        	//리로드
-			        	//if(data) location.reload(true);			        	
+			        	//성공하면 사이즈 등록
+			        	if(data){	
+			        		var productCodeVal = $('input[name="productCodeVal"]');
+			        		var measuredValue = $('input[name="measuredValue"]');
+			        		var requiredSizeCode = $('input[name="requiredSizeCode"]');
+			        		var sizeobj = {};
+			        		var sizeArr = [];
+			        		for(var i = 0; i < measuredValue.length; i++){
+			        			
+			        			sizeobj = {
+			        					"measuredValue" : measuredValue.eq(i).val()
+			        					,"requiredSizeCode" : requiredSizeCode.eq(i).val()
+			        					,"requestedProductCode" : productCodeVal.eq(i).val()
+			        			}
+			        			sizeArr.push(sizeobj);
+			        		}
+			        		console.log(sizeArr);
+			        		addSizeAjax(sizeArr);
+			        	}		        	
 			        },
 			        error : function(xhr,status,error) {
 			        	console.log('오류가 발생했습니다. 관리자에게 문의해주세요.');
@@ -164,6 +202,7 @@
 			
 			//측정값 빼고 품목별 의뢰 정보 넣기
 			$(document).on('click', '#addBuyerOrder', function(){
+				
 				var arr = [];
 				var productCode = $('input[name="productCode"]');
 				
@@ -177,6 +216,9 @@
 				
 				var orderInfoObj = {};
 				var orderSize = {};
+				
+				if(clientAccountName.val)
+				
 				for(var i = 0; i< productCode.length; i++){
 				orderInfoObj = {
 						clientCode : clientCode.val()
@@ -189,21 +231,7 @@
 					}
 					arr.push(orderInfoObj)	
 				}
-				
-				var productCodeVal = $('input[name="productCodeVal"]');
-				var measuredValue = $('input[name="measuredValue"]');
-				var requiredSizeCode = $('input[name="requiredSizeCode"]');
-				var sizeobj = {};
-				for(var i = 0; i < measuredValue.length; i++){
-					
-					sizeobj = {
-							measuredValue : measuredValue.eq(i).val()
-							,requiredSizeCode : requiredSizeCode.eq(i).val()
-							,productCodeVal : productCodeVal.eq(i).val()
-					}
-					arr.push(sizeobj);
-				}
-				console.log(arr);
+	        	console.log(arr);
 				addOrderAjax(arr);
 			});
 			

@@ -1,7 +1,6 @@
 package ksmart39.springboot.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import ksmart39.springboot.domain.ProductCodeDetail;
 import ksmart39.springboot.domain.RequestedProduct;
+import ksmart39.springboot.domain.RequestedProductSize;
 import ksmart39.springboot.domain.RequiredSizeList;
 import ksmart39.springboot.service.ContractAddBuyerOrderService;
 
@@ -36,14 +36,37 @@ public class ContractController_KDM {
 	 @Autowired public ContractController_KDM(ContractAddBuyerOrderService contractAddBuyerOrderService) {
 	 this.contractAddBuyerOrderService = contractAddBuyerOrderService;
 	 }
+	 
+	 //[다미] 주문서 등록
+	 @PostMapping("/addBuyerOrderSize")
+	 @ResponseBody
+	 public Boolean addBuyerOrderSize(@RequestBody List<RequestedProductSize> requestedProductSize) {
+		 log.info("화면에서 받아오는 값 : {}", requestedProductSize);
+		 int result = contractAddBuyerOrderService.addBuyerOrderSize(requestedProductSize);
+		 boolean resultB = false;
+		 if(result>0) {
+			 resultB = true;
+		 }else {
+			 resultB = false;
+		 }
+		 
+		 return resultB;
+	 }
 		
 	//[다미] 주문서 등록
 	@PostMapping("/addBuyerOrder")
 	@ResponseBody
-	public String addBuyerOrder(@RequestBody List<RequestedProduct> requestedProduct) {
-		log.info("화면에서 받아오는 값 : {}", requestedProduct);
-		//contractAddBuyerOrderService.addBuyerOrder(requestedProduct);
-		return "기운을 담아 야홋!!";
+	public boolean addBuyerOrder(@RequestBody List<RequestedProduct> requestedProduct) {
+		log.info("화면에서 받아오는 값tes : {}", requestedProduct);
+		int result = contractAddBuyerOrderService.addBuyerOrder(requestedProduct);
+		boolean resultB = false;
+		if(result>0) {
+			resultB = true;
+		}else {
+			resultB = false;
+		}
+		
+		return resultB;
 	}
 	
 	//[다미] 품목에 따른 측정 부위 가져오기
