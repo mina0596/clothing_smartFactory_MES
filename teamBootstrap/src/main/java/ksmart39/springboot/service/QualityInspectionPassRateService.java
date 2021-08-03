@@ -61,7 +61,11 @@ public class QualityInspectionPassRateService {
 	public List<Map<String,Object>> getMonthlyFailRateByYear(){
 		return passRateMapper.getMonthlyFailRateByYear();
 	}
-		
+	
+	//[민아]연도별 월 불량률 상세정보 조회
+	public List<Map<String,Object>> getMonthlyFailRateRank(String selectedYear){
+		return passRateMapper.getMonthlyFailRateRank(selectedYear);
+	}
 		
 }	
 	 

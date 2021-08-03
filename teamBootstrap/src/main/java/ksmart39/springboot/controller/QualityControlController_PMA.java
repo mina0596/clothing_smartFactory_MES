@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ksmart39.springboot.service.QualityControlService;
@@ -86,6 +87,16 @@ public class QualityControlController_PMA {
 		return"quality/qualityInspectionFailRateList";
 	}
 	
+	//연도별 월 불량률 상세정보 조회
+	@PostMapping("/addFailRank")
+	@ResponseBody
+	public List<Map<String,Object>> getMonthlyFailRank(@RequestBody Map<String,Object> selectYearMap){
+		log.info("ajax로 연도 데려오는 값 확인:{}", selectYearMap);
+		String selectedYear = (String) selectYearMap.get("selectedYear"); 
+		log.info("Map안에 값 확인:{}", selectedYear);
+		List<Map<String,Object>> monthlyFailRank = passRateService.getMonthlyFailRateRank(selectedYear);
+		return monthlyFailRank;
+	}
 	
 	
 }
