@@ -5,16 +5,46 @@ layout:decorate="@{layout/default_qualityControl}">
 
 <th:block layout:fragment="pageTitle">
  <script type="text/javascript">
-		$(function(){
-			//#checkAll 버튼 클릭 시 전체 checked
-				$('#checkAll').click(function(){
-					if($('#checkAll').prop('checked')){
-						$('.checked').prop('checked',true);
-							}else{
-								$('.checked').prop('checked',false);
-							}
-						});									
-					});
+	$(function(){
+		//#checkAll 버튼 클릭 시 전체 checked
+			$('#checkAll').click(function(){
+				if($('#checkAll').prop('checked')){
+					$('.checked').prop('checked',true);
+						}else{
+							$('.checked').prop('checked',false);
+						}
+					});									
+				});
+
+
+	$(document).on('click','.btn_status', function(){
+		if (confirm("승인하시겠습니까?") == true){    //확인
+			var inspectionRequestObj = $(this).parent().parent().children().eq(1);
+			var productRequestCode = inspectionRequestObj.text();
+		
+			$.ajax({
+				url: "/quality/approvalInspectionRequest",
+				method : 'post',
+				async: true,
+				dataType : "text",
+				data : {'qualityInspectionRequestCode' : qualityInspectionRequestCode},
+				success: function(data){
+					if(data){
+						location.reload();
+					}else{
+						alert('승인이 실패했습니다.');
+					}
+				},
+				error: function(error){
+					console.log(error);
+				}
+			});
+		
+		}else{   //취소
+		    return;
+		}
+	});
+		
 	</script>  
 </th:block>
 
@@ -102,16 +132,18 @@ layout:decorate="@{layout/default_qualityControl}">
                  <tr th:if="${#lists.size(list) > 0}" th:each="l, i : ${list}">
                    <td><input type="checkbox" class="checked"></td>
                    	<td th:text="${i.index+1}"></td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">[[${l.quality_inspection_request_code}]]</a></td>
-                    <td th:text="${l.contract_code}"></td>
-                    <td th:text="${l.requested_product_code}"></td>
-                    <td th:text="${l.quality_inspection_code}"></td>
-                    <td th:text="${l.sub_class_name}"></td>
-                    <td th:text="${l.sampling_check}"></td>
-                    <td th:text="${#maps.containsKey(l, 'inspection_request_approval') ? l.inspection_request_approval: '승인전' }"></td>
-                    <!-- <td th:text="${l.inspection_request_approval}"></td> -->
-                    <td th:text="${l.inspection_request_date}"></td>
+                    <td th:text="${l.qir}"></td>
+                    <td th:text="${l.cc}"></td>
+                    <td th:text="${l.rpc}"></td>
+                    <td th:text="${l.qic}"></td>
+                    <td th:text="${l.scn}"></td>
+                    <td th:if ="${l.sc eq 1}">샘플링</td>
+                    <td th:if ="${l.sc eq 0}">해당없음</td>
+                    <td>
+                    <span th:if="${l.ira eq '승인'}" class="btn btn-success btn-xs btn_status" >승인완료</span>
+					<button th:if="${l.ira eq '미승인'}" class="btn btn-danger btn-xs btn_status"  value="확인하기">미승인</button>
+					</td>   
+                    <td th:text="${l.ird}"></td>
                   	<td><a th:href="@{/addQualityInspectionStatus}" class="btn btn-warning btn-xs"><i class="fa fa-bar-chart-o"></i>현황</a></td>
                   	<td><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
                   </tr>                             

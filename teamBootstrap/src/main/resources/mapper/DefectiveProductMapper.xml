@@ -35,7 +35,8 @@
 			,defective_product_reg_date					
 			,defective_product_update_date				
 		FROM
-			defective_product_management;
+			defective_product_management
+		LIMIT #{rowStart}, #{rowPerPage};
 	</select>
 
 	<select id="defectiveProductCount" resultType="int">

@@ -23,6 +23,7 @@ import ksmart39.springboot.domain.DefectiveProduct;
 import ksmart39.springboot.domain.QualityInspectionResult;
 import ksmart39.springboot.paging.Pagination;
 import ksmart39.springboot.service.DefectiveProductService;
+import ksmart39.springboot.service.QualityInsMeasurementValueService;
 
 @Controller
 @RequestMapping("/quality")
@@ -31,6 +32,9 @@ public class QualityControlController_LHB {
 	
 	@Autowired
 	private DefectiveProductService defectiveProductService;
+	@Autowired 
+	private QualityInsMeasurementValueService qualityInsMeasurementValueService;
+
 	
 
 	
@@ -110,4 +114,24 @@ public class QualityControlController_LHB {
 		result = defectiveProductService.deleteDefectiveProduct(delArr);
 		return result;
 	}	
+	
+	//[한빛]품질검사요청목록
+	@GetMapping("/qualityInspectionRequestList")
+	public String qualityControlRequestList(Model model) {
+		List<Map<String, Object>> resultMap = qualityInsMeasurementValueService.getQualityInspectionRequestList();
+		log.info("test3333{}",resultMap);
+		model.addAttribute("list", resultMap);
+		return "quality/qualityInspectionRequestList";
+		
+	}
+	
+	//[한빛] 품질검사요청 승인
+	@PostMapping("/approvalInspectionRequest")
+	@ResponseBody
+	public boolean approvalInspectionRequest(@RequestParam(name = "qualityInspectionRequestCode", required = false) String qualityInspectionRequestCode) {
+		boolean approval = false;
+		int result = qualityInsMeasurementValueService.approvalInspectionRequest(qualityInspectionRequestCode);
+		if(result > 0) approval = true;
+		return approval;
+	}
 }

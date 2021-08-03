@@ -25,9 +25,9 @@ public class SupplierService {
 		return supplierMapper.searchSupplierClientCate(client);
 	}
 	//[보람] 원부자재 정보 
-	public  List<Map<String,Object>> getRawInfo(){
+	public  List<Map<String,Object>> searchRawMaterial(String supplierName){
 	
-		return supplierMapper.getRawInfo();
+		return supplierMapper.searchRawMaterial(supplierName);
 	}
 	//[보람] 발주요청 등록
 	public int addSupplierRequest(SupplierRequest supplierRequest) {

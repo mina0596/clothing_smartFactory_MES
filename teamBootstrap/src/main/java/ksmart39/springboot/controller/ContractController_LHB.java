@@ -51,11 +51,11 @@ public class ContractController_LHB {
 		return "contract/addBuyerOrder";
 	}		
 	
-	//[한빛]주문서 등록 -> 조회
-	@PostMapping("/addBuyerOrder")
-	public String addBuyerOrder() {
-		return "redirect:/buyerOrderList";
-	}
+//	//[한빛]주문서 등록 -> 조회
+//	@PostMapping("/addBuyerOrder")
+//	public String addBuyerOrder() {
+//		return "redirect:/buyerOrderList";
+//	}
 
 	//[한빛]주문서 조회
 	@GetMapping("/buyerOrderList")

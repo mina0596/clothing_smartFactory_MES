@@ -96,6 +96,7 @@
 	<select id="searchByClientName" resultType="Map" parameterType="String">
 		SELECT 
 			ci.client_name AS clientName
+			,ci.client_code AS clientCode
 		FROM 
 			client_info AS ci
 		INNER JOIN
@@ -482,14 +483,14 @@
 	<!-- [품질검사 요청 목록] 품질검사 요청 목록 -->
 	<select id="getQualityInspectionRequestList" resultType="Map">
 		SELECT
-			q.quality_inspection_request_code
-			,p.contract_code
-			,q.requested_product_code
-			,q.quality_inspection_code
-			,sub.sub_class_name
-			,q.sampling_check
-			,q.inspection_request_approval
-			,q.inspection_request_date
+			q.quality_inspection_request_code  AS qir
+			,p.contract_code								AS cc
+			,q.requested_product_code				AS rpc
+			,q.quality_inspection_code				AS qic
+			,sub.sub_class_name						AS scn
+			,q.sampling_check							AS sc
+			,q.inspection_request_approval		AS ira
+			,q.inspection_request_date				AS ird
 		FROM
 			quality_inspection_request AS q
 		INNER JOIN
@@ -497,6 +498,15 @@
 		INNER JOIN
 			sub_class_inspection_list AS sub ON q.quality_inspection_code = sub.quality_inspection_code;
 	</select>
+	
+	<update id="approvalInspectionRequest" parameterType="String">
+		UPDATE 
+			quality_inspection_request
+		SET
+			inspection_request_approval = '승인'
+		WHERE 
+			quality_inspection_request_code = #{qualityInspectionRequestCode};	
+	</update>
 	
 	<!-- [품질검사 요청] 품질검사 단일 요청-->
 	<insert id="qualityInspectionRequest" parameterType="qualityInspectionRequest">

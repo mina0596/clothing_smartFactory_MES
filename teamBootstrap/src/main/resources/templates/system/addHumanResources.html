@@ -16,10 +16,41 @@ layout:decorate="@{layout/default_system}">
 	 <h4 class="mb"><i class="fa fa-angle-right"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 사원등록</font></font></h4>
               <div class="form">
                 <form class="cmxform form-horizontal style-form" id="addEmployeeForm" method="post"  th:action="@{/system//addHumanResources}">
+
+       
+	                <div class="form-group">
+			          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">아이디</label>
+			          <div class="col-md-6">
+			            <div  class="input-group ">
+			              <input type="text" name = "employeeId" id= "employeeId" placeholder="영문자로 시작하는 6~20자 영문자 또는 숫자이어야 합니다." class="form-control"  size="16" required="required">
+			              <div class="input-group-btn">
+			                <button type="button" id="idCheckBtn" class="btn btn-warning"><i class="fa"></i>중복체크</button>
+			              </div>
+			            </div>
+			          </div>
+			        </div>
+                  
+                    <div class="form-group ">
+                      <label for="password" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">패스워드</font></font></label>
+                      <div class="col-lg-6">
+                        <input class="form-control " name="employeePw" id="employeePw" placeholder="패스워드를 입력하세요." type="password" disabled="disabled">
+                      </div>
+                    </div>
+                  
+                    <div class="form-group ">
+                     <label for="confirm_password" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">패스워드 확인</font></font></label>
+                      <div class="col-lg-6">
+                       <input class="form-control "  name="employeePwCheck" id = "employeePwCheck" placeholder="패스워드를 다시 한번 입력하세요." type="password" disabled="disabled">
+                      </div>
+                    </div>
+                    
+	                <div class = "alert alert-success"  id="alert-success">비밀번호가 일치합니다.</div>
+					<div class = "alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
+
                    <div class="form-group">
                     <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">권한</label>
                      <div class="col-sm-2">
-                      <select class="form-control" name = "levelNum" >
+                      <select class="form-control" name = "levelNum" disabled="disabled">
 						<option value = "선택">::선택::</option>
 						<option value="1">관리자</option>					
 						<option value="2">본사직원</option>
@@ -31,7 +62,7 @@ layout:decorate="@{layout/default_system}">
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">소속</label>
                   <div class="col-sm-2">
-                      <select class="form-control"  name = "employeeDepartment">
+                      <select class="form-control"  name = "employeeDepartment" disabled="disabled">
 						<option value = "선택">::선택::</option>
 						<option value = "본사">본사</option>
 						<option value = "공장">공장</option>
@@ -42,7 +73,7 @@ layout:decorate="@{layout/default_system}">
                   <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">직책</label>
                   <div class="col-sm-2">
-                      <select class="form-control" name = "employeePosition">
+                      <select class="form-control" name = "employeePosition" disabled="disabled">
 						<option value = "선택">::선택::</option>
 						<option value = "사원">사원</option>
 						<option value = "주임">주임</option>
@@ -53,66 +84,36 @@ layout:decorate="@{layout/default_system}">
 						<option value = "임원">임원</option>
 		               </select>
                   </div>
-                </div>
-       
-	                <div class="form-group">
-			          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">아이디</label>
-			          <div class="col-md-6">
-			            <div  class="input-group ">
-			              <input type="text" name = "employeeId" id= "employeeId" placeholder="아이디를 입력하세요." class="form-control"  size="16">
-			              <div class="input-group-btn">
-			                <button type="button" id="idCheckBtn" class="btn btn-warning"><i class="fa"></i>중복체크</button>
-			              </div>
-			            </div>
-			          </div>
-			        </div>
-                  
-                    <div class="form-group ">
-                      <label for="password" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">패스워드</font></font></label>
-                      <div class="col-lg-6">
-                        <input class="form-control " name="employeePw" id="employeePw" placeholder="패스워드를 입력하세요." type="password">
-                      </div>
-                    </div>
-                  
-                    <div class="form-group ">
-                     <label for="confirm_password" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">패스워드 확인</font></font></label>
-                      <div class="col-lg-6">
-                       <input class="form-control "  name="employeePwCheck" id = "employeePwCheck" placeholder="패스워드를 다시 한번 입력하세요." type="password" >
-                      </div>
-                    </div>
-                    
-	                <div class = "alert alert-success"  id="alert-success">비밀번호가 일치합니다.</div>
-					<div class = "alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
-                  
+                </div>                  
                     
                   <div class="form-group ">
                     <label for="firstname" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">사원명</font></font></label>
                      <div class="col-lg-6">
-                      <input class=" form-control" name="employeeName" placeholder="사원명을 입력하세요." type="text" >
+                      <input class=" form-control" name="employeeName" placeholder="사원명을 입력하세요." type="text"  disabled="disabled">
                      </div>
                   </div>
                   
                   <div class="form-group ">
                     <label for="email" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이메일</font></font></label>
                     <div class="col-lg-6">
-                      <input class="form-control " name="employeeEmail" id = "employeeEmail" placeholder="이메일을 입력하세요." type="text">
+                      <input class="form-control " name="employeeEmail" id = "employeeEmail" placeholder="이메일을 입력하세요." type="text" disabled="disabled">
                     </div>
                   </div>
                   
                   <div class="form-group ">
                     <label for="email" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">전화번호</font></font></label>
                     <div class="col-lg-6">
-                      <input class="form-control " name="employeeTel" placeholder="전화번호를 입력하세요." onKeyup="inputTelNumber(this);" type="text" >
+                      <input class="form-control " name="employeeTel" placeholder="전화번호를 입력하세요." onKeyup="inputTelNumber(this);" type="text" disabled="disabled">
                     </div>
                   </div>
                   
                   <div class="form-group ">
                     <label for="email" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">주소</font></font></label>
                     <div class="col-lg-6">
-                      <input class="form-control "  type="text"  placeholder="지번"  id="zip">
-                      <input class="form-control " name="employeeAddress" type="text"  placeholder="주소" id ="addr1">
-                      <input class="form-control " name="employeeAddress" type="text"  placeholder="상세주소" id ="addr2">
-					<a type="button"  class="btn btn-theme" onclick="execDaumPostcode()"> 주소 검색 </a>
+                      <input class="form-control "  type="text"  placeholder="지번"  id="zip" disabled="disabled">
+                      <input class="form-control " name="employeeAddress" type="text"  placeholder="주소" id ="addr1" disabled="disabled">
+                      <input class="form-control " name="employeeAddress" type="text"  placeholder="상세주소" id ="addr2" disabled="disabled">
+					<button type="button"  class="btn btn-theme" onclick="execDaumPostcode()" disabled="disabled"> 주소 검색 </button>
                     </div>
                   </div>
               
@@ -120,7 +121,7 @@ layout:decorate="@{layout/default_system}">
                 
          <div class="form-group text-right">
           <div class="col-lg-offset-2 col-lg-10">
-            <button class="btn btn-theme" type="submit" id="addBtn"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">등록</font></font></button>
+            <button class="btn btn-theme" type="submit" id="addBtn" disabled="disabled"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">등록</font></font></button>
             <button class="btn btn-theme04" type="button" onClick="history.back();"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소</font></font></button>
           </div>
         </div>
@@ -146,6 +147,8 @@ layout:decorate="@{layout/default_system}">
 			var employeeTel = $('input[name=employeeTel]').val();
 			var employeeAddress = $('input[name=employeeAddress]').val();
 			var submitFlag = true;
+			
+	        var idReg = /^[a-z]+[a-z0-9]{5,19}$/g;
 		
 			if($('select[name=levelNum]').val() == '선택'){			
 				alert('권한을 입력해주세요.');
@@ -162,9 +165,9 @@ layout:decorate="@{layout/default_system}">
 				$('input[name=employeePosition]').focus();
 				submitFlag = false;
 				return submitFlag;
-			}else if(employeeId == null || employeeId == undefined || employeeId == ''){
-				alert('아이디를 입력해주세요.');
-				$('input[name=employeeId]').focus();
+			}else if(!idReg.test($('#employeeId').val())){
+	            alert("아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자이어야 합니다.");
+				$('input[name=employeeId]').val("");
 				submitFlag = false;
 				return submitFlag;
 			}else if(employeePw == null || employeePw == undefined || employeePw == ''){
@@ -199,7 +202,7 @@ layout:decorate="@{layout/default_system}">
 				return submitFlag;
 			}
 			
-			if(submitFlag) addClient.submit();
+			if(submitFlag) $('#addBtn').submit();
 		});			
 	});
 	
@@ -219,6 +222,10 @@ layout:decorate="@{layout/default_system}">
 					request.done(function( data ) {
 						if(data){
 							alert("사용가능한 아이디입니다.");
+							
+							$('#addEmployeeForm input').prop('disabled', false);
+							$('#addEmployeeForm select').prop('disabled', false);
+							$('#addEmployeeForm button').prop('disabled', false);
 						}else{
 							alert('중복된 아이디입니다.');
 							$('input[name="employeeId"]').focus();
