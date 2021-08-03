@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_qualityControl}">
+
+<div th:fragment="monthlyFailRate" id="byMonths" class="tab-pane active">
+   <!-- 월별 불량률 시작  -->
+	<form class="form-horizontal style-form">
+	 <select name="selectedYear" class="selectedYear form-control" style="width: 110px;">
+	 	<option value="">연도선택</option>
+	 	<option th:each="m : ${failedRateByYear}" th:value="${m.year}" th:text="${m.year + '년'}"></option>
+	 </select>
+	2021년 월별 불량률 결과표 입니다. 원하시는 연도를 선택해주세요.
+	 <div class=".col-xs-6" style="height: 70%; width: 50%; margin-left: 450px;">
+   		<canvas id="failedRateChartByMonth"></canvas>
+   	 </div>
+     <table class="table table-striped table-advance table-hover" id="list">
+       <thead>
+         <tr>
+    		<th><i class="fa fa-bullhorn"></i> 번호</th>
+    		<th><i class="fa fa-barcode"></i> 품질검사코드</th>
+           <th><i class="fa fa-bookmark"></i> 대분류명</th>
+           <th><i class="fa fa-bookmark"></i> 중분류명</th>
+           <th><i class="fa fa-bookmark"></i> 소분류명</th>
+           <th><i class="fa fa-bookmark"></i> 세부검사명</th>
+           <th><i class="fa fa-bookmark"></i> 검사 기준</th>
+           <th><i class="fa fa-bookmark"></i> 필수 요소 여부</th>
+           <th><i class="fa fa-calendar"></i> 등록일</th>
+         </tr>
+       </thead>
+       <tbody>
+        	  <tr>
+         	<td></td>
+    		<td></td>
+           <td></td>
+           <td></td>
+           <td></td>
+           <td></td>
+           <td></td>
+           <td></td>
+           <td></td>
+         </tr>
+       </tbody>
+     </table>
+</form>
+ </div>
+
+
+      
+</div>
+
+</html>

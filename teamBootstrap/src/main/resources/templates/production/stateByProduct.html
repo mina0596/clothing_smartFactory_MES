@@ -98,8 +98,9 @@ layout:decorate="@{layout/default_production}">
 		                    <td th:text = "${s.plowClassification}"></td>
 		                    <td th:text = "${s.pStartDate}"></td>
 		                    <td th:text = "${s.pEndDate}"></td>
-                   		    <td th:if="${s.pStatus eq '완료'}" ><span class="badge bg-important" style="padding-top: 5px;">완료</span></td>
-                            <td th:if="${s.pStatus eq '진행중'}" ><span class="badge bg-success" style="padding-top: 5px;">진행중</span></td>
+		                    <td th:if="${s.pStatus eq '완료'}" ><span class="badge bg-success" style="padding-top: 5px;">완료</span></td>
+		                    <td th:if="${s.pStatus eq '진행중'}" ><span class="badge bg-important" style="padding-top: 5px;">진행중</span></td>
+		                    <td th:if="${s.pStatus eq '대기중'}" ><span class="badge bg-warning" style="padding-top: 5px;">대기중</span></td>
 		                  </tr>
 		                </tbody>
 		              </table>
@@ -141,8 +142,9 @@ layout:decorate="@{layout/default_production}">
                     <td th:text ="${p.lowClass}" ><span class="badge bg" style="padding-top: 5px;"></span></td>
                     <td th:text ="${p.pStartDate}"></td>
                     <td th:text ="${p.pEndDate}"></td>
-                    <td th:if="${p.pStatus eq '완료'}" ><span class="badge bg-important" style="padding-top: 5px;">완료</span></td>
-                    <td th:if="${p.pStatus eq '진행중'}" ><span class="badge bg-success" style="padding-top: 5px;">진행중</span></td>
+                    <td th:if="${p.pStatus eq '완료'}" ><span class="badge bg-success" style="padding-top: 5px;">완료</span></td>
+                    <td th:if="${p.pStatus eq '진행중'}" ><span class="badge bg-important" style="padding-top: 5px;">진행중</span></td>
+                    <td th:if="${p.pStatus eq '대기중'}" ><span class="badge bg-warning" style="padding-top: 5px;">대기중</span></td>
                     <td th:text ="${p.dueDate}"></td>
                     <td><a class="btn btn-primary btn-xs"  th:href="@{/production/stateByProduct(productCode=${p.productCode})}" >상세보기</a></td>
                   </tr>
