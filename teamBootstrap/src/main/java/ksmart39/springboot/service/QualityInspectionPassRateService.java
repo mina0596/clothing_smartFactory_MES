@@ -30,7 +30,7 @@ public class QualityInspectionPassRateService {
 	}
 	
 	//[민아]연도별 불량률 조회
-	public Map<String,Object> getPastYearsFailedPercent(){
+	public List<Map<String,Object>> getPastYearsFailedPercent(){
 		return passRateMapper.getPastYearsFailedPercent();
 	}
 	
@@ -56,6 +56,13 @@ public class QualityInspectionPassRateService {
 		log.info("getYearlyFailRank 결과값확인 :{}", result);
 		return result;
 	}
+	
+	//[민아]월별 연도별 불량률 조회
+	public List<Map<String,Object>> getMonthlyFailRateByYear(){
+		return passRateMapper.getMonthlyFailRateByYear();
+	}
+		
+		
 }	
 	 
 	
