@@ -13,6 +13,8 @@ public interface SupplierMapper {
 	public List<Map<String,Object>> getRawInventoryState();
 	
 	//[보람] Modal창 거래처 정보 리스트
+	//거래처별 자재정보
+	public  List<Map<String,Object>> searchRawMaterial(String supplierName);
 	//[보람] 발주 요청 거래처 정보
 	public List<Map<String,Object>> searchSupplierClientCate(String client);
 

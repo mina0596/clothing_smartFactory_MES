@@ -65,38 +65,28 @@
 	ORDER BY c.client_code
 </select>
 	<!--원부자재 정보-->
-	<select id="getRawInfo" resultType="map">
-	SELECT 
-		raw_material_code,
- 		raw_material_high_classification,
-  		raw_material_medium_classification, 
- 		raw_material_name, 
- 		raw_material_color_code,
-  		raw_material_feature,
-   		raw_material_unit 
-	FROM raw_material_info
-	</select>
-	<!-- 발주요청리스트  -->
-	<select id="getSupplierRequestList" resultType="map">
-	 SELECT
-		o.raw_material_order_code,
-		c.client_name,
-		r.raw_material_code,
-		r.raw_material_name,
-		r.raw_material_color_code,
-		o.raw_material_order_amount,
-		r.raw_material_unit,
-		o.raw_material_order_approval,
-		o.raw_material_order_date,
-		o.raw_material_expected_date
+	<select id="searchRawMaterial" resultType="map">
+	SELECT
+		c.client_code AS supplierCode,
+		c.client_name AS supplierClientName,
+		c.client_employee AS supplierClientEmployee,
+		c.client_tel AS supplierClientTel,
+		r.raw_material_high_classification AS SupplierRawMaterialCate,
+		r.raw_material_code AS rawMatrialCode,
+		r.raw_material_name AS rawMatrialName,
+		r.raw_material_color_code AS rawMatrialColor,
+		IFNULL(r.raw_material_feature,'')AS rawMatrialFeature,
+		r.raw_material_unit AS rawMaterialUnit
 	FROM
-		raw_material_order  AS o
+	client_info AS c
 	INNER JOIN
-		raw_material_info  AS r
-	ON o.raw_material_code = r.raw_material_code
-	INNER JOIN 
-	 client_info AS c
-	ON o.client_code = c.client_code;
+	raw_material_order AS raw
+	ON c.client_code = raw.client_code
+	INNER JOIN
+	raw_material_info AS r
+	ON raw.raw_material_code =r.raw_material_code
+WHERE c.client_name=#{supplierName}
+ORDER BY r.raw_material_code
 	</select>
 	<!-- 발주계약 리스트 -->
 	<select id="getSupplierContractList" resultType="map">
