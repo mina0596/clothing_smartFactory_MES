@@ -15,6 +15,11 @@ layout:decorate="@{layout/default_contract}">
 		$('#cancleBtn').click(function(){
 			location.href="/supplierRequestList";
 		});
+		$('#supplierRequstBtn').click(function(){
+			$('#supplierRequest').show();
+			
+			//모달에서 save버튼 클릭시
+		});
 	
 	
 		});
@@ -97,7 +102,7 @@ layout:decorate="@{layout/default_contract}">
 		          </div>
 		        </div>
 		        <div class="form-group" style="visibility:hidden;">
-		          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">발주거래처코드</label>
+		          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">원부자재코드</label>
 		         	<div class="col-md-5">
 		           	 <input class="form-control" id="rawMaterialCode" name="rawMeterialCode" type="text"  >
 		          </div>
@@ -116,13 +121,13 @@ layout:decorate="@{layout/default_contract}">
 		       <div class="form-group">
 		          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">발주원부자재 색상</label>
 		          <div class="col-md-5">
-		            <input type="text" class="form-control" id="rawMaterialColor" name="" readonly="readonly">
+		            <input type="text" class="form-control" id="rawMaterialColor" name="rawMaterialColor" readonly="readonly">
 		          </div>
 		        </div>
 		       <div class="form-group">
 		          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">발주원부자재 패턴및 특징</label>
 		          <div class="col-md-5">
-		           <input type="text" class="form-control"  name="" readonly="readonly">
+		           <input type="text" class="form-control" id="rawMateiralFeature" name="rawMateiralFeature" readonly="readonly">
 		          </div>
 		        </div>
 		        <div class="form-group">
@@ -133,14 +138,9 @@ layout:decorate="@{layout/default_contract}">
 		        </div>
 		        <div class="form-group">
 		           	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">발주단위</label>
-		           	  	<div class="col-sm-4">
-		             	 <select class="form-control">
-		                  <option>단위</option>
-		                  <option> 개</option>
-		                  <option> kg</option>
-		                  <option> 필</option>
-		                 </select>
-		           	  </div>
+		           	  	 <div class="col-md-5">
+		           <input type="text" class="form-control" id="rawMaterialUnit" name="rawMaterialUnit">
+		           	 </div>
 		           	 </div>
 		      <div class="form-group">
 		          <label class="col-sm-2 col-sm-2 control-label"style="font-weight: 600;">발주원부자재납기일</label>

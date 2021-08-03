@@ -128,6 +128,14 @@ public class ContractController_HBR {
 		supplierService.addSupplierRequest(supplierRequest);
 		return "redirect:/supplierRequestList";
 	}
+	//[보람]원부자재 발주요청 거래처별 자재 조회
+	@RequestMapping(value = "searchRawMaterial",method = RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String,Object>> searchRawMaterial(@RequestParam(value = "selectSupplierName",required = false)String supplierName){
+		
+		List<Map<String,Object>> clientRawMaterial = supplierService.searchRawMaterial(supplierName);
+		return clientRawMaterial;
+	}
 	//[보람]원부자재 발주요청 거래처 조회
 	@RequestMapping(value = "searchSupplierClientCate", method = RequestMethod.GET)
 	@ResponseBody
@@ -142,14 +150,14 @@ public class ContractController_HBR {
 	public String addSupplierRequest(Model model) {
 		 List<Map<String,Object>> resultMap1 = supplierService.getRawInventoryState();
 		 
-		 List<Map<String,Object>> resultMap3 = supplierService.getRawInfo();
+		
 		
 		 log.info("========================================");
 		 log.info("addSupplierRequeststate{}",resultMap1);
 		 log.info("========================================");
 		 model.addAttribute("rawInventoryList", resultMap1);
 		 
-		 model.addAttribute("rawMeterialList", resultMap3);
+		
 		 
 		return "contract/addSupplierRequest";
 	}

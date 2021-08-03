@@ -2,22 +2,11 @@
  * 
  */
 $(function(){//발주요청 클릭시  발주요청 화면 뜨기
-	$('#supplierRequstBtn').click(function(){
-		$('#supplierRequest').show();
-		
-		//모달에서 save버튼 클릭시
-	});
 	$('#searchSupplier').click(function(){
 		$('#bySupplierModal').modal();
-		$('#byCompletedProductList').find('input[type=text]').val('');
 		$("input[type=radio]:checked").attr('checked',false);
 	});
-	 $('[data-popup-close]').on('click', function(e)  {
-	        var targeted_popup_class = jQuery(this).attr('data-popup-close');
-	        $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
-
-	        e.preventDefault();
-	    });
+	 
 
 	 
 	//거래처명 검색 모달 
@@ -75,12 +64,7 @@ $(function(){//발주요청 클릭시  발주요청 화면 뜨기
 			request.fail(function( jqXHR, textStatus ) {
 				alert( "Request failed: " + textStatus );
 			});
-			
-			
-			
-			
-			
-		$('#saveSupplier').click(function(){
+	$('#saveSupplier').click(function(){
 			var check = $('input[name=supplierClient]:checked');
 			var checkTr = check.parent().parent();
 			var supplierCode = checkTr.find('.supplierCode').text();
@@ -94,51 +78,86 @@ $(function(){//발주요청 클릭시  발주요청 화면 뜨기
 		});
 		});
 		
+		var selectSupplierName =$('#supplierContractName');
+		
+		
 		$('#searchRamMeterial').click(function(){
-			$('#byRamMetrialModal').modal("show");
-		$('#saveRamMeterial').click(function(){
-			var check = $('input[name=byRamMetrialModal]:checked');
-			var checkTr = check.parent().parent();
-			var rawMaterialCode1 = checkTr.find('.rawMaterialCode1').text();
-			var rawMateiralName1 = checkTr.find('.rawMateiralName1').text();
-			var rawMaterialColor = checkTr.find('.rawMaterialColor').text();
-			$('#rawMaterialCode').attr('value',rawMaterialCode1);
-			$('#rawMaterialName').attr('value',rawMateiralName1);
-			$('#rawMaterialColor').attr('value',rawMaterialColor);
-			});
-		});
-		
-		
-		//거래처명으로 조회
-		$('#clientCateBtn').click(function(){
+			var selectSupplierName =$('#supplierContractName').val();
+			$('#byRamMetrialModal').modal();
+			$("input[type=radio]:checked").attr('checked',false);
 			$('.searchlist').remove();
+			var html = "";
+			var request = $.ajax({
+				url: "/contract/searchRawMaterial",
+				method: "get",
+				type: "post",
+				data: {selectSupplierName : selectSupplierName},
+				dataType: "json"
+			});
+			request.done(function( data ) {
+				console.log(data);
+				if(data.length > 0){
+					for(i=0; i<data.length; i++){									
+						
+						html += '<tr class="searchlist">';
+						html += '<td><input type="radio" name="rawmaterial" class="radioClass" value=""></td>';
+						html += '<td>' + [i + 1] + '</td>';
+						//원부자재코드
+						html += '<td class="rawmaterialCode" value="';
+						html +=  data[i].rawMatrialCode ;
+						html += '">' + data[i].rawMatrialCode + '</td>';
+						//원부자재 카테고리
+						html += '<td class="rawmaterialCate" value="';
+						html += data[i].SupplierRawMaterialCate;
+						html += '">' + data[i].SupplierRawMaterialCate + '</td>';
+						//원부자재이름
+						html += '<td class="rawmaterialName" value="';
+						html +=data[i].rawMatrialName;
+						html +='">' + data[i].rawMatrialName + '</td>';
+						//원부자재 색상
+						html += '<td class="rawmaterialColor" value="';
+						html += data[i].rawMatrialColor;
+						html +=	'">' + data[i].rawMatrialColor + '</td>';
+						//원부자재 특징
+						html += '<td class="rawmaterialFeature" value="';
+						html += data[i].rawMatrialFeature;
+						html += '">' + data[i].rawMatrialFeature + '</td>';
+						//원자재단위
+						html += '<td class="rawmaterialUnit" value="';
+						html += data[i].rawMaterialUnit;
+						html += '">' + data[i].rawMaterialUnit + '</td>';
+						html += '</tr>';					
+					}
+				}else{
+					$('#seachRaWMaterialList').empty();
+					html += '<tr class="searchlist"><td colspan="8" style="text-align: center;"> 검색된 결과가 없습니다. </td></tr>';
+				}
+				
+				$('#seachRaWMaterialList').append(html);
+			});
 			
+			request.fail(function( jqXHR, textStatus ) {
+				alert( "Request failed: " + textStatus );
+			});
 			
+			$('#saveRamMeterial').click(function(){
+				var check = $('input[name=rawmaterial]:checked');
+				var checkTr = check.parent().parent();
+				var checkRrawMaterialCode = checkTr.find('.rawmaterialCode').text();
+				var rawMateiralName = checkTr.find('.rawMateiralName').text();
+				var rawMaterialColor = checkTr.find('.rawMaterialColor').text();
+				var rawmaterialFeature = checkTr.find('.rawmaterialFeature').text();
+				var rawmaterialUnit = checkTr.find('.rawmaterialUnit').text();
+				$('#rawMaterialCode').attr('value',checkRrawMaterialCode);
+				$('#rawMaterialName').attr('value',rawMateiralName);
+				$('#rawMaterialColor').attr('value',rawMaterialColor);
+				$('#rawMateiralFeature').attr('value',rawmaterialFeature);
+				$('#rawMaterialUnit').attr('value',rawmaterialUnit);
+			});
+			console.log(check);
 		});
-		$('#saveSupplier').click(function(){
-			var check = $('input[name=completeList]:checked');
-			var checkTr = check.parent().parent();
-			var checkRequestCode = checkTr.find('.requestCode').text();
-			var checkProductCode = checkTr.find('.productCode').text();
-			var checkedContractCode =checkTr.find('.contrcatNumber').text();
-			var checkedClientName = checkTr.find('.clientName').text();
-			var checkedProductName= checkTr.find('.productName').text();
-			var checkedContractCode = checkTr.find('.contrcatNumber').text();
-			var checkedAddress = checkTr.find('.address').text();
-			var checkedTel = checkTr.find('.tel').text();
-			$('#shipmentOrderRequestCode').attr('value', checkRequestCode);
-			$('#shipmentOrderProduectCode').attr('value', checkProductCode);
-			$('#shimpemtContractNumber').attr('value', checkedContractCode);
-			$('#shipmentOrderClient').attr('value', checkedClientName);
-			$('#shipmentOrderProductName').attr('value', checkedProductName);
-			$('#shipmentOrderAdress').attr('value', checkedAddress);
-			$('#shipmentOrderTel').attr('value', checkedTel);
+	
 			
-		}) ;
-		
-		
-		
-		
 	});
 	
 

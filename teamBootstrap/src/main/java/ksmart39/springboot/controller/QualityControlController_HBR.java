@@ -36,42 +36,38 @@ public class QualityControlController_HBR {
 	private QualityInspectionStauteService qualityInsepctionStauteService;
 	
 	//================================================================
-	//[다미&보람] 수주계약별 검색 
-	@RequestMapping(value = "searchQualityInspection",method = RequestMethod.GET)
-	@ResponseBody
-	public List<Map<String,Object>> getSearchQualityInspectionState(Model model,@RequestParam(value ="bySupplierValue",required = false)String bySupplierValue,
-																	@RequestParam(value = "clientName",required = false)String clientName,
-																	@RequestParam(value = "requestProductName", required = false)String requestProductName,
-																	@RequestParam(value = "inspectionStartDate", required = false)String inspectionStartDate,
-																	@RequestParam(value = "inspectionEndDate", required = false)String inspectionEndDate){
-		
-		//RequestParam 값을 map에 담기
-		//HASHMAP을 객체화하기
-		HashMap<String,Object> map = new HashMap<String,Object>();
-		//객체화된map에.put 메서드로  RequestParam값 넣기
-		map.put("bySupplierValue", bySupplierValue);
-		map.put("clientName", clientName);
-		map.put("requestProductName", requestProductName);
-		map.put("inspectionStartDate", inspectionStartDate);
-		map.put("inspectionEndDate", inspectionEndDate);
-		List<Map<String, Object>> stateMap = qualityInsepctionStauteService.getSearchQualityInspectionState(map);
-		model.addAttribute("stateMap", stateMap);
-		return stateMap;
-	}
+
+	
 	
 	//[다미&보람]수주계약별 검색 품질검사 현황
 		@GetMapping("/qualityInspectionStatusContract")
-		public String qualityInspectionStatusContract(Model model) {
+		public String qualityInspectionStatusContract(Model model,@RequestParam(name = "contactNumber",required = false)String contactNumber,
+				@RequestParam(name = "clientName",required = false)String clientName,
+				@RequestParam(name = "inspectionStartDate", required = false)String inspectionStartDate,
+				@RequestParam(name = "inspectionEndDate", required = false)String inspectionEndDate){
+
 			//등급별
 			List<Map<String, Object>> inspectionStateList = qualityInsepctionStauteService.getStateBuyerContractQualityInspection();
 			//수치별
 			List<Map<String, Object>> inspectionStateMeasurement =qualityInsepctionStauteService.getStateBuyerContractQualityInspectionMeasurement();
 			//합격/불합격
 			List<Map<String, Object>> inspectionStatePassCheck =qualityInsepctionStauteService.getStateBuyerContractQualityInspectionPass();
+			
+			//등급별 검색
+			HashMap<String,Object> map = new HashMap<String,Object>();
+			//객체화된map에.put 메서드로  RequestParam값 넣기
+			map.put("contactNumber", contactNumber);
+			map.put("clientName", clientName);			
+			map.put("inspectionStartDate", inspectionStartDate);
+			map.put("inspectionEndDate", inspectionEndDate);
+			log.info("map",map);
+			List<Map<String, Object>> stateMap = qualityInsepctionStauteService.getSearchQualityInspectionState(map);
+			model.addAttribute("stateMap", stateMap);
+			log.info("stateMap:",stateMap);
 			model.addAttribute("inspectionStateList", inspectionStateList);
 			model.addAttribute("inspectionStateMeasurement", inspectionStateMeasurement);
 			model.addAttribute("inspectionStatePassCheck", inspectionStatePassCheck);
-			log.info("inspectionStateMeasurement{}",inspectionStateMeasurement);
+			
 			return "quality/qualityInspectionStatusContract";
 		}
 	
