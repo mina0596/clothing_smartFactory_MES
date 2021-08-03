@@ -69,7 +69,7 @@ public class QualityControlController_PMA {
 		model.addAttribute("failedRank", failedRank);
 		
 		//그래프에 뿌려줄 연도별 불량률
-		Map<String,Object> failedRateByYear = passRateService.getPastYearsFailedPercent();
+		List<Map<String,Object>> failedRateByYear = passRateService.getPastYearsFailedPercent();
 		log.info("지난3년간의 불량률 조회 DB에서 가져오는거 확인:{}", failedRateByYear);
 		model.addAttribute("failedRateByYear", failedRateByYear);
 		
@@ -77,7 +77,13 @@ public class QualityControlController_PMA {
 		List<Map<String,Object>> yearlyFailRate = passRateService.getYearlyFailRank();
 		log.info("표에 뿌려줄 연도별 5위 상세정보 확인 :{}", yearlyFailRate);
 		model.addAttribute("yearlyFailRate", yearlyFailRate);
-		return"quality/defectiveRateStatus";
+		
+		//월별 불량률 
+		List<Map<String,Object>> monthlyFailRate = passRateService.getMonthlyFailRateByYear();
+		log.info("월별 연도별 불량률 확인 :{}", monthlyFailRate);
+		model.addAttribute("monthlyFailRate", monthlyFailRate);
+		
+		return"quality/qualityInspectionFailRateList";
 	}
 	
 	

@@ -89,54 +89,27 @@
 	<!-- ======option2는, 자동으로 현재부터 3년전꺼까지 한번에 실행되는 쿼리========== -->
 	<select id="getPastYearsFailedPercent" resultType="map">
 		SELECT
-			sub.curYear	AS currentYear,
-			sub.pastYear AS pastYear,
-			sub.twoPastYear AS twoPastYear,
-			sub.threePastYear AS threePastYear,
-			ROUND(sub.currentYearFailNum/sub.currentYearTotalNum*100) AS curFailRate,
-			ROUND(sub.pastYearFailNum/sub.pastYearTotalNum*100) AS pastYearFailRate,
-			ROUND(sub.twoPastYearFailNum/sub.twoPastYearTotalNum*100) AS twoPastYearFailRate,
-			ROUND(sub.threePastYearFailNum/sub.threePastYearTotalNum*100) AS threePastYearFailRate
+			result.year
+			,result.totalNum
+			,result.failNum
+			,round((result.failNum/result.totalNum)*100) AS failRate
+			,concat(ROUND((result.failNum/result.totalNum)*100), '%') AS failRatePercent
 		FROM
-			(select
-				date_format(NOW(),'%Y') AS curYear,
-				date_format(NOW(),'%Y')-1 AS pastYear,
-				date_format(NOW(),'%Y')-2 AS twoPastYear,
-				date_format(NOW(),'%Y')-3 AS threePastYear,
-				count(
-				case 
-				when date_format(ifr.inspection_end_date, '%Y') = 
-					(SELECT date_format(NOW(),'%Y')) then 1 end) AS currentYearTotalNum,
-				count(
-				case 
-				when date_format(ifr.inspection_end_date, '%Y') = 
-					(SELECT date_format(NOW(),'%Y')-1) then 1 end) AS pastYearTotalNum,
-				count(
-				case 
-				when date_format(ifr.inspection_end_date, '%Y') = 
-					(SELECT date_format(NOW(),'%Y')-2) then 1 end) AS twoPastYearTotalNum,
-				count(
-				case 
-				when date_format(ifr.inspection_end_date, '%Y') = 
-					(SELECT date_format(NOW(),'%Y')-3) then 1 end) AS threePastYearTotalNum,
-					count(
-				case 
-				when date_format(ifr.inspection_end_date, '%Y') = 
-					(SELECT date_format(NOW(),'%Y')) and ifr.inspection_pass_check ='불합격' then 1 end) AS currentYearFailNum,
-				count(
-				case 
-				when date_format(ifr.inspection_end_date, '%Y') = 
-					(SELECT date_format(NOW(),'%Y')-1) and ifr.inspection_pass_check ='불합격' then 1 end) AS pastYearFailNum,
-				count(
-				case 
-				when date_format(ifr.inspection_end_date, '%Y') = 
-					(SELECT date_format(NOW(),'%Y')-2) and ifr.inspection_pass_check ='불합격' then 1 end) AS twoPastYearFailNum,
-				count(
-				case 
-				when date_format(ifr.inspection_end_date, '%Y') = 
-					(SELECT date_format(NOW(),'%Y')-3) and ifr.inspection_pass_check ='불합격' then 1 end) AS threePastYearFailNum
-			FROM 
-				inspection_result AS ifr) AS sub
+			(
+				SELECT
+					DATE_FORMAT(ir.inspection_end_date, '%Y') AS 'year',
+					COUNT(1) AS totalNum,
+					(SELECT 
+						COUNT(1)
+					 FROM 
+					 	inspection_result AS subIr
+					 where
+					 	DATE_FORMAT(subIr.inspection_end_date, '%Y') = DATE_FORMAT(ir.inspection_end_date, '%Y')
+					 	and
+					 	subIr.inspection_pass_check = '불합격') AS failNum
+				FROM
+					inspection_result AS ir
+				GROUP BY DATE_FORMAT(ir.inspection_end_date, '%Y') ) AS result
 	</select>
 	<!-- =============================선생님이 짜주신 간단하게 연도별로의 불량률 ============================= 
 	SELECT
@@ -278,5 +251,28 @@
 					;
 	 </select>
 	 
+	 <select id="getMonthlyFailRateByYear" resultType="map">
+		 SELECT
+			result.year
+			,result.month
+			,result.totalNum
+			,result.failNum
+			,ROUND(((result.failNum/result.totalNum)*100)) AS 'failRate'
+			,concat(ROUND(((result.failNum/result.totalNum)*100)), '%') AS 'failRatePercent'
+		FROM
+			(SELECT 
+				DATE_FORMAT(subIr.inspection_end_date, '%Y') AS 'year',
+				DATE_FORMAT(subIr.inspection_end_date, '%m') AS 'month',
+				COUNT(1) AS totalNum,
+				COUNT(case 
+						when subIr.inspection_pass_check = '불합격' then 1 END) AS failNum
+			FROM 
+				inspection_result AS subIr
+				GROUP by
+					DATE_FORMAT(subIr.inspection_end_date, '%Y-%m')
+				ORDER by
+					DATE_FORMAT(subIr.inspection_end_date, '%Y-%m')) AS result
+	 </select>
+		
 	 
 </mapper>
