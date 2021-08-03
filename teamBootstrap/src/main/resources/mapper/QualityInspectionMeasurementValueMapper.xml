@@ -96,6 +96,7 @@
 	<select id="searchByClientName" resultType="Map" parameterType="String">
 		SELECT 
 			ci.client_name AS clientName
+			,ci.client_code AS clientCode
 		FROM 
 			client_info AS ci
 		INNER JOIN
