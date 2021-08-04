@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.functors.FalsePredicate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,9 +79,12 @@ public class QualityControlController_PMA {
 		return productInfo;
 	}
 	
-	//[민아]품질검사 기준표 등록 처리 후 목록화면으로 이동
+	//[민아]품질검사 기준표 등록 처리 없이 목록화면으로 이동
 	@PostMapping("/addStandardTable")
-	//public String addStandardTable(@RequestBody QualityInspectionStandard standardDomain, @RequestParam(name = ""))
+	public String addStandardTable(@RequestParam(name = "qualityInspectionCode")String qualityInspectionCode) {
+		
+		return "quality/standardTableList";
+	}
 	
 	//[민아]품질검사별 불량률 현황
 	@GetMapping("/qualityInspectionFailRateList")

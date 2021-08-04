@@ -61,7 +61,7 @@ layout:decorate="@{layout/default_qualityControl}">
 					$('#byNumInput').addClass('in');
 					$('#byLevelInput').removeClass('in');
 					$('#byPassInput').removeClass('in');
-				}else if(selectedType == 'Y/N별'){
+				}else if(selectedType == '합격/불합격별'){
 					$('#byPassInput').addClass('in');
 					$('#byLevelInput').removeClass('in');
 					$('#byNumInput').removeClass('in');
@@ -69,10 +69,10 @@ layout:decorate="@{layout/default_qualityControl}">
 			})
 			
 			$('.regBtn').click(function(){
-				console.log('확인하기');
-				var needNum = $('#needNum').val();
+				var maxVal = $('#maxValue').val();
 				var needUnit = $('#needUnit').val();
-				$('#hiddenMinValue').val('±' + needNum + needUnit);
+				$('#hiddenMinValue').val('-' + maxVal);
+				$('#hiddenStn').val('±' + maxVal + needUnit);
 			})
 	
 		})
@@ -146,6 +146,7 @@ layout:decorate="@{layout/default_qualityControl}">
 			            </div>
 			            <div class="col-md-2">
 		                    <input type="text" class="form-control" placeholder="4등급 이상" name="standardTolerance">
+		                    <input type="hidden" class="form-control" name="standardMeasurementUnit" value="등급">
 		               </div>  
 		              </div>
 		              
@@ -231,11 +232,10 @@ layout:decorate="@{layout/default_qualityControl}">
 					        <div class="col-md-3" style="padding-left: 50px;">
 				                 <label class="control-label col-lg-2" style="font-weight: 600;"> 허용오차</label>
 				            </div>
-				            <div class="col-md-2">
-			                    <input type="number" class="form-control" name="standardNum" placeholder="오차 범위  ±를 제외한 숫자를 입력하세요" id="needNum">
-			                    <input type="hidden" class="form-control" name="minValue" id="hiddenMinValue">
-			                    <input type="hidden" class="form-control" name="maxValue" id="hiddenMaxValue">
-			                    <input type="hidden" class="form-control" name="standardTolerance" id="hiddenMaxValue">
+				            <div class="col-md-2 form-inline">
+			                    <input type="number" class="form-control" name="maxValue" placeholder="오차 범위  ±를 제외한 숫자를 입력하세요" id="maxValue">
+			                    <input type="number" class="form-control" name="minValue" id="hiddenMinValue">
+			                    <input type="text" class="form-control" name="standardTolerance" id="hiddenStn">
 			                </div> 
 				            <div class="col-md-1" style="padding-left: 0px;" >
 			                    <select class="form-control" name="standardMeasurementUnit" id="needUnit">
@@ -284,7 +284,7 @@ layout:decorate="@{layout/default_qualityControl}">
 				                 <label class="control-label col-lg-2" style="font-weight: 600;"> 검사기준</label>
 				            </div>
 				            <div class="col-md-5">
-			                    <input type="text" class="form-control" placeholder="표면의 변색이 눈에 띄게 보임">
+			                    <input type="text" class="form-control" placeholder="표면의 변색이 눈에 띄게 보임" name="method">
 			               </div>  
 		                </div>
 

@@ -10,17 +10,26 @@ layout:decorate="@{layout/default_system}">
 </th:block>
 
 <th:block layout:fragment="customJs">
-	<!-- <script>
+	<script type="text/javascript">
 		$(function(){
-			$('.form-control').each(function(){
-				$(this).change(function(){
-					console.log(this);
-					var addOption = $(this).children('option').find('#addOption').val();
-					console.log(addOption);
-				});
+			$('#selectHighClass').change(function(){
+				console.log($(this).val());
+				if($(this).val() == '추가'){
+					$('#highClassInput').attr('type', 'text');
+					$('#selectHighClass').removeAttr('name');
+					$('#highClassInput').attr('name', 'productionProcessHighClassification');
+				}
+			});
+			$('#selectLowClass').change(function(){
+				console.log($(this).val());
+				if($(this).val() == '추가'){
+					$('#lowClassInput').attr('type', 'text');
+					$('#selectLowClass').removeAttr('name');
+					$('#lowClassInput').attr('name', 'productionProcessLowClassification');
+				}
 			});
 		})
-	</script> -->
+	</script>
 </th:block>
 
 <th:block layout:fragment="container">
@@ -31,40 +40,44 @@ layout:decorate="@{layout/default_system}">
       <hr>
       <br>
       
-      <form class="form-horizontal style-form" method="post">
+      <form class="form-horizontal style-form" th:action="@{/system/addProductionProcess}" method="post">
 
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">대분류 항목명</label>
    	  	<div class="col-sm-6">
-     	 <select class="form-control">
-          <option>재단공정</option>
-          <option>봉제공정</option>
-          <option>완성공정</option>
-          <option>마무리공정</option>
-          <option id="addOption" value="추가">추가</option>
+     	 <select class="form-control form-inline" name="productionProcessHighClassification" id="selectHighClass">
+          <option value="">::대분류 공정 선택::</option>
+          <option value="재단공정">재단공정</option>
+          <option value="봉제공정">봉제공정</option>
+          <option value="완성공정">완성공정</option>
+          <option value="마무리공정">마무리공정</option>
+          <option value="추가">추가</option>
          </select>
-   	  	</div>
+            <input class="form-control" id="highClassInput" type="hidden" placeholder="공정명을 적으세요.">
+          </div>
 		</div>
    	  	
    	  	<div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">중분류 항목명</label>
-   	  	<div class="col-sm-6">
-     	 <select class="form-control">
-          <option>재단 전공정</option>
-          <option>재단 본공정</option>
-          <option>재단 후공정</option>
-          <option>봉제 본봉공정</option>
-          <option>봉제특수공정</option>
-          <option id="addOption">추가</option>
-         </select>
-   	  	</div>
+	   	  	<div class="col-sm-6">
+	     	 <select class="form-control" name="productionProcessLowClassification" id="selectLowClass">
+	          <option value="">::중분류 공정 선택::</option>
+	          <option value="재단전공정">재단전공정</option>
+	          <option value="재단본공정">재단본공정</option>
+	          <option value="재단후공정">재단후공정</option>
+	          <option value="봉제본봉공정">봉제본봉공정</option>
+	          <option value="봉제특수공정">봉제특수공정</option>
+	          <option value="추가">추가</option>
+	         </select>
+	         	<input class="form-control" id="lowClassInput" type="hidden" placeholder="공정명을 적으세요.">
+	  		</div>
    	  	</div>
    	  	
         
         <div class="form-group">
    	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">생산공정순번</label>
    	  	<div class="col-sm-6">
-            <input class="form-control" id="disabledInput" type="number" placeholder="번호로 입력하세요 (어떻게할지 해결)">
+            <input class="form-control" name="processOrderNum" type="number" placeholder="번호로 입력하세요">
           </div>
    	 	</div>
         
@@ -72,8 +85,8 @@ layout:decorate="@{layout/default_system}">
  		
          <div class="form-group text-right">
           <div class="col-lg-offset-2 col-lg-10">
-            <button class="btn btn-theme" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">등록</font></font></button>
-            <button class="btn btn-theme04" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소</font></font></button>
+            <button class="btn btn-theme" type="submit">등록</button>
+            <button class="btn btn-theme04" type="button">취소</button>
           </div>
         </div>
          

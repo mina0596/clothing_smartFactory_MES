@@ -13,39 +13,15 @@
 <th:block layout:fragment="container">
 <div class="row mt">
      <div class="col-xs-12">
-          <h4><i class="fa fa-truck"></i> 생산공정 목록</h4>
+          <h4><i class="fa fa-bolt"></i> 생산공정 목록</h4>
           <hr>  
-			<div class="form-group" style="padding-left: 50px">
-				<div class="col-md-3">
-				 <select class="form-control">
-				   <option>생산공정코드</option>
-				   <option>대분류 항목명</option>
-				   <option>중분류 항목명</option>
-				   <option>공정 순번</option>
-				   <option>등록일시</option>
-				  </select>
-				</div>
-				<div class="col-md-6">
-				  <input class="form-control" type="text" placeholder="검색어를 입력하세요">
-				</div>
-				<div class="col-md-2">
-				  <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
-				  <button type="button" class="btn btn-primary">검색하여 가져오기</button>
-				</div>
-	       </div>
-	       
-	      <br>
-	      <br>
-	      <br>
-	      <br>
-	      <br>
-	      
-                
+
 	        <form class="form-horizontal style-form">
               <table class="table table-striped table-advance table-hover" id="list">
                 <thead>
                   <tr>
-                    <th><i class="fa fa-bullhorn"></i>생산공정코드</th>
+                  	<th></th>
+                    <th><i class="fa fa-barcode"></i>생산공정코드</th>
                     <th><i class="fa fa-bookmark"></i>대분류 항목명</th>
                     <th><i class=" fa fa-bookmark"></i>중분류 항목명</th>
                     <th><i class=" fa fa-bookmark"></i>공정 순번</th>
@@ -54,88 +30,23 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td class="hidden-phone">cutting_process01</td>
-                    <td class="hidden-phone">재단공정</td>
-                    <td>재단전공정</td>
-                    <td>1</td>
-                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
-                    <td>2021-01-18 16:02</td>
-                    <td> 
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                  <tr th:each="ppl : ${productionProcessList}">
+                  	<td></td>
+                  	<td th:text="${ppl.productionProcessCode}"></td>
+                  	<td th:text="${ppl.productionProcessHighClassification}"></td>
+                  	<td th:text="${ppl.productionProcessLowClassification}"></td>
+                  	<td th:text="${ppl.processOrderNum}"></td>
+                  	<td th:text="${ppl.productionProcessRegDate}"></td>
+                  	<td>
+                      <button class="modifyBtn btn btn-warning btn-xs"><i class="fa fa-pencil"></i></button>
                     </td>
                   </tr>
-                  
-                  <tr>
-                    <td class="hidden-phone">cutting_process02</td>
-                    <td class="hidden-phone">재단공정</td>
-                    <td>재단본공정</td>
-                    <td>2</td>
-                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
-                    <td>2021-01-18 16:02</td>
-                    <td> 
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                    </td>
-                  </tr>
-                  
-                  <tr>
-                    <td class="hidden-phone">cutting_process03</td>
-                    <td class="hidden-phone">재단공정</td>
-                    <td>재단후공정</td>
-                    <td>3</td>
-                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
-                    <td>2021-01-18 16:02</td>
-                    <td> 
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                    </td>
-                  </tr>
-                  
-                  <tr>
-                    <td class="hidden-phone">sewing_process01</td>
-                    <td class="hidden-phone">봉제공정</td>
-                    <td>봉제본봉공정</td>
-                    <td>4</td>
-                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
-                    <td>2021-01-18 16:02</td>
-                    <td> 
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                    </td>
-                  </tr>
-                  
-                  <tr>
-                    <td class="hidden-phone">sewing_process02</td>
-                    <td class="hidden-phone">봉제공정</td>
-                    <td>봉제특수공정</td>
-                    <td>5</td>
-                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
-                    <td>2021-01-18 16:02</td>
-                    <td> 
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                    </td>
-                  </tr>
-                  
-                  <tr>
-                    <td class="hidden-phone">completion_process01</td>
-                    <td class="hidden-phone">완성공정</td>
-                    <td>완성가공</td>
-                    <td>6</td>
-                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
-                    <td>2021-01-18 16:02</td>
-                    <td> 
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                    </td>
-                  </tr>
-                  
-                  
-                 
-                 
                 </tbody>
               </table>
             
 		        <div class="form-group text-right">
 		          <div class="col-lg-offset-2 col-lg-10">
-		           <a th:href="@{/addProductionProcess}" class="btn btn-success btn-xs"><i class="fa fa-check"></i>등록</a>
-		           <a id="deleteBtn" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i>삭제</a>
+		           <a th:href="@{/system/addProductionProcess}" class="btn btn-success btn-xs"><i class="fa fa-check"></i>등록</a>
 		          </div>
 		        </div>
        		</form>
