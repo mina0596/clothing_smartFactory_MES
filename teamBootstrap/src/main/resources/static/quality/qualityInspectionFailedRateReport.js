@@ -22,6 +22,7 @@ $(function(){
 	/*******************************그래프에 관한 스크립트*************************** */
 	myFunc();
 	console.log('js에서 출력하는', yearlyFailInfo);
+	
 	//데이터 setup 연도별 불량률 그래프
 	const lables = [];
 	const inputData = [];
@@ -192,4 +193,10 @@ $(function(){
 	//lables = [];
 	//inputData = [];
 	});
+	
+	/**************************품질검사별 불량률****************************/
+	$('.inspectionTabBtn').click(function(){
+		console.log('확인해보자');
+		
+	})
 })

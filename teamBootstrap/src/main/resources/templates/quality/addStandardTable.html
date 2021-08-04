@@ -5,53 +5,45 @@ layout:decorate="@{layout/default_qualityControl}">
 
 
 <th:block layout:fragment="customJs">
+	<script type="text/javascript" th:src="@{/systemQuality/systemQualityInspection.js}"></script>	
 	<script type="text/javascript">
 		$(function(){
-
-		    var tableAttr = $('#list').children();
-			var tdList = tableAttr.find('.radioClass');
-			var radioSelected = tableAttr.find('.radioClass').is(':checked');
-			
-			
+			var subClassCateName = $('#subClassCateName');
+	
 			//원부자재 재료 구분명 가져오는 modal
 			$('#searchBtn1').click(function(){
-				$('#byMaterialCategory').modal("show");
+				$('#SearchInspectionCode').modal("show");
 			});
-			
-			$('#sendMaterialCateNameBtn').click(function(){
-				tdList = tableAttr.find('.radioClass');
-				tdList.each(function(){
-					if($(this).is(':checked')){
-						var par = $(this).parent();
-						var materialCateName = par.parent().find('.materialCate').text();
-						console.log(materialCateName + '<<materialCateName');
-						$('#materialCateName').attr('value', materialCateName);
-						$('#materialCateName').attr('readOnly', true);
-						
-					}				
+			$('#lowClassCateName').change(function(){
+				var lowClassCateName = $('#lowClassCateName option:selected').val();
+				var request = $.ajax({
+					url: "/quality/subClassCate",
+					method: "get",
+					data: { lowClassCateName : lowClassCateName}
+				}); 
+				request.done(function( data ) {
+					console.log(data);
+					$('#subClassCateName').find('option:not(:first)').remove();
+					if(data != undefined && data != '' && data.length > 0){
+						var html = '';
+						for(var i = 0; i<data.length; i++){
+							html += "<option value= '";
+							html += data[i].subClassCode;
+							html += "'>";
+							html += data[i].subClassName;
+							html += "</option>";					
+						}
+						subClassCateName.append(html);
+					}
 					
 				});
+				
+				request.fail(function( jqXHR, textStatus ) {
+					alert( "Request failed: " + textStatus );
+				});	
 			});
-			
-
-			
-	    	$('[data-popup-open]').on('click', function(e)  {
-		       var targeted_popup_class = jQuery(this).attr('data-popup-open');
-		       $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
-
-		       e.preventDefault();
-		   });
-
-		    //----- CLOSE
-		    $('[data-popup-close]').on('click', function(e)  {
-		       var targeted_popup_class = jQuery(this).attr('data-popup-close');
-		       $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
-
-		       e.preventDefault();
-		    });
-		}) 
 	
-	
+		})
 	</script>
 </th:block>
 
@@ -61,55 +53,32 @@ layout:decorate="@{layout/default_qualityControl}">
 	   <hr>
 	   <br>
 	   <div class="form-group">
-               	<div class="col-md-3" style="padding-left: 50px;">
-	          		<label class="col-sm-2 control-label" style="font-weight: 600;">품질검사코드</label>
-               	</div>
-		          <div class="col-md-5">
-		            <div  class="input-group">
-		              <input type="text" class="form-control" id="materialCateName" size="16">
-		              <div class="input-group-btn">
-		                <button type="button" class=" btn btn-theme03 btn btn-default" id="searchBtn1"><i class="fa"></i>검색하여 가져오기</button>
-		              </div>
-		            </div>
-		          </div>
-		        </div>
-		        
-                <div class="form-group">
-               	<div class="col-md-3" style="padding-left: 50px;">
-	          		<label class="col-sm-2 control-label" style="font-weight: 600;">대분류 검사명</label>
-               	</div>
-		          <div class="col-md-5">
-		              <input type="text" class="form-control" id="materialCateName" disabled="disabled" size="16">
-		          </div>
-		        </div>
-		        
-                <div class="form-group">
-               	<div class="col-md-3" style="padding-left: 50px;">
-	          		<label class="col-sm-2 control-label" style="font-weight: 600;">중분류 검사명</label>
-               	</div>
-		          <div class="col-md-5">
-		              <input type="text" class="form-control" id="materialCateName" disabled="disabled" size="16">
-		          </div>
-		        </div>
-		        
-                <div class="form-group">
-               	<div class="col-md-3" style="padding-left: 50px;">
-	          		<label class="col-sm-2 control-label" style="font-weight: 600;">소분류 검사명</label>
-               	</div>
-		          <div class="col-md-5">
-		              <input type="text" class="form-control" id="materialCateName" disabled="disabled" size="16">
-		          </div>
-		        </div>
-		        
-                <div class="form-group">
-               	<div class="col-md-3" style="padding-left: 50px;">
-	          		<label class="col-sm-2 control-label" style="font-weight: 600;">소분류 세부 검사명</label>
-               	</div>
-		          <div class="col-md-5">
-		              <input type="text" class="form-control" id="materialCateName" disabled="disabled" size="16">
-		          </div>
-		        </div>
-
+         	<div class="col-md-3" style="padding-left: 50px;">
+     		<label class="col-sm-2 control-label" style="font-weight: 600;">품질검사코드</label>
+         	</div>
+         	<div class="col-md-5">
+            <input type="text" class="form-control" placeholder="아래에서 선택해주세요." readonly="readonly">
+          </div>
+         	
+	   </div>
+	   <div class="form-group">
+         	<div class="col-md-3" style="padding-left: 50px;">
+         	</div>
+		   <div id="searchInsCodeForm" class="form-inline col-md-5">
+				 <select class="form-control" name="highClassificationName" id="highClassCateName" >
+		            <option value="">::대분류검사명::</option>
+	             </select>
+			     <select class="form-control" name="mediumClassificationName" id="middleClassCateName">
+		           	<option  value="">::중분류검사명::</option>
+	             </select>
+			  	 <select class="form-control" name="lowClassificationName" id="lowClassCateName">
+             		<option  value="">::소분류검사명::</option>
+		         </select>
+			  	 <select class="form-control" name="subClassificationName" id="subClassCateName">
+             		<option  value="">::상세분류검사명::</option>
+		         </select>
+        	</div>
+		</div>
 		        <div class="form-group">
 			        <div class="col-md-3" style="padding-left: 50px;">
 		          		<label class="col-sm-2 control-label" style="font-weight: 600;">검사 측정 결과값 종류</label>
@@ -167,7 +136,7 @@ layout:decorate="@{layout/default_qualityControl}">
 		               	</div>
 				          <div class="col-md-5">
 				            <div  class="input-group">
-				              <input type="text" class="form-control" id="materialCateName" size="16" placeholder="KS K ISO 105-C10">
+				              <input type="text" class="form-control" size="16" placeholder="KS K ISO 105-C10">
 				              <div class="input-group-btn">
 				                <button type="button" class=" btn btn-theme03 btn btn-default" id="searchBtn2"><i class="fa"></i> 웹에서 검색하여 가져오기</button>
 				              </div>
@@ -211,7 +180,7 @@ layout:decorate="@{layout/default_qualityControl}">
 			               	</div>
 			               	<div class="col-md-3">
 				            <div  class="input-group">
-				              <input type="text" class="form-control" id="materialCateName" size="16" placeholder="자켓">
+				              <input type="text" class="form-control" size="16" placeholder="자켓">
 				              <div class="input-group-btn">
 				                <button type="button" class=" btn btn-default" id="searchBtn2"><i class="fa fa-search"></i></button>
 				              </div>
@@ -329,88 +298,8 @@ layout:decorate="@{layout/default_qualityControl}">
 	       	</div>
        <!-- 전체 흰색바탕 끝 -->
        </div>
-
-		        
-		        
-
-
-    <!-- 모달화면에서의 검색부분 -->
-        <div class="modal fade modal-xl"  id="byMaterialCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog" style="width:auto;display:table" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h4 class="modal-title" id="exampleModalLabel"><i class="fa fa-globe"></i> 원부자재 재료 구분 검색</h4>
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">&times;</span>
-		        </button>
-		      </div>     
-		      <div class="modal-body">
-		   <div class="form-group">
-          <div class="col-md-6">
-          <select class="form-control">
-		   <option>::구분선택::</option>
-		   <option>원부재</option>
-		   <option>부자재</option>
-		  </select>
-		  </div>
-		  
-          <div class="input-group col-md-6">
-            <input type="text" class="form-control" size="5">
-            <div class="input-group-btn">
-              <button type="button" class=" btn btn-theme03 btn btn-default"><i class="fa"></i>검색</button>
-            </div>
-          </div>
-		</div>
-
-	<!-- 모달에서 테이블부분  -->
-       <table class="table table-striped table-advance table-hover" id="list">
-         <thead>
-           <tr>
-             <th><i class="fa fa-check-circle-o"></i> 선택</th>
-             <th><i class="fa fa-bullhorn"></i> 번호</th>
-             <th class="hidden-phone"><i class="fa fa-bookmark"></i> 원부자재 구분</th>
-             <th><i class="fa fa-bookmark"></i> 원부자재 재료 구분명</th>
-           </tr>
-         </thead>
-         <tbody>
-           <tr>
-             <td><input type="radio" class="radioClass"></td>
-             <td>1</td>
-             <td>원자재</td>
-             <td class="materialCate">원단</td>
-            </tr>
-           <tr>
-            <td><input type="radio" class="radioClass"></td>
-            <td>2</td>
-            <td>부자재</td>
-            <td class="materialCate">단추</td>
-           </tr>
-           <tr>
-            <td><input type="radio" class="radioClass"></td>
-            <td>3</td>
-            <td>부자재</td>
-            <td class="materialCate">실</td>
-           </tr>
-           <tr>
-            <td><input type="radio" class="radioClass"></td>
-            <td>4</td>
-            <td>부자재</td>
-            <td class="materialCate">지퍼</td>
-           </tr>
-         </tbody>
-       </table>
-	 </div>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-      <button type="button" class="btn btn-primary" id="sendMaterialCateNameBtn" data-dismiss="modal">값가져오기</button>
-       </div>
-    </div>
-   
   </div>
-
-		<!-- 모달테스트 끝  -->
-<th:block th:replace="/quality/modal_SearchInspectionCodeForStandard::modal_SearchInspectionCodeForStandard"></th:block>
+ <th:block th:replace="/quality/modal_SearchInspectionCode::modal_SearchInspectionCode"></th:block>
 </th:block>
 
 </html>
