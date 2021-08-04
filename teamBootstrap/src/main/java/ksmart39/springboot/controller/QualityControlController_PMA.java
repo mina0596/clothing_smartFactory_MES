@@ -1,5 +1,6 @@
 package ksmart39.springboot.controller;
 
+import java.security.spec.PSSParameterSpec;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ksmart39.springboot.service.QualityControlService;
@@ -39,6 +42,19 @@ public class QualityControlController_PMA {
 	public String addStandardTable() {
 		return "quality/addStandardTable";
 	}
+	
+	//[민아]품질검사 기준표 등록화면에서 상세검사 가져오기
+	@GetMapping("/subClassCate")
+	@ResponseBody
+	public List<Map<String,Object>> getMediumClassCate(@RequestParam(value = "lowClassCateName", required = false)String lowClassCateName) {
+		List<Map<String,Object>> subCate = qualityControlService.getSubClassName(lowClassCateName);
+		log.info("========================================");
+		log.info("subCate {}",subCate);
+		log.info("========================================");
+		
+		return subCate;
+	}
+	
 	//[민아]품질검사 기준표 목록
 	@GetMapping("/standardTableList")
 	public String getStandardTableList(Model model) {
@@ -62,7 +78,7 @@ public class QualityControlController_PMA {
 	}
 	
 	//[민아]품질검사별 불량률 현황
-	@GetMapping("/defectiveRateStatus")
+	@GetMapping("/qualityInspectionFailRateList")
 	public String getDefectiveRate(Model model) {
 		List<Map<String,Object>> failedRank = passRateService.getInspectionFailedRank();
 		log.info("불합격률 DB에서 가져오는거 확인:{}", failedRank);
@@ -83,9 +99,25 @@ public class QualityControlController_PMA {
 		log.info("월별 연도별 불량률 확인 :{}", monthlyFailRate);
 		model.addAttribute("monthlyFailRate", monthlyFailRate);
 		
+		//대분류검사별 불량률 
+		List<Map<String,Object>> highInspectionFailRate = passRateService.getHighClassInspectionFailRank();
+		log.info("대분류검사별 불량률 확인:{}", highInspectionFailRate);
+		model.addAttribute("highInspectionFailRate", highInspectionFailRate);
+			
+		
 		return"quality/qualityInspectionFailRateList";
 	}
 	
+	//연도별 월 불량률 상세정보 조회
+	@PostMapping("/addFailRank")
+	@ResponseBody
+	public List<Map<String,Object>> getMonthlyFailRank(@RequestBody Map<String,Object> selectYearMap){
+		log.info("ajax로 연도 데려오는 값 확인:{}", selectYearMap);
+		String selectedYear = (String) selectYearMap.get("selectedYear"); 
+		log.info("Map안에 값 확인:{}", selectedYear);
+		List<Map<String,Object>> monthlyFailRank = passRateService.getMonthlyFailRateRank(selectedYear);
+		return monthlyFailRank;
+	}
 	
 	
 }

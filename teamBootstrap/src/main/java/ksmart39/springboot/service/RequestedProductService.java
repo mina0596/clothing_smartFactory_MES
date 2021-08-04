@@ -25,9 +25,9 @@ public class RequestedProductService {
 			return requestedProductMapper.completeRequest(productRequestCode);
 		}
 		
-		//[한빛] 승인완료 목록 뿌리기
-		public List<RequestedProduct> getRequestedProductApproval(Map<String, Object> paramMap){
-			List<RequestedProduct> approvalList = requestedProductMapper.getRequestedProductApproval(paramMap);
+		//[한빛] 출고 현황
+		public List<Map<String,Object>> getRequestedProductApproval(){
+			List<Map<String,Object>> approvalList = requestedProductMapper.getRequestedProductApproval();
 			return approvalList;
 		}
 }
