@@ -25,7 +25,7 @@
 					});
 					
 					request.done(function( data ) {
-						console.log(data);
+						//console.log(data);
 						if(data.length > 0){
 							for(var i = 0; i<data.length; i++){
 								html += '<tr class="removeTrCL">';
@@ -153,7 +153,7 @@
 					success : function(data) {
 						console.log(data);
 						//리로드
-						if(data) location.reload(true);			        	
+						if(data) window.location.href = '/contract/buyerOrderList';        	
 					},
 					error : function(xhr,status,error) {
 						console.log('오류가 발생했습니다. 관리자에게 문의해주세요.');
@@ -215,43 +215,61 @@
 				var chargeEmployeeCode = $('#chargeEmployeeCode');
 				var clientCode = $('#clientCode');
 				
+				var productCodeVal = $('input[name="productCodeVal"]');
+        		var measuredValue = $('input[name="measuredValue"]');
+        		var requiredSizeCode = $('input[name="requiredSizeCode"]');       		
+				
 				var orderInfoObj = {};
 				var orderSize = {};
+				var validationCheck = true;
 				
-				if(clientAccountName.val)
-				
-				for(var i = 0; i< productCode.length; i++){
-				orderInfoObj = {
-						clientCode : clientCode.val()
-						,requestedDeliveryAddress : requestedDeliveryAddress.val()
-						,requestedDeliveryTel : requestedDeliveryTel.val()
-						,requestedDate : requestedDate.val()
-						,requestedDueDate : requestedDueDate.val()
-						,requestedSpecialNote : requestedSpecialNote.val()
-						,chargeEmployeeCode : chargeEmployeeCode.val()
-						,productCode : productCode.eq(i).val()
+				if(clientAccountName.val() == null || clientAccountName.val() == '' || clientAccountName.val() == undefined){
+					alert('거래처 명을 입력해주세요.');
+					clientAccountName.focus();
+					validationCheck = false;
+				}else if(requestedDeliveryAddress.val() == null || requestedDeliveryAddress.val() == '' || requestedDeliveryAddress.val() == undefined){
+					alert('주소를 입력해주세요.');
+					requestedDeliveryAddress.focus();
+					validationCheck = false;
+				}else if(requestedDeliveryTel.val() == null || requestedDeliveryTel.val() == '' || requestedDeliveryTel.val() == undefined){
+					alert('전화번호를 입력해주세요.');
+					requestedDeliveryTel.focus();
+					validationCheck = false;
+				}else if(requestedDueDate.val() == null || requestedDueDate.val() == '' || requestedDueDate.val() == undefined){
+					alert('납기일자를 입력해주세요.');
+					requestedDueDate.focus();
+					validationCheck = false;
+				}else if(requestedDate.val() == null || requestedDate.val() == '' || requestedDate.val() == undefined){
+					alert('수주주문일자를 입력해주세요.');
+					requestedDate.focus();
+					validationCheck = false;
+				}else if(productCodeVal.length <= 0){
+					alert('품목을 선택해주세요.');
+					$('#selectedSuitType').focus();
+					validationCheck = false;
+				}else if(measuredValue.val() == null || measuredValue.val() == '' || measuredValue.val() == undefined){
+					alert('측정값을 입력해주세요.');
+					measuredValue.focus();
+					validationCheck = false;
+				}else if(validationCheck){
+					for(var i = 0; i< productCode.length; i++){
+						orderInfoObj = {
+								clientCode : clientCode.val()
+								,requestedDeliveryAddress : requestedDeliveryAddress.val()
+								,requestedDeliveryTel : requestedDeliveryTel.val()
+								,requestedDate : requestedDate.val()
+								,requestedDueDate : requestedDueDate.val()
+								,requestedSpecialNote : requestedSpecialNote.val()
+								,chargeEmployeeCode : chargeEmployeeCode.val()
+								,productCode : productCode.eq(i).val()
+						}
+						arr.push(orderInfoObj)	
 					}
-					arr.push(orderInfoObj)	
+					console.log(arr);
+					addOrderAjax(arr);				
 				}
-	        	console.log(arr);
-				addOrderAjax(arr);
+				
 			});
-			
-//			$(document).on('click', '#requestedDeliveryTel', function(){
-//				
-//				var measuredValue = $('input[name="measuredValue"]');
-//				var requiredSizeCode = $('input[name="requiredSizeCode"]');
-//				var sizeobj = {};
-//				for(var i = 0; i < measuredValue.length; i++){
-//					
-//					sizeobj = {
-//							measuredValue : measuredValue.eq(i).val()
-//							,requiredSizeCode : requiredSizeCode.eq(i).val()
-//					}
-//					console.log(sizeobj);
-//					testarr.push(sizeobj);
-//				}
-//			});
 			
 		});
 		
