@@ -3,7 +3,7 @@
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
 layout:decorate="@{layout/default_qualityControl}">
 
-<div th:fragment="yearlyFailRate" id="byYear" class="tab-pane">
+<div th:fragment="yearlyFailRate" id="byYear" class="tab-pane active">
 <!-- 연도별 불량률 시작  -->
    <div class=".col-xs-6" style="height: 70%; width: 50%; margin-left: 23%;">
    	<canvas id="failedRateChartByYear"></canvas>
@@ -24,8 +24,8 @@ layout:decorate="@{layout/default_qualityControl}">
            </tr>
          </thead>
          <tbody>
-           <tr><div class="label label-warning" style="font-size: medium; font-style: italic;"><i class="fa fa-calendar-o"></i> 2021</div></tr>
-          	  <tr th:each="curRate : ${yearlyFailRate}" th:if="${curRate.year == '2021'}" > 
+           	<button type="button" class="btn label label-warning yearBtn" style="font-size: medium; font-style: italic;"><i class="fa fa-calendar-o"></i>2021</button>
+          	<tr th:each="curRate : ${yearlyFailRate}" th:if="${curRate.year == '2021'}" > 
            	<td th:text="${curRate.realRank}"></td>
       		<td th:text="${curRate.inspectionCode}"></td>
       		<td th:text="${curRate.highName}"></td>
@@ -53,8 +53,8 @@ layout:decorate="@{layout/default_qualityControl}">
            </tr>
          </thead>
          <tbody>
-           <tr><div class="label label-warning" style="font-size: medium; font-style: italic;"><i class="fa fa-calendar-o"></i> 2020</div></tr>
-          	  <tr th:each="pastRate: ${yearlyFailRate}" th:if="${pastRate.year == '2020'}" > 
+           <button type="button" class="btn label label-warning yearBtn" style="font-size: medium; font-style: italic;"><i class="fa fa-calendar-o"></i>2020</button>
+          	<tr th:each="pastRate: ${yearlyFailRate}" th:if="${pastRate.year == '2020'}" > 
            	<td th:text="${pastRate.realRank}"></td>
       		<td th:text="${pastRate.inspectionCode}"></td>
       		<td th:text="${pastRate.highName}"></td>
@@ -82,8 +82,8 @@ layout:decorate="@{layout/default_qualityControl}">
            </tr>
          </thead>
          <tbody>
-           <tr><div class="label label-warning" style="font-size: medium; font-style: italic;"><i class="fa fa-calendar-o"></i> 2019</div></tr>
-          	  <tr th:each="twoPastRate : ${yearlyFailRate}" th:if="${twoPastRate.year == '2019'}"> 
+           <button type="button" class="btn label label-warning yearBtn" style="font-size: medium; font-style: italic;"><i class="fa fa-calendar-o"></i>2019</button>
+          	<tr th:each="twoPastRate : ${yearlyFailRate}" th:if="${twoPastRate.year == '2019'}"> 
            	<td th:text="${twoPastRate.realRank}"></td>
       		<td th:text="${twoPastRate.inspectionCode}"></td>
       		<td th:text="${twoPastRate.highName}"></td>
@@ -111,7 +111,7 @@ layout:decorate="@{layout/default_qualityControl}">
            </tr>
          </thead>
          <tbody>
-           <tr><div class="label label-warning" style="font-size: medium; font-style: italic;"><i class="fa fa-calendar-o"></i> 2018</div></tr>
+           <button type="button" class="btn label label-warning yearBtn" style="font-size: medium; font-style: italic;"><i class="fa fa-calendar-o"></i>2018</button>
           	  <tr th:each="threePastRate: ${yearlyFailRate}" th:if="${threePastRate.year == '2018'}" > 
            	<td th:text="${threePastRate.realRank}"></td>
       		<td th:text="${threePastRate.inspectionCode}"></td>
