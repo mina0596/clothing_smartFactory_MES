@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_qualityControl}">
+
+<th:block layout:fragment="pageTitle">
+	   <div class="border-head"> 
+	    
+	    </div>
+<script type="text/javascript" th:src="@{/quality/QualityInspection.js}"></script>	  
+<!-- 사용자 정의 css -->
+<th:block layout:fragment="customCss">
+
+</th:block>
+<th:block layout:fragment="customJs">
+<script>
+$(function(){
+	var productName = $('#productName').text();
+	var client = $('#client').text();
+	var productCode = $('#productCode').text();
+	var contractCode = $('#contractCode').text();
+	
+	
+	$('#inspectionClientName').text(client);
+	$('#inspectionContractCode').text(contractCode);
+	$('#inspectionProductName').text(productName);
+	$('#inspectionProductCode').text(productCode);
+	
+})
+</script>
+
+</th:block>	    
+	    
+	
+</th:block>
+
+
+
+<th:block layout:fragment="container">
+	
+  <div class="form-panel">
+          <h1 style="text-align: center; text-decoration: underline;">품질검사 최종성적서 </h1>
+         
+          <br>
+        <form class="form-horizontal style-form" method="post">
+      
+        <div class="form-group" style="width: 80%; margin-left: auto; margin-right: auto;">
+        <table border="1"  class="table col-md-6"   >
+   				<thead >
+   				<tr >   						
+   						<th colspan="2"   style="text-align: center;"  >거래처명</th>
+   						<th colspan="2"  style="text-align: center;"  ><p id="inspectionClientName"></p></th>
+   						<th colspan="2"    style="text-align: center; "  >계약번호</th>
+   						<th colspan="2"    style="text-align: center;"><p id="inspectionContractCode"></p></th>
+   				</tr>
+   				<tr >   						
+   						<th colspan="2"   style="text-align: center; "  >품목명</th>
+   						<th colspan="2"   style="text-align: center;"><p id="inspectionProductName"></p></th>
+   						<th colspan="2"   style="text-align: center;"  >품목코드</th>
+   						<th colspan="2"   style="text-align: center;"  ><p id="inspectionProductCode"></p></th>
+   				</tr>
+   				
+   				
+   					<tr >   						
+   						<th rowspan="2"style="text-align: center;" >중분류검사명</th>
+   						<th rowspan="2"style="text-align: center;" >소분류검사명</th>
+   						<th rowspan="2"style="text-align: center;" >상세검사명</th>
+   						<th colspan="3"style="text-align: center;" >검사 회수결과</th>
+   						<th rowspan="2"style="text-align: center;" >최종결과</th>
+   						<th rowspan="2"style="text-align: center;" >최종결과 등록일</th>
+   					</tr>
+   					<tr>
+   						<th style="text-align: center;" >1차결과</th>
+   						<th style="text-align: center;" >2차결과</th>
+   						<th style="text-align: center;" >3차결과</th>
+   					</tr>
+   				</thead>
+   				<tbody>
+   				<tr th:if="${#lists.size(finalResultReportInfo) > 0}" th:each="f:${finalResultReportInfo}" style="text-align: center;">
+   					
+   					<td id="client" th:text="${f.client_name}" hidden="hidden"></td>
+   					<td id="productName" th:text="${f.detailed_categorized_name}"  hidden="hidden"></td>
+   					<td id="productCode" th:text="${f.requested_product_code}"  hidden="hidden"></td>
+   					<td id="contractCode" th:text="${f.contract_code}"  hidden="hidden"></td>
+   					
+   					<td th:text="${f.med_class_name}"></td>
+   					<td th:text="${f.low_class_name}"></td>
+   					<td th:text="${f.sub_class_name}"></td>
+   					<td th:text="${f.inspection_first}"></td>
+   					<td th:text="${f.inspection_second}"></td>
+   					<td th:text="${f.inspection_third}"></td>
+   					<td th:text="${f.low_cate_final_pass_check}"></td>
+   					<td th:text="${f.final_Date}"></td>
+   					
+   					
+   				</tr>
+   				</tbody>
+   			</table>
+   			</div>
+        </form>
+
+</div>
+
+
+</th:block>
+
+</html>

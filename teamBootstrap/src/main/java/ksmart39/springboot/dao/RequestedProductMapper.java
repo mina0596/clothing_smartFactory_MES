@@ -17,5 +17,5 @@ public interface RequestedProductMapper {
 	public int completeRequest(String productRequestCode);
 	
 	//[한빛] 승인완료 목록 뿌리기 
-	public List<RequestedProduct> getRequestedProductApproval(Map<String, Object> paramMap);
+	public List<Map<String,Object>> getRequestedProductApproval();
 }

@@ -250,9 +250,8 @@
 					(SELECT @row_num := 0, @rate := 0, @check_num :=0) AS r
 					;
 	 </select>
-	 
-	 <select id="getMonthlyFailRateByYear" resultType="map">
-		 SELECT
+	 <!-- 
+	 SELECT
 			result.year
 			,result.month
 			,result.totalNum
@@ -272,7 +271,100 @@
 					DATE_FORMAT(subIr.inspection_end_date, '%Y-%m')
 				ORDER by
 					DATE_FORMAT(subIr.inspection_end_date, '%Y-%m')) AS result
+	  -->
+	 <select id="getMonthlyFailRateByYear" resultType="map">
+		 SELECT 
+			DATE_FORMAT(subIr.inspection_end_date, '%Y') AS 'year',
+			DATE_FORMAT(subIr.inspection_end_date, '%m') AS 'month',
+			subIr.quality_inspection_code AS inspectionCode,
+			COUNT(1) AS totalNum,
+			COUNT(case 
+					when subIr.inspection_pass_check = '불합격' then 1 END) AS failNum,
+			round(COUNT(case when subIr.inspection_pass_check = '불합격' then 1 END)/COUNT(1)*100) AS failRate,
+			CONCAT(round(COUNT(case when subIr.inspection_pass_check = '불합격' then 1 END)/COUNT(1)*100), '%') AS failRatePercent
+		FROM
+			inspection_result AS subIr
+			GROUP BY quality_inspection_code
+			ORDER BY DATE_FORMAT(subIr.inspection_end_date, '%Y-%m');
 	 </select>
-		
+	
+	<select id="getMonthlyFailRateRank" parameterType="String" resultType="map">
+		SELECT	
+			(case
+			 when @rate = result.failRate then @row_num
+			 when @rate := result.failRate then @row_num := @check_num + 1
+			END) AS subRank,
+			CONCAT(@check_num := @check_num + 1, '위') AS realRank,
+			result.*
+		FROM
+			(SELECT 
+				DATE_FORMAT(subIr.inspection_end_date, '%Y') AS 'year',
+				CONCAT(DATE_FORMAT(subIr.inspection_end_date, '%m'), '월') AS 'month',
+				subIr.quality_inspection_code AS inspectionCode,
+				subClass.sub_class_name AS subName,
+				lowClass.low_class_name AS lowName,
+				medClass.med_class_name AS medName,
+				highClass.high_class_name AS highName,
+				COUNT(1) AS totalNum,
+				COUNT(case 
+						when subIr.inspection_pass_check = '불합격' then 1 END) AS failNum,
+				round(COUNT(case when subIr.inspection_pass_check = '불합격' then 1 END)/COUNT(1)*100) AS failRate,
+				CONCAT(round(COUNT(case when subIr.inspection_pass_check = '불합격' then 1 END)/COUNT(1)*100), '%') AS failRatePercent
+			FROM
+				inspection_result AS subIr
+				INNER join
+					sub_class_inspection_list AS subClass
+				on
+					subIr.quality_inspection_code = subClass.quality_inspection_code
+				inner join
+					low_class_inspection_list AS lowClass
+				on
+					subClass.high_med_low_class_code = lowClass.high_med_low_class_code
+				INNER join
+					medium_class_inspection_list AS medClass
+				on
+					subClass.high_med_class_code = medClass.high_med_class_code
+				INNER join
+					high_class_inspection_list AS highClass
+				on
+					subClass.high_class_code = highClass.high_class_code
+				WHERE DATE_FORMAT(subIr.inspection_end_date, '%Y') = #{selectedYear}
+				GROUP BY subIr.quality_inspection_code
+				ORDER BY failRate DESC
+				LIMIT 5) AS result
+			join
+				(SELECT @row_num := 0, @rate := 0, @check_num :=0) AS r
+	</select>
+	
+	<select id="getHighClassInspectionFailRank" resultType="map">
+		SELECT	
+			(case
+			 when @rate = result.failRate then @row_num
+			 when @rate := result.failRate then @row_num := @check_num + 1
+			END) AS subRank,
+			CONCAT(@check_num := @check_num + 1, '위') AS realRank,
+			result.*,
+			concat(result.failRate, '%') AS failRatePercent
+		FROM
+			(SELECT 
+				SUBSTRING(subIr.quality_inspection_code, 1, 3) AS inspectionCode,
+				highClass.high_class_name AS highName,
+				COUNT(1) AS totalNum,
+				COUNT(case 
+						when subIr.inspection_pass_check = '불합격' then 1 END) AS failNum,
+				round(COUNT(case when subIr.inspection_pass_check = '불합격' then 1 END)/COUNT(1)*100) AS failRate
+			FROM
+				inspection_result AS subIr
+				INNER join
+					high_class_inspection_list AS highClass
+				on
+					SUBSTRING(subIr.quality_inspection_code, 1, 3) = highClass.high_class_code
+				GROUP BY 
+					highClass.high_class_name
+				ORDER BY 
+					failRate DESC) AS result
+			join
+				(SELECT @row_num := 0, @rate := 0, @check_num :=0) AS r
+	</select>
 	 
 </mapper>

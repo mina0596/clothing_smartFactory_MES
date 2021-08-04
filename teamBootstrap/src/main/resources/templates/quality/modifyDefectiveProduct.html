@@ -49,11 +49,18 @@ layout:decorate="@{layout/default_qualityControl}">
             </div>
 
 	        <div class="form-group">
-               <label class="col-sm-2 col-sm-2 control-label">담당자코드</label>
-               <div class="col-sm-6">
-                  <input type="text" th:value ="${employeeCode}" id="raw_material_admin" class="form-control" name="chargeEmployeeCode" readonly="readonly">
-               </div>
-            </div>
+	          <label class="col-lg-2 col-sm-2 control-label" style="font-weight: 600;">담당자 사원 코드</label>
+	          <div class="col-lg-6">
+	            <input type="text" id="chargeEmployeeCode" name="chargeEmployeeCode" class="form-control" readonly="readonly" th:value="${session.SCODE}">
+	          </div>
+	     	</div>   
+	     	                  
+		    <div class="form-group">
+	          <label class="col-lg-2 col-sm-2 control-label" style="font-weight: 600;">담당 사원명</label>
+	          <div class="col-lg-6">
+	            <input type="text" class="form-control" readonly="readonly" th:value="${session.SNAME}">
+	          </div>
+	        </div>
             
 	        <div class="form-group">
                <label class="col-sm-2 col-sm-2 control-label">불량원인</label>

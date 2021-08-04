@@ -34,6 +34,7 @@
 			quality_inspection_list;
 	</select>
 	
+	<!-- [민아]품질검사 기준표 조회  -->
 	<select id="getInspectionStandard" parameterType="String" resultType="map">
 		 SELECT 
 			istand.quality_inspection_code		AS inspectionCode,
@@ -77,6 +78,19 @@
 		where
 			istand.category = #{inspectionCate};
 	</select>
+	
+	<select id="getSubClassName" parameterType="String" resultType="map">
+		SELECT
+			 s.quality_inspection_code AS subClassCode,
+			 s.sub_class_name AS subClassName
+		FROM
+			low_class_inspection_list AS l
+		INNER JOIN
+			sub_class_inspection_list AS s
+		ON l.high_med_low_class_code =s.high_med_low_class_code
+		WHERE s.high_med_low_class_code = #{lowClassCateName};
+	</select>
+	
 	
 	
 	
