@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import ksmart39.springboot.domain.QualityInspectionStandard;
 import ksmart39.springboot.service.QualityControlService;
 import ksmart39.springboot.service.QualityInspectionPassRateService;
 
@@ -76,6 +77,10 @@ public class QualityControlController_PMA {
 		log.info("productInfo :{}", productInfo);
 		return productInfo;
 	}
+	
+	//[민아]품질검사 기준표 등록 처리 후 목록화면으로 이동
+	@PostMapping("/addStandardTable")
+	//public String addStandardTable(@RequestBody QualityInspectionStandard standardDomain, @RequestParam(name = ""))
 	
 	//[민아]품질검사별 불량률 현황
 	@GetMapping("/qualityInspectionFailRateList")
