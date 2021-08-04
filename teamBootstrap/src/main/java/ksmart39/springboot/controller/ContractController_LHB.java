@@ -44,18 +44,7 @@ public class ContractController_LHB {
 	private static final Logger log = LoggerFactory.getLogger(SystemController.class);
 	
 	//----------------------------------------수주주문서-----------------------------------------------------
-	//[한빛]주문서 등록
-	@GetMapping("/addBuyerOrder")
-	public String addBuyerOrder(Model model) {
-		model.addAttribute("title", "수주관리");
-		return "contract/addBuyerOrder";
-	}		
-	
-//	//[한빛]주문서 등록 -> 조회
-//	@PostMapping("/addBuyerOrder")
-//	public String addBuyerOrder() {
-//		return "redirect:/buyerOrderList";
-//	}
+
 
 	//[한빛]주문서 조회
 	@GetMapping("/buyerOrderList")

@@ -13,6 +13,7 @@ public class RequestedProduct{
 	private String requestedDueDate;
 	private String requestedDeliveryAddress;
 	private String requestedDeliveryTel;
+	private String requestedDate;
 	private String requestedSpecialNote;
 	private String approvalStatus;
 	private String requestedProductDetailRegDate;
@@ -102,6 +103,14 @@ public class RequestedProduct{
 		this.requestedDeliveryTel = requestedDeliveryTel;
 	}
 
+	public String getRequestedDate() {
+		return requestedDate;
+	}
+
+	public void setRequestedDate(String requestedDate) {
+		this.requestedDate = requestedDate;
+	}
+
 	public String getRequestedSpecialNote() {
 		return requestedSpecialNote;
 	}
@@ -156,14 +165,12 @@ public class RequestedProduct{
 				+ ", chargeEmployeeCode=" + chargeEmployeeCode + ", clientCode=" + clientCode + ", contractCode="
 				+ contractCode + ", productRequestCode=" + productRequestCode + ", designDrawingAttachment="
 				+ designDrawingAttachment + ", requestedDueDate=" + requestedDueDate + ", requestedDeliveryAddress="
-				+ requestedDeliveryAddress + ", requestedDeliveryTel=" + requestedDeliveryTel
-				+ ", requestedSpecialNote=" + requestedSpecialNote + ", approvalStatus=" + approvalStatus
-				+ ", requestedProductDetailRegDate=" + requestedProductDetailRegDate
+				+ requestedDeliveryAddress + ", requestedDeliveryTel=" + requestedDeliveryTel + ", requestedDate="
+				+ requestedDate + ", requestedSpecialNote=" + requestedSpecialNote + ", approvalStatus="
+				+ approvalStatus + ", requestedProductDetailRegDate=" + requestedProductDetailRegDate
 				+ ", requestedProductDetailUpdateDate=" + requestedProductDetailUpdateDate + ", requestedProductSize="
 				+ requestedProductSize + ", client=" + client + "]";
 	}
-	
-	
 	
 	
 }
