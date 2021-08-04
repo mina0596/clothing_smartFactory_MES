@@ -33,6 +33,7 @@
 	<result property="requestedDueDate" 					column="requested_due_date"></result>
 	<result property="requestedDeliveryAddress" 			column="requested_delivery_address"></result>
 	<result property="requestedDeliveryTel" 				column="requested_delivery_tel"></result>
+	<result property="requestedDate" 						column="requested_date"></result>
 	<result property="requestedSpecialNote" 				column="requested_special_note"></result>
 	<result property="approvalStatus" 						column="approval_status"></result>
 	<result property="requestedProductDetailRegDate" 		column="requested_product_detail_reg_date"></result>
@@ -96,6 +97,7 @@
 			,requested_due_date
 			,requested_delivery_address
 			,requested_delivery_tel
+			,requested_date
 			,requested_special_note
 			,approval_status
 			,requested_product_detail_reg_date
@@ -112,8 +114,9 @@
 			,#{item.requestedDueDate}
 			,#{item.requestedDeliveryAddress}
 			,#{item.requestedDeliveryTel}
+			,#{item.requestedDate}
 			,#{item.requestedSpecialNote}
-			,NULL
+			,'미승인'
 			,NOW()
 			,NULL)
 			</foreach>
