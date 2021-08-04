@@ -20,8 +20,8 @@ layout:decorate="@{layout/default_qualityControl}">
 	$(document).on('click','.btn_status', function(){
 		if (confirm("승인하시겠습니까?") == true){    //확인
 			var inspectionRequestObj = $(this).parent().parent().children().eq(1);
-			var productRequestCode = inspectionRequestObj.text();
-		
+			var qualityInspectionRequestCode = inspectionRequestObj.text();
+			console.log(qualityInspectionRequestCode);
 			$.ajax({
 				url: "/quality/approvalInspectionRequest",
 				method : 'post',
