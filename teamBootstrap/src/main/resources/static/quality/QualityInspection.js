@@ -12,7 +12,7 @@ $(function(){
 		method: "get"
 	}); 
 	request.done(function( data ) {
-		console.log(data[0].client_name);
+		
 		if(data != undefined || data != '' || data.length > 0){
 			var html = '';
 			for(var i = 0; i<data.length; i++){

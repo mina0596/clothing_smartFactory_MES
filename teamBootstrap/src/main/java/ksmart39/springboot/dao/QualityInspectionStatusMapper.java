@@ -9,7 +9,11 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface QualityInspectionStatusMapper {
 	
+	//[보람]수주계약별 수치검사현황
+	public List<Map<String,Object>> getSearchQualityInspectionStatePassCheck(HashMap map3);
 	
+	//[보람]수주계약별 수치검사현황
+	public List<Map<String,Object>> getSearchQualityInspectionStateMeasurement(HashMap map2);
 	//[보람] 수주계약별 검사 조회
 	public List<Map<String,Object>> getSearchQualityInspectionState(HashMap map);
 

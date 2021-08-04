@@ -21,21 +21,20 @@ layout:decorate="@{layout/default_qualityControl}">
 	* 거래처명 or 수주계약 필수 기입 사항!
 	<div>
 	<hr>
-	<form class="searchState form-inline"th:action="@{/quality/qualityInspectionStatusContract}" role="form">
+	<form id="searchState" class="form-inline"th:action="@{/quality/qualityInspectionStatusContract}" role="form">
 	<table class="table table-striped table-advance table-hover">
          	<thead>
         			<tr>
         				<th>
 		         			 <div class="form-inline">
 		         			 	<label class="control-label">계약번호</label>
-			                	<input type="text" class="form-control" name="contactNumber"  placeholder="검색어를 입력하세요.">
-			                	
-			                </div>
+			                	<input type="text" class="form-control" name="contactNumber"  id="contactNumber" placeholder="검색어를 입력하세요.">
+			                	</div>
 	         			</th>
 	         			<th>
 	         				<div class="form-inline">
 		         				<label class="control-label">거래처명</label>
-			                	<input type="text" class="form-control" id="clientName" name="clientName" placeholder="검색어를 입력하세요.">
+			                	<input type="text" class="clientName form-control" id="clientName" name="clientName" placeholder="검색어를 입력하세요." >
 		              		</div>
 	         			</th>
 	         			<th>
@@ -43,9 +42,9 @@ layout:decorate="@{layout/default_qualityControl}">
 	         			<th> 
 	         				<div class="form-inline">
 		         				<label class="control-label">검사일</label>
-			                	<input type="date" class="form-control" id="inspectionStartDate" name="inspectionStartDate" placeholder="검색어를 입력하세요.">&nbsp; ~
-			                	<input type="date" class="form-control" id="inspectionEndDate" name="inspectionEndDate" placeholder="검색어를 입력하세요.">
-			                	<button id="searchBtn1" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
+			                	<input type="date" class="form-control" id="inspectionStartDate" name="inspectionStartDate" placeholder="검색어를 입력하세요." >&nbsp; ~
+			                	<input type="date" class="form-control" id="inspectionEndDate" name="inspectionEndDate" placeholder="검색어를 입력하세요." >
+			                	<button id="searchBtn1" type="button" class="btn btn-default" ><i class="fa fa-search"></i></button> 
 		              		</div>
 	         			</th>  	         		 
 	       			</tr>     			
@@ -56,7 +55,7 @@ layout:decorate="@{layout/default_qualityControl}">
 		<br>
 		<div id="print" class="searchInspectionResult">
 		 <h4><i class="fa fa-angle-right"></i> 수주계약번호별 현황 검색 결과</h4> 
-          	 <div> 수주계약번호 <div id="contractNum" style="display: inline; font-weight: bold;"></div> 로 검색한 결과 입니다.
+          	 <div> 수주계약번호 <p style="display: inline; font-weight: bold;" id="inspectionContract"></p> 와 거래처명 <p style="display: inline; font-weight: bold;" id="inspectionClientName"></p>  로 검색한 결과 입니다.
           	  <button id="printS" class="btn btn-primary btn-xs" onClick="content_print()"><i class="fa fa-print"></i></button></div>
           	 <h5>※등급별</h5>
      		<table style="border-color: #8c8c8c;" class="table table-bordered table-striped table-condensed " >
@@ -89,6 +88,9 @@ layout:decorate="@{layout/default_qualityControl}">
 	     <tbody >
 	     	 <tr th:if="${#lists.size(stateMap) > 0}" th:each="g,i:${stateMap}"> 
 	     		<th th:text="${i.index+1}"  scope="row" id="mandatory"></th> 
+				 				
+				<td id="inspectioncontactCode" th:text="${g.contractCode}" hidden="hidden"></td> 
+				<td id="clientNames" th:text="${g.cleintName}" hidden="hidden"></td> 
 				<td th:text="${g.highClassName}"></td> 
 				<td th:text="${g.lowClassName}"></td> 
 				<td th:text="${g.subClassName}"></td> 
@@ -108,7 +110,7 @@ layout:decorate="@{layout/default_qualityControl}">
 				<td></td>
 	     	</tr>
 			<tr th:unless="${#lists.size(stateMap) > 0}" style="text-align: center;">
-				<td colspan="17" th:text="${'현재진행중인검사가없습니다.'}">
+				<td colspan="17" th:text="${'현재 검사현황 목록이없습니다'}">
 				</td>
 			</tr>
 		</tbody>
@@ -142,6 +144,30 @@ layout:decorate="@{layout/default_qualityControl}">
 			</tr>
 		 </thead>
 	     <tbody >
+	     <tr th:if="${#lists.size(meansureMap) > 0}" th:each="m,i:${meansureMap}"> 
+	     		<th th:text="${i.index+1}"  scope="row" id="mandatory"></th> 
+				<td th:text="${m.highClassName}"></td> 
+				<td th:text="${m.lowClassName}"></td> 
+				<td th:text="${m.subClassName}"></td> 
+				<td th:text="${m.requestProductCode}"></td>
+				<td th:text="${m.detailedCateName}"></td>
+				<td th:text="${m.inspectionRequestDate}"></td>
+				<td th:text="${m.inspectionCategory}"></td>
+				<td th:text="${m.standardTolerance}"></td>
+				<td th:text="${m.minTolerance}"></td>
+				<td th:text="${m.maxTolerance}"></td>
+				<td th:text="${m.insFirst}"></td>		
+				<td th:text="${m.insSecond}"></td>
+				<td th:text="${m.insThird}"></td>
+				<td th:text="${m.insStart}"></td>
+				<td th:text="${m.insEnd}"></td>
+				<td th:text="${m.finalPassCheck}"></td>
+				<td></td>
+	     	</tr>
+			<tr th:unless="${#lists.size(meansureMap) > 0}" style="text-align: center;">
+				<td colspan="17" th:text="${'현재 검사현황 목록이없습니다'}">
+				</td>
+			</tr>
 			
 		</tbody>
       </table>
@@ -174,6 +200,30 @@ layout:decorate="@{layout/default_qualityControl}">
 		</tr>
 	 </thead>
      <tbody >
+     	<tr th:if="${#lists.size(passCheckMap) > 0}" th:each="p,i:${passCheckMap}"> 
+	     		<th th:text="${i.index+1}"  scope="row" id="mandatory"></th> 
+				<td th:text="${p.highClassName}"></td> 
+				<td th:text="${p.lowClassName}"></td> 
+				<td th:text="${p.subClassName}"></td> 
+				<td th:text="${p.requestProductCode}"></td>
+				<td th:text="${p.detailedCateName}"></td>
+				<td th:text="${p.inspectionRequestDate}"></td>
+				<td th:text="${p.inspectionCategory}"></td>
+				<td th:text="${p.standardTolerance}"></td>
+				<td th:text="${p.minTolerance}"></td>
+				<td th:text="${p.maxTolerance}"></td>
+				<td th:text="${p.insFirst}"></td>		
+				<td th:text="${p.insSecond}"></td>
+				<td th:text="${p.insThird}"></td>
+				<td th:text="${p.insStart}"></td>
+				<td th:text="${p.insEnd}"></td>
+				<td th:text="${p.finalPassCheck}"></td>
+				<td></td>
+	     	</tr>
+			<tr th:unless="${#lists.size(passCheckMap) > 0}" style="text-align: center;">
+				<td colspan="17" th:text="${'현재 검사현황 목록이없습니다'}">
+				</td>
+			</tr>
 
 	</tbody>
      </table>

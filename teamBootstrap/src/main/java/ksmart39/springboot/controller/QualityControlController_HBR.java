@@ -46,28 +46,44 @@ public class QualityControlController_HBR {
 				@RequestParam(name = "inspectionStartDate", required = false)String inspectionStartDate,
 				@RequestParam(name = "inspectionEndDate", required = false)String inspectionEndDate){
 
-			HashMap<String,Object> map = new HashMap<String,Object>();
-			//객체화된map에.put 메서드로  RequestParam값 넣기
-			map.put("contactNumber", contactNumber);
-			map.put("clientName", clientName);			
-			map.put("inspectionStartDate", inspectionStartDate);
-			map.put("inspectionEndDate", inspectionEndDate);
-			log.info("====================");
-			log.info("map:",map);
-			log.info("====================");
-			
-			//등급별 검색
-			List<Map<String, Object>> stateMap = qualityInsepctionStauteService.getSearchQualityInspectionState(map);
 			//등급별
 			List<Map<String, Object>> inspectionStateList = qualityInsepctionStauteService.getStateBuyerContractQualityInspection();
 			//수치별
 			List<Map<String, Object>> inspectionStateMeasurement =qualityInsepctionStauteService.getStateBuyerContractQualityInspectionMeasurement();
 			//합격/불합격
 			List<Map<String, Object>> inspectionStatePassCheck =qualityInsepctionStauteService.getStateBuyerContractQualityInspectionPass();
+			
+			//등급별 검색
+			HashMap<String,Object> map = new HashMap<String,Object>();
+			//객체화된map에.put 메서드로  RequestParam값 넣기
+			map.put("contactNumber", contactNumber);
+			map.put("clientName", clientName);			
+			map.put("inspectionStartDate", inspectionStartDate);
+			map.put("inspectionEndDate", inspectionEndDate);
+			log.info("map  {}",map);
+			//수치별 검색
+			HashMap<String,Object> map2 = new HashMap<String,Object>();
+			map2.put("contactNumber",contactNumber);
+			map2.put("clientName",clientName);
+			map2.put("inspectionStartDate",inspectionStartDate);
+			map2.put("inspectionEndDate",inspectionEndDate);
+			//합격/불합격 검색
+			HashMap<String,Object> map3 = new HashMap<String,Object>();
+			map3.put("contactNumber",contactNumber);
+			map3.put("clientName",clientName);
+			map3.put("inspectionStartDate",inspectionStartDate);
+			map3.put("inspectionEndDate",inspectionEndDate);
+			//등급별검색 			
+			List<Map<String, Object>> stateMap = qualityInsepctionStauteService.getSearchQualityInspectionState(map);
+			//수치별검색
+			List<Map<String, Object>> meansureMap = qualityInsepctionStauteService.getSearchQualityInspectionStateMeasurement(map2);
+			//합격불합격검색
+			List<Map<String, Object>> passCheckMap = qualityInsepctionStauteService.getSearchQualityInspectionStatePassCheck(map3);
+			
 			model.addAttribute("stateMap", stateMap);
-			log.info("====================");
-			log.info("stateMap:",stateMap);
-			log.info("====================");
+			model.addAttribute("meansureMap", meansureMap);
+			model.addAttribute("passCheckMap", passCheckMap);
+		
 			model.addAttribute("inspectionStateList", inspectionStateList);
 			model.addAttribute("inspectionStateMeasurement", inspectionStateMeasurement);
 			model.addAttribute("inspectionStatePassCheck", inspectionStatePassCheck);
@@ -88,18 +104,15 @@ public class QualityControlController_HBR {
 	}
 	
 	
-	
-	
-	//[다미+보람]검사현황 조회 성적서 모달창값전달하기
-	@RequestMapping(value = "/finalResult",method = RequestMethod.GET)
-	@ResponseBody
-	public List<Map<String,Object>> getFinalResultReport(@RequestParam(value = "requestProductCode", required = false)String requestProductCode){
-		List<Map<String,Object>> finalResultReport = qualityInsepctionFinalResultService.getFinalResultReport(requestProductCode);
-		log.info("=============================================");
-	  	log.info("finalResultReport  {}",finalResultReport);
-	  	log.info("=============================================");
-		return finalResultReport;
+	@GetMapping("/qualityInspectionReportInfo")
+	public String qualityInspectionReportInfo(Model model, @RequestParam(value = "requestProductCode", required = false)String requestProductCode) {
+		List<Map<String,Object>> finalResultReportInfo = qualityInsepctionFinalResultService.getFinalResultReport(requestProductCode);
+		model.addAttribute("finalResultReportInfo",finalResultReportInfo);
+		
+		return "quality/qualityInspectionReportInfo";
 	}
+	
+
 	
 	
 	
