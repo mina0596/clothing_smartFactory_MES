@@ -4,18 +4,19 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
 layout:decorate="@{layout/default_system}">
 
 <th:block layout:fragment="pageTitle">
-	   <div class="border-head"> 
-	    <h3>시스템관리</h3>
-	    </div>
+<h1><i class="fa fa-gears"></i>시스템 관리</h1>
 </th:block>
 
 
 <th:block layout:fragment="container">
-	시스템관리 
-	<br><br><br><br><br><br><br><br><br><br><br><br>
-	<br><br><br><br><br><br><br><br><br><br><br><br>
-	<br><br><br><br><br><br><br><br><br><br><br><br>
-	<br><br><br><br><br><br><br><br><br><br><br><br>
+ <div class="row content-panel form-panel">
+ 	<div class="profile-text" style="text-align: center;">
+  		<h3>생산관리 흐름도</h3>
+  			<div class="scale">
+ 			<img style="max-width: 100%;" src="/image/process.jpg">
+  			</div>
+	</div>
+  </div>
 </th:block>
 
 </html>

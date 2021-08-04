@@ -4,13 +4,18 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
 layout:decorate="@{layout/default_rawMaterials}">
 
 <th:block layout:fragment="pageTitle">
-	   <div class="border-head"> 
-	    <h3>자재관리</h3>
-	    </div>
+<h1><i class="fa fa-gears"></i>자재 관리</h1>
 </th:block>
 
 
 <th:block layout:fragment="container">
+ <div class="row content-panel form-panel">
+ 	<div class="profile-text" style="text-align: center;">
+  		<h3>자재관리 흐름도</h3>
+ 			<img style="max-width: 100%;" src="/image/rawMaterialsProcess.jpg">
+	</div>
+  </div>
+  <br>
 <h4><i class="fa fa-th"></i> 원부자재 현재고 현황</h4>
           <hr>  
 <table class="table table-striped table-advance table-hover" id="list">
