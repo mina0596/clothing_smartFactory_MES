@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.thymeleaf.util.MapUtils;
 
 import ksmart39.springboot.domain.SupplierRequest;
+import ksmart39.springboot.service.RawMaterialsInventoryStatusService;
 import ksmart39.springboot.service.RequestedProductService;
 import ksmart39.springboot.service.SupplierService;
 
@@ -29,11 +30,12 @@ public class ContractController_HBR {
 	@Autowired
 	private final SupplierService supplierService;
 	private final RequestedProductService requestedProductService;
+	private final RawMaterialsInventoryStatusService materialsInventoryStatusService;
 	
-	
-	 @Autowired public ContractController_HBR(SupplierService supplierService, RequestedProductService requestedProductService) {
+	 @Autowired public ContractController_HBR(SupplierService supplierService, RequestedProductService requestedProductService, RawMaterialsInventoryStatusService materialsInventoryStatusService) {
 	 this.supplierService = supplierService;
 	 this.requestedProductService = requestedProductService;
+	 this.materialsInventoryStatusService = materialsInventoryStatusService;
 	 }
 	 
 
@@ -119,14 +121,26 @@ public class ContractController_HBR {
 	}
 	//[보람] 발주 수정 경로 
 	@GetMapping("/modifySupplierRequest")
-	public String modifySupplierRequest(Model model) {
+	public String modifySupplierRequest(Model model,@RequestParam(value= "rawMaterialOrder",required = false)String rawMaterialOrder) {
+		SupplierRequest supplierRequest = supplierService.getSupplierRequestInfo(rawMaterialOrder);
+		 model.addAttribute("supplierRequest", supplierRequest);
 		return "contract/modifySupplierRequest";
 	}
 	//[보람]원부자재 발주등록 완료
 	@PostMapping("/addSupplierRequest")
-	public String addSupplierRequest(SupplierRequest supplierRequest) {
-		supplierService.addSupplierRequest(supplierRequest);
-		return "redirect:/supplierRequestList";
+	public String addSupplierRequest(@RequestParam(name = "rawMeterialCode",required = false)String rawMeterialCode,
+									@RequestParam(name = "supplierClient",required = false)String supplierClient,
+									@RequestParam(name = "chargeEmployeeCode", required = false)String chargeEmployeeCode,
+									@RequestParam(name = "rawMaterialAmount",required = false)int rawMaterialAmount,
+									@RequestParam(name = "rawMaterialOrderExpected",required = false)String rawMaterialOrderExpected) {
+		log.info("========================================");
+		  log.info("rawMeterialCode {}:",rawMeterialCode);
+		  log.info("supplierClient {}:",supplierClient);
+		  log.info("chargeEmployeeCode {}:",chargeEmployeeCode);
+		  log.info("rawMaterialAmount {}:",rawMaterialAmount);
+		  log.info("========================================");
+		supplierService.addSupplierRequest(rawMeterialCode, supplierClient, chargeEmployeeCode, rawMaterialAmount, rawMaterialOrderExpected);
+		return "redirect:/contract/supplierRequestList";
 	}
 	//[보람]원부자재 발주요청 거래처별 자재 조회
 	@RequestMapping(value = "searchRawMaterial",method = RequestMethod.GET)
@@ -148,14 +162,12 @@ public class ContractController_HBR {
 	//[보람]원부자재 발주요청메서드
 	@GetMapping("/addSupplierRequest")
 	public String addSupplierRequest(Model model) {
-		 List<Map<String,Object>> resultMap1 = supplierService.getRawInventoryState();
+		List<Map<String,Object>> inventoryStatusList = materialsInventoryStatusService.getInventoryStatusByMCode();
+		model.addAttribute("inventoryStatusList", inventoryStatusList);
 		 
 		
 		
-		 log.info("========================================");
-		 log.info("addSupplierRequeststate{}",resultMap1);
-		 log.info("========================================");
-		 model.addAttribute("rawInventoryList", resultMap1);
+		
 		 
 		
 		 
