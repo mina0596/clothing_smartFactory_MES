@@ -73,41 +73,14 @@ public class ContractController_LHB {
 		return "contract/buyerOrderList"; //잘못됨
 	}	
 	
-
+	//[한빛]출고현황
 	@GetMapping("/buyerOrderApproval")
-	public String getRequestedProductApproval(Model model
-							   ,@RequestParam(name="searchKey", required = false) String searchKey
-							   ,@RequestParam(name="searchValue", required = false) String searchValue) {
-		
-		log.info("========================================");
-		log.info("화면에서 입력받은 값(회원목록) searchKey: {}", searchKey);
-		log.info("화면에서 입력받은 값(회원목록) searchValue: {}", searchValue);
-		log.info("========================================");
-		
-		//System.out.println("=========================================");
-		//System.out.println("searchKey : " + searchKey);
-		//System.out.println("searchValue : " + searchValue);
-		//System.out.println("=========================================");
-		
-		//map을 활용해서 검색 키워드 정리
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("searchKey", searchKey);
-		paramMap.put("searchValue", searchValue);
-		
-		List<RequestedProduct> approvalList = requestedProductService.getRequestedProductApproval(paramMap);
-		
-		log.info("========================================");
-		log.info("approvalList: {}", approvalList);
-		log.info("========================================");
-		//System.out.println("=========================================");
-		//System.out.println("memberList : " + memberList);
-		//System.out.println("=========================================");
-		
-		model.addAttribute("title", "회원목록");
-		model.addAttribute("approvalList", approvalList);
-		
+	public String getExWarehousingList(Model model) {
+		List<Map<String,Object>> approvalList = requestedProductService.getRequestedProductApproval();
+		model.addAttribute("approvalList",approvalList);
 		return "contract/buyerOrderApproval";
 	}
+
 	
 	//[한빛]수주 주문서 상세로!
 	@GetMapping("/buyerOrderInfo")

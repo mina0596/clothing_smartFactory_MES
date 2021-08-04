@@ -75,7 +75,7 @@ public class QualityControlController_LHB {
 		paramMap.put("searchValue", searchValue);
 
 	    Map<String, Object> resultMap = defectiveProductService.getDefectiveProduct(paging);
-	    model.addAttribute("defectiveProductList", 					resultMap.get("defectiveProductList"));
+	    model.addAttribute("defectiveProductList", 			resultMap.get("defectiveProductList"));
 	    model.addAttribute("currentPage", 					resultMap.get("currentPage"));
 		model.addAttribute("lastPage", 						resultMap.get("lastPage"));
 		model.addAttribute("pageStartNum", 					resultMap.get("pageStartNum"));
