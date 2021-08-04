@@ -5,6 +5,7 @@ $(function(){
 	var highClassCateName = $('#highClassCateName');
 	var middleClassCateName = $('#middleClassCateName');
 	var lowClassCateName = $('#lowClassCateName');
+	var subClassCateName = $('#subClassCateName');
 	var inspectionCode=[]
 //검사대분류명가지고오기
 	var request = $.ajax({
@@ -94,11 +95,15 @@ $(function(){
 			alert( "Request failed: " + textStatus );
 		});	
 	})
-	$('#lowClassCateName').change(function(){
-		var lowClassCateName = $('#lowClassCateName option:selected').val();
-		$('#qualityinsertForm input').prop('disabled', false);
-		inspectionCode.push(lowClassCateName);
-		console.log(inspectionCode);
-	});
+	//상세검사에 대한 select가 없으면 실행
+	if(subClassCateName == 'undefined'|| subClassCateName ==''){
+		$('#lowClassCateName').change(function(){
+			console.log('이게 찍히면 안되는뎅');
+			var lowClassCateName = $('#lowClassCateName option:selected').val();
+			$('#qualityinsertForm input').prop('disabled', false);
+			inspectionCode.push(lowClassCateName);
+			console.log(inspectionCode);
+		});
+	}
 	
 })
