@@ -39,7 +39,7 @@ layout:decorate="@{layout/default_contract}">
          		<tr>
          			<th>거래처별</th>
          			<th>품목별</th>
-         			<th>의뢰별</th>
+         			<th>계약별</th>
          			<th>순서</th>
          		</tr>
          	</thead>
@@ -116,39 +116,27 @@ layout:decorate="@{layout/default_contract}">
                     <td th:text="${c.ctp}"></td>
                     <td th:text="${c.csd}"></td>
                     <td th:text="${c.ced}"></td>
-                    <td>  <button class="btn btn-primary btn-xs" type="button" onclick="location.href='/modifyBuyerContract'"><i class="fa fa-pencil"></i>수정</button></td>
+                    <td><button class="btn btn-primary btn-xs" type="button" onclick="location.href='modifyBuyerContract'"><i class="fa fa-pencil"></i>수정</button></td>
 
                   </tr>
                   
            		 </tbody>
               </table>
-                            	<div class="dataTables_paginate paging_bootstrap pagination">
-					<ul>
-						<li class="prev"><a th:href="@{/system/clientList}"> << </a></li>
-						<li><a th:if="${currentPage > 1}" th:href="@{/system/clientList(currentPage=${currentPage - 1})}">이전</a></li>
-						<th:block th:each="num:${#numbers.sequence(pageStartNum, pageEndNum)}">
-						<li><a th:if="${num != currentPage}" th:href="@{/system/clientList(currentPage=${num})}">[[${num}]]</a></li>
-						<li><a th:unless="${num != currentPage}">[[${num}]]</a></li>
-						
-						</th:block>
-						<li class="prev"><a th:if="${currentPage < lastPage}" th:href="@{/system/clientList(currentPage=${currentPage + 1})}"> 다음 </a></li>
-						<li class="next"><a th:href="@{/system/clientList(currentPage=${lastPage})}"> >> </a></li>
-					</ul>
-				</div>
+
               
            	 </div>
             </div>
-            <div class="form-group text-right">
+              <div class="form-group text-right">
 		          <div class="col-lg-offset-2 col-lg-10">
 		          <br>
 		          <br>
-		          <br>
-		          <br>
-		          <a th:href="@{/addBuyerRequest}" class="btn btn-success btn-xs"><i class="fa fa-plus"></i>계약등록</a>	          
+
+		          <a th:href="@{/contract/addBuyerContract}" class="btn btn-success btn-xs"><i class="fa fa-plus"></i>계약등록</a>	          
 		           <a id="deleteBtn" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i>삭제</a>
 		          </div>
 		        </div> 
             </div>
+
           
           <!-- 입고 상세 내역 팝업창 -->
           <div class="popup" data-popup="requestInfo">

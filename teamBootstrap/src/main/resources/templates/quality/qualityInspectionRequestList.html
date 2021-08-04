@@ -144,7 +144,7 @@ layout:decorate="@{layout/default_qualityControl}">
 					<button th:if="${l.ira eq '미승인'}" class="btn btn-danger btn-xs btn_status"  value="확인하기">미승인</button>
 					</td>   
                     <td th:text="${l.ird}"></td>
-                  	<td><a th:href="@{/addQualityInspectionStatus}" class="btn btn-warning btn-xs"><i class="fa fa-bar-chart-o"></i>현황</a></td>
+                  	<td><a th:href="@{/quality/qualityInspectionStatusNow}" class="btn btn-warning btn-xs"><i class="fa fa-bar-chart-o"></i>현황</a></td>
                   	<td><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
                   </tr>                             
            		 </tbody>
@@ -153,7 +153,7 @@ layout:decorate="@{layout/default_qualityControl}">
            </div>
            <div class="form-group text-right">
 		          <div class="col-lg-offset-2 col-lg-10">
-		           <a th:href="@{/qualityInspectionRequest}" class="btn btn-success btn-xs"><i class="fa fa-check"></i>등록</a>
+		          <a th:href="@{/quality/qualityInspectionRequest}" class="btn btn-success btn-xs"><i class="fa fa-plus"></i>검사요청</a>	          
 		           <a id="deleteBtn" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i>삭제</a>
 		          </div>
 		        </div>
