@@ -196,7 +196,7 @@ $(function(){
 			data: {lowClassCateName : lowClassCateName}
 		}); 
 		request.done(function( data ) {
-			console.log(data);
+			//console.log(data);
 			//셀렉트박스  첫번째옵션빼고 초기화시키기
 			$('#SubClassCateName').find('option:not(:first)').remove();
 			if(data != undefined && data != '' && data.length > 0){

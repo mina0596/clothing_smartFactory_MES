@@ -534,7 +534,7 @@
 			,#{qualityInspectionCode}
 			,#{samplingCheck}
 			,#{inspectioinSpecialRequest}
-			,#{inspectionRequestApproval}
+			,'미승인'
 			,#{requestedInspectionCompleteDate}
 			,NOW()
 			,NULL
