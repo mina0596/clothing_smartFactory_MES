@@ -38,7 +38,7 @@ layout:decorate="@{layout/default_system}">
                   <div class="form-group ">
                     <label for="lastname" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">전화번호</font></font></label>
                     <div class="col-lg-6">
-                      <input class=" form-control" name="clientTel"  onKeyup="inputTelNumber(this);" placeholder="전화번호를 입력하세요."  type="text">
+                      <input class=" form-control" name="clientTel" maxlength="13" onKeyup="inputTelNumber(this);" placeholder="전화번호를 입력하세요."  type="text">
                     </div>
                   </div>
                   
@@ -59,7 +59,7 @@ layout:decorate="@{layout/default_system}">
                   <div class="form-group ">
                     <label for="email" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">사업자번호</font></font></label>
                     <div class="col-lg-6">
-                      <input class="form-control " name="clientBusinessNum" onkeyup="setindustrial_num(this)" placeholder="10개의 숫자로 구성된 사업자번호를 입력하세요."  type="text">
+                      <input class="form-control " name="clientBusinessNum" maxlength="12" onkeyup="setindustrial_num(this)" placeholder="10개의 숫자로 구성된 사업자번호를 입력하세요."  type="text">
                     </div>
                   </div>
                   
