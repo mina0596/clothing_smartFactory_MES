@@ -20,11 +20,11 @@
           <li class="sub-menu">
             <a href="javascript:;">
               <i class="fa fa-book"></i>
-              <span>검사요청 ![다미]</span>
+              <span>검사요청 ![다미&한빛]</span>
               </a>
              <ul class="sub">
               <li><a th:unless="${session.SLEVEL == '3'}" th:href="@{/quality/qualityInspectionRequest}">품질 검사 요청 ![다미]</a></li>
-              <li><a th:href="@{/quality/qualityInspectionRequestList}">요청목록 ![다미]</a></li>
+              <li><a th:href="@{/quality/qualityInspectionRequestList}">검사요청목록 ![한빛]</a></li>
             </ul>
           </li>
           

@@ -69,6 +69,12 @@ public class ContractController_KDM {
 		return resultB;
 	}
 	
+	//[다미]수주계약 등록 -> 조회
+	@GetMapping("/addBuyerOrder")
+	public String addBuyerOrder() {
+		return "contract/addbuyerOrder";
+	}
+	
 	//[다미] 품목에 따른 측정 부위 가져오기
 	@PostMapping("/getMeasurementPart")
 	@ResponseBody
@@ -83,20 +89,5 @@ public class ContractController_KDM {
 		List<ProductCodeDetail> result = contractAddBuyerOrderService.getDetailedCategorizedName(genderCategorizedCode);
 		return result;
 	}
-	
-	// [다미] 전표 목록
-	@GetMapping("/paymentInvoiceList")
-	public String paymentInvoiceList(Model model) {
-		return "contract/paymentInvoiceList";
-	}
-
-	// [다미] 전표 등록 화면
-	@GetMapping("/addPaymentInvoice")
-	public String addPaymentInvoice(Model model) {
-		return "contract/addPaymentInvoice";
-	}
-	
-
-
 
 }

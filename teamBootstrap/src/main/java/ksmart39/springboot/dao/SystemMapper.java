@@ -10,7 +10,7 @@ import ksmart39.springboot.domain.AccountingCategory;
 import ksmart39.springboot.domain.Client;
 import ksmart39.springboot.domain.HighClassInspection;
 import ksmart39.springboot.domain.HumanResources;
-
+import ksmart39.springboot.domain.ProductionProcessList;
 import ksmart39.springboot.domain.QualityInspection;
 import ksmart39.springboot.domain.RawMaterials;
 import ksmart39.springboot.domain.SubClassInspection;
@@ -99,6 +99,12 @@ public interface SystemMapper {
 	 */ 	
 	//[민아] 원부자재 전체 리스트 조회
 	public List<RawMaterials> getMaterialsList(); 
+	
+	//[민아]생산공정 등록
+	public int addProductionProcess(ProductionProcessList productionProcessDomain);
+	
+	//[민아]생산공정 전체 목록
+	public List<ProductionProcessList> getProductionProcessList();
 
 	
 }

@@ -52,8 +52,8 @@ public class RawMaterialsController_KDM {
 	
 	//[다미]자재 입고 등록 후 자재 입고 목록으로 리다이렉트 , 파라미터는 임시 값
 	@PostMapping("/addInWarehousing")
-	public String addInWarehousing(@RequestParam(value = "raw_material_name", required = false )String raw_material_name) {
-		return "redirect:/inWarehousingList";
+	public String addInWarehousing() {
+		return "redirect:inWarehousingList";
 	}
 	
 	//[다미]자재 입고 등록

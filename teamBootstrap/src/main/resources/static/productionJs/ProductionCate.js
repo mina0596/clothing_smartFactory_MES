@@ -11,7 +11,7 @@
 			method: "get"
 		}); 
 		request.done(function( data ) {
-			console.log(data);
+			//console.log(data);
 			if(data != undefined || data != '' || data.length > 0){
 				var html = '';
 				for(var i = 0; i<data.length; i++){
@@ -40,7 +40,7 @@
 				data: {gender : gender}
 			}); 
 			request.done(function( data ) {
-				console.log(data);
+				//console.log(data);
 				if(data != undefined && data != '' && data.length > 0){
 					var html = '';
 					for(var i = 0; i<data.length; i++){

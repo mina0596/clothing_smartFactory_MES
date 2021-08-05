@@ -27,8 +27,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
-
+import ksmart39.springboot.domain.CompletedProduct;
 import ksmart39.springboot.domain.ProductProductionProcessStatus;
 import ksmart39.springboot.domain.WorkOrder;
 import ksmart39.springboot.service.CompletedProductService;
@@ -88,7 +87,8 @@ public class ProductionController_PMA {
 		log.info("ajax에서 잘 받아오나요? {}", selectedProductInfo);
 		productionService.completeProcess(selectedProductInfo);
 		if(selectedProductInfo.getProductionProcessCode().equals("process_07")) {
-			completedProductService.addCompletedProduct(null);
+			CompletedProduct completedInfo = completedProductService.getProductInfoToInsertCompleted(selectedProductInfo.getRequestedProductCode());
+			completedProductService.addCompletedProduct(completedInfo);
 		}else {
 			productionService.insertNextProcess(selectedProductInfo);			
 		}

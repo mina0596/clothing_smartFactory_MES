@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ksmart39.springboot.domain.AccountingCategory;
 import ksmart39.springboot.domain.Client;
 import ksmart39.springboot.domain.HumanResources;
+import ksmart39.springboot.domain.ProductionProcessList;
 import ksmart39.springboot.domain.QualityInspection;
 
 import ksmart39.springboot.domain.RawMaterials;
@@ -38,12 +39,6 @@ public class SystemController_PMA {
 
 	private static final Logger log = LoggerFactory.getLogger(SystemController_PMA.class);
 
-	
-
-
-	
-
-
 
 	// [민아]원부자재 리스트 조회
 	@GetMapping("/rawMaterialsList")
@@ -56,15 +51,14 @@ public class SystemController_PMA {
 	// [민아]원부자재 등록화면
 	@GetMapping("/addRawMaterials")
 	public String addRawMeterials(Model model) {
-
 		return "system/addRawMaterials";
 	}
-
-	// [민아]모달 실험
-	@GetMapping("/modalBody")
-	public String testModaltest(Model model) {
-
-		return "system/modalBody";
+	
+	//[민아]원부자재 등록 후 목록화면으로 이동
+	@PostMapping("/addRawMaterials")
+	public String addRawMaterials(@RequestParam(name = "materialName") String materialName) {
+		log.info("화면단 확인:{}", materialName);
+		return "redirect:/system/rawMaterialsList";
 	}
 
 	// [민아]원부자재정보 수정
@@ -123,15 +117,24 @@ public class SystemController_PMA {
 	//================================================================
 	//[민아]생산공정 등록
 	@GetMapping("/addProductionProcess")
-	public String addProductionProcess() {
+	public String addProductionProcess(Model model) {
 		return "system/addProductionProcess";
 	}
 	
+	//[민아]생산공정 등록 후 생산공정 목록화면으로 이동
+	@PostMapping("/addProductionProcess")
+	public String addProductionProcess(ProductionProcessList productionProcessDomain) {
+		log.info("등록화면에서 받아오는 등록정보 확인 :{}", productionProcessDomain);
+		systemService.addProductionProcess(productionProcessDomain);
+		return "redirect:/system/productionProcessList";
+	}
 	//[민아]생산공정 목록
 	@GetMapping("/productionProcessList")
-	public String getProductionProcessList() {
+	public String getProductionProcessList(Model model) {
+		List<ProductionProcessList> productionProcessList = systemService.getProductionProcessList();
+		log.info("DB에서 리스트 잘 데려오는지 확인:{}", productionProcessList);
+		model.addAttribute("productionProcessList", productionProcessList);
 		return "system/productionProcessList";
 	}
 		
-
 }

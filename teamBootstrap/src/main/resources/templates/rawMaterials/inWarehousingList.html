@@ -4,9 +4,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
 layout:decorate="@{layout/default_rawMaterials}">
 
 <th:block layout:fragment="pageTitle">
-	   <div class="border-head"> 
-	    <h3>자재 관리</h3>
-	   </div>
+
 
  <script type="text/javascript">
 		$(function(){
@@ -95,6 +93,7 @@ layout:decorate="@{layout/default_rawMaterials}">
                   <tr>
                   	<th><input type="checkbox" id="checkAll"></th>
                  	<th><i class="fa fa-bullhorn"></i>번호</th>
+                    <th class="hidden-phone"><i class="fa fa-bookmark"></i>입/출고코드</th>
                     <th class="hidden-phone"><i class="fa fa-bookmark"></i>원부자재 코드</th>
                     <th><i class="fa fa-bookmark"></i>원부자재 발주 코드</th>
                     <th><i class=" fa fa-bookmark"></i>구분</th>
@@ -111,6 +110,7 @@ layout:decorate="@{layout/default_rawMaterials}">
                   <tr th:if="${#lists.size(list) > 0}" th:each="l, i : ${list}">
                   	<td><input type="checkbox" class="checked"></td>
                   	<td th:text="${i.index+1}"></td>
+                    <td th:text="${l.transactionCode}"></td>
                     <td>
                     <a th:href="@{#}" data-popup-open="inWarehousingInfo" >[[${l.materialCode}]]</a></td>
                     <td th:text="${l.materialOrderCode}"></td>
@@ -120,7 +120,7 @@ layout:decorate="@{layout/default_rawMaterials}">
                     <td th:text="${l.materialsInfo.unit}"></td>
                     <td th:text="${l.transactionDate}"></td>
                   	<td>  
-                  		<a th:href="@{/rawMaterials/modifyInWarehousing}" class="btn btn-primary btn-xs">
+                  		<a th:href="@{/rawMaterials/modifyInWarehousing(transactionCode=${l.transactionCode})}" class="btn btn-primary btn-xs">
                   			<i class="fa fa-pencil"></i>
                   				수정
                   		</a>

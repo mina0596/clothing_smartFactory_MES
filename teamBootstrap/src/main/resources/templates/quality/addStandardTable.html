@@ -14,34 +14,66 @@ layout:decorate="@{layout/default_qualityControl}">
 			$('#searchBtn1').click(function(){
 				$('#SearchInspectionCode').modal("show");
 			});
-			$('#lowClassCateName').change(function(){
-				var lowClassCateName = $('#lowClassCateName option:selected').val();
-				var request = $.ajax({
-					url: "/quality/subClassCate",
-					method: "get",
-					data: { lowClassCateName : lowClassCateName}
-				}); 
-				request.done(function( data ) {
-					console.log(data);
-					$('#subClassCateName').find('option:not(:first)').remove();
-					if(data != undefined && data != '' && data.length > 0){
-						var html = '';
-						for(var i = 0; i<data.length; i++){
-							html += "<option value= '";
-							html += data[i].subClassCode;
-							html += "'>";
-							html += data[i].subClassName;
-							html += "</option>";					
+			if(subClassCateName != 'undefined'|| subClassCateName !=''){
+				$('#lowClassCateName').change(function(){
+					var lowClassCateName = $('#lowClassCateName option:selected').val();
+					var request = $.ajax({
+						url: "/quality/subClassCate",
+						method: "get",
+						data: { lowClassCateName : lowClassCateName}
+					}); 
+					request.done(function( data ) {
+						console.log(data);
+						$('#subClassCateName').find('option:not(:first)').remove();
+						if(data != undefined && data != '' && data.length > 0){
+							var html = '';
+							for(var i = 0; i<data.length; i++){
+								html += "<option value= '";
+								html += data[i].subClassCode;
+								html += "'>";
+								html += data[i].subClassName;
+								html += "</option>";					
+							}
+							subClassCateName.append(html);
 						}
-						subClassCateName.append(html);
-					}
+						
+					});
 					
+					request.fail(function( jqXHR, textStatus ) {
+						alert( "Request failed: " + textStatus );
+					});	
 				});
-				
-				request.fail(function( jqXHR, textStatus ) {
-					alert( "Request failed: " + textStatus );
-				});	
+			}
+			
+			$('#subClassCateName').change(function(){
+				var resultInspectionCode = $(this).val();
+				console.log(resultInspectionCode);
+				$('#inspectionCodeInput').val(resultInspectionCode);
 			});
+			$('input:radio[name="category"]').change(function(){
+				var selectedType = $(this).val();
+				if(selectedType == '등급별'){
+					$('#byLevelInput').addClass('in');
+					$('#byNumInput').removeClass('in');
+					$('#byPassInput').removeClass('in');
+					//aria-expanded
+				}else if(selectedType == '수치별'){
+					$('#byNumInput').addClass('in');
+					$('#byLevelInput').removeClass('in');
+					$('#byPassInput').removeClass('in');
+				}else if(selectedType == '합격/불합격별'){
+					$('#byPassInput').addClass('in');
+					$('#byLevelInput').removeClass('in');
+					$('#byNumInput').removeClass('in');
+				}
+			})
+			
+			$('.regBtn').click(function(){
+				var maxVal = $('#maxValue').val();
+				var needUnit = $('#needUnit').val();
+				$('#hiddenMinValue').val('-' + maxVal);
+				$('#hiddenStn').val('±' + maxVal + needUnit);
+			})
 	
 		})
 	</script>
@@ -52,12 +84,13 @@ layout:decorate="@{layout/default_qualityControl}">
 	   <h4 class="mb"><i class="fa fa-edit"></i> 품질검사 기준표 등록</h4>
 	   <hr>
 	   <br>
+	   <form th:action="addStandardTable" method="post">
 	   <div class="form-group">
          	<div class="col-md-3" style="padding-left: 50px;">
      		<label class="col-sm-2 control-label" style="font-weight: 600;">품질검사코드</label>
          	</div>
          	<div class="col-md-5">
-            <input type="text" class="form-control" placeholder="아래에서 선택해주세요." readonly="readonly">
+            <input type="text" id="inspectionCodeInput" name="qualityInspectionCode" class="form-control" placeholder="아래에서 선택해주세요." readonly="readonly">
           </div>
          	
 	   </div>
@@ -65,16 +98,16 @@ layout:decorate="@{layout/default_qualityControl}">
          	<div class="col-md-3" style="padding-left: 50px;">
          	</div>
 		   <div id="searchInsCodeForm" class="form-inline col-md-5">
-				 <select class="form-control" name="highClassificationName" id="highClassCateName" >
+				 <select class="form-control" id="highClassCateName" >
 		            <option value="">::대분류검사명::</option>
 	             </select>
-			     <select class="form-control" name="mediumClassificationName" id="middleClassCateName">
+			     <select class="form-control" id="middleClassCateName">
 		           	<option  value="">::중분류검사명::</option>
 	             </select>
-			  	 <select class="form-control" name="lowClassificationName" id="lowClassCateName">
+			  	 <select class="form-control" id="lowClassCateName">
              		<option  value="">::소분류검사명::</option>
 		         </select>
-			  	 <select class="form-control" name="subClassificationName" id="subClassCateName">
+			  	 <select class="form-control" id="subClassCateName">
              		<option  value="">::상세분류검사명::</option>
 		         </select>
         	</div>
@@ -85,13 +118,13 @@ layout:decorate="@{layout/default_qualityControl}">
 	               	</div>
 					<div class="radio" style="font-size: 15px">
 			          <label style="padding-right: 20px; padding-left: 40px;" >
-			            <input type="radio" name="optionsRadios"  id="optionsRadios1" value="등급별" checked> 등급별
+			            <input type="radio" name="category" value="등급별"> 등급별
 			          </label>      
 			          <label style="padding-right: 20px;">
-			            <input type="radio" name="optionsRadios" id="optionsRadios2" value="수치별"> 수치별
+			            <input type="radio" name="category" value="수치별"> 수치별
 			          </label>
 			          <label>
-			            <input type="radio" name="optionsRadios" id="optionsRadios3" value="Y/N별"> 합격/불합격별
+			            <input type="radio" name="category" value="합격/불합격별"> 합격/불합격별
 			          </label>
 			        </div>  
 				</div>
@@ -112,7 +145,8 @@ layout:decorate="@{layout/default_qualityControl}">
 			                 <label class="control-label col-lg-2" style="font-weight: 600;"> 등급 기준</label>
 			            </div>
 			            <div class="col-md-2">
-		                    <input type="text" class="form-control" placeholder="4등급 이상">
+		                    <input type="text" class="form-control" placeholder="4등급 이상" name="standardTolerance">
+		                    <input type="hidden" class="form-control" name="standardMeasurementUnit" value="등급">
 		               </div>  
 		              </div>
 		              
@@ -122,7 +156,7 @@ layout:decorate="@{layout/default_qualityControl}">
 			                 <label class="control-label col-lg-2" style="font-weight: 600;"> 합격을 위한 최소등급값</label>
 			            </div>
 			            <div class="col-md-2">
-		                    <input type="number" class="form-control" placeholder="등급 숫자를 입력하세요">
+		                    <input type="number" class="form-control" placeholder="등급 숫자를 입력하세요" name="minValue">
 		               </div> 
 			            <div class="col-md-2" style="padding-left: 0px;">
 		                    <label class="col-sm-2 control-label" style="font-weight: 600; padding-left: 0px;">급</label>
@@ -136,9 +170,9 @@ layout:decorate="@{layout/default_qualityControl}">
 		               	</div>
 				          <div class="col-md-5">
 				            <div  class="input-group">
-				              <input type="text" class="form-control" size="16" placeholder="KS K ISO 105-C10">
+				              <input type="text" class="form-control" size="16" placeholder="KS K ISO 105-C10" name="method">
 				              <div class="input-group-btn">
-				                <button type="button" class=" btn btn-theme03 btn btn-default" id="searchBtn2"><i class="fa"></i> 웹에서 검색하여 가져오기</button>
+				                <button type="button" class=" btn btn-theme03 btn btn-default" onclick="window.open('http://www.kotiti-global.com/ko/index.do')"><i class="fa"></i> 웹에서 검색하여 가져오기</button>
 				              </div>
 				            </div>
 				          </div>
@@ -150,10 +184,10 @@ layout:decorate="@{layout/default_qualityControl}">
 		               	</div>
 						<div class="radio" style="font-size: 15px">
 				          <label style="padding-right: 20px; padding-left: 40px;" >
-				            <input type="radio" name="optionsRadios"  id="optionsRadios1" value="Y" checked> YES
+				            <input type="radio" name="requiredInspectionCheck" value="Y" checked> YES
 				          </label>      
 				          <label style="padding-right: 20px;">
-				            <input type="radio" name="optionsRadios" id="optionsRadios2" value="N"> NO
+				            <input type="radio" name="requiredInspectionCheck" value="N"> NO
 				          </label>
 				        </div>  
 						</div>
@@ -173,20 +207,6 @@ layout:decorate="@{layout/default_qualityControl}">
                 <div id="byNumInput" class="accordion-body collapse">
                   <div class="accordion-inner">
                     <p>
-
-                    	<div class="form-group">
-			               	<div class="col-md-3" style="padding-left: 50px;">
-				          		<label class="col-sm-2 control-label" style="font-weight: 600;"> 측정 품목명</label>
-			               	</div>
-			               	<div class="col-md-3">
-				            <div  class="input-group">
-				              <input type="text" class="form-control" size="16" placeholder="자켓">
-				              <div class="input-group-btn">
-				                <button type="button" class=" btn btn-default" id="searchBtn2"><i class="fa fa-search"></i></button>
-				              </div>
-				            </div>
-				          </div>
-				        </div>
                     	
 
                     	<div class="form-group">
@@ -203,7 +223,7 @@ layout:decorate="@{layout/default_qualityControl}">
 				                 <label class="control-label col-lg-2" style="font-weight: 600;"> 측정방법</label>
 				            </div>
 				            <div class="col-md-5">
-			                    <input type="text" class="form-control" placeholder="뒤판 몸판에서 뒷목점 통과 양쪽 어깨점 간의 길이">
+			                    <input type="text" class="form-control" name="method" placeholder="뒤판 몸판에서 뒷목점 통과 양쪽 어깨점 간의 길이">
 			               </div>  
 		                </div>
 		                
@@ -212,15 +232,17 @@ layout:decorate="@{layout/default_qualityControl}">
 					        <div class="col-md-3" style="padding-left: 50px;">
 				                 <label class="control-label col-lg-2" style="font-weight: 600;"> 허용오차</label>
 				            </div>
-				            <div class="col-md-2">
-			                    <input type="number" class="form-control" placeholder="오차 범위  ±를 제외한 숫자를 입력하세요">
+				            <div class="col-md-2 form-inline">
+			                    <input type="number" class="form-control" name="maxValue" placeholder="오차 범위  ±를 제외한 숫자를 입력하세요" id="maxValue">
+			                    <input type="number" class="form-control" name="minValue" id="hiddenMinValue">
+			                    <input type="text" class="form-control" name="standardTolerance" id="hiddenStn">
 			                </div> 
-				            <div class="col-md-1" style="padding-left: 0px;">
-			                    <select class="form-control">
-							      	<option>::단위::</option>
-							      	<option>mm</option>
-							      	<option>cm</option>
-							      	<option>직접입력</option>
+				            <div class="col-md-1" style="padding-left: 0px;" >
+			                    <select class="form-control" name="standardMeasurementUnit" id="needUnit">
+							      	<option value="">::단위::</option>
+							      	<option value="mm">mm</option>
+							      	<option value="cm">cm</option>
+							      	<option >직접입력</option>
 						      </select>
 			               </div> 
 		              </div> 
@@ -232,10 +254,10 @@ layout:decorate="@{layout/default_qualityControl}">
 		               	</div>
 						<div class="radio" style="font-size: 15px">
 				          <label style="padding-right: 20px; padding-left: 40px;" >
-				            <input type="radio" name="optionsRadios"  id="optionsRadios1" value="Y" checked> YES
+				            <input type="radio" name="requiredInspectionCheck" value="Y" checked> YES
 				          </label>      
 				          <label style="padding-right: 20px;">
-				            <input type="radio" name="optionsRadios" id="optionsRadios2" value="N"> NO
+				            <input type="radio" name="requiredInspectionCheck" value="N"> NO
 				          </label>
 				        </div>  
 						</div>
@@ -262,7 +284,7 @@ layout:decorate="@{layout/default_qualityControl}">
 				                 <label class="control-label col-lg-2" style="font-weight: 600;"> 검사기준</label>
 				            </div>
 				            <div class="col-md-5">
-			                    <input type="text" class="form-control" placeholder="표면의 변색이 눈에 띄게 보임">
+			                    <input type="text" class="form-control" placeholder="표면의 변색이 눈에 띄게 보임" name="method">
 			               </div>  
 		                </div>
 
@@ -272,10 +294,10 @@ layout:decorate="@{layout/default_qualityControl}">
 		               	</div>
 						<div class="radio" style="font-size: 15px">
 				          <label style="padding-right: 20px; padding-left: 40px;" >
-				            <input type="radio" name="optionsRadios"  id="optionsRadios1" value="Y" checked> YES
+				            <input type="radio" name="optionsRadios" value="Y" checked> YES
 				          </label>      
 				          <label style="padding-right: 20px;">
-				            <input type="radio" name="optionsRadios" id="optionsRadios2" value="N"> NO
+				            <input type="radio" name="optionsRadios" value="N"> NO
 				          </label>
 				        </div>  
 						</div>
@@ -292,13 +314,13 @@ layout:decorate="@{layout/default_qualityControl}">
 				
 			<div class="form-group text-right">
 	         <div class="col-lg-offset-2 col-lg-10">
-	           <button class="btn btn-theme" type="button" onclick="location.href='standardTableList'">등록</button>
+	           <button class="regBtn btn btn-theme" type="submit">등록</button>
 	                 <button class="btn btn-theme04" type="button" onClick="history.back();">취소</button>
 	         </div>
 	       	</div>
+       	 </form>
        <!-- 전체 흰색바탕 끝 -->
        </div>
-  </div>
  <th:block th:replace="/quality/modal_SearchInspectionCode::modal_SearchInspectionCode"></th:block>
 </th:block>
 

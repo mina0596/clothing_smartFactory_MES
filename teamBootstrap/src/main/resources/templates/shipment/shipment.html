@@ -4,17 +4,21 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
 layout:decorate="@{layout/default_shipment}">
 
 <th:block layout:fragment="pageTitle">
-	   <div class="border-head"> 
-	    <h3>출하관리</h3>
-	    </div>
+<h1><i class="fa fa-gears"></i>출하 관리</h1>
 </th:block>
 
 
 <th:block layout:fragment="container">
-
-<h4><i class="fa fa-angle-right"></i>출하지시목록</h4> 
-              <hr>   
-              <table class="table table-striped table-advance table-hover" id="shipmentOrderList">
+ <div class="row content-panel form-panel">
+ 	<div class="profile-text" style="text-align: center;">
+  		<h3>출하관리 흐름도</h3>
+ 			<img style="max-width: 100%;" src="/image/shipmentProcess.jpg">
+	</div>
+  </div>
+  <br>
+	<h4><i class="fa fa-angle-right"></i>송장목록</h4>  
+              <hr>  
+              <table id="shipmentInvoicelist" class="table table-striped table-advance table-hover" >
                 <thead>
                   <tr>
                    <th><input type="checkbox" class="check" id="checkAll"></th>
