@@ -128,6 +128,12 @@ layout:decorate="@{layout/default_qualityControl}">
              <div>
               <h4><i class="fa fa-angle-right"></i>불량품 목록</h4> 
              </div>
+                         <div class="form-group text-right">
+		          <div class="col-lg-offset-2 col-lg-10">
+		           <a th:href="@{/quality/addDefectiveProduct}" class="btn btn-success btn-xs"><i class="fa fa-plus"></i> 불량품등록</a>
+	               <a class="btn btn-danger btn-xs" id="deleteBtn"><i class="fa fa-trash-o "></i>삭제</a>
+		          </div>
+		        </div> 
               <table id="list" class="table table-striped table-advance table-hover">
                 <thead>
                   <tr>
@@ -180,12 +186,7 @@ layout:decorate="@{layout/default_qualityControl}">
            	 </div>
             </div>
             
-            <div class="form-group text-right">
-		          <div class="col-lg-offset-2 col-lg-10">
-		           <a th:href="@{/quality/addDefectiveProduct}" class="btn btn-success btn-xs"><i class="fa fa-plus"></i> 불량품등록</a>
-	               <a class="btn btn-danger btn-xs" id="deleteBtn"><i class="fa fa-trash-o "></i>삭제</a>
-		          </div>
-		        </div> 
+
             </div>
           
           <!-- =============================================================== -->
