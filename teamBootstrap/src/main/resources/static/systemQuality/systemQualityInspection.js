@@ -5,6 +5,7 @@ $(function(){
 	var highClassCateName = $('#highClassCateName');
 	var middleClassCateName = $('#middleClassCateName');
 	var lowClassCateName = $('#lowClassCateName');
+	var subClassCateName = $('#subClassCateName');
 	var inspectionCode=[]
 //검사대분류명가지고오기
 	var request = $.ajax({

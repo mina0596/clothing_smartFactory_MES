@@ -107,7 +107,7 @@ layout:decorate="@{layout/default_production}">
 		 			method: "get"
 		 		}); 
 		 		request.done(function( data ) {
-		 			console.log(data);
+		 			//console.log(data);
 		 			if(data != undefined || data != '' || data.length > 0){
 		 				var html = '';
 		 				for(var i = 0; i<data.length; i++){
@@ -141,7 +141,7 @@ layout:decorate="@{layout/default_production}">
 		 				data: {gender : genderName}
 		 			}); 
 		 			request.done(function( data ) {
-		 				console.log(data);
+		 				//console.log(data);
 		 				if(data != undefined && data != '' && data.length > 0){
 		 					var html = '';
 		 					for(var i = 0; i<data.length; i++){

@@ -14,7 +14,7 @@ layout:decorate="@{layout/default_qualityControl}">
       <hr>
       <br>
       
-      <form th:action="@{/quality/qualityInspectionRequest}" class="form-horizontal style-form" method="post">
+      <form id="submitForm" th:action="@{/quality/qualityInspectionRequest}" class="form-horizontal style-form" method="post">
 
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label">계약번호</label>
@@ -32,7 +32,7 @@ layout:decorate="@{layout/default_qualityControl}">
 		<label class="col-sm-2 col-sm-2 control-label">품목별 의뢰 코드</label>
 			<div class="col-sm-4">
 				<select id="requestedProductCode" name="requestedProductCode" class="form-control">
-					<option>::품목별 의뢰 코드::</option>
+					<option value="">::품목별 의뢰 코드::</option>
 				</select>
 			</div>
 		</div>
@@ -41,7 +41,7 @@ layout:decorate="@{layout/default_qualityControl}">
                   <label class="col-sm-2 col-sm-2 control-label" >대분류 검사명</label>
                   <div class="col-sm-4">
                       <select id="highClassCateName" class="form-control">
-						<option>::선택::</option>
+						<option value="">::선택::</option>
 		               </select>
                   </div>
          </div> 
@@ -50,7 +50,7 @@ layout:decorate="@{layout/default_qualityControl}">
                   <label class="col-sm-2 col-sm-2 control-label">중분류 검사명</label>
                   <div class="col-sm-4">
                       <select id="middleClassCateName" class="form-control">
-						<option>::선택::</option>
+						<option value="">::선택::</option>
 		               </select>
                   </div>
                 </div>
@@ -58,7 +58,7 @@ layout:decorate="@{layout/default_qualityControl}">
                   <label class="col-sm-2 col-sm-2 control-label">소분류 검사명</label>
                   <div class="col-sm-4">
                       <select id="lowClassCateName" class="form-control">
-						<option>::선택::</option>
+						<option value="">::선택::</option>
 		               </select>
                   </div>
                 </div>
@@ -66,7 +66,7 @@ layout:decorate="@{layout/default_qualityControl}">
                   <label class="col-sm-2 col-sm-2 control-label">소분류 검사 상세명</label>
                   <div class="col-sm-4">
                       <select id="SubClassCateName" name="qualityInspectionCode" class="form-control">
-						<option>::선택::</option>
+						<option value="">::선택::</option>
 		               </select>
                   </div>
                 </div> 
@@ -89,7 +89,7 @@ layout:decorate="@{layout/default_qualityControl}">
                  <div class="form-group">
 		          <label class="col-sm-2 col-sm-2 control-label">검사 완료 요청 시각</label>
 		          <div class="col-md-4">
-		          	<input name="requestedInspectionCompleteDate" type="datetime-local" class="form-control">	            
+		          	<input id="time" name="requestedInspectionCompleteDate" type="datetime-local" class="form-control">	            
 		          </div>
 		        </div>
        
@@ -109,7 +109,7 @@ layout:decorate="@{layout/default_qualityControl}">
  		
          <div class="form-group text-right">
           <div class="col-lg-offset-2 col-lg-10">
-            <button class="btn btn-theme" type="submit"><font style="vertical-align: inherit;">요청</font></button>
+            <button id="submitBtn" class="btn btn-theme" type="button"><font style="vertical-align: inherit;">요청</font></button>
             <a th:href="@{/quality/qualityInspectionRequestList}" class="btn btn-theme04" type="button"><font style="vertical-align: inherit;">취소</font></a>
           </div>
         </div>

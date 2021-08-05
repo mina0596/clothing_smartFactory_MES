@@ -196,7 +196,7 @@ $(function(){
 			data: {lowClassCateName : lowClassCateName}
 		}); 
 		request.done(function( data ) {
-			console.log(data);
+			//console.log(data);
 			//셀렉트박스  첫번째옵션빼고 초기화시키기
 			$('#SubClassCateName').find('option:not(:first)').remove();
 			if(data != undefined && data != '' && data.length > 0){
@@ -215,6 +215,32 @@ $(function(){
 			alert( "Request failed: " + textStatus );
 		});	
 	});
-	
+	//유효성
+	$('#submitBtn').click(function(){
+		if($('#contractNum').val() == '' || $('#contractNum').val() == undefined || $('#contractNum').val() == null){
+			alert('계약번호를 입력해주세요.');
+			$('#contractNum').focus();
+		}else if($('#requestedProductCode').val() == '' || $('#requestedProductCode').val() == undefined || $('#requestedProductCode').val() == null){
+			alert('품목 의뢰 코드를 선택해주세요.');
+			$('#requestedProductCode').focus();
+		}else if($('#highClassCateName').val() == '' || $('#highClassCateName').val() == undefined || $('#highClassCateName').val() == null){
+			alert('대분류 검사명을 선택해주세요.');
+			$('#highClassCateName').focus();
+		}else if($('#middleClassCateName').val() == '' || $('#middleClassCateName').val() == undefined || $('#middleClassCateName').val() == null){
+			alert('중분류 검사명을 선택해주세요.');
+			$('#middleClassCateName').focus();
+		}else if($('#lowClassCateName').val() == '' || $('#lowClassCateName').val() == undefined || $('#lowClassCateName').val() == null){
+			alert('소분류 검사명을 선택해주세요.');
+			$('#lowClassCateName').focus();
+		}else if($('#SubClassCateName').val() == '' || $('#SubClassCateName').val() == undefined || $('#SubClassCateName').val() == null){
+			alert('소분류 검사 상세명을 선택해주세요.');
+			$('#SubClassCateName').focus();
+		}else if($('#time').val() == '' || $('#time').val() == undefined || $('#time').val() == null){
+			alert('검사완료 요청 시간을 선택해주세요.');
+			$('#time').focus();
+		}else{
+			$('#submitForm').submit();
+		}
+	});
 		
 	});

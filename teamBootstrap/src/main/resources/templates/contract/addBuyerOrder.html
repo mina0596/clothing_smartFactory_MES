@@ -12,7 +12,7 @@ layout:decorate="@{layout/default_contract}">
 		<div class="form-panel">
 	 		<h4 class="mb"><i class="fa fa-edit"></i> 수주 주문서 등록</h4>
 	        <div class="form">
-	          <form class="cmxform form-horizontal style-form" method="post" th:action="@{/contract/addBuyerOrder}">
+	          <form class="cmxform form-horizontal style-form" method="post">
 	            <div class="form-group">
 		          <label class="col-sm-2 col-sm-2 control-label">거래처명</label>
 		          <div class="col-md-4">
@@ -54,59 +54,56 @@ layout:decorate="@{layout/default_contract}">
 	           		</div>
              
                   <div class="form-group ">
-                    <label for="email" class="control-label col-lg-2" style="font-weight: 600;">납부처연락처</label>
-                    <div class="col-lg-2">
-                      <input class="form-control " id="requestedDeliveryTel" name="requestedDeliveryTel" type="text">
+                    <label for="email" class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">납부처연락처</label>
+                    <div class="col-md-4">
+                      <input type="text" class="form-control " id="requestedDeliveryTel" name="requestedDeliveryTel" placeholder="'-'빼고 입력해주세요.">
                     </div>
                   </div>
                   
-                  <div class="form-group ">
-                    <label for="email" class="control-label col-lg-2" style="font-weight: 600;">납부처 주소</label>
-                    <div class="col-lg-6">
-                      <input class="form-control" id="requestedDeliveryAddress" name="requestedDeliveryAddress" type="text">
-                    </div>
-                  </div>
-                  
+				<div class="form-group">
+		          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">납품처 주소</label>
+		          <div class="col-md-4">
+		            <div class="input-group ">
+		              <input type="text" id="requestedDeliveryAddress" name="clientAccountName" class="form-control" readonly="readonly" size="16">
+		              <span id="guide" style="color:#999;display:none"></span>
+		              <div class="input-group-btn">
+		                <button type="button" onclick="searchAddr()" class=" btn btn-theme03 btn btn-default"><i class="fa"></i>주소 검색</button>
+		              </div>
+		            </div>
+		          </div>
+		        </div>
                 <div class="form-group">
 		          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">납기요청일</label>
-		          <div class="col-md-2">
+		          <div class="col-md-4">
 		              <input type="date" id="requestedDueDate" name="requestedDueDate" class="form-control" size="16">
 		          </div>
 		        </div>
 		        
 				<div class="form-group">
 		          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">특이사항</label>
-		          <div class="col-sm-6">
+		          <div class="col-md-4">
 		            <input class="form-control" id="requestedSpecialNote" name="requestedSpecialNote" type="text" placeholder="흰색체크">
 		            <span class="help-block">특이사항을 적지 않아도 됩니다.</span>
 		          </div>
-		        </div>  
-		        
-		        <div class="form-group">
-		          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">첨부파일</label>
-		              <div class="fileupload fileupload-new col-xs-3" data-provides="fileupload">
-		                  <input type="file" name="designDrawingAttachment" />
-		                  <span class="fileupload-preview" style="margin-left:5px;"></span>
-		        		</div>
-		        </div>	        
+		        </div>          
  
  			        <div class="form-group">
-			          <label class="col-lg-2 col-sm-2 control-label" style="font-weight: 600;">담당 사원명</label>
-			          <div class="col-lg-2">
+			          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">담당 사원명</label>
+			          <div class="col-md-2">
 			            <input type="text" class="form-control" readonly="readonly" th:value="${session.SNAME}">
 			          </div>
 			        </div>
 			        
 			        <div class="form-group">
-			          <label class="col-lg-2 col-sm-2 control-label" style="font-weight: 600;">담당자 사원 코드</label>
-			          <div class="col-lg-2">
+			          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">담당자 사원 코드</label>
+			          <div class="col-md-2">
 			            <input type="text" id="chargeEmployeeCode" name="chargeEmployeeCode" class="form-control" readonly="readonly" th:value="${session.SCODE}">
 			          </div>
 			     	</div>        
                    
                 <div class="form-group">
 		          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">수주주문일자</label>
-		          <div class="col-md-2">
+		          <div class="col-md-4">
 		              <input type="date" id="requestedDate" class="form-control" size="16">
 		          </div>
 		        </div>
