@@ -18,7 +18,7 @@ layout:decorate="@{layout/default_qualityControl}">
 	<div class="col-lg-15 main-chart">
 	
 	<h4><i class="fa fa-angle-right"></i> 수주계약 검사현황 조회</h4>
-	* 거래처명 or 수주계약 필수 기입 사항!
+	
 	<div>
 	<hr>
 	<form id="searchState" class="form-inline"th:action="@{/quality/qualityInspectionStatusContract}" role="form">
@@ -54,14 +54,16 @@ layout:decorate="@{layout/default_qualityControl}">
 		<br>
 		<br>
 		<div id="print" class="searchInspectionResult">
-		 <h4><i class="fa fa-angle-right"></i> 수주계약번호별 현황 검색 결과</h4> 
-          	 <div> 수주계약번호 <p style="display: inline; font-weight: bold;" id="inspectionContract"></p> 와 거래처명 <p style="display: inline; font-weight: bold;" id="inspectionClientName"></p>  로 검색한 결과 입니다.
-          	  <button id="printS" class="btn btn-primary btn-xs" onClick="content_print()"><i class="fa fa-print"></i></button></div>
+		 <h4>수주계약번호별 현황 검색 결과  <button id="printS" class="btn btn-primary btn-xs" onClick="content_print()"><i class="fa fa-print"></i></button></h4> 
+          	
+          	
           	 <h5>※등급별</h5>
      		<table style="border-color: #8c8c8c;" class="table table-bordered table-striped table-condensed " >
 	         <thead>
 	        	<tr> 
-				<th rowspan="2">no.</th> 
+				<th rowspan="2">no.</th>
+				<th rowspan="2">수주계약번호</th>
+				<th rowspan="2">거래처명</th> 
 				<th rowspan="2">공정</th> 
 				<th rowspan="2">공정소분</th> 
 				<th rowspan="2">공정세분</th> 
@@ -88,9 +90,8 @@ layout:decorate="@{layout/default_qualityControl}">
 	     <tbody >
 	     	 <tr th:if="${#lists.size(stateMap) > 0}" th:each="g,i:${stateMap}"> 
 	     		<th th:text="${i.index+1}"  scope="row" id="mandatory"></th> 
-				 				
-				<td id="inspectioncontactCode" th:text="${g.contractCode}" hidden="hidden"></td> 
-				<td id="clientNames" th:text="${g.cleintName}" hidden="hidden"></td> 
+				<td th:text="${g.contractCode}" ></td> 
+				<td th:text="${g.cleintName}" ></td> 
 				<td th:text="${g.highClassName}"></td> 
 				<td th:text="${g.lowClassName}"></td> 
 				<td th:text="${g.subClassName}"></td> 
@@ -107,10 +108,10 @@ layout:decorate="@{layout/default_qualityControl}">
 				<td th:text="${g.insStart}"></td>
 				<td th:text="${g.insEnd}"></td>
 				<td th:text="${g.finalPassCheck}"></td>
-				<td></td>
+				
 	     	</tr>
 			<tr th:unless="${#lists.size(stateMap) > 0}" style="text-align: center;">
-				<td colspan="17" th:text="${'현재 검사현황 목록이없습니다'}">
+				<td colspan="19" th:text="${'현재 검사현황 목록이없습니다'}">
 				</td>
 			</tr>
 		</tbody>
@@ -119,7 +120,9 @@ layout:decorate="@{layout/default_qualityControl}">
      <table style="border-color: #8c8c8c;" class="table table-bordered table-striped table-condensed " >
 	         <thead>
 	        	<tr> 
-				<th rowspan="2">no.</th> 
+				<th rowspan="2">no.</th>
+				<th rowspan="2">수주계약번호</th>
+				<th rowspan="2">거래처명</th>  
 				<th rowspan="2">공정</th> 
 				<th rowspan="2">공정소분</th> 
 				<th rowspan="2">공정세분</th> 
@@ -146,6 +149,8 @@ layout:decorate="@{layout/default_qualityControl}">
 	     <tbody >
 	     <tr th:if="${#lists.size(meansureMap) > 0}" th:each="m,i:${meansureMap}"> 
 	     		<th th:text="${i.index+1}"  scope="row" id="mandatory"></th> 
+				<td th:text="${m.contractCode}" ></td> 
+				<td th:text="${m.clientName}" ></td> 
 				<td th:text="${m.highClassName}"></td> 
 				<td th:text="${m.lowClassName}"></td> 
 				<td th:text="${m.subClassName}"></td> 
@@ -162,10 +167,10 @@ layout:decorate="@{layout/default_qualityControl}">
 				<td th:text="${m.insStart}"></td>
 				<td th:text="${m.insEnd}"></td>
 				<td th:text="${m.finalPassCheck}"></td>
-				<td></td>
+				
 	     	</tr>
 			<tr th:unless="${#lists.size(meansureMap) > 0}" style="text-align: center;">
-				<td colspan="17" th:text="${'현재 검사현황 목록이없습니다'}">
+				<td colspan="19" th:text="${'현재 검사현황 목록이없습니다'}">
 				</td>
 			</tr>
 			
@@ -175,7 +180,9 @@ layout:decorate="@{layout/default_qualityControl}">
     <table style="border-color: #8c8c8c;" class="table table-bordered table-striped table-condensed " >
          <thead>
         	<tr> 
-			<th rowspan="2">no.</th> 
+			<th rowspan="2">no.</th>
+			<th rowspan="2">수주계약번호</th>
+			<th rowspan="2">거래처명</th>  
 			<th rowspan="2">공정</th> 
 			<th rowspan="2">공정소분</th> 
 			<th rowspan="2">공정세분</th> 
@@ -202,6 +209,8 @@ layout:decorate="@{layout/default_qualityControl}">
      <tbody >
      	<tr th:if="${#lists.size(passCheckMap) > 0}" th:each="p,i:${passCheckMap}"> 
 	     		<th th:text="${i.index+1}"  scope="row" id="mandatory"></th> 
+				<td th:text="${p.contractCode}" ></td> 
+				<td th:text="${p.clientName}" ></td> 
 				<td th:text="${p.highClassName}"></td> 
 				<td th:text="${p.lowClassName}"></td> 
 				<td th:text="${p.subClassName}"></td> 
@@ -218,7 +227,7 @@ layout:decorate="@{layout/default_qualityControl}">
 				<td th:text="${p.insStart}"></td>
 				<td th:text="${p.insEnd}"></td>
 				<td th:text="${p.finalPassCheck}"></td>
-				<td></td>
+				
 	     	</tr>
 			<tr th:unless="${#lists.size(passCheckMap) > 0}" style="text-align: center;">
 				<td colspan="17" th:text="${'현재 검사현황 목록이없습니다'}">
@@ -238,7 +247,7 @@ layout:decorate="@{layout/default_qualityControl}">
          <br>    
               
 		 <div class="stateContractInspectionList">
-		 <h4><i class="fa fa-angle-right"></i> 수주계약번호별 전체 현황</h4> 
+		 <h4> 수주계약번호별 전체 현황</h4> 
 <div class="col-lg-12 mt">
             <div class="row content-panel">
 

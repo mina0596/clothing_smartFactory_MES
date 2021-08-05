@@ -100,7 +100,7 @@ $(function(){//발주요청 클릭시  발주요청 화면 뜨기
 					for(i=0; i<data.length; i++){									
 						
 						html += '<tr class="searchlist">';
-						html += '<td><input type="radio" name="rawmaterial" class="radioClass" value=""></td>';
+						html += '<td><input type="radio" name="rawmaterials" class="radioClass" value=""></td>';
 						html += '<td>' + [i + 1] + '</td>';
 						//원부자재코드
 						html += '<td class="rawmaterialCode" value="';
@@ -140,21 +140,20 @@ $(function(){//발주요청 클릭시  발주요청 화면 뜨기
 				alert( "Request failed: " + textStatus );
 			});
 			
-			$('#saveRamMeterial').click(function(){
-				var check = $('input[name=rawmaterial]:checked');
-				var checkTr = check.parent().parent();
-				var checkRrawMaterialCode = checkTr.find('.rawmaterialCode').text();
-				var rawMateiralName = checkTr.find('.rawMateiralName').text();
-				var rawMaterialColor = checkTr.find('.rawMaterialColor').text();
-				var rawmaterialFeature = checkTr.find('.rawmaterialFeature').text();
-				var rawmaterialUnit = checkTr.find('.rawmaterialUnit').text();
-				$('#rawMaterialCode').attr('value',checkRrawMaterialCode);
-				$('#rawMaterialName').attr('value',rawMateiralName);
-				$('#rawMaterialColor').attr('value',rawMaterialColor);
-				$('#rawMateiralFeature').attr('value',rawmaterialFeature);
-				$('#rawMaterialUnit').attr('value',rawmaterialUnit);
-			});
-			console.log(check);
+		});
+		$('#saveRamMeterial').click(function(){
+			var check = $('input[name=rawmaterials]:checked');
+			var checkTr = check.parent().parent();
+			var checkRrawMaterialCode = checkTr.find('.rawmaterialCode').text();
+			var checkRawMateiralName = checkTr.find('.rawmaterialName').text();
+			var checkRawMaterialColor = checkTr.find('.rawmaterialColor').text();
+			var rawmaterialFeature = checkTr.find('.rawmaterialFeature').text();
+			var rawmaterialUnit = checkTr.find('.rawmaterialUnit').text();
+			$('#rawMaterialCode').attr('value',checkRrawMaterialCode);
+			$('#rawMaterialName').attr('value',checkRawMateiralName);
+			$('#rawMaterialColor').attr('value',checkRawMaterialColor);
+			$('#rawMateiralFeature').attr('value',rawmaterialFeature);
+			$('#rawMaterialUnit').attr('value',rawmaterialUnit);
 		});
 	
 			
