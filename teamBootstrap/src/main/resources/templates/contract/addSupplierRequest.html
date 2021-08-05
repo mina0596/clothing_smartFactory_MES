@@ -13,14 +13,15 @@ layout:decorate="@{layout/default_contract}">
 	$(function(){
 		$('#supplierRequest').hide();
 		$('#cancleBtn').click(function(){
-			location.href="/supplierRequestList";
+			location.href="/contract/supplierRequestList";
 		});
 		$('#supplierRequstBtn').click(function(){
 			$('#supplierRequest').show();
 			
 			//모달에서 save버튼 클릭시
 		});
-	
+		
+		
 	
 		});
 	
@@ -36,27 +37,30 @@ layout:decorate="@{layout/default_contract}">
             
               <table id="list" class="table table-striped table-advance table-hover">
                 <thead>
-                  <tr>
-                  	
-                 	<th><i class="fa fa-bullhorn"></i>번호</th>
-                 	<th><i class="fa fa-bookmark"></i>원부자재 코드</th>
-                    <th><i class=" fa fa-bookmark"></i>재료명</th>
-                    <th><i class=" fa fa-bookmark"></i>색상코드</th>
-                    <th><i class=" fa fa-bookmark"></i>현재수량</th>
-                    <th><i class=" fa fa-bookmark"></i>단위</th>
-                    <th><i class=" fa fa-bookmark"></i>업데이트 날짜</th>
+                   <tr>
+             		<th><i class="fa fa-bullhorn"></i> 번호</th>
+                    <th><i class="fa fa-barcode"></i> 원부자재 코드</th>
+                    <th><i class="fa fa-bookmark"></i> 재료명</th>
+                    <th><i class=" fa fa-bookmark"></i> 색상코드</th>
+                  
+                    
+                    <th><i class=" fa fa-bookmark"></i> 단위</th>
+                    <th><i class=" fa fa-bookmark"></i> 현수량</th>
+                    <th><i class=" fa fa-clock-o"></i> 최신업데이트 일자</th>
+                   
                   </tr>
                 </thead>
- 				 <tbody>
-                <!--db에서 데이터 넣어야하는 부분 -->
-                  <tr th:if="${#lists.size(rawInventoryList) > 0}" th:each="l,i: ${rawInventoryList}">
-               		<td th:text="${i.index+1}"></td>
-                  	<td th:text="${l.raw_material_code}"></td>
-                    <td th:text="${l.raw_material_name}"></td>
-                    <td th:text="${l.raw_material_color_code}"></td>
-                    <td th:text="${l.raw_material_transaction_amount}"></td>
-                    <td th:text="${l.raw_material_unit}"></td>
-                    <td th:text="${l.raw_material_transaction_reg_date}"></td>
+                <tbody>
+                  <tr th:if="${#lists.size(inventoryStatusList) > 0}" th:each="l,n : ${inventoryStatusList}">
+	            	<td th:text="${n.index+1}"></td>
+                    <td th:text="${l.materialCode}"></td>
+                    <td th:text="${l.name}" id="materialName"></td>
+                    <td th:text="${l.colorCode}" id="colorName"></td>
+                    <!-- <td th:text="${l.feature}" id="feature"></td> -->
+                    <td th:text="${l.unit}" id="unit"></td>
+                    <td th:text="${l.leftMaterialTotal}"></td>
+                    <td th:text="${l.finalTransDate}"></td>
+                    
                   </tr>
                 </tbody>
               </table>
@@ -68,19 +72,19 @@ layout:decorate="@{layout/default_contract}">
             
             
      <!-- 발주등록 폼 -->       
-	<div class="col-lg-9" id="supplierRequest" >
+	<div class="col-lg-9" id="supplierRequest"  style="width:90%; margin-left: auto; margin-right: auto;">
          <div class="row content-panel">
           <h4 class="mb"><i class="fa fa-bars"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">발주요청등록</font></font></h4>
-	    	 <form class="form-horizontal style-form" method="post"  th:action="@{/addSupplierRequest}" >
+	    	 <form class="form-horizontal style-form" method="post"  th:action="@{/contract/addSupplierRequest}" >
 	    	 	<div class="form-group" style="visibility:hidden;">
-		          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">발주거래처코드</label>
-		         	<div class="col-md-5">
-		           	 <input class="form-control" id="supplierContractCode" name="" type="text"  >
+		          <label class="col-sm-2 col-sm-2 control-label" >발주거래처코드</label>
+		         	<div class="col-lg-4">
+		           	 <input class="form-control" id="supplierContractCode" name="supplierClient" type="text"  >
 		          </div>
 		        </div>
 				<div class="form-group">
-		          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">발주거래처명</label>
-		          <div class="col-md-5">
+		          <label class="col-sm-2 col-sm-2 control-label" >발주거래처명</label>
+		         <div class="col-lg-4">
 		            <div  class="input-group ">
 		              <input type="search" class="form-control" id="supplierContractName" name="clientName" size="16">
 		               <div class="input-group-btn">
@@ -90,26 +94,26 @@ layout:decorate="@{layout/default_contract}">
 		          </div>
 		        </div>
 	       		<div class="form-group">
-		          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">발주거래처담당자</label>
-		         	<div class="col-md-5">
+		          <label class="col-sm-2 col-sm-2 control-label" >발주거래처담당자</label>
+		         	<div class="col-lg-4">
 		           	 <input class="form-control" id="supplierEmployee" name="clientCode" type="text"  >
 		          </div>
 		        </div>
 		       <div class="form-group">
-		          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">발주거래처 연락처</label>
-		          <div class="col-md-5">
+		          <label class="col-sm-2 col-sm-2 control-label" >발주거래처 연락처</label>
+		          <div class="col-lg-4">
 		          	<input class="form-control" id="supplierPhone" type="tel">
 		          </div>
 		        </div>
 		        <div class="form-group" style="visibility:hidden;">
-		          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">원부자재코드</label>
-		         	<div class="col-md-5">
+		          <label class="col-sm-2 col-sm-2 control-label" >원부자재코드</label>
+		         	<div class="col-lg-4">
 		           	 <input class="form-control" id="rawMaterialCode" name="rawMeterialCode" type="text"  >
 		          </div>
 		        </div>
 		       	<div class="form-group">
-		          <label class="col-sm-2 col-sm-2 control-label"style="font-weight: 600;">발주원부자재명</label>
-		          <div class="col-md-5">
+		          <label class="col-sm-2 col-sm-2 control-label">발주원부자재명</label>
+		          <div class="col-lg-4">
 		            <div  class="input-group ">
 		              <input type="search" class="form-control" id="rawMaterialName" name="" size="16">
 		              <div class="input-group-btn">
@@ -119,59 +123,54 @@ layout:decorate="@{layout/default_contract}">
 		          </div>
 		        </div>
 		       <div class="form-group">
-		          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">발주원부자재 색상</label>
-		          <div class="col-md-5">
+		          <label class="col-sm-2 col-sm-2 control-label" >발주원부자재 색상</label>
+		          <div class="col-lg-4">
 		            <input type="text" class="form-control" id="rawMaterialColor" name="rawMaterialColor" readonly="readonly">
 		          </div>
 		        </div>
 		       <div class="form-group">
-		          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">발주원부자재 패턴및 특징</label>
-		          <div class="col-md-5">
+		          <label class="col-sm-2 col-sm-2 control-label" >발주원부자재 패턴및 특징</label>
+		          <div class="col-lg-4">
 		           <input type="text" class="form-control" id="rawMateiralFeature" name="rawMateiralFeature" readonly="readonly">
 		          </div>
 		        </div>
 		        <div class="form-group">
-		          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">발주원부자재수량</label>
-		          <div class="col-md-5">
-		           <input type="text" class="form-control" name="">
+		          <label class="col-sm-2 col-sm-2 control-label" >발주원부자재수량</label>
+		          <div class="col-lg-4">
+		           <input type="text" class="form-control" name="rawMaterialAmount">
 		          </div>
 		        </div>
 		        <div class="form-group">
-		           	  	<label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">발주단위</label>
-		           	  	 <div class="col-md-5">
-		           <input type="text" class="form-control" id="rawMaterialUnit" name="rawMaterialUnit">
+		           	  	<label class="col-sm-2 col-sm-2 control-label" >발주단위</label>
+		           	  	 <div class="col-lg-4">
+		           	<input type="text" class="form-control" id="rawMaterialUnit" name="rawMaterialUnit">
 		           	 </div>
 		           	 </div>
 		      <div class="form-group">
-		          <label class="col-sm-2 col-sm-2 control-label"style="font-weight: 600;">발주원부자재납기일</label>
-		          <div class="col-md-4">
-		            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
-		              <input type="text" class="form-control" readonly="readonly" size="16">
-		              <div class="input-group-btn">
-		                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
-		                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
-		              </div>
-		            </div>
+		          <label class="col-sm-2 col-sm-2 control-label">발주원부자재납기일</label>
+		          <div class="col-lg-4">
+		            <input  id="rawMaterialOrderExpected" type="date" class="form-control"name="rawMaterialOrderExpected">
 		          </div>
 		        </div>
 	        <div class="form-group" style="visibility:hidden;">
-	          <label class="col-lg-2 col-sm-2 control-label"style="font-weight: 600;">발주등록코드</label>
-	          <div class="col-md-5">
-	            	<input type="text" readonly="readonly" name="chargeEmployeeCode">
+	          <label class="col-lg-2 col-sm-2 control-label">발주등록코드</label>
+	          <div class="col-lg-4">
+	            	<input type="text" readonly="readonly" th:value="${session.SCODE}" name="chargeEmployeeCode">
 	          </div>
 	        </div>
 	        <div class="form-group">
-	          <label class="col-lg-2 col-sm-2 control-label"style="font-weight: 600;">발주등록자</label>
-	          <div class="col-md-5">
-	            	<input type="text" readonly="readonly" name="humanResources.employeeName">
+	          <label class="col-lg-2 col-sm-2 control-label">발주담당사원명</label>
+	          <div class="col-lg-4">
+	            	<input type="text" readonly="readonly"  th:value="${session.SNAME}" name="humanResources.employeeName">
 	          </div>
 	        </div>
 	       <div class="form-group text-right">
 	           <div class="col-lg-offset-2 col-lg-10">
-	            <button class="btn btn-theme" ><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">발주요청등록</font></font></button></a>
+	            <button class="btn btn-theme" type="submit" ><font style="vertical-align: inherit;">발주요청등록</font></font></button>
 	             <button class="btn btn-theme04" type="button" id="cancleBtn"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">발주요청취소</font></font></button>
 	           </div>
-	          </form>
+	           </div>
+	          </form>	          
 		</div>
     </div>
     	

@@ -42,7 +42,7 @@ $(function(){
 				        html += "<tr>";
 			          	html += "<td>" + [i + 1] + "</td>"
 			        	html += "<td>" + data[i].product_request_code + "</td>";
-			        	html += "<td>" + data[i].requested_product_code + "</td>";
+			        	html += "<td> <a href='/quality/qualityInspectionReportInfo?requestProductCode="+data[i].requested_product_code +"'>"+data[i].requested_product_code+"</a></td>";
 			        	html += "<td>" + data[i].client_name + "</td>";
 			        	html += "<td>" + data[i].gender_categorized_name + "</td>";
 			        	html += "<td>" + data[i].detailed_categorized_name + "</td>";
