@@ -106,7 +106,7 @@ $(function(){
                     <td ><a th:href="@{/shipment/shipmentOrderInfo(shipmentOrderCode=${s.shipment_order_code})}">[[${s.shipment_order_code}]]</a></td>
                     <td th:text="${s.client_name}" ></td>
                     <td th:text="${s.gender_categorized_name}" ></td>
-                    <td th:text="${s.gender_categorized_name}"> </td>
+                    <td th:text="${s.shipment_order_date}"> </td>
                     <td th:text="${s.shipment_order_reg_date}"> </td>
                  	<td> <a class="btn btn-primary btn-xs" th:href="@{/shipment/modifyShipmentOrder(shipmentOrderCode=${s.shipment_order_code})}">수정</a></td>
                   </tr>
