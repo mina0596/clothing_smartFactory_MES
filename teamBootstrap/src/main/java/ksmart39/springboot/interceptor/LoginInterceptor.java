@@ -26,7 +26,7 @@ public class LoginInterceptor implements HandlerInterceptor{
 		
 		HttpSession session = request.getSession();
 		String sessionId = (String)	session.getAttribute("SID"); 
-		String sessionLevel = (String)	session.getAttribute("SLEVEL"); 
+		int sessionLevel = (int)	session.getAttribute("SLEVEL"); 
 		
 		String[] adminUri = {"/rawMaterials/addInWarehousing", "/rawMaterials/addExWarehousing", "/quality/qualityInspectionRequest",
 							 "/quality/addDefectiveProduct", "/system/addHumanResources", "/system/addClient", "/system/addRawMaterials",
@@ -49,12 +49,16 @@ public class LoginInterceptor implements HandlerInterceptor{
 		ArrayList<String> facUriList = new ArrayList<>(Arrays.asList(facUri));
 		log.info("adminUriList 확인 :{}", adminUriList);
 		log.info("facUriList 확인 :{}", facUriList);
+		String uirAddr = request.getRequestURI();
 		if(sessionId == null) {
 			response.sendRedirect("/"); 
 			return false; 
 		}else {
-			String uirAddr = request.getRequestURI();
 			log.info("uirAddr 확인:{}", uirAddr);
+			if(sessionLevel == 3 && adminUriList.contains(uirAddr)) {
+				response.sendRedirect("/mesmain");
+				return false;
+			}
 			return true;
 		}
 	}

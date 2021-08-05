@@ -23,6 +23,8 @@ public class WebConfig implements WebMvcConfigurer{
 				.excludePathPatterns("/login/**")
 				.excludePathPatterns("/favicon.ico")
 				.excludePathPatterns("/package/**")
+				.excludePathPatterns("/image/**")
+				.excludePathPatterns("/**/**.js")
 				.excludePathPatterns("/jplot/**");
 		/*
 		 * registry.addInterceptor(finalResultInterceptor)

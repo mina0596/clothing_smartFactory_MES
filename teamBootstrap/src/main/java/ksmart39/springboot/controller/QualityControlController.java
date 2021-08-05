@@ -448,7 +448,7 @@ public class QualityControlController {
 		@PostMapping("/addStandardTable")
 		public String addStandardTable(@RequestParam(name = "qualityInspectionCode")String qualityInspectionCode) {
 			
-			return "quality/standardTableList";
+			return "redirect:/quality/standardTableList";
 		}
 		
 		//[민아]품질검사별 불량률 현황
