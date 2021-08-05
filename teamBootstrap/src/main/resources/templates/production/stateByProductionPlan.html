@@ -6,7 +6,8 @@ layout:decorate="@{layout/default_production}">
 <th:block layout:fragment="customJs">
 	<script type="text/javascript">
 		$(function(){
-			var tableTbody = $('#tableTbody');
+			var tableTbody = $('.tableTbody');
+			console.log(tableTbody);
 			var tbodyTr = tableTbody.find('tr');
 			var percentages = tableTbody.children().find('input[name=percentValue]');
 			console.log('percentages 의 속성들', percentages);
@@ -107,7 +108,7 @@ layout:decorate="@{layout/default_production}">
                     <th><i class="fa fa-bookmark"></i> 담당자</th>
                   </tr>
                 </thead>
-                <tbody id="tableTbody">
+                <tbody class="tableTbody">
                   <tr th:each="l, i : ${achievePercentageByPlanList}">
 	                <td th:text="${i.index+1}"></td>
                     <td th:text="${l.productionPlanCode}"></td>
@@ -124,7 +125,7 @@ layout:decorate="@{layout/default_production}">
                     	<input class="percentage" type="hidden" th:value="${l.completedPercentage}" name="percentValue">
                     	<div class="progress">
 		                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
-		                  <span th:text="${l.achievePercentageNum} + '% 완료'"></span>
+		                  <span th:text="${l.achievePercentageNum} + '% 완료'" style="color: black;"></span>
 		                </div>
 		              </div>
                     </td>
@@ -161,7 +162,7 @@ layout:decorate="@{layout/default_production}">
                     <th><i class="fa fa-bookmark"></i> 담당자</th>
                   </tr>
                 </thead>
-                <tbody id="tableTbody">
+                <tbody class="tableTbody">
                   <tr th:each="fp, n : ${finishedProductionPlanList}">
 	                <td th:text="${n.index+1}"></td>
                     <td th:text="${fp.productionPlanCode}"></td>
@@ -177,7 +178,7 @@ layout:decorate="@{layout/default_production}">
                     	<input class="percentage" type="hidden" th:value="${fp.completedPercentage}" name="percentValue">
                     	<div class="progress">
 		                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
-		                  <span th:text="${fp.achievePercentageNum} + '% 완료'"></span>
+		                  <span th:text="${fp.achievePercentageNum} + '% 완료'" style="color: black;"></span>
 		                </div>
 		              </div>
                     </td>
