@@ -23,7 +23,7 @@ $(function(){//발주요청 클릭시  발주요청 화면 뜨기
 			});
 			
 			request.done(function( data ) {
-				console.log(data);
+				
 				if(data.length > 0){
 					for(i=0; i<data.length; i++){									
 						
@@ -95,7 +95,7 @@ $(function(){//발주요청 클릭시  발주요청 화면 뜨기
 				dataType: "json"
 			});
 			request.done(function( data ) {
-				console.log(data);
+				
 				if(data.length > 0){
 					for(i=0; i<data.length; i++){									
 						
@@ -156,6 +156,38 @@ $(function(){//발주요청 클릭시  발주요청 화면 뜨기
 			$('#rawMaterialUnit').attr('value',rawmaterialUnit);
 		});
 	
+		$('#addSupplierBtn').click(function(){
+			var submitFlag =true;
+			var addSupplierRequestForm=$('#addSupplierRequestForm');
+			var supplierContractName =$('#supplierContractName');
+			var rawMaterialName=$('#rawMaterialName');
+			var rawMaterialAmount=$('#rawMaterialAmount');
+			var rawMaterialOrderExpected = $('#rawMaterialOrderExpected');
+			if(supplierContractName.val()==''){
+				alert('거래처를 검색해주세요');
+				supplierContractName.focus();
+				submitFlag=false;
+				return submitFlag;
+			}else if(rawMaterialName.val()==''){
+				alert('원부자재명을 검색해주세요');
+				rawMaterialName.focus();
+				submitFlag=false;
+				return submitFlag;
+			}else if(rawMaterialAmount.val()==''){
+				alert('원부자재수량을 입력해주세요');
+				rawMaterialAmount.focus();
+				submitFlag=false;
+				return submitFlag;
+			}else if(rawMaterialOrderExpected.val()==''){
+				alert('원부자재 납기일을  입력해주세요');
+				rawMaterialOrderExpected.focus();
+				submitFlag=false;
+				return submitFlag;
+			}else{
+				submitFlag=true;
+				if(submitFlag)addSupplierRequestForm.submit();
+			}
+		});
 			
 	});
 	
