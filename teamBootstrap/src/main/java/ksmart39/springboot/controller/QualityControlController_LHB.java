@@ -134,4 +134,17 @@ public class QualityControlController_LHB {
 		if(result > 0) approval = true;
 		return approval;
 	}
+	
+	//[한빛]품질검사요청 수정
+	@GetMapping("/modifyQualityInspectionRequest")
+	public String modifyQualityInspectionRequest(Model model) {
+		model.addAttribute("title", "수주관리");
+		return "quality/modifyQualityInspectionRequest"; 
+	}
+	
+	//[한빛]품질검사요청 수정
+	@PostMapping("/modifyQualityInspectionRequest")
+	public String modifyQualityInspectionRequest() {
+		return "redirect:qualityInspectionRequestList";
+	}
 }
