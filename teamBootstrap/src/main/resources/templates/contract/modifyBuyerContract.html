@@ -15,46 +15,61 @@ layout:decorate="@{layout/default_contract}">
 	<div class="form-panel">
 	 <h4 class="mb"><i class="fa fa-angle-right"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">수주계약수정</font></font></h4>
               <div class="form">
-                <form class="cmxform form-horizontal style-form" id="signupForm" method="post" th:action="@{addBuyerContract}">
+                <form class="cmxform form-horizontal style-form" id="signupForm" method="post" th:action="@{/contract/modifyBuyerContract}">
                  
                   <div class="form-group ">
-                    <label for="firstname" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">계약번호</font></font></label>
-                    <div class="col-lg-6">
-                      <input class=" form-control" id="workeclientAccountCoderCode" name="clientAccountCode" type="text">
-                    </div>
-                  </div>
-                 
-                  
-                  <div class="form-group ">
-                    <label for="firstname" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">거래처명</font></font></label>
-                    <div class="col-lg-6">
-                      <input class=" form-control" id="clientAccountName" name="clientAccountName" type="text">
+                    <label for="firstname" class="control-label col-lg-2" style="font-weight: 600;">계약번호</label>
+                    <div class="col-md-2">
+                      <input class=" form-control" id="workeclientAccountCoderCode" name="clientAccountCode" type="text" disabled="disabled" placeholder="12876">
                     </div>
                   </div>
                   
+                  <div class="form-group">
+		    		<label class="col-sm-2 control-label" style="font-weight: 600;">거래처명</label>
+			         <div class="col-md-5">
+			           <div  class="input-group">
+			             <input type="text" class="form-control" id="clientAccountName" name="clientAccountName" size="16" placeholder="5648" disabled="disabled">
+			             <div class="input-group-btn">
+			               <button type="button" class=" btn btn-theme03 btn btn-default" id="searchBtn1"><i class="fa"></i> 검색하여 가져오기</button>
+			             </div>
+			           </div>
+			         </div>
+			       </div>
+     
 			       <div class="form-group">
 			         <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">수주의뢰코드</label>
-			         <div class="col-sm-6">
-			           <input class="form-control" id="disabledInput" type="text" placeholder="명주실 (DB에서 가져온 값)" disabled>
-			           <!-- 버튼 누르면 검색할 수 있는 창으로 연결 -->            
-			           <!-- 검색창에서 검색하여 없는 품목은 등록도 할 수 있도록 설정하기 -->
-			           <button type="button" class="btn btn-default">검색하여 가져오기</button>
+			         <div class="col-sm-4">
+			           <input class="form-control" id="disabledInput" type="text" placeholder="req01, req02, req04" disabled>
 			         </div>
+			       </div>
+			       
+			       <div class="form-group">
+			         <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">계약 품목 수량</label>
+			         <div class="col-md-2">
+                      <input class="form-control " id="clientAccountAddr" name="clientAccountAddr" type="number" placeholder="숫자만 입력하세요" disabled="disabled">
+                    </div>
+                    <div class="col-md-2" style="padding-left: 0px;">
+			            <label class="col-sm-2 control-label" style="font-weight: 600; padding-left: 0px;">벌</label>
+			        </div>
 			       </div>
 			       			     	      
                   
                   <div class="form-group ">
-                    <label for="email" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">결제조건</font></font></label>
-                    <div class="col-lg-6">
-                      <input class="form-control " id="clientAccountAddr" name="clientAccountAddr" type="text">
+                    <label for="email" class="control-label col-lg-2" style="font-weight: 600;">결제조건</label>
+                    <div class="col-md-2">
+                      <input class="form-control " id="clientAccountAddr" name="clientAccountAddr" type="text" placeholder="12개월 할부">
                     </div>
                   </div>
                   
+     
                   <div class="form-group ">
-                    <label for="email" class="control-label col-lg-2" style="font-weight: 600;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">총계약금</font></font></label>
-                    <div class="col-lg-6">
-                      <input class="form-control " id="clientAccountAddr" name="clientAccountAddr" type="text">
+                    <label for="email" class="control-label col-lg-2" style="font-weight: 600;">총계약금</label>
+                    <div class="col-md-2">
+                      <input class="form-control " id="clientAccountAddr" name="clientAccountAddr" type="number" placeholder="숫자만 입력하세요">
                     </div>
+                    <div class="col-md-2" style="padding-left: 0px;">
+			            <label class="col-sm-2 control-label" style="font-weight: 600; padding-left: 0px;">원</label>
+			        </div>
                   </div>
                   
 		        
@@ -62,11 +77,7 @@ layout:decorate="@{layout/default_contract}">
 		          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">계약시작일</label>
 		          <div class="col-md-4">
 		            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
-		              <input type="text" class="form-control" readonly="readonly" size="16">
-		              <div class="input-group-btn">
-		                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
-		                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
-		              </div>
+		              <input type="date" id="requestedDueDate" name="requestedDueDate" class="form-control" size="16">
 		            </div>
 		          </div>
 		        </div>
@@ -74,42 +85,43 @@ layout:decorate="@{layout/default_contract}">
 		          <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">계약종료일</label>
 		          <div class="col-md-4">
 		            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
-		              <input type="text" class="form-control" readonly="readonly" size="16">
-		              <div class="input-group-btn">
-		                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
-		                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
-		              </div>
+		              <input type="date" id="requestedDueDate" name="requestedDueDate" class="form-control" size="16">
 		            </div>
 		          </div>
 		        </div>
-                  
-
+		        
+		        <div class="form-group">
+		          <label class="col-lg-2 col-sm-2 control-label" style="font-weight: 600;">담당자 사원 코드</label>
+		          <div class="col-lg-2">
+		            <input type="text" id="chargeEmployeeCode" name="chargeEmployeeCode" class="form-control" readonly="readonly" th:value="${session.SCODE}">
+		          </div>
+		     	</div>   
+		     	                  
 			        <div class="form-group">
-			          <label class="col-lg-2 col-sm-2 control-label" style="font-weight: 600;">담당 사원명</label>
-			          <div class="col-lg-6">
-			            <p class="form-control-static">이한빛</p>
-			          </div>
-			        </div>
+		          <label class="col-lg-2 col-sm-2 control-label" style="font-weight: 600;">담당 사원명</label>
+		          <div class="col-lg-2">
+		            <input type="text" class="form-control" readonly="readonly" th:value="${session.SNAME}">
+		          </div>
+		        </div>
 			        
-			        <div class="form-group">
-			          <label class="col-lg-2 col-sm-2 control-label" style="font-weight: 600;">담당자 사원 코드</label>
-			          <div class="col-lg-6">
-			            <p class="form-control-static">W01</p>
-			          </div>
-			     	</div>        
+     
                   
 		         <div class="form-group text-right">
 		         <div class="col-lg-offset-2 col-lg-10">
-		           <button class="btn btn-theme" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">수정</font></font></button>
-            	   <button class="btn btn-theme04" type="button" onClick="history.back();"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소</font></font></button>
+		           <button class="btn btn-theme" type="submit">수정</button>
+            	   <button class="btn btn-theme04" type="button" onClick="history.back();">취소</button>
 		         </div>
 		       </div>
 		     </form>
 		   </div>
 		</div>
 
-
-
+<script type="text/javascript" th:src="@{Dashio/lib/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script> 
+<script type="text/javascript" th:src="@{Dashio/lib/bootstrap-daterangepicker/date.js}"></script>
+<script type="text/javascript" th:src="@{Dashio/lib/bootstrap-daterangepicker/daterangepicker.js}"></script> 
+<script type="text/javascript" th:src="@{Dashio/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js}"></script> 
+<script type="text/javascript" th:src="@{Dashio/lib/bootstrap-daterangepicker/moment.min.js}"></script>
+<script th:src="@{Dashio/lib/advanced-form-components.js}"></script>
 </th:block>
 
 </html>

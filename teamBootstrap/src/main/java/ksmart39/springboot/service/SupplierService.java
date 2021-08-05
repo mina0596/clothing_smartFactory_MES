@@ -1,5 +1,6 @@
 package ksmart39.springboot.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,10 +15,9 @@ public class SupplierService {
 	
 	@Autowired
 	private SupplierMapper supplierMapper;
-	//[보람] 발주요청에 자재 현황 리스트
-	public List<Map<String,Object>> getRawInventoryState(){
-		return supplierMapper.getRawInventoryState();
-		
+	//[보람]발주요청 정보 
+	 public  SupplierRequest getSupplierRequestInfo(String rawMaterialOrder){
+		return supplierMapper.getSupplierRequestInfo(rawMaterialOrder);
 	}
 	//[보람] 발주 요청 거래처 정보
 	public List<Map<String,Object>> searchSupplierClientCate(String client){
@@ -30,8 +30,15 @@ public class SupplierService {
 		return supplierMapper.searchRawMaterial(supplierName);
 	}
 	//[보람] 발주요청 등록
-	public int addSupplierRequest(SupplierRequest supplierRequest) {
-		return supplierMapper.addSupplierRequest(supplierRequest);
+	public int addSupplierRequest(String rawMeterialCode,String supplierClient,String chargeEmployeeCode,int rawMaterialAmount,String rawMaterialOrderExpected) {
+		Map<String, Object> rawMaterialOrderMap = new HashMap<String,Object>();
+		rawMaterialOrderMap.put("rawMeterialCode",rawMeterialCode);
+		rawMaterialOrderMap.put("supplierClient",supplierClient);
+		rawMaterialOrderMap.put("chargeEmployeeCode",chargeEmployeeCode);
+		rawMaterialOrderMap.put("rawMaterialAmount",rawMaterialAmount);
+		rawMaterialOrderMap.put("rawMaterialOrderExpected",rawMaterialOrderExpected);
+		
+		return supplierMapper.addSupplierRequest(rawMaterialOrderMap);
 	}
 	//[보람]발주요청 리스트
 	public List<Map<String,Object>> getSupplierRequestList(){

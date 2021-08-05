@@ -10,6 +10,16 @@
 	</resultMap>
 	
 	
+	<select id="getProductInfoToInsertCompleted" parameterType="String" resultType="CompletedProduct">
+		SELECT
+			ppps.requested_product_code AS requestedProductCode,
+			date_format(MIN(ppps.process_start_date), '%Y-%m-%d %T') AS productionStartDate,
+			date_format(MAX(ppps.completed_product_update_date), '%Y-%m-%d %T') AS productionFinishDate
+		FROM
+			product_production_process_status AS ppps
+		where ppps.requested_product_code = #{requestedProductCode};
+	</select>
+	
 	
 	<!-- 완제품등록을 위한 정보들 가져오는 쿼리 -->
 	<select id="getCompletedProductInfo" resultType="CompletedProduct">

@@ -74,7 +74,6 @@ layout:decorate="@{layout/default_contract}">
                     <th><i class=" fa fa-calendar"></i>수주일자</th>
                     <th><i class=" fa fa-calendar"></i>등록일자</th>
                     <th><i class=" fa fa-check"></i>승인상태</th>
-                    <th><i class=" fa fa-pencil"></i>수정</th>
                   </tr>
                 </thead>
  
@@ -90,7 +89,6 @@ layout:decorate="@{layout/default_contract}">
                     <td th:text="${a.rdd}"></td>
                     <td th:text="${a.rpdrd}"></td>
                    <td> <button  type="button" class="btn btn-info btn-xs" id="addBtn" ><i class="fa fa-check"></i>승인완료</button></td>
-                    <td>  <button class="btn btn-primary btn-xs" type="button" onclick="location.href='/modifyBuyerOrder'"><i class="fa fa-pencil"></i>수정</button></td>
                   </tr>
                   
            		 </tbody>
@@ -102,8 +100,8 @@ layout:decorate="@{layout/default_contract}">
 		          <br>
 		          <br>
 
-                       <a th:href="@{/addBuyerContract}" class="btn btn-theme02" ><i class="fa fa-check"></i> 계약등록</a>
-                       <button class="btn btn-theme04" type="button" onClick="history.back();" style="float: right;"><font style="vertical-align: inherit;">취소</font></button>	
+		          <a th:href="@{/contract/addBuyerContract}" class="btn btn-success btn-xs"><i class="fa fa-plus"></i>계약등록</a>	          
+		           <a id="deleteBtn" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i>삭제</a>
 		          </div>
 		        </div> 
             </div>

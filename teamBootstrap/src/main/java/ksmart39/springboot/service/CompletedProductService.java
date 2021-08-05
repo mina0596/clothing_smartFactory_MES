@@ -41,4 +41,10 @@ public class CompletedProductService {
 	public List<Map<String,Object>> getCompletedProductList(){
 		return completedProductMapper.getCompletedProductList();
 	}
+	
+	
+	//[민아]완제품 자동등록을 위한 정보 가져오기
+	public CompletedProduct getProductInfoToInsertCompleted(String ProductCode) {
+		return completedProductMapper.getProductInfoToInsertCompleted(ProductCode);
+	}
 }
