@@ -15,6 +15,7 @@ import ksmart39.springboot.dao.SystemMapper;
 import ksmart39.springboot.domain.AccountingCategory;
 import ksmart39.springboot.domain.Client;
 import ksmart39.springboot.domain.HumanResources;
+import ksmart39.springboot.domain.ProductionProcessList;
 import ksmart39.springboot.domain.QualityInspection;
 
 import ksmart39.springboot.domain.RawMaterials;
@@ -196,17 +197,24 @@ public class SystemService {
 	}
 		
 	//[보람 ]품질검사 리스트 조회메서드
-	
-	 public List<Map<String, Object>> getQualityInspectionList() 
-	 { return	
-			  systemMapper.getQualityInspectionList();
+	 public List<Map<String, Object>> getQualityInspectionList() { 
+		 return systemMapper.getQualityInspectionList();
 	 }
 	 
-
-		//[민아]원부자재 전체 리스트 조회
-		public List<RawMaterials> getMaterialsList(){
-			List<RawMaterials> rawMaterialsList = systemMapper.getMaterialsList();
-			return rawMaterialsList;
-		};
+	 //=======================================================
+	//[민아]원부자재 전체 리스트 조회
+	public List<RawMaterials> getMaterialsList(){
+		List<RawMaterials> rawMaterialsList = systemMapper.getMaterialsList();
+		return rawMaterialsList;
+	}
+	
+	//[민아]생산공정 등록
+	public int addProductionProcess(ProductionProcessList productionProcessDomain) {
+		return systemMapper.addProductionProcess(productionProcessDomain);
+	}
 	 
+	//[민아]생산공정 전체 목록
+	public List<ProductionProcessList> getProductionProcessList(){
+		return systemMapper.getProductionProcessList();
+	}
 }
