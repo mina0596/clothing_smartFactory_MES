@@ -95,7 +95,7 @@ $(function(){
 		});	
 	})
 	//상세검사에 대한 select가 없으면 실행
-	if(subClassCateName == 'undefined'|| subClassCateName ==''){
+	
 		$('#lowClassCateName').change(function(){
 			console.log('이게 찍히면 안되는뎅');
 			var lowClassCateName = $('#lowClassCateName option:selected').val();
@@ -103,6 +103,5 @@ $(function(){
 			inspectionCode.push(lowClassCateName);
 			console.log(inspectionCode);
 		});
-	}
 	
 })

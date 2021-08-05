@@ -39,8 +39,8 @@ layout:decorate="@{layout/default_rawMaterials}">
                     <th><i class=" fa fa-bookmark"></i> 색상코드</th>
                     <!-- DB에 데이터값이 null로 들어가 있을 경우에는 오류가 떠서 모든게 안나온다..... -->
                     <!-- <th><i class=" fa fa-bookmark"></i> 특징</th> -->
-                    <th><i class=" fa fa-bookmark"></i> 단위</th>
                     <th><i class=" fa fa-bookmark"></i> 현수량</th>
+                    <th><i class=" fa fa-bookmark"></i> 단위</th>
                     <th><i class=" fa fa-clock-o"></i> 최신업데이트 일자</th>
                     <th><i class=" fa fa-exchange"></i> 입출고 등록</th>
                   </tr>
@@ -52,8 +52,8 @@ layout:decorate="@{layout/default_rawMaterials}">
                     <td th:text="${l.name}" id="materialName"></td>
                     <td th:text="${l.colorCode}" id="colorName"></td>
                     <!-- <td th:text="${l.feature}" id="feature"></td> -->
-                    <td th:text="${l.unit}" id="unit"></td>
                     <td th:text="${l.leftMaterialTotal}"></td>
+                    <td th:text="${l.unit}" id="unit"></td>
                     <td th:text="${l.finalTransDate}"></td>
                     <td> 
                       <button type="button" class="btn btn-success btn-xs" onclick="location.href='addInWarehousing'" style="padding-right: 5px;"><i class="fa fa-plus-square"></i></button>
