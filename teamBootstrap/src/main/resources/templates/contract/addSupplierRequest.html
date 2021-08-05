@@ -74,8 +74,8 @@ layout:decorate="@{layout/default_contract}">
      <!-- 발주등록 폼 -->       
 	<div class="col-lg-9" id="supplierRequest"  style="width:90%; margin-left: auto; margin-right: auto;">
          <div class="row content-panel">
-          <h4 class="mb"><i class="fa fa-bars"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">발주요청등록</font></font></h4>
-	    	 <form class="form-horizontal style-form" method="post"  th:action="@{/contract/addSupplierRequest}" >
+          <h4 class="mb"><i class="fa fa-bars"></i><font style="vertical-align: inherit;" ><font style="vertical-align: inherit;">발주요청등록</font></font></h4>
+	    	 <form class="form-horizontal style-form" method="post"  th:action="@{/contract/addSupplierRequest}"id="addSupplierRequestForm" >
 	    	 	<div class="form-group" style="visibility:hidden;">
 		          <label class="col-sm-2 col-sm-2 control-label" >발주거래처코드</label>
 		         	<div class="col-lg-4">
@@ -96,13 +96,13 @@ layout:decorate="@{layout/default_contract}">
 	       		<div class="form-group">
 		          <label class="col-sm-2 col-sm-2 control-label" >발주거래처담당자</label>
 		         	<div class="col-lg-4">
-		           	 <input class="form-control" id="supplierEmployee" name="clientCode" type="text"  >
+		           	 <input class="form-control" id="supplierEmployee" name="clientCode" type="text" readonly="readonly" >
 		          </div>
 		        </div>
 		       <div class="form-group">
 		          <label class="col-sm-2 col-sm-2 control-label" >발주거래처 연락처</label>
 		          <div class="col-lg-4">
-		          	<input class="form-control" id="supplierPhone" type="tel">
+		          	<input class="form-control" id="supplierPhone" type="tel"readonly="readonly">
 		          </div>
 		        </div>
 		        <div class="form-group" style="visibility:hidden;">
@@ -137,13 +137,13 @@ layout:decorate="@{layout/default_contract}">
 		        <div class="form-group">
 		          <label class="col-sm-2 col-sm-2 control-label" >발주원부자재수량</label>
 		          <div class="col-lg-4">
-		           <input type="text" class="form-control" name="rawMaterialAmount">
+		           <input type="text" class="form-control" name="rawMaterialAmount" id="rawMaterialAmount">
 		          </div>
 		        </div>
 		        <div class="form-group">
 		           	  	<label class="col-sm-2 col-sm-2 control-label" >발주단위</label>
 		           	  	 <div class="col-lg-4">
-		           	<input type="text" class="form-control" id="rawMaterialUnit" name="rawMaterialUnit">
+		           	<input type="text" class="form-control" id="rawMaterialUnit" name="rawMaterialUnit" readonly="readonly">
 		           	 </div>
 		           	 </div>
 		      <div class="form-group">
@@ -166,7 +166,7 @@ layout:decorate="@{layout/default_contract}">
 	        </div>
 	       <div class="form-group text-right">
 	           <div class="col-lg-offset-2 col-lg-10">
-	            <button class="btn btn-theme" type="submit" ><font style="vertical-align: inherit;">발주요청등록</font></font></button>
+	            <button id="addSupplierBtn" class="btn btn-theme" type="button" ><font style="vertical-align: inherit;">발주요청등록</font></font></button>
 	             <button class="btn btn-theme04" type="button" id="cancleBtn"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">발주요청취소</font></font></button>
 	           </div>
 	           </div>
