@@ -39,14 +39,6 @@ public class ContractController_PMA {
 	
 	//----------------------------------------수주주문서-----------------------------------------------------
 	
-	//[민아]수주계약 등록 -> 조회
-	@GetMapping("/addBuyerOrder_Minah")
-	public String addBuyerOrder_Minah() {
-		return "contract/addbuyerOrder_Minah";
-	}
-	
-	
-
 	//=========================================================
 	//[민아]계약후 예정 수금/출금 등록
 	@GetMapping("/addInvoicePayment")

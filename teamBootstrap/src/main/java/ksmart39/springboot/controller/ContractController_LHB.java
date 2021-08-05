@@ -44,18 +44,7 @@ public class ContractController_LHB {
 	private static final Logger log = LoggerFactory.getLogger(SystemController.class);
 	
 	//----------------------------------------수주주문서-----------------------------------------------------
-	//[한빛]주문서 등록
-	@GetMapping("/addBuyerOrder")
-	public String addBuyerOrder(Model model) {
-		model.addAttribute("title", "수주관리");
-		return "contract/addBuyerOrder";
-	}		
-	
-//	//[한빛]주문서 등록 -> 조회
-//	@PostMapping("/addBuyerOrder")
-//	public String addBuyerOrder() {
-//		return "redirect:/buyerOrderList";
-//	}
+
 
 	//[한빛]주문서 조회
 	@GetMapping("/buyerOrderList")
@@ -70,8 +59,14 @@ public class ContractController_LHB {
 	@GetMapping("/modifyBuyerOrder")
 	public String modifyBuyerOrder(Model model) {
 		model.addAttribute("title", "수주관리");
-		return "contract/buyerOrderList"; //잘못됨
+		return "contract/modifyBuyerOrder"; 
 	}	
+	
+	//[한빛]수주계약 등록 -> 조회
+	@PostMapping("/modifyBuyerOrder")
+	public String modifyBuyerOrder() {
+		return "redirect:buyerOrderList";
+	}
 	
 	//[한빛]출고현황
 	@GetMapping("/buyerOrderApproval")
@@ -114,7 +109,7 @@ public class ContractController_LHB {
 	//[한빛]수주계약 등록 -> 조회
 	@PostMapping("/addBuyerContract")
 	public String addBuyerContract() {
-		return "redirect:/buyerContractList";
+		return "redirect:buyerContractList";
 	}
 	
 	//[한빛]수주계약 조회
@@ -125,10 +120,17 @@ public class ContractController_LHB {
 		return "contract/buyerContractList";
 	}
 	
-	//[한빛] 수주계약 수정
+	//[한빛]수주 주문서 수정
 	@GetMapping("/modifyBuyerContract")
+	public String modifyBuyerContract(Model model) {
+		model.addAttribute("title", "수주관리");
+		return "contract/modifyBuyerContract"; 
+	}
+	
+	//[한빛]수주계약 등록 -> 조회
+	@PostMapping("/modifyBuyerContract")
 	public String modifyBuyerContract() {
-		return"contract/modifyBuyerContract";
+		return "redirect:buyerContractList";
 	}
 	
 }

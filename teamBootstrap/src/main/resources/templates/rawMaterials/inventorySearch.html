@@ -4,25 +4,23 @@
 	<!-- Begin Search -->
 	<div th:fragment="searchFragment">
 		<form th:action="@{/rawMaterials/warehousingList}" method="get">
-			<div>
-				<select name="searchKey">
-				   <option>입/출고 코드</option>
-				   <option>원부자재 코드</option>
-				   <option>재료명</option>
-				   <option>발주주문코드</option>
-				</select>
-				<button class="btn-default" type="submit"><i class="fa fa-search"></i></button>
-				<input type="text" placeholder="검색어를 입력하세요">
+			<div class="form-group">
+		<div class="col-md-3">
+			<select class="form-control" name="searchKey">
+			  <option value="materialCode">원부자재코드</option>
+			  <option value="materialName">재료명</option>
+			  <!-- 수량 이하로 보여줘라 -->
+			 <option>수량</option>
+			 <option>최신업데이트 일자</option>
+			</select>
+		</div>
+			<div class="col-xs-3">
+			  <input class="form-control col-xs-3" type="text" placeholder="검색어를 입력하세요">
 			</div>
-			<div>
-				<label>입/출고 일자</label>
-				
-           		<input type=date>
-				<span>to</span>
-				<input type=date>
-				
-				<button type="submit" class="btn-theme">검색</button>
-			</div>
+		<div class="col-md-2">         
+		  <button type="button" class="btn btn-theme">검색</button>
+		</div>
+      </div>
 
 		</form>
 	</div>
@@ -42,23 +40,6 @@
 			<div class="col-xs-3">
 			  <input class="form-control col-xs-3" type="text" placeholder="검색어를 입력하세요">
 			</div>
-		<div class="col-md-3">
-		 <select class="form-control" name="searchKey">
-		   <option value="materialCode">원부자재코드</option>
-		   <option value="materialName">재료명</option>
-		   <!-- 수량 이하로 보여줘라 -->
-		   <option>수량</option>
-		   <option>최신업데이트 일자</option>
-		  </select>
-		</div>
-		<div class="col-xs-3">
-		  <input class="form-control col-xs-3" type="text" placeholder="검색어를 입력하세요">
-		</div>
-		<div class="col-md-3 input-group">
-           		<input type=date class="form-control" id="exampleInputPassword2">
-				<span class="input-group-addon">To</span>
-				<input type=date class="form-control" id="exampleInputPassword2">
-       		</div>
 		<div class="col-md-2">         
 		  <button type="button" class="btn btn-theme">검색</button>
 		</div>

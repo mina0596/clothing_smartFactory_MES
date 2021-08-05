@@ -40,7 +40,7 @@ layout:decorate="@{layout/default_system}">
 			});
 			
 			//수정하기
-			var modifyBtn = tableAttr.children().find('#modifyBtn');
+			var modifyBtn = tableAttr.children().find('.modifyBtn');
 			modifyBtn.click(function(){
 				console.log('찍히니?');
 				var tdElement = $(this).parent().parent();
@@ -125,14 +125,13 @@ layout:decorate="@{layout/default_system}">
                     <td th:text="${l.colorCode}" id="colorName"></td>
                     <td th:text="${l.feature}" id="feature"> </td>
                     <td th:text="${l.unit}" id="unit"></td>
-                    <!-- 날짜형태로 받을 수 있게 설정해야함 th:datetime -->
-                    <td th:datetime="rawMaterialRegDate"></td>
+                    <td th:text="${l.rawMaterialRegDate}"></td>
                     <td> 
-                      <button type="button" class="btn btn-success btn-xs" onclick="location.href='addInWarehousing'" style="padding-right: 5px;"><i class="fa fa-plus-square"></i></button>
-                      <button type="button" class="btn btn-danger btn-xs" onclick="location.href='addExWarehousing'"><i class="fa fa-minus-square"></i></button>
+                      <a type="button" class="btn btn-success btn-xs" th:href="@{/rawMaterials/addInWarehousing}" style="padding-right: 5px;"><i class="fa fa-plus-square"></i></a>
+                      <a type="button" class="btn btn-danger btn-xs" th:href="@{/rawMaterials/addExWarehousing}"><i class="fa fa-minus-square"></i></a>
                     </td>
                     <td> 
-                      <button type="button" class="btn btn-primary btn-xs" id="modifyBtn" ><i class="fa fa-pencil"></i></button>
+                      <a type="button" class="btn btn-warning btn-xs modifyBtn"><i class="fa fa-pencil"></i></a>
                     </td>
                   </tr>
                 </tbody>
@@ -140,7 +139,7 @@ layout:decorate="@{layout/default_system}">
             
 		        <div class="form-group text-right">
 		          <div class="col-lg-offset-2 col-lg-10">
-		           <a th:href="@{/addRawMaterials}" class="btn btn-success btn-xs"><i class="fa fa-plus"></i>원부자재 추가</a>
+		           <a th:href="@{/system/addRawMaterials}" class="btn btn-success btn-xs"><i class="fa fa-plus"></i>원부자재 추가</a>
 		           <button type="button" id="deleteBtn" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i>삭제</button>
 		          </div>
 		        </div>

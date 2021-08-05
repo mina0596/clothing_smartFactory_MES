@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_qualityControl}">
+
+<th:block layout:fragment="pageTitle">
+
+</th:block>
+
+
+<th:block layout:fragment="container">
+    <div class="form-panel">
+      <h4 class="mb"><i class="fa fa-edit"></i>품질 검사 요청 수정</h4>
+      <hr>
+      <br>
+      
+      <form th:action="@{/quality/modifyQualityInspectionRequest}" class="form-horizontal style-form" method="post">
+
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label">계약번호</label>
+          <div class="col-md-4">
+            <div  class="input-group ">
+              <input type="text" id="contractNum" class="form-control" readonly="readonly" placeholder="buyerContract002"  size="16">
+              <div class="input-group-btn">
+                <button type="button" id="bycontractNum" data-toggle="modal" data-target="#SearchContractNum" class=" btn btn-theme03 btn btn-default"><i class="fa"></i>검색하여 가져오기</button>
+              </div>
+            </div>
+          </div>
+        </div>		        
+		        
+		<div class="form-group">
+		<label class="col-sm-2 col-sm-2 control-label">품목별 의뢰 코드</label>
+			<div class="col-sm-4">
+				<select id="requestedProductCode" name="requestedProductCode" class="form-control">
+					<option>::품목별 의뢰 코드::</option>
+				</select>
+			</div>
+		</div>
+         
+         <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label" >대분류 검사명</label>
+                  <div class="col-sm-4">
+                      <select id="highClassCateName" class="form-control">
+						<option>::선택::</option>
+		               </select>
+                  </div>
+         </div> 
+         
+         <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">중분류 검사명</label>
+                  <div class="col-sm-4">
+                      <select id="middleClassCateName" class="form-control">
+						<option>::선택::</option>
+		               </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">소분류 검사명</label>
+                  <div class="col-sm-4">
+                      <select id="lowClassCateName" class="form-control">
+						<option>::선택::</option>
+		               </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">소분류 검사 상세명</label>
+                  <div class="col-sm-4">
+                      <select id="SubClassCateName" name="qualityInspectionCode" class="form-control">
+						<option>::선택::</option>
+		               </select>
+                  </div>
+                </div> 
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">샘플링 검사 유무</label>
+                  <div class="col-sm-4">
+                      <select name="samplingCheck" class="form-control">
+						<option value="0">해당 없음</option>
+						<option value="1">샘플링 검사</option>
+				
+		               </select>
+                  </div>
+                </div>
+                 <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">특이사항</label>
+                  <div class="col-sm-4">
+                    <input name="inspectioinSpecialRequest" type="text" class="form-control">
+                  </div>
+                </div>
+                 <div class="form-group">
+		          <label class="col-sm-2 col-sm-2 control-label">검사 완료 요청 시각</label>
+		          <div class="col-md-4">
+		          	<input name="requestedInspectionCompleteDate" type="datetime-local" class="form-control">	            
+		          </div>
+		        </div>
+       
+        <div class="form-group">
+          <label class="col-lg-2 col-sm-2 control-label">담당 사원명</label>
+          <div class="col-lg-2">
+            <input name="chargeEmployeeName" class="form-control" th:value="${session.SNAME}" readonly="readonly">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="col-lg-2 col-sm-2 control-label">담당자 사원 코드</label>
+          <div class="col-lg-2">
+            <input name="qualityInspectionRequestEmployeeCode" class="form-control" th:value="${session.SCODE}" readonly="readonly">
+          </div>
+        </div>
+ 		
+         <div class="form-group text-right">
+          <div class="col-lg-offset-2 col-lg-10">
+            <button class="btn btn-theme" type="submit"><font style="vertical-align: inherit;">요청수정</font></button>
+            <a th:href="@{/quality/qualityInspectionRequestList}" class="btn btn-theme04" type="button"><font style="vertical-align: inherit;">취소</font></a>
+          </div>
+        </div>
+      </form>
+      
+    </div>
+    
+  	<!-- 계약번호 검색 모달 -->
+	<th:block th:replace="/quality/modal_SearchContractNum::modal_SearchContractNum"></th:block>  
+
+		<script type="text/javascript">
+			$(function(){
+				$('#searchContractNum').click(function(){
+					$('#bySupplierModal').modal('show');
+						
+						$('#saveValue').click(function(){
+							var check = $('input[name=byRequestCode]:checked');
+							var requestCode = check.parents('tr').find('.byRequestCode').text();
+							var contractNum = check.parents('tr').find('.contractNum').text();
+							console.log(requestCode);
+							console.log(contractNum);
+							$('#requested_product_code').attr('value', requestCode);
+							$('#contractNum').attr('value', contractNum);								
+						});					
+					});
+					
+				});
+		</script>
+	<!-- 품질검사 요청 -->
+	<script type="text/javascript" th:src="@{/quality/qualityInspectionRequest.js}"></script>
+</th:block>
+
+</html>

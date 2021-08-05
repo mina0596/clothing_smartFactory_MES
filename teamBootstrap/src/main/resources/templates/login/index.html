@@ -5,27 +5,14 @@
 <head>
 	<title>TEAMONE MES 로그인</title>
 	
+
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
-	<script th:src="@{/Dashio/lib/jquery/jquery.min.js}"></script>
+	<script type="text/javascript" th:src="@{/login/js/main.js}"></script>
 	<link rel="stylesheet" type="text/css" th:href="@{/login/css/style.css}">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
-	<script type="text/javascript" th:src="@{/login/js/main.js}"></script>
-	<script>
-	$(function(){
-		$('#btn1').click(function(){
-			window.location ='/fileDownload';			
-		});
-		$('#btn2').click(function(){
-			window.location ='/fileDownload2';			
-		});
-		$('#btn3').click(function(){
-			window.location.href ='https://github.com/mina0596/clothing_smartFactory_MES';			
-		});
-	});
-
-	</script>
+	
 </head>
 <body>
 	<img class="wave" th:src="@{/login/img/wave.png}">
@@ -33,7 +20,7 @@
 		<div class="img">
 			<div class="login-content">
 			<form th:action="@{/login}" method="post">
-			<button type="button" id="btn2" class="btn2" onMouseOver="this.innerHTML='CLICK❕❕'" onMouseOut="this.innerHTML='완료보고서'" style="display: inline; background-color: lime;">완료보고서</button>
+<!-- 			<button type="button" id="btn2" class="btn2" onMouseOver="this.innerHTML='CLICK❕❕'" onMouseOut="this.innerHTML='완료보고서'" style="display: inline; background-color: lime;">완료보고서</button> -->
 				<img class="img01" th:src="@{/login/img/avatar.svg}">
 				<h2 class="title">관리자</h2>
            		<div class="input-div one">
@@ -59,7 +46,7 @@
 		<div class="img">
 			<div class="login-content">
 			<form th:action="@{/login}" method="post">
-			<button type="button" id="btn1" class="btn2" onMouseOver="this.innerHTML='CLICK❕❕'" onMouseOut="this.innerHTML='개발문서'" style="display: inline; background-color: yellow;">개발문서</button>
+<!-- 			<button type="button" id="btn1" class="btn2" onMouseOver="this.innerHTML='CLICK❕❕'" onMouseOut="this.innerHTML='개발문서'" style="display: inline; background-color: yellow;">개발문서</button> -->
 				<img class="img01" th:src="@{/login/img/avatar.svg}">
 				<h2 class="title">본사</h2>
            		<div class="input-div one">
@@ -86,7 +73,7 @@
 		<div class="img">
 			<div class="login-content">
 			<form th:action="@{/login}" method="post">
-			<button type="button" id="btn3" class="btn2" onMouseOver="this.innerHTML='CLICK❕❕'" onMouseOut="this.innerHTML='GIT HUB'" style="display: inline; background-color: yellow;">GIT HUB</button>
+<!-- 			<button type="button" id="btn3" class="btn2" onMouseOver="this.innerHTML='CLICK❕❕'" onMouseOut="this.innerHTML='GIT HUB'" style="display: inline; background-color: yellow;">GIT HUB</button> -->
 				<img class="img01" th:src="@{/login/img/avatar.svg}">
 				<h2 class="title">공장</h2>
            		<div class="input-div one">
@@ -112,6 +99,19 @@
 
         
     </div>
+<script type="text/javascript">
+// 	$(function(){
+// 		$('#btn1').click(function(){
+// 			window.location ='/fileDownload';			
+// 		});
+// 		$('#btn2').click(function(){
+// 			window.location ='/fileDownload2';			
+// 		});
+// 		$('#btn3').click(function(){
+// 			window.location.href ='https://github.com/mina0596/clothing_smartFactory_MES';			
+// 		});
+// 	});
 
+</script>
 </body>
 </html>

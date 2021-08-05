@@ -209,6 +209,7 @@
 				var clientAccountName = $('#clientAccountName');
 				var requestedDeliveryAddress = $('#requestedDeliveryAddress');
 				var requestedDeliveryTel = $('#requestedDeliveryTel');
+				var requestedDate = $('#requestedDate');
 				var requestedDueDate = $('#requestedDueDate');
 				var requestedSpecialNote = $('#requestedSpecialNote');
 				var chargeEmployeeCode = $('#chargeEmployeeCode');
@@ -224,6 +225,7 @@
 						clientCode : clientCode.val()
 						,requestedDeliveryAddress : requestedDeliveryAddress.val()
 						,requestedDeliveryTel : requestedDeliveryTel.val()
+						,requestedDate : requestedDate.val()
 						,requestedDueDate : requestedDueDate.val()
 						,requestedSpecialNote : requestedSpecialNote.val()
 						,chargeEmployeeCode : chargeEmployeeCode.val()

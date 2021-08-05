@@ -30,7 +30,8 @@
 	
 	<select id="getRawMaterialInwarehousingList" resultMap="materialsInventoryResultMap">
 		SELECT 
-			r.raw_material_code
+			r.raw_material_transaction_code
+			,r.raw_material_code
 			,r.raw_material_order_code
 			,ri.raw_material_high_classification
 			,ri.raw_material_name
