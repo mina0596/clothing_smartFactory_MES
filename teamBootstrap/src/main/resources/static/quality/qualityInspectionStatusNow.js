@@ -1,12 +1,14 @@
 /**
  * 
  */
+//프린트  
 $(function(){
 	var value = '';
 	var html = '';
 	var searchKey = '';
 	var searchValue = '';
 	var searchObj = {};
+	
 	
 	//계약번호 모달
 	$('#bycontractNum').click(function(){
@@ -428,3 +430,4 @@ $(function(){
 		}		
 	});	
 });
+

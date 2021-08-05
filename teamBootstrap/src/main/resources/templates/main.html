@@ -26,45 +26,55 @@ layout:decorate="@{layout/default}">
 
 
 <th:block layout:fragment="container">
-<div class="col-lg-11">
-<div class="row mt">
-	<div class="col-lg-12">
 		<div class="row content-panel form-panel">
-              <div class="col-md-4 profile-text mt mb centered">
-                <div class="right-divider hidden-sm hidden-xs">
-                  <h4>JAVA</h4>
-                  <h4>JAVA SCRIPT</h4>
-                  <h4>SPRING</h4>
-                  <h4>MYBATIS</h4>
-                  <h4>MYSQL</h4>
-                  <h4>JQUERY</h4>
-                </div>
-              </div>
-              <!-- /col-md-4 -->
-              <div class="col-md-4 profile-text ">
-                <h3>   </h3>
-                <h6></h6>
-                <p>한국형 봉제공장 스마트팩토리 상용화가 활발해짐에 따라<br> 이에 부합한 전사관리시스템을 구축할 목적이다.<br>
-					완전자동화 시스템의 최대장점인 생산성과 품질향상에 기여하는<br> QC 강화 ERP 시스템을 구축함으로써 기업경영의 경쟁력을 향상시킨다.<br>
-					기존 전수검사보다 빠른 속도로 검사를 실행하여 <br>한 개의 불량품도 납품되지 않게 관리할 수 있는 시스템을 구축한다.</p>
-                <br>
-              	<p>
+		<div class="mesTitle">
+              <div class="col-md-5 profile-text">
+                <div class="right-divider">
+                  <h3>개발환경</h3>
+                 <p>OS: Window10 <br>
+					WAS: apache-tomcat-9.0.1 <br>
+					개발언어: java / javascript / html5 / css / thymeleaf / jquery / ajax <br>
+					Framework: springframework / mybatis / bootstrap <br>
+					DBMS: mariaDB <br>
+					Tools: Spring Tool Suite, Eclips / GitHub, HeidiSQL 10.1.0</p>
+                 <h3>관련문서/GIT HUB</h3>
+                <p>
 	              	<button type="button" id="btn2" class="btn btn-warning" onMouseOver="this.innerHTML='CLICK❕❕'" onMouseOut="this.innerHTML='완료보고서'" style="display: inline;">완료보고서</button>
 	              	<button type="button" id="btn1" class="btn btn-warning" onMouseOver="this.innerHTML='CLICK❕❕'" onMouseOut="this.innerHTML='개발문서'" style="display: inline;">개발문서</button>
 	              	<button type="button" id="btn3" class="btn btn-warning" onMouseOver="this.innerHTML='CLICK❕❕'" onMouseOut="this.innerHTML='GIT HUB'" style="display: inline;">GIT HUB</button>
               	</p>
-               	<a th:href="@{#}" class="btn btn-theme">박민아</a>
-               	<a th:href="@{#}" class="btn btn-theme">이한빛</a>
-               	<a th:href="@{#}" class="btn btn-theme">한보람</a>
-               	<a th:href="@{/quality/qualityInspectionStatusNow}" class="btn btn-theme">김다미</a>
+                </div>
               </div>
             </div>
+
+              <div class="col-md-4 profile-text ">
+                <h3>의류제조업 품질관리를 강화한 생산관리시스템</h3>
+                <p>한국형 봉제공장 스마트팩토리 상용화가 활발해짐에 따라<br> 이에 부합한 전사관리시스템을 구축할 목적이다.<br>
+					완전자동화 시스템의 최대장점인 생산성과 품질향상에 기여하는<br> QC 강화 ERP 시스템을 구축함으로써 기업경영의 경쟁력을 향상시킨다.<br>
+					기존 전수검사보다 빠른 속도로 검사를 실행하여 <br>한 개의 불량품도 납품되지 않게 관리할 수 있는 시스템을 구축한다.</p>   
+				<div style="padding-top: 15px;">
+				<h3 style="display: inline;">MAIN</h3>          	
+               	<a th:href="@{/quality/qualityInspectionFailRateList}" class="btn btn-theme">박민아</a>
+               	<a th:href="@{/production/stateByProduct}" class="btn btn-theme">이한빛</a>
+               	<a th:href="@{/quality/qualityInspectionStatusContract}" class="btn btn-theme">한보람</a>
+               	<a th:href="@{/quality/qualityInspectionStatusNow}" class="btn btn-theme">김다미</a><br>
+               	
+               	<h3 style="display: inline; padding-right:3px">BLOG</h3>
+               	<a href="https://blog.naver.com/mina0596" class="btn btn-theme">박민아</a>
+               	<a href="https://blog.naver.com/v2onelight" class="btn btn-theme">이한빛</a>
+               	<a href="https://blog.naver.com/hahn0127" class="btn btn-theme">한보람</a>
+               	<a href="https://blog.naver.com/entekk1111" class="btn btn-theme">김다미</a>
+               	</div>
+              </div>
+            </div>
+            
             <div class="row content-panel form-panel">
             	<div class="profile-text" style="text-align: center;">
             	 <h3>프로세스 흐름도</h3>
            		<img style="max-width: 100%;" src="/image/process.jpg">
            		</div>
             </div>
+            
             <div class="row content-panel form-panel">
              <div class="profile-text" style="text-align: center;">
                 <h3>TEAMONE MES GUIDE</h3>
@@ -82,9 +92,7 @@ layout:decorate="@{layout/default}">
                   <p>프로그램 전반적인 기초 정보 등록</p>
                </div>
             </div>
-		</div>
-	</div>
-</div>
+
 		
 	              
 </th:block>
