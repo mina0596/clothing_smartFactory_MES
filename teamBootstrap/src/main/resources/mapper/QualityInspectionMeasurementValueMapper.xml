@@ -508,7 +508,7 @@
 			quality_inspection_request_code = #{qualityInspectionRequestCode};	
 	</update>
 	
-	<!-- [품질검사 요청] 품질검사 단일 요청-->
+	<!-- [품질검사 요청] 품질검사 단일 요청 -->
 	<insert id="qualityInspectionRequest" parameterType="qualityInspectionRequest">
 		INSERT INTO quality_inspection_request(
 			quality_inspection_request_code
