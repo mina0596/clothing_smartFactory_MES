@@ -44,6 +44,7 @@ public class MainController {
 		return "/mesmain";
 	}
 	
+	
 	//개발문서 다운로드
 	@RequestMapping("/fileDownload")
 	@ResponseBody
@@ -82,9 +83,9 @@ public class MainController {
 	@ResponseBody
 	public ResponseEntity<Resource> fileDownload2(HttpServletResponse response, HttpServletRequest request, HttpSession session) throws IOException {
 		
-		File file = new File(System.getProperty("user.dir") + "/src/main/resources/static/file/"+"team01QC_smartFactoryMes.pdf");
+		File file = new File(System.getProperty("user.dir") + "/src/main/resources/static/file/"+"team01QC_smartFactoryMes.docx");
 		//cafe24배포할때 이걸로
-		//File file = new File(session.getServletContext().getRealPath("/WEB-INF/classes/static/file/"+"team01QC_smartFactoryMes.pdf"));
+		//File file = new File(session.getServletContext().getRealPath("/WEB-INF/classes/static/file/"+"team01QC_smartFactoryMes.docx"));
 		
 		Path path = Paths.get(file.getAbsolutePath());
 		Resource resource = new UrlResource(path.toUri());

@@ -60,52 +60,7 @@
 	<!-- 차트 js 추가   -->
 	<script th:src="@{/package/dist/chart.js}"></script>
 	                      
-		
-  		
-		<script type="application/javascript">
-		$(document).ready(function() {
-		  $("#date-popover").popover({
-		    html: true,
-		    trigger: "manual"
-		  });
-		  $("#date-popover").hide();
-		  $("#date-popover").click(function(e) {
-		    $(this).hide();
-		  });
-		
-		  $("#my-calendar").zabuto_calendar({
-		    action: function() {
-		      return myDateFunction(this.id, false);
-		    },
-		    action_nav: function() {
-		      return myNavFunction(this.id);
-		    },
-		    ajax: {
-		      url: "show_data.php?action=1",
-		      modal: true
-		    },
-		    legend: [{
-		        type: "text",
-		        label: "Special event",
-		        badge: "00"
-		      },
-		      {
-		        type: "block",
-		        label: "Regular event",
-		      }
-		    ]
-		  });
-		});
-		
-		function myNavFunction(id) {
-		  $("#date-popover").hide();
-		  var nav = $("#" + id).data("navigation");
-		  var to = $("#" + id).data("to");
-		  console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
-		}
-		</script>
-	<!-- 사용자 정의 title -->
-	
+	<!-- 사용자 정의 title -->	
 	<th:block layout:fragment="customTitle"></th:block>
 	
 	<!-- 사용자 정의 css -->
