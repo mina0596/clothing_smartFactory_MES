@@ -50,7 +50,7 @@ layout:decorate="@{layout/default_shipment}">
 				var parent = tdList.parent();
 				
 				parent.each(function(){
-					console.log($(this).parent());	
+						
 					var removeRow = $(this).parent();			
 					if($(this).find('.check').is(':checked')){		
 						removeRow.remove();
