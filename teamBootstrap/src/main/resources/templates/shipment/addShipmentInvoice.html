@@ -11,7 +11,7 @@
 		    <script>
 	$(function(){
 		$('#cancleBtn').click(function(){
-			location.href='/shipmentInvoiceList'
+			location.href='/shipment/shipmentInvoiceList'
 		});
 	});
 	
@@ -58,19 +58,24 @@
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label">납품처주소</label>
           <div class="col-md-5">
-            <input class="form-control" id="disabledInput" type="text" placeholder="전주시 덕진구 수정 가능하다" >
+            <input class="form-control" id="disabledInput" type="text"  >
           </div>
         </div>
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label">납품처연락처</label>
           <div class="col-md-5">
-            <input class="form-control" id="disabledInput" type="text" placeholder="010-6588-1111" >
+            <input class="form-control" id="disabledInput" type="text"  >
           </div>
         </div>
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label">택배사</label>
           <div class="col-md-5">
-            <span>CJ대한통운</span>
+            <select>
+            	<option>CJ택배</option>
+            	<option>우체국택배</option>
+            	<option>로젠택배</option>
+            	<option>롯데택배</option>
+            </select>
           </div>
         </div>
         
@@ -104,7 +109,7 @@
  		
        <div class="form-group text-right">
                     <div class="col-lg-offset-2 col-lg-10">
-                      <button class="btn btn-theme" type="button" onclick="location.href='/shipmentInvoiceList'"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">송장등록</font></font></button>
+                      <button class="btn btn-theme" type="button" onclick="location.href='/shipment/shipmentInvoiceList'"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">송장등록</font></font></button>
                       <button class="btn btn-theme04" type="button" id="cancleBtn"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">송장취소</font></font></button>
                     </div>
                     </div>

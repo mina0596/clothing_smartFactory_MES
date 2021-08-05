@@ -17,7 +17,7 @@ $(function(){
 				,shipmentOrderDate:$('.shipmentOrderDate').val()
 				
 		};
-		console.log(shipmentArray);
+		
 	
 	var request = $.ajax({
 		url: "/shipment/searchShipmentOrder",
@@ -63,7 +63,7 @@ $(function(){
 			if(checkList[i].checked){
 				checkArray.push(checkList[i].value);
 			}
-			console.log(checkArray);
+			
 		}//체크된 체크박스의 길이가 0이면 품질검사항목이없다.
 		if(checkArray.length == 0){
 			alert("선택된 출하지시항목이 없습니다.");

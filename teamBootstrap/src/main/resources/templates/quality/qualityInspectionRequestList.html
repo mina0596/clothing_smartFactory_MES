@@ -78,17 +78,17 @@ layout:decorate="@{layout/default_qualityControl}">
          			<td style="padding-right: 20px;">
          				<div class="form-group"><!-- 품목별 의뢰 코드별 -->
 		               		<button id="byRequestedProductCode" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
-		                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="직접 입력 또는 검색">
+		                	<input type="text" class="form-control" id="byRequestedProductCodeValue" placeholder="직접 입력 또는 검색">
 	              		</div>
          			</td>
          			<td>
          				<div class="form-group">
-		                	<input type=date class="form-control" id="exampleInputPassword2" placeholder="등록일별">&nbsp&nbsp&nbsp ~ 
+		                	<input type=date class="form-control" placeholder="등록일별">&nbsp&nbsp&nbsp ~ 
 	               		</div>
          			</td>
          			<td style="padding-right: 20px;">
          				<div class="form-group">
-		                	<input type=date class="form-control" id="exampleInputPassword2" placeholder="등록일별">
+		                	<input type=date class="form-control" placeholder="등록일별">
 	               		</div>
          			</td>
          			<td style="padding-right: 20px;">
@@ -183,7 +183,7 @@ layout:decorate="@{layout/default_qualityControl}">
 	         			<th colspan="3" style="padding-right: 20px;">
 		         			 <div class="form-inline" style="margin-bottom: 0px;">
 		         			 	<label class="control-label">품질검사 코드</label>&nbsp
-			                	<input type="text" class="form-control" id="bySupplierValue" placeholder="검색어를 입력하세요.">
+			                	<input type="text" class="form-control" placeholder="검색어를 입력하세요.">
 			                </div>
 	         			</th>
 	         			<th style="padding-right: 20px;">
@@ -310,20 +310,20 @@ layout:decorate="@{layout/default_qualityControl}">
 	         			<th colspan="2" style="padding-right: 20px;">
 		         			 <div class="form-inline" style="margin-bottom: 0px;">
 		         			 	<label class="control-label">계약번호</label>&nbsp
-			                	<input type="text" class="form-control" id="bySupplierValue" placeholder="검색어를 입력하세요.">
+			                	<input type="text" class="form-control" placeholder="검색어를 입력하세요.">
 			                </div>
 	         			</th>
 	         			<th style="padding-right: 20px;">
 		         			 <div class="form-inline" style="margin-bottom: 0px;">
 		         			 	<label class="control-label">품목별의뢰코드</label>&nbsp
-			                	<input type="text" class="form-control" id="bySupplierValue" placeholder="검색어를 입력하세요.">
+			                	<input type="text" class="form-control" placeholder="검색어를 입력하세요.">
 			                </div>
 	         			</th>         			
 	         			<th colspan="2" style="padding-right: 20px;">
 	         				<div class="form-inline" style="margin-bottom: 0px;">
 		         				<label class="control-label">계약날짜</label>&nbsp
-			                	<input type="date" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">&nbsp ~
-			                	<input type="date" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
+			                	<input type="date" class="form-control" placeholder="검색어를 입력하세요.">&nbsp ~
+			                	<input type="date" class="form-control" placeholder="검색어를 입력하세요.">
 	         				 &nbsp&nbsp&nbsp <button type="submit" class="btn btn-theme">검색</button>
 		              		</div>
 	         			</th> 
@@ -404,7 +404,7 @@ layout:decorate="@{layout/default_qualityControl}">
 								var check = $('input[name=materialName]:checked');
 								var checkVal = check.parents('tr').find('.materialName').text();
 								console.log(checkVal);
-								$('#exampleInputPassword2').attr('value', checkVal);
+								$('#byRequestedProductCodeValue').attr('value', checkVal);
 							});
 						}
 					}

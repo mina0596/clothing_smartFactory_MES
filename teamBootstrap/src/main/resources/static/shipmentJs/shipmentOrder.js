@@ -32,7 +32,7 @@ $(function(){//완제품목록 가져오는 모달
 			});
 			
 			request.done(function( data ) {
-				console.log(data);
+				
 				if(data.length > 0){
 					for(i=0; i<data.length; i++){									
 												
@@ -95,7 +95,7 @@ $(function(){//완제품목록 가져오는 모달
 			});
 			
 			request.done(function( data ) {
-				console.log(data);
+				
 				if(data.length > 0){
 					for(i=0; i<data.length; i++){									
 						
@@ -169,7 +169,7 @@ $(function(){//완제품목록 가져오는 모달
 		$('#checkProduct').click(function(){
 			//shipmentOrderProduectCode 을 param
 		var shipmentOrderProduectCode=	$('#shipmentOrderProduectCode').val();
-		console.log('shipmentOrderProduectCode:'+shipmentOrderProduectCode);
+		
 		if(shipmentOrderProduectCode != '' && shipmentOrderProduectCode != undefined && shipmentOrderProduectCode != null){
 			var request = $.ajax({
 				async:true,
