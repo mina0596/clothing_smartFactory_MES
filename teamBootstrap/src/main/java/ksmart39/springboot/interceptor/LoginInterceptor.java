@@ -1,5 +1,7 @@
 package ksmart39.springboot.interceptor;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -26,7 +28,7 @@ public class LoginInterceptor implements HandlerInterceptor{
 		
 		HttpSession session = request.getSession();
 		String sessionId = (String)	session.getAttribute("SID"); 
-		int sessionLevel = (int)	session.getAttribute("SLEVEL"); 
+		int sessionLevel = Integer.valueOf((String)session.getAttribute("SLEVEL")); 
 		
 		String[] adminUri = {"/rawMaterials/addInWarehousing", "/rawMaterials/addExWarehousing", "/quality/qualityInspectionRequest",
 							 "/quality/addDefectiveProduct", "/system/addHumanResources", "/system/addClient", "/system/addRawMaterials",
@@ -49,18 +51,32 @@ public class LoginInterceptor implements HandlerInterceptor{
 		ArrayList<String> facUriList = new ArrayList<>(Arrays.asList(facUri));
 		log.info("adminUriList 확인 :{}", adminUriList);
 		log.info("facUriList 확인 :{}", facUriList);
-		String uirAddr = request.getRequestURI();
+		String uriAddr = request.getRequestURI();
+		
+		Boolean accessCheck = true;
 		if(sessionId == null) {
 			response.sendRedirect("/"); 
-			return false; 
+			accessCheck = false; 
 		}else {
-			log.info("uirAddr 확인:{}", uirAddr);
-			if(sessionLevel == 3 && adminUriList.contains(uirAddr)) {
-				response.sendRedirect("/mesmain");
-				return false;
+			log.info("uriAddr 확인:{}", uriAddr);
+			if(sessionLevel==3 && adminUriList.contains(uriAddr)) {
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out;
+				out = response.getWriter();
+				out.println("<script>alert('권한이 없습니다. 관리자에게 문의해주세요.'); history.back();</script>");
+				out.flush();
+				accessCheck = false;
+			}else if(sessionLevel==2 && facUriList.contains(uriAddr)) {
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out;
+				out = response.getWriter();
+				out.println("<script>alert('권한이 없습니다. 관리자에게 문의해주세요.'); history.back();</script>");
+				out.flush();
+				accessCheck = false;
 			}
-			return true;
+			accessCheck = true;
 		}
+		return accessCheck;
 	}
 	
 	@Override
