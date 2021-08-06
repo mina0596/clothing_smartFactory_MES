@@ -27,6 +27,7 @@ import ksmart39.springboot.service.WorkOrderService;
 public class ProductionController_KDM {
 
 	
+	/***********************************
 	private static final Logger log = LoggerFactory.getLogger(ProductionController_KDM.class);
 	
 	private final ProductionPlanService productionPlanService;
@@ -37,7 +38,6 @@ public class ProductionController_KDM {
 	
 
 	
-
 	
 
 	
@@ -203,5 +203,5 @@ public class ProductionController_KDM {
 	}
 	
 	
-	
+	**********************************************************************/
 }

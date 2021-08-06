@@ -19,9 +19,13 @@ public class WebConfig implements WebMvcConfigurer{
 		registry.addInterceptor(loginInterceptor)
 				.addPathPatterns("/**")
 				.excludePathPatterns("/")
-				.excludePathPatterns("/Dashio/css/**")
+				.excludePathPatterns("/Dashio/**")
 				.excludePathPatterns("/login/**")
-				.excludePathPatterns("/favicon.ico");
+				.excludePathPatterns("/favicon.ico")
+				.excludePathPatterns("/package/**")
+				.excludePathPatterns("/image/**")
+				.excludePathPatterns("/**/**.js")
+				.excludePathPatterns("/jplot/**");
 		/*
 		 * registry.addInterceptor(finalResultInterceptor)
 		 * .addPathPatterns("/quality/addInspectionMeasurementValue");
