@@ -34,7 +34,7 @@ import ksmart39.springboot.service.WorkOrderService;
 @RequestMapping("/production")
 public class ProductionController_LHB {
 
-	
+	/*****************************************
 	private static final Logger log = LoggerFactory.getLogger(ProductionController_LHB.class);
 	
 	private final ProductionStatusService productionStatusService;
@@ -70,5 +70,5 @@ public class ProductionController_LHB {
 		return "production/stateByProduct";
 	}
 	
-
+	**********************************************************************/
 }

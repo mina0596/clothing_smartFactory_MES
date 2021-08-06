@@ -38,7 +38,8 @@ import ksmart39.springboot.service.WorkOrderService;
 @Controller
 @RequestMapping("/production")
 public class ProductionController_PMA {
-
+	
+	/*********************************************
 	private static final Logger log = LoggerFactory.getLogger(ProductionController_PMA.class);
 
 	private final WorkOrderService workOrderService;
@@ -273,5 +274,5 @@ public class ProductionController_PMA {
 		return searchContractCodeResult;
 	}
 
-	
+	*******************************************************/
 }

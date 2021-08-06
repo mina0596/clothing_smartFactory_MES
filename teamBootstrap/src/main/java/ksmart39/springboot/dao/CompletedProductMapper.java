@@ -24,4 +24,5 @@ public interface CompletedProductMapper {
 	
 	//[민아]완제품 자동등록을 위한 정보 가져오는 쿼리
 	public CompletedProduct getProductInfoToInsertCompleted(String productCode);
+	
 }
