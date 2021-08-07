@@ -101,7 +101,7 @@ public class ContractController {
 	//[다미]수주계약 등록 -> 조회
 	@GetMapping("/addBuyerOrder")
 	public String addBuyerOrder() {
-		return "contract/addbuyerOrder";
+		return "contract/addBuyerOrder";
 	}
 	
 	//[다미] 품목에 따른 측정 부위 가져오기
