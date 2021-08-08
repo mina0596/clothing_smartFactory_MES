@@ -32,7 +32,7 @@ layout:decorate="@{layout/default_contract}">
 					tdList = tableAttr.find('.check');
 					var parent = tdList.parent();
 					parent.each(function(){
-						console.log($(this).parent());	
+							
 						var removeRow = $(this).parent();			
 						if($(this).find('.check').is(':checked')){		
 							removeRow.remove();
@@ -149,7 +149,7 @@ layout:decorate="@{layout/default_contract}">
              
                     <div class=" col-xs-12 text-right">
                    
-                      <button class="btn btn-success btn-xs" type="button" onclick="location.href='/addSupplierContract'"><i class="fa fa-check"></i>계약등록</button>
+                      <button class="btn btn-success btn-xs" type="button" onclick="location.href='/contract/addSupplierContract'"><i class="fa fa-check"></i>계약등록</button>
                       <button class="btn btn-danger btn-xs" type="button" id="deleteBtn"><i class="fa fa-trash-o "></i>발주삭제</button>
                     </div>
                  

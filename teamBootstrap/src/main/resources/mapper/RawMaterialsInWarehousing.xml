@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ksmart39.springboot.dao.RawMaterialInwarehousingMapper">
+<mapper namespace="ksmart39.springboot.dao.RawMaterialsInwarehousingMapper">
 
 	<resultMap type="RawMaterialsInventory" 		id="materialsInventoryResultMap">
 		<result property="inventoryAmount" 			column="leftMaterialTotal"/>
@@ -30,7 +30,8 @@
 	
 	<select id="getRawMaterialInwarehousingList" resultMap="materialsInventoryResultMap">
 		SELECT 
-			r.raw_material_code
+			r.raw_material_transaction_code
+			,r.raw_material_code
 			,r.raw_material_order_code
 			,ri.raw_material_high_classification
 			,ri.raw_material_name

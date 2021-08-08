@@ -32,7 +32,7 @@ $(function(){//완제품목록 가져오는 모달
 			});
 			
 			request.done(function( data ) {
-				console.log(data);
+				
 				if(data.length > 0){
 					for(i=0; i<data.length; i++){									
 												
@@ -95,7 +95,7 @@ $(function(){//완제품목록 가져오는 모달
 			});
 			
 			request.done(function( data ) {
-				console.log(data);
+				
 				if(data.length > 0){
 					for(i=0; i<data.length; i++){									
 						
@@ -164,40 +164,12 @@ $(function(){//완제품목록 가져오는 모달
 			
 		}) ;
 		
-		// 출하지시등록 버튼 클릭시 유효성검사
-		$('#shipmentOrderBtn').click(function(){
-			
-			var submitFlag =true;
-			var shipmentOrderForm= $('#shipmentOrderForm');
-			var shipmentOrderRequestCode= $('#shipmentOrderRequestCode');
-			var shipmentOrderProduectCode= $('#shipmentOrderProduectCode');
-			var shimpemtContractNumber= $('#shimpemtContractNumber');
-			var shipmentOrderClient= $('#shipmentOrderClient');
-			var shipmentOrderProductName= $('#shipmentOrderProductName');
-			var contractState= $('#contractState');
-			var shipmentOrderDate= $('#shipmentOrderDate');
-			var inputOb = shipmentOrderForm.find('input[name=contractState]');
-			if(shipmentOrderRequestCode.val()==''||shipmentOrderRequestCode.val()== null||shipmentOrderRequestCode.val()==undefined ){
-				alert('완제품목록을 검색하세요');
-				shipmentOrderRequestCode.focus();
-			}else if(contractState.val()==''||contractState.val()== null||contractState.val()==undefined ){
-				alert('계약상태를입력해주세요');
-				contractState.focus();
-			
-			}else if(shipmentOrderDate.val()==''||shipmentOrderDate.val()== null||shipmentOrderDate.val()==undefined ){
-				alert('출하지시날짜를 입력해주세요');
-				shipmentOrderDate.focus();
-			}else{
-				$('#shipmentOrderForm').submit();
-			}
-		});
-		
 		//출하지시등록전 의뢰품목코드 중복체크
 		var productk = 0;
 		$('#checkProduct').click(function(){
 			//shipmentOrderProduectCode 을 param
 		var shipmentOrderProduectCode=	$('#shipmentOrderProduectCode').val();
-		console.log('shipmentOrderProduectCode:'+shipmentOrderProduectCode);
+		
 		if(shipmentOrderProduectCode != '' && shipmentOrderProduectCode != undefined && shipmentOrderProduectCode != null){
 			var request = $.ajax({
 				async:true,
@@ -214,15 +186,50 @@ $(function(){//완제품목록 가져오는 모달
 				}else {
 					alert("등록가능한 품목코드입니다.");
 					productk=1;
+					$('#shipmentOrderBtn').attr("disabled", false);
 				}
-				
-				
+			
 			}); 
 			request.fail(function( jqXHR, textStatus ) {
 				alert( "Request failed: " + textStatus );
 			});	
 		}
 		})
+		// 출하지시등록 버튼 클릭시 유효성검사
+		$('#shipmentOrderBtn').click(function(){
+			
+			var submitFlag =true;
+			var shipmentOrderForm= $('#shipmentOrderForm');
+			var shipmentOrderRequestCode= $('#shipmentOrderRequestCode');
+			var shipmentOrderProduectCode= $('#shipmentOrderProduectCode');
+			var shimpemtContractNumber= $('#shimpemtContractNumber');
+			var shipmentOrderClient= $('#shipmentOrderClient');
+			var shipmentOrderProductName= $('#shipmentOrderProductName');
+			var contractState= $('#contractState');
+			var shipmentOrderDate= $('#shipmentOrderDate');
+			var inputOb = shipmentOrderForm.find('input[name=contractState]');
+			if(shipmentOrderRequestCode.val()==''||shipmentOrderRequestCode.val()== null||shipmentOrderRequestCode.val()==undefined ){
+				alert('완제품목록을 검색하세요');
+				shipmentOrderRequestCode.focus();
+				submitFlag=false;
+				return submitFlag;
+				
+			}else if(contractState.val()==''||contractState.val()== null||contractState.val()==undefined ){
+				alert('계약상태를입력해주세요');
+				contractState.focus();
+				submitFlag=false;
+				return submitFlag;
+			}else if(shipmentOrderDate.val()==''||shipmentOrderDate.val()== null||shipmentOrderDate.val()==undefined ){
+				alert('출하지시날짜를 입력해주세요');
+				shipmentOrderDate.focus();
+				submitFlag=false;
+				return submitFlag;
+			}else{
+				if(submitFlag)$('#shipmentOrderForm').submit();
+			}
+		});
+		
+		
 		
 		
 	});

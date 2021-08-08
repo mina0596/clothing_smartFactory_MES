@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import ksmart39.springboot.domain.QualityBiochemFabricLevelStandard;
 import ksmart39.springboot.domain.QualityInspection;
+import ksmart39.springboot.domain.QualityInspectionRequest;
 import ksmart39.springboot.domain.QualityInspectionResult;
 import ksmart39.springboot.domain.QualityInspectionStandard;
 
@@ -51,4 +52,19 @@ public interface QualityInsMeasurementValueMapper {
 	
 	//품질검사 요청 검색 모달
 	public List<Map<String, Object>> searchQualityInspectionRequest(Map<String, Object> map);
+
+	//품질검사 요청 목록
+	public List<Map<String, Object>> getQualityInspectionRequestList();
+	
+	//품질검사 승인
+	public int approvalInspectionRequest(String qualityInspectionRequestCode);
+	
+	//품질검사 단일 요청
+	public int qualityInspectionRequest(QualityInspectionRequest qualityInspectionRequest);
+	
+	//계약번호로 품목별 의뢰코드 검색
+	public List<Map<String, Object>> searchRequestProductCode(String contractCode);
+	
+	//품질검사 세부 코드 검색
+	public List<Map<String, Object>> subClassCate(String lowClassCateName);
 }

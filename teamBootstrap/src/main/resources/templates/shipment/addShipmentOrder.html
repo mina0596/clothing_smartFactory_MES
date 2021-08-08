@@ -37,7 +37,7 @@
       <form class="form-horizontal style-form" method="post" th:action="@{/shipment/addShipmentOrder}" id="shipmentOrderForm">
        <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label">완제품 의뢰코드</label>
-          <div class="col-md-5">
+          <div class="col-lg-4">
             <div  class="input-group date form_datetime-adv">
               <input type="text" class="form-control" id="shipmentOrderRequestCode" size="16" name="shipmentRequestCode" >
               <div class="input-group-btn">
@@ -48,7 +48,7 @@
         </div>
       <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label">품목별의뢰코드</label>
-          <div class="col-md-5">
+          <div class="col-lg-4">
           <div  class="input-group date form_datetime-adv">
             <input class="shipmentRequestCode form-control" id="shipmentOrderProduectCode"  size="16" type="text" readonly="readonly" name="shipmentOrderProduectCode">
              <div class="input-group-btn">
@@ -59,40 +59,52 @@
         </div>
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label">계약번호</label>
-          <div class="col-md-5">
+          <div class="col-lg-4">
             <input class="form-control" id="shimpemtContractNumber" type="text" readonly="readonly">
           </div>
         </div>
         
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label">거래처명</label>
-          <div class="col-md-5">
+          <div class="col-lg-4">
             <input class="form-control" id="shipmentOrderClient" type="text" readonly="readonly" >
           </div>
         </div>
          <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label">제품명</label>
-       	 <div class="col-md-5">
+       	 <div class="col-lg-4">
             <input type="text" id="shipmentOrderProductName"  class="form-control" readonly="readonly" name="shipmentOrderProductName">
           </div>
         </div>
         
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label">계약상태</label>
-          <div class="col-md-5">
+          <div class="col-lg-4">
             <input type="text" class="form-control" placeholder="" name="contractState" id="contractState">
           </div>
         </div>
         <div class="form-group">
 		          <label class="col-sm-2 col-sm-2 control-label">출하지시날짜</label>
-	          <div class="col-md-4">
+	          <div class="col-lg-4">
 				<input  id="shipmentOrderDate" type="date" class="form-control"name="shipmentOrderDate">
 	          </div>
 	        </div>
-        
+        <div class="form-group">
+			 <label class="col-lg-2 col-sm-2 control-label">담당 사원명</label>
+			    <div class="col-lg-4">
+			       <input name="chargeEmployeeName" class="form-control" th:value="${session.SNAME}" readonly="readonly">
+			    </div>
+		</div>
+			        
+		<div class="form-group">
+			<label class="col-lg-2 col-sm-2 control-label">담당자 사원 코드</label>
+			 <div class="col-lg-4">
+			       <input name="chargeEmployeeCode" class="form-control" th:value="${session.SCODE}" readonly="readonly">
+			 </div>
+		</div>
         <div class="form-group text-right">
             <div class="col-lg-offset-2 col-lg-10">
-              <button class="btn btn-theme" id="shipmentOrderBtn" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">출하지시등록</font></font></button>
+              <button class="btn btn-theme" id="shipmentOrderBtn" type="button" disabled="disabled"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">출하지시등록</font></font></button>
               <button class="btn btn-theme04" type="button" id="cancleBtn"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">출하지시취소</font></font></button>
             </div>
             </div>

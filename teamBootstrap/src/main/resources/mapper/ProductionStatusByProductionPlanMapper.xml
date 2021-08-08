@@ -65,8 +65,9 @@
 			pp.charge_employee_code = einfo.employee_code
 		WHERE
 			<![CDATA[
-				DATE(pp.expected_production_end_date) <= NOW();
+				DATE(pp.expected_production_end_date) <= NOW()
 			]]>
+		ORDER BY plannedEndDate DESC;
 	</select>
 	
 	<select id="getAchievePercentageByPlan" resultType="map"> 

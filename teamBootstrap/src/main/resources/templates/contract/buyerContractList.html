@@ -39,7 +39,7 @@ layout:decorate="@{layout/default_contract}">
          		<tr>
          			<th>거래처별</th>
          			<th>품목별</th>
-         			<th>의뢰별</th>
+         			<th>계약별</th>
          			<th>순서</th>
          		</tr>
          	</thead>
@@ -59,7 +59,7 @@ layout:decorate="@{layout/default_contract}">
          			</td>
          			<td>
          				<div class="form-group">
-		                	<input type=date class="form-control" id="exampleInputPassword2" placeholder="입고일별">&nbsp&nbsp&nbsp  
+		                	<input type=date class="form-control" placeholder="입고일별">&nbsp&nbsp&nbsp  
 	               		</div>
          			</td>
 
@@ -94,8 +94,8 @@ layout:decorate="@{layout/default_contract}">
                     <th class="hidden-phone"><i class="fa fa-bookmark"></i>계약번호</th>
                     <th class="hidden-phone"><i class="fa fa-bookmark"></i>거래처명</th>
                     <th><i class="fa fa-bookmark"></i>수주일자</th>
-                    <th><i class="fa fa-bookmark"></i>단위</th>
                     <th><i class="fa fa-bookmark"></i>수량</th>
+                    <th><i class="fa fa-bookmark"></i>단위</th>
                     <th><i class=" fa fa-bookmark"></i>총계약금</th>
                     <th><i class=" fa fa-bookmark"></i>계약시작일자</th>
                     <th><i class=" fa fa-bookmark"></i>계약종료일자</th>
@@ -109,44 +109,34 @@ layout:decorate="@{layout/default_contract}">
                   	<td><input type="checkbox" class="checked"></td>
                   	<td th:text = "${n.index+1}"></td>
                     <td th:text="${c.cc}"></td>
+                    <td th:text="${c.cn}"></td>
+                    <td th:text="${c.cd}"></td>
+                    <td th:text="${c.ca}"></td>
                     <td th:text="${c.cu}"></td>
-                    <td th:text="${c.clientCode}"></td>
-                    <td th:text="${c.clientCode}"></td>
-                   <td> <button  type="button" class="btn btn-info btn-xs" id="addBtn" ><i class="fa fa-check"></i>승인완료</button></td>
-                    <td>2021-05-12 15:15:00</td>
-                    <td>  <button class="btn btn-primary btn-xs" type="button" onclick="location.href='/modifyBuyerContract'"><i class="fa fa-pencil"></i>수정</button></td>
+                    <td th:text="${c.ctp}"></td>
+                    <td th:text="${c.csd}"></td>
+                    <td th:text="${c.ced}"></td>
+                    <td><button class="btn btn-primary btn-xs" type="button" onclick="location.href='modifyBuyerContract'"><i class="fa fa-pencil"></i>수정</button></td>
 
                   </tr>
                   
            		 </tbody>
               </table>
-                            	<div class="dataTables_paginate paging_bootstrap pagination">
-					<ul>
-						<li class="prev"><a th:href="@{/system/clientList}"> << </a></li>
-						<li><a th:if="${currentPage > 1}" th:href="@{/system/clientList(currentPage=${currentPage - 1})}">이전</a></li>
-						<th:block th:each="num:${#numbers.sequence(pageStartNum, pageEndNum)}">
-						<li><a th:if="${num != currentPage}" th:href="@{/system/clientList(currentPage=${num})}">[[${num}]]</a></li>
-						<li><a th:unless="${num != currentPage}">[[${num}]]</a></li>
-						
-						</th:block>
-						<li class="prev"><a th:if="${currentPage < lastPage}" th:href="@{/system/clientList(currentPage=${currentPage + 1})}"> 다음 </a></li>
-						<li class="next"><a th:href="@{/system/clientList(currentPage=${lastPage})}"> >> </a></li>
-					</ul>
-				</div>
+
               
            	 </div>
             </div>
-            <div class="form-group text-right">
+              <div class="form-group text-right">
 		          <div class="col-lg-offset-2 col-lg-10">
 		          <br>
 		          <br>
-		          <br>
-		          <br>
-		          <a th:href="@{/addBuyerRequest}" class="btn btn-success btn-xs"><i class="fa fa-plus"></i>계약등록</a>	          
+
+		          <a th:href="@{/contract/addBuyerContract}" class="btn btn-success btn-xs"><i class="fa fa-plus"></i>계약등록</a>	          
 		           <a id="deleteBtn" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i>삭제</a>
 		          </div>
 		        </div> 
             </div>
+
           
           <!-- 입고 상세 내역 팝업창 -->
           <div class="popup" data-popup="requestInfo">
@@ -204,14 +194,14 @@ layout:decorate="@{layout/default_contract}">
 	         			<th colspan="2" style="padding-right: 20px;">
 		         			 <div class="form-inline" style="margin-bottom: 0px;"><!-- 발주처별 -->
 		         			 	<label class="control-label">거래처코드</label>&nbsp
-			                	<input type="text" class="form-control" id="bySupplierValue" placeholder="검색어를 입력하세요.">
+			                	<input type="text" class="form-control" placeholder="검색어를 입력하세요.">
 			                </div>
 	         			</th>
 	         			<!-- <th style="padding-bottom: 12px;"><label class="control-label">발주처 명</label></th> -->
 	         			<th colspan="3" style="padding-right: 20px;">
 	         				<div class="form-inline" style="margin-bottom: 0px;"><!-- 재료별 -->
 		         				<label class="control-label">거래처 명</label>&nbsp
-			                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
+			                	<input type="text" class="form-control" placeholder="검색어를 입력하세요.">
 	         				 &nbsp&nbsp&nbsp <button type="submit" class="btn btn-theme">검색</button>
 		              		</div>
 	         			</th>  
@@ -304,7 +294,7 @@ layout:decorate="@{layout/default_contract}">
 	         			<th colspan="2" style="padding-right: 20px;">
 	         				<div class="form-inline" style="margin-bottom: 0px;"><!-- 색상별 -->
 		         				<label class="control-label">검색</label>&nbsp
-			                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
+			                	<input type="text" class="form-control" placeholder="검색어를 입력하세요.">
 	         				 &nbsp&nbsp&nbsp <button type="submit" class="btn btn-theme">검색</button>
 		              		</div>
 	         			</th>  

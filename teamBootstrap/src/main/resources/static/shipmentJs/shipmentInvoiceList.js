@@ -6,7 +6,7 @@ $(function(){
 	//송장번호 검색하기 
 		$('#invoiceCodeBtn').click(function(){
 		var shipmentInvoice = $('.shipmentInvoice').val();
-		console.log(shipmentInvoice);
+		
 		var html ='';
 		var request = $.ajax({
 		url: "/shipment/searchInvoiceCode",
@@ -17,7 +17,7 @@ $(function(){
 
 	}); 
 	request.done(function( data ) {
-				console.log("shipmentInvoiceCode :" + data)
+				
 		$('#shipmentInvoicelist >tbody').empty();
 			 if(data.length > 0){				 
 				  for(i=0; i<data.length; i++){
@@ -47,7 +47,7 @@ $(function(){
 	//거래처별 검색하기 
 	$('#clientCateBtn').click(function(){
 		var client = $('.client').val();
-		console.log(client);
+		
 		var html ='';
 		var request = $.ajax({
 		url: "/shipment/searchClientCate",
@@ -59,7 +59,7 @@ $(function(){
 	}); 
 	request.done(function( data ) {
 		
-		console.log("shipmentInvoiceCode :" + data)
+		
 		$('#shipmentInvoicelist >tbody').empty();
 			 if(data.length > 0){				 
 				  for(i=0; i<data.length; i++){
@@ -89,7 +89,7 @@ $(function(){
 	//택배사명으로찾기
 	$('#invoiceClientBtn').click(function(){
 		var invoiceClient = $('.invoiceClient').val();
-		console.log(invoiceClient);
+		
 		var html ='';
 		var request = $.ajax({
 			url: "/shipment/searchInvoiceClient",
@@ -101,7 +101,7 @@ $(function(){
 		}); 
 		request.done(function( data ) {
 			
-			console.log("shipmentInvoiceCode :" + data)
+			
 			$('#shipmentInvoicelist >tbody').empty();
 			if(data.length > 0){				 
 				for(i=0; i<data.length; i++){
@@ -131,7 +131,7 @@ $(function(){
 	//송장등록일조회
 	$('#invoiceRegDateBtn').click(function(){
 		var invoiceRegDate = $('.invoiceRegDate').val();
-		console.log(invoiceRegDate);
+		
 		var html ='';
 		var request = $.ajax({
 			url: "/shipment/searchInvoiceRegDate",

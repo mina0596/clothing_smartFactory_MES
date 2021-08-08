@@ -30,9 +30,9 @@ $(function(){
 					html +=  data[i].client_name
 					html += '">' + data[i].client_name + '</td>';
 					//의뢰코드
-					html += '<td class="product_request_code" value="';
-					html += data[i].product_request_code;
-					html += '">' + data[i].product_request_code + '</td>';
+					html += "<td>";
+					html += data[i].product_request_code+;
+					html += "'></a>" + data[i].product_request_code + '</td>';
 					
 					//중분류명
 					html += '<td class="med_class_name" value="';

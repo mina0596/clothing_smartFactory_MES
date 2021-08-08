@@ -6,7 +6,8 @@
 
 body{
     font-family: 'Poppins', sans-serif;
-    overflow: hidden;
+    overflow-x:hidden; 
+    overflow-y:auto;
 }
 
 .wave{
@@ -25,6 +26,11 @@ body{
     grid-gap :7rem;
     padding: 0 2rem;
     justify-content: center;
+}
+
+.mesTitle{
+	padding-top: 20px;
+	padding-left: 300px;
 }
 
 .img{
@@ -159,7 +165,7 @@ a{
 }
 
 a:hover{
-	color: #38d39f;
+	color: #fff;
 }
 
 .btn{
@@ -179,6 +185,26 @@ a:hover{
 	cursor: pointer;
 	transition: .5s;
 }
+
+.btn2{
+	display: block;
+	width: 150px;
+	height: 50px;
+	border-radius: 15px;
+	outline: none;
+	border: none;
+	background-image: linear-gradient(to right, #a6a9ff, #6468de, #e2e3ff);
+	background-size: 200%;
+	font-size: 25px;
+	color: #fff;
+	font-family: 'Poppins', sans-serif;
+	text-transform: uppercase;
+	margin: 1rem 0;
+	cursor: pointer;
+	transition: .5s;
+	padding: 3px;
+}
+
 .btn:hover{
 	background-position: right;
 }

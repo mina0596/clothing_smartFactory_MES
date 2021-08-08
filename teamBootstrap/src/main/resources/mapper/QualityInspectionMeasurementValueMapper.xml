@@ -2,7 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ksmart39.springboot.dao.QualityInsMeasurementValueMapper">
 
-
+	<resultMap type="qualityInspectionRequest" 						id="qualityInspectionRequestResultMap">
+		<result property="qualityInspectionRequestCode" 				column="quality_inspection_request_code"/>
+		<result property="requestedProductCode" 						column="requested_product_code"/>
+		<result property="qualityInspectionRequestEmployeeCode" 		column="quality_inspection_request_employee_code"/>
+		<result property="qualityInspectionRequestApprovedEmployeeCode" column="quality_inspection_request_approved_employee_code"/>
+		<result property="rawMaterialCode" 								column="raw_material_code"/>
+		<result property="qualityInspectionCode" 						column="quality_inspection_code"/>
+		<result property="samplingCheck" 								column="sampling_check"/>
+		<result property="inspectioinSpecialRequest" 					column="inspectioin_special_request"/>
+		<result property="inspectionRequestApproval" 					column="inspection_request_approval"/>
+		<result property="requestedInspectionCompleteDate" 				column="requested_inspection_complete_date"/>
+		<result property="inspectionRequestDate" 						column="inspection_request_date"/>
+		<result property="inspectionRequestApprovalDate" 				column="inspection_request_approval_date"/>
+		<result property="qualityInspectionRequestRegDate" 				column="quality_inspection_request_reg_date"/>
+		<result property="qualityInspectionRequestUpdateDate" 			column="quality_inspection_request_update_date"/>
+	</resultMap>
+	
 	<resultMap type="QualityBiochemFabricLevelStandard" 	id="QualityBiochemFabricLevelStandardResultMap">
 		<result property="rawMaterialCode" 						column="raw_material_code" />
 		<result property="qualityInspectionCode" 				column="quality_inspection_code" />
@@ -47,7 +63,7 @@
 	</resultMap>
 	
 		
-	<!-- 품질검사 코드 검색 -->
+	<!-- [품질검사 측정값 현황] 품질검사 코드 검색 -->
 	<select id="searchInspectionCode" resultType="QualityInspection" parameterType="QualityInspection">
 		SELECT
 			quality_inspection_code as qualityInspectionCode
@@ -76,10 +92,11 @@
 		</trim>
 	</select>
 	
-	<!-- 품질검사 현황 거래처 검색 -->
+	<!-- [품질검사 측정값 현황] 거래처 검색 -->
 	<select id="searchByClientName" resultType="Map" parameterType="String">
 		SELECT 
 			ci.client_name AS clientName
+			,ci.client_code AS clientCode
 		FROM 
 			client_info AS ci
 		INNER JOIN
@@ -95,7 +112,7 @@
 			ci.client_name;
 	</select>
 	
-	<!-- 품질검사 현황 계약번호 검색 -->
+	<!-- [품질검사 측정값 현황] 계약번호 검색 -->
 	<select id="searchByContractNum" resultType="Map" parameterType="Map">
 		SELECT 
 			co.contract_code AS contractCode
@@ -129,7 +146,7 @@
 		</trim>
 	</select>
 	
-	<!--실시간 검사 현황 리스트 위에 넣을 데이터들 -->
+	<!-- [품질검사 측정값 현황] 실시간 검사 현황 리스트 위에 넣을 데이터들 -->
 	<select id="getAllCount" resultType="Map" parameterType="String">
 		SELECT
 				DISTINCT 
@@ -170,7 +187,7 @@
 												WHERE bb.contract_code = #{contractNum})
 	</select>
 	
-	<!-- 전체 합/불별 건수 -->
+	<!-- [품질검사 측정값 현황] 전체 합/불별 건수 -->
 	<select id="getPassOrFailCount" resultType="Map" parameterType="String">
 		SELECT
 			COUNT(case when ref.low_cate_final_pass_check='합격' then 1 end) AS pass
@@ -185,7 +202,7 @@
 			p.contract_code = #{contractNum};
 	</select>
 	
-	<!-- 공정별 불량건수 -->
+	<!-- [품질검사 측정값 현황] 공정별 불량건수 -->
 	<select id="getFailCountByHighInspection" resultType="Map" parameterType="String">
 		SELECT
 			COUNT(case when SUBSTRING(ref.quality_inspection_code,1,3)='A01' then 1 end) AS A01
@@ -203,7 +220,7 @@
 			ref.low_cate_final_pass_check='불합격';	
 	</select>
 	
-	<!-- 품질검사 현황 -->
+	<!-- [품질검사 측정값 현황] 품질검사 현황 -->
 	<select id="getQualityInspectionStatusNow" resultType="Map" parameterType="Map">
 		SELECT
 			re.quality_inspection_request_code AS inspectionRequestCode
@@ -261,7 +278,7 @@
 				AND pc.gender_categorized_name LIKE CONCAT ('%', #{genderCate} ,'%')
 			</if>		
 			<if test="productCode != null and productCode != ''.toString()">
-				AND pc.detailed_categorized_code LIKE CONCAT ('%', #{productCode} ,'%')
+				AND pc.product_code LIKE CONCAT ('%', #{productCode} ,'%')
 			</if>		
 			<if test="inspectionCode != null and inspectionCode != ''.toString()">
 				AND sub.quality_inspection_code LIKE CONCAT ('%', #{inspectionCode} ,'%')
@@ -276,7 +293,7 @@
 		GROUP BY q.quality_inspection_request_code;
 	</select>
 	
-	<!-- 품질검사 측정값 목록 -->
+	<!-- [품질검사 측정값 목록] 품질검사 측정값 목록 -->
 	<select id="getInspectionMeasurementValueList" resultMap="QualityInspectionResultMap">
 		SELECT 
 			inspection_result_code
@@ -301,7 +318,7 @@
 		GROUP BY i.quality_inspection_request_code;
 	</select>
 	
-	<!-- 품질검사 측정값 등록 -->
+	<!-- [품질검사 측정값 등록] 품질검사 측정값 등록 -->
 	<insert id="addQualityRawMaterialInspectionResult" parameterType="QualityInspectionResult">
 		INSERT INTO inspection_result
 			(
@@ -344,7 +361,7 @@
 			
 	</insert>
 	
-	<!-- 품질검사 수치별 등록 기준값 가져오기 -->
+	<!-- [품질검사 측정값 등록] 품질검사 수치별 등록 기준값 가져오기 -->
 	<select id="getQualityInspectionStandardByNumber" parameterType="String" resultType="Map">
 		SELECT
 			s.quality_inspection_code
@@ -370,7 +387,7 @@
 		GROUP BY s.quality_inspection_code;
 	</select>
 	
-	<!-- 품질검사 측정값 기준치 -->
+	<!-- [품질검사 측정값 등록] 품질검사 측정값 기준치 -->
 	<select id="getQualityInspectionStandard" parameterType="String" resultMap="QualityInspectionStandardResultMap" >
 		SELECT 
 			quality_inspection_code
@@ -389,7 +406,7 @@
 			i.quality_inspection_code = #{qualityInspectionCode};
 	</select>
 	
-	<!-- 품질검사 원부자재 기준치 목록 -->
+	<!-- [품질검사 측정값 등록] 품질검사 원부자재 기준치 목록 -->
 	<select id="getBiochemFabricLevelStandard" parameterType="QualityInspectionResult" resultMap="QualityBiochemFabricLevelStandardResultMap">
 		SELECT 
 			raw_material_code
@@ -407,7 +424,7 @@
 			b.raw_material_code = #{rawMaterialCode};
 	</select>
 	
-	<!-- 품질검사 요청목록 목록 -->
+	<!-- [품질검사 측정값 등록] 품질검사 요청목록 목록 -->
 	<select id="searchQualityInspectionRequest" resultType="Map" parameterType="Map">
 		SELECT
 			q.quality_inspection_request_code
@@ -461,5 +478,92 @@
 			</if>
 				GROUP BY q.quality_inspection_request_code;
 		</trim>
+	</select>
+	
+	<!-- [품질검사 요청 목록] 품질검사 요청 목록 -->
+	<select id="getQualityInspectionRequestList" resultType="Map">
+		SELECT
+			q.quality_inspection_request_code  AS qir
+			,p.contract_code								AS cc
+			,q.requested_product_code				AS rpc
+			,q.quality_inspection_code				AS qic
+			,sub.sub_class_name						AS scn
+			,q.sampling_check							AS sc
+			,q.inspection_request_approval		AS ira
+			,q.inspection_request_date				AS ird
+		FROM
+			quality_inspection_request AS q
+		INNER JOIN
+			requested_product_detail AS p ON q.requested_product_code = p.requested_product_code
+		INNER JOIN
+			sub_class_inspection_list AS sub ON q.quality_inspection_code = sub.quality_inspection_code;
+	</select>
+	
+	<update id="approvalInspectionRequest" parameterType="String">
+		UPDATE 
+			quality_inspection_request
+		SET
+			inspection_request_approval = '승인'
+		WHERE 
+			quality_inspection_request_code = #{qualityInspectionRequestCode};	
+	</update>
+	
+	<!-- [품질검사 요청] 품질검사 단일 요청 -->
+	<insert id="qualityInspectionRequest" parameterType="qualityInspectionRequest">
+		INSERT INTO quality_inspection_request(
+			quality_inspection_request_code
+			,requested_product_code
+			,quality_inspection_request_employee_code
+			,quality_inspection_request_approved_employee_code
+			,raw_material_code
+			,quality_inspection_code
+			,sampling_check
+			,inspectioin_special_request
+			,inspection_request_approval
+			,requested_inspection_complete_date	
+			,inspection_request_date
+			,inspection_request_approval_date
+			,quality_inspection_request_reg_date
+			,quality_inspection_request_update_date
+			)VALUES (
+			sf_qualityInspectionRequestCode()
+			,#{requestedProductCode}
+			,#{qualityInspectionRequestEmployeeCode}
+			,#{qualityInspectionRequestApprovedEmployeeCode}
+			,#{rawMaterialCode}
+			,#{qualityInspectionCode}
+			,#{samplingCheck}
+			,#{inspectioinSpecialRequest}
+			,'미승인'
+			,#{requestedInspectionCompleteDate}
+			,NOW()
+			,NULL
+			,NOW()
+			,NULL)
+	</insert>
+	
+	<!-- [품질검사 요청] 계약번호로 품목별 의뢰코드 검색 -->
+	<select id="searchRequestProductCode" parameterType="String" resultType="Map">
+		SELECT 
+			r.requested_product_code
+		FROM 
+			requested_product_detail AS r
+		LEFT JOIN
+			completed_product_list AS c ON r.requested_product_code = c.requested_product_code
+		WHERE
+			r.contract_code = #{contractCode}
+		AND
+			c.requested_product_code IS NULL;
+	</select>
+	
+	<!-- [품질검사 요청] 품질검사 세부 코드 검색 -->
+	<select id="subClassCate" parameterType="String" resultType="Map">
+		SELECT 
+			quality_inspection_code
+			,sub_class_name
+		FROM 
+			sub_class_inspection_list AS sub
+		WHERE 
+				sub.high_med_low_class_code = #{lowClassCateName};	
 	</select>
 </mapper>

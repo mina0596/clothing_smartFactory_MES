@@ -1,7 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ksmart39.springboot.dao.ShipmentMapper">
-<!--  -->
+<resultMap type="ShipmentOrder" id="shipmentOrder">
+	<result property="shipmentOrderCode" column="shipment_order_code"/>
+	<result property="requestProductCode" column="requested_product_code"/>
+	<result property="chargeEmployeeCode" column="charge_employee_code"/>
+	<result property="shipmentOrderGroupCode" column="shipment_order_group_code"/>
+	<result property="shipmentOrderDate" column="shipment_order_date"/>
+	<result property="shipmentOrderContractState" column="shipment_order_contract_state"/>
+	<result property="shipmentOderRegDate" column="shipment_order_reg_date"/>
+	<result property="shimpentOrderUpdateDate" column="shipment_order_reg_update_date"/>
+	<association property="humanResources" javaType="humanResources">
+	<result property="employeeName" column="employee_name"/>
+	</association>
+	<association property="requestedProduct" javaType="requestedProduct">
+	<result property="productRequestCode" column="product_request_code"/>
+	<result property="contractCode" column="contract_code"/>
+	</association>
+	<association property="client" javaType="client">
+	<result property="clientName" column="client_name"/>
+	</association>
+	<association property="productCodeDetail" javaType="productCodeDetail">
+	<result property="detailedCategorizedName" column="detailed_categorized_name"/>
+	<result property="genderCategorizedName" column="gender_categorized_name"/>
+	</association>
+</resultMap>
+<!--출하지시 삭제-->
+<delete id="deleteShipmentOrder" parameterType="String">
+DELETE  FROM shipment_order
+WHERE shipment_order_code =#{checkArray}
+</delete>
+
+
+<!--출하지시 수정  -->
+<update id="modifyShipmentOrder" parameterType="ShipmentOrder">
+UPDATE 	shipment_order AS s
+		INNER JOIN 
+			requested_product_detail AS r
+		ON s.requested_product_code = r.requested_product_code
+		INNER JOIN
+			client_info AS c
+		ON r.client_code =c.client_code
+		INNER JOIN
+			product_code_detail AS p
+		ON r.product_code =p.product_code
+		INNER join
+		employee_info AS e
+		ON s.charge_employee_code = e.employee_code
+	<trim prefix="SET" prefixOverrides=",">	
+		<if test="requestedProduct.contractCode != null and requestedProduct.contractCode != ''.toString()">
+		r.contract_code=#{requestedProduct.contractCode}
+		</if>
+		<if test="client.clientName != null and client.clientName != ''.toString()">
+		,c.client_name=#{client.clientName}
+		</if>
+		<if test="shipmentOrderGroupCode != null and shipmentOrderGroupCode != ''.toString()">
+		,s.shipment_order_group_code=#{shipmentOrderGroupCode}
+		</if>
+		<if test="shipmentOrderCode != null and shipmentOrderCode != ''.toString()">
+		,s.shipment_order_code=#{shipmentOrderCode}
+		</if>
+		<if test="requestedProduct.productRequestCode != null and requestedProduct.productRequestCode != ''.toString()">
+		,r.product_request_code=#{requestedProduct.productRequestCode}
+		</if>
+		<if test="requestProductCode != null and requestProductCode != ''.toString()">
+		,s.requested_product_code=#{requestProductCode}
+		</if>
+		<if test="productCodeDetail.genderCategorizedName != null and productCodeDetail.genderCategorizedName != ''.toString()">
+		,p.gender_categorized_name=#{productCodeDetail.genderCategorizedName}
+		</if>
+		<if test="productCodeDetail.detailedCategorizedName != null and productCodeDetail.detailedCategorizedName != ''.toString()">
+		,p.detailed_categorized_name=#{productCodeDetail.detailedCategorizedName}
+		</if>
+		<if test="shipmentOrderContractState != null and shipmentOrderContractState != ''.toString()">
+		,s.shipment_order_contract_state=#{shipmentOrderContractState}
+		</if>
+		<if test="shipmentOrderDate != null and shipmentOrderDate != ''.toString()">
+		,s.shipment_order_date =#{shipmentOrderDate}
+		</if>
+		</trim>
+	WHERE s.shipment_order_code=#{shipmentOrderCode}
+
+
+</update>
+<!--출하지시 정보 -->
+<select id="shipmentOrderInfo" parameterType="String" resultMap="shipmentOrder">
+SELECT
+      c.client_name,
+		s.shipment_order_group_code,
+		s.shipment_order_code,
+		r.product_request_code,
+		s.requested_product_code,
+		r.contract_code,
+		p.detailed_categorized_name,
+		p.gender_categorized_name,
+		s.charge_employee_code,
+		e.employee_name,
+		s.shipment_order_contract_state,
+		s.shipment_order_date,
+		s.shipment_order_reg_date
+	FROM
+		shipment_order AS s
+	INNER JOIN 
+		requested_product_detail AS r
+	ON s.requested_product_code = r.requested_product_code
+	INNER JOIN
+		client_info AS c
+	ON r.client_code =c.client_code
+	INNER JOIN
+		product_code_detail AS p
+	ON r.product_code =p.product_code
+	INNER join
+	employee_info AS e
+	ON s.charge_employee_code = e.employee_code
+	WHERE s.shipment_order_code =#{shipmentOrderCode}
+</select>
 <!-- 출하지시 등록시  의뢰품목코드 중복체크 -->
 <select id="checkProduct"  parameterType="String" resultType="Integer" >
 SELECT
@@ -27,7 +140,7 @@ INSERT INTO shipment_order
 	  shipment_order_reg_update_date)
 	VALUES (sf_shipmentOrder2(),
 	 #{shipmentOrderProduectCode},
-	  'E0017',
+	  #{chargeEmployeeCode},
 	  sf_shipmentOrderGroup(#{shipmentRequestCode}),
 	  #{shipmentOrderDate},
 	  #{shipmentOrderProductName} ,
@@ -136,11 +249,11 @@ DATE_FORMAT(s.shipment_order_reg_date,'%Y-%m-%d %T') AS shipmentRegDate
 <!--출하지시목록  -->
 <select id="getShipmentOrderList" resultType="map">
 	SELECT
-		s.shipment_order_code AS shipmentOrderCode,
-		c.client_name AS clientName,
-		p.gender_categorized_name AS productName,
-		s.shipment_order_date AS shipmentOrderDate,
-		s.shipment_order_reg_date AS shipmentRegDate
+		s.shipment_order_code,
+		c.client_name,
+		p.gender_categorized_name,
+		s.shipment_order_date,
+		s.shipment_order_reg_date
 	FROM
 		shipment_order AS s
 	INNER JOIN 

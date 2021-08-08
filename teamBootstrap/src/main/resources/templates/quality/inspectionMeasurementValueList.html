@@ -23,7 +23,7 @@ layout:decorate="@{layout/default_qualityControl}">
      <div class="col-md-12">
        <div class="content">
        
-          <h4><i class="fa fa-angle-right"></i>품질 검사 요청 조회</h4>
+          <h4><i class="fa fa-angle-right"></i>품질 검사 측정값 조회</h4>
          	 <hr>
            <form class="form-inline" role="form">
         
@@ -48,17 +48,17 @@ layout:decorate="@{layout/default_qualityControl}">
          			<td style="padding-right: 20px;">
          				<div class="form-group"><!-- 품목별 의뢰 코드별 -->
 		               		<button id="byRequestedProductCode" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
-		                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="직접 입력 또는 검색">
+		                	<input type="text" class="form-control" placeholder="직접 입력 또는 검색">
 	              		</div>
          			</td>
          			<td>
          				<div class="form-group">
-		                	<input type=date class="form-control" id="exampleInputPassword2" placeholder="등록일별">&nbsp&nbsp&nbsp ~ 
+		                	<input type=date class="form-control" placeholder="등록일별">&nbsp&nbsp&nbsp ~ 
 	               		</div>
          			</td>
          			<td style="padding-right: 20px;">
          				<div class="form-group">
-		                	<input type=date class="form-control" id="exampleInputPassword2" placeholder="등록일별">
+		                	<input type=date class="form-control" placeholder="등록일별">
 	               		</div>
          			</td>
          			<td style="padding-right: 20px;">
@@ -90,19 +90,18 @@ layout:decorate="@{layout/default_qualityControl}">
                     <th><i class="fa fa-bookmark"></i>품질검사 코드</th>
                     <th><i class=" fa fa-bookmark"></i>합격여부</th>
                     <th><i class=" fa fa-bookmark"></i>현황</th>
-                    <th><i class=" fa fa-bookmark"></i>수정</th>
+                    
                   </tr>
                 </thead>
                 <tbody>
                   <tr th:if="${#lists.size(list)>0}" th:each="l, i: ${list}">
                    <td><input type="checkbox" class="checked" th:value="${l.inspectionResultCode}"></td>
                    	<td th:text="${i.index+1}"></td>
-                    <td>
-                    <a th:href="@{#}">[[${l.qualityInspectionRequestCode}]]</a></td>
+                    <td th:text="${l.qualityInspectionRequestCode}"></td>
                     <td th:text="${l.qualityInspectionCode}"></td>
                     <td th:text="${l.inspectionPassCheck}"></td>
-                  	<td><a th:href="@{/addQualityInspectionStatus}" class="btn btn-warning btn-xs"><i class="fa fa-bar-chart-o"></i>현황</a></td>
-                  	<td><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
+                  	<td><a th:href="@{/quality/qualityInspectionStatusNow}" class="btn btn-warning btn-xs"><i class="fa fa-bar-chart-o"></i>현황</a></td>
+                  	
                   </tr>                
            		 </tbody>
               </table>
@@ -110,7 +109,7 @@ layout:decorate="@{layout/default_qualityControl}">
            </div>
            <div class="form-group text-right">
 		          <div class="col-lg-offset-2 col-lg-10">
-		           <a th:href="@{/qualityInspectionRequest}" class="btn btn-success btn-xs"><i class="fa fa-check"></i>등록</a>
+		           <a th:href="@{/quality/addInspectionMeasurementValue}" class="btn btn-success btn-xs"><i class="fa fa-check"></i>등록</a>
 		           <a id="deleteBtn" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i>삭제</a>
 		          </div>
 		        </div>
@@ -140,7 +139,7 @@ layout:decorate="@{layout/default_qualityControl}">
 	         			<th colspan="3" style="padding-right: 20px;">
 		         			 <div class="form-inline" style="margin-bottom: 0px;">
 		         			 	<label class="control-label">품질검사 코드</label>&nbsp
-			                	<input type="text" class="form-control" id="bySupplierValue" placeholder="검색어를 입력하세요.">
+			                	<input type="text" class="form-control" placeholder="검색어를 입력하세요.">
 			                </div>
 	         			</th>
 	         			<th style="padding-right: 20px;">
@@ -267,20 +266,20 @@ layout:decorate="@{layout/default_qualityControl}">
 	         			<th colspan="2" style="padding-right: 20px;">
 		         			 <div class="form-inline" style="margin-bottom: 0px;">
 		         			 	<label class="control-label">계약번호</label>&nbsp
-			                	<input type="text" class="form-control" id="bySupplierValue" placeholder="검색어를 입력하세요.">
+			                	<input type="text" class="form-control" placeholder="검색어를 입력하세요.">
 			                </div>
 	         			</th>
 	         			<th style="padding-right: 20px;">
 		         			 <div class="form-inline" style="margin-bottom: 0px;">
 		         			 	<label class="control-label">품목별의뢰코드</label>&nbsp
-			                	<input type="text" class="form-control" id="bySupplierValue" placeholder="검색어를 입력하세요.">
+			                	<input type="text" class="form-control" placeholder="검색어를 입력하세요.">
 			                </div>
 	         			</th>         			
 	         			<th colspan="2" style="padding-right: 20px;">
 	         				<div class="form-inline" style="margin-bottom: 0px;">
 		         				<label class="control-label">계약날짜</label>&nbsp
-			                	<input type="date" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">&nbsp ~
-			                	<input type="date" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
+			                	<input type="date" class="form-control" placeholder="검색어를 입력하세요.">&nbsp ~
+			                	<input type="date" class="form-control" placeholder="검색어를 입력하세요.">
 	         				 &nbsp&nbsp&nbsp <button type="submit" class="btn btn-theme">검색</button>
 		              		</div>
 	         			</th> 
@@ -346,7 +345,7 @@ layout:decorate="@{layout/default_qualityControl}">
 							$('#saveQualityInspectionCode').click(function(){
 								var check = $('input[name=byQualityInspectionModal]:checked');
 								var checkVal = check.parents('tr').find('.byQualityInspectionModal').text();
-								console.log(checkVal);
+								//console.log(checkVal);
 								$('#byQualityInspectionCodeValue').attr('value', checkVal);
 							});
 							
@@ -360,7 +359,7 @@ layout:decorate="@{layout/default_qualityControl}">
 							$('#saveMaterialName').click(function(){
 								var check = $('input[name=materialName]:checked');
 								var checkVal = check.parents('tr').find('.materialName').text();
-								console.log(checkVal);
+								//console.log(checkVal);
 								$('#exampleInputPassword2').attr('value', checkVal);
 							});
 						}

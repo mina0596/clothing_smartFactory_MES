@@ -28,17 +28,18 @@ public class CompletedProductService {
 	//[민아]완제품 품목 등록
 	public int addCompletedProduct(CompletedProduct productInfo) {
 		//완제품 품목코드 + 최초시작일자 + 마지막공정완료일자 목록
-		List<CompletedProduct> productInfoList = completedProductMapper.getCompletedProductInfo();
-		int addWorkCheck = 0;
-		for(int i=0; i < productInfoList.size(); i++) {
-			completedProductMapper.addCompletedProduct(productInfoList.get(i));
-			addWorkCheck = 1;
-		}
-		return addWorkCheck;
+	
+		return completedProductMapper.addCompletedProduct(productInfo);
 	}
 	
 	//[민아]완제품 품목 목록
 	public List<Map<String,Object>> getCompletedProductList(){
 		return completedProductMapper.getCompletedProductList();
+	}
+	
+	
+	//[민아]완제품 자동등록을 위한 정보 가져오기
+	public CompletedProduct getProductInfoToInsertCompleted(String ProductCode) {
+		return completedProductMapper.getProductInfoToInsertCompleted(ProductCode);
 	}
 }

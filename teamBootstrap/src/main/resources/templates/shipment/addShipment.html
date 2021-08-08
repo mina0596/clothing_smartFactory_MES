@@ -5,38 +5,6 @@
 <th:block layout:fragment="customJs">
 	<script type="text/javascript">
 		$(function(){
-			$('#searchRequest').click(function(){
-				$('#byRequestProductCode').modal("show");
-			});
-			
-			$('#sendProductionRequest').click(function(){
-				tdList = tableAttr.find('.radioClass');
-				tdList.each(function(){
-					if($(this).is(':checked')){
-						var par = $(this).parent();
-						var productRequsetCode = par.parent().find('.productRequsetCode').text();
-						console.log(materialCateName + '<<materialCateName');
-						$('#productReqeust').attr('value', productRequsetCode);
-						
-						
-					}				
-					
-				});
-				$('[data-popup-open]').on('click', function(e)  {
-				       var targeted_popup_class = jQuery(this).attr('data-popup-open');
-				       $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
-
-				       e.preventDefault();
-				   });
-
-				    //----- CLOSE
-				    $('[data-popup-close]').on('click', function(e)  {
-				       var targeted_popup_class = jQuery(this).attr('data-popup-close');
-				       $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
-
-				       e.preventDefault();
-				    });
-				}) 
 		})
 	</script>
 </th:block>  
@@ -46,9 +14,7 @@
       <h4 class="mb"><i class="fa fa-edit"></i> 출고 등록</h4>
       <hr>
       <br>
-      
-     
-
+      <form th:action="@{/shipment/addShipment}" method="post">
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label"> 출하송장번호</label>
           <div class="col-md-5">
@@ -64,14 +30,14 @@
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">출하 지시 번호</label>
           <div class="col-md-5">
-            <input class="form-control" id="disabledInput" type="text" placeholder="shipment_order_01 (DB에서 가져온 값)" disabled>
+            <input class="form-control" type="text" placeholder="shipment_order_01 (DB에서 가져온 값)" readonly="readonly">
           </div>
         </div>
         
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">거래처명</label>
           <div class="col-md-5">
-            <input class="form-control" id="disabledInput" type="text" placeholder="파크랜드 전주점 (DB에서 가져온 값)" disabled>
+            <input class="form-control" type="text" placeholder="파크랜드 전주점 (DB에서 가져온 값)" readonly="readonly">
           </div>
         </div>
         
@@ -80,64 +46,55 @@
           <div class="col-md-5">
           	<span class="label label-default" style="font-size: 100%;">req01_MS_pants</span> 
           	<span class="label label-default" style="font-size: 100%;">req01_MS_jacket</span> 
-            <!-- <input class="form-control" id="disabledInput" type="text" placeholder="req01_MS_pants, (DB에서 가져온 값)" disabled> -->
           </div>
         </div>
            	        
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">납품처 주소</label>
           <div class="col-md-5">
-            <input type="text" class="form-control" placeholder="전주시 덕진구 금암동 (DB에서 가져올 수 있고, 수정할 수도 있다.)">
+            <input type="text" class="form-control" placeholder="전주시 덕진구 금암동 ">
           </div>
         </div>
         
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">납품처 연락처</label>
           <div class="col-md-5">
-            <input type="text" class="form-control" placeholder="063-717-1008 (DB에서 가져올 수 있고, 수정할 수도 있다.)">
+            <input type="text" class="form-control" placeholder="063-717-1008">
           </div>
         </div>
         
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label" style="font-weight: 600;">출고일자</label>
           <div class="col-md-4">
-            <div data-date="2014-02-01T10:05:00Z" class="input-group date form_datetime-adv">
-              <input type="text" class="form-control" readonly="readonly" size="16" id="finishDate">
-              <div class="input-group-btn">
-                <button type="button" class="btn btn-theme02 date-reset"><i class="fa fa-times"></i></button>
-                <button type="button" class="btn btn-theme date-set"><i class="fa fa-calendar"></i></button>
-              </div>
-            </div>
+              <input type="datetime-local" class="form-control" size="16">
           </div>
         </div>
         
       
         <div class="form-group">
-          <label class="col-lg-2 col-sm-2 control-label" style="font-weight: 600;">담당 사원명</label>
+          <label class="col-lg-2 col-sm-2 control-label" style="font-weight: 600;">담당자명</label>
           <div class="col-lg-10">
-            <p class="form-control-static">한예슬</p>
+            <p class="form-control-static">[[${session.SNAME}]]</p>
           </div>
         </div>
         
         <div class="form-group">
           <label class="col-lg-2 col-sm-2 control-label" style="font-weight: 600;">담당자 사원 코드</label>
           <div class="col-lg-10">
-            <p class="form-control-static">employee1234</p>
+            <p class="form-control-static">[[${session.SCODE}]]</p>
           </div>
         </div>
  		
          <div class="form-group text-right">
           <div class="col-lg-offset-2 col-lg-10">
-            <button class="btn btn-theme" type="button" onclick="location.href='shipmentList'">등록</button>
+            <button class="btn btn-theme" type="submit">등록</button>
             <button class="btn btn-theme04" type="button" onclick="location.href='shipmentList'">취소</button>
           </div>
         </div>
-
+	</form>
     </div>
 
-<!-- 달력사용을 위한 스크립트  -->
 
-  <script th:src="@{Dashio/lib/advanced-form-components.js}"></script>
 
 </th:block>
 

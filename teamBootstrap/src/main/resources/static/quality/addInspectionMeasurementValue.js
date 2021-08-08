@@ -38,7 +38,7 @@
 				});
 				
 				request.done(function( data ) {
-					console.log(data);
+					//console.log(data);
 					if(data.length > 0){
 						for(i=0; i<data.length; i++){
 							var date =  data[i].inspection_request_date;
@@ -167,7 +167,7 @@
 						});
 						 
 						request.done(function( data ) {
-							console.log(data);
+							//console.log(data);
 							
 							if(data != '' && data != undefined && data != null){
 								
@@ -258,7 +258,7 @@
 		        contentType : 'application/json; charset=UTF-8',
 		        dataType: 'text',
 		        success : function(data) {
-		        	console.log(data);
+		        	//console.log(data);
 		        	
 		        	//리로드
 		        	if(data) location.reload(true);
@@ -304,7 +304,7 @@
 					insArray.push(insInfo);
 				};
 		
-			console.log(JSON.stringify(insArray));
+			//console.log(JSON.stringify(insArray));
 			if(validationCheck) addInsValueAjax(insArray);
 			
 		});
