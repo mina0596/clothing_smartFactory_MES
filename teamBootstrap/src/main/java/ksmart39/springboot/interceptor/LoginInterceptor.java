@@ -27,8 +27,17 @@ public class LoginInterceptor implements HandlerInterceptor{
 			throws Exception {
 		
 		HttpSession session = request.getSession();
-		String sessionId = (String)	session.getAttribute("SID"); 
-		int sessionLevel = Integer.valueOf((String)session.getAttribute("SLEVEL")); 
+		String sessionId = (String)	session.getAttribute("SID");
+		int sessionLevel = 0;
+		try {			
+			sessionLevel = Integer.valueOf((String)session.getAttribute("SLEVEL")); 
+			log.info("sessionLevel 확인111 :{}", sessionLevel);
+		}catch(NumberFormatException e) {
+			
+		}catch (Exception e) {
+			
+		}
+		log.info("sessionLevel 확인222 :{}", sessionLevel);
 		
 		String[] adminUri = {"/rawMaterials/addInWarehousing", "/rawMaterials/addExWarehousing", "/quality/qualityInspectionRequest",
 							 "/quality/addDefectiveProduct", "/system/addHumanResources", "/system/addClient", "/system/addRawMaterials",
