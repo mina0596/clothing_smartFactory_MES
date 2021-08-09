@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+layout:decorate="@{layout/default_qualityControl}">
+
+<th:block layout:fragment="customJs">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<!-- 변수담아주는 함수들 모음  -->
+	<script th:inline="javascript">
+		var yearlyFailInfo = null;
+		var monthlyFailInfo = null;
+		function myFunc(){
+			/* <![CDATA[ */
+		 	yearlyFailInfo = /*[[${failedRateByYear}]]*/;
+		 	console.log(yearlyFailInfo);
+		 	monthlyFailInfo = /*[[${monthlyFailRate}]]*/;
+		 	console.log(monthlyFailInfo);
+		 	/*]]> */
+		}
+		
+	</script>
+	<script th:inline="javascript" th:src="@{/quality/qualityInspectionFailedRateReport.js}"></script>
+	
+</th:block>
+
+<th:block layout:fragment="container">
+	<h4 style="font-weight: bold;"><i class="fa fa-bar-chart-o"></i> 품질검사별 불량 현황</h4>
+
+	<div class="col-lg-12 mt">
+            <div class="row content-panel">
+
+              <div class="panel-heading">
+                <ul class="nav nav-tabs nav-justified">
+                  <li  class="active">
+                    <a data-toggle="tab" href="#byYear" class="yearTabBtn">연도별 불량률</a>
+                  </li>
+                  <li>
+                    <a data-toggle="tab" href="#byMonths" class="monthTabBtn">월별 불량률</a>
+                  </li>
+                </ul>
+              </div>
+              <!-- /panel-heading -->
+              
+              
+              <div class="panel-body">
+                <div class="tab-content">
+                
+                <!-- 연도별 불량률 조회 -->
+				<div th:replace="quality/qualityInspectionFailRateList/yearlyFailRateList :: yearlyFailRate"></div>
+                <!-- 월별별 불량률 조회 -->
+				<div th:replace="quality/qualityInspectionFailRateList/monthlyFailRateList :: monthlyFailRate"></div>
+
+                  
+                  
+                  <!-- /tab-pane -->
+                </div>
+                <!-- /tab-content -->
+              </div>
+              <!-- /panel-body -->
+
+		</div>
+	
+       </div>
+	
+  
+</th:block>
+
+</html>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart39.springboot.dao.ContractAddBuyerOrderMapper">
+
+<resultMap type="RequiredSizeList" 				id="RequiredSizeListResultMap">
+	<result property="requiredSizeCode" 			column="required_size_code"/>
+	<result property="detailedCategorizedCode" 		column="detailed_categorized_code"/>
+	<result property="qualityInspectionCode" 		column="quality_inspection_code"/>
+	<result property="measurementPart" 				column="measurement_part"/>
+	<result property="unit" 						column="unit"/>
+	<result property="requiredSizeRegDate" 			column="required_size_reg_date"/>
+	<result property="requiredSizeUpdateDate"		column="required_size_update_date"/>
+</resultMap>
+
+<resultMap type="ProductCodeDetail" 			id="ProductCodeDetailResultMap">
+	<result property="productCode" 					column="product_code"/>
+	<result property="genderCategorizedCode" 		column="gender_categorized_code"/>
+	<result property="genderCategorizedName" 		column="gender_categorized_name"/>
+	<result property="detailedCategorizedCode" 		column="detailed_categorized_code"/>
+	<result property="detailedCategorizedName" 		column="detailed_categorized_name"/>
+	<result property="productCodeDetailRegDate" 	column="product_code_detail_reg_date"/>
+	<result property="productCodedetailUpdateDate"	column="product_code_detail_update_date"/>
+</resultMap>
+
+<resultMap type="RequestedProduct" 				id="RequestedProductResultMap">
+	<result property="requestedProductCode" 				column="requested_product_code"></result>
+	<result property="productCode" 							column="product_code"></result>
+	<result property="chargeEmployeeCode" 					column="charge_employee_code"></result>
+	<result property="clientCode" 							column="client_code"></result>
+	<result property="contractCode" 						column="contract_code"></result>
+	<result property="productRequestCode" 					column="product_request_code"></result>
+	<result property="designDrawingAttachment" 				column="design_drawing_attachment"></result>
+	<result property="requestedDueDate" 					column="requested_due_date"></result>
+	<result property="requestedDeliveryAddress" 			column="requested_delivery_address"></result>
+	<result property="requestedDeliveryTel" 				column="requested_delivery_tel"></result>
+	<result property="requestedDate" 						column="requested_date"></result>
+	<result property="requestedSpecialNote" 				column="requested_special_note"></result>
+	<result property="approvalStatus" 						column="approval_status"></result>
+	<result property="requestedProductDetailRegDate" 		column="requested_product_detail_reg_date"></result>
+	<result property="requestedProductDetailUpdateDate" 	column="requested_product_detail_update_date"></result>
+</resultMap>
+
+<resultMap type="RequestedProductSize" 			id="RequestedProductSizeResultMap">
+	<result property="requestedProductCode" 				column="requested_product_code"></result>
+	<result property="requiredSizeCode" 					column="required_size_code"></result>
+	<result property="chargedEmployeeCode" 					column="charged_employee_code"></result>
+	<result property="measuredValue" 						column="measured_value"></result>
+	<result property="requiredSizeRegDate" 					column="required_size_reg_date"></result>
+	<result property="requiredSizeUpdateDate" 				column="required_size_update_date"></result>
+</resultMap>
+	
+	<!-- 주문 의뢰 사이즈 등록 -->
+	<insert id="addBuyerOrderSize" parameterType="java.util.List">
+		INSERT INTO requested_product_size
+			(requested_product_code
+			,required_size_code
+			,charged_employee_code
+			,measured_value
+			,required_size_reg_date
+			,required_size_update_date)
+			VALUES 
+			<foreach collection="list" item="item" separator=",">
+			(#{item.requestedProductCode}
+			,#{item.requiredSizeCode}
+			,#{item.chargedEmployeeCode}
+			,#{item.measuredValue}
+			,NOW()
+			,NULL)
+			</foreach>
+	</insert>
+	
+	<!-- 주문 의뢰 코드 가져오기 -->
+	<select id="getRequestProductCode" parameterType="String" resultType="Map">
+		SELECT 
+			r.requested_product_code
+			,r.charge_employee_code
+			,r.requested_product_detail_reg_date
+		FROM 
+			requested_product_detail AS r
+		WHERE
+			r.product_code = #{productCode}
+		ORDER BY 
+			r.requested_product_code
+		DESC LIMIT 1
+	</select>
+	
+	<!-- 주문 의뢰 등록 -->
+	<insert id="addBuyerOrder" parameterType="java.util.List">
+		INSERT INTO requested_product_detail(
+			requested_product_code
+			,product_code
+			,charge_employee_code
+			,client_code
+			,contract_code
+			,product_request_code
+			,design_drawing_attachment
+			,requested_due_date
+			,requested_delivery_address
+			,requested_delivery_tel
+			,requested_date
+			,requested_special_note
+			,approval_status
+			,requested_product_detail_reg_date
+			,requested_product_detail_update_date
+			)VALUES
+			<foreach collection="list" item="item" separator=",">
+			(#{item.requestedProductCode}
+			,#{item.productCode}
+			,#{item.chargeEmployeeCode}
+			,#{item.clientCode}
+			,#{item.contractCode}
+			,#{item.productRequestCode}
+			,#{item.designDrawingAttachment}
+			,#{item.requestedDueDate}
+			,#{item.requestedDeliveryAddress}
+			,#{item.requestedDeliveryTel}
+			,#{item.requestedDate}
+			,#{item.requestedSpecialNote}
+			,'미승인'
+			,NOW()
+			,NULL)
+			</foreach>
+	</insert>
+	
+	<!-- 의뢰코드 마지막 + 1해서 가져오기 -->
+	<select id="getProductRequestCode" resultType="String">
+		SELECT 
+			CONCAT('req',LPAD(CAST(SUBSTRING(MAX(r.product_request_code),4)AS DECIMAL)+1,5,0)) as productRequestCode
+		FROM 
+			requested_product_detail AS r;	
+	</select>
+
+	<!-- 품목에 따른 측정부위 가져오기 -->
+	<select id="getMeasurementPart" parameterType="String" resultMap="RequiredSizeListResultMap">
+		SELECT 
+			required_size_code
+			,detailed_categorized_code
+			,quality_inspection_code
+			,measurement_part
+			,unit
+			,required_size_reg_date
+			,required_size_update_date
+		FROM 
+			required_size_list AS r
+		WHERE 
+			r.detailed_categorized_code = #{detailedCategorizedCode};
+	</select>
+	
+	<!-- 성별에 따른 품목들 가져오기 -->
+	<select id="getDetailedCategorizedName" parameterType="String" resultMap="ProductCodeDetailResultMap">
+		SELECT 
+			product_code
+			,gender_categorized_code
+			,gender_categorized_name
+			,detailed_categorized_code
+			,detailed_categorized_name
+		FROM 
+			product_code_detail AS p
+		WHERE
+			p.gender_categorized_name = #{genderCategorizedName};
+	</select>
+</mapper>

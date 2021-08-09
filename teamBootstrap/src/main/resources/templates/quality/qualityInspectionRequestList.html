@@ -5,16 +5,46 @@ layout:decorate="@{layout/default_qualityControl}">
 
 <th:block layout:fragment="pageTitle">
  <script type="text/javascript">
-		$(function(){
-			//#checkAll 버튼 클릭 시 전체 checked
-				$('#checkAll').click(function(){
-					if($('#checkAll').prop('checked')){
-						$('.checked').prop('checked',true);
-							}else{
-								$('.checked').prop('checked',false);
-							}
-						});									
-					});
+	$(function(){
+		//#checkAll 버튼 클릭 시 전체 checked
+			$('#checkAll').click(function(){
+				if($('#checkAll').prop('checked')){
+					$('.checked').prop('checked',true);
+						}else{
+							$('.checked').prop('checked',false);
+						}
+					});									
+				});
+
+
+	$(document).on('click','.btn_status', function(){
+		if (confirm("승인하시겠습니까?") == true){    //확인
+			var inspectionRequestObj = $(this).parent().parent().children().eq(1);
+			var qualityInspectionRequestCode = inspectionRequestObj.text();
+			console.log(qualityInspectionRequestCode);
+			$.ajax({
+				url: "/quality/approvalInspectionRequest",
+				method : 'post',
+				async: true,
+				dataType : "text",
+				data : {'qualityInspectionRequestCode' : qualityInspectionRequestCode},
+				success: function(data){
+					if(data){
+						location.reload();
+					}else{
+						alert('승인이 실패했습니다.');
+					}
+				},
+				error: function(error){
+					console.log(error);
+				}
+			});
+		
+		}else{   //취소
+		    return;
+		}
+	});
+		
 	</script>  
 </th:block>
 
@@ -48,17 +78,17 @@ layout:decorate="@{layout/default_qualityControl}">
          			<td style="padding-right: 20px;">
          				<div class="form-group"><!-- 품목별 의뢰 코드별 -->
 		               		<button id="byRequestedProductCode" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
-		                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="직접 입력 또는 검색">
+		                	<input type="text" class="form-control" id="byRequestedProductCodeValue" placeholder="직접 입력 또는 검색">
 	              		</div>
          			</td>
          			<td>
          				<div class="form-group">
-		                	<input type=date class="form-control" id="exampleInputPassword2" placeholder="등록일별">&nbsp&nbsp&nbsp ~ 
+		                	<input type=date class="form-control" placeholder="등록일별">&nbsp&nbsp&nbsp ~ 
 	               		</div>
          			</td>
          			<td style="padding-right: 20px;">
          				<div class="form-group">
-		                	<input type=date class="form-control" id="exampleInputPassword2" placeholder="등록일별">
+		                	<input type=date class="form-control" placeholder="등록일별">
 	               		</div>
          			</td>
          			<td style="padding-right: 20px;">
@@ -99,133 +129,31 @@ layout:decorate="@{layout/default_qualityControl}">
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                 <tr th:if="${#lists.size(list) > 0}" th:each="l, i : ${list}">
                    <td><input type="checkbox" class="checked"></td>
-                   <td class="hidden-phone">
-                     1
-                    </td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">QC_REQUEST01</a></td>
-                    <td class="hidden-phone">1234</td>
-                    <td class="hidden-phone">req01_MS_pants</td>
-                    <td class="hidden-phone">AAee1</td>
-                    <td>원단 이화학검사(파괴검사)</td>
-                    <td>샘플링</td>
-                    <td><span class="label label-info label-mini">승인완료</span></td>
-                    <td>2021-06-18 18:15:11</td>
-                  	<td>  <a th:href="@{/addQualityInspectionStatus}" class="btn btn-warning btn-xs"><i class="fa fa-bar-chart-o"></i>현황</a></td>
-                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  <tr>
-                   <td><input type="checkbox" class="checked"></td>
-                   <td class="hidden-phone">
-                     2
-                    </td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">QC_REQUEST01</a></td>
-                    <td class="hidden-phone">1234</td>
-                    <td class="hidden-phone">req01_MS_pants</td>
-                    <td class="hidden-phone">AAee1</td>
-                    <td>원단 이화학검사(파괴검사)</td>
-                    <td>샘플링</td>
-                    <td><span class="label label-info label-mini">승인완료</span></td>
-                    <td>2021-06-18 18:15:11</td>
-                  	<td>  <a th:href="@{/addQualityInspectionStatus}" class="btn btn-warning btn-xs"><i class="fa fa-bar-chart-o"></i>현황</a></td>
-                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  <tr>
-                   <td><input type="checkbox" class="checked"></td>
-                   <td class="hidden-phone">
-                     3
-                    </td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">QC_REQUEST01</a></td>
-                    <td class="hidden-phone">1234</td>
-                    <td class="hidden-phone">req01_MS_pants</td>
-                    <td class="hidden-phone">AAee1</td>
-                    <td>원단 이화학검사(파괴검사)</td>
-                    <td>샘플링</td>
-                    <td><span class="label label-info label-mini">승인완료</span></td>
-                    <td>2021-06-18 18:15:11</td>
-                  	<td>  <a th:href="@{/addQualityInspectionStatus}" class="btn btn-warning btn-xs"><i class="fa fa-bar-chart-o"></i>현황</a></td>
-                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  <tr>
-                   <td><input type="checkbox" class="checked"></td>
-                   <td class="hidden-phone">
-                     4
-                    </td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">QC_REQUEST01</a></td>
-                    <td class="hidden-phone">1234</td>
-                    <td class="hidden-phone">req01_MS_pants</td>
-                    <td class="hidden-phone">AAee1</td>
-                    <td>원단 이화학검사(파괴검사)</td>
-                    <td>샘플링</td>
-                    <td><span class="label label-info label-mini">승인완료</span></td>
-                    <td>2021-06-18 18:15:11</td>
-                  	<td>  <a th:href="@{/addQualityInspectionStatus}" class="btn btn-warning btn-xs"><i class="fa fa-bar-chart-o"></i>현황</a></td>
-                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  <tr>
-                   <td><input type="checkbox" class="checked"></td>
-                   <td class="hidden-phone">
-                     5
-                    </td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">QC_REQUEST01</a></td>
-                    <td class="hidden-phone">1234</td>
-                    <td class="hidden-phone">req01_MS_pants</td>
-                    <td class="hidden-phone">AAee1</td>
-                    <td>원단 이화학검사(파괴검사)</td>
-                    <td>샘플링</td>
-                    <td><span class="label label-info label-mini">승인완료</span></td>
-                    <td>2021-06-18 18:15:11</td>
-                  	<td>  <a th:href="@{/addQualityInspectionStatus}" class="btn btn-warning btn-xs"><i class="fa fa-bar-chart-o"></i>현황</a></td>
-                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  <tr>
-                   <td><input type="checkbox" class="checked"></td>
-                   <td class="hidden-phone">
-                    6
-                    </td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">QC_REQUEST01</a></td>
-                    <td class="hidden-phone">1234</td>
-                    <td class="hidden-phone">req01_MS_pants</td>
-                    <td class="hidden-phone">AAee1</td>
-                    <td>원단 이화학검사(파괴검사)</td>
-                    <td>샘플링</td>
-                    <td><span class="label label-info label-mini">승인완료</span></td>
-                    <td>2021-06-18 18:15:11</td>
-                  	<td>  <a th:href="@{/addQualityInspectionStatus}" class="btn btn-warning btn-xs"><i class="fa fa-bar-chart-o"></i>현황</a></td>
-                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  <tr>
-                   <td><input type="checkbox" class="checked"></td>
-                   <td class="hidden-phone">
-                     7
-                    </td>
-                    <td class="hidden-phone">
-                    <a th:href="@{#}">QC_REQUEST01</a></td>
-                    <td class="hidden-phone">1234</td>
-                    <td class="hidden-phone">req01_MS_pants</td>
-                    <td class="hidden-phone">AAee1</td>
-                    <td>원단 이화학검사(파괴검사)</td>
-                    <td>샘플링</td>
-                    <td><span class="label label-warning label-mini">승인요청중</span></td>
-                    <td>2021-06-18 18:15:11</td>
-                  	<td>  <a class="btn btn-warning btn-xs"><i class="fa fa-bar-chart-o"></i>현황</a></td>
-                  	<td>  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</button></td>
-                  </tr>
-                  
+                   	<td th:text="${i.index+1}"></td>
+                    <td th:text="${l.qir}"></td>
+                    <td th:text="${l.cc}"></td>
+                    <td th:text="${l.rpc}"></td>
+                    <td th:text="${l.qic}"></td>
+                    <td th:text="${l.scn}"></td>
+                    <td th:if ="${l.sc eq 1}">샘플링</td>
+                    <td th:if ="${l.sc eq 0}">해당없음</td>
+                    <td>
+                    <span th:if="${l.ira eq '승인'}" class="btn btn-success btn-xs btn_status" >승인완료</span>
+					<button th:if="${l.ira eq '미승인'}" class="btn btn-danger btn-xs btn_status"  value="확인하기">미승인</button>
+					</td>   
+                    <td th:text="${l.ird}"></td>
+                  	<td><a th:href="@{/quality/qualityInspectionStatusNow}" class="btn btn-warning btn-xs"><i class="fa fa-bar-chart-o"></i>현황</a></td>
+                    <td><button class="btn btn-primary btn-xs" type="button" onclick="location.href='modifyQualityInspectionRequest'"><i class="fa fa-pencil"></i>수정</button></td>
+                  </tr>                             
            		 </tbody>
               </table>
             </div>
            </div>
            <div class="form-group text-right">
 		          <div class="col-lg-offset-2 col-lg-10">
-		           <a th:href="@{/qualityInspectionRequest}" class="btn btn-success btn-xs"><i class="fa fa-check"></i>등록</a>
+		          <a th:href="@{/quality/qualityInspectionRequest}" class="btn btn-success btn-xs"><i class="fa fa-plus"></i>검사요청</a>	          
 		           <a id="deleteBtn" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i>삭제</a>
 		          </div>
 		        </div>
@@ -255,7 +183,7 @@ layout:decorate="@{layout/default_qualityControl}">
 	         			<th colspan="3" style="padding-right: 20px;">
 		         			 <div class="form-inline" style="margin-bottom: 0px;">
 		         			 	<label class="control-label">품질검사 코드</label>&nbsp
-			                	<input type="text" class="form-control" id="bySupplierValue" placeholder="검색어를 입력하세요.">
+			                	<input type="text" class="form-control" placeholder="검색어를 입력하세요.">
 			                </div>
 	         			</th>
 	         			<th style="padding-right: 20px;">
@@ -382,20 +310,20 @@ layout:decorate="@{layout/default_qualityControl}">
 	         			<th colspan="2" style="padding-right: 20px;">
 		         			 <div class="form-inline" style="margin-bottom: 0px;">
 		         			 	<label class="control-label">계약번호</label>&nbsp
-			                	<input type="text" class="form-control" id="bySupplierValue" placeholder="검색어를 입력하세요.">
+			                	<input type="text" class="form-control" placeholder="검색어를 입력하세요.">
 			                </div>
 	         			</th>
 	         			<th style="padding-right: 20px;">
 		         			 <div class="form-inline" style="margin-bottom: 0px;">
 		         			 	<label class="control-label">품목별의뢰코드</label>&nbsp
-			                	<input type="text" class="form-control" id="bySupplierValue" placeholder="검색어를 입력하세요.">
+			                	<input type="text" class="form-control" placeholder="검색어를 입력하세요.">
 			                </div>
 	         			</th>         			
 	         			<th colspan="2" style="padding-right: 20px;">
 	         				<div class="form-inline" style="margin-bottom: 0px;">
 		         				<label class="control-label">계약날짜</label>&nbsp
-			                	<input type="date" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">&nbsp ~
-			                	<input type="date" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
+			                	<input type="date" class="form-control" placeholder="검색어를 입력하세요.">&nbsp ~
+			                	<input type="date" class="form-control" placeholder="검색어를 입력하세요.">
 	         				 &nbsp&nbsp&nbsp <button type="submit" class="btn btn-theme">검색</button>
 		              		</div>
 	         			</th> 
@@ -476,7 +404,7 @@ layout:decorate="@{layout/default_qualityControl}">
 								var check = $('input[name=materialName]:checked');
 								var checkVal = check.parents('tr').find('.materialName').text();
 								console.log(checkVal);
-								$('#exampleInputPassword2').attr('value', checkVal);
+								$('#byRequestedProductCodeValue').attr('value', checkVal);
 							});
 						}
 					}

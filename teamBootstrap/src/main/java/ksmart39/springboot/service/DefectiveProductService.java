@@ -1,14 +1,19 @@
 package ksmart39.springboot.service;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ksmart39.springboot.dao.DefectiveProductMapper;
+import ksmart39.springboot.domain.Client;
 import ksmart39.springboot.domain.DefectiveProduct;
 import ksmart39.springboot.domain.QualityInspectionResult;
+import ksmart39.springboot.paging.PageMaker;
+import ksmart39.springboot.paging.Pagination;
 
 @Service
 public class DefectiveProductService {
@@ -40,9 +45,28 @@ public class DefectiveProductService {
 	}
 	
 	//[한빛] 불량품 목록
-	public List<DefectiveProduct> getDefectiveProduct(){
-		List<DefectiveProduct> defectiveProduct = defectiveProductMapper.getDefectiveProduct();
-		return defectiveProduct;
+	public Map<String, Object> getDefectiveProduct(Pagination paging){
+		
+		PageMaker pageMaker = new PageMaker();
+		
+		paging.setRowPerPage(10);
+	    pageMaker.setPaging(paging);
+	    
+	    pageMaker.setTotalCount(defectiveProductMapper.defectiveProductCount());
+
+	    Map<String, Object> paramMap = new HashMap<String, Object>();
+  		paramMap.put("rowStart", paging.getRowStart());
+  		paramMap.put("rowPerPage", paging.getRowPerPage());
+
+  		List<Map<String, DefectiveProduct>> defectiveProductList = defectiveProductMapper.getDefectiveProduct(paramMap);
+  		Map<String, Object> resultMap = new HashMap<String, Object>();
+  		resultMap.put("currentPage", paging.getCurrentPage());
+  		resultMap.put("defectiveProductList", defectiveProductList);
+  		resultMap.put("lastPage", pageMaker.getLastPage());
+  		resultMap.put("pageStartNum", pageMaker.getPageStartNum());
+  		resultMap.put("pageEndNum", pageMaker.getPageEndNum());
+
+		return resultMap;
 	}
 	
 	//[한빛] 불량품 삭제

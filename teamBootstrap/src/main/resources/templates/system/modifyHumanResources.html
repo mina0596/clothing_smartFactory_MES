@@ -140,7 +140,75 @@ layout:decorate="@{layout/default_system}">
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 	<script>
+	$(function(){
+		$('#addBtn').click(function(){
+			var levelNum = $('input[name=levelNum]').val();
+			var employeeDepartment = $('input[name=employeeDepartment]').val();
+			var employeePosition = $('input[name=employeePosition]').val();
+			var employeeId = $('input[name=employeeId]').val();
+			var employeePw = $('input[name=employeePw]').val();
+			var employeeName = $('input[name=employeeName]').val();
+			var employeeEmail = $('input[name=employeeEmail]').val();
+			var employeeTel = $('input[name=employeeTel]').val();
+			var employeeAddress = $('input[name=employeeAddress]').val();
+			var submitFlag = true;
 		
+			if($('select[name=levelNum]').val() == '선택'){			
+				alert('권한을 입력해주세요.');
+				$('input[name=levelNum]').focus();
+				submitFlag = false;
+				return submitFlag;
+			}else if($('select[name=employeeDepartment]').val() == '선택'){
+				alert('부서를 입력해주세요.');
+				$('input[name=employeeDepartment]').focus();
+				submitFlag = false;
+				return submitFlag;
+			}else if($('select[name=employeePosition]').val() == '선택'){
+				alert('직위를 입력해주세요.');
+				$('input[name=employeePosition]').focus();
+				submitFlag = false;
+				return submitFlag;
+			}else if(employeeId == null || employeeId == undefined || employeeId == ''){
+				alert('아이디를 입력해주세요.');
+				$('input[name=employeeId]').focus();
+				submitFlag = false;
+				return submitFlag;
+			}else if(employeePw == null || employeePw == undefined || employeePw == ''){
+				alert('비밀번호를 입력해주세요.');
+				$('input[name=employeePw]').focus();
+				submitFlag = false;
+				return submitFlag;
+			}else if(employeePw == null || employeePw == undefined || employeePw == ''){
+				alert('비밀번호를 입력해주세요.');
+				$('input[name=employeePw]').focus();
+				submitFlag = false;
+				return submitFlag;
+			}else if(employeeName == null || employeeName == undefined || employeeName == ''){
+				alert('이름을 입력해주세요.');
+				$('input[name=employeeName]').focus();
+				submitFlag = false;
+				return submitFlag;
+			}else if(employeeEmail == null || employeeEmail == undefined || employeeEmail == ''){
+				alert('이메일을 입력해주세요.');
+				$('input[name=employeeEmail]').focus();
+				submitFlag = false;
+				return submitFlag;
+			}else if(employeeTel == null || employeeTel == undefined || employeeTel == ''){
+				alert('연락처를 입력해주세요.');
+				$('input[name=employeeTel]').focus();
+				submitFlag = false;
+				return submitFlag;
+			}else if(employeeAddress == null || employeeAddress == undefined || employeeAddress == ''){
+				alert('주소를 입력해주세요.');
+				$('input[name=employeeAddress]').focus();
+				submitFlag = false;
+				return submitFlag;
+			}
+			
+			if(submitFlag) addClient.submit();
+		});			
+	});
+	
 		  $(function(){
 		    	$("#alert-success").hide();
 		    	$("#alert-danger").hide();

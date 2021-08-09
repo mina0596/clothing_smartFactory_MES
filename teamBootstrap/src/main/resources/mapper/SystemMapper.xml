@@ -2,25 +2,66 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ksmart39.springboot.dao.SystemMapper">
 
-<!-- =========================================================== -->
-<resultMap type="HumanResources"  id="getHumanResourcesInfo">
-	<result  property="employeeCode" 				column="employee_code"/>
-	<result  property="levelNum" 				column="level_num"/>
-	<result  property="employeeId" 				column="employee_id"/>
-	<result  property="employeePw" 			column="employee_pw"/>
-	<result  property="employeeName" 			column="employee_name"/>
-	<result  property="employeeTel" 				column="employee_tel"/>
-	<result  property="employeeAddress" 				column="employee_address"/>
-	<result  property="employeeEmail" 				column="employee_email"/>
-	<result  property="employeeDepartment" 				column="employee_department"/>
-	<result  property="employeePosition" 		column="employee_position"/>
-	<result  property="employeeInfoRegDate" 		column="employee_info_reg_date"/>
-	<result  property="employeeInfoUpdateDate" 		column="employee_info_update_date"/>
-	<association property="humanResourcesLevel"  javaType="HumanResourcesLevel">
-		<id property="levelNum"  column="level_num"/>	 <!-- join 공통 -->
-		<result property="levelName" column="level_name"/>
-	</association>
-</resultMap>
+	<!-- ===============================생산공정관리============================== -->
+	<resultMap type="ProductionProcessList"  id="productionProcessMap">
+		<result  property="productionProcessCode" 					column="production_process_code"/>
+		<result  property="productionProcessHighClassification" 	column="production_process_high_classification"/>
+		<result  property="productionProcessLowClassification" 		column="production_process_low_classification"/>
+		<result  property="processOrderNum" 						column="process_order_num"/>
+		<result  property="productionProcessRegDate" 				column="production_process_reg_date"/>
+		<result  property="productionProcessUpdateDate" 			column="production_process_update_date"/>
+	</resultMap>
+	
+	<insert id="addProductionProcess" parameterType="map">
+		INSERT INTO production_process_list
+			(production_process_code
+			, production_process_high_classification
+			, production_process_low_classification
+			, process_order_num
+			, production_process_reg_date
+			, production_process_update_date)
+		VALUES 
+			(sf_productionProcessCode()
+			, #{productionProcessHighClassification}
+			, #{productionProcessLowClassification}
+			, #{processOrderNum}
+			, NOW()
+			, NOW())
+	</insert>
+	
+	<select id="getProductionProcessList" resultMap="productionProcessMap">
+		SELECT 
+			production_process_code, 
+			production_process_high_classification, 
+			production_process_low_classification, 
+			process_order_num, 
+			production_process_reg_date, 
+			production_process_update_date
+		FROM 
+			production_process_list
+	</select>
+	
+	
+	<!-- =========================================================== -->
+	<resultMap type="HumanResources"  id="getHumanResourcesInfo">
+		<result  property="employeeCode" 				column="employee_code"/>
+		<result  property="levelNum" 				column="level_num"/>
+		<result  property="employeeId" 				column="employee_id"/>
+		<result  property="employeePw" 			column="employee_pw"/>
+		<result  property="employeeName" 			column="employee_name"/>
+		<result  property="employeeTel" 				column="employee_tel"/>
+		<result  property="employeeAddress" 				column="employee_address"/>
+		<result  property="employeeEmail" 				column="employee_email"/>
+		<result  property="employeeDepartment" 				column="employee_department"/>
+		<result  property="employeePosition" 		column="employee_position"/>
+		<result  property="employeeInfoRegDate" 		column="employee_info_reg_date"/>
+		<result  property="employeeInfoUpdateDate" 		column="employee_info_update_date"/>
+		<association property="humanResourcesLevel"  javaType="HumanResourcesLevel">
+			<id property="levelNum"  column="level_num"/>	 <!-- join 공통 -->
+			<result property="levelName" column="level_name"/>
+		</association>
+	</resultMap>
+	
 	
 	
 	<select id="getHumanResources" resultMap="getHumanResourcesInfo" parameterType = "map"  resultType="HumanResources" fetchSize="1000">
@@ -43,12 +84,14 @@
 			INNER JOIN
 			erp_access_level as l
 			on
-			e.level_num = l.level_num;
+			e.level_num = l.level_num
+			LIMIT #{rowStart}, #{rowPerPage};
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test="searchKey != null and searchKey != ''.toString()">
 				${searchKey} LIKE CONCAT('%', #{searchValue} ,'%');
 			</if>
 		</trim>
+		
 	</select>
 	
 	<select id="getHumanResourcesCount" resultType="int">
@@ -172,19 +215,19 @@
 				</foreach>
 	</delete>	
 	
-<!-- =========================================================== -->
-<resultMap type="Client"  id="getClientInfo">
-	<result  property="clientCode" 				column="client_code"/>
-	<result  property="clientCategory" 				column="client_category"/>
-	<result  property="clientName" 				column="client_name"/>
-	<result  property="clientTel" 			column="client_tel"/>
-	<result  property="clientEmployee" 			column="client_employee"/>
-	<result  property="clientCeo" 				column="client_ceo"/>
-	<result  property="clientBusinessNum" 				column="client_business_num"/>
-	<result  property="clientAddress" 				column="client_address"/>
-	<result  property="clientInfoRegDate" 				column="client_info_reg_date"/>
-	<result  property="clientInfoUpdateDate" 		column="client_info_update_date"/>
-</resultMap>
+	<!-- =========================================================== -->
+	<resultMap type="Client"  id="getClientInfo">
+		<result  property="clientCode" 				column="client_code"/>
+		<result  property="clientCategory" 				column="client_category"/>
+		<result  property="clientName" 				column="client_name"/>
+		<result  property="clientTel" 			column="client_tel"/>
+		<result  property="clientEmployee" 			column="client_employee"/>
+		<result  property="clientCeo" 				column="client_ceo"/>
+		<result  property="clientBusinessNum" 				column="client_business_num"/>
+		<result  property="clientAddress" 				column="client_address"/>
+		<result  property="clientInfoRegDate" 				column="client_info_reg_date"/>
+		<result  property="clientInfoUpdateDate" 		column="client_info_update_date"/>
+	</resultMap>
 	
 	<!-- 불러오기	 --> 
 	<select id="getClient" resultMap="getClientInfo"  parameterType = "map" resultType="Client" fetchSize="1000">
@@ -308,7 +351,7 @@
 	</delete>
 			
 
-<!-- =========================================================== -->
+	<!-- =========================================================== -->
 	<resultMap type="AccountingCategory" id="AccountingCategoryMap">
 		<result property="categoryCode" 		column="account_category_code"/>
 		<result property="categoryName" 		column="account_category_name"/>
