@@ -118,11 +118,9 @@ $(function(){
 		});	
 	});
 	$('.completeProcess').click(function(){
-				console.log('공정을 시작해볼까요?');
 				
 				var selectedProductCode = $(this).parent().parent().find('.productCode').text();
 				var selectedProcessCode = $(this).parent().parent().find('.processCode').text();
-				console.log(selectedProductCode);
 				
 				var selectedProductInfo={
 						requestedProductCode : selectedProductCode,
@@ -139,7 +137,6 @@ $(function(){
 				});
 				
 				request.done(function(data){
-					console.log(data);
 					location.reload();
 				});
 				
@@ -168,7 +165,6 @@ $(function(){
 				});
 				
 				request.done(function(data){
-					console.log(data);
 					location.reload();
 				});
 				request.fail(function( jqXHR, textStatus ) {

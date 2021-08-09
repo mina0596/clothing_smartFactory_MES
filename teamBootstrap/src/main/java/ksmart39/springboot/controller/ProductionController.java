@@ -295,12 +295,11 @@ public class ProductionController {
 		productionService.completeProcess(selectedProductInfo);
 		if(selectedProductInfo.getProductionProcessCode().equals("process_07")) {
 			CompletedProduct completedInfo = completedProductService.getProductInfoToInsertCompleted(selectedProductInfo.getRequestedProductCode());
+			log.info("completedInfo확인하기: {}", completedInfo);
 			completedProductService.addCompletedProduct(completedInfo);
 		}else {
 			productionService.insertNextProcess(selectedProductInfo);			
 		}
-		
-		
 		return selectedProductInfo;
 	}
 	

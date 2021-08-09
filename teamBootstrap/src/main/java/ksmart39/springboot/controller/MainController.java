@@ -50,9 +50,9 @@ public class MainController {
 	@ResponseBody
 	public ResponseEntity<Resource> fileDownload(HttpServletResponse response, HttpServletRequest request, HttpSession session) throws IOException {
 		
-		File file = new File(System.getProperty("user.dir") + "/src/main/resources/static/file/"+"team01QC_smartFactoryMes.xlsx");
+		//File file = new File(System.getProperty("user.dir") + "/src/main/resources/static/file/"+"team01QC_smartFactoryMes.xlsx");
 		//cafe24배포할때 이걸로
-		//File file = new File(session.getServletContext().getRealPath("/WEB-INF/classes/static/file/"+"team01QC_smartFactoryMes.xlsx"));
+		File file = new File(session.getServletContext().getRealPath("/WEB-INF/classes/static/file/"+"team01QC_smartFactoryMes.xlsx"));
 		
 	        Path path = Paths.get(file.getAbsolutePath());
 	        Resource resource = new UrlResource(path.toUri());
@@ -83,9 +83,9 @@ public class MainController {
 	@ResponseBody
 	public ResponseEntity<Resource> fileDownload2(HttpServletResponse response, HttpServletRequest request, HttpSession session) throws IOException {
 		
-		File file = new File(System.getProperty("user.dir") + "/src/main/resources/static/file/"+"team01QC_smartFactoryMes.docx");
+		//File file = new File(System.getProperty("user.dir") + "/src/main/resources/static/file/"+"team01QC_smartFactoryMes.docx");
 		//cafe24배포할때 이걸로
-		//File file = new File(session.getServletContext().getRealPath("/WEB-INF/classes/static/file/"+"team01QC_smartFactoryMes.docx"));
+		File file = new File(session.getServletContext().getRealPath("/WEB-INF/classes/static/file/"+"team01QC_smartFactoryMes.docx"));
 		
 		Path path = Paths.get(file.getAbsolutePath());
 		Resource resource = new UrlResource(path.toUri());
