@@ -58,4 +58,313 @@
 		
 	</select>
 	
+	<!-- *********************잊지말자!!!!!!! 이건 지금 final이 아니라 그냥 inspection으로 되어있다!!! 나중에 final result값이 많아지면 바꾸자!! -->
+	<!-- ******************연도별로의 불량률 찾는 쿼리 옵션 두개 ******************* -->
+	<!-- ======option1은, 연도별로 쿼리가 실행되는거========== -->
+	<select id="getFailedPercent" parameterType="String" resultType="map">
+		SELECT 
+			totalNumSub.totalNum	AS totalNum,
+			failedNumSub.failedNum AS failedNum,
+			ROUND(failedNum / totalNum * 100) AS failedRate,
+			concat(ROUND(failedNum / totalNum * 100), '%') AS failedPercent
+		FROM
+			(select
+				COUNT(*) AS totalNum
+			from 
+				inspection_final_result AS ifr
+			WHERE
+				DATE_FORMAT(ifr.final_result_reg_date, '%Y') = '2018') AS totalNumSub
+			join
+			(select
+				COUNT(*) AS failedNum,
+				ifr.quality_inspection_code AS InspectionCode
+			from 
+				inspection_final_result AS ifr
+			WHERE
+				DATE_FORMAT(ifr.final_result_reg_date, '%Y') = #{inputYear}
+				and
+				ifr.low_cate_final_pass_check = '불합격') AS failedNumSub
+	</select>
+	
+	<!-- ======option2는, 자동으로 현재부터 3년전꺼까지 한번에 실행되는 쿼리========== -->
+	<select id="getPastYearsFailedPercent" resultType="map">
+		SELECT
+			result.year
+			,result.totalNum
+			,result.failNum
+			,round((result.failNum/result.totalNum)*100) AS failRate
+			,concat(ROUND((result.failNum/result.totalNum)*100), '%') AS failRatePercent
+		FROM
+			(
+				SELECT
+					DATE_FORMAT(ir.inspection_end_date, '%Y') AS 'year',
+					COUNT(1) AS totalNum,
+					(SELECT 
+						COUNT(1)
+					 FROM 
+					 	inspection_result AS subIr
+					 where
+					 	DATE_FORMAT(subIr.inspection_end_date, '%Y') = DATE_FORMAT(ir.inspection_end_date, '%Y')
+					 	and
+					 	subIr.inspection_pass_check = '불합격') AS failNum
+				FROM
+					inspection_result AS ir
+				GROUP BY DATE_FORMAT(ir.inspection_end_date, '%Y') ) AS result
+	</select>
+	<!-- =============================선생님이 짜주신 간단하게 연도별로의 불량률 ============================= 
+	SELECT
+		result.monthNum
+		,result.totalRequestedNum
+		,result.fail
+		,((result.fail/result.totalRequestedNum)*100) AS 'rate' 
+	FROM
+	(
+		SELECT
+			DATE_FORMAT(ir.inspection_end_date, '%Y') AS monthNum,
+			COUNT(1) AS totalRequestedNum,
+			(SELECT 
+				COUNT(1)
+			 FROM 
+			 	inspection_result AS subIr
+			 where
+			 	DATE_FORMAT(subIr.inspection_end_date, '%Y') = DATE_FORMAT(ir.inspection_end_date, '%Y')
+			 	and
+			 	subIr.inspection_pass_check = '불합격') AS 'fail'
+		FROM
+			inspection_result AS ir
+		GROUP BY DATE_FORMAT(ir.inspection_end_date, '%Y') ) AS result
+	==================================================================================================== -->
+	<!-- 최종결과테이블에서 가져오는 쿼리문
+	SELECT
+			sub.curYear	AS currentYear,
+			sub.pastYear AS pastYear,
+			sub.twoPastYear AS twoPastYear,
+			sub.threePastYear AS threePastYear,
+			ROUND(sub.currentYearFailNum/sub.currentYearTotalNum*100) AS curFailRate,
+			ROUND(sub.pastYearFailNum/sub.pastYearTotalNum*100) AS pastYearFailRate,
+			ROUND(sub.twoPastYearFailNum/sub.twoPastYearTotalNum*100) AS twoPastYearFailRate,
+			ROUND(sub.threePastYearFailNum/sub.threePastYearTotalNum*100) AS threePastYearFailRate
+		FROM
+			(select
+				date_format(NOW(),'%Y') AS curYear,
+				date_format(NOW(),'%Y')-1 AS pastYear,
+				date_format(NOW(),'%Y')-2 AS twoPastYear,
+				date_format(NOW(),'%Y')-3 AS threePastYear,
+				count(
+				case 
+				when date_format(ifr.final_result_reg_date, '%Y') = 
+					(SELECT date_format(NOW(),'%Y')) then 1 end) AS currentYearTotalNum,
+				count(
+				case 
+				when date_format(ifr.final_result_reg_date, '%Y') = 
+					(SELECT date_format(NOW(),'%Y')-1) then 1 end) AS pastYearTotalNum,
+				count(
+				case 
+				when date_format(ifr.final_result_reg_date, '%Y') = 
+					(SELECT date_format(NOW(),'%Y')-2) then 1 end) AS twoPastYearTotalNum,
+				count(
+				case 
+				when date_format(ifr.final_result_reg_date, '%Y') = 
+					(SELECT date_format(NOW(),'%Y')-3) then 1 end) AS threePastYearTotalNum,
+					count(
+				case 
+				when date_format(ifr.final_result_reg_date, '%Y') = 
+					(SELECT date_format(NOW(),'%Y')) and ifr.low_cate_final_pass_check ='불합격' then 1 end) AS currentYearFailNum,
+				count(
+				case 
+				when date_format(ifr.final_result_reg_date, '%Y') = 
+					(SELECT date_format(NOW(),'%Y')-1) and ifr.low_cate_final_pass_check ='불합격' then 1 end) AS pastYearFailNum,
+				count(
+				case 
+				when date_format(ifr.final_result_reg_date, '%Y') = 
+					(SELECT date_format(NOW(),'%Y')-2) and ifr.low_cate_final_pass_check ='불합격' then 1 end) AS twoPastYearFailNum,
+				count(
+				case 
+				when date_format(ifr.final_result_reg_date, '%Y') = 
+					(SELECT date_format(NOW(),'%Y')-3) and ifr.low_cate_final_pass_check ='불합격' then 1 end) AS threePastYearFailNum
+			FROM 
+				inspection_final_result AS ifr) AS sub
+	 -->
+	 
+	 <select id="getYearlyFailRank" parameterType="String" resultType="map">
+	 	SELECT
+			(case
+			 when @rate = subq.failRate then @row_num
+			 when @rate := subq.failRate then @row_num := @check_num + 1
+			 END) AS subRank,
+			CONCAT(@check_num := @check_num + 1, '위') AS realRank,
+			subq.*
+		from
+				(SELECT
+					sub1.inspectionCode,
+					subClass.sub_class_name AS subName,
+					lowClass.low_class_name AS lowName,
+					medClass.med_class_name AS medName,
+					highClass.high_class_name AS highName,
+					sub1.totalRequestedNum,
+					sub2.failedNum,
+					round(sub2.failedNum/sub1.totalRequestedNum*100) AS failRate
+					
+				From
+					(SELECT
+						ir.quality_inspection_code AS inspectionCode,
+						COUNT(1) AS totalRequestedNum
+					FROM
+						inspection_result AS ir
+						WHERE
+							DATE_FORMAT(ir.inspection_end_date, '%Y') = #{inputYear}
+							GROUP BY ir.quality_inspection_code) AS sub1
+					INNER join
+					(SELECT
+						ir.quality_inspection_code AS inspectionCode,
+						COUNT(1) AS failedNum
+					FROM
+						inspection_result AS ir
+						where
+							ir.inspection_pass_check='불합격'
+							and
+							DATE_FORMAT(ir.inspection_end_date, '%Y') = #{inputYear}
+							GROUP BY ir.quality_inspection_code) AS sub2
+					on
+						sub1.inspectionCode = sub2.inspectionCode
+					INNER join
+						sub_class_inspection_list AS subClass
+					on
+						sub1.inspectionCode = subClass.quality_inspection_code
+					inner join
+						low_class_inspection_list AS lowClass
+					on
+						subClass.high_med_low_class_code = lowClass.high_med_low_class_code
+					INNER join
+						medium_class_inspection_list AS medClass
+					on
+						subClass.high_med_class_code = medClass.high_med_class_code
+					INNER join
+						high_class_inspection_list AS highClass
+					on
+						subClass.high_class_code = highClass.high_class_code
+					ORDER by
+						failRate DESC
+					LIMIT 5) AS subq
+						join
+					(SELECT @row_num := 0, @rate := 0, @check_num :=0) AS r
+					;
+	 </select>
+	 <!-- 
+	 SELECT
+			result.year
+			,result.month
+			,result.totalNum
+			,result.failNum
+			,ROUND(((result.failNum/result.totalNum)*100)) AS 'failRate'
+			,concat(ROUND(((result.failNum/result.totalNum)*100)), '%') AS 'failRatePercent'
+		FROM
+			(SELECT 
+				DATE_FORMAT(subIr.inspection_end_date, '%Y') AS 'year',
+				DATE_FORMAT(subIr.inspection_end_date, '%m') AS 'month',
+				COUNT(1) AS totalNum,
+				COUNT(case 
+						when subIr.inspection_pass_check = '불합격' then 1 END) AS failNum
+			FROM 
+				inspection_result AS subIr
+				GROUP by
+					DATE_FORMAT(subIr.inspection_end_date, '%Y-%m')
+				ORDER by
+					DATE_FORMAT(subIr.inspection_end_date, '%Y-%m')) AS result
+	  -->
+	 <select id="getMonthlyFailRateByYear" resultType="map">
+		 SELECT 
+			DATE_FORMAT(subIr.inspection_end_date, '%Y') AS 'year',
+			DATE_FORMAT(subIr.inspection_end_date, '%m') AS 'month',
+			subIr.quality_inspection_code AS inspectionCode,
+			COUNT(1) AS totalNum,
+			COUNT(case 
+					when subIr.inspection_pass_check = '불합격' then 1 END) AS failNum,
+			round(COUNT(case when subIr.inspection_pass_check = '불합격' then 1 END)/COUNT(1)*100) AS failRate,
+			CONCAT(round(COUNT(case when subIr.inspection_pass_check = '불합격' then 1 END)/COUNT(1)*100), '%') AS failRatePercent
+		FROM
+			inspection_result AS subIr
+			GROUP BY quality_inspection_code
+			ORDER BY DATE_FORMAT(subIr.inspection_end_date, '%Y-%m');
+	 </select>
+	
+	<select id="getMonthlyFailRateRank" parameterType="String" resultType="map">
+		SELECT	
+			(case
+			 when @rate = result.failRate then @row_num
+			 when @rate := result.failRate then @row_num := @check_num + 1
+			END) AS subRank,
+			CONCAT(@check_num := @check_num + 1, '위') AS realRank,
+			result.*
+		FROM
+			(SELECT 
+				DATE_FORMAT(subIr.inspection_end_date, '%Y') AS 'year',
+				CONCAT(DATE_FORMAT(subIr.inspection_end_date, '%m'), '월') AS 'month',
+				subIr.quality_inspection_code AS inspectionCode,
+				subClass.sub_class_name AS subName,
+				lowClass.low_class_name AS lowName,
+				medClass.med_class_name AS medName,
+				highClass.high_class_name AS highName,
+				COUNT(1) AS totalNum,
+				COUNT(case 
+						when subIr.inspection_pass_check = '불합격' then 1 END) AS failNum,
+				round(COUNT(case when subIr.inspection_pass_check = '불합격' then 1 END)/COUNT(1)*100) AS failRate,
+				CONCAT(round(COUNT(case when subIr.inspection_pass_check = '불합격' then 1 END)/COUNT(1)*100), '%') AS failRatePercent
+			FROM
+				inspection_result AS subIr
+				INNER join
+					sub_class_inspection_list AS subClass
+				on
+					subIr.quality_inspection_code = subClass.quality_inspection_code
+				inner join
+					low_class_inspection_list AS lowClass
+				on
+					subClass.high_med_low_class_code = lowClass.high_med_low_class_code
+				INNER join
+					medium_class_inspection_list AS medClass
+				on
+					subClass.high_med_class_code = medClass.high_med_class_code
+				INNER join
+					high_class_inspection_list AS highClass
+				on
+					subClass.high_class_code = highClass.high_class_code
+				WHERE DATE_FORMAT(subIr.inspection_end_date, '%Y') = #{selectedYear}
+				GROUP BY subIr.quality_inspection_code
+				ORDER BY failRate DESC
+				LIMIT 5) AS result
+			join
+				(SELECT @row_num := 0, @rate := 0, @check_num :=0) AS r
+	</select>
+	
+	<select id="getHighClassInspectionFailRank" resultType="map">
+		SELECT	
+			(case
+			 when @rate = result.failRate then @row_num
+			 when @rate := result.failRate then @row_num := @check_num + 1
+			END) AS subRank,
+			CONCAT(@check_num := @check_num + 1, '위') AS realRank,
+			result.*,
+			concat(result.failRate, '%') AS failRatePercent
+		FROM
+			(SELECT 
+				SUBSTRING(subIr.quality_inspection_code, 1, 3) AS inspectionCode,
+				highClass.high_class_name AS highName,
+				COUNT(1) AS totalNum,
+				COUNT(case 
+						when subIr.inspection_pass_check = '불합격' then 1 END) AS failNum,
+				round(COUNT(case when subIr.inspection_pass_check = '불합격' then 1 END)/COUNT(1)*100) AS failRate
+			FROM
+				inspection_result AS subIr
+				INNER join
+					high_class_inspection_list AS highClass
+				on
+					SUBSTRING(subIr.quality_inspection_code, 1, 3) = highClass.high_class_code
+				GROUP BY 
+					highClass.high_class_name
+				ORDER BY 
+					failRate DESC) AS result
+			join
+				(SELECT @row_num := 0, @rate := 0, @check_num :=0) AS r
+	</select>
+	 
 </mapper>

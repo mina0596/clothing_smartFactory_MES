@@ -49,11 +49,18 @@ layout:decorate="@{layout/default_qualityControl}">
             </div>
 
 	        <div class="form-group">
-               <label class="col-sm-2 col-sm-2 control-label">담당자코드</label>
-               <div class="col-sm-6">
-                  <input type="text" th:value ="${employeeCode}" id="raw_material_admin" class="form-control" name="chargeEmployeeCode" readonly="readonly">
-               </div>
-            </div>
+	          <label class="col-lg-2 col-sm-2 control-label" style="font-weight: 600;">담당자 사원 코드</label>
+	          <div class="col-lg-6">
+	            <input type="text" id="chargeEmployeeCode" name="chargeEmployeeCode" class="form-control" readonly="readonly" th:value="${session.SCODE}">
+	          </div>
+	     	</div>   
+	     	                  
+		    <div class="form-group">
+	          <label class="col-lg-2 col-sm-2 control-label" style="font-weight: 600;">담당 사원명</label>
+	          <div class="col-lg-6">
+	            <input type="text" class="form-control" readonly="readonly" th:value="${session.SNAME}">
+	          </div>
+	        </div>
             
 	        <div class="form-group">
                <label class="col-sm-2 col-sm-2 control-label">불량원인</label>
@@ -132,6 +139,40 @@ layout:decorate="@{layout/default_qualityControl}">
 		</div>
      
       <script type="text/javascript">
+		$(function(){
+			$('#addBtn').click(function(){
+				var inspectionResultCode = $('input[name=inspectionResultCode]').val();
+				var defectCause = $('input[name=defectCause]').val();
+				var defectiveProductMeasure = $('input[name=defectiveProductMeasure]').val();
+				var managementNote = $('input[name=managementNote]').val();
+				var submitFlag = true;
+			
+				if(inspectionResultCode == null || inspectionResultCode == undefined || inspectionResultCode == ''){			
+					alert('품질검사결과코드를 선택해주세요.');
+					$('input[name=inspectionResultCode]').focus();
+					submitFlag = false;
+					return submitFlag;
+				}else if(defectCause == null || defectCause == undefined || defectCause == ''){
+					alert('불량원인을 입력해주세요.');
+					$('input[name=defectCause]').focus();
+					submitFlag = false;
+					return submitFlag;
+				}else if($('select[name=defectiveProductMeasure]').val() == '선택'){
+					alert('처리방법을 입력해주세요.');
+					$('input[name=defectiveProductMeasure]').focus();
+					submitFlag = false;
+					return submitFlag;
+				}else if(managementNote == null || managementNote == undefined || managementNote == ''){
+					alert('비고를 입력해주세요.');
+					$('input[name=managementNote]').focus();
+					submitFlag = false;
+					return submitFlag;
+				}
+				
+				if(submitFlag) addDefectiveProduct.submit();
+			});			
+		});
+     
 				$('#search').click(function(){
 					$('#byFinalResultModal').modal("show");
 					

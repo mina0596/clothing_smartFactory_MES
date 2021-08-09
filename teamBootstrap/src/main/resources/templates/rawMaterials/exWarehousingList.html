@@ -86,23 +86,23 @@ layout:decorate="@{layout/default_rawMaterials}">
          			<td style="padding-right: 20px;">
 	         			 <div class="form-group"><!-- 발주처별 -->
 		               		<button id="bySupplier" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
-		                	<input type="text" class="form-control" id="bySupplierValue" placeholder="직접 입력 또는 검색">
+		                	<input type="text" class="form-control" placeholder="직접 입력 또는 검색">
 		                </div>
          			</td>
          			<td style="padding-right: 20px;">
          				<div class="form-group"><!-- 재료별 -->
 		               		<button id="byMaterialName" type="button" class="btn btn-default"><i class="fa fa-search"></i></button> 
-		                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="직접 입력 또는 검색">
+		                	<input type="text" class="form-control" placeholder="직접 입력 또는 검색">
 	              		</div>
          			</td>
          			<td>
          				<div class="form-group">
-		                	<input type=date class="form-control" id="exampleInputPassword2" placeholder="입고일별">&nbsp&nbsp&nbsp ~ 
+		                	<input type=date class="form-control" placeholder="입고일별">&nbsp&nbsp&nbsp ~ 
 	               		</div>
          			</td>
          			<td style="padding-right: 20px;">
          				<div class="form-group">
-		                	<input type=date class="form-control" id="exampleInputPassword2" placeholder="입고일별">
+		                	<input type=date class="form-control" placeholder="입고일별">
 	               		</div>
          			</td>
          			<td style="padding-right: 20px;">
@@ -144,14 +144,14 @@ layout:decorate="@{layout/default_rawMaterials}">
 	         			<th colspan="2" style="padding-right: 20px;">
 		         			 <div class="form-inline" style="margin-bottom: 0px;"><!-- 발주처별 -->
 		         			 	<label class="control-label">발주처 코드</label>&nbsp
-			                	<input type="text" class="form-control" id="bySupplierValue" placeholder="검색어를 입력하세요.">
+			                	<input type="text" class="form-control" placeholder="검색어를 입력하세요.">
 			                </div>
 	         			</th>
 	         			<!-- <th style="padding-bottom: 12px;"><label class="control-label">발주처 명</label></th> -->
 	         			<th colspan="3" style="padding-right: 20px;">
 	         				<div class="form-inline" style="margin-bottom: 0px;"><!-- 재료별 -->
 		         				<label class="control-label">발주처 명</label>&nbsp
-			                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
+			                	<input type="text" class="form-control" placeholder="검색어를 입력하세요.">
 	         				 &nbsp&nbsp&nbsp <button type="submit" class="btn btn-theme">검색</button>
 		              		</div>
 	         			</th>  
@@ -213,7 +213,7 @@ layout:decorate="@{layout/default_rawMaterials}">
 	         			<th colspan="2" style="padding-right: 20px;">
 		         			 <div class="form-inline" style="margin-bottom: 0px;"><!-- 발주처별 -->
 		         			 	<label class="control-label">재료코드</label>&nbsp
-			                	<input type="text" class="form-control" id="bySupplierValue" placeholder="검색어를 입력하세요.">
+			                	<input type="text" class="form-control" placeholder="검색어를 입력하세요.">
 			                </div>
 	         			</th>
 	         			<th colspan="1" style="padding-right: 20px;">
@@ -229,13 +229,13 @@ layout:decorate="@{layout/default_rawMaterials}">
 	         			<th colspan="1" style="padding-right: 20px;">
 	         				<div class="form-inline" style="margin-bottom: 0px;"><!-- 재료별 -->
 		         				<label class="control-label">재료명</label>&nbsp
-			                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
+			                	<input type="text" class="form-control" placeholder="검색어를 입력하세요.">
 		              		</div>
 	         			</th>  
 	         			<th colspan="2" style="padding-right: 20px;">
 	         				<div class="form-inline" style="margin-bottom: 0px;"><!-- 색상별 -->
 		         				<label class="control-label">색상명</label>&nbsp
-			                	<input type="text" class="form-control" id="exampleInputPassword2" placeholder="검색어를 입력하세요.">
+			                	<input type="text" class="form-control" placeholder="검색어를 입력하세요.">
 	         				 &nbsp&nbsp&nbsp <button type="submit" class="btn btn-theme">검색</button>
 		              		</div>
 	         			</th>  
@@ -294,7 +294,7 @@ layout:decorate="@{layout/default_rawMaterials}">
                   <tr>
                   	<th><input type="checkbox" id="checkAll"></th>
                  	 <th><i class="fa fa-bullhorn"></i>번호</th>
-                    <th class="hidden-phone"><i class="fa fa-bookmark"></i>발주코드</th>
+                    <th class="hidden-phone"><i class="fa fa-bookmark"></i>출고코드</th>
                     <th><i class="fa fa-bookmark"></i>자재코드</th>
                     <th><i class=" fa fa-bookmark"></i>재료명</th>
                     <th><i class=" fa fa-bookmark"></i>색상명</th>
@@ -319,8 +319,9 @@ layout:decorate="@{layout/default_rawMaterials}">
                     <td th:text="${e.rmUnit}"></td>
                     <td th:text="${e.rmtDate}"></td>
                     <td th:text="${e.rmtRegDate}"></td>
-                    <td><button class="btn btn-primary btn-xs" type="button" onclick="location.href='/modifyExWarehousing'"><i class="fa fa-pencil"></i>수정</button></td>
-
+                    <td>  
+                    	<a th:href="@{/rawMaterials/modifyExWarehousing(transactionCode=${e.rmtCode})}"  class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>수정</a>
+                    </td> 
                   </tr>
             		 </tbody>
               </table>
@@ -328,7 +329,7 @@ layout:decorate="@{layout/default_rawMaterials}">
             </div>
             <div class="form-group text-right">
 		          <div class="col-lg-offset-2 col-lg-10">
-		           <a th:href="@{/addInWarehousing}" class="btn btn-success btn-xs"><i class="fa fa-plus"></i>출고등록</a>
+		           <a th:href="@{/rawMaterials/addExWarehousing}" class="btn btn-success btn-xs"><i class="fa fa-plus"></i>출고등록</a>
 	                 <a class="btn btn-danger btn-xs" id="deleteBtn"><i class="fa fa-trash-o "></i>삭제</a>
 		          </div>
 		        </div> 

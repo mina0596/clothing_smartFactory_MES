@@ -18,25 +18,8 @@ public class ContractService {
 	@Autowired
 	private ContractMapper contractMapper;
 	
-	public Map<String,Object> getBuyerContract(Pagination paging){
-		PageMaker pageMaker = new PageMaker();
-	    pageMaker.setPaging(paging);
-	    
-	    pageMaker.setTotalCount(contractMapper.getContractCount());
-		
-	    Map<String, Object> paramMap = new HashMap<String, Object>();
-  		paramMap.put("rowStart", paging.getRowStart());
-  		paramMap.put("rowPerPage", paging.getRowPerPage());
-  		
-  		List<Map<String, ContractInfo>> buyerContractList = contractMapper.getBuyerContract(paramMap);
-  		Map<String, Object> resultMap = new HashMap<String, Object>();
-  		resultMap.put("currentPage", paging.getCurrentPage());
-  		resultMap.put("buyerContractList", buyerContractList);
-  		resultMap.put("lastPage", pageMaker.getLastPage());
-  		resultMap.put("pageStartNum", pageMaker.getPageStartNum());
-  		resultMap.put("pageEndNum", pageMaker.getPageEndNum());
-
-		return resultMap;
+	public List<Map<String,Object>> getBuyerContract(){
+		return contractMapper.getBuyerContract();
 	}
 
 }

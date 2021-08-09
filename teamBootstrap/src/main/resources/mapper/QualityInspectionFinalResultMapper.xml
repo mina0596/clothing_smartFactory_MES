@@ -98,7 +98,10 @@
 	</select>
 	
 	<select id="getFinalResultReport" parameterType="String" resultType="map">
-		SELECT 
+	SELECT 
+			c.client_name,
+			p.detailed_categorized_name,
+			r.contract_code,
 			q.requested_product_code,
 			i.quality_inspection_request_code,
 			m.med_class_name,
@@ -113,7 +116,7 @@
 			INNER JOIN 
 				quality_inspection_request AS q
 			ON i.quality_inspection_request_code = q.quality_inspection_request_code
-			INNER JOIN
+						INNER JOIN
 				sub_class_inspection_list AS s
 			ON q.quality_inspection_code = s.quality_inspection_code
 			INNER JOIN
@@ -125,6 +128,15 @@
 			INNER JOIN 
 				inspection_final_result AS f
 			ON q.quality_inspection_request_code=f.quality_inspection_request_code
+			INNER join
+			requested_product_detail AS r
+			ON r.requested_product_code = q.requested_product_code
+			INNER join
+			product_code_detail AS p
+			ON r.product_code = p.product_code
+			INNER JOIN 
+			client_info AS c
+			on r.client_code = c.client_code
 		WHERE q.requested_product_code = #{requestProductCode}
 			GROUP BY i.quality_inspection_request_code;
 	

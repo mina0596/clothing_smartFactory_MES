@@ -25,5 +25,8 @@ public class QualityControlService {
 		return qualityControlMapper.getInspectionStandard(inspectionCate);
 	}
 		
-	
+	//[민아]상세검사종류 조회
+	public List<Map<String,Object>> getSubClassName(String lowClassCateName){
+		return qualityControlMapper.getSubClassName(lowClassCateName);
+	}
 }

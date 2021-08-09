@@ -5,6 +5,7 @@ $(function(){
 	var highClassCateName = $('#highClassCateName');
 	var middleClassCateName = $('#middleClassCateName');
 	var lowClassCateName = $('#lowClassCateName');
+	var subClassCateName = $('#subClassCateName');
 	var inspectionCode=[]
 //검사대분류명가지고오기
 	var request = $.ajax({
@@ -36,14 +37,14 @@ $(function(){
 	$('#highClassCateName').change(function(){
 		var highClassCateName =$('#highClassCateName option:selected').val();
 			inspectionCode.push(highClassCateName);
-			console.log(inspectionCode);
+			
 		var request = $.ajax({
 			url: "/system/mediumClassCate",
 			method: "get",
 			data: {highClassCateName : highClassCateName}
 		}); 
 		request.done(function( data ) {
-			console.log(data);
+			
 			if(data != undefined && data != '' && data.length > 0){
 				//셀렉트박스  첫번째옵션빼고 초기화시키기
 				$('#middleClassCateName').find('option:not(:first)').remove();
@@ -67,14 +68,14 @@ $(function(){
 	$('#middleClassCateName').change(function(){
 		var middleClassCateName = $('#middleClassCateName option:selected').val();
 		inspectionCode.push(middleClassCateName);
-		console.log(inspectionCode);
+		
 		var request = $.ajax({
 			url: "/system/lowClassCate",
 			method: "get",
 			data: {middleClassCateName : middleClassCateName}
 		}); 
 		request.done(function( data ) {
-			console.log(data);
+			
 			//셀렉트박스  첫번째옵션빼고 초기화시키기
 			$('#lowClassCateName').find('option:not(:first)').remove();
 			if(data != undefined && data != '' && data.length > 0){
@@ -94,11 +95,14 @@ $(function(){
 			alert( "Request failed: " + textStatus );
 		});	
 	})
-	$('#lowClassCateName').change(function(){
-		var lowClassCateName = $('#lowClassCateName option:selected').val();
-		$('#qualityinsertForm input').prop('disabled', false);
-		inspectionCode.push(lowClassCateName);
-		console.log(inspectionCode);
-	});
+	//상세검사에 대한 select가 없으면 실행
+	
+		$('#lowClassCateName').change(function(){
+			
+			var lowClassCateName = $('#lowClassCateName option:selected').val();
+			$('#qualityinsertForm input').prop('disabled', false);
+			inspectionCode.push(lowClassCateName);
+			
+		});
 	
 })

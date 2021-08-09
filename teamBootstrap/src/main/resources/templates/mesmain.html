@@ -7,37 +7,74 @@ layout:decorate="@{layout/default}">
 	   <div class="border-head"> 
 	    <h3>MES MANUAL</h3>
 	    </div>
+	    <script>
+			$(function(){
+				$('#btn1').click(function(){
+					window.location ='/fileDownload';			
+				});
+				$('#btn2').click(function(){
+					window.location ='/fileDownload2';			
+				});
+				$('#btn3').click(function(){
+					console.log('d');
+					window.location.href ='https://github.com/mina0596/clothing_smartFactory_MES';			
+				});
+			});
+	
+		</script>
 </th:block>
 
 
 <th:block layout:fragment="container">
-<div class="col-lg-11">
-<div class="row mt">
-	<div class="col-lg-12">
-<div class="row content-panel form-panel">
-              <div class="col-md-4 profile-text mt mb centered">
-                <div class="right-divider hidden-sm hidden-xs">
-                  <h4>JAVA</h4>
-                  <h4>JAVA SCRIPT</h4>
-                  <h4>SPRING</h4>
-                  <h4>MYBATIS</h4>
-                  <h4>MYSQL</h4>
-                  <h4>JQUERY</h4>
+		<div class="row content-panel form-panel">
+		<div class="mesTitle">
+              <div class="col-md-5 profile-text">
+                <div class="right-divider">
+                  <h3>개발환경</h3>
+                 <p>OS: Window10 <br>
+					WAS: apache-tomcat-9.0.1 <br>
+					개발언어: java / javascript / html5 / css / thymeleaf / jquery / ajax <br>
+					Framework: springframework / mybatis / bootstrap <br>
+					DBMS: mariaDB <br>
+					Tools: Spring Tool Suite, Eclips / GitHub, HeidiSQL 10.1.0</p>
+                 <h3>관련문서/GIT HUB</h3>
+                <p>
+	              	<button type="button" id="btn2" class="btn btn-warning" onMouseOver="this.innerHTML='CLICK❕❕'" onMouseOut="this.innerHTML='완료보고서'" style="display: inline;">완료보고서</button>
+	              	<button type="button" id="btn1" class="btn btn-warning" onMouseOver="this.innerHTML='CLICK❕❕'" onMouseOut="this.innerHTML='개발문서'" style="display: inline;">개발문서</button>
+	              	<button type="button" id="btn3" class="btn btn-warning" onMouseOver="this.innerHTML='CLICK❕❕'" onMouseOut="this.innerHTML='GIT HUB'" style="display: inline;">GIT HUB</button>
+              	</p>
                 </div>
               </div>
-              <!-- /col-md-4 -->
+            </div>
+
               <div class="col-md-4 profile-text ">
-                <h3>박민아 이한빛 한보람 김다미</h3>
-                <h6></h6>
+                <h3>의류제조업 품질관리를 강화한 생산관리시스템</h3>
                 <p>한국형 봉제공장 스마트팩토리 상용화가 활발해짐에 따라<br> 이에 부합한 전사관리시스템을 구축할 목적이다.<br>
 					완전자동화 시스템의 최대장점인 생산성과 품질향상에 기여하는<br> QC 강화 ERP 시스템을 구축함으로써 기업경영의 경쟁력을 향상시킨다.<br>
-					기존 전수검사보다 빠른 속도로 검사를 실행하여 <br>한 개의 불량품도 납품되지 않게 관리할 수 있는 시스템을 구축한다.</p>
-                <br>
-                <p><a th:href="@{/qualityInspectionStatusNow}" class="btn btn-theme">본인이 맡은 주요 화면으로 이동</a>&nbsp<a th:href="@{/qualityInspectionStatusNow}" class="btn btn-theme">블로그 주소?</a></p>
+					기존 전수검사보다 빠른 속도로 검사를 실행하여 <br>한 개의 불량품도 납품되지 않게 관리할 수 있는 시스템을 구축한다.</p>   
+				<div style="padding-top: 15px;">
+				<h3 style="display: inline;">MAIN</h3>          	
+               	<a th:href="@{/quality/qualityInspectionFailRateList}" class="btn btn-theme">박민아</a>
+               	<a th:href="@{/production/stateByProduct}" class="btn btn-theme">이한빛</a>
+               	<a th:href="@{/quality/qualityInspectionStatusContract}" class="btn btn-theme">한보람</a>
+               	<a th:href="@{/quality/qualityInspectionStatusNow}" class="btn btn-theme">김다미</a><br>
+               	
+               	<h3 style="display: inline; padding-right:3px">BLOG</h3>
+               	<a href="https://blog.naver.com/mina0596" class="btn btn-theme">박민아</a>
+               	<a href="https://blog.naver.com/v2onelight" class="btn btn-theme">이한빛</a>
+               	<a href="https://blog.naver.com/hahn0127" class="btn btn-theme">한보람</a>
+               	<a href="https://blog.naver.com/entekk1111" class="btn btn-theme">김다미</a>
+               	</div>
               </div>
             </div>
             
-            <br><br>
+            <div class="row content-panel form-panel">
+            	<div class="profile-text" style="text-align: center;">
+            	 <h3>프로세스 흐름도</h3>
+           		<img style="max-width: 100%;" src="/image/process.jpg">
+           		</div>
+            </div>
+            
             <div class="row content-panel form-panel">
              <div class="profile-text" style="text-align: center;">
                 <h3>TEAMONE MES GUIDE</h3>
@@ -55,175 +92,8 @@ layout:decorate="@{layout/default}">
                   <p>프로그램 전반적인 기초 정보 등록</p>
                </div>
             </div>
-	
-	
-		<!-- 그냥 막 넣어봤어요~ -->
-			<h1 style="text-align: center;"></h1>
-            <h4><i class="fa fa-angle-right"></i> 생산계획별 현황 목록</h4>    
-            <hr>     
-	        <form class="form-horizontal style-form">
-              <table class="table table-striped table-advance table-hover" id="list">
-                <thead>
-                  <tr>
-             		<th><i class="fa fa-bullhorn"></i> 번호</th>
-                    <th><i class="fa fa-barcode"></i> 생산계획코드</th>
-                    <th><i class="fa fa-bookmark"></i> 양복명</th>
-                    <th><i class="fa fa-bookmark"></i> 품목명</th>
-                    <th><i class="fa fa-bookmark"></i> 계획수량<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
-                    <th><i class="fa fa-bookmark"></i> 생산량<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
-                    <th><i class="fa fa-bookmark"></i> 잔량<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
-                    <th><i class="fa fa-calendar"></i> 작업시작일자<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
-                    <th><i class="fa fa-bookmark"></i> 진행상황<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
-                    <th><i class="fa fa-calendar"></i> 작업마감일자<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
-                    <th><i class="fa fa-calendar"></i> 계획기간<i class="btn fa fa-sort" style="padding: 0px;"></i></th>
-                    <th><i class="fa fa-bookmark"></i> 담당자</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-	                <td>1</td>
-                    <td>production_plan_01</td>
-                    <td>숙녀양복</td>
-                    <td>바지</td>
-                    <td>100벌</td>
-                    <td>60벌</td>
-                    <td>40벌</td>
-                    <td>2021-02-01</td>
-                    <td><span class="badge bg-important" style="padding-top: 5px;">진행중</span></td>
-                    <td>2021-03-01</td>
-                    <td>1개월</td>
-                    <td>박민아</td>
-                  </tr>
-                  
-                  <tr>
-	            	<td>2</td>
-                    <td>production_plan_02</td>
-                    <td>숙녀양복</td>
-                    <td>치마</td>
-                    <td>20벌</td>
-                    <td>26벌</td>
-                    <td></td>
-                    <td>2021-02-01</td>
-                    <td><span class="badge" style="padding-top: 5px;">달성</span></td>
-                    <td>2021-02-08</td>
-                    <td>일주일</td>
-                    <td>김다미</td>
-                  </tr>   
-                  <tr>
-                  	<td>3</td>
-                    <td>production_plan_03</td>
-                    <td>숙녀양복</td>
-                    <td>자켓</td>
-                    <td>5벌</td>
-                    <td>2벌</td>
-                    <td>3벌</td>
-                    <td>2021-02-01</td>
-                    <td><span class="badge bg-important" style="padding-top: 5px;">진행중</span></td>
-                    <td>2021-02-01</td>
-                    <td>하루</td>
-                    <td>이한빛</td>
-                  </tr>
-                 <tr>
-	            	<td>4</td>
-                    <td>production_plan_04</td>
-                    <td>신사양복</td>
-                    <td>자켓</td>
-                    <td>200벌</td>
-                    <td>206벌</td>
-                    <td></td>
-                    <td>2021-02-01</td>
-                    <td><span class="badge" style="padding-top: 5px;">달성</span></td>
-                    <td>2021-04-01</td>
-                    <td>2개월</td>
-                    <td>한보람</td>
-                 </tr>
-                </tbody>
-              </table>
-              
-              <h4><i class="fa fa-angle-right"></i> 수주계약번호별 전체 현황</h4> 
 
-
-		<table style="border-color: #8c8c8c;" class="table table-bordered table-striped table-condensed " id="list">
-         <thead>
-        	<tr> 
-			<th rowspan="2">no.</th> 
-			<th rowspan="2"><input type="checkbox"></th> 
-			<th rowspan="2">공정</th> 
-			<th rowspan="2">공정소분</th> 
-			<th rowspan="2">공정세분</th> 
-			<th rowspan="2">품목코드</th> 
-			<th rowspan="2">품목명</th> 
-			<th rowspan="2">요청시간</th> 
-			<th rowspan="2">검사단위</th> 
-			<th colspan="3" scope="colgroup" id="first">기준</th> 
-			<th colspan="3" scope="colgroup" id="second">측정값</th> 
-			<th colspan="2" scope="colgroup" id="second">처리정보</th> 
-			<th rowspan="2">최종합격여부</th> 
-			<th rowspan="2">기타</th> 
-		</tr> 
-		<tr> 
-			<th scope="col" id="hong">기준값</th> 
-			<th scope="col" id="jeon">최소값</th> 
-			<th scope="col" id="kim">최대값</th> 
-			<th scope="col" id="song">1회차</th> 
-			<th scope="col" id="song">2회차</th> 
-			<th scope="col" id="song">3회차</th> 
-			<th scope="col" id="song">시작시간</th> 
-			<th scope="col" id="song">완료시간</th> 
-		</tr>
-		<tr> 
-			<th scope="row" id="mandatory">1</th> 
-			<td><input type="checkbox"></td> 
-			<td>수입검사</td> 
-			<td>물세탁</td> 
-			<td>변퇴색</td> 
-			<td>req01_MS_pants</td>
-			<td>바지</td>
-			<td>2021-04-22 12:12:22</td>
-			<td>등급</td>
-			<td>4</td>
-			<td>5</td>
-			<td>4</td>
-			<td>5</td>
-			<td>3</td>
-			<td>4</td>
-			<td>2021-04-22 12:12:22</td>
-			<td>2021-04-22 12:12:22</td>
-			<td>합격</td>
-			<td>없음</td>
-		</tr> 
-       </thead>
-       <tbody>
-		<tr> 
-			<th scope="row" id="mandatory">1</th> 
-			<td><input type="checkbox"></td> 
-			<td>수입검사</td> 
-			<td>물세탁</td> 
-			<td>변퇴색</td> 
-			<td>req01_MS_pants</td>
-			<td>바지</td>
-			<td>2021-04-22 12:12:22</td>
-			<td>등급</td>
-			<td>4</td>
-			<td>5</td>
-			<td>4</td>
-			<td>5</td>
-			<td>3</td>
-			<td>4</td>
-			<td>2021-04-22 12:12:22</td>
-			<td>2021-04-22 12:12:22</td>
-			<td>합격</td>
-			<td>없음</td>
-		</tr> 
-                  
-                  
-	                 
-	                </tbody>
-	              </table>
-	              </form>
-	              </div>
-	              </div>
-	              </div>
+		
 	              
 </th:block>
 

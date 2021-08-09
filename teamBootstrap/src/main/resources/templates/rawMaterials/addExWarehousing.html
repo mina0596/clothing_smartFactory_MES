@@ -27,7 +27,7 @@ layout:decorate="@{layout/default_rawMaterials}">
 		     </div>
 		        
 	        <div class="form-group">
-               <label class="col-sm-2 col-sm-2 control-label">품질검사요청코드</label>
+               <label class="col-sm-2 col-sm-2 control-label">원부자재 코드</label>
                <div class="col-sm-6">
                   <input type="text" id="raw_material_code" name="materialCode" class="form-control" readonly="readonly" >
                </div>
@@ -36,7 +36,7 @@ layout:decorate="@{layout/default_rawMaterials}">
 	        <div class="form-group">
                <label class="col-sm-2 col-sm-2 control-label">발주 담당자 코드</label>
                <div class="col-sm-6">
-                  <input type="text"  id="raw_material_admin" class="form-control" name="chargeEmployeeCode" readonly="readonly">
+                  <input type="text"  id="raw_material_admin" th:value ="${employeeCode}"class="form-control" name="chargeEmployeeCode" readonly="readonly">
                </div>
             </div>
                 
@@ -56,8 +56,8 @@ layout:decorate="@{layout/default_rawMaterials}">
       		  
 	        <div class="form-group text-right">
 	          <div class="col-lg-offset-2 col-lg-10">
-	            <button class="btn btn-theme" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">등록</font></font></button>
-	            <a href="javascript:history.back()" class="btn btn-theme04" type="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소</font></font></a>
+		           <button id="addBtn" class="btn btn-theme" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">등록</font></font></button>
+            	   <button class="btn btn-theme04" type="button" onClick="history.back();"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소</font></font></button>	           
 	          </div>
 	        </div>
 		</form>            
@@ -85,7 +85,6 @@ layout:decorate="@{layout/default_rawMaterials}">
 			         			<th><i class="fa fa-check"></i></th>
 			         			<th>발주코드</th>
 			         			<th>원부자재 코드</th>
-			         			<th>발주 담당자 코드</th>
 		        			</tr>     			
 		       			</thead>
 		       			<tbody style="text-align: center;" id="materialData">
@@ -121,7 +120,6 @@ layout:decorate="@{layout/default_rawMaterials}">
 										'<td><input type="radio" name="bySupplierModal"></td>' +
 										'<td name="rawMaterialOrderCode">' + data[i].rawMeterialOrderCode + '</td>' +
 										'<td name="raw_material_code">' + data[i].rawMeterialCode + '</td>' +
-										'<td name="raw_material_transaction_amount">' + data[i].chargeEmployeeCode + '</td>' +
 										'</tr>' ;
 									$('#materialData').append(requestData);
 								}
@@ -146,14 +144,44 @@ layout:decorate="@{layout/default_rawMaterials}">
 						var checkTr = check.parent().parent();
 						var rawMaterialOrderCode = checkTr.find('td').eq(1).text();
 						var rawMaterialCode = checkTr.find('td').eq(2).text();
-						var rawMaterialAdmin = checkTr.find('td').eq(3).text();
 						$('#raw_material_order_code').attr('value',rawMaterialOrderCode);
 						$('#raw_material_code').attr('value',rawMaterialCode);
-						$('#raw_material_admin').attr('value',rawMaterialAdmin);
 					}); 
 				});	
 				
+				
+				//유효성검사
+				$(function(){
+					$('#addBtn').click(function(){
+						var materialOrderCode = $('input[name=materialOrderCode]').val();
+						var transactionAmount = $('input[name=transactionAmount]').val();
+						var transactionDate = $('input[name=transactionDate]').val();
+						var submitFlag = true;
+					
+						if(materialOrderCode == null || materialOrderCode == undefined || materialOrderCode == ''){			
+							alert('발주 코드를 검색해주세요.');
+							$('input[name=materialOrderCode]').focus();
+							submitFlag = false;
+							return submitFlag;
+						}else if(transactionAmount == null || transactionAmount == undefined || transactionAmount == ''){			
+							alert('수량을 입력해주세요.');
+							$('input[name=transactionAmount]').focus();
+							submitFlag = false;
+							return submitFlag;
+						}else if(transactionDate == null || transactionDate == undefined || transactionDate == ''){
+							alert('출고일자를 입력해주세요.');
+							$('input[name=transactionDate]').focus();
+							submitFlag = false;
+							return submitFlag;
+						}
+						
+						if(submitFlag) addExhousing.submit();
+					});			
+				});
+				
      </script>
      </th:block>
+     
+
 
 </html>

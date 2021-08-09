@@ -12,7 +12,7 @@ $(function(){
 			if(checkList[i].checked){
 				checkArray.push(checkList[i].value);
 			}
-			console.log(checkArray);
+			
 		}//체크된 체크박스의 길이가 0이면 품질검사항목이없다.
 		if(checkArray.length == 0){
 			alert("선택된 품질검사항목이 없습니다.");
@@ -49,7 +49,7 @@ $('#inspectionSearchBtn').click(function(){
 				lowClassCateName : $('#lowClassCateName').val(),
 				
 		};
-		console.log(inspectionArray);
+	
 		//검색 ajax전달
 		var request = $.ajax({
 			  url: "/system/searchInspectionList",
@@ -60,7 +60,7 @@ $('#inspectionSearchBtn').click(function(){
 			});
 			 
 			request.done(function( data ) {
-				console.log(data);
+				
 		        $( '#inspectionList > tbody').empty();
 		        //검색성공시 검사목록리시트를 tbody아래는 비우고 반복을돌려서 검색된 결과값을가지고오기
 
