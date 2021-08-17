@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ksmart39.springboot.controller.ProductionController_PMA;
 import ksmart39.springboot.dao.ProductionPlanMapper;
 import ksmart39.springboot.dao.ProductionStatusByProductionPlanMapper;
 import ksmart39.springboot.domain.ProductionPlan;
