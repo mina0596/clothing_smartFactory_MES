@@ -1,5 +1,5 @@
-# 의류제조업 품질관리를 강화한 생산관리시스템
-team one project (ERP)
+# 봉제공장 스마트팩토리 MES
+## 의류제조업 품질관리를 강화한 생산관리시스템
 
 ## 프로세스 흐름도 <br>
 ![image](https://user-images.githubusercontent.com/83526150/187356380-29fb48a3-6420-4425-9ff0-baa25a976546.png)
